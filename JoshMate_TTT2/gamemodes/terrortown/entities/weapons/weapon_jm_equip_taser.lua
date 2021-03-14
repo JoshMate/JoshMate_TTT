@@ -131,7 +131,9 @@ function TaseTarget(att, path, dmginfo)
       net.Send(att)
       -- End Of
       
-      ent:GetActiveWeapon():PreDrop()
+      if (not ent:GetActiveWeapon():PreDrop == nil) then
+         ent:GetActiveWeapon():PreDrop()
+      end
 
       ent:Freeze(true)
       ent:SetNWBool("isTased", true)

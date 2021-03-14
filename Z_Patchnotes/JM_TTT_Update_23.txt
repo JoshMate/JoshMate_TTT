@@ -3,18 +3,24 @@
 [Server]
 
 - Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!)
-- Changed [Rounds] Time before map change: 60 -> 45 Minutes
+- Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left)
 
-- Changed [Roles] Traitor Percentage
 
 [Gameplay]
 
 
+- Reworked [Chameleon] You will stay invisible until you:
+- Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
+- Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc...
+- Reworked [Chameleon] The code is much more stable now too
+
+- Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that (Thanks Jake)
+
 [Maps]
 
+- Changed [Devil Town] Sandstorm Duration: 30 -> 20 Seconds
 
 // TODO: Teleporting behind the gas wall on transit
-//TOD: Scope Taser bug
 
 // TODO: Transit Fog Wallto be faster
 
