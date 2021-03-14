@@ -1,0 +1,33 @@
+:tss:  TTT - Update 11:
+
+- Buffed [Poltergeist] Max Range: 800 -> 5000
+- Buffed [Poltergeist] Max Ammo: 4 -> 6
+
+- Buffed [Bear Trap] Visibility when placed: 40% -> 20%
+- Buffed [Bear Trap] Damage per tick: 5 -> 7
+
+- Buffed [C4] Blast Radius: 1000 -> 1250
+- Buffed [C4] Extra Physics Push Radius: 100% -> 125%
+- Buffed [C4] Safe wires at minium timer: 5 -> 3
+- Buffed [C4] Time for Minimum Safe wires: 540 -> 240
+- Nerfed [C4] Minimum Timer: 45 -> 60
+- Nerfed [C4] Maximum Timer: 600 -> 300
+
+- Nerfed [Silenced Pistol] Shoot Delay: 0.08 -> 0.10
+
+- Buffed [Sniper] Recoil: 8 -> 5
+
+- Buffed [AWP] Recoil: 25 -> 10
+
+- Nerfed [Flare Gun] Damage: 5 -> 0
+- Buffed [Flare Gun] Ignite Time 15 -> 16
+- Buffed [Flare Gun] Time to destroy body 6 -> 5
+- Buffed [Flare Gun] Shot Sound Level: 40% -> 20%
+
+- Bufed [Detective] Added Ninja Pro to their shop
+- Bufed [Detective] Added Toughness to their shop
+
+- Changed [Armour] Description to be more informative
+
+- Added [Map Vote] Public votes at the end of each game for the next map
+- Changed [Round Limit]: 18 -> 12

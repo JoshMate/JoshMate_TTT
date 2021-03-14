@@ -1,0 +1,75 @@
+:tss:  TTT - Update 13:
+
+[Gameplay]
+
+- Reworkded [LMG] Again...
+= It is now an absolute monster, good all round stats
+= But it like a minigun it takes time to spin up and reach its max DPS
+= It is very slow but will win most fights once it has spun up
+= It can out DPS the SMG and kill groups faster than the shotgun
+= Tap shooting or burst firing will result much less DPS than all other guns
+= Worse than the Rifle, better than the SMG in terms of accuracy
+= You have to 100% commit to a spin up for this weapon to shine
+
+- Reworked [Karma] It is now more punishing to RDM 
+- Changed [Karma] Max Karma: 1300 -> 1000
+- Changed [Karma] Karma regen per round: 20 -> 10
+- Changed [Karma] Karma regen per round If Clean: 50 -> 40
+- Changed [Karma] Karma Killing Blow Penalty: 0 -> 100
+- UnChanged [Karma] Karma Loss Per HP Damage Done: 1 -> 1
+
+- Reworked [Ammo] Ammo types have been condensed down to 3 rather than 5
+- Changed [Shotgun] Now uses heavy Ammo (Stats still the same)
+- Changed [Heavy Pistol] Now uses heavy Ammo (Stats still the same)
+- Changed [Weapon System] Huge amount of weapon / ammo code cleanup
+
+- Reworked [Text] Traitor item descriptions to better inform about quirks
+
+- Nerfed [Armour] Damage Reduction: 50% -> 40%
+
+- Buffed [All Scoped Weapons] Can now zoom in and at at any time (No more delay)
+
+- Buffed [The Defender] Change slot: Primary slot -> equipment slot
+- Buffed [AWP] Held Move Speed: 30% -> 50%
+- Buffed [AWP] Scope Zoom: 100% -> 200%
+
+- Nerfed [Sniper] Fire Rate Dealy: 1.15 -> 1.25
+
+- Buffed [Light Pistol] Spread: 0.025 -> 0.020
+
+- Buffed [Rifle] Spread: 0.025 -> 0.020
+- Nerfed [Rifle] FireRate Delay: 0.120 -> 0.125
+
+- Nerfed [Shotgun] Damage: 128 -> 112
+
+- Buffed [FlareGun] Players/props that are on fire now burn things near them
+- Buffed [FlareGun] Diposes of corpses instantly
+- Fixed [FlareGun] Bugs in the code that made this very inconsistent
+
+- Changed [Round Structure] Round Length: 8 -> 10 Minutes
+- Changed [Round Structure] Round Prep Time: 1 -> 10 seconds
+- Changed [Round Structure] 1st Round Prep Time: 1 -> 45 seconds
+- Changed [Round Structure] Rounds Per Map: 15 -> 16
+
+- Buffed [Radio] Added some MEME noises (Now viable for Ts)
+- Fixed [Radio] Noises didn't match the new HD ones
+[MAPS]
+
+- Reworked [All Maps] Weapon Spawns Reworked for every map
+
+- Added [ttt_specific_ocean] A new island
+- Added [ttt_specific_ocean] Lots of changes and new features
+- Changed [ttt_specific_ocean] Reduced water damage: 10 -> 6 per second
+- Changed [ttt_specific_ocean] Wooden Physics Boat HP 1 -> 200
+- Changed [ttt_specific_ocean] Sand islands should be easier to climb
+
+- Reworked [ttt_skytown] Rework of the underground
+- Added [ttt_skytown] New traitor room in the underground
+- Added [ttt_skytown] Now 4 ways into the church traitor room
+- Added [ttt_skytown] Some more props here and there
+- Changed [ttt_skytown] improved indoor lighting
+- Changed [ttt_skytown] Re built the sky rail train
+- fixed [ttt_skytown] re-did alot of textures that looked funny
+
+- Reworked [ttt_elevator] cleaned up texture work
+- Changed [ttt_elevator] Renamed ttt_elevator_classic -> ttt_elevator

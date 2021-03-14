@@ -1,0 +1,107 @@
+[ Update 15 ] - (Josh Mate's TTT2 Server)
+
+[Gameplay]
+
+- Added [Taser] A Non-Lethal Detective weapon that stuns targets
+/ Stuns the target for 10 seconds
+/ Deals no damage and doesn't affect karma
+/ Strips the target's non-store-bought weapons (eg. light pistol and rifle)
+/ Holstered, magneeto and crowbar will be kept
+/ Things like AWP, Knife, Radar, etc... will be kept (Secretly)
+
+- Added [Manhack Swarm] A Traitor weapon that deploys a swarm of manhacks
+/ Spawns 8 manhacks that attack all players including the traitors
+/ They deploy up to 500 units away in the direction you are facing.
+/ can be destroyed by shooting them
+/ crowbar is insta kill on them, but you may take damage getting that close
+/ they deal small amounts of damage, but make a good harasser / distraction
+/ Fixed: the manhack corpse chunks making the floor hard to walk on
+
+- Added [Grenade: Inferno] A Traitor grenade that creates a field of fire
+/ A single use lethal greande that creates fire in a large radius around it
+/ Explodes on impact (No timer like the other grenades)
+/ Burns for a long time, so it will deny an area of space the whole time
+
+- Reworked [Grenade: Fire] is now Grenade: Explosive
+/ The fire grenade was super trollable for Innocents
+/ You could destroy someones karma by standing in their fire
+/ The fire never seemed to ignite the area consistently 
+/ It was too underpowered and inconsistent for Traitors
+/ I have replaced it with a low damage, large radius explosive grenade
+/ Similar to the CSGO frag, it will not kill, but injure people in its radius
+/ It will still destroy your karma if you attack friends,
+/ But they can't choose to stand in it as easily to annoy you.
+
+- Reworked [All Grenades] Now have a coloured trail effect, to help ID nades in flight
+- Reworked [All Grenades] Now fly straighter and more consistently (They are soo nice now)
+
+- Reworked [Every Gun] ABSOLUTELY HUGE overhaul of balance of all the firearms
+
+- Buffed [Health Station] Heal Speed: 100% -> 200%
+- Buffed [Health Station] Recharge Speed: 100% -> 200%
+
+- Buffed [Toughness] Now has: + 50% Immunity to Fire Damage
+- Buffed [Toughness] Now has: + 25% Immunity to Explosive Damage
+
+- Changed [Icons] New custom icon for: Awp, Taser, Flashbang, Defender, Swarm, Inferno 
+- Changed [Beacon]  Removed from T shop (Turns out it wasn't finished by vanilla dev)
+- Changed [DNA Scanner] Removed from D shop (Made no sense since D started with it)
+- Changed [Auto Pistol] Shoot Sound effect replaced with a nicer one
+- Changed [MOTD] Server rules and what is "KOSABLE" is now in the MOTD
+
+- Changed [Karma] Karma Maximum value: 1000 -> 1250
+- Changed [Karma] Karma penalty per HP done wrongly: 1 -> 2
+- Changed [Karma] Karma penalty for killing blow: 200 -> 200
+- Changed [Karma] Karma recharge end of round (Always): 10 -> 0
+- Changed [Karma] Karma recharge end of round (If Clean): 40 -> 50
+
+- Changed [Prop Possesion] Enabled, but tweaked to be less spamable
+- Changed [Round Structure] Rounds per map: 16 -> 12
+- Changed [Round Structure] Prep Time (per Round): 10 -> 12 Seconds
+
+- Fixed [Radio] Balanced out the louder and quieter radio sound effects
+- Fixed [Defender] should now actually be in the equipment slot (7)
+- Fixed [Defender] Description is now longer and more informative
+- Fixed [LMG] bug where LMG spin up stats was shared by all LMG holders
+
+
+[Maps]
+
+- New Map [Dread Hollow] A horror map set in the middle of a forest at night
+/ Latest Version on Workshop!
+
+- Changed [SkyTown]: Reworked All Lighting
+- Changed [SkyTown]: Reworked Brick Shit House 
+- Changed [SkyTown]: Reworked the Central Park areas
+- Changed [SkyTown]: Reworked Ammo Shop
+- Changed [SkyTown]: Reworked Lighthouse Base
+- Changed [SkyTown]: Reworked Player Spawns
+- Changed [SkyTown]: Reworked Weapon Spawns
+- Changed [SkyTown]: Big Prop cleanup and FPS optimisations
+- Changed [SkyTown]: Fixed lots of little bugs
+- Changed [SkyTown]: Polished up a few minor details
+- Changed [SkyTown]: Added a little shortcut around the leftside of Warehouse
+/ Latest Version on Workshop!
+
+- Changed [Specific Ocean]: Reworked All Lighting
+- Changed [Specific Ocean]: Reworked the open roof snack island
+- Changed [Specific Ocean]: Reworked Weapon Spawns
+- Changed [Specific Ocean]: Little Re-arrange of shitter-island
+- Changed [Specific Ocean]: Water now deals increased DMG 6 -> 10
+- Changed [Specific Ocean]: Traitor Doors are now toggle instead of lock for 20s
+- Changed [Specific Ocean]: Cleaned up the visuals / textures
+/ Latest Version on Workshop!
+
+- Changed [Town Square]: Reworked All Lighting
+- Changed [Town Square]: Cleaned up even more props and improved FPS
+/ Latest Version on Workshop!
+
+- Changed [Elevator]: Reworked All Lighting
+- Changed [Elevator]: Updated Map Icon
+/ Latest Version on Workshop!
+
+- Changed [Industrial]: Reworked All Lighting
+- Changed [Industrial]: Made it harder to hit the lower button in Prep Time
+- Changed [Industrial]: Updated Map Icon
+/ Latest Version on Workshop!
+

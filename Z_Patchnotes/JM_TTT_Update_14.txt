@@ -1,0 +1,49 @@
+:tss:  TTT - Update 14:
+
+[Gameplay]
+
+- Buffed [Flare Gun] AOE fire damage radius: 220 -> 300 units
+
+- Added [Radio] Kingdom Hearts Laugh
+
+- Fixed [BearTrap] Traitors were not given a beartrap when they picked it up
+- Fixed [Text] AWP description is now better
+
+[Maps]
+
+- Changed [TownSquare] Made the ladder up to the tower much easier to use
+- Changed [TownSquare] Deleted ALOT of props, should improve FPS for all
+- Changed [TownSquare] HP + Credit noise in the T room makes less noise
+- Changed [TownSquare] Added a ramp to the pool fence
+
+- Changed [Industrial] You can no longer use your flashlight on this map
+- Changed [Industrial] New Sound effects for lights going out / on
+- Changed [Industrial] Lights now go off for longer 25 -> 30 Seconds
+- Changed [Industrial] Better, brighter lighting all around (Apart from dark areas)
+
+- Changed [Elevator] Reduced darkness time from 10 -> 8 Seconds
+- Changed [Elevator] New Sound effects for lights going out / on
+- Changed [Elevator] Buffed REEE sound effect
+
+- Changed [Specific Ocean] The Traitor cant now lock the church down for 20 seconds
+- Changed [Specific Ocean] The Traitor can no longer freely open/close church door
+- Changed [Specific Ocean] Removed those 1 way lockable doors in church
+- Changed [Specific Ocean] The raft now stops at each destination for 3 seconds
+- Changed [Specific Ocean] The raft is now moves a bit quicker
+- Changed [Specific Ocean] Each raft stop now has a dock you dont get wet anymore
+- Changed [Specific Ocean] Added a white trail effect to the raft
+- Changed [Specific Ocean] Added more physics boats
+- Changed [Specific Ocean]  Added Ocean Man Easter Egg (Properly)
+
+- Reworked [SkyTown] The Lockable Gates
+- Reworked [SkyTown] The Skyrail Stations
+- Changed [SkyTown] Skyrail button can now be pressed in "one trip"
+- Changed [SkyTown] Skyrail Base Speed has been Slightly Increased
+- Changed [SkyTown] Buffed Skyrail Reeee Mode Speed and Sound 
+- Changed [SkyTown] Improved the underground entrance at warehouse
+- Changed [SkyTown] Imrpove the pipe parkour outside the front of warehouse
+- Changed [SkyTown] Extrended Warehouse's exterior a bit
+- Changed [SkyTown] Improved the Church traitor Room's Layout
+- Changed [SkyTown] Improved teleports between traitor rooms
+- Changed [SkyTown] Added a red trail effect to CHARPLE
+

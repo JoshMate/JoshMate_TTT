@@ -1,0 +1,187 @@
+[ Update 19] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Fixed [Dedicated Server] Tweaked and fixed a load of teething issues from going Dedicated
+
+- Changed [Map Vote System] !rtv should work again
+- Changed [Map Vote System] RTV will now wait until the end of the round to start voting
+- Changed [Map Vote System] Colours, text and font greatly improved
+- Changed [Map Vote System] Layout fixes and improvements
+- Changed [Map Vote System] Complete config code rewrite
+
+- Changed [Scoring] All Unlawful kills are now worth - 10 (rather than -3, -5 or -12 depending on role)
+- Changed [Scoring] All Lawful kills are now worth  + 5 (rather than 1, 2 or 18 depending on role)
+
+- Changed [EXP] EXP gained from your Score: x4 -> x5
+- Changed [EXP] Being alive at the end: 		50% Bonus EXP
+- Changed [EXP] You won as  Innocent: 		100% Bonus EXP
+- Changed [EXP] You won as  Detective: 	150% Bonus EXP
+- Changed [EXP] You won as  Traitor: 		150% Bonus EXP
+// All Bonus XPs stack together additively
+
+
+[Gameplay]
+
+- Added New D Weapon [CCTV Camera]
+// Allows the detective to place a camera in the level which is live streamed to their HUD
+// This camera can be destroyed by ANYONE!
+// You will not be able to see names of the people on the video feed
+
+- Added New T Weapon [Soap]
+// Place down a bar of soap, walking over the soap will cause you to "Slip" 
+// And by "Slip" I mean get launched at high speed in that direction.
+// Can be used as a lethal trap or for mobility, that is up to you.
+// Works on the floor like a beartrap in terms of (Pickups, UI warnings, etc...)
+// They are not reusable like bear traps, but you get 2 instead!
+
+
+- Added [UI] Placed Bear traps now have a ui icon in the world for team mates (Like the C4 Does)
+- Added [Screen Effect] Taser Now has a electrocution screen effect for the person being tased
+- Added [Screen Effect]Poison Dar Now has sickly green screen effect for the person being poisoned
+- Added [Screen Effect] Bear Trap Now has bloody red screen effect for the person being trapped
+
+- Added [HitMarker] Added Hitmarker to: Cannibal Corpse Consume
+- Added [HitMarker] Added Hitmarker to: Push Grenade knock back player
+- Added [HitMarker] Added Hitmarker to: Manhack damage
+- Added [HitMarker] Added Hitmarker to: Crowbar Push
+
+- Reworked [Radio] Same radio, but the decoy effects have been merged into it
+// (All DNA and Radar scans will point to this instead of you)
+
+- Removed [Poltigeist] 
+// Manhackes was a better distraction and inferno grenades did more damage.
+// Will potentially be reworked in the future. it was also causing  errors in the server.
+
+- Removed [Decoy]
+// No one ever bought this...
+// It's functionality has been merged in with the radio
+
+- Reworked [Explosive Grenade]
+// Is now a high consistent AOE "Chipper" that will always weaken your opponent
+// Be careful! It will have karma penalties if you hit a friendly!
+// It can now damage through walls and props
+// Has a smaller radius to balance that ^
+// It will now consistently deals Damge (No harsh fall off or weird exponentials anymore)
+// Depending on how close you are it will deal: 60 to 15 Damage
+
+- Reworked [Throwing] (Knives and grenades)
+// Scrapped all the crap, it now just comes out of your face a set speed (Ultra reliable and consistent)
+// Reduced the Gravity of thrown things (They fall down slower = smoother arch)
+// Throwing is now the same arch / path / speed everytime so you can line up cross-map throwing knives or nades
+// Added the ability to right click throw grenades that does a very light throw (less distance)
+// Added a very feint dark trail to the throwing knife
+// Made all the throwables' trails feinter
+
+- Buffed [Stun Grenade] Targets now drop their currently held weapon (Not strip, like taser)
+- Buffed [Stun Grenade] Targets will now have a drunken / disoritated effect applied to them
+- Nerfed [Stun Grenade] Duration: 15 -> 10 Seconds
+
+- Buffed [Vigor] Max HP: 20 -> 25 HP
+- Changed [Vigor] No longer flat out heals you, but instead gives you a slow HP regen over time
+
+- Buffed [Armour] Damage Absorbed: 40 -> 50%
+
+- Buffed [Radar] Scan Delay: 20 -> 15 Seconds
+
+- Buffed [Newton Launcher] Number of Shots: 2 -> 3
+
+- Buffed [Shotgun] Damage: 135 -> 150
+- Nerfed [Shotgun] Recoil: 10 -> 15
+- Nerfed [Shotgun] Removed the ability to "Iron Sights"
+ 
+- Nerfed [Heavy Pistol] Spread: 0.0125 -> 0.0150
+// It is now the same as the light pistol's accuracy
+// This stops it from just being the old AK (Being able to 1 tap across the map)
+// While still making it very viable at 1 tapping at close range (Like a pistol should be)
+
+- Buffed [AWP] No-Scope Spread: 0.2 - > 0.1 
+- Buffed [Sniper] No-Scope Spread: 0.2 - > 0.1 
+// Now has the same spread as the shotgun
+// Doesn't really make no-scoping viable, it just makes the crosshair look nicer
+// I guess people who want to try their luck at cheeky no-scope will enjoy this change
+
+- Fixed [Stun Grenade] Description is now more informative
+- Fixed [Diguiser] Desciprtion now informs of Quirks
+- Fixed [Diguiser] Diguiser hud icon now matches shop icon
+- Fixed [Radar] Desciprtion now informs of Quirks
+- Fixed [Bear Trap] Improved isPlayerTrapped server logic
+- Fixed [Poison Dart] Improved isPlayerPoison server logic
+- Fixed [Poison Dart] Correct Function Args errror message
+- Fixed [Poison Dart] Fixed Repeat Hits would not reset the poison Timer (They now do)
+- Fixed [Taser] Fixed Repeat Hits would not reset the Taser Timer (They now do)
+- Fixed [Taser]  Taser is back in the Shop
+- Fixed [Taser] Corrected Error message
+- Fixed [Taser] Improved isPlayerTased server logic
+- Fixed [Taser] Playing the Shoot  Sound twice
+
+[Maps]
+
+- New Map [Transit]
+// An enclosed underground space with two stations linked via a train ride
+
+- Reworked [Dread Hollow] It now has an innocenet win condition
+// The innocents must search the map for red objectives and actiavte them to turn them green
+// A green objective will count towards the innocents score which once it reachs a certain number, will win the game
+// The Traitors must prevent the innocents from scoring until he can kill them all
+// Traitors can turn objectives red again but they also have a tiny chance to randomly turn red on their own.
+// There is a dashboard / display in the Saloon that tracks all of this that both teams can see.
+
+- Changed [Dread Hollow] Fixed the HUGE ping spikes (It was my too complex ghost system)
+- Changed [Dread Hollow] Drastic Changes to some ruins and added more
+- Changed [Dread Hollow] Added loads more spooky sound events
+- Changed [Dread Hollow] Added loads more ambient sounds
+- Changed [Dread Hollow] Camera now always keeps upright
+- Changed [Dread Hollow] A second duplicated camera screen has been added to the hospital
+- Changed [Dread Hollow] HUGE Physics prop clean up (Should perform better now)
+- Changed [Dread Hollow] HUGE Static prop clean up (Should perform better now)
+- Changed [Dread Hollow] Added water to the bottom of the mind shaft (For Seb)
+- Changed [Dread Hollow] Added some charples to the map
+- Changed [Dread Hollow] Mine shaft improvements
+- Changed [Dread Hollow] Dark forest has been cleaned up
+- Changed [Dread Hollow] Added a few more windows and routes into the Saloon
+- Changed [Dread Hollow] A few tress have gone that were in weird places
+- Changed [Dread Hollow] Redid the weapon spawns
+- Changed [Dread Hollow] Removed The Ghosts (For Now)
+- Changed [Dread Hollow] Many other small improvements, clean ups and fixes
+// Latest Version on the workshop
+
+- Changed [Desert] Reworked the sniper tower
+- Changed [Desert] Added an Oasis Pool
+- Changed [Desert] Made Ruined City more enclosed and detailed
+- Changed [Desert] Cleaned up alot of props
+- Changed [Desert] Cleaned up the car garage
+- Changed [Desert] Replaced all the ladders with new Joshmate2.0 Ladders
+- Changed [Desert] Fixed the dreaded mis alligned roof
+- Changed [Desert] Lots of bug fixes and clean ups across the map
+- Changed [Desert] Added the mandatory Turtle Easter Egg
+// Latest Version on the workshop
+
+- Changed [Lab] Did some major reworking to the central lobby
+- Changed [Lab] HUGE prop clean up (To improve Performance)
+- Changed [Lab] Decorated each corridor in a slightly unique way
+- Changed [Lab] Removed Turtle Easter Egg
+- Changed [Lab] Redid the Weapons spawns
+// Latest Version on the workshop
+
+- Changed [Elevator] Fixed the glowing ladder bug 
+- Changed [Elevator] Fixed Spawning inside another player
+- Changed [Elevator] Redid the weapon spawns
+// Latest Version on the workshop
+
+- Changed [Specific Ocean] Cleaned up alot of props
+// Latest Version on the workshop
+
+- Changed [Sky Town] HUGE prop clean up (To improve Performance)
+- Changed [Sky Town] Better clipping on warehouse parkour
+- Changed [Sky Town] Cleaned up underground
+- Changed [Sky Town] Replaced T button skyrail speed up with one that stops it instead
+// Latest Version on the workshop
+
+- Changed [Industrial] HUGE prop clean up (To improve Performance)
+- Changed [Industrial] Redid Weapon Spawns
+// Latest Version on the workshop
+
+
+
+

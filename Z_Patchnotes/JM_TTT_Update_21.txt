@@ -1,0 +1,37 @@
+[ Update 21] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Changed [Rounds] Number of rounds per map: 6 -> 10
+- Changed [Credits] Traitors will now gain bonus credits sooner for killing x% of the population: every 18% (used to be 20%)
+
+[Gameplay]
+ 
+ - Buffed [Shotgun] Damage: 150 -> 160
+ - Buffed [Shotgun] Bullets per shot: 15 -> 16
+ // This ones for you Jake Baby
+ 
+- Fixed [Taser] Tase effects should no longer persist past death
+
+[Maps]
+
+- New Map [Devil Town] An abandoned town in the desert which may be prone to sandstorms
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- New Map [Stand Off] A Mexican stand-off in the sky (A highly experimental map) (Seb's Idea)
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] Halved the space between the two stations
+- Changed [Transit] Removed the black squares that serperated the tunnel
+- Changed [Transit] Added a dangerous narrow catwalk to link the stations on foot
+- Changed [Transit] Bit of A prop Cleanup
+- Changed [Transit] Added a kill box to the buttom of the pit (There wasn't one and seb or Koen didn't even notice!)
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [SkyTown] Reduced the amount of gibs that the easter egg produces (To reduce the server lag)
+- Changed [SkyTown] Added a back door entrance to Ammo Shop
+- Changed [SkyTown] Changed the wall placement on Ammo Shop Island to have only one way round
+- Changed [SkyTown] Added a balcony to the front of brick shithouse
+- Changed [SkyTown] The Teleporters between the traitor rooms are now touch activated (Used to be a button)
+- Changed [SkyTown] Easter egg has been changed to: [REDACTED]
+// [LATEST VERSION ON THE WORKSHOP NOW]

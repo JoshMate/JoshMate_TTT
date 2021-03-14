@@ -1,0 +1,63 @@
+[ Update 20] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+// None
+
+[Gameplay]
+
+- Added [Barrier] A Detective Utility Item
+// Place down a defensive barrier
+// Left click to place the barrier right in front of you
+// After 2 seconds the barrier will arm blocking all passage and projectiles
+// It will last for 15 seconds and has 3 uses
+// It's basically the Anivia wall with a arm time to stop you from easily trapping people
+// Can be used to create limited bridges / ramps for getting places but this isn't what it's designed for
+
+- Added [Bomb Squad] A Detecitve Passive item which grants:
+// + C4 will be much easier to detect
+// + C4 wires will all be safe when defusing
+// + 50% Immunity to Fire Damage
+// + 50% Immunity to Explosive Damage
+
+- Removed [Toughness]
+- Removed [Defuser]
+
+- Buffed [Ninja Pro] Added Toughness's Fall Damage Immunity
+- Buffed [Ninja Pro] Added Toughness's Drown Dwamage Immunity
+- Changed [Ninja Pro] Made it Traitor Only
+
+- Buffed [C4] Damage Increased: 150 -> 175
+- Buffed [C4] Blast Radius Increased: 1200 -> 1500 ( 175 dmg at 0 units - 90 dmg at 750 units - 0 dmg at 1500 units)
+- Changed [C4] Beep Sound Distance (Without Bomb Squad): 300 units
+- Changed [C4] Beep Sound Distance (With Bomb Squad): 1000 Units
+
+- Changed [Decoy Radio] Removed the Overly Loud and annoying Meme sounds from the radio
+
+- Changed [Explosive Grenade] Now pushes nearby props upon explosion
+
+- Fixed [C4] Changed Description to inform of new changes
+- Fixed [CCTV Camera] Rare bug that causes the screen to stay through rounds
+- Fixed [Beartrap] Screen effects staying after death
+- Fixed [Poison Dart] Screen effects staying after death
+- Fixed [Taser] Screen effects staying after death
+
+[Maps]
+
+- New Map [Back Alley] A much smaller and more compact town map with the same feel as Park Square
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Dread Hollow] The Objective Traitor Buttons can be used from a bit further away (QOL)
+- Changed [Dread Hollow] Score Needed by Innocents to win: 300 -> 600 (1Min  -> 2Min (at 5 Objectives))
+- Changed [Dread Hollow] Objectives are locked (Can't be made green) for the first 30 seconds of the round
+- Changed [Dread Hollow] Made the Alyx Voice Lines about 30% more quiet
+- Changed [Dread Hollow] Added voice lines for the buttons becoming pressable and being 25% of the way there
+- Changed [Dread Hollow] Flipped the built in camera screens so they aren't mirrored anymore
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] Completely re-worked the train (Now with traitor buttons)
+- Changed [Transit] Added a way for the traitors to teleport across platforms
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [ParkSquare] Traitor buttons have only a single use now (I think this might fix the issues with them)
+// [LATEST VERSION ON THE WORKSHOP NOW]

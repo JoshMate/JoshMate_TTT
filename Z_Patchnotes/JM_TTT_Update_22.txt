@@ -1,0 +1,193 @@
+[ Update 22] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Changed [Karma] Traitors no longer lose karma for damaging fellow traitors 
+// The rules on RDM and damage have not changed though
+// This is the prevent accidental C4 Karma wipe outs or trolling by standing in your fellow T's fire etc...
+// This also enables agreed team kills for advanced Traitor Tactics
+// You will still be HEAVILY punished for team killing a fellow traitor if they press charges
+
+- Changed [Karma] You no longer recieve Positive Karma for "Correct" kills
+// This makes RDM even more un-rewarding as if you RDM'd two Traits and an Ino you would not lose karma overall
+
+- Changed [Logging] Greatly Improved the Code for Karma / Kill / Action Logging so I can better solve disputes
+
+[Gameplay]
+
+- Removed [Silenced Pistol] It didn't really fit my current gameplay design philosophies
+// No matter how I balanced it, it was either too good or too bad.
+// Just use the knife for close range silent kills or the awp for long range silent kills
+// Bring it back
+
+- Removed [Health Station] Replaced by Tree of Life
+
+- Added [Chameleon] A traitor Passive
+// Noah's Idea and winning item submission from the TTT Design Contest
+// An item that grants:
+// + Invisibility while standing still 
+// - Takes 4 seconds to activate
+// - Any action will cancel it
+// - You can still look around
+// Makes a subtle noise when it activates
+// Displays a buff and screen effect so the user knows when they are invisible to others
+
+- Added [Tree of Life] A Detective utility item
+// Place down a small tree which passively heals all players who stand near it
+// Lasts for about 30 seconds and you get 3 to place (on a flat surface like soap)
+// If placed in another TOLs radius, one of the trees will die
+// This is to prevent massive amounts of heal stacking and becoming very hard to kill
+
+- Reworked [Teleporter] For both Traitors and Detectives
+- Buffed [Teleporter] Teleport Animation is now instant (No more being stunned or waiting)
+- Buffed [Teleporter] Can now mark teleport locations anywhere (But not while crouched)
+- Buffed [Teleporter] Can now teleport from anywhere
+- Buffed [Teleporter] You can no longer be seen holding out the teleporter (You look holstered)
+- Buffed [Teleporter] You deploy (Swap to) the Teleporter much faster now
+- Changed [Teleporter] Much better HUD Info about how to use and what is going wrong
+- Nerfed [Teleporter] Uses: 10 -> 5
+- Nerfed [Teleporter] The teleport Effects are bigger and louder
+- Nerfed [Teleporter] You can Telefrag after a 5 second delay of marking your spot
+// This will make the teleporter way less rigid and a easier to use.
+// However this enables some suicidal / stuck positions to be teleported to, so use at your own risk!
+// Marking is silent and has no visuals. Recalling is loud and has spark visuals
+// Your Momentum is preserved so if you teleport while falling then GG
+
+- Reworked [Grenades]
+- Changed [Grenades] Full re-write of the base grenade code
+- Changed [Grenades] Now deploy faster and can be thrown instantly after equipping
+- Changed [Grenades] Much smoother trajectory and better physics
+- Changed [Grenades] Shortened the fuses on ALL grenades to 3 seconds
+- Changed [Grenades] Added a sound effect to throwing ALL grenades
+- Changed [Grenades] Added a chat message to tell players they can't throw grenades during pre game
+
+- Reworked [Smoke Grenade] it is now "Tag Grenade"
+// The smoke grenade was super buggy and engine limited
+// It was also barely used apart from just yeeting it for no reason
+// Tag grenade can be thrown and upon explosion will tell you how many people were nearby
+// Use it for scouting rooms or corners or checking how many people are in a certain place
+// Has the CSS Smoke Model
+
+- Reworked [Push Grenade] it is now "Jump Grenade"
+// The Push Grenade was a sketchy tool to give to innocents since the RDM potential is soo high
+// Traitors never used it because of how clunky it was and how the newton launcher is much better
+// The Jump Grenade is a utility nade that when thrown will push you in the opposite direction you threw it
+// It explodes on impact making "Rocket Jumping" or "Long Jumping" the main purpose of this nade
+// The Grenades push will ONLY affect the user so it can't be used to harras or RDM
+// This also stops it from just being the Newton launcher but for innocents
+// Left Click to do a direction jump
+// Right Click to do a verticle jump
+// Has the CSS Flashbang Model
+
+- Reworked [Explosive Grenade] is now "Frag Grenade"
+// The explosive damage no longer goes through walls
+// The explosion will break windows and props now
+// Has the CSS Frag Model
+
+- Changed [Binoculars] Detectives now start with these in slot 9 (Previously Unsused Slot)
+- Changed [Binoculars] Removed From Shop
+- Buffed [Binoculars] Corpse Processing Time: 5 -> 2 Seconds
+
+- Changed [Visualiser] Detectives now start with these in slot 9 (Previously Unsused Slot)
+- Changed [Visualiser] Removed From Shop
+- Buffed [Visualiser] Scan Delay: 15 -> 5 Seconds
+
+// Neither of these items were used very much. 
+// They weren't a very exciting choice compared to the other "Fun" items
+// They still have interesting potential in gameplay though, so I made them part of the Detective's default kit
+
+- Buffed [Light Pistol] Damage: 20 -> 30 
+- Buffed [Light Pistol] Magizine Capacity: 12 -> 20
+- Nerfed [Light Pistol] Fire Rate Delay: 0.13 -> 0.15 
+- Nerfed [Light Pistol] Removed Iron Sights
+// Jack of all trades for close to mid range
+
+- Buffed [Auto Pistol] Damage: 18 -> 20 
+- Buffed [Auto  Pistol] Magizine Capacity: 12 -> 20
+- Nerfed [Auto  Pistol] Removed Iron Sights
+//  Shreds point blank but terrible at range
+
+- Buffed [Heavy Pistol] Damage: 40 -> 45
+- Nerfed [Heavy Pistol] Fire Rate Delay: 0.30 -> 0.40
+- Nerfed [Heavy Pistol] Recoil: 10 -> 15
+- Nerfed [Heavy Pistol] Removed Iron Sights
+// 1-tap headshot cannon, rapid firing isn't a good idea
+
+// These changes aim to make the pistols more viable at up close running and gunning and less viable cross map. (Like pistols should be?)
+
+- Buffed [Assault Rifle] Damage: 40 -> 45
+- Buffed [Assault Rifle] Spread Accuracy: 0.010 -> 0.008
+- Nerfed [Assault Rifle] Recoil: 3 -> 4
+- Nerfed [Assault Rifle] Fire Rate Delay: 0.13 -> 0.15 
+- Nerfed [Assault Rifle] Magizine Capacity: 30 -> 20
+// Now a accurate beast at mid range, but no longer shreds up close (That's the SMG's Job) This should discourage spraying and encourage accurate tap shooting
+ 
+- Nerfed [SMG]  Removed Iron Sights
+// Shreds up close, can no longer iron sight to shred at mid range, (that's the Assault Rifle's Job)
+
+- Buffed [LMG] Recoil: 1 -> 0.5 
+// Can better spray at all ranges, but is out classed by every gun in those ranges. (It has a 100 mag cap to make up for it) (The true jack of all trades master of none primary for those who aren't massive try hards ;)
+
+// These changes aim to make the primary weapons have more distinction between what ranges they excell at, and stop them from stepping on each others toes in other ranges.
+
+- Buffed [Defender] Damage: 70 -> 80
+- Nerfed [Defender] Fire Rate Delay: 0.30 -> 0.40
+
+- Buffed [Stun Grenade] Number of Grenades to throw: 1 -> 3
+- Nerfed [Stun Grenade] Hard cover (solid walls, not physics props) will protect you from the stun
+- Nerfed [Stun Grenade] Duration: 10 -> 5
+- Changed [Stun Grenade] Is now Detective Only
+
+- Buffed [Inferno Bomb] Number of Grenades to throw: 1 -> 2
+- Nerfed [Inferno Bomb] Radius: 300 -> 225
+- Nerfed [Inferno Bomb] Duration: 30 -> 10 seconds
+
+- Changed [Manhack Swarm] Viewmodel is now nothing like other deployables (Faster deploy time as a result)
+
+- Buffed [Soap] Number of Soap to place: 2 -> 3
+
+- Buffed [Barrier] LifeTime: 15 -> 20 Seconds
+- Buffed [Barrier] Arm Time: 2 -> 1.5 Seconds
+
+- Buffed [Radar] Scan Delay: 15 -> 10 Seconds
+
+- Changed [Buffs] Added timers to the buff icon for all timed buffs
+
+- Changed [Inventory] Added Hud Help for what left click and right click do with the various items
+- Changed [Inventory] Alot of items will now auto-remove from your inv when they have no uses left and cant be refilled
+
+- Changed [BearTrap] Can now be placed on breakables (Standoff platforms etc...)
+- Changed [Tree of Life] Can now be placed on breakables (Standoff platforms etc...)
+- Changed [Soap] Can now be placed on breakables (Standoff platforms etc...)
+- Changed [C4] Added a distinct bassy boom to its explosion (So you know it's not just a grenade)
+- Changed [Inferno Grenade] Added a distinct bassy fire to its explosion (So you know it's not just a grenade)
+
+- Fixed [Screen Effects] Complete re-write of the code for tase/poison/beartrap/stun screen effects to be less error prone
+- Fixed [Freeze] Bear trap and taser should no longer remove each other's freeze effects prematurely
+- Fixed [Stun Grenade] No longer counts dead players in the stun counter
+
+[Maps]
+
+
+
+- Changed [Devil Town] Full visual rework to help you tell the difference between the parts of the map
+- Changed [Devil Town] Added a TOWER (The people want what the people want)
+- Changed [Devil Town] Added some breakable planks that link the roof tops
+- Changed [Devil Town] The Sand storm can now happen more than once per round
+- Changed [Devil Town] The Sand storm now has audio cues for it starting and ending
+- Changed [Devil Town] The Sand storm now appears more frequently
+- Changed [Devil Town] The Sand storm now has more Darude
+
+- Changed [Transit] A wall of Poison Gas will force players to one of the back rooms to finish it (Sudden Death)
+- Changed [Transit] Slightly Altered the back room of the south station
+- Changed [Transit] Fixed the ladders from not letting you dismount
+- Changed [Transit] Fixed the weapon Spawns
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Standoff] Added a traitor button that will temporarily (12s) raise 2 random walls that block sight
+- Changed [Standoff] Added some ambient wind to the map
+- Changed [Standoff] Fixed the Flying Corpse Bug
+- Changed [Standoff] The fall is now much shorter and the telport is better configured (For Performance)
+- Changed [Standoff] Sudden death can now happen randomly between 1 - 3 minutes (For variety)
+- Changed [Standoff] Cleaned up some props (For server performance)
+// [LATEST VERSION ON THE WORKSHOP NOW]

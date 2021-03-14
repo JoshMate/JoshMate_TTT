@@ -1,0 +1,22 @@
+:tss:  TTT - Update 10:
+
+- Nerfed Shotgun mag capacity 6 -> 5
+- Nerfed Shotgun Max Ammo 12- > 10
+
+- Buffed Auto Pistol Spread 0.065 -> 0.055
+- Nerfed Auto Pistol Mag Capacity 18 -> 16
+
+- Buffed Light Pistol Spread 0.025 -> 0.020
+- Buffed Light Pistol Mag Capacity 12 -> 16
+
+- Buffed Heavy Pistol Spread 0.020 -> 0.015
+- Nerfed Heavy Pistol Mag Capacity 7 -> 5
+
+- Buffed C4 Blast Radius 1000 -> 1200
+
+- Nerfed Ninja Pro Movement Speed 50% -> 20%
+
+- LMG Overhauled
+- It is now a very accurate and fast firing weapon with very little recoil
+- It has super high mag capacity
+- But it has terrible damage, so it is made for suppressing foes and medium - long ranges

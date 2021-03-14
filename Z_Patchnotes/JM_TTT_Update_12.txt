@@ -1,0 +1,53 @@
+:tss:  TTT - Update 12:
+
+- Added [Flashbang Grenade]:
+= A throwable greanade for Tratiros and detectives
+= Blinds and Deafens players who are near it or looking at it
+
+- Added [sound] New HD sound effects for all major weapons
+- Added [sound] Sound for grenades impacting the world
+- Added [sound] Sound for smoke grenades exploding
+
+- Buffed [Smoke Grenade] Thicker Smoke Cloud
+- Buffed [Smoke Grenade] More consistent coverage and dissipation
+- Nerfed [Smoke Grenade] Cloud fades away faster
+- Nerfed [Smoke Grenade] Cloud starts small and gets bigger over time
+
+- Nerfed [Light Pistol]  Shoot Delay: 0.08 -> 0.12
+- Buffed [Light Pistol]  Damage: 20 -> 25
+
+- Buffed [Auto Pistol]  Recoil: 4 -> 3
+- Buffed [Auto Pistol]  Spread: 0.055 -> 0.050
+- Nerfed [Auto Pistol]  Shoot Delay: 0.08 -> 0.10
+
+- Buffed [SMG]  Spread: 0.055 -> 0.050
+- Nerfed [SMG]  Shoot Delay: 0.08 -> 0.10
+
+- Nerfed [Silenced Pistol] Shoot Delay: 0.10 -> 0.15
+- Buffed [Silenced Pistol] Recoil: 2 -> 1
+- Buffed [Silenced Pistol] Spread: 0.020 -> 0.015
+
+- Nerfed [LMG] Magazine Capacity: 150 -> 100
+- Nerfed [LMG] Spread: 0.010 -> 0.020
+- Nerfed [LMG] DeploySpeed: 1 -> 2
+- Nerfed [LMG] Holding Movement Speed: 100% -> 30%
+- Buffed [LMG] Fire Rate Delay: 0.12 -> 0.10
+- Buffed [LMG] Damage: 12 -> 25
+
+- Buffed [Armour] Damage Reduction: 20% -> 50%
+
+- Buffed [Knife] Holding Movement Speed: 100% -> 120%
+
+- Buffed [Holstered] Holding Movement Speed: 100% -> 120%
+
+-Buffed [Binoculars] Zoom in amount: -> 100% -> 150%
+
+- Buffed [AWP] Recoil: 10 -> 5
+- Nerfed [AWP] Holding Movement Speed: 100% -> 30%
+
+- Changed [ttt_elevator_classic] Removed Smoke Grenades
+- Changed [ttt_elevator_classic] Removed the ability to turn on the flash light on this map alone
+- Fixed [ttt_elevator_classic] Fixed Seb's light fixture C4 Dropdown hack
+
+- Changed [ttt_industrial] ttt_elevator renamed to ttt_industrial
+- Fixed [ttt_industrial] Security Keycard is no longer super glitchy to hold

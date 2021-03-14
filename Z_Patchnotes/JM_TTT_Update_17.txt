@@ -1,0 +1,150 @@
+[ Update 17] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Added [Addon] Cod style hit marker effects to dealing damage to players!
+
+- Added [Audio] Sounds to the end of round ressult screen (Thanks Vinny)
+
+- Changed [Loading screen] Changed back to Zommquilt (Thanks Koen)
+
+[Gameplay]
+
+- Removed [Flare Gun] 
+// Its functionality has been split between the following three items: Inferno Grenade, Poison Dart and Cannibal
+
+- Added [Poison Dart] for Traitors
+// A silent and long range weapon that deals very low damage over a long period of time
+// Heals the user for the damage dealt to the target over time.
+// Eg. The target takes 2 dmg a second for 30 seconds, while the user heals 2 HP a second for 30 seconds
+// Players will be informed that they have been poisoned
+// The effects stops if the target dies (Can only steal hp while they have it to steal)
+// The effect can't overheal (But can heal up to your max Bonus HP from other sources)
+// Healing at the Detective Health Station or buying vigor will remove poison
+// It only has 5 uses
+
+
+- Added [Cannibal] for Traitors
+// A utility weapon which allows the player to consume corpses (prop_ragdolls)
+// Eating a corpse will increase your max HP by 10 and heal you for 10
+// It will also convert the corpse into a pile of bones which REMOVES all corpse information
+// Doing so makes a meaty noise, so people will know if they are nearby
+// It has 5 uses (+50 Max HP) and you must be very close to the corpse
+
+- Added [Vigor] for detectives
+// A passive which grants +20 Max HP and fully heals the buyer
+// Removes the debuffs: (Tased) and (Poisoned)
+
+- Reworked [Inferno Grenade]
+// Still an AOE area denier which burns an area and all in it.
+// The damage has been converted from lots of exponential flame sources to a single constant sphere
+// This means you will get hurt for the same amount anywhere in the radius, rather than like 37 or 4 at random
+// It burns for alot longer now but does damage at a slower rate
+// A cloud of orange smoke will now outline the rough radius of where it will hurt you
+// The damage is now properly resisted by toughness, applied to hit markers and karma
+// Overall I think this makes the grenade more predictable and consistent, but less randomly insta-killy
+
+- Reworked [C4]
+// Overall the C4 Will now be far more consistent, powerful, predictable (for the Traitor).
+// Radius can take out a full Sky Town Island and damage those around
+// Damage now falls of linearly from 150 to 0 over the 1200 unit distance
+// Before it had some really sharp falloff and would be like a a few inches between insta kill and totally fine
+// The Knockback will still happen and you can survive if you are on the outskirts of the blast (But still take DMG)
+// Explosions from a failed defuse are now more deadly than they wer e before (50% of a real one)
+// Longer Fuses are NO longer quieter (To be More consistent in this engine)
+// Beep is a bit louder to account for larger radius and to encourage defusing (Fail still causes a boom)
+// Toughness will let you survive C4 Blast radius about 25% deeper into the explosion than normal
+
+- Buffed [Defuser] Holder's Detection Radius for C4 Increased: 300 -> 1000
+- Buffed [Defuser] Beep Sound when holding massively increased
+- Buffed [Defuser] Beep Light when holding massively increased
+// Made Defuser much more viable as C4s are really strong now
+
+- Buffed [newton Launcher] 25% buff to push force for players
+- Buffed [newton Launcher] 50% buff to push force for props
+
+- Buffed [Ninja Pro] Added bonus jump Height and reduced crouch movement penalty ontop of previous effects
+
+- Buffed [Goomba Stomping] Damage Dealt to victim: 100% -> 250%
+- Buffed [Goomba Stomping] Damage Dealt to self: 33% -> 20%
+
+- Buffed [Manhack Swarm] Deploy Range: 500 -> 650 Units
+
+- Nerfed [Taser] Stun Duration: 15 -> 10 Seconds
+- Changed [Taser] Now displays a debuff icon while you are tased
+
+- Buffed [LMG] Movement Speed: 80% -> 100%
+- Nerfed [LMG] Damage: 25 -> 20 (Can no longer 2 tap to the head)
+// LMG is just a medicore gun stat wise but just has 100 bullets, so it doesn't matter if you miss
+
+- Buffed [Bear Trap] Deploy Speed Icreased: 2x -> 4x
+- Buffed [Bear Trap] No longer has a 1% chance to escape (You must be saved)
+- Buffed [Bear Trap] Tick Rate: 100% -> 200%
+- Buffed [Bear Trap] Trap owner is now warned who has been caught in their trap
+- Buffed [Bear Trap] Trap owner is now warned when the trap is removed or picked up
+- Buffed [Bear Trap] Trap owner is now warned when the trap is damaged
+- Nerfed [Bear Trap] Damage per tick: 7 -> 3
+- Nerfed [Bear Trap] Others can now see you holding it
+
+
+- Buffed [Detective] Starting Credits: 2 -> 3
+
+- Changed [Fall Damage] Start taking fall damage earlier (Damage has not increased) (Goomba stomps can start earlier too)
+
+- Changed [Bleeding] Blood amount and duration of bleeding increased: 100% -> 200%
+// When you take damage, depending on how much you will leave a trail of blood. Its now bigger
+
+- Fixed [Toughness] You can now goomba stomp with this (previously, buying this perk blocked it from happening)
+- Fixed [Toughness] Now displays the correct toughness logo on your screen when owned
+- Fixed [Ninja Pro] Now displays the correct Ninja Pro logo on your screen when owned
+- Fixed [Armour] Now displays the correct Armour logo on your screen when owned
+- Fixed [Basic Weapons] Now displays the correct Weapon logo on corpses
+- Fixed [Debuffs] Added a failsafe to Debufss liked poisoned / tased so they don't carry through rounds
+- Fixed [Buy Notifications] The wrong icon and name coming up when your Traitor mate buys something
+
+[Maps]
+
+- New Map [Lucker] This isn't a serious map, but just a bit of fun.
+
+- Changed [Desert] Converted Penis rock to a mini fort
+- Changed [Desert] Converted the underground bunker into a bar
+- Changed [Desert] Converted the weird tree corner to a construction site
+- Changed [Desert] Icreased the complexity of the ruins
+- Changed [Desert] Cleaned up the sniper tower
+- Changed [Desert] New jump route into the house's bedroom
+- Changed [Desert] Redone Weapon Placements
+// Latest Version on Workshop now!
+
+- Changed [Abyss] Added a tiny central island to be the Centre of the map
+- Changed [Abyss] Removed the traitor rooms (They made C4 Trivial and were super janky to use)
+- Changed [Abyss] The map is now divivded by colour and prop type (Blue Barrel islands vs Red Crate Islands)
+- Changed [Abyss] Reworked the weapon placements to make them more scarce
+- Changed [Abyss] Added some more detail to the bridges (No more floating planks)
+- Changed [Abyss] Cleaned up the texture work
+- Changed [Abyss] Changed fog colour from blue to white (No more weird colour shifts (Grenade trails etc...))
+- Changed [Abyss] Reworked the lighting so there is less dark corners and weird shadows
+- Changed [Abyss] Added some nice ambient sounds
+- Changed [Abyss] Added Anoter Easter egg
+- Changed [Abyss] Incresed Turtle Touching radius but reduced the damage
+- Changed [Abyss] Added a physics push effect to turtle boom
+- Changed [Abyss] Added a fire effect to turtle boom
+- Changed [Abyss] Added a trail effect to the turtles
+// Latest Version on Workshop now!
+
+- Changed [TownSquare] Renamed to "Parklane"
+- Changed [Parklane] Teleporters out of the traitor room are now ontouch (Should stop them getting locked)
+- Changed [Parklane] Teleporters can now teleport EVERYTHING: props, weapons, npcs etc...
+- Changed [Parklane] Added wooden planks fot the top of the bookshelves in library to obscure vision
+- Changed [Parklane] Re-arranged the library a bit
+- Changed [Parklane] Added a ramp up the fence in the shipping yard
+- Changed [Parklane] Added a plant pot ledge outside the towers window to enable a weird route
+- Fixed [Parklane] Health pickups  not accounting for new max HP items
+// Latest Version on Workshop now!
+
+- Fixed [Skytown] Health pickups in pharmacy not accounting for new max HP items
+// Latest Version on Workshop now!
+
+- Changed [Lab] Changed the way the door to the deep pit works (It is now controled by a button)
+- Changed [Lab] Added a health pickup to the bottom of the deep pit
+- Fixed [Lab] Health pickups not accounting for new max HP items
+// Latest Version on Workshop now!

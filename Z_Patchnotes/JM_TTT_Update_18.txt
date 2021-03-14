@@ -1,0 +1,106 @@
+[ Update 18] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Changed [Hosting] We are now running on a dedicated server!
+
+- Added [Scoreboard] Icons for ranks in the server (Owner, Moderator, VIP)
+- Added [Scoreboard] Colour Coded Karma (Green -> Red) for (Good -> Bad)
+- Added [Scoreboard] Better Karma Descriptions (Evil, Very Bad, Bad, Crude, Questionable, Good, Very Good, Perfect)
+- Fixed   [Scoreboard] Josh Mate TTT Logo being the wrong size
+
+- Added [JM XP] An XP and level up system
+// Don't worry, it is purely cosmetic and has no effect on gameplay!
+// Your Level is displayed next to your name on the Scoreboard for all to see!
+// Gain XP at the end of the round based on:
+// (((Karama / 10) + (Score * 4)) * XPMultiplier) 
+// + 50% Bonus xp Multiplier if you were alive at the end!
+// + 50% Bonus xp Multiplier if you won as the traitor!
+// Type !jmxp to find out how much xp you are away from leveling up
+
+[Gameplay]
+
+- Reworked [Flashbang] It is now a stun grenade
+// Slows all players hit in radius by 70% for 10 Seconds
+// Blocked by walls, NOT blocked by props, NOT blocked by looking away
+// Tells the thrower how many people they stunned (And a hitmarker!)
+// Has a 2 second fuse (Pop flashing ohhhh yeeah) (other fuses are 5 seconds)
+
+- Buffed [Cannibal] Max HP Per Corpse: 10 -> 25
+- Buffed [Cannibal] HP Heal per Corpse: 10 -> 25
+- Nerfed [Cannibal] Uses: 5 -> 4
+// At 4 stacks you will have 200HP instead of 150 at 5 stacks
+// in a game of 8ish people, having to eat 5 of them to survive one more AK shot was just bad
+// This weapon was a bad choice compared to any other item
+
+- Buffed [Swarm] Manhacks Deployed: 8 -> 9
+- Buffed [Inferno Grenade] Radius: 260 - > 300
+- Buffed [Inferno Grenade] Damage per Tick: 4 -> 6
+- Buffed [AWP] No longer has a speed penalty (Was very out of character I think)
+- Buffed [Defender] It now comes with an extra Mag of ammo (Like the Silenced pistol does)
+
+- Chagned [Hit Marker] You now get a hitmarker for hitting someone with: Newton Launcher
+- Chagned [Hit Marker] You now get a hitmarker for hitting someone with: Taser
+- Chagned [Hit Marker] You now get a hitmarker for hitting someone with: Stun Grenade
+
+- Changed [Trail Colour] Inferno Grenade: Red -> Orange
+- Changed [Trail Colour] Explosive Grenade: Orange -> Yellow
+- Changed [Trail Colour] Flashbang Grenade: Blue -> Cyan
+- Changed [All Grenades] Fuse Time: 5 Seconds -> 4 Seconds
+
+- Changed [Fall Damage] You can now fall higher before damage starts
+- Changed [Fall Damage] When it does start though, it will do more damage
+- Changed [Fall Damage] Goomba Stomping Damage given to target: 250% -> 300%
+// You now shouldn't get hurt dropping from a 1st story window, but 2nd will hurt
+
+- Changed [World Model] People can no longer see you holding: Bear Trap
+- Changed [World Model] People can no longer see you holding: Cannibal
+- Changed [World Model] People can no longer see you holding: Manhack Swarm
+- Changed [World Model] People can no longer see you holding: C4
+- Changed [World Model] People can no longer see you holding: Radio
+- Changed [World Model] People can no longer see you holding: Health Station
+// You will just appear as holstered to anyone else while you hold these
+// These weapons will be removed upon dropping (As they have no world model)
+
+- Fixed [C4] Description to inform of the U17 Rework
+- Fixed [beartrap] Fixed Description to inform of the U17 Rework
+- Fixed [beartrap] Update Shop Icon to match the rest of the custom items
+- Fixed [beartrap] an error msg printing to the console every new map
+- Fixed [Flashbang] an error msg printing to the console every new map
+
+
+
+[Maps]
+
+- Chagned [Lab] Added a new traitor room
+- Chagned [Lab] Overhauled "the pre-existing traitor" rooms
+- Chagned [Lab] Overhauled "the Pit"
+- Chagned [Lab] Overhauled "the storage" room
+- Chagned [Lab] Overhauled "the multi-level ladder" room
+- Chagned [Lab] Added some more cover and detail to the central lobby
+- Chagned [Lab] Landing on the yellow hazard lines now sends your body to the new "Corpses Chute"
+- Chagned [Lab] Added A sign to warn about the dangers of the Yellow Hazards Lines
+- Chagned [Lab] Cleaned up some props / clutter / overcrowding of detail across the map
+- Chagned [Lab] Added a turtle based easter egg
+- Chagned [Lab] Rebalanced weapon spawns
+// Latest Version On The Workshop Now!
+
+- Changed [Elevator] Added more Spawns so it won't break if 12+ people vote it
+- Changed [Elevator] Improved the lighting inside the elevator
+- Changed [Elevator] Ladder has been optimised to be easier to climb
+- Changed [Elevator] Ladder can now be climbed from all angles (Stops you getting stuck on it)
+- Changed [Elevator] Ladder can now be walked around both sides (Looked like you could before but you couldn't)
+- Changed [Elevator] Ladder and the hatch hole have been shifted over ever so slightly to account for above
+// Latest Version On The Workshop Now!
+
+- Changed [Dread Hollow] Added a tunnel connecting the mine shaft to the saloon
+- Changed [Dread Hollow] Something strange has been sighted out in the woods...
+- Changed [Dread Hollow] Added a new portable ghost hunting camera!
+// Latest Version On The Workshop Now!
+
+- Changed [ParkSquare] Greatly Improved and cleaned up the Traitor Room
+- Changed [ParkSquare] Made the teleporting much less prone to getting stuck and easier to use
+- Changed [ParkSquare] Added a CCTV camera + Monitor that points at the tower to the Traitor Room
+// Latest Version On The Workshop Now!
+
+

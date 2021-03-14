@@ -1,0 +1,82 @@
+[ Update 16 ] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Changed [Loading screen] Now displays the next map
+
+- Reworked [Map Vote]
+// Now displays map icons! (Very Pretty)
+// No longer stops maps from being votable (Was a bug)
+
+[Gameplay]
+
+- Reworked [LMG]
+// Changed it to now be:
+// A mid range automatic weapon that is between the SMG and the Rifle with 100 rounds and a movement debuff
+
+- Reworked [Newton Laucher]
+// It is now a 2 shot weapon (like the awp)
+// It silenty shoots a bolt of energy where you are aiming
+// If this hits a wall or anything it will explode and push everything away from it.
+// It is basically a long range and instant double strength Push Grenade explosion on demmand
+// Its fun to use, but very situational
+
+- Reworked [Health Station]
+// Changed potential healing from 200 -> 400
+// It no longer recharges its healing capacity over time
+// It will still heal up to 100HP on a player and at the same speed
+// It will now just heal up to 400 HP rather than INFINITE
+// This will help with some undiscovered survive for ever while out the map bugs
+
+- Reworked [Smoke Grenade] 
+// Smoke clouds are now much smaller
+// Smoke clouds start as a large plume and get smaller (Used to be the other way round)
+// They are now thicker
+// They should hopefully be more viable at quickly distorting vision without covering up the whole map
+
+- Nerfed [All Shops] Items are not re-buyable
+// Every item can only be purchased ONCE (1x times) (Once per round, NOT once per map or game.)
+// (This does not affect what your team can buy)
+// This is to stop spammy or repeatable tactics
+// And hopefully encourage some diversity and experimentation
+
+- Buffed [Rifle] Bodyshot Damage: 35 -> 40
+- Nerfed [Rifle] Headshot Damage: 105 -> 80
+// 1 Tapping Was completely OP, It had to be nerfed (Blame a certain CSGO tryhard for this one)
+// 2 Tapping is still viable if you can control the HEAVY recoil
+
+- Buffed [All Grenades] Throw distance/velocity increased: 100% -> 150%
+// They should now feel even less sluggish to throw
+
+- Buffed [Knife] Throwing should now be straighter and more consistent (Like the grenades)
+- Buffed [Knife] Throw distance/velocity increased: 100% -> 150%
+// Should now be more consistent and nice like the grenades
+
+- Buffed [The Defender] Increased the scope zoom (Same as awp now): 20 -> 10 (FOV)
+- Buffed [Sniper] Increased the scope zoom (Same as awp now): 20 -> 10 (FOV)
+- Nerfed [Sniper] Has terrible Accuracy when No scoping. Perfect when scoped in (Like COD)
+- Nerfed [AWP] Has terrible Accuracy when No scoping. Perfect when scoped in (Like COD)
+// Stops you from using the sniper as a shotgun and the awp as a knife
+
+- Buffed [Silenced Pistol] Spread: 0.015 -> 0.0125
+- Fixed [Silenced Pistol] Is now quieter (A bug had prevented it from being  this in the first place)
+
+- Buffed [Grenade: Explosive] Damage: 40 -> 50 (Although this will be more like 60-80 in game)
+- Buffed [Grenade: Explosive] Radius: 400 -> 500
+
+- Buffed [Taser] Uses: 2 -> 3
+
+[Maps]
+
+- New Map [Desert] An open sandy desert with various structures scattered around
+// Latest Version on Workshop now!
+
+- New Map [Lab] A maze of tight corridors with unique obstacles and experiments in each room
+// Latest Version on Workshop now!
+
+- New Map [Abyss] A bridge, over a foggy abyss.
+// Latest Version on Workshop now!
+
+- Changed [Dread Hollow] Added a traitor button to deal with radio tower campers in a fair way
+- Changed [Dread Hollow] Minor Improvements, fixes and refinements throughout
+// Latest Version on Workshop now!

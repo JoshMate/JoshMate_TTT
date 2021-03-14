@@ -1,0 +1,21 @@
+[ Update 22] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!)
+- Changed [Rounds] Time before map change: 60 -> 45 Minutes
+
+- Changed [Roles] Traitor Percentage
+
+[Gameplay]
+
+
+[Maps]
+
+
+// TODO: Teleporting behind the gas wall on transit
+//TOD: Scope Taser bug
+
+// TODO: Transit Fog Wallto be faster
+
+// TODO: Sandstorms keep often but shorter (20S)

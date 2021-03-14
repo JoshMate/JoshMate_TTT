@@ -1,0 +1,3 @@
+1st map idea:
+3 cable cars that move slightly off sync past each other, more than one person spawns on the each depending on player count
+Traitor buttons to drop each cable car at random on a timer of 60 seconds
