@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture" "joshmate/barrier"
+	"$surfaceprop" "Glass"
+	"$additive" 1
+	"$nolod" 1
+	"$translucent" 1
+}

@@ -1,0 +1,3 @@
+gmpublish.exe update -addon "D:\GoogleDrive\Projects\Gmod\MyGmodMaps\ttt_skytown\ttt_skytown.gma" -id "2347056183" -changes "Updated"
+
+gmpublish.exe update -icon "D:\GoogleDrive\Projects\Gmod\MyGmodMaps\ttt_skytown\workshop\SkyTown_Preview_Square512.jpg" -id "2347056183"

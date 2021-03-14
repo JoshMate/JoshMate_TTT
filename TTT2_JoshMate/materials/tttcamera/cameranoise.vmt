@@ -1,0 +1,17 @@
+"UnlitGeneric" 
+{
+	"$basetexture" "tttcamera/cameranoise"
+	"$vertexalpha" 1
+	"$translucent" 1
+	"$additive" 1
+	"Proxies" 
+	{ 
+		"AnimatedTexture" 
+		{ 
+			"animatedTextureVar" "$basetexture" 
+			"animatedTextureFrameNumVar" "$frame" 
+			"animatedTextureFrameRate" "20" 
+		}
+	}
+	"$frame"	 "5"
+}
