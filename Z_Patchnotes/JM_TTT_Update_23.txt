@@ -19,6 +19,7 @@
 [Maps]
 
 - Changed [Devil Town] Sandstorm Duration: 30 -> 20 Seconds
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 // TODO: Teleporting behind the gas wall on transit
 
