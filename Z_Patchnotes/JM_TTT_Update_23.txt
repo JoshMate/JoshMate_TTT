@@ -8,7 +8,6 @@
 
 [Gameplay]
 
-// Awp 1 bullet
 // Traitors start with Radar
 // Ninja + Disguiser merge
 // Rework Inferno
@@ -18,6 +17,7 @@
 // Can't DNA a bloodied bear trap
 // Dead people can hear traitor
 
+- Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
 
 - Reworked [Chameleon] You will stay invisible until you:
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
