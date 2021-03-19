@@ -8,6 +8,16 @@
 
 [Gameplay]
 
+// Awp 1 bullet
+// Traitors start with Radar
+// Ninja + Disguiser merge
+// Rework Inferno
+// Detective start with armour
+// Make soap transparent
+// Make Soap just have 2 ammo
+// Can't DNA a bloodied bear trap
+// Dead people can hear traitor
+
 
 - Reworked [Chameleon] You will stay invisible until you:
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
@@ -23,8 +33,14 @@
 - Changed [Devil Town] Sandstorm Duration: 30 -> 20 Seconds
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
-// TODO: Teleporting behind the gas wall on transit
+- Changed [Transit] The wall is no longer 2d and extends all the way back behind it (Can't get behind it)
+- Changed [Transit] The wall is now slightly faster
+- Changed [Transit] The wall now deals damage over time rather than insta kill (Deals more the longer you stay in it)
+- Changed [Transit] Removed the last BARREL to stop seb from DDOSing the server...
+// Still needs uploading
 
-// TODO: Transit Fog Wallto be faster
-
-// TODO: Sandstorms keep often but shorter (20S)
+- Changed [Kook Town] Clipped off the borders (You can no longer fall off the map)
+- Changed [Kook Town] Made the middle outskirt Roofs less hide-on-able
+- Changed [Kook Town] Added some more ladders
+- Changed [Kook Town] Fixed some textures that were wrong
+// [LATEST VERSION ON THE WORKSHOP NOW]
