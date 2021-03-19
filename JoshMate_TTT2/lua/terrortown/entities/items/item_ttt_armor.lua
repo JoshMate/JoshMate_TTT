@@ -21,6 +21,7 @@ ITEM.hud = Material("vgui/ttt/joshmate/hud_armour.png")
 ITEM.CanBuy = {ROLE_TRAITOR, ROLE_DETECTIVE}
 ITEM.oldId = EQUIP_ARMOR or 1
 ITEM.limited = false
+ITEM.InLoadoutFor           = {ROLE_DETECTIVE}
 
 if SERVER then
 

@@ -1,4 +1,4 @@
-[ Update 22] - (Josh Mate's TTT2 Server)
+[ Update 23] - (Josh Mate's TTT2 Server)
 
 [Server]
 
@@ -8,16 +8,20 @@
 
 [Gameplay]
 
-// Traitors start with Radar
 // Ninja + Disguiser merge
 // Rework Inferno
-// Detective start with armour
 // Dead people can hear traitor
+// Fix soap and beartrap dna scanning
 
 - Added [Silenced Pistol]
 - Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging
 - Reworked [Silenced Pistol] It now briefly slows the target when hit
 - Reworked [Silenced Pistol] It only has 10 uses before it is destroyed
+// Rework campaign and idea by Seb
+
+- Changed [Radar] Traitors now start with this item
+
+- Changed [Armour] Detectives now start with this item
 
 - Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
 
@@ -29,7 +33,8 @@
 - Reworked [Chameleon] You will stay invisible until you:
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
 - Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc...
-- Reworked [Chameleon] The code is much more stable now too [//Jake]
+- Reworked [Chameleon] The code is much more stable now too 
+- Reworked [Chameleon] Existing bugs fixed [//Jake]
 
 - Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that [//JAKE]
 - Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty
