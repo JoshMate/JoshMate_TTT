@@ -36,6 +36,11 @@ if CLIENT then
 			hud = Material("vgui/ttt/joshmate/hud_chameleon.png"),
 			type = "good"
 		})
+
+        STATUS:RegisterStatus("jm_silencedpistol", {
+			hud = Material("vgui/ttt/joshmate/hud_silencedpistol.png"),
+			type = "good"
+		})
 	end)
 end
 
@@ -49,6 +54,7 @@ if SERVER then
                 v:SetNWBool("isBearTrapped", false)
                 v:SetNWBool("isStunGrenaded", false)
                 v:SetNWBool("isChameleoned", false)
+                v:SetNWBool("isSilencedPistoled", false)
                 v:SetNWFloat("lastTimePlayerDidInput", CurTime())
                 if SERVER then
                     ULib.invisible(v,false,255)
@@ -151,6 +157,15 @@ hook.Add("TTTPlayerSpeedModifier", "JM_GrenadeSlowEffect", function(ply, _, _, s
    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
    if ply:GetNWBool("isStunGrenaded") == true then 
 	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+   end   
+end)
+
+
+hook.Add("TTTPlayerSpeedModifier", "JM_SilencedSlowEffect", function(ply, _, _, speedMultiplierModifier)
+	if not IsValid(ply)then return end
+   speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+   if ply:GetNWBool("isSilencedPistoled") == true then 
+	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
    end   
 end)
 

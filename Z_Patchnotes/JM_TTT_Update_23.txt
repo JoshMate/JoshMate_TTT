@@ -8,7 +8,6 @@
 
 [Gameplay]
 
-Josh_Update_23
 // Traitors start with Radar
 // Ninja + Disguiser merge
 // Rework Inferno
@@ -17,6 +16,11 @@ Josh_Update_23
 // Make Soap just have 2 ammo
 // Can't DNA a bloodied bear trap
 // Dead people can hear traitor
+
+- Added [Silenced Pistol]
+- Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging
+- Reworked [Silenced Pistol] It now briefly slows the target when hit
+- Reworked [Silenced Pistol] It only has 10 uses before it is destroyed
 
 - Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
 
