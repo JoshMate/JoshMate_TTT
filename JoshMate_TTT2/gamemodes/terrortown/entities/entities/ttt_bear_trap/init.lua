@@ -50,6 +50,8 @@ function ENT:Touch(toucher)
 		self:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		self:SetColor( Color( 255, 0, 0, 255 ) ) 
 
+		
+
 		if not toucher:IsPlayer() then
 			timer.Simple(0.1, function()
 				if not IsValid(self) then return end
@@ -69,6 +71,8 @@ function ENT:Touch(toucher)
 		if TTT2 then -- add element to HUD if TTT2 is loaded
 			STATUS:AddStatus(toucher, "ttt2_beartrap")
 		end
+
+		self.fingerprints = {}
 
 		toucher:ChatPrint("[Bear Trap] - You're trapped, Ask for help!")
 		self.Owner:ChatPrint("[Bear Trap] - Your trap has caught: " .. toucher:GetName())
