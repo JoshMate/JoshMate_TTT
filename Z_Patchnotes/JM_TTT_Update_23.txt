@@ -12,9 +12,6 @@
 // Ninja + Disguiser merge
 // Rework Inferno
 // Detective start with armour
-// Make soap transparent
-// Make Soap just have 2 ammo
-// Can't DNA a bloodied bear trap
 // Dead people can hear traitor
 
 - Added [Silenced Pistol]
@@ -32,7 +29,7 @@
 - Reworked [Chameleon] You will stay invisible until you:
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
 - Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc...
-- Reworked [Chameleon] The code is much more stable now too
+- Reworked [Chameleon] The code is much more stable now too [//Jake]
 
 - Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that [//JAKE]
 - Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty

@@ -94,6 +94,12 @@ function SWEP:PreDrop()
 	return self.BaseClass.PreDrop(self)
  end
 
+-- Stop random Cur Time when going invisible
+function SWEP:Deploy()
+self:GetOwner():SetNWFloat("lastTimePlayerDidInput", CurTime())
+return self.BaseClass.Deploy(self)
+end
+
 -- Handle Invisibility checking
 function SWEP:Think()
 	if SERVER then
@@ -122,7 +128,7 @@ if CLIENT then
 	function SWEP:Initialize()
 		self:AddTTT2HUDHelp("Stand still while holding this weapon to go invisible!", nil, true)
  
-	   return self.BaseClass:Initialize(self)
+	   return self.BaseClass.Initialize(self)
 	end
 end
 if SERVER then
