@@ -84,17 +84,13 @@ end
 
 -- Remove Invisibility on changing weapons
 function SWEP:Holster( wep )
-	if(not self.GetOwner() == nil) then
-		Invisibility_Remove(self.GetOwner()) 
-	end
+	Invisibility_Remove(self:GetOwner()) 
 	return self.BaseClass.Holster(self)
 end
 
 -- Remove Invisibility on dropping weapons (This prevent tase from giving INF invisibiltiy)
 function SWEP:PreDrop()
-	if(not self.GetOwner() == nil) then
-		Invisibility_Remove(self.GetOwner()) 
-	end
+	Invisibility_Remove(self:GetOwner()) 
 	return self.BaseClass.PreDrop(self)
  end
 
@@ -126,7 +122,7 @@ if CLIENT then
 	function SWEP:Initialize()
 		self:AddTTT2HUDHelp("Stand still while holding this weapon to go invisible!", nil, true)
  
-	   return self.BaseClass.Initialize(self)
+	   return self.BaseClass:Initialize(self)
 	end
 end
 if SERVER then
