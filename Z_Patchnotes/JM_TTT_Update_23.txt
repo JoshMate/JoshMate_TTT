@@ -25,8 +25,10 @@
 - Nerfed [Ninja Pro] Ninja buffs only affect you while disguised [//Josh] [//Seb]
 
 - Changed [Radar] Traitors now start with this item [//Josh]
+- Changed [Radar] Removed from the Traitor Shop [//Josh]
 
 - Changed [Armour] Detectives now start with this item [//Josh]
+- Changed [Armour] Removed from the Detective Shop [//Josh]
 
 - Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
 
