@@ -1,29 +1,28 @@
 [ Update 23] - (Josh Mate's TTT2 Server)
 
-[TODO]
-// Ninja + Disguiser merge
-// Rework Inferno
-// Dead people can hear traitor
-// Fix soap and beartrap dna scanning
+[Server] [//Josh] 
 
-[Server]
+- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!) [//Josh]
+- Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left) [//Josh]
 
-- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!)
-- Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left)
+- Changed [Voice] Dead players can now hear both Traitors and Innocents [//Josh]
 
-- Changed [Voice] Dead players can now hear both Traitors and Innocents
+[Gameplay] [//Josh] [//SEB] [//Jake]
 
-[Gameplay]
+- Added [Silenced Pistol] [//Josh]
+- Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging [//Josh]
+- Reworked [Silenced Pistol] It now briefly slows the target when hit [//Josh]
+- Reworked [Silenced Pistol] It only has 10 uses before it is destroyed [//Josh]
+// Rework campaign and idea by [//SEB]
 
-- Added [Silenced Pistol]
-- Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging
-- Reworked [Silenced Pistol] It now briefly slows the target when hit
-- Reworked [Silenced Pistol] It only has 10 uses before it is destroyed
-// Rework campaign and idea by Seb
+- Removed [Disguiser]  Merged with Ninja Pro [//Josh] [//Seb]
+- Buffed [Ninja Pro] Added the Disguiser functionality [//Josh] [//Seb]
+- Buffed [Ninja Pro] Can toggle the Ninja buffs on and off with disguiser [//Josh] [//Seb]
+- Nerfed [Ninja Pro] Ninja buffs only affect you while disguised [//Josh] [//Seb]
 
-- Changed [Radar] Traitors now start with this item
+- Changed [Radar] Traitors now start with this item [//Josh]
 
-- Changed [Armour] Detectives now start with this item
+- Changed [Armour] Detectives now start with this item [//Josh]
 
 - Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
 
@@ -32,20 +31,20 @@
 
 - Buffed [Beartrap] Can no longer DNA bloodied trap [//SEB]
 
-- Reworked [Chameleon] You will stay invisible until you:
-- Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
-- Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc...
-- Reworked [Chameleon] The code is much more stable now too 
+- Reworked [Chameleon] You will stay invisible until you: [//Josh]
+- Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt [//Josh]
+- Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc... [//Josh]
+- Reworked [Chameleon] The code is much more stable now too [//Josh]
 - Reworked [Chameleon] Existing bugs fixed [//Jake]
 
 - Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that [//JAKE]
-- Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty
-- Fixed [Inventory] Beart Trap should now swap you to holstered upon being placed
-- Fixed [DNA] Soap and beartrap can now be DNA scanned properly
+- Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty [//Josh]
+- Fixed [Inventory] Beart Trap should now swap you to holstered upon being placed [//Josh]
+- Fixed [DNA] Soap and beartrap can now be DNA scanned properly [//Josh]
 
-[Maps]
+[Maps] [//Josh]
 
-- Changed [Specific Ocean] Huge prop clean up
+- Changed [Specific Ocean] Huge prop clean up 
 - Changed [Specific Ocean] Added some more cover to the middle islands
 - Changed [Specific Ocean] Added more guns to the map
 // [LATEST VERSION ON THE WORKSHOP NOW]

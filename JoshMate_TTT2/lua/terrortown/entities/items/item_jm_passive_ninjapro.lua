@@ -6,12 +6,14 @@ ITEM.EquipMenuData = {
 	type = "item_passive",
 	name = "Ninja Pro",
 	desc = [[Passively grants:
-	
+
+		The Ability to Diguise your name
+
+		Whiles Disguised:
 		+ Silent Footsteps
 		+ Immunity to Fall & Drown Damage
 		+ 20% Movement Speed 
-		+ 50% Jump Height
-		+ 50% Faster Crouch Walking
+		+ 50% Better Jump Height & Crouch Walking
 ]]
 }
 
