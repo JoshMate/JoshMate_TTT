@@ -22,6 +22,8 @@
 - Buffed [Soap] Now transparent when placed [//SEB]
 - Nerfed [Soap] Uses: 3 -> 2 [//SEB]
 
+- Buffed [Beartrap] Can no longer DNA bloodied trap [//SEB]
+
 - Reworked [Chameleon] You will stay invisible until you:
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
 - Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc...
