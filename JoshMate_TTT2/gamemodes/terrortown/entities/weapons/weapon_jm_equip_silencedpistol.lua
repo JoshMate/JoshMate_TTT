@@ -11,7 +11,7 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A silent weapon
 	
-Targets will be slown briefly when shot
+Targets will be slowed when shot
       
 Targets will not scream when killed
       
@@ -55,7 +55,7 @@ SWEP.IronSightsAng         = Vector(-0.5, 0, 0)
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 SWEP.ReloadAnim            = ACT_VM_RELOAD_SILENCED
 
-local JM_Silenced_Pistol_Duration               = 2
+local JM_Silenced_Pistol_Duration   = 3
 
 function SWEP:Deploy()
    self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)

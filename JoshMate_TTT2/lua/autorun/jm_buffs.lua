@@ -41,6 +41,11 @@ if CLIENT then
 			hud = Material("vgui/ttt/joshmate/hud_silencedpistol.png"),
 			type = "good"
 		})
+
+        STATUS:RegisterStatus("jm_tracker", {
+			hud = Material("vgui/ttt/joshmate/hud_tracker.png"),
+			type = "bad"
+		})
 	end)
 end
 
@@ -56,6 +61,7 @@ if SERVER then
                 v:SetNWBool("isChameleoned", false)
                 v:SetNWBool("isSilencedPistoled", false)
                 v:SetNWFloat("lastTimePlayerDidInput", CurTime())
+                v:SetNWBool("isTracked", false)
                 if SERVER then
                     ULib.invisible(v,false,255)
                 end

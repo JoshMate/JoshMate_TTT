@@ -2,12 +2,18 @@
 
 [Server] [//Josh] 
 
-- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!) [//Josh]
-- Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left) [//Josh]
+- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!) 
+- Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left) 
 
-- Changed [Voice] Dead players can now hear both Traitors and Innocents [//Josh]
+- Changed [Voice] Dead players can now hear both Traitors and Innocents
 
 [Gameplay] [//Josh] [//SEB] [//Jake]
+
+- Added [Tracking Dart] This is what became of Jake's Pinger  [//Josh] [//Jake]
+// A detective utilty weapon
+// Shoot a player to track them
+// Tracked players can be seen by everyone through walls
+// 3 uses and each track lasts for 30 seconds
 
 - Added [Silenced Pistol] [//Josh]
 - Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging [//Josh]
