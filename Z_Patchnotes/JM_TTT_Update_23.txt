@@ -8,7 +8,7 @@
 
 [Gameplay]
 
-// Awp 1 bullet (Seb)
+Josh_Update_23
 // Traitors start with Radar
 // Ninja + Disguiser merge
 // Rework Inferno
@@ -18,13 +18,19 @@
 // Can't DNA a bloodied bear trap
 // Dead people can hear traitor
 
+- Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
+
+- Buffed [Soap] Now transparent when placed [//SEB]
+- Nerfed [Soap] Uses: 3 -> 2 [//SEB]
+
+- Buffed [Beartrap] Can no longer DNA bloodied trap [//SEB]
 
 - Reworked [Chameleon] You will stay invisible until you:
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt
 - Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc...
 - Reworked [Chameleon] The code is much more stable now too
 
-- Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that (Thanks Jake)
+- Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that [//JAKE]
 - Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty
 - Fixed [Inventory] Beart Trap should now swap you to holstered upon being placed
 
