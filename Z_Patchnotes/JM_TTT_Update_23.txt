@@ -5,8 +5,6 @@
 - Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!) 
 - Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left) 
 
-- Changed [Voice] Dead players can now hear both Traitors and Innocents
-
 [Gameplay] [//Josh] [//SEB] [//Jake]
 
 - Added [Tracking Dart] This is what became of Jake's Pinger  [//Josh] [//Jake]
