@@ -55,7 +55,7 @@ SWEP.IronSightsAng         = Vector(-0.5, 0, 0)
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 SWEP.ReloadAnim            = ACT_VM_RELOAD_SILENCED
 
-local JM_Silenced_Pistol_Duration               = self.Primary.Delay
+local JM_Silenced_Pistol_Duration               = SWEP.Primary.Delay
 
 function SWEP:Deploy()
    self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
@@ -114,7 +114,7 @@ function SWEP:PrimaryAttack()
 
  self:EmitSound( self.Primary.Sound )
 
- self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+ self:SendWeaponAnim( self.PrimaryAnim )
 
  self:ShootSilencedPistolShot()
 
