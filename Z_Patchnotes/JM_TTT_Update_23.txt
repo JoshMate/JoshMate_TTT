@@ -1,5 +1,11 @@
 [ Update 23] - (Josh Mate's TTT2 Server)
 
+[TODO]
+// Ninja + Disguiser merge
+// Rework Inferno
+// Dead people can hear traitor
+// Fix soap and beartrap dna scanning
+
 [Server]
 
 - Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!)
@@ -8,11 +14,6 @@
 - Changed [Voice] Dead players can now hear both Traitors and Innocents
 
 [Gameplay]
-
-// Ninja + Disguiser merge
-// Rework Inferno
-// Dead people can hear traitor
-// Fix soap and beartrap dna scanning
 
 - Added [Silenced Pistol]
 - Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging
@@ -40,6 +41,7 @@
 - Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that [//JAKE]
 - Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty
 - Fixed [Inventory] Beart Trap should now swap you to holstered upon being placed
+- Fixed [DNA] Soap and beartrap can now be DNA scanned properly
 
 [Maps]
 
