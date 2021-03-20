@@ -39,7 +39,7 @@ if CLIENT then
 
         STATUS:RegisterStatus("jm_silencedpistol", {
 			hud = Material("vgui/ttt/joshmate/hud_silencedpistol.png"),
-			type = "good"
+			type = "bad"
 		})
 
         STATUS:RegisterStatus("jm_tracker", {
