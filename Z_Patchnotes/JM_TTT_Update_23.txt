@@ -37,6 +37,14 @@
 
 - Buffed [Beartrap] Can no longer DNA bloodied trap [//SEB]
 
+- Buffed [Cannibal] The last use grants double Max HP and fully heals you [//Josh]
+- Nerfed [Cannibal] Number of Uses: 4 -> 3 [//Josh]
+// Old: 25, 50, 75, 100 (No Heal)
+// New: 25, 50, 100 (Full Heal)
+
+- Buffed [Inferno Bomb] Duration: 10 -> 20 Seconds [//Josh]
+// I had a full rework in mind but didn't end up having time, maybe next time...
+
 - Reworked [Chameleon] You will stay invisible until you: [//Josh]
 - Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt [//Josh]
 - Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc... [//Josh]
@@ -50,10 +58,16 @@
 
 [Maps] [//Josh]
 
-- Changed [Specific Ocean] Huge prop clean up 
 - Changed [Specific Ocean] Added some more cover to the middle islands
+- Changed [Specific Ocean] Spawn points are now more spread out
+- Changed [Specific Ocean] Nerfed Shitter Island by making windows in the shitter house
+- Changed [Specific Ocean] Added a new floating dock just off the old dock
+- Changed [Specific Ocean] Extended Oil Rig Island a tiny bit more
+- Changed [Specific Ocean] The waters damage now starts off slow and builds up over time (The longer you stay in it)
 - Changed [Specific Ocean] Added more guns to the map
+- Changed [Specific Ocean] Huge prop clean up 
 // [LATEST VERSION ON THE WORKSHOP NOW]
+
 
 - Changed [Devil Town] Sandstorm Duration: 30 -> 20 Seconds
 // [LATEST VERSION ON THE WORKSHOP NOW]
@@ -61,8 +75,9 @@
 - Changed [Transit] The wall is no longer 2d and extends all the way back behind it (Can't get behind it)
 - Changed [Transit] The wall is now slightly faster
 - Changed [Transit] The wall now deals damage over time rather than insta kill (Deals more the longer you stay in it)
-- Changed [Transit] Removed the last BARREL to stop seb from DDOSing the server...
+- Changed [Transit] Removed the LAST BARREL to stop seb from DDOSing the server...
 // [LATEST VERSION ON THE WORKSHOP NOW]
+
 
 - Changed [Kook Town] Clipped off the borders (You can no longer fall off the map)
 - Changed [Kook Town] Made the middle outskirt Roofs less hide-on-able

@@ -11,7 +11,7 @@ ENT.Trail_Colour = Color(255,0,0,150)
 
 local JM_Inferno_Blast_Damage          = 6
 local JM_Inferno_Blast_Radius          = 225
-local JM_Inferno_Blast_Duration        = 10
+local JM_Inferno_Blast_Duration        = 20
 local JM_Inferno_Blast_TickDelay       = 0.25
 
 ---
