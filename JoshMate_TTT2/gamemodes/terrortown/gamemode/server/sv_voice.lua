@@ -107,6 +107,7 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		return can_hear, is_locational or false
 	end
 
+
 	if speaker:IsSpec() and isGlobalVoice then
 		-- Check that the speaker was not previously sending voice on the team chat
 		return PlayerCanHearSpectator(listener, speaker, roundState)

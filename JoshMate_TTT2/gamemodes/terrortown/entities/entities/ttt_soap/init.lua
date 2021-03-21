@@ -25,6 +25,10 @@ function ENT:Initialize()
 		self:GetPhysicsObject():EnableMotion(false)
 	end
 
+	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
+	self:SetColor( Color( 255, 255, 255, 50 ) )
+
+
 	-- JoshMate Changed
 	self:SendWarn(true)
 end

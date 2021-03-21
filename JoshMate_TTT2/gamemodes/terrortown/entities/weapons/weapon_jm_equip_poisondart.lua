@@ -38,7 +38,7 @@ SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 50
+SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_poisondart.wav"

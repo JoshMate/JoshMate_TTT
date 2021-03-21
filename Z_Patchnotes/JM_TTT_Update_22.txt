@@ -177,6 +177,7 @@
 - Changed [Devil Town] The Sand storm now has audio cues for it starting and ending
 - Changed [Devil Town] The Sand storm now appears more frequently
 - Changed [Devil Town] The Sand storm now has more Darude
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Changed [Transit] A wall of Poison Gas will force players to one of the back rooms to finish it (Sudden Death)
 - Changed [Transit] Slightly Altered the back room of the south station

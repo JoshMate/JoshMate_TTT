@@ -1,21 +1,86 @@
-[ Update 22] - (Josh Mate's TTT2 Server)
+[ Update 23] - (Josh Mate's TTT2 Server)
 
-[Server]
+[Server] [//Josh] 
 
-- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!)
-- Changed [Rounds] Time before map change: 60 -> 45 Minutes
+- Changed [Rounds] Round Time Limit: 7 -> 6 Minutes (BORED!) 
+- Changed [Rounds] Time before map change: 60 -> 45 Minutes (This overides the amount of rounds left) 
 
-- Changed [Roles] Traitor Percentage
+[Gameplay] [//Josh] [//SEB] [//Jake]
 
-[Gameplay]
+- Added [Tracking Dart] This is what became of Jake's Pinger  [//Josh] [//Jake]
+// A detective utilty weapon
+// Shoot a player to track them
+// Tracked players can be seen by everyone through walls
+// 3 uses and each track lasts for 30 seconds
+
+- Added [Silenced Pistol] [//Josh]
+- Reworked [Silenced Pistol] It is now slower firing but more accurate and damaging [//Josh]
+- Reworked [Silenced Pistol] It now briefly slows the target when hit [//Josh]
+- Reworked [Silenced Pistol] It only has 10 uses before it is destroyed [//Josh]
+// Rework campaign and idea by [//SEB]
+
+- Removed [Disguiser]  Merged with Ninja Pro [//Josh] [//Seb]
+- Buffed [Ninja Pro] Added the Disguiser functionality [//Josh] [//Seb]
+- Buffed [Ninja Pro] Can toggle the Ninja buffs on and off with disguiser [//Josh] [//Seb]
+- Nerfed [Ninja Pro] Ninja buffs only affect you while disguised [//Josh] [//Seb]
+
+- Changed [Radar] Traitors now start with this item [//Josh]
+- Changed [Radar] Removed from the Traitor Shop [//Josh]
+
+- Changed [Armour] Detectives now start with this item [//Josh]
+- Changed [Armour] Removed from the Detective Shop [//Josh]
+
+- Nerfed [AWP] Magazine capacity: 2 -> 1 [//SEB]
+
+- Buffed [Soap] Now transparent when placed [//SEB]
+- Nerfed [Soap] Uses: 3 -> 2 [//SEB]
+
+- Buffed [Beartrap] Can no longer DNA bloodied trap [//SEB]
+
+- Buffed [Cannibal] The last use grants double Max HP and fully heals you [//Josh]
+- Nerfed [Cannibal] Number of Uses: 4 -> 3 [//Josh]
+// Old: 25, 50, 75, 100 (No Heal)
+// New: 25, 50, 100 (Full Heal)
+
+- Buffed [Inferno Bomb] Duration: 10 -> 20 Seconds [//Josh]
+// I had a full rework in mind but didn't end up having time, maybe next time...
+
+- Reworked [Chameleon] You will stay invisible until you: [//Josh]
+- Reworked [Chameleon] Change weapons, Move, Get pushed, Get hurt [//Josh]
+- Reworked [Chameleon] This allows you to communicate, check menus, leaderboards etc... [//Josh]
+- Reworked [Chameleon] The code is much more stable now too [//Josh]
+- Reworked [Chameleon] Existing bugs fixed [//Jake]
+
+- Fixed [Taser] A bug that Tasing someone who is scoped in made them stuck like that [//JAKE]
+- Fixed [Inventory] Newton Launcher should now be removed from your inventory upon being empty [//Josh]
+- Fixed [Inventory] Beart Trap should now swap you to holstered upon being placed [//Josh]
+- Fixed [DNA] Soap and beartrap can now be DNA scanned properly [//Josh]
+
+[Maps] [//Josh]
+
+- Changed [Specific Ocean] Added some more cover to the middle islands
+- Changed [Specific Ocean] Spawn points are now more spread out
+- Changed [Specific Ocean] Nerfed Shitter Island by making windows in the shitter house
+- Changed [Specific Ocean] Added a new floating dock just off the old dock
+- Changed [Specific Ocean] Extended Oil Rig Island a tiny bit more
+- Changed [Specific Ocean] The waters damage now starts off slow and builds up over time (The longer you stay in it)
+- Changed [Specific Ocean] Added more guns to the map
+- Changed [Specific Ocean] Huge prop clean up 
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 
-[Maps]
+- Changed [Devil Town] Sandstorm Duration: 30 -> 20 Seconds
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] The wall is no longer 2d and extends all the way back behind it (Can't get behind it)
+- Changed [Transit] The wall is now slightly faster
+- Changed [Transit] The wall now deals damage over time rather than insta kill (Deals more the longer you stay in it)
+- Changed [Transit] Removed the LAST BARREL to stop seb from DDOSing the server...
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 
-// TODO: Teleporting behind the gas wall on transit
-//TOD: Scope Taser bug
-
-// TODO: Transit Fog Wallto be faster
-
-// TODO: Sandstorms keep often but shorter (20S)
+- Changed [Kook Town] Clipped off the borders (You can no longer fall off the map)
+- Changed [Kook Town] Made the middle outskirt Roofs less hide-on-able
+- Changed [Kook Town] Added some more ladders
+- Changed [Kook Town] Fixed some textures that were wrong
+// [LATEST VERSION ON THE WORKSHOP NOW]

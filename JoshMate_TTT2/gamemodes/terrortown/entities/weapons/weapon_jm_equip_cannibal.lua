@@ -32,8 +32,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.45
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 4
-SWEP.Primary.DefaultClip   = 4
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 10
 SWEP.Primary.SoundLevel    = 50
@@ -50,6 +50,7 @@ SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
 local Cannibal_Eat_MaxHP      = 25
+local Cannibal_Eat_MaxHP_Last = 50
 local Cannibal_Eat_Range      = 125
 
 if TTT2 and CLIENT then
@@ -79,8 +80,15 @@ function SWEP:PrimaryAttack()
 
       if IsValid(target) then
          if target:GetClass() == "prop_ragdoll" then
-            self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP)
-            self:GetOwner():SetHealth(self:GetOwner():Health() + Cannibal_Eat_MaxHP)
+
+            if self:Clip1() == 1 then
+               self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP_Last)
+               self:GetOwner():SetHealth(self:GetOwner():GetMaxHealth())
+            else
+               self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP)
+               self:GetOwner():SetHealth(self:GetOwner():Health() + Cannibal_Eat_MaxHP)
+            end
+            
 
             targetPos = target:GetPos()
 

@@ -63,13 +63,6 @@ if SERVER then
 		end
 	end
 
-	function SWEP:OnRemove()
-		if self.Owner:IsValid() and self.Owner:IsTerror() then
-			self.Owner:ConCommand("lastinv")
-		end
-	end
-
-
 end
 
 -- Hud Help Text

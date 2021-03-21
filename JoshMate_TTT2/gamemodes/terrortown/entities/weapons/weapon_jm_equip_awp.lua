@@ -20,7 +20,7 @@ Perfect accuracy and 1 hit kill
       
 Targets will not scream when killed
       
-Only has two shots
+Only has one shot
 ]]
    };
 end
@@ -37,8 +37,8 @@ SWEP.Primary.Damage        = 1000
 SWEP.HeadshotMultiplier    = 1
 SWEP.Primary.Delay         = 1.25
 SWEP.Primary.Cone          = 0.1
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 40

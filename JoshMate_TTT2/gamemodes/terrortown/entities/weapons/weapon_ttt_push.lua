@@ -5,7 +5,7 @@ DEFINE_BASECLASS "weapon_tttbase"
 SWEP.HoldType               = "physgun"
 
 if CLIENT then
-   SWEP.PrintName           = "newton_name"
+   SWEP.PrintName           = "Newton Launcher"
    SWEP.Slot                = 7
 
    SWEP.ViewModelFlip       = false
@@ -15,13 +15,13 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A silent utility weapon
+      desc = [[A lethal utility weapon
 	
 Creates a physics explosion at your cursor
       
 Players and props will be pushed violently
       
-Only has two shots
+2 uses and has perfect accuracy and range
 ]]
 
    };
@@ -172,9 +172,30 @@ function SWEP:PrimaryAttack()
       PushPullRadius(tr.HitPos, owner)
    end
 
+   if SERVER then
+      if self:Clip1() <= 0 then
+         self:Remove()
+      end
+   end
 
 
 end
 
 
 
+-- Hud Help Text
+if CLIENT then
+	function SWEP:Initialize()
+		self:AddTTT2HUDHelp("To Launch players", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+if SERVER then
+   function SWEP:OnRemove()
+      if self.Owner:IsValid() and self.Owner:IsTerror() then
+         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      end
+   end
+end
+-- 
