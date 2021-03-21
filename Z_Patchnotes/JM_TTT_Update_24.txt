@@ -17,6 +17,18 @@
 [Gameplay]
 
 
+- Buffed [Rifle] Recoil: 4 -> 3
 
+- Buffed [Shotgun] Number of Shots: 16 -> 18
+- Buffed [Shotgun] Damage: 160 -> 180
+
+- Buffed [Silenced Pistol] Now makes the target drop their held weapon on the floor
+- Buffed [Silenced Pistol] Slow Duration: 3 -> 4 Seconds
+- Buffed [Silenced Pistol] Slow Amount: 50% -> 70%
+- Buffed [Silenced Pistol] Fire Rate Delay: 0.60 -> 0.30
+- Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
+- Nerfed [Silenced Pistol] Damage: 45 -> 25
+// It is now basically a single target detective stun grenade  
+// But without the screen effect and slightly less duration
 
 [Maps]

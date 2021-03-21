@@ -25,12 +25,12 @@ end
 
 SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Primary.Damage        = 40
-SWEP.Primary.Delay         = 0.60
+SWEP.Primary.Damage        = 25
+SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0.010
 SWEP.Primary.Recoil        = 0.5
-SWEP.Primary.ClipSize      = 10
-SWEP.Primary.DefaultClip   = 10
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 
 SWEP.HeadshotMultiplier    = 2
@@ -55,7 +55,7 @@ SWEP.IronSightsAng         = Vector(-0.5, 0, 0)
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 SWEP.ReloadAnim            = ACT_VM_RELOAD_SILENCED
 
-local JM_Silenced_Pistol_Duration   = 3
+local JM_Silenced_Pistol_Duration   = 4
 
 function SWEP:Deploy()
    self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
@@ -78,6 +78,19 @@ function SilencedPistolTarget(att, path, dmginfo)
     if SERVER then
     -- Only works on players and only outside of post and prep
     if (not ent:IsPlayer()) or (not GAMEMODE:AllowPVP()) then return end
+
+    -- Drop currently Held Weapon
+    if ( ent:IsValid() ) then
+      local curWep = ent:GetActiveWeapon()
+      if curWep == nil or curWep.AllowDrop == nil or curWep.AllowDrop == false then
+         ent:SelectWeapon("weapon_zm_improvised")
+      end
+      if curWep.AllowDrop == true then
+         ent:DropWeapon()
+         ent:SelectWeapon("weapon_zm_improvised")
+      end
+   end
+   -- End of Drop
         
     weaponInflictor = dmginfo:GetInflictor()
 

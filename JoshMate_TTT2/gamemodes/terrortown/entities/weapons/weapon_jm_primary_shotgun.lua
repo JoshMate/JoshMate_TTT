@@ -23,7 +23,7 @@ SWEP.WeaponID              = AMMO_SHOTGUN
 
 
 SWEP.Primary.Damage        = 10
-SWEP.Primary.NumShots      = 16
+SWEP.Primary.NumShots      = 18
 SWEP.Primary.Delay         = 1
 SWEP.Primary.Cone          = 0.1
 SWEP.Primary.Recoil        = 15

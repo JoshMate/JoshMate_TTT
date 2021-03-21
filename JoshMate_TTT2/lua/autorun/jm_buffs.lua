@@ -171,7 +171,7 @@ hook.Add("TTTPlayerSpeedModifier", "JM_SilencedSlowEffect", function(ply, _, _, 
 	if not IsValid(ply)then return end
    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
    if ply:GetNWBool("isSilencedPistoled") == true then 
-	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
+	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
    end   
 end)
 
