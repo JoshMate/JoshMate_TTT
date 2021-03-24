@@ -19,6 +19,8 @@
 
 - Buffed [Rifle] Recoil: 4 -> 3
 
+- Buffed [SMG] Recoil: 1 -> 0.5
+
 - Buffed [Shotgun] Number of Shots: 16 -> 18
 - Buffed [Shotgun] Damage: 160 -> 180
 
@@ -26,8 +28,9 @@
 - Buffed [Silenced Pistol] Slow Duration: 3 -> 4 Seconds
 - Buffed [Silenced Pistol] Slow Amount: 50% -> 70%
 - Buffed [Silenced Pistol] Fire Rate Delay: 0.60 -> 0.30
+- Buffed [Silenced Pistol] Spread Accuracy: 0.010 -> 0.00 (Same as taser)
 - Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
-- Nerfed [Silenced Pistol] Damage: 45 -> 25
+- Nerfed [Silenced Pistol] Damage: 45 -> 20
 // It is now basically a single target detective stun grenade  
 // But without the screen effect and slightly less duration
 

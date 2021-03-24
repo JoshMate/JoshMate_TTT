@@ -9,13 +9,11 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A silent weapon
+      desc = [[A silent utility weapon
 	
-Targets will be slowed when shot
-      
-Targets will not scream when killed
-      
-Has 10 shots
+Targets will be slowed and drop their held weapon
+            
+Has 3 uses
 ]]
    };
 
@@ -25,9 +23,9 @@ end
 
 SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Primary.Damage        = 25
+SWEP.Primary.Damage        = 20
 SWEP.Primary.Delay         = 0.30
-SWEP.Primary.Cone          = 0.010
+SWEP.Primary.Cone          = 0
 SWEP.Primary.Recoil        = 0.5
 SWEP.Primary.ClipSize      = 3
 SWEP.Primary.DefaultClip   = 3
