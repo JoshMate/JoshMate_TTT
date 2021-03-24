@@ -2,4 +2,4 @@
 
 ![ttt_icon](Z_Patchnotes/TTT2_Icon.png)
 
-A custom GMOD Gamemode written by Josh Mate. For use on my own Server
+A forked version of TTT2 repo, that has been heavily customised and re-purposed for my own TTT Server
