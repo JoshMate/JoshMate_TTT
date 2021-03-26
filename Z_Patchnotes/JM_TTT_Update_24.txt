@@ -34,7 +34,9 @@
 - Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
 - Nerfed [Silenced Pistol] Damage: 45 -> 20
 
-- FIxed [Effect Timers] No longer will buffs stay forever when they should be timing out
+- Fixed [Effect Timers] No longer will buffs stay forever when they should be timing out
+- Fixed [C4] Detective can now defuse a c4 planted by an innocent.
+- Fixed [C4] Anyone can now try to defuse anyones C4.
 
 [Maps]
 
