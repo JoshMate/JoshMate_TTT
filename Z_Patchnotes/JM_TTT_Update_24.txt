@@ -31,7 +31,12 @@
 - Buffed [Silenced Pistol] Spread Accuracy: 0.010 -> 0.00 (Same as taser)
 - Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
 - Nerfed [Silenced Pistol] Damage: 45 -> 20
-// It is now basically a single target detective stun grenade  
-// But without the screen effect and slightly less duration
 
 [Maps]
+
+- Changed [Sky Town] Fixed a dodgey roof in graveyard
+- Changed [Sky Town] Updated the breakable windows with my window 2.0 functionality
+- Changed [Sky Town] Reduced the amount of white claw needed for easter egg: 5 -> 3
+- Changed [Sky Town] Added slightly more whiteclaw to the map
+- Changed [Sky Town] Easter Egg music is now considerably Louder
+// [LATEST VERSION ON THE WORKSHOP NOW]
