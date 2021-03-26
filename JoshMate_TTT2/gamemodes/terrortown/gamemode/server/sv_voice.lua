@@ -48,6 +48,10 @@ local function PlayerCanHearTeam(listener, speaker, speakerTeam)
 		return false, false
 	end
 
+	if(listener:IsSpec())
+		return true, loc_voice:GetBool()
+	end
+
 	-- Listener checks
 	if listener:GetSubRoleData().disabledTeamVoiceRecv or not listener:IsActive() or not listener:IsInTeam(speaker) then
 		return false, false
