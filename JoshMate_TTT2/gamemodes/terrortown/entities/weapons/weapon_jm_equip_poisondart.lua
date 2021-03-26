@@ -108,9 +108,9 @@ function PoisonTarget(att, path, dmginfo)
    if (not ent:IsPlayer()) or (not GAMEMODE:AllowPVP()) then return end
       
    weaponInflictor = dmginfo:GetInflictor()
-   timerName = "timer_PoisonEffectTimer_" .. pl:SteamID64()
+   timerName = "timer_PoisonEffectTimer_" .. ent:SteamID64()
    timer.Create( timerName, Poison_Damage_Delay, Poison_Duration*2, function () if ent:IsPlayer() and ent:Alive() then PoisonEffect_Tick(ent, att, weaponInflictor, timerName ) end end )
-   timerName = "timer_PoisonRemoveTimer_" .. pl:SteamID64()
+   timerName = "timer_PoisonRemoveTimer_" .. ent:SteamID64()
    timer.Create( timerName, Poison_Duration, 1, function () if ent:IsPlayer() and ent:Alive() then RemovePoison(ent) end end )
    
    ent:ChatPrint("[Poison]: You have been poisoned!")

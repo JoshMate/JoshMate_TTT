@@ -120,9 +120,9 @@ function TaseTarget(att, path, dmginfo)
       -- Only works on players and only outside of post and prep
       if (not ent:IsPlayer()) or (not GAMEMODE:AllowPVP()) then return end
       STATUS:AddTimedStatus(ent, "jm_taser", Taser_Stun_Duration, 1)
-      timerName = "timer_TaserEffectTimer_" .. pl:SteamID64()
+      timerName = "timer_TaserEffectTimer_" .. ent:SteamID64()
       timer.Create( timerName, 0.5, Taser_Stun_Duration*2, function () if ent:IsPlayer() and ent:Alive() then TaseEffects(ent, timerName) end end )
-      timerName = "timer_TaserEndTimer_" .. pl:SteamID64()
+      timerName = "timer_TaserEndTimer_" .. ent:SteamID64()
       timer.Create( timerName, Taser_Stun_Duration, 1, function () if ent:IsPlayer() then RemoveTase(ent) end end )
 
       -- JM Changes Extra Hit Marker
