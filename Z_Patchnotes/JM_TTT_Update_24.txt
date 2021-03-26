@@ -32,6 +32,8 @@
 - Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
 - Nerfed [Silenced Pistol] Damage: 45 -> 20
 
+- Fixed [C4] Detective can now defuse a c4 planted by an innocent.
+
 [Maps]
 
 - Changed [Sky Town] Fixed a dodgey roof in graveyard
