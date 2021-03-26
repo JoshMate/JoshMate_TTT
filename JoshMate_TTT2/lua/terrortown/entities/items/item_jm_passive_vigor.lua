@@ -29,7 +29,7 @@ if SERVER then
 	function ITEM:Equip(buyer)
 		buyer:SetMaxHealth(buyer:GetMaxHealth() + 25)
 
-		timerName = "timer_VigorHPRegen_" .. buyer:GetName()
+		timerName = "timer_VigorHPRegen_" .. buyer:SteamID64()
    		timer.Create( timerName, Vigor_Regen_Delay, 0, function ()
 
 			if not IsValid(buyer) then return end

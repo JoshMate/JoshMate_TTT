@@ -74,7 +74,7 @@ function TrackTarget(att, path)
 
     if SERVER then
 
-        timerName = "timer_Tracker_RemoveTimer" .. ent:EntIndex()
+        timerName = "timer_Tracker_RemoveTimer" .. pl:SteamID64()
         timer.Create(timerName, JM_Tracker_Duration, 1, 
             function() 
                 if ent:IsPlayer() then

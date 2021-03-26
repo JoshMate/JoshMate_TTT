@@ -92,7 +92,7 @@ function SilencedPistolTarget(att, path, dmginfo)
         
     weaponInflictor = dmginfo:GetInflictor()
 
-    timerName = "timer_SilencedPistolRemover_" .. ent:EntIndex()
+    timerName = "timer_SilencedPistolRemover_" .. ent:SteamID()
     timer.Create( timerName, JM_Silenced_Pistol_Duration, 1, function () if ent:IsPlayer() and ent:Alive() then RemoveSilencedPistolSlow(ent) end end )
     
     ent:SetNWBool("isSilencedPistoled", true)

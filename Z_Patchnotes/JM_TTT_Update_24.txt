@@ -17,12 +17,14 @@
 [Gameplay]
 
 
-- Buffed [Rifle] Recoil: 4 -> 3
+- Buffed [Rifle] Recoil: 4 -> 2
+- Nerfed [Rifle] Recoil: Fire Rate Delay: 0.150 -> 0.175
 
 - Buffed [SMG] Recoil: 1 -> 0.5
 
-- Buffed [Shotgun] Number of Shots: 16 -> 18
-- Buffed [Shotgun] Damage: 160 -> 180
+- Buffed [Shotgun] Number of Shots: 16 -> 20
+- Nerfed [Shotgun] Damage per shot: 10 -> 8 
+
 
 - Buffed [Silenced Pistol] Now makes the target drop their held weapon on the floor
 - Buffed [Silenced Pistol] Slow Duration: 3 -> 4 Seconds
@@ -31,6 +33,8 @@
 - Buffed [Silenced Pistol] Spread Accuracy: 0.010 -> 0.00 (Same as taser)
 - Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
 - Nerfed [Silenced Pistol] Damage: 45 -> 20
+
+- FIxed [Effect Timers] No longer will buffs stay forever when they should be timing out
 
 [Maps]
 
