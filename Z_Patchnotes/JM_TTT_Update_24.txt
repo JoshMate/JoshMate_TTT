@@ -1,16 +1,8 @@
 [ Update 24] - (Josh Mate's TTT2 Server)
 
-- Added [] 
-- Reworked [] 
-- Fixed [] 
-- Buffed [] 
-- Nerfed [] 
-// Comments
-
 [Server]
 
-
-
+// NONE
 
 [Gameplay]
 
@@ -20,7 +12,7 @@
 // It will last for 60 seconds and has 3 uses
 // Does not block bullets or projectiles
 // Can harm the owner
-// The Damage is about 60 - 80 damage and the slow is 50% over 8 seconds
+// Deals 80 damage and the slow is 50% over 8 seconds
 // You can have multiple walls up at once
 // You will recieve hit markers for damage done (Trip wire style information)
 
