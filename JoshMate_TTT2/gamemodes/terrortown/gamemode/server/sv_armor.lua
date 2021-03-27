@@ -169,7 +169,7 @@ function ARMOR:HandlePlayerTakeDamage(ply, infl, att, amount, dmginfo)
 
 	-- handle different damage type factors, only these four damage types are valid
 	if not dmginfo:IsDamageType(DMG_BULLET) and not dmginfo:IsDamageType(DMG_CLUB)
-		and not dmginfo:IsDamageType(DMG_BURN) and not dmginfo:IsDamageType(DMG_BLAST)
+		and not dmginfo:IsDamageType(DMG_BLAST)
 	then return end
 
 	-- handle if blast damage should be ignored by the armor

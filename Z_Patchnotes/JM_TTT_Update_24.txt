@@ -59,9 +59,10 @@
 - Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
 - Nerfed [Silenced Pistol] Damage: 45 -> 20
 
-- Fixed [Effect Timers] No longer will buffs stay forever when they should be timing out
+- Fixed [Effect Timers] No longer will buffs stay forever 2w1when they should be timing out
 - Fixed [C4] Detective can now defuse a c4 planted by an innocent.
 - Fixed [C4] Anyone can now try to defuse anyones C4.
+- Fixed [C4] Armour no longer halves Fire and Explosive Damage
 
 [Maps]
 
@@ -70,4 +71,13 @@
 - Changed [Sky Town] Reduced the amount of white claw needed for easter egg: 5 -> 3
 - Changed [Sky Town] Added slightly more whiteclaw to the map
 - Changed [Sky Town] Easter Egg music is now considerably Louder
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Desert] Replaced the JANKY truck with a little hut
+- Changed [Desert] Extended the swimming pool area
+- Changed [Desert] Improved jump routes up to the central house
+- Changed [Desert] Extended Sniper Tower a bit
+- Changed [Desert] Extended The Sand Temple
+- Changed [Desert] Large Prop cleanup
+- Changed [Desert] Updated the turtles to my new Turtle 2.0 functionality
 // [LATEST VERSION ON THE WORKSHOP NOW]
