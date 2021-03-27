@@ -22,16 +22,16 @@ SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_SHOTGUN
 
 
-SWEP.Primary.Damage        = 8
+SWEP.Primary.Damage        = 9
 SWEP.Primary.NumShots      = 20
 SWEP.Primary.Delay         = 1
-SWEP.Primary.Cone          = 0.125
+SWEP.Primary.Cone          = 0.130
 SWEP.Primary.Recoil        = 15
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
 
-SWEP.HeadshotMultiplier    = 2
+SWEP.HeadshotMultiplier    = 1.5
 SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false

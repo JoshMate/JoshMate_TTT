@@ -1,13 +1,11 @@
 [ Update 24] - (Josh Mate's TTT2 Server)
 
-
 - Added [] 
 - Reworked [] 
 - Fixed [] 
 - Buffed [] 
 - Nerfed [] 
 // Comments
-
 
 [Server]
 
@@ -16,6 +14,17 @@
 
 [Gameplay]
 
+- Added [Fire Wall] A new traitor weapon to replace the inferno bomb
+// Left click to place the Fire Wall right in front of you
+// After 2s the barrier will arm hurting and slowing all who pass through it
+// It will last for 60 seconds and has 3 uses
+// Does not block bullets or projectiles
+// Can harm the owner
+// The Damage is about 60 - 80 damage and the slow is 50% over 8 seconds
+// You can have multiple walls up at once
+// You will recieve hit markers for damage done (Trip wire style information)
+
+- Removed [Inferno Bomb] Replaced by the Fire Wall
 
 - Buffed [Rifle] Recoil: 4 -> 2
 - Nerfed [Rifle] Recoil: Fire Rate Delay: 0.150 -> 0.175
@@ -23,11 +32,27 @@
 - Buffed [SMG] Recoil: 1 -> 0.5
 
 - Buffed [Shotgun] Number of Shots: 16 -> 20
-- Nerfed [Shotgun] Damage per shot: 10 -> 8 
+- Buffed [Shotgun] Damage: 160 -> 180
+- Nerfed [Shotgun] Damage per shot: 10 -> 9
+- Nerfed [Shotgun] Accuracy Spread: 0.125 -> 0.130
+- Nerfed [Shotgun] HeadShot Damage: 2x -> 1.5x
+ 
+- Buffed [Tracking Dart] Duration: 30 -> 45 Seconds
 
+- Buffed [Soap] Transparency: 30% -> 20%
+
+- Buffed [Barrier] Duration: 20 -> 30 Seconds
+- Nerfed [Barrier] Arm Time: 1.5 -> 2 Seconds
+- Changed [Barrier] Added a sexy new force field effect when armed
+
+- Buffed [Manhack Swarm] Number of ManHacks: 9 -> 12
+- Buffed [Manhack Swarm] Deployment Range: 650 -> 800
+- Buffed [Manhack Swarm] Damage: 4 -> 6
+- Nerfed [Manhack Swarm] ManHack HP: 25 -> 1
+- Nerfed [Manhack Swarm] Manhacks will now self destruct after 30 seconds
 
 - Buffed [Silenced Pistol] Now makes the target drop their held weapon on the floor
-- Buffed [Silenced Pistol] Slow Duration: 3 -> 4 Seconds
+- Buffed [Silenced Pistol] Slow Duration: 3 -> 5 Seconds
 - Buffed [Silenced Pistol] Slow Amount: 50% -> 70%
 - Buffed [Silenced Pistol] Fire Rate Delay: 0.60 -> 0.30
 - Buffed [Silenced Pistol] Spread Accuracy: 0.010 -> 0.00 (Same as taser)

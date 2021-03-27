@@ -26,7 +26,7 @@ function ENT:Initialize()
 	end
 
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor( Color( 255, 255, 255, 50 ) )
+	self:SetColor( Color( 255, 255, 255, 30 ) )
 
 
 	-- JoshMate Changed

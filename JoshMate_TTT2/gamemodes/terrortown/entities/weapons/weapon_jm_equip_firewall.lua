@@ -7,9 +7,9 @@ if CLIENT then
 	SWEP.ViewModelFOV		= 10
  end
 
-SWEP.PrintName				= "Barrier"
+SWEP.PrintName				= "Fire Wall"
 SWEP.Author			    	= "Josh Mate"
-SWEP.Instructions			= "Leftclick to place a barrier"
+SWEP.Instructions			= "Leftclick to place a Fire Wall"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
@@ -29,23 +29,23 @@ SWEP.AllowDrop 				= true
 SWEP.Base 					= "weapon_tttbase"
 SWEP.Kind                  	= WEAPON_EQUIP
 SWEP.WeaponID              	= AMMO_BARRIER
-SWEP.CanBuy                	= {ROLE_DETECTIVE}
+SWEP.CanBuy                	= {ROLE_TRAITOR}
 SWEP.AutoSpawnable			= false
 SWEP.LimitedStock 			= true
 
 if CLIENT then
-	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_barrier.png"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_firewall.png"
  
 	SWEP.EquipMenuData = {
 	   type = "item_weapon",
-	   name = "Barrier",
-	   desc = [[Place down a defensive barrier
+	   name = "Fire Wall",
+	   desc = [[Place down a lethal fire wall
 	
-Left click to place the barrier right in front of you
+Left click to place the Fire Wall right in front of you
 
-After 2s the barrier will arm blocking all passage and projectiles
+After 2s the barrier will arm hurting and slowing all who pass through it
 
-It will last for 30 seconds and has 3 uses
+It will last for 60 seconds and has 3 uses
 ]]
 	}
 end
@@ -60,14 +60,15 @@ function SWEP:PrimaryAttack()
 	if (CLIENT) then return end
 
 	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Barrier_PlaceRange, filter = self.Owner})
-	local ent = ents.Create("ent_jm_barrier")
+	local ent = ents.Create("ent_jm_firewall")
 	ent:SetPos(tr.HitPos)
 	local ang = tr.Normal:Angle()
 	ang:RotateAroundAxis(ang:Right(), -90)
 	ent:SetAngles(ang)
 	ent:Spawn()
 	ent.SetOwner(self:GetOwner())
-	ent.fingerprints = self.fingerprints
+	ent.fingerprints = {}
+	ent.JM_Owner = self:GetOwner()
 	self:TakePrimaryAmmo(1)
 	if SERVER then
 		if self:Clip1() <= 0 then
@@ -83,7 +84,7 @@ end
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Place a Barrier", nil, true)
+	   self:AddTTT2HUDHelp("Place a Fire Wall", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

@@ -46,6 +46,11 @@ if CLIENT then
 			hud = Material("vgui/ttt/joshmate/hud_tracker.png"),
 			type = "bad"
 		})
+
+        STATUS:RegisterStatus("jm_firewall", {
+			hud = Material("vgui/ttt/joshmate/hud_firewall.png"),
+			type = "bad"
+		})
 	end)
 end
 
@@ -60,6 +65,7 @@ if SERVER then
                 v:SetNWBool("isStunGrenaded", false)
                 v:SetNWBool("isChameleoned", false)
                 v:SetNWBool("isSilencedPistoled", false)
+                v:SetNWBool("isFireWalled", false)
                 v:SetNWFloat("lastTimePlayerDidInput", CurTime())
                 v:SetNWBool("isTracked", false)
                 if SERVER then
@@ -112,6 +118,18 @@ if CLIENT then
         ["$pp_colour_mulb"] = 0
     }
 
+    local effectTable_FireWall = {
+        ["$pp_colour_addr"] = 0.25,
+        ["$pp_colour_addg"] = 0.10,
+        ["$pp_colour_addb"] = 0,
+        ["$pp_colour_brightness"] = 0,
+        ["$pp_colour_contrast"] = 1,
+        ["$pp_colour_colour"] = 1,
+        ["$pp_colour_mulr"] = 0,
+        ["$pp_colour_mulg"] = 0,
+        ["$pp_colour_mulb"] = 0
+    }
+
     local effectTable_Chameleon = {
         ["$pp_colour_addr"] = 0.25,
         ["$pp_colour_addg"] = 0.25,
@@ -144,6 +162,11 @@ if CLIENT then
             DrawColorModify( effectTable_PoisonDart )
         end
 
+        -- Fire Wall
+        if (LocalPlayer():GetNWBool("isFireWalled") == true) then
+            DrawColorModify( effectTable_FireWall )
+        end
+
         -- Stun Grenade
         if (LocalPlayer():GetNWBool("isStunGrenaded") == true) then
             DrawMotionBlur( 0.05, 1, 0.01 )
@@ -172,6 +195,14 @@ hook.Add("TTTPlayerSpeedModifier", "JM_SilencedSlowEffect", function(ply, _, _, 
    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
    if ply:GetNWBool("isSilencedPistoled") == true then 
 	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+   end   
+end)
+
+hook.Add("TTTPlayerSpeedModifier", "JM_FireWallSlowEffect", function(ply, _, _, speedMultiplierModifier)
+	if not IsValid(ply)then return end
+   speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+   if ply:GetNWBool("isFireWalled") == true then 
+	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
    end   
 end)
 

@@ -11,11 +11,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A utilty weapon
 	
-Shoot a player to track them
+Shoot a player to track them (Does No Damage)
             
 Tracked players can be seen by everyone through walls
             
-3 uses and each track lasts for 30 seconds
+3 uses and each track lasts for 45 seconds
 ]]
 };
 
@@ -47,7 +47,7 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_357.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_357.mdl")
 
-local JM_Tracker_Duration = 30
+local JM_Tracker_Duration = 45
 local JM_Tracker_Colour = Color( 255, 255, 0 )
 
 function TrackerEffectsInit(ent)
@@ -154,7 +154,7 @@ end
 -- ESP Halo effect
 hook.Add( "PreDrawHalos", "Add", function()
 
-    local players = {}
+   local players = {}
 	local count = 0
 
 	for _, ply in ipairs( player.GetAll() ) do

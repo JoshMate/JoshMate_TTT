@@ -111,7 +111,7 @@ function PoisonTarget(att, path, dmginfo)
    timerName = "timer_PoisonEffectTimer_" .. ent:SteamID64()
    timer.Create( timerName, Poison_Damage_Delay, Poison_Duration*2, function () if ent:IsPlayer() and ent:Alive() then PoisonEffect_Tick(ent, att, weaponInflictor, timerName ) end end )
    timerName = "timer_PoisonRemoveTimer_" .. ent:SteamID64()
-   timer.Create( timerName, Poison_Duration, 1, function () if ent:IsPlayer() and ent:Alive() then RemovePoison(ent) end end )
+   timer.Create( timerName, Poison_Duration, 1, function () if ent:IsPlayer() then RemovePoison(ent) end end )
    
    ent:ChatPrint("[Poison]: You have been poisoned!")
    ent:SetNWBool("isPoisonDarted", true)
