@@ -79,5 +79,6 @@
 - Changed [Desert] Extended Sniper Tower a bit
 - Changed [Desert] Extended The Sand Temple
 - Changed [Desert] Large Prop cleanup
+- Changed [Desert] Redid weapon spawns
 - Changed [Desert] Updated the turtles to my new Turtle 2.0 functionality
 // [LATEST VERSION ON THE WORKSHOP NOW]
