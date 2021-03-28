@@ -80,6 +80,7 @@ function SilencedPistolTarget(att, path, dmginfo)
     -- Drop currently Held Weapon
     if ( ent:IsValid() ) then
       local curWep = ent:GetActiveWeapon()
+      ent:GetActiveWeapon():PreDrop()
       if curWep == nil or curWep.AllowDrop == nil or curWep.AllowDrop == false then
          ent:SelectWeapon("weapon_zm_improvised")
       end

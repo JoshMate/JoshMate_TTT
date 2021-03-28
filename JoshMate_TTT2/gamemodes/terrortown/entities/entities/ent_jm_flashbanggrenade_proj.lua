@@ -40,6 +40,7 @@ function ENT:Explode(tr)
                -- Drop currently Held Weapon
                if ( pl:IsValid() ) then
                   local curWep = pl:GetActiveWeapon()
+                  pl:GetActiveWeapon():PreDrop()
                   if curWep == nil or curWep.AllowDrop == nil or curWep.AllowDrop == false then
                      pl:SelectWeapon("weapon_zm_improvised")
                   end

@@ -62,6 +62,10 @@ function MapVote:Start(voteTime)
         local winner = table.Random(winners)
         local mapName = MapVote.maps[winner]
 
+        local playedMapsList = ConfigHelper:ReadPlayedMaps()
+        table.insert(playedMapsList, mapName)
+        ConfigHelper:WritePlayedMaps(playedMapsList) 
+
         net.Start("MapVote_End")
         net.WriteUInt(winner, 32)
         net.Broadcast()
@@ -117,22 +121,16 @@ function MapVote:GetRandomMaps()
 
     local result = {}
 
-    local i = 0
-    local max = self.config.mapsToVote
+    local playedMaps = ConfigHelper:ReadPlayedMaps()
 
-    for k, map in RandomPairs(maps) do
-        if i >= max then break end
+    for k, map in pairs(maps) do
         local mapstr = map:sub(1, -5)
-
-        -- using this to get only maps which have no mapicons (need this when I create mapicons :D)
-        --local a = file.Exists("maps/thumb/" .. mapstr .. ".png", "GAME")
-        --local b = file.Exists("maps/" .. mapstr .. ".png", "GAME")
-
         local notExclude = not self:IsExlude(mapstr)
 
         if self:HasPrefix(mapstr) and notExclude then 
-            table.insert(result, mapstr)
-            i = i + 1
+            if (not self:ExistsInTable(mapstr,playedMaps)) then
+                table.insert(result, mapstr)
+            end
         end
     end
 
@@ -162,6 +160,17 @@ function MapVote:IsExlude(map)
 
     for k, exclude in pairs(excludes) do
         if map == exclude then
+            return true
+        end
+    end
+
+    return false
+end
+
+function MapVote:ExistsInTable(find, table)
+
+    for k,v in pairs(table) do
+        if v == find then
             return true
         end
     end

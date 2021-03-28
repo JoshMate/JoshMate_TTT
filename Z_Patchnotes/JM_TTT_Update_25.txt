@@ -2,6 +2,7 @@
 
 - Added [] 
 - Reworked [] 
+- Changed [] 
 - Fixed [] 
 - Buffed [] 
 - Nerfed [] 
@@ -10,12 +11,18 @@
 
 [Server]
 
+- Changed [Map Vote]
+- Changed [Map Vote] RTV Counter should now display the correct number of RTVers
 
+- Changed [Rounds] Round Time Limit: 6 -> 4.5 Minutes
+- Changed [Rounds] Map Maximum Time: 45 Minutes -> 30 Minutes
+- Changed [Rounds] Map Maximum Rounds: 10 -> 12
 
+- Changed [Credits] Traitors get 1 credit every X% kills: 18 -> 15%
 
 [Gameplay]
 
-
+- Nerfed [Radar] Scan Time Delay: 10 -> 15 Seconds
 
 [Maps]
 

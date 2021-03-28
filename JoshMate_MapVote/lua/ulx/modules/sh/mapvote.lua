@@ -18,7 +18,21 @@ cmdMapvote:setOpposite("unmapvote", {_, _, true}, "!unmapvote")
 -- #########################
 function ulx.rtvreset(calling_ply)
     PrintMessage(HUD_PRINTTALK, calling_ply:Nick() .. " resets the RTV.")
+    RTV:Reset()
 end
 
 local cmdRtv = ulx.command(CATEGORY_NAME, "resetrtv", ulx.rtvreset, "!resetrtv")
 cmdRtv:defaultAccess(ULib.ACCESS_ADMIN)
+
+
+-- #########################
+-- ##Reset Played Maps #####
+-- #########################
+
+function ulx.resetmaplist(calling_ply)
+    PrintMessage(HUD_PRINTTALK, calling_ply:Nick() .. " resets the list of played maps.")
+    ConfigHelper:WritePlayedMaps({}) 
+end
+
+local cmdResetMapList = ulx.command(CATEGORY_NAME, "resetmaplist", ulx.resetmaplist, "!resetmaplist")
+cmdResetMapList:defaultAccess(ULib.ACCESS_ADMIN)
