@@ -11,8 +11,9 @@
 
 [Server]
 
-- Changed [Map Vote]
+- Changed [Map Vote] Maps are removed of the map list once they have won a vote
 - Changed [Map Vote] RTV Counter should now display the correct number of RTVers
+- Changed [Map Vote] Each player can now only add 1 RTV vote per map
 
 - Changed [Rounds] Round Time Limit: 6 -> 4.5 Minutes
 - Changed [Rounds] Map Maximum Time: 45 Minutes -> 30 Minutes
@@ -22,7 +23,15 @@
 
 [Gameplay]
 
+- Buffed [Firewall] Wall Life Time: 60 -> 120 Seconds
+- Nerfed [Firewall] Damage: 80 -> 70
+- Nerfed [Firewall] Slow Duration: 8 -> 7 Seconds 
+
+- Buffed [Tracking Dart] Duration: 45 -> 60 Seconds
+
 - Nerfed [Radar] Scan Time Delay: 10 -> 15 Seconds
+
+- Fixed [Infinite Taser] Added a fail safe timer that Force-Un-Freezes players who should no longer be frozen from the taser
 
 [Maps]
 

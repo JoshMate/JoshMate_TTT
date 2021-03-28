@@ -47,7 +47,7 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_357.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_357.mdl")
 
-local JM_Tracker_Duration = 45
+local JM_Tracker_Duration = 60
 local JM_Tracker_Colour = Color( 255, 255, 0 )
 
 function TrackerEffectsInit(ent)

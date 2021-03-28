@@ -180,6 +180,34 @@ if CLIENT then
     end )
 end
 
+
+-- FAIL SAFES (TO PREVENT INFINITE DEBUFFS)
+-- Ticks in the background every x Seconds forever (Expensive, but needed)
+
+if SERVER then
+
+function JM_Buffs_FailSafes() 
+
+    for _, v in ipairs(player.GetAll()) do
+        if IsValid(v) then
+            
+            -- Unfreeze stuck players
+            if (v:GetNWBool("isTased") == false and v:GetNWBool("isBearTrapped") == false) then
+                v:Freeze(false)
+            end
+
+        end
+    end
+
+end
+
+failSafeTimerName = "timer_buffs_failsafes"
+failSafeTimerDelay = 1 
+timer.Create(failSafeTimerName, failSafeTimerDelay, 0, JM_Buffs_FailSafesend)
+
+end
+
+
 -- Stat changes via hooks
 hook.Add("TTTPlayerSpeedModifier", "JM_GrenadeSlowEffect", function(ply, _, _, speedMultiplierModifier)
 	if not IsValid(ply)then return end

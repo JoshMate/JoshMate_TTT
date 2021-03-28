@@ -2,7 +2,7 @@ AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
-local JM_Barrier_LifeTime			= 60
+local JM_Barrier_LifeTime			= 120
 local JM_Barrier_ArmTime			= 2
 
 local JM_Barrier_Colour_PreArm		= Color( 255, 150, 0, 255 )
@@ -15,7 +15,7 @@ local JM_Barrier_Sound_HitPlayer	= "firewall_hit.wav"
 
 local JM_FireWall_Damage_Amount		= 2
 local JM_FireWall_Damage_Delay		= 0.20
-local JM_FireWall_Damage_Duration	= 8
+local JM_FireWall_Damage_Duration	= 7
 
 ENT.JM_IsLethal					= false
 
