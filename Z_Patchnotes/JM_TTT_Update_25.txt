@@ -11,13 +11,13 @@
 
 [Server]
 
-- Changed [Map Vote] Maps are removed of the map list once they have won a vote
+- Changed [Map Vote] Maps are removed from the map pool once they have been played
 - Changed [Map Vote] RTV Counter should now display the correct number of RTVers
 - Changed [Map Vote] Each player can now only add 1 RTV vote per map
 
 - Changed [Rounds] Round Time Limit: 6 -> 4.5 Minutes
 - Changed [Rounds] Map Maximum Time: 45 Minutes -> 30 Minutes
-- Changed [Rounds] Map Maximum Rounds: 10 -> 12
+- Changed [Rounds] Map First Prep Time: 60 -> 30 Seconds
 
 - Changed [Credits] Traitors get 1 credit every X% kills: 18 -> 15%
 
@@ -35,3 +35,6 @@
 
 [Maps]
 
+- Changed [Standoff] Maximum Delay of Sudden Death: 3 -> 2 Minutes  
+- Changed [Standoff] Made the spawns less likely to get you stuck
+// [LATEST VERSION ON THE WORKSHOP NOW]
