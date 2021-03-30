@@ -19,9 +19,9 @@ SWEP.WeaponID              = AMMO_M16
 
 
 SWEP.Primary.Damage        = 45
-SWEP.Primary.Delay         = 0.15
+SWEP.Primary.Delay         = 0.175
 SWEP.Primary.Cone          = 0.008
-SWEP.Primary.Recoil        = 4
+SWEP.Primary.Recoil        = 2
 SWEP.Primary.ClipSize      = 20
 SWEP.Primary.DefaultClip   = 20
 SWEP.Primary.ClipMax       = 60

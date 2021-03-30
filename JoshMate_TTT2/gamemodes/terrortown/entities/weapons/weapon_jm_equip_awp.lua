@@ -33,7 +33,7 @@ SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 
 SWEP.Primary.Recoil        = 5
-SWEP.Primary.Damage        = 1000
+SWEP.Primary.Damage        = 5000
 SWEP.HeadshotMultiplier    = 1
 SWEP.Primary.Delay         = 1.25
 SWEP.Primary.Cone          = 0.1

@@ -1,0 +1,76 @@
+[ Update 24] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+// NONE
+
+[Gameplay]
+
+- Added [Fire Wall] A new traitor weapon to replace the inferno bomb
+// Left click to place the Fire Wall right in front of you
+// After 2s the barrier will arm hurting and slowing all who pass through it
+// It will last for 60 seconds and has 3 uses
+// Does not block bullets or projectiles
+// Can harm the owner
+// Deals 80 damage and the slow is 50% over 8 seconds
+// You can have multiple walls up at once
+// You will recieve hit markers for damage done (Trip wire style information)
+
+- Removed [Inferno Bomb] Replaced by the Fire Wall
+
+- Buffed [Rifle] Recoil: 4 -> 2
+- Nerfed [Rifle] Recoil: Fire Rate Delay: 0.150 -> 0.175
+
+- Buffed [SMG] Recoil: 1 -> 0.5
+
+- Buffed [Shotgun] Number of Shots: 16 -> 20
+- Buffed [Shotgun] Damage: 160 -> 180
+- Nerfed [Shotgun] Damage per shot: 10 -> 9
+- Nerfed [Shotgun] Accuracy Spread: 0.125 -> 0.130
+- Nerfed [Shotgun] HeadShot Damage: 2x -> 1.5x
+ 
+- Buffed [Tracking Dart] Duration: 30 -> 45 Seconds
+
+- Buffed [Soap] Transparency: 30% -> 20%
+
+- Buffed [Barrier] Duration: 20 -> 30 Seconds
+- Nerfed [Barrier] Arm Time: 1.5 -> 2 Seconds
+- Changed [Barrier] Added a sexy new force field effect when armed
+
+- Buffed [Manhack Swarm] Number of ManHacks: 9 -> 12
+- Buffed [Manhack Swarm] Deployment Range: 650 -> 800
+- Buffed [Manhack Swarm] Damage: 4 -> 6
+- Nerfed [Manhack Swarm] ManHack HP: 25 -> 1
+- Nerfed [Manhack Swarm] Manhacks will now self destruct after 30 seconds
+
+- Buffed [Silenced Pistol] Now makes the target drop their held weapon on the floor
+- Buffed [Silenced Pistol] Slow Duration: 3 -> 5 Seconds
+- Buffed [Silenced Pistol] Slow Amount: 50% -> 70%
+- Buffed [Silenced Pistol] Fire Rate Delay: 0.60 -> 0.30
+- Buffed [Silenced Pistol] Spread Accuracy: 0.010 -> 0.00 (Same as taser)
+- Nerfed [Silenced Pistol] Magazine Capacity: 10 -> 3
+- Nerfed [Silenced Pistol] Damage: 45 -> 20
+
+- Fixed [Effect Timers] No longer will buffs stay forever 2w1when they should be timing out
+- Fixed [C4] Detective can now defuse a c4 planted by an innocent.
+- Fixed [C4] Anyone can now try to defuse anyones C4.
+- Fixed [C4] Armour no longer halves Fire and Explosive Damage
+
+[Maps]
+
+- Changed [Sky Town] Fixed a dodgey roof in graveyard
+- Changed [Sky Town] Updated the breakable windows with my window 2.0 functionality
+- Changed [Sky Town] Reduced the amount of white claw needed for easter egg: 5 -> 3
+- Changed [Sky Town] Added slightly more whiteclaw to the map
+- Changed [Sky Town] Easter Egg music is now considerably Louder
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Desert] Replaced the JANKY truck with a little hut
+- Changed [Desert] Extended the swimming pool area
+- Changed [Desert] Improved jump routes up to the central house
+- Changed [Desert] Extended Sniper Tower a bit
+- Changed [Desert] Extended The Sand Temple
+- Changed [Desert] Large Prop cleanup
+- Changed [Desert] Redid weapon spawns
+- Changed [Desert] Updated the turtles to my new Turtle 2.0 functionality
+// [LATEST VERSION ON THE WORKSHOP NOW]

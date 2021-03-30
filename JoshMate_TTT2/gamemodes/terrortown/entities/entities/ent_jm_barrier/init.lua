@@ -2,11 +2,10 @@ AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
-local JM_Barrier_LifeTime			= 20
-local JM_Barrier_ArmTime			= 1.5
+local JM_Barrier_LifeTime			= 30
+local JM_Barrier_ArmTime			= 2
 
-local JM_Barrier_Colour_PreArm		= Color( 0, 90, 125, 80 )
-local JM_Barrier_Colour_Armed		= Color( 0, 180, 255, 180 )
+local JM_Barrier_Colour_PreArm		= Color( 0, 180, 255, 180 )
 
 local JM_Barrier_Sound_Placed		= "weapons/ar2/ar2_reload_rotate.wav"
 local JM_Barrier_Sound_Armed		= "weapons/ar2/ar2_reload_push.wav"
@@ -30,7 +29,12 @@ function ENT:Barrier_Arm()
 		if IsValid(self) then 
 			self:EmitSound(JM_Barrier_Sound_Armed);
 			self:SetSolid( SOLID_VPHYSICS ) 
-			self:SetColor(JM_Barrier_Colour_Armed)  
+			
+			self:SetMaterial("models/props_combine/stasisshield_sheet")
+			self:SetRenderMode( RENDERMODE_NORMAL )
+			self:DrawShadow(false) 
+
+
 		end 
 	end
 end
