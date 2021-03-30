@@ -38,3 +38,20 @@
 - Changed [Standoff] Maximum Delay of Sudden Death: 3 -> 2 Minutes  
 - Changed [Standoff] Made the spawns less likely to get you stuck
 // [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] Total Lighting Rework
+- Changed [Transit] Maximum Delay of Sudden Death: 3 -> 2.5 Minutes  
+- Changed [Transit] Raised the lower catwalk up a bit to stop koen's suicidal tendencies...
+- Changed [Transit] Removed the Traitor Vent from the train, it was glitchy and never used
+- Changed [Transit] Added a small patch of water to the centre of the lower catwalk
+- Changed [Transit] Added a way to board the train via the roof on the south station
+- Changed [Transit] Added a little high up ledge to the south station back room
+- Changed [Transit] Change the height of the pillar in the back of north rooms
+- Changed [Transit] Clipping to prevent your body going through the ceiling on top of a sign
+- Changed [Transit] Some large changes to the south station platform front end
+- Changed [Transit] Added a vent to access the back room on the south station
+- Changed [Transit] Added Josh Mate's Windows 2.0 functionality
+- Changed [Transit] Added Josh Mate's Turtle 2.0 functionality
+- Changed [Transit] Various over tweaks and cleanups
+// [LATEST VERSION ON THE WORKSHOP NOW]
+// STILL NEEDS THE WEAPONS RE-PLACING
