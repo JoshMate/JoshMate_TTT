@@ -45,4 +45,3 @@
 - Changed [Transit] Added Josh Mate's Turtle 2.0 functionality
 - Changed [Transit] Various over tweaks and cleanups
 // [LATEST VERSION ON THE WORKSHOP NOW]
-// STILL NEEDS THE WEAPONS RE-PLACING
