@@ -1,0 +1,41 @@
+[ Update 26 ] - (Josh Mate's TTT2 Server)
+
+- Added [] 
+- Reworked [] 
+- Changed [] 
+- Fixed [] 
+- Buffed [] 
+- Nerfed [] 
+// Comments
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+[Server]
+
+
+
+[Gameplay]
+
+
+
+[Maps]
+
+- New Map [Dread Hollow Light] A new lighter version of dread hollow
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- New Map [Warmup] A Brand new pre-game lobby map. Now with the ULTIMATE LADDER HACK
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] New Coloured Coded Signs improve visibility of what station you are on
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Abyss] HUGE Redesign of the out islands to be more user friendly and interesting
+- Changed [Abyss] Huge rework and clean up of the whole map
+- Changed [Abyss] The upper skybox no longer insta kills you when you touch it (Slowly Damages)
+- Changed [Abyss] Got rid of the invisible walls above the roofs (It now damages rather than blocking)
+- Changed [Abyss] Added signs so you know which side you are on
+- Changed [Abyss] Added more spawn variety and stopped the Hold W on Spawn brainletts
+- Changed [Abyss] Slightly increased view distance in the fog to make fog hack less powerful
+- Changed [Abyss] Re-did weapon spawns in a much better way
+- Changed [Abyss] Huge Prop Cleanup
+- Changed [Abyss] Added Turtle 2.0 Functionality
+// [LATEST VERSION ON THE WORKSHOP NOW]

@@ -10,20 +10,12 @@ if CLIENT then
    SWEP.EquipMenuData = {
       type = "item_weapon",
       desc = [[A utilty weapon
-	
-<<<<<<< HEAD
+      
 Shoot a player to track them (Does No Damage)
             
 Tracked players can be seen by everyone through walls
             
 3 uses and each track lasts for 45 seconds
-=======
-Shoot a player to track them
-            
-Tracked players can be seen by everyone through walls
-            
-3 uses and each track lasts for 30 seconds
->>>>>>> master
 ]]
 };
 

@@ -9,23 +9,13 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-<<<<<<< HEAD
       desc = [[A silent utility weapon
 	
 Targets will be slowed and drop their held weapon
             
 Has 3 uses
-=======
-      desc = [[A silent weapon
-	
-Targets will be slowed when shot
-      
-Targets will not scream when killed
-      
-Has 10 shots
->>>>>>> master
 ]]
-   };
+};
 
    SWEP.Icon               = "vgui/ttt/icon_silenced"
    SWEP.IconLetter         = "a"
@@ -33,21 +23,12 @@ end
 
 SWEP.Base                  = "weapon_tttbase"
 
-<<<<<<< HEAD
 SWEP.Primary.Damage        = 20
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
 SWEP.Primary.Recoil        = 0.5
 SWEP.Primary.ClipSize      = 3
 SWEP.Primary.DefaultClip   = 3
-=======
-SWEP.Primary.Damage        = 40
-SWEP.Primary.Delay         = 0.60
-SWEP.Primary.Cone          = 0.010
-SWEP.Primary.Recoil        = 0.5
-SWEP.Primary.ClipSize      = 10
-SWEP.Primary.DefaultClip   = 10
->>>>>>> master
 SWEP.Primary.ClipMax       = 0
 
 SWEP.HeadshotMultiplier    = 2
@@ -72,11 +53,8 @@ SWEP.IronSightsAng         = Vector(-0.5, 0, 0)
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 SWEP.ReloadAnim            = ACT_VM_RELOAD_SILENCED
 
-<<<<<<< HEAD
 local JM_Silenced_Pistol_Duration   = 5
-=======
-local JM_Silenced_Pistol_Duration   = 3
->>>>>>> master
+
 
 function SWEP:Deploy()
    self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
@@ -99,7 +77,6 @@ function SilencedPistolTarget(att, path, dmginfo)
     if SERVER then
     -- Only works on players and only outside of post and prep
     if (not ent:IsPlayer()) or (not GAMEMODE:AllowPVP()) then return end
-<<<<<<< HEAD
 
     -- Drop currently Held Weapon
     if ( ent:IsValid() ) then
@@ -118,12 +95,6 @@ function SilencedPistolTarget(att, path, dmginfo)
     weaponInflictor = dmginfo:GetInflictor()
 
     timerName = "timer_SilencedPistolRemover_" .. ent:SteamID()
-=======
-        
-    weaponInflictor = dmginfo:GetInflictor()
-
-    timerName = "timer_SilencedPistolRemover_" .. ent:EntIndex()
->>>>>>> master
     timer.Create( timerName, JM_Silenced_Pistol_Duration, 1, function () if ent:IsPlayer() and ent:Alive() then RemoveSilencedPistolSlow(ent) end end )
     
     ent:SetNWBool("isSilencedPistoled", true)
