@@ -10,7 +10,7 @@ if CLIENT then
    SWEP.EquipMenuData = {
       type = "item_weapon",
       desc = [[A utilty weapon
-	
+      
 Shoot a player to track them (Does No Damage)
             
 Tracked players can be seen by everyone through walls

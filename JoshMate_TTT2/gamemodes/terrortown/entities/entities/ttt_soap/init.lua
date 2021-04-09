@@ -29,6 +29,7 @@ function ENT:Initialize()
 	self:SetColor( Color( 255, 255, 255, 30 ) )
 
 
+
 	-- JoshMate Changed
 	self:SendWarn(true)
 end

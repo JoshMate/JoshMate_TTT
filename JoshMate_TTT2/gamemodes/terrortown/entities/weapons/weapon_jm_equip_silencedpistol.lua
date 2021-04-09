@@ -15,7 +15,7 @@ Targets will be slowed and drop their held weapon
             
 Has 3 uses
 ]]
-   };
+};
 
    SWEP.Icon               = "vgui/ttt/icon_silenced"
    SWEP.IconLetter         = "a"
@@ -54,6 +54,7 @@ SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 SWEP.ReloadAnim            = ACT_VM_RELOAD_SILENCED
 
 local JM_Silenced_Pistol_Duration   = 5
+
 
 function SWEP:Deploy()
    self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
