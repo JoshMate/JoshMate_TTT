@@ -20,7 +20,6 @@
 // Before firewall was really hard to use because everyone could see you place it and all attack you
 // This should make it more covert and more of a long term trap
 // It also only has 2 Uses rather than 3 to account for this new boost in power
-
 //TODO Remove Place Sound Effect
 //TODO Add HUD icon (Like C4) for Walls
 
