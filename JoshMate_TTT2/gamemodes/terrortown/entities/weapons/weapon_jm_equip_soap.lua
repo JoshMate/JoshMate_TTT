@@ -49,21 +49,9 @@ Each soap can slip one person (You get 2 soaps)
 end
 
 
-if SERVER then
-	resource.AddFile("sound/slip.wav")
-	resource.AddFile("models/soap.dx80.vtx")
-	resource.AddFile("models/soap.dx90.vtx")
-	resource.AddFile("models/soap.mdl")
-	resource.AddFile("models/soap.sw.vtx")
-	resource.AddFile("models/soap.vvd")
-	resource.AddFile("materials/models/soap.vmt")
-	resource.AddFile("materials/models/soap.vtf")	
-end
-
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-	self:EmitSound( self.Primary.Sound )
 	self:ThrowSoap("models/soap.mdl")
 	
 end

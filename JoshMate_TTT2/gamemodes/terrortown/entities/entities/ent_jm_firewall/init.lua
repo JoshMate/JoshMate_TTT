@@ -3,9 +3,9 @@ AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
 local JM_Barrier_LifeTime			= 120
-local JM_Barrier_ArmTime			= 2
+local JM_Barrier_ArmTime			= 15
 
-local JM_Barrier_Colour_PreArm		= Color( 255, 150, 0, 255 )
+local JM_Barrier_Colour_PreArm		= Color( 0, 0, 0, 0 )
 local JM_Barrier_Colour_Dormant		= Color( 0, 0, 0, 0 )
 
 local JM_Barrier_Sound_Placed		= "firewall_place.wav"

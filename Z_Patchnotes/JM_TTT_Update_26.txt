@@ -9,11 +9,23 @@
 // Comments
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
-[Server]
+[Server] 
 
 
 
 [Gameplay]
+
+- Reworked [Firewall] When placing it, it will be invisible for 15 seconds then deploy instantly.
+// People will not know that you have placed it, until it appears and you are long gone
+// Before firewall was really hard to use because everyone could see you place it and all attack you
+// This should make it more covert and more of a long term trap
+// It also only has 2 Uses rather than 3 to account for this new boost in power
+
+//TODO Remove Place Sound Effect
+//TODO Add HUD icon (Like C4) for Walls
+
+- Buffed [Soap] It no longer makes a weird clicking noise when you place it (Which was audible to others)
+
 
 
 

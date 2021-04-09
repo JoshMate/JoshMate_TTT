@@ -41,11 +41,11 @@ if CLIENT then
 	   name = "Fire Wall",
 	   desc = [[Place down a lethal fire wall
 	
-Left click to place the Fire Wall right in front of you
+Left click to place the Fire Wall right in front of you. It will be invisible until it arms
 
-After 2s the barrier will arm hurting and slowing all who pass through it
+After 15s the barrier will arm, becoming visible and hurting and slowing all who pass through it
 
-It will last for 60 seconds and has 3 uses
+It will last for 2 Minutes and has 2 uses
 ]]
 	}
 end
