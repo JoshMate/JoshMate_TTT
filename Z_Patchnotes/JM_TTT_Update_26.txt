@@ -19,9 +19,8 @@
 // People will not know that you have placed it, until it appears and you are long gone
 // Before firewall was really hard to use because everyone could see you place it and all attack you
 // This should make it more covert and more of a long term trap
-// It also only has 2 Uses rather than 3 to account for this new boost in power
-//TODO Remove Place Sound Effect
-//TODO Add HUD icon (Like C4) for Walls
+// Added a HUD UI marker for fellow Traitors
+
 
 - Buffed [Soap] It no longer makes a weird clicking noise when you place it (Which was audible to others)
 
