@@ -203,7 +203,7 @@ end
 
 failSafeTimerName = "timer_buffs_failsafes"
 failSafeTimerDelay = 1 
-timer.Create(failSafeTimerName, failSafeTimerDelay, 0, JM_Buffs_FailSafesend)
+timer.Create(failSafeTimerName, failSafeTimerDelay, 0, JM_Buffs_FailSafes)
 
 end
 
