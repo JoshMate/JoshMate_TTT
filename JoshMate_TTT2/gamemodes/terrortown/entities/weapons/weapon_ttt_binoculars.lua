@@ -53,7 +53,7 @@ SWEP.ZoomLevels = {
 	5
 }
 
-SWEP.ProcessingDelay = 2
+SWEP.ProcessingDelay = 0.5
 
 function SWEP:SetupDataTables()
 	self:DTVar("Bool", 0, "processing")

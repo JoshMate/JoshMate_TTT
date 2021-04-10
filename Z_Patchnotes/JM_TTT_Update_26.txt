@@ -53,7 +53,7 @@
 - Nerfed [Barrier] Number of Uses: 3 -> 2
 - Changed [Barrier] Added more visual effects to let players avoid being stuck inside
 
-
+- Buffed [Binoculars] Body Scan Time: 2 -> 0.5 Seconds
 
 
 [Maps]

@@ -70,12 +70,11 @@ end
 
 local function PushPullRadius(pos, pusher)
    local radius = 500
-   local phys_force = 300
    local push_force = 400
 
-   -- pull physics objects and push players
+   -- push players
    for k, target in ipairs(ents.FindInSphere(pos, radius)) do
-      if IsValid(target) then
+      if IsValid(target) and target:IsPlayer() then
          local tpos = target:LocalToWorld(target:OBBCenter())
          local dir = (tpos - pos):GetNormal()
          local phys = target:GetPhysicsObject()
@@ -106,17 +105,6 @@ local function PushPullRadius(pos, pusher)
             phys:ApplyForceCenter(dir * -1 * phys_force)
          end
       end
-   end
-
-   local phexp = ents.Create("env_physexplosion")
-   if IsValid(phexp) then
-      phexp:SetPos(pos)
-      phexp:SetKeyValue("magnitude", 150) --max
-      phexp:SetKeyValue("radius", radius)
-      -- 1 = no dmg, 2 = push ply, 4 = push radial, 8 = los, 16 = viewpunch
-      phexp:SetKeyValue("spawnflags", 1 + 2 + 16)
-      phexp:Spawn()
-      phexp:Fire("Explode", "", 0.2)
    end
 end
 

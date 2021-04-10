@@ -48,10 +48,12 @@ SWEP.WeaponID              = AMMO_POISONDART
 SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_aug.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_rif_aug.mdl")
+SWEP.IronSightsPos         = Vector( 5, -15, -2 )
+SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
 
 local Poison_Duration               = 15
 local Poison_Damage_Delay           = 1
-local Poison_Damage_Amount          = 4
+local Poison_Damage_Amount          = 5
 local JM_Shoot_Range                = 10000
 
 
