@@ -48,7 +48,7 @@ SWEP.IsSilent              = true
 SWEP.ViewModel             = "models/weapons/c_crowbar.mdl"
 SWEP.WorldModel            = "models/weapons/w_crowbar.mdl"
 
-local JM_Tree_Place_Range		= 200
+local JM_Tree_Place_Range		= 300
 
 
 
@@ -56,7 +56,6 @@ local JM_Tree_Place_Range		= 200
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-	self:EmitSound( self.Primary.Sound )
 
 	if (CLIENT) then return end
 

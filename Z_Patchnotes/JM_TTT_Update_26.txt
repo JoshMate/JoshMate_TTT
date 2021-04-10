@@ -1,14 +1,5 @@
 [ Update 26 ] - (Josh Mate's TTT2 Server)
 
-- Added [] 
-- Reworked [] 
-- Changed [] 
-- Fixed [] 
-- Buffed [] 
-- Nerfed [] 
-// Comments
-// [LATEST VERSION ON THE WORKSHOP NOW]
-
 [Server] 
 
 - Changed [Hit Markers] Time Before damage number stacking effect fades: 1 -> 2 Seconds
@@ -37,10 +28,10 @@
 // This should make it more covert and more of a long term trap
 // Added a HUD UI marker for fellow Traitors
 
-- Buffed [Soap] It no longer makes a weird clicking noise when you place it (Which was audible to others)
-
 - Buffed [Newton Launcher] Push Radius: 400 -> 500
 - Buffed [Newton Launcher] Push Force: 300 -> 400
+
+- Buffed [Tree of Life] Place Range: 200 -> 300
 
 - Buffed [Frag Grenade] Damage: 70 -> 80
 - Buffed [Frag Grenade] Radius: 300 -> 400
@@ -55,6 +46,12 @@
 
 - Buffed [Binoculars] Body Scan Time: 2 -> 0.5 Seconds
 
+- Buffed [Light Pistol] Accuracy Spread: 0.0150 -> 0.0125
+
+- Buffed [Heavy Pistol] Accuracy Spread: 0.0150 -> 0.0125
+
+- Fixed [Soap] It no longer makes a weird clicking noise when you place it (Which was audible to others)
+- Fixed  [Tree of Life] It no longer makes a weird clicking noise when you place it (Which was audible to others)
 
 [Maps]
 

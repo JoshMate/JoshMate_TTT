@@ -59,7 +59,7 @@ function ENT:Explode(tr)
                
                local timerName = "timer_FlashBangBlind_" .. pl:SteamID64()
                timer.Create( timerName, JM_FlashBang_Duration, 1, function () 
-                  if IsValid(pl) then
+                  if IsValid(pl) and pl:IsPlayer() then
                      STATUS:RemoveStatus(pl,"jm_stungrenade")
                      pl:SetNWBool("isStunGrenaded",false)
                      return
