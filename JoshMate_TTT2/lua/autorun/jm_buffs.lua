@@ -47,6 +47,11 @@ if CLIENT then
 			type = "bad"
 		})
 
+        STATUS:RegisterStatus("jm_tag", {
+			hud = Material("vgui/ttt/joshmate/hud_tracker.png"),
+			type = "bad"
+		})
+
         STATUS:RegisterStatus("jm_firewall", {
 			hud = Material("vgui/ttt/joshmate/hud_firewall.png"),
 			type = "bad"

@@ -5,6 +5,8 @@
 - Changed [Hit Markers] Time Before damage number stacking effect fades: 1 -> 2 Seconds
 - Changed [Hit Markers] Adjusted some of the colours for damage numbers
 
+- Changed [Roles] Traitor percentage: 35% -> 30%
+
 [Gameplay]
 
 - Rework [Taser] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon

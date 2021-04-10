@@ -54,7 +54,7 @@ function ENT:Explode(tr)
 
                -- Wall Hack
                self:HitEffectsInit(pl)
-               STATUS:AddTimedStatus(pl, "jm_tracker", JM_Tag_Duration, 1)
+               STATUS:AddTimedStatus(pl, "jm_tag", JM_Tag_Duration, 1)
                timerName = "timer_Tag_RemoveTimer" .. pl:SteamID64()
                timer.Create(timerName, JM_Tag_Duration, 1, 
                      function() 
