@@ -2,8 +2,8 @@ AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
-local JM_Barrier_LifeTime			= 30
-local JM_Barrier_ArmTime			= 2
+local JM_Barrier_LifeTime			= 60
+local JM_Barrier_ArmTime			= 3
 
 local JM_Barrier_Colour_PreArm		= Color( 0, 180, 255, 180 )
 
@@ -29,7 +29,7 @@ function ENT:Barrier_Arm()
 		if IsValid(self) then 
 			self:EmitSound(JM_Barrier_Sound_Armed);
 			self:SetSolid( SOLID_VPHYSICS ) 
-			
+			self:Barrier_Effects_Destroyed()
 			self:SetMaterial("models/props_combine/stasisshield_sheet")
 			self:SetRenderMode( RENDERMODE_NORMAL )
 			self:DrawShadow(false) 
@@ -64,6 +64,7 @@ function ENT:Initialize()
 
 	-- Play Place Sound
 	self:EmitSound(JM_Barrier_Sound_Placed);
+	self:Barrier_Effects_Destroyed()
 
 	-- JoshMate Changed
 	self:SetMaterial("joshmate/barrier")

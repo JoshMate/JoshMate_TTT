@@ -11,9 +11,25 @@
 
 [Server] 
 
-
+- Changed [Hit Markers] Time Before damage number stacking effect fades: 1 -> 2 Seconds
+- Changed [Hit Markers] Adjusted some of the colours for damage numbers
 
 [Gameplay]
+
+- Rework [Taser] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Taser] No longer strips all weapons, but instead drops current weapon (Like Silenced Pistol)
+- Changed [Taser] No longer locks all your controls, but instead just prevents you from moving
+- Changed [Taser] You now now push tased targets around (Don't abuse this on Innocents)
+
+- Rework [Silenced Pistol] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Silenced Pistol] Better visual feedback to the user when they land a hit
+
+- Rework [Poison Dart] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Poison Dart] Better visual feedback to the user when they land a hit
+// it is now the same damage and healing, but over 15 rather than 30 seconds (Less Flinching and more effective)
+
+- Rework [Tracking Dart] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Tracking Dart] Better visual feedback to the user when they land a hit
 
 - Reworked [Firewall] When placing it, it will be invisible for 15 seconds then deploy instantly.
 // People will not know that you have placed it, until it appears and you are long gone
@@ -21,8 +37,21 @@
 // This should make it more covert and more of a long term trap
 // Added a HUD UI marker for fellow Traitors
 
-
 - Buffed [Soap] It no longer makes a weird clicking noise when you place it (Which was audible to others)
+
+- Buffed [Newton Launcher] Push Radius: 400 -> 500
+- Buffed [Newton Launcher] Push Force: 300 -> 400
+
+- Buffed [Frag Grenade] Damage: 70 -> 80
+- Buffed [Frag Grenade] Radius: 300 -> 400
+
+- Buffed [Tag Grenade] Now reveals players visually for 2 seconds upon tagging them (Like Tracking Dart)
+- Buffed [Tag Grenade] Radius: 300 -> 400
+
+- Buffed [Barrier] Duration: 30 -> 60 Seconds
+- Nerfed [Barrier] Arm Time: 2 -> 3 Seconds
+- Nerfed [Barrier] Number of Uses: 3 -> 2
+- Changed [Barrier] Added more visual effects to let players avoid being stuck inside
 
 
 

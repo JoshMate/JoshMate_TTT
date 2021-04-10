@@ -69,9 +69,9 @@ end
 
 
 local function PushPullRadius(pos, pusher)
-   local radius = 400
-   local phys_force = 3000
-   local push_force = 300
+   local radius = 500
+   local phys_force = 300
+   local push_force = 400
 
    -- pull physics objects and push players
    for k, target in ipairs(ents.FindInSphere(pos, radius)) do

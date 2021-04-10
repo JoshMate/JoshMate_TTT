@@ -7,7 +7,7 @@ local Hitmarkers_time				= 0.5
 local HitMarker_Size				= 128
 local HitMarker_CritThreshold		= 50
 
-local stacker_time			= 1
+local stacker_time			= 2
 local stacker_time_last		= 0
 local stacker_amount 		= 0
 
@@ -33,10 +33,10 @@ hook.Add( "HUDPaint", "hitmarkers", function()
 
 		surface.SetTextColor( 255, 255, 255, ( stacker_time_last - CurTime() ) * 255  )
 		
-		if stacker_amount >= 50 then 
+		if stacker_amount >= 45 then 
 			surface.SetTextColor( 255, 255, 0, ( stacker_time_last - CurTime() ) * 255  )
 		end
-		if stacker_amount >= 75 then 
+		if stacker_amount >= 70 then 
 			surface.SetTextColor( 255, 150, 0, ( stacker_time_last - CurTime() ) * 255  )
 		end
 		if stacker_amount >= 100 then 
@@ -47,6 +47,8 @@ hook.Add( "HUDPaint", "hitmarkers", function()
 		surface.SetTextPos( (ScrW()/2) + (size/2), (ScrH()/2) - (size/2)) 
 		surface.DrawText( tostring(stacker_amount))
 	end
+
+
 	-- Hit Markers
 	if last_time < CurTime() then return end
 
