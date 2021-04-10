@@ -41,7 +41,7 @@ function ENT:Explode(tr)
                if(ent:IsValid() and ent:IsPlayer()) then
                   local curWep = ent:GetActiveWeapon()
                   ent:GetActiveWeapon():PreDrop()
-                  if (not curWep.AllowDrop == nil and curWep.AllowDrop == true) then
+                  if (curWep.AllowDrop) then
                      ent:DropWeapon()
                   end
                   ent:SelectWeapon("weapon_zm_improvised")

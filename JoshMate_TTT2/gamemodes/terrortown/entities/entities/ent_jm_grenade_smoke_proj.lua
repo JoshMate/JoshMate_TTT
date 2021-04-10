@@ -14,7 +14,7 @@ local JM_Tag_Radius  = 400
 local JM_Tag_Duration = 2
 local JM_Tag_Colour = Color( 255, 255, 255 )
 
-function SWEP:HitEffectsInit(ent)
+function ENT:HitEffectsInit(ent)
    if not IsValid(ent) then return end
 
    local effect = EffectData()
