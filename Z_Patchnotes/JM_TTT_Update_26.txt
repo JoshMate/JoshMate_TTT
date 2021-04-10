@@ -30,8 +30,8 @@
 
 - Buffed [Newton Launcher] Push Radius: 400 -> 500
 - Buffed [Newton Launcher] Push Force: 300 -> 400
-
-- Buffed [Tree of Life] Place Range: 200 -> 300
+- Changed [Newton Launcher] No longer pushes physics props (Inc Ammo and weapons)
+// This last bit is a HUGE performance boost and was causing lag spikes on the server and on the weaker PCs
 
 - Buffed [Frag Grenade] Damage: 70 -> 80
 - Buffed [Frag Grenade] Radius: 300 -> 400
@@ -45,6 +45,8 @@
 - Changed [Barrier] Added more visual effects to let players avoid being stuck inside
 
 - Buffed [Binoculars] Body Scan Time: 2 -> 0.5 Seconds
+
+- Buffed [Tree of Life] Place Range: 200 -> 300
 
 - Buffed [Light Pistol] Accuracy Spread: 0.0150 -> 0.0125
 

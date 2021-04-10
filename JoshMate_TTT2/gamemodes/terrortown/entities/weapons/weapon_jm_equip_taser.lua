@@ -93,10 +93,10 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       if(ent:IsValid() and ent:IsPlayer()) then
          local curWep = ent:GetActiveWeapon()
          ent:GetActiveWeapon():PreDrop()
-         ent:SelectWeapon("weapon_zm_improvised")
          if (not curWep.AllowDrop == nil and curWep.AllowDrop == true) then
             ent:DropWeapon()
          end
+         ent:SelectWeapon("weapon_zm_improvised")
       end
       -- End of Drop
 

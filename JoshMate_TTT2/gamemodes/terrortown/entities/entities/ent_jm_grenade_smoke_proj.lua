@@ -14,6 +14,20 @@ local JM_Tag_Radius  = 400
 local JM_Tag_Duration = 2
 local JM_Tag_Colour = Color( 255, 255, 255 )
 
+function SWEP:HitEffectsInit(ent)
+   if not IsValid(ent) then return end
+
+   local effect = EffectData()
+   local ePos = ent:GetPos()
+   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+   effect:SetStart(ePos)
+   effect:SetOrigin(ePos)
+   
+   util.Effect("TeslaZap", effect, true, true)
+   util.Effect("TeslaHitboxes", effect, true, true)
+   util.Effect("cball_explode", effect, true, true)
+end
+
 function ENT:Explode(tr)
    if (SERVER) then
       self.Entity:EmitSound(Sound("grenade_tag.wav"));
@@ -39,7 +53,7 @@ function ENT:Explode(tr)
                -- End of Hit Markers
 
                -- Wall Hack
-               TrackerEffectsInit(pl)
+               self:HitEffectsInit(pl)
                STATUS:AddTimedStatus(pl, "jm_tracker", JM_Tag_Duration, 1)
                timerName = "timer_Tag_RemoveTimer" .. pl:SteamID64()
                timer.Create(timerName, JM_Tag_Duration, 1, 

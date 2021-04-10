@@ -38,16 +38,13 @@ function ENT:Explode(tr)
                pl:SetNWBool("isStunGrenaded", true)
 
                -- Drop currently Held Weapon
-               if ( pl:IsValid() ) then
-                  local curWep = pl:GetActiveWeapon()
-                  pl:GetActiveWeapon():PreDrop()
-                  if curWep == nil or curWep.AllowDrop == nil or curWep.AllowDrop == false then
-                     pl:SelectWeapon("weapon_zm_improvised")
+               if(ent:IsValid() and ent:IsPlayer()) then
+                  local curWep = ent:GetActiveWeapon()
+                  ent:GetActiveWeapon():PreDrop()
+                  if (not curWep.AllowDrop == nil and curWep.AllowDrop == true) then
+                     ent:DropWeapon()
                   end
-                  if curWep.AllowDrop == true then
-                     pl:DropWeapon()
-                     pl:SelectWeapon("weapon_zm_improvised")
-                  end
+                  ent:SelectWeapon("weapon_zm_improvised")
                end
                -- End of Drop
 

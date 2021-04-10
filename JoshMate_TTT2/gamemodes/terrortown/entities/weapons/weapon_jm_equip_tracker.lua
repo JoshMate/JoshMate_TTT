@@ -67,7 +67,7 @@ end
 function SWEP:ApplyEffect(ent,weaponOwner)
 
    if not IsValid(ent) then return end
-   HitEffectsInit(ent)
+   self:HitEffectsInit(ent)
    
    if SERVER then
       
