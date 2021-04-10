@@ -55,6 +55,7 @@ function ENT:Explode(tr)
                -- End of Hit Markers
                
                local timerName = "timer_FlashBangBlind_" .. pl:SteamID64()
+               if(timer.Exists(timerName)) then timer.Remove(timerName) end
                timer.Create( timerName, JM_FlashBang_Duration, 1, function () 
                   if IsValid(pl) and pl:IsPlayer() then
                      STATUS:RemoveStatus(pl,"jm_stungrenade")

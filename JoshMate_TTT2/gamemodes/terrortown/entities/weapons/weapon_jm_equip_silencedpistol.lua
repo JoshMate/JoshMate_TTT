@@ -132,7 +132,7 @@ function SWEP:PrimaryAttack()
    -- New Direct Effect Code (Cuts out all the bullet callback code)
    if SERVER then
       local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Shoot_Range, filter = self.Owner})
-      if (tr.Entity:IsValid() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
          self:ApplyEffect(tr.Entity, self:GetOwner())
       end
    end

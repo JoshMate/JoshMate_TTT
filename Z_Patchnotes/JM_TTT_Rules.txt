@@ -6,7 +6,7 @@ It is absolutely okay to do these things any time
 - Damaging, pushing or killing anyone with the Turtle Easteregg explosion
 - Being AFK for a few seconds or "Menu strafing" (You can't prove they are in the Traitor Shop)
 - Not Talking / being quiet (You don't have to constantly talk to be innocent)
-- Tase, or slow someone who is not near any hazards at the time (If they are killed by a traitor after that is not indirect harm)
+- Tasing, or slowing someone who is not near any hazards at the time (If they are killed by a traitor after, that is not your concern unless they are the hazard)
 
 [Tier 2: Suspicious]
 It is suspiciousto do any of these to your own team (Unless you are two consenting traitors)
@@ -48,3 +48,7 @@ This will waste everyones time, so don't be petty when it comes to doing this.
 - As a detective harrassing or trolling the innocents
 - As a detective causing direct or indirect harm to innocents (shooting them, Tasing in or near a hazard, or barrier blocking in or near a hazard)
 - As a traitor killing another traitor without their consent
+- Setting something in motion in the pre round that will cause a player to die / be injured just after the round starts
+- "Because they told me to" is not a good enought piece of eveidence
+- "I didn't read the rules" Is not an excuse for breaking them
+- Blocking important single way paths (like the ladder on elevator)

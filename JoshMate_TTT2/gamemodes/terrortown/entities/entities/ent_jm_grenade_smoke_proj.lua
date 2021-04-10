@@ -56,6 +56,7 @@ function ENT:Explode(tr)
                self:HitEffectsInit(pl)
                STATUS:AddTimedStatus(pl, "jm_tag", JM_Tag_Duration, 1)
                timerName = "timer_Tag_RemoveTimer" .. pl:SteamID64()
+               if(timer.Exists(timerName)) then timer.Remove(timerName) end
                timer.Create(timerName, JM_Tag_Duration, 1, 
                      function() 
                         if pl:IsPlayer() then
