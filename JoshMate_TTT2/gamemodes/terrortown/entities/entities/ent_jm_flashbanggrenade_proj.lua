@@ -54,15 +54,12 @@ function ENT:Explode(tr)
                net.Send(self:GetOwner())
                -- End of Hit Markers
                
-               local timerName = "timer_FlashBangBlind_" .. pl:SteamID64()
-               if(timer.Exists(timerName)) then timer.Remove(timerName) end
-               timer.Create( timerName, JM_FlashBang_Duration, 1, function () 
-                  if IsValid(pl) and pl:IsPlayer() then
+               if(timer.Exists(("timer_FlashBangBlind_" .. pl:SteamID64()))) then timer.Remove(("timer_FlashBangBlind_" .. pl:SteamID64())) end
+               timer.Create( ("timer_FlashBangBlind_" .. pl:SteamID64()), JM_FlashBang_Duration, 1, function () 
+                     if (not pl:IsValid() or not pl:IsPlayer()) then timer.Remove(("timer_FlashBangBlind_" .. pl:SteamID64())) return end
                      STATUS:RemoveStatus(pl,"jm_stungrenade")
                      pl:SetNWBool("isStunGrenaded",false)
-                     return
-                  end
-                  timer.Remove(timerName)
+                     timer.Remove(("timer_FlashBangBlind_" .. pl:SteamID64()))
                end )         
             end
 

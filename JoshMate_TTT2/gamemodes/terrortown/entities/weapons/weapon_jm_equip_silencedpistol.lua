@@ -81,14 +81,13 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    if SERVER then
       
       -- Remove the existing Timer then reset it (To prevent Duplication)
-      timerName = "timer_SilencedPistolEndTimer_" .. ent:SteamID64()
-      if(timer.Exists(timerName)) then timer.Remove(timerName) end
-      timer.Create( timerName, JM_Silenced_Pistol_Duration, 1, function ()
-         if(ent:IsValid() and ent:IsPlayer()) then
+      if(timer.Exists(("timer_SilencedPistolEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_SilencedPistolEndTimer_" .. ent:SteamID64())) end
+      timer.Create( ("timer_SilencedPistolEndTimer_" .. ent:SteamID64()), JM_Silenced_Pistol_Duration, 1, function ()
+            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_SilencedPistolEndTimer_" .. ent:SteamID64())) return end
             ent:SetNWBool("isSilencedPistoled", false)
             STATUS:RemoveStatus(ent, "jm_silencedpistol")
-         end 
-      end )
+            timer.Remove(("timer_SilencedPistolEndTimer_" .. ent:SteamID64()))
+      end)
 
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )

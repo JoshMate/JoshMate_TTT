@@ -103,19 +103,20 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    if SERVER then
       
       -- Remove the existing Timer then reset it (To prevent Duplication)
-      timerName = "timer_PoisonEndTimer_" .. ent:SteamID64()
-      if(timer.Exists(timerName)) then timer.Remove(timerName) end
-      timer.Create( timerName, Poison_Duration, 1, function ()
-         if(ent:IsValid() and ent:IsPlayer()) then
+      if(timer.Exists(("timer_PoisonEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_PoisonEndTimer_" .. ent:SteamID64())) end
+      timer.Create( ("timer_PoisonEndTimer_" .. ent:SteamID64()), Poison_Duration, 1, function ()
+            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_PoisonEndTimer_" .. ent:SteamID64())) return end
             ent:SetNWBool("isPoisonDarted", false)
             STATUS:RemoveStatus(ent, "jm_poisondart")
-         end 
+            timer.Remove(("timer_PoisonEndTimer_" .. ent:SteamID64()))
       end )
 
-      -- Remove the existing Timer then reset it (To prevent Duplication)
-      timerName = "timer_PoisonTickTimer_" .. ent:SteamID64()
-      if(timer.Exists(timerName)) then timer.Remove(timerName) end
-      timer.Create( timerName, Poison_Damage_Delay, Poison_Duration, function () PoisonEffect_Tick(ent,weaponOwner) end )
+      -- Remove the existing Timer then reset it (To prevent Duplication) 
+      if(timer.Exists(("timer_PoisonTickTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_PoisonTickTimer_" .. ent:SteamID64())) end
+      timer.Create( ("timer_PoisonTickTimer_" .. ent:SteamID64()), Poison_Damage_Delay, Poison_Duration, function ()
+            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_PoisonTickTimer_" .. ent:SteamID64())) return end
+            PoisonEffect_Tick(ent,weaponOwner) 
+      end )
 
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )

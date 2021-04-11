@@ -13,9 +13,9 @@ local JM_Barrier_Sound_Armed		= "firewall_arm.wav"
 local JM_Barrier_Sound_Destroyed	= "firewall_destroy.wav"
 local JM_Barrier_Sound_HitPlayer	= "firewall_hit.wav"
 
-local JM_FireWall_Damage_Amount		= 2
+local JM_FireWall_Damage_Amount		= 3
 local JM_FireWall_Damage_Delay		= 0.20
-local JM_FireWall_Damage_Duration	= 7
+local JM_FireWall_Damage_Duration	= 5
 
 ENT.JM_IsLethal					= false
 
@@ -132,8 +132,7 @@ function FireWallEffect_Tick(ent, attacker, timerName)
 end
 
 function RemoveFireWall(ent)
-	STATUS:RemoveStatus(ent, "jm_firewall")
-	ent:SetNWBool("isFireWalled", false)
+	
 end
 
 function ENT:Use( activator, caller )
@@ -144,23 +143,34 @@ end
 
 function ENT:Touch(toucher)
 
-	if(self.JM_IsLethal == false) then return end
-	if(toucher:IsValid() == false) then return end
-	if(toucher:IsPlayer() == false) then return end
-	if(toucher:IsTerror() == false) then return end
-	if(toucher:Alive() == false) then return end
-	if(not GAMEMODE:AllowPVP()) then return end
-	if(toucher:GetNWBool("isFireWalled") == true) then return end
-
-	STATUS:AddTimedStatus(toucher, "jm_firewall", JM_FireWall_Damage_Duration, 1)
-	toucher:EmitSound(JM_Barrier_Sound_HitPlayer);
-
 	if SERVER then
+
+		if(self.JM_IsLethal == false) then return end
+		if(toucher:IsValid() == false) then return end
+		if(toucher:IsPlayer() == false) then return end
+		if(toucher:IsTerror() == false) then return end
+		if(toucher:Alive() == false) then return end
+		if(not GAMEMODE:AllowPVP()) then return end
+		if(toucher:GetNWBool("isFireWalled") == true) then return end
+
 		toucher:SetNWBool("isFireWalled", true)
-		timerName = "timer_FireWall_Damage_" .. toucher:SteamID64()
-		timer.Create( timerName, JM_FireWall_Damage_Delay, JM_FireWall_Damage_Duration * 5, function () if toucher:IsPlayer() and toucher:Alive() then FireWallEffect_Tick(toucher, self.JM_Owner, timerName ) end end )
-		timerName = "timer_FireWall_Remove_" .. toucher:SteamID64()
-		timer.Create( timerName, JM_FireWall_Damage_Duration, 1, function () if toucher:IsPlayer() then RemoveFireWall(toucher) end end )
+		STATUS:AddTimedStatus(toucher, "jm_firewall", JM_FireWall_Damage_Duration, 1)
+		toucher:EmitSound(JM_Barrier_Sound_HitPlayer);
+	
+		-- Remove the existing Timer then reset it (To prevent Duplication)
+		if(timer.Exists(("timer_FireWall_Damage_" .. toucher:SteamID64()))) then timer.Remove(("timer_FireWall_Damage_" .. toucher:SteamID64())) end
+		timer.Create( ("timer_FireWall_Damage_" .. toucher:SteamID64()), JM_FireWall_Damage_Delay, JM_FireWall_Damage_Duration * 5, function ()
+			  if (not toucher:IsValid() or not toucher:IsPlayer()) then timer.Remove(("timer_FireWall_Damage_" .. toucher:SteamID64())) return end
+			  FireWallEffect_Tick(toucher, self.JM_Owner, timerName )
+		end )
+
+		-- Remove the existing Timer then reset it (To prevent Duplication) 
+		if(timer.Exists(("timer_FireWall_Remove_" .. toucher:SteamID64()))) then timer.Remove(("timer_FireWall_Remove_" .. toucher:SteamID64())) end
+		timer.Create( ("timer_FireWall_Remove_" .. toucher:SteamID64()), JM_FireWall_Damage_Duration, 1, function ()
+			  if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_FireWall_Remove_" .. toucher:SteamID64())) return end
+			  STATUS:RemoveStatus(toucher, "jm_firewall")
+			  toucher:SetNWBool("isFireWalled", false)
+		end )
 
 	end
 

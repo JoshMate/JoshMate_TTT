@@ -74,13 +74,12 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    if SERVER then
       
       -- Remove the existing Timer then reset it (To prevent Duplication)
-      timerName = "timer_TaserEndTimer_" .. ent:SteamID64()
-      if(timer.Exists(timerName)) then timer.Remove(timerName) end
-      timer.Create( timerName, Taser_Stun_Duration, 1, function ()
-         if(ent:IsValid() and ent:IsPlayer()) then
+      if(timer.Exists(("timer_TaserEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_TaserEndTimer_" .. ent:SteamID64())) end
+      timer.Create( ("timer_TaserEndTimer_" .. ent:SteamID64()), Taser_Stun_Duration, 1, function ()
+            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_TaserEndTimer_" .. ent:SteamID64())) return end
             ent:SetNWBool("isTased", false)
             STATUS:RemoveStatus(ent, "jm_taser")
-         end 
+            timer.Remove(("timer_TaserEndTimer_" .. ent:SteamID64()))
       end )
 
       -- JM Changes Extra Hit Marker

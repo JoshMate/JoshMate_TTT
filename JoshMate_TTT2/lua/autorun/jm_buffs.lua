@@ -219,7 +219,7 @@ hook.Add("TTTPlayerSpeedModifier", "JM_FireWallSlowEffect", function(ply, _, _, 
 	if (not ply:IsValid() or not ply:IsPlayer())then return end
     speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
     if ply:GetNWBool("isFireWalled") == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
     end   
 end)
 

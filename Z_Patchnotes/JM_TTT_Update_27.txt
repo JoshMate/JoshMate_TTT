@@ -2,9 +2,18 @@
 
 [Server]
 
+- Added [HUD Kill Cards] A pop up on death shows who killed you, how they did it and with how much damage
+
 - Changed [Map Vote] There are now 6 maps per row in the map Vote (As we have sooo many maps now)
 - Fixed [Map Vote] Server Errors on typing showmap when there is no vote happening
 
 [Gameplay]
+
+- Buffed [Firewal] Damge per Tick: 2 -> 3
+- Buffed [Firewal] Damage Duration: 7 -> 5 Seconds
+- Buffed [Firewal] Total Damage: 70 -> 75
+- Buffed [Firewall] Slow Amount: 50% -> 70%
+
+- Fixed [Buff Effect Weapons] Addd even more checks and memory management to Taser and the other broken things
 
 [Maps]

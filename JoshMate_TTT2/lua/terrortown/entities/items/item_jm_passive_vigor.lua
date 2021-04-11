@@ -29,13 +29,12 @@ if SERVER then
 	function ITEM:Equip(buyer)
 		buyer:SetMaxHealth(buyer:GetMaxHealth() + 25)
 
-		timerName = "timer_VigorHPRegen_" .. buyer:SteamID64()
-   		timer.Create( timerName, Vigor_Regen_Delay, 0, function ()
-
-			if not IsValid(buyer) then return end
+		if(timer.Exists(("timer_VigorHPRegen_" .. buyer:SteamID64()))) then timer.Remove(("timer_VigorHPRegen_" .. buyer:SteamID64())) end
+   		timer.Create( ("timer_VigorHPRegen_" .. buyer:SteamID64()), Vigor_Regen_Delay, 0, function ()
+			if not buyer:IsValid() then return end
 			if not buyer:IsTerror() then return end
+			if not buyer:Alive() then timer.Remove(timerName) return end
 			if not buyer:HasEquipmentItem("item_jm_passive_vigor") then timer.Remove(timerName) return end
-			if not buyer:Alive() then return end
 			if buyer:Health() >= buyer:GetMaxHealth() then return end
 			
 			local newHP = buyer:Health() + Vigor_Regen_HealAmount

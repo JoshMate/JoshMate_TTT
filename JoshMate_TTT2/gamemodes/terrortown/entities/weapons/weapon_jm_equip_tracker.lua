@@ -72,13 +72,12 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    if SERVER then
       
       -- Remove the existing Timer then reset it (To prevent Duplication)
-      timerName = "timer_TrackingEndTimer_" .. ent:SteamID64()
-      if(timer.Exists(timerName)) then timer.Remove(timerName) end
-      timer.Create( timerName, JM_Tracker_Duration, 1, function ()
-         if(ent:IsValid() and ent:IsPlayer()) then
+      if(timer.Exists(("timer_TrackingEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_TrackingEndTimer_" .. ent:SteamID64())) end
+      timer.Create( ("timer_TrackingEndTimer_" .. ent:SteamID64()), JM_Tracker_Duration, 1, function ()
+            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_TrackingEndTimer_" .. ent:SteamID64())) return end
             ent:SetNWBool("isTracked", false)
             STATUS:RemoveStatus(ent, "jm_tracker")
-         end 
+            timer.Remove(("timer_TrackingEndTimer_" .. ent:SteamID64()))
       end )
 
       -- JM Changes Extra Hit Marker
