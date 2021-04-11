@@ -104,18 +104,22 @@ end
 
 function FireWallEffect_Tick(ent, attacker, timerName)
 	if SERVER then
-	   if not IsValid(ent) then
-		  timer.Remove(timerName)
-		  return
-	   end
-	   if not ent:GetNWBool("isFireWalled") then
-		  timer.Remove(timerName)
-		  return
-	   end
-	   if not ent:Alive() then 
-		  timer.Remove(timerName)
-		  return 
-	   end
+		if not IsValid(ent) then
+			timer.Remove(timerName)
+			return
+		  end
+		 if not ent:IsPlayer() then
+		 timer.Remove(timerName)
+		 return
+		 end
+		 if not ent:Alive() then
+		 timer.Remove(timerName)
+		 return
+		 end
+		 if not ent:GetNWBool("isFireWalled") then
+		 timer.Remove(timerName)
+		 return
+		 end
  
 	   local dmginfo = DamageInfo()
 	   dmginfo:SetDamage(JM_FireWall_Damage_Amount)
@@ -162,7 +166,7 @@ function ENT:Touch(toucher)
 		if(timer.Exists(("timer_FireWall_Damage_" .. toucher:SteamID64()))) then timer.Remove(("timer_FireWall_Damage_" .. toucher:SteamID64())) end
 		timer.Create( ("timer_FireWall_Damage_" .. toucher:SteamID64()), JM_FireWall_Damage_Delay, JM_FireWall_Damage_Duration * 5, function ()
 			  if (not toucher:IsValid() or not toucher:IsPlayer()) then timer.Remove(("timer_FireWall_Damage_" .. toucher:SteamID64())) return end
-			  FireWallEffect_Tick(toucher, self.JM_Owner, timerName )
+			  FireWallEffect_Tick(toucher, self.JM_Owner, ("timer_FireWall_Damage_" .. toucher:SteamID64()) )
 		end )
 
 		-- Remove the existing Timer then reset it (To prevent Duplication) 

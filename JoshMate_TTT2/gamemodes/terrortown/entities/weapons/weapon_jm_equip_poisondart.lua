@@ -57,11 +57,25 @@ local Poison_Damage_Amount          = 5
 local JM_Shoot_Range                = 10000
 
 
-function PoisonEffect_Tick(ent, attacker)
+function PoisonEffect_Tick(ent, attacker, timerName)
    if SERVER then
+      if not IsValid(ent) then
+         timer.Remove(timerName)
+         return
+       end
+      if not ent:IsPlayer() then
+      timer.Remove(timerName)
+      return
+      end
+      if not ent:Alive() then
+      timer.Remove(timerName)
+      return
+      end
+      if not ent:GetNWBool("isPoisonDarted") then
+      timer.Remove(timerName)
+      return
+      end
       
-      if(not ent:IsValid() or not ent:IsPlayer() or not ent:Alive()) then return end
-
       local dmginfo = DamageInfo()
       dmginfo:SetDamage(Poison_Damage_Amount)
       dmginfo:SetAttacker(attacker)
@@ -115,7 +129,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       if(timer.Exists(("timer_PoisonTickTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_PoisonTickTimer_" .. ent:SteamID64())) end
       timer.Create( ("timer_PoisonTickTimer_" .. ent:SteamID64()), Poison_Damage_Delay, Poison_Duration, function ()
             if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_PoisonTickTimer_" .. ent:SteamID64())) return end
-            PoisonEffect_Tick(ent,weaponOwner) 
+            PoisonEffect_Tick(ent,weaponOwner, ("timer_PoisonTickTimer_" .. ent:SteamID64())) 
       end )
 
       -- JM Changes Extra Hit Marker
