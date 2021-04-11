@@ -105,6 +105,7 @@ end
 function FireWallEffect_Tick(ent, attacker, timerName)
 	if SERVER then
 	   if not IsValid(ent) then
+		  timer.Remove(timerName)
 		  return
 	   end
 	   if not ent:GetNWBool("isFireWalled") then

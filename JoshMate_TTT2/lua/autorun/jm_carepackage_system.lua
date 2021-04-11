@@ -21,8 +21,8 @@ if SERVER then
 		ent:SetPos(spawn:GetPos())
         ent:Spawn()     
        
-        if Forced then print("[JM Care Package] - Force spawning a Care Package!")
-        if not Forced then print("[JM Care Package] - Naturally Spawning Care package after: " .. tostring(JM_CarePackage_Spawn_Timer_Final) .. " Seconds")
+        if Forced then print("[JM Care Package] - Force spawning a Care Package!") end
+        if not Forced then print("[JM Care Package] - Naturally Spawning Care package after: " .. tostring(JM_CarePackage_Spawn_Timer_Final) .. " Seconds") end 
         print("[JM Care Package] - Spawning Care package at Spawn: " .. tostring(randomChoice) .. " / " .. tostring(#possibleSpawns))
 
     end

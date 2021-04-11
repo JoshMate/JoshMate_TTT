@@ -80,6 +80,7 @@ function ENT:Use( activator, caller )
 				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_sniper")
 				
 			end
+			
 			if randomLootChoice == 6 then
 				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
 				activator:SetMaxHealth(activator:GetMaxHealth() + 50)

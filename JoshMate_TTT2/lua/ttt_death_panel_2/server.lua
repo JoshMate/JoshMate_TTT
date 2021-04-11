@@ -419,7 +419,7 @@ local function posttakedamagedeath(victim, attacker, dmginfo)
 				_mdl_bowling_pin = "_dp2_bowlp",
 			}
 
-			local basegrenadefn = util.WeaponForClass("weapon_tttbasegrenade")
+			local basegrenadefn = util.WeaponForClass("weapon_jm_base_grenade")
 			basegrenadefn = basegrenadefn and basegrenadefn.GetGrenadeName
 
 			local swep, grenadename

@@ -114,8 +114,7 @@ end
 
 -- subclasses must override with their own grenade ent
 function SWEP:GetGrenadeName()
-   ErrorNoHalt("SWEP BASEGRENADE ERROR: GetGrenadeName not overridden! This is probably wrong!\n")
-   return "ttt_firegrenade_proj"
+   return "weapon_jm_grenade_smoke"
 end
 
 
