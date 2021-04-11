@@ -49,7 +49,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 7)
+			local randomLootChoice = math.random(1, 16)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -80,17 +80,70 @@ function ENT:Use( activator, caller )
 				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_sniper")
 				
 			end
-			
+
 			if randomLootChoice == 6 then
+				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
+				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_pistol")
+				
+			end
+
+			if randomLootChoice == 7 then
+				activator:ChatPrint("[Care Package] - Loot: Advanced SMG")
+				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_smg")
+				
+			end
+
+			if randomLootChoice == 8 then
+				activator:ChatPrint("[Care Package] - Loot: Advanced Shotgun")
+				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_shotgun")
+				
+			end
+			
+			if randomLootChoice == 9 then
+				activator:ChatPrint("[Care Package] - Loot: Advanced Rifle")
+				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_rifle")
+				
+			end
+
+			if randomLootChoice == 10 then
+				activator:ChatPrint("[Care Package] - Loot: Advanced Sniper")
+				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_sniper")
+				
+			end
+			
+			if randomLootChoice == 11 then
 				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
 				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
 				activator:SetHealth(activator:GetMaxHealth())
 			end
 
-			if randomLootChoice == 7 then
-				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw")
+			if randomLootChoice == 12 then
+				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
+				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
+				activator:SetHealth(activator:GetMaxHealth())
+			end
+
+			if randomLootChoice == 13 then
+				activator:ChatPrint("[Care Package] - Loot: 20% Speed Boost")
+				activator:SetNWBool("isCarePackageBuffSpeed", true)
+			end
+			
+			if randomLootChoice == 14 then
+				activator:ChatPrint("[Care Package] - Loot: 20% Speed Boost")
+				activator:SetNWBool("isCarePackageBuffSpeed", true)
+			end
+
+			if randomLootChoice == 15 then
+				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw Radio")
 				Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
 			end
+
+			if randomLootChoice == 16 then
+				activator:ChatPrint("[Care Package] - Loot: Roller Mine")
+				Loot_SpawnThis(self,"npc_rollermine")
+			end
+
+			
 
 			self:Remove()
 		end

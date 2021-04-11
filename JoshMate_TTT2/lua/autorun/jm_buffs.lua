@@ -72,6 +72,7 @@ function RemoveAllBuffs(ent)
         ent:SetNWFloat("lastTimePlayerDidInput", CurTime())
         ent:SetNWBool("isTracked", false)
         ent:SetNWBool("isTagged", false)
+        ent:SetNWBool("isCarePackageBuffSpeed", false)
         if SERVER then
             ULib.invisible(ent,false,255)
         end
@@ -228,6 +229,14 @@ hook.Add("TTTPlayerSpeedModifier", "JM_TaserSlowEffect", function(ply, _, _, spe
     speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
     if ply:GetNWBool("isTased") == true then 
 	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0
+    end   
+end)
+
+hook.Add("TTTPlayerSpeedModifier", "JM_CarePackageSpeedEffect", function(ply, _, _, speedMultiplierModifier)
+	if (not ply:IsValid() or not ply:IsPlayer())then return end
+    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+    if ply:GetNWBool("isCarePackageBuffSpeed") == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
     end   
 end)
 
