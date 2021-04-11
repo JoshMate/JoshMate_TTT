@@ -17,6 +17,7 @@
 
 - Added [Loot] +1 Credit, this is given to the player (If D or T) along with the main reward
 - Added [Loot] Max Health: +50% Max HP for the rest of the round and get fully healed (Stacks with other sources)
+- Added [Loot] Gus Radio: A radio that plays the whole Gus is My name song. and then expolodes
 
 
 [Gameplay]

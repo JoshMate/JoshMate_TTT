@@ -49,7 +49,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 6)
+			local randomLootChoice = math.random(1, 7)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -85,6 +85,11 @@ function ENT:Use( activator, caller )
 				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
 				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
 				activator:SetHealth(activator:GetMaxHealth())
+			end
+
+			if randomLootChoice == 7 then
+				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw")
+				Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
 			end
 
 			self:Remove()

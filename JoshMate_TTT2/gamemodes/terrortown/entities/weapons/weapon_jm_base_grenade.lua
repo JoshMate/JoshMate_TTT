@@ -114,7 +114,7 @@ end
 
 -- subclasses must override with their own grenade ent
 function SWEP:GetGrenadeName()
-   return "weapon_jm_grenade_smoke"
+   return "ent_jm_grenade_fire_proj"
 end
 
 
