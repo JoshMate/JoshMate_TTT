@@ -168,6 +168,6 @@ hook.Add( "PreDrawHalos", "Halos_Tracking_Dart", function()
 		end
 	end
 
-    halo.Add( players, JM_Tracker_Colour, 1, 1, 1, true, true )
+    halo.Add( players, JM_Tracker_Colour, 5, 5, 2, true, true )
 
 end )

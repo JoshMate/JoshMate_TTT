@@ -3,48 +3,50 @@ AddCSLuaFile()
 SWEP.HoldType              = "pistol"
 
 if CLIENT then
-   SWEP.PrintName          = "Heavy Pistol"
+   SWEP.PrintName          = "Advanced: Pistol"
    SWEP.Slot               = 1
 
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
 
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_sec"
+   SWEP.IconLetter         = "u"
 end
 
 SWEP.Base                  = "weapon_tttbase"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_PISTOL
-SWEP.WeaponID              = AMMO_DEAGLE
-
+SWEP.WeaponID              = AMMO_PISTOL
 
 SWEP.Primary.Damage        = 40
-SWEP.Primary.Delay         = 0.40
+SWEP.Primary.Delay         = 0.115
 SWEP.Primary.Cone          = 0.010
-SWEP.Primary.Recoil        = 15
-SWEP.Primary.ClipSize      = 5
-SWEP.Primary.DefaultClip   = 5
-SWEP.Primary.ClipMax       = 10
+SWEP.Primary.Recoil        = 1
+SWEP.Primary.ClipSize      = 20
+SWEP.Primary.DefaultClip   = 20
+SWEP.Primary.ClipMax       = 40
 
-SWEP.HeadshotMultiplier    = 3
+SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Automatic     = false
-SWEP.Primary.Sound         = "shoot_heavypistol.wav"
-SWEP.Primary.Ammo          = "357"
+SWEP.Primary.Ammo          = "Pistol"
+SWEP.Primary.Sound         = "shoot_advanced_pistol.wav"
 SWEP.AutoSpawnable         = true
-SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
+SWEP.AmmoEnt               = "item_jm_ammo_light"
 SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/cstrike/c_pist_deagle.mdl"
-SWEP.WorldModel            = "models/weapons/w_pist_deagle.mdl"
-SWEP.IronSightsPos         = Vector(-6.361, -3.701, 2.15)
+SWEP.ViewModel             = "models/weapons/cstrike/c_pist_fiveseven.mdl"
+SWEP.WorldModel            = "models/weapons/w_pist_fiveseven.mdl"
+SWEP.IronSightsPos         = Vector(-5.95, -4, 2.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 
 -- No Iron Sights
 function SWEP:SecondaryAttack()
    return
 end
+
+
+
+

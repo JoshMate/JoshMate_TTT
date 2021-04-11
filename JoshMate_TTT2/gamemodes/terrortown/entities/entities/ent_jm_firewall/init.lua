@@ -145,13 +145,13 @@ function ENT:Touch(toucher)
 
 	if SERVER then
 
-		if(self.JM_IsLethal == false) then return end
-		if(toucher:IsValid() == false) then return end
-		if(toucher:IsPlayer() == false) then return end
-		if(toucher:IsTerror() == false) then return end
-		if(toucher:Alive() == false) then return end
+		if(not self.JM_IsLethal) then return end
+		if(not toucher:IsValid()) then return end
+		if(not toucher:IsPlayer()) then return end
+		if(not toucher:IsTerror()) then return end
+		if(not toucher:Alive()) then return end
 		if(not GAMEMODE:AllowPVP()) then return end
-		if(toucher:GetNWBool("isFireWalled") == true) then return end
+		if(toucher:GetNWBool("isFireWalled")) then return end
 
 		toucher:SetNWBool("isFireWalled", true)
 		STATUS:AddTimedStatus(toucher, "jm_firewall", JM_FireWall_Damage_Duration, 1)

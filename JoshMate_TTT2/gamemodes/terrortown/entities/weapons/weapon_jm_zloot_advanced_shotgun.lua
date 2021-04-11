@@ -5,7 +5,7 @@ DEFINE_BASECLASS "weapon_tttbase"
 SWEP.HoldType              = "shotgun"
 
 if CLIENT then
-   SWEP.PrintName          = "Shotgun"
+   SWEP.PrintName          = "Advanced: Shotgun"
    SWEP.Slot               = 2
 
    SWEP.ViewModelFlip      = false
@@ -22,9 +22,9 @@ SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_SHOTGUN
 
 
-SWEP.Primary.Damage        = 9
+SWEP.Primary.Damage        = 10
 SWEP.Primary.NumShots      = 20
-SWEP.Primary.Delay         = 1
+SWEP.Primary.Delay         = 0.3
 SWEP.Primary.Cone          = 0.130
 SWEP.Primary.Recoil        = 15
 SWEP.Primary.ClipSize      = 5
@@ -38,13 +38,13 @@ SWEP.Primary.Automatic     = false
 
 
 SWEP.Primary.Ammo          = "357"
-SWEP.Primary.Sound         = Sound( "Weapon_M3.Single" )
+SWEP.Primary.Sound         = "shoot_advanced_shotgun.wav"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
 SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/cstrike/c_shot_m3super90.mdl"
-SWEP.WorldModel            = "models/weapons/w_shot_m3super90.mdl"
+SWEP.ViewModel             = "models/weapons/cstrike/c_shot_xm1014.mdl"
+SWEP.WorldModel            = "models/weapons/w_shot_xm1014.mdl"
 
 function SWEP:SetupDataTables()
    self:NetworkVar("Bool", 0, "Reloading")

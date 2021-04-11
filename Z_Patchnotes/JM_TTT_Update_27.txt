@@ -7,12 +7,32 @@
 - Changed [Map Vote] There are now 6 maps per row in the map Vote (As we have sooo many maps now)
 - Fixed [Map Vote] Server Errors on typing showmap when there is no vote happening
 
+- Added [Care Package] Randomly during some rounds a care package will appear, containing powerful and unique loot
+
+- Added [Loot] Advanced Rifle 		- The Rifle But: 			1 Tap headshots and 2 tap body shots
+- Added [Loot] Advanced SMG 		- The SMG But: 			60 bullets in a mag and faster firing
+- Added [Loot] Advanced Shotgun 	- The Shotgun But: 		Semi Automatic and slightly more damage
+- Added [Loot] Advanced Sniper 	- The Sniper But: 		Semi Automatic and slightly more damage
+- Added [Loot] Advanced Pistol 		- The Pistol But: 			More Damage, Faster Firing less recoil
+
+- Added [Loot] +1 Credit, this is given to the player (If D or T) along with the main reward
+- Added [Loot] Max Health: +50% Max HP for the rest of the round and get fully healed (Stacks with other sources)
+
+
 [Gameplay]
+
+- Removed [The Defender] It was re-purposed into the Advanced Weapon System
 
 - Buffed [Firewal] Damge per Tick: 2 -> 3
 - Buffed [Firewal] Damage Duration: 7 -> 5 Seconds
 - Buffed [Firewal] Total Damage: 70 -> 75
 - Buffed [Firewall] Slow Amount: 50% -> 70%
+
+- Buffed [Tracking Dart] Increased the size of the glow effect
+- Buffed [Tag Grenade] Increased the size of the glow effect
+
+- Buffed [Light Pistol] Increased Spread Accuracy: 0.0125 -> 0.010
+- Buffed [Heavy Pistol] Increased Spread Accuracy: 0.0125 -> 0.010
 
 - Fixed [Buff Effect Weapons] Addd even more checks and memory management to Taser and the other broken things
 
