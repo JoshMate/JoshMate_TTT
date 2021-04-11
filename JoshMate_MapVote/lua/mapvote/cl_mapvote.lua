@@ -60,14 +60,14 @@ hook.Add("OnPlayerChat", "Show mapvote again", function(ply, text)
     text = string.Trim(text)
 
 	if text == "!mapvoteshow" then
-		MapVote.gui:SetVisible(true)
+        if (MapVote.gui) then MapVote.gui:SetVisible(true) end
         return false
 	end
 end)
 
 -- ConVars (clientsided)
 local cv_spacing = 4
-local cv_max_button_row = 5
+local cv_max_button_row = 6
 local cv_button_size = 100
 local cv_avatar_size = 32
 local cv_avatar = 1

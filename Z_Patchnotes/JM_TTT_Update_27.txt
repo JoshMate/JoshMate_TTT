@@ -2,6 +2,9 @@
 
 [Server]
 
+- Changed [Map Vote] There are now 6 maps per row in the map Vote (As we have sooo many maps now)
+- Fixed [Map Vote] Server Errors on typing showmap when there is no vote happening
+
 [Gameplay]
 
 [Maps]
