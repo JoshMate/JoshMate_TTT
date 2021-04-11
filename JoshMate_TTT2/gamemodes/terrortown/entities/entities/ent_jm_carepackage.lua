@@ -49,7 +49,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 16)
+			local randomLootChoice = math.random(16, 16)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
