@@ -39,7 +39,7 @@ SWEP.HoldType 				   = "normal"
 
 local deployRange = 650
 local deployAmount = 12
-local deployLifeTime = 30
+local deployLifeTime = 60
 
 
 function Barrier_Effects_Destroyed(ent)
@@ -53,7 +53,7 @@ function Barrier_Effects_Destroyed(ent)
 	util.Effect("TeslaZap", effect, true, true)
 	util.Effect("TeslaHitboxes", effect, true, true)
 	util.Effect("cball_explode", effect, true, true)
- end
+end
 
 function SWEP:SecondaryAttack()
 end
@@ -72,8 +72,6 @@ if SERVER then
          npc = ents.Create("npc_manhack")
          npc:SetPos(tr.HitPos)
          npc:SetShouldServerRagdoll(false)
-         npc:SetHealth(1)
-         npc:SetMaxHealth(1)
          npc:Spawn()
          npc:SetNWEntity("giveHitMarkersTo", self.Owner)
          npc.JM_ManHackLifeStart = JM_ManHackLifeStart         

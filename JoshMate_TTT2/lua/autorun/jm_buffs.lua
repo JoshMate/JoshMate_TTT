@@ -52,6 +52,11 @@ if CLIENT then
 			type = "bad"
 		})
 
+        STATUS:RegisterStatus("jm_mega_tracker", {
+			hud = Material("vgui/ttt/joshmate/hud_tracker.png"),
+			type = "bad"
+		})
+
         STATUS:RegisterStatus("jm_firewall", {
 			hud = Material("vgui/ttt/joshmate/hud_firewall.png"),
 			type = "bad"
@@ -72,6 +77,7 @@ function RemoveAllBuffs(ent)
         ent:SetNWFloat("lastTimePlayerDidInput", CurTime())
         ent:SetNWBool("isTracked", false)
         ent:SetNWBool("isTagged", false)
+        ent:SetNWBool("isMegaTracked", false)
         ent:SetNWBool("isCarePackageBuffSpeed", false)
         if SERVER then
             ULib.invisible(ent,false,255)

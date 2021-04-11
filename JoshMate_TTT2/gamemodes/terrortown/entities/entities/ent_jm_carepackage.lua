@@ -33,6 +33,19 @@ function Loot_SpawnThis(carepackage,thingToSpawn)
     ent:Spawn()
 end
 
+function Barrier_Effects_Destroyed(ent)
+	if not IsValid(ent) then return end
+ 
+	local effect = EffectData()
+	local ePos = ent:GetPos()
+	effect:SetStart(ePos)
+	effect:SetOrigin(ePos)
+	
+	util.Effect("TeslaZap", effect, true, true)
+	util.Effect("TeslaHitboxes", effect, true, true)
+	util.Effect("cball_explode", effect, true, true)
+end
+
 
 function ENT:Use( activator, caller )
 
@@ -43,13 +56,13 @@ function ENT:Use( activator, caller )
 			self:EmitSound("carepackage_open.wav")
 			activator:ChatPrint("[Care Package] - You have looted a care package!")
 
-			if(activator:IsDetective() or activator:IsTraitor()) then
-				activator:ChatPrint("[Care Package] - Loot: +1 Credit")
+			if(activator:IsTraitor()) then
+				activator:ChatPrint("[Care Package] - Loot: +1 Credit (Traitor Bonus Loot)")
 				activator:AddCredits(1)
 			end
 			
 
-			local randomLootChoice = math.random(1, 16)
+			local randomLootChoice = math.random(1, 12)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -81,66 +94,85 @@ function ENT:Use( activator, caller )
 				
 			end
 
+			
 			if randomLootChoice == 6 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_pistol")
-				
+				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
+				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
+				activator:SetHealth(activator:GetMaxHealth())
 			end
+
 
 			if randomLootChoice == 7 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced SMG")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_smg")
-				
+				activator:ChatPrint("[Care Package] - Loot: 20% Speed Boost")
+				activator:SetNWBool("isCarePackageBuffSpeed", true)
 			end
+			
 
 			if randomLootChoice == 8 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Shotgun")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_shotgun")
-				
-			end
-			
-			if randomLootChoice == 9 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Rifle")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_rifle")
-				
-			end
-
-			if randomLootChoice == 10 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Sniper")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_sniper")
-				
-			end
-			
-			if randomLootChoice == 11 then
-				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
-				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
-				activator:SetHealth(activator:GetMaxHealth())
-			end
-
-			if randomLootChoice == 12 then
-				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
-				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
-				activator:SetHealth(activator:GetMaxHealth())
-			end
-
-			if randomLootChoice == 13 then
-				activator:ChatPrint("[Care Package] - Loot: 20% Speed Boost")
-				activator:SetNWBool("isCarePackageBuffSpeed", true)
-			end
-			
-			if randomLootChoice == 14 then
-				activator:ChatPrint("[Care Package] - Loot: 20% Speed Boost")
-				activator:SetNWBool("isCarePackageBuffSpeed", true)
-			end
-
-			if randomLootChoice == 15 then
 				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw Radio")
 				Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
 			end
 
-			if randomLootChoice == 16 then
-				activator:ChatPrint("[Care Package] - Loot: Roller Mine")
+			if randomLootChoice == 9 then
+				activator:ChatPrint("[Care Package] - Loot: A little Friend")
 				Loot_SpawnThis(self,"npc_rollermine")
+			end
+
+			if randomLootChoice == 10 then
+				activator:ChatPrint("[Care Package] - Loot: Manhacks!")
+
+				local JM_ManHackLifeStart = CurTime()
+				local deployAmount = 12
+				local deployLifeTime = 60
+
+				local npc = nil
+				for i = deployAmount,1,-1 do 
+					npc = ents.Create("npc_manhack")
+					npc:SetPos(self.GetPos())
+					npc:SetShouldServerRagdoll(false)
+					npc:Spawn()
+					npc:SetNWEntity("giveHitMarkersTo", self.Owner)
+					npc.JM_ManHackLifeStart = JM_ManHackLifeStart         
+				end
+
+				timer.Simple(deployLifeTime, function () 
+
+					for k, v in ipairs( ents.FindByClass("npc_manhack") ) do
+						if (v.JM_ManHackLifeStart <= CurTime() - (deployLifeTime - 1)) then
+						Barrier_Effects_Destroyed(v) 
+						v:Remove()
+						end
+					end
+
+				end)
+			end
+
+			if randomLootChoice == 11 then
+				activator:ChatPrint("[Care Package] - Loot: Pigeon")
+				Loot_SpawnThis(self,"npc_pigeon")
+			end
+
+			if randomLootChoice == 12 then
+				activator:ChatPrint("[Care Package] - Loot: Mega Tracker")
+			
+				for _, ply in ipairs( player.GetAll() ) do
+					if (ply:IsTerror() and ply:Alive() and not ply:SteamID64() == activator:SteamID64() ) then
+
+						STATUS:AddTimedStatus(ply, "jm_mega_tracker", 30, 1)
+						ply:SetNWBool("isMegaTracked", true)
+
+						if(timer.Exists(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64()))) then timer.Remove(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64())) end
+						timer.Create(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64()), 30, 1,function() 
+								if (not ply:IsValid() or not ply:IsPlayer()) then timer.Remove(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64())) return end
+								ply:SetNWBool("isMegaTracked", false)
+								timer.Remove(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64()))
+						end)
+						
+					end
+				end
+
+
+
 			end
 
 			
@@ -162,5 +194,22 @@ local JM_CarePackage_Halo_Colour = Color(150,0,255,255)
 hook.Add( "PreDrawHalos", "Halos_CarePackage", function()
 
     halo.Add( ents.FindByClass( "ent_jm_carepackage*" ), JM_CarePackage_Halo_Colour, 5, 5, 2, true, true )
+ 
+ end )
+
+ -- ESP Halo effect
+hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
+
+	local players = {}
+	local count = 0
+ 
+	 for _, ply in ipairs( player.GetAll() ) do
+		 if (ply:IsTerror() and ply:Alive() and ply:GetNWBool("isMegaTracked") ) then
+			 count = count + 1
+			 players[ count ] = ply
+		 end
+	 end
+ 
+	 halo.Add( players, Color( 255, 255, 0 ), 5, 5, 2, true, true )
  
  end )
