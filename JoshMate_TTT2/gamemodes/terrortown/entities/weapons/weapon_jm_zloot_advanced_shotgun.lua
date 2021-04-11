@@ -19,7 +19,7 @@ SWEP.Base                  = "weapon_tttbase"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_HEAVY
-SWEP.WeaponID              = AMMO_SHOTGUN
+SWEP.WeaponID              = AMMO_ADVANCED_SHOTGUN
 
 
 SWEP.Primary.Damage        = 10

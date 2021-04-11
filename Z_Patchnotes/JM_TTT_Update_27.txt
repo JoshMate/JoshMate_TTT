@@ -8,16 +8,16 @@
 - Fixed [Map Vote] Server Errors on typing showmap when there is no vote happening
 
 - Added [Care Package] Randomly during some rounds a care package will appear, containing powerful and unique loot
+// The list of possible Care Package Loot items is:
 
 - Added [Loot] Advanced Rifle 		- The Rifle But: 			1 Tap headshots and 2 tap body shots
 - Added [Loot] Advanced SMG 		- The SMG But: 			60 bullets in a mag and faster firing
 - Added [Loot] Advanced Shotgun 	- The Shotgun But: 		Semi Automatic and slightly more damage
 - Added [Loot] Advanced Sniper 	- The Sniper But: 		Semi Automatic and slightly more damage
 - Added [Loot] Advanced Pistol 		- The Pistol But: 			More Damage, Faster Firing less recoil
-
 - Added [Loot] +1 Credit, this is given to the player (If D or T) along with the main reward
 - Added [Loot] Gus Radio: A radio that plays the whole Gus is My name song and then expolodes.
-- Added [Loot] Max Health: +50% Max HP for the rest of the round and get fully healed (Stacks with other sources)
+- Added [Loot] Max Health: +50 Max HP for the rest of the round and get fully healed (Stacks with other sources)
 - Added [Loot] Speed Buff: +20% movement speed for the rest of the round (Stacks with other sources)
 - Added [Loot] Roller mine: An invulerable combine roller mine that will harrass anyone it sees
 

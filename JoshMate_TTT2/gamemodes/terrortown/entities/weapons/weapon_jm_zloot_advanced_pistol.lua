@@ -17,7 +17,7 @@ SWEP.Base                  = "weapon_tttbase"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_PISTOL
-SWEP.WeaponID              = AMMO_PISTOL
+SWEP.WeaponID              = AMMO_ADVANCED_PISTOL
 
 SWEP.Primary.Damage        = 40
 SWEP.Primary.Delay         = 0.115
