@@ -44,6 +44,7 @@ SWEP.Secondary.Ammo        = "none"
 SWEP.Secondary.Delay         = 1
 
 SWEP.Kind                  = WEAPON_NADE
+SWEP.WeaponID              = AMMO_NADE_BASE
 SWEP.IsGrenade             = true
 
 SWEP.was_thrown            = false
@@ -114,7 +115,7 @@ end
 
 -- subclasses must override with their own grenade ent
 function SWEP:GetGrenadeName()
-   return "ent_jm_grenade_fire_proj"
+   return "ent_jm_grenade_smoke_proj"
 end
 
 

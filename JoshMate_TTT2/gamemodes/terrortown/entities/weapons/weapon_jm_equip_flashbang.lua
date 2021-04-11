@@ -27,7 +27,7 @@ end
 SWEP.Base               = "weapon_jm_base_grenade"
 
 SWEP.Kind               = WEAPON_EQUIP
-SWEP.WeaponID           = AMMO_INFERNO
+SWEP.WeaponID           = AMMO_NADE_FLASH
 
 SWEP.ViewModel			= "models/weapons/csgonade/v_eq_flashbang.mdl"
 SWEP.WorldModel			= "models/weapons/csgonade/w_eq_flashbang.mdl"

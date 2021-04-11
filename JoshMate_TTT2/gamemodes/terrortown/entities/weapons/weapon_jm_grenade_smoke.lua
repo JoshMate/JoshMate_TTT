@@ -10,7 +10,7 @@ end
 
 SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
-SWEP.WeaponID           = AMMO_NADE_FIRE
+SWEP.WeaponID           = AMMO_NADE_TAG
 
 SWEP.ViewModel          = "models/weapons/cstrike/c_eq_smokegrenade.mdl"
 SWEP.WorldModel         = "models/weapons/w_eq_smokegrenade.mdl"
