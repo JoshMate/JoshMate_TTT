@@ -14,11 +14,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Non-Lethal Weapon
 	
-Stuns the target for 10 seconds
+Prevents the target from moving for 10 seconds
    
-Stips them of all their non-purchased weapons
+The target will drop their currently held weapon
    
-Only has 3 uses
+Has 3 uses, perfect acccuracy and long range
 ]]
    };
 
@@ -50,35 +50,9 @@ SWEP.ViewModel             = Model("models/weapons/c_pistol.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_pistol.mdl")
 
 local Taser_Stun_Duration      = 10
+local JM_Shoot_Range         = 10000
 
-local weaponArray = {
-   "weapon_jm_secondary_auto",
-   "weapon_jm_secondary_light",
-   "weapon_jm_secondary_heavy",
-   "weapon_jm_primary_rifle",
-   "weapon_jm_primary_smg",
-   "weapon_jm_primary_shotgun",
-   "weapon_jm_primary_sniper",
-   "weapon_jm_primary_lmg",
-   "weapon_jm_grenade_smoke",
-   "weapon_jm_grenade_fire",
-   "weapon_jm_grenade_push"
-}
-
-function TaseEffects(ent)
-   if not IsValid(ent) then return end
-   local edata = EffectData()
-   edata:SetMagnitude(1)
-   edata:SetScale(1)
-   edata:SetRadius(8)
-   local v = ent:GetPos()
-   if ent:IsPlayer() then v:Add(Vector(0,0,40))end
-   edata:SetOrigin(v)
-   util.Effect("Sparks", edata)
-
-end
-
-function TaseEffectsInit(ent)
+function SWEP:HitEffectsInit(ent)
    if not IsValid(ent) then return end
 
    local effect = EffectData()
@@ -92,101 +66,89 @@ function TaseEffectsInit(ent)
    util.Effect("cball_explode", effect, true, true)
 end
 
-function RemoveTase(ent)
-   ent:SetNWBool("isTased", false)
-   if (ent:GetNWBool("isBearTrapped") == false) then ent:Freeze(false) end 
-   STATUS:RemoveStatus(ent, "jm_taser")
-end
+function SWEP:ApplyEffect(ent,weaponOwner)
 
-function TaseTarget(att, path, dmginfo)
-   local ent = path.Entity
    if not IsValid(ent) then return end
-
-   TaseEffectsInit(ent)
+   self:HitEffectsInit(ent)
    
    if SERVER then
-
-      -- Only works on players and only outside of post and prep
-      if (not ent:IsPlayer()) or (not GAMEMODE:AllowPVP()) then return end
-      STATUS:AddTimedStatus(ent, "jm_taser", Taser_Stun_Duration, 1)
-
-      timerName = "timer_TaserEffectTimer_" .. ent:SteamID64()
-      timer.Create( timerName, 0.5, Taser_Stun_Duration*2, function () if ent:IsPlayer() and ent:Alive() then TaseEffects(ent) end end )
       
+      -- Remove the existing Timer then reset it (To prevent Duplication)
       timerName = "timer_TaserEndTimer_" .. ent:SteamID64()
-      timer.Create( timerName, Taser_Stun_Duration, 1, function () if ent:IsPlayer() then RemoveTase(ent) end end )
+      if(timer.Exists(timerName)) then timer.Remove(timerName) end
+      timer.Create( timerName, Taser_Stun_Duration, 1, function ()
+         if(ent:IsValid() and ent:IsPlayer()) then
+            ent:SetNWBool("isTased", false)
+            STATUS:RemoveStatus(ent, "jm_taser")
+         end 
+      end )
 
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )
       net.WriteFloat(0)
-      net.Send(att)
+      net.Send(weaponOwner)
       -- End Of
       
-      ent:GetActiveWeapon():PreDrop()
-
-      ent:Freeze(true)
-      ent:SetNWBool("isTased", true)
-
-      for names = 1, #weaponArray do
-         ent:StripWeapon(weaponArray[names])
+      -- Drop currently Held Weapon
+      if(ent:IsValid() and ent:IsPlayer()) then
+         local curWep = ent:GetActiveWeapon()
+         ent:GetActiveWeapon():PreDrop()
+         if (curWep.AllowDrop) then
+            ent:DropWeapon()
+         end
+         ent:SelectWeapon("weapon_zm_improvised")
       end
+      -- End of Drop
 
-      ent:SelectWeapon("weapon_zm_improvised")
-
+      -- Set Status and print Message
+      STATUS:AddTimedStatus(ent, "jm_taser", Taser_Stun_Duration, 1)
+      ent:SetNWBool("isTased", true)
       ent:ChatPrint("[Taser]: You have been Tased!")
-      
-
+      weaponOwner:ChatPrint("[Taser]: You have tased someone!")
+      -- End Of
    end
-end
-
-function SWEP:ShootTaserShot()
-   local cone = self.Primary.Cone
-   local bullet = {}
-   bullet.Num       = 1
-   bullet.Src       = self:GetOwner():GetShootPos()
-   bullet.Dir       = self:GetOwner():GetAimVector()
-   bullet.Spread    = Vector( cone, cone, 0 )
-   bullet.Tracer    = 1
-   bullet.Force     = 2
-   bullet.Damage    = self.Primary.Damage
-   bullet.TracerName = self.Tracer
-   bullet.Callback = TaseTarget
-
-   self:GetOwner():FireBullets( bullet )
 end
 
 function SWEP:PrimaryAttack()
+
+   -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-
    if not self:CanPrimaryAttack() then return end
-
    self:EmitSound( self.Primary.Sound )
-
    self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
-
-   self:ShootTaserShot()
-
    self:TakePrimaryAmmo( 1 )
-
    if IsValid(self:GetOwner()) then
       self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-
-      self:GetOwner():ViewPunch( Angle( math.Rand(-0.2,-0.1) * self.Primary.Recoil, math.Rand(-0.1,0.1) *self.Primary.Recoil, 0 ) )
    end
+   -- #########
 
-   if ( (game.SinglePlayer() && SERVER) || CLIENT ) then
-      self:SetNWFloat( "LastShootTime", CurTime() )
+   -- New Direct Effect Code (Cuts out all the bullet callback code)
+   if SERVER then
+      local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Shoot_Range, filter = self.Owner})
+      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+         self:ApplyEffect(tr.Entity, self:GetOwner())
+      end
    end
+   -- #########
 
+   -- Remove Weapon When out of Ammo
    if SERVER then
       if self:Clip1() <= 0 then
          self:Remove()
       end
    end
+   -- #########
+
 end
+
+
+
 
 function SWEP:SecondaryAttack()
 end
+
+
+
 
 -- Hud Help Text
 if CLIENT then

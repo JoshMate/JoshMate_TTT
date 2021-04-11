@@ -9,8 +9,8 @@ ENT.Model = Model("models/weapons/w_eq_fraggrenade_thrown.mdl")
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(255,255,0,150)
 
-local JM_Explosive_Blast_Damage    = 35
-local JM_Explosive_Blast_Radius    = 300
+local JM_Explosive_Blast_Damage    = 40
+local JM_Explosive_Blast_Radius    = 400
 
 function ENT:Explode(tr)
    if SERVER then

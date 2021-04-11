@@ -1,10 +1,10 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType            = "ar2"
+SWEP.HoldType              = "ar2"
 
 if CLIENT then
-   SWEP.PrintName          = "Poison Dart"
+   SWEP.PrintName          = "Poison Dart Gun"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -12,15 +12,13 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Silent Long-Range Weapon
-	
-Poisons the target for 30 seconds
-   
-Steals the HP of the target over time
+      desc = [[A Lethal Weapon
+
+Steals 60 HP from the target over 15 seconds
 
 Targets flinch while they are poisoned
    
-Only has 5 uses (Repeat shots reset the timer)
+Has 3 uses, silent, perfect acccuracy and long range
 ]]
    };
 
@@ -29,58 +27,51 @@ end
 
 SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Primary.Recoil        = 3
-SWEP.Primary.Damage        = 1
-SWEP.HeadshotMultiplier    = 1
+SWEP.Primary.Recoil        = 0
+SWEP.Primary.Damage        = 0
+SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 5
-SWEP.Primary.DefaultClip   = 5
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 1
+SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_poisondart.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
-SWEP.Tracer                = "None"
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_POISONDART
 SWEP.UseHands              = true
-SWEP.IsSilent              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_aug.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_rif_aug.mdl")
 SWEP.IronSightsPos         = Vector( 5, -15, -2 )
 SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
 
-local Poison_Duration            = 30
-local Poison_Damage_Delay        = 0.5
-local Poison_Damage_Amount       = 1
+local Poison_Duration               = 15
+local Poison_Damage_Delay           = 1
+local Poison_Damage_Amount          = 5
+local JM_Shoot_Range                = 10000
 
 
-function PoisonEffect_Tick(ent, attacker, weaponInflictor, timerName)
+function PoisonEffect_Tick(ent, attacker)
    if SERVER then
-      if not IsValid(ent) then
-         return
-      end
-      if not ent:GetNWBool("isPoisonDarted") then
-         timer.Remove(timerName)
-         return
-      end
-      if not ent:Alive() then 
-         timer.Remove(timerName)
-         return 
-      end
+      
+      if(not ent:IsValid() or not ent:IsPlayer() or not ent:Alive()) then return end
 
       local dmginfo = DamageInfo()
       dmginfo:SetDamage(Poison_Damage_Amount)
       dmginfo:SetAttacker(attacker)
-		dmginfo:SetInflictor(weaponInflictor)
+      local inflictor = ents.Create("weapon_jm_equip_poisondart")
+		dmginfo:SetInflictor(inflictor)
       dmginfo:SetDamageType(DMG_GENERIC)
       dmginfo:SetDamagePosition(ent:GetPos())
       ent:TakeDamageInfo(dmginfo)
+
+      if(not attacker:IsValid() or not attacker:IsPlayer() or not attacker:Alive()) then return end
 
       -- Heal the User
       if (attacker:Health()+ Poison_Damage_Amount) <= attacker:GetMaxHealth() then
@@ -90,82 +81,91 @@ function PoisonEffect_Tick(ent, attacker, weaponInflictor, timerName)
 
 end
 
+function SWEP:HitEffectsInit(ent)
+   if not IsValid(ent) then return end
 
-function RemovePoison(ent)
-      STATUS:RemoveStatus(ent, "jm_poisondart")
-      ent:SetNWBool("isPoisonDarted", false)
+   local effect = EffectData()
+   local ePos = ent:GetPos()
+   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+   effect:SetStart(ePos)
+   effect:SetOrigin(ePos)
+   
+   util.Effect("TeslaZap", effect, true, true)
+   util.Effect("TeslaHitboxes", effect, true, true)
+   util.Effect("cball_explode", effect, true, true)
 end
 
+function SWEP:ApplyEffect(ent,weaponOwner)
 
-function PoisonTarget(att, path, dmginfo)
-   local ent = path.Entity
-   if not IsValid(ent) or not IsPlayer(ent) then return end
-
-   STATUS:AddTimedStatus(ent, "jm_poisondart", Poison_Duration, 1)
+   if not IsValid(ent) then return end
+   self:HitEffectsInit(ent)
    
    if SERVER then
-   -- Only works on players and only outside of post and prep
-   if (not ent:IsPlayer()) or (not GAMEMODE:AllowPVP()) then return end
       
-   weaponInflictor = dmginfo:GetInflictor()
-   timerName = "timer_PoisonEffectTimer_" .. ent:SteamID64()
-   timer.Create( timerName, Poison_Damage_Delay, Poison_Duration*2, function () if ent:IsPlayer() and ent:Alive() then PoisonEffect_Tick(ent, att, weaponInflictor, timerName ) end end )
-   timerName = "timer_PoisonRemoveTimer_" .. ent:SteamID64()
-   timer.Create( timerName, Poison_Duration, 1, function () if ent:IsPlayer() then RemovePoison(ent) end end )
-   
-   ent:ChatPrint("[Poison]: You have been poisoned!")
-   ent:SetNWBool("isPoisonDarted", true)
+      -- Remove the existing Timer then reset it (To prevent Duplication)
+      timerName = "timer_PoisonEndTimer_" .. ent:SteamID64()
+      if(timer.Exists(timerName)) then timer.Remove(timerName) end
+      timer.Create( timerName, Poison_Duration, 1, function ()
+         if(ent:IsValid() and ent:IsPlayer()) then
+            ent:SetNWBool("isPoisonDarted", false)
+            STATUS:RemoveStatus(ent, "jm_poisondart")
+         end 
+      end )
 
+      -- Remove the existing Timer then reset it (To prevent Duplication)
+      timerName = "timer_PoisonTickTimer_" .. ent:SteamID64()
+      if(timer.Exists(timerName)) then timer.Remove(timerName) end
+      timer.Create( timerName, Poison_Damage_Delay, Poison_Duration, function () PoisonEffect_Tick(ent,weaponOwner) end )
+
+      -- JM Changes Extra Hit Marker
+      net.Start( "hitmarker" )
+      net.WriteFloat(0)
+      net.Send(weaponOwner)
+      -- End Of
+
+      -- Set Status and print Message
+      STATUS:AddTimedStatus(ent, "jm_poisondart", Poison_Duration, 1)
+      ent:SetNWBool("isPoisonDarted", true)
+      ent:ChatPrint("[Poison Dart]: You have been poisoned!")
+      weaponOwner:ChatPrint("[Poison Dart]: You have hit someone!")
+      -- End Of
    end
-end
-
-
-
-function SWEP:ShootPoisonShot()
-   local cone = self.Primary.Cone
-   local bullet = {}
-   bullet.Num       = 1
-   bullet.Src       = self:GetOwner():GetShootPos()
-   bullet.Dir       = self:GetOwner():GetAimVector()
-   bullet.Spread    = Vector( cone, cone, 0 )
-   bullet.Tracer    = 9999
-   bullet.Force     = 1
-   bullet.Damage    = self.Primary.Damage
-   bullet.TracerName = self.Tracer
-   bullet.Callback = PoisonTarget
-
-   self:GetOwner():FireBullets( bullet )
 end
 
 function SWEP:PrimaryAttack()
+
+   -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-
    if not self:CanPrimaryAttack() then return end
-
    self:EmitSound( self.Primary.Sound )
-
    self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
-
-   self:ShootPoisonShot()
-
    self:TakePrimaryAmmo( 1 )
-
    if IsValid(self:GetOwner()) then
       self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-
-      self:GetOwner():ViewPunch( Angle( math.Rand(-0.2,-0.1) * self.Primary.Recoil, math.Rand(-0.1,0.1) *self.Primary.Recoil, 0 ) )
    end
+   -- #########
 
-   if ( (game.SinglePlayer() && SERVER) || CLIENT ) then
-      self:SetNWFloat( "LastShootTime", CurTime() )
+   -- New Direct Effect Code (Cuts out all the bullet callback code)
+   if SERVER then
+      local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Shoot_Range, filter = self.Owner})
+      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+         self:ApplyEffect(tr.Entity, self:GetOwner())
+      end
    end
+   -- #########
 
+   -- Remove Weapon When out of Ammo
    if SERVER then
       if self:Clip1() <= 0 then
          self:Remove()
       end
    end
+   -- #########
+
 end
+
+
+
 
 function SWEP:SetZoom(state)
    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then

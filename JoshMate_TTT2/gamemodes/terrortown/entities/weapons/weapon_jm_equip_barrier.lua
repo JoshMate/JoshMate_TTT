@@ -13,8 +13,8 @@ SWEP.Instructions			= "Leftclick to place a barrier"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 3
-SWEP.Primary.DefaultClip	= 3
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -43,9 +43,9 @@ if CLIENT then
 	
 Left click to place the barrier right in front of you
 
-After 2s the barrier will arm blocking all passage and projectiles
+After 3s the barrier will arm blocking all passage and projectiles
 
-It will last for 30 seconds and has 3 uses
+It will last for 60 seconds and has 2 uses
 ]]
 	}
 end

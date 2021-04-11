@@ -47,6 +47,11 @@ if CLIENT then
 			type = "bad"
 		})
 
+        STATUS:RegisterStatus("jm_tag", {
+			hud = Material("vgui/ttt/joshmate/hud_tracker.png"),
+			type = "bad"
+		})
+
         STATUS:RegisterStatus("jm_firewall", {
 			hud = Material("vgui/ttt/joshmate/hud_firewall.png"),
 			type = "bad"
@@ -54,27 +59,38 @@ if CLIENT then
 	end)
 end
 
+-- The Function to Clean up players Buffs
+function RemoveAllBuffs(ent) 
+    if ent:IsValid() and ent:IsPlayer() then
+        ent:SetNWBool("isTased", false)
+        ent:SetNWBool("isPoisonDarted", false)
+        ent:SetNWBool("isBearTrapped", false)
+        ent:SetNWBool("isStunGrenaded", false)
+        ent:SetNWBool("isChameleoned", false)
+        ent:SetNWBool("isSilencedPistoled", false)
+        ent:SetNWBool("isFireWalled", false)
+        ent:SetNWFloat("lastTimePlayerDidInput", CurTime())
+        ent:SetNWBool("isTracked", false)
+        ent:SetNWBool("isTagged", false)
+        if SERVER then
+            ULib.invisible(ent,false,255)
+        end
+    end
+end
+
 -- Remove all Buffs on round start
 if SERVER then
-	hook.Add("TTTPrepareRound", "JMCleanUpTimers_Taser", function()
+	hook.Add("TTTPrepareRound", "JMCleanUPBuffs_PreRound", function()
 		for _, v in ipairs(player.GetAll()) do
-			if IsValid(v) then
-				v:SetNWBool("isTased", false)
-                v:SetNWBool("isPoisonDarted", false)
-                v:SetNWBool("isBearTrapped", false)
-                v:SetNWBool("isStunGrenaded", false)
-                v:SetNWBool("isChameleoned", false)
-                v:SetNWBool("isSilencedPistoled", false)
-                v:SetNWBool("isFireWalled", false)
-                v:SetNWFloat("lastTimePlayerDidInput", CurTime())
-                v:SetNWBool("isTracked", false)
-                if SERVER then
-                    ULib.invisible(v,false,255)
-                end
-			end
+			RemoveAllBuffs(v) 
 		end
 	end)
 end
+
+-- Remove All Hooks on player Death
+hook.Add( "PlayerDeath", "JMCleanUPBuffs_Death", function( victim, inflictor, attacker )
+    RemoveAllBuffs(victim) 
+end )
 
 
 -- Set up Screen Effects
@@ -181,57 +197,37 @@ if CLIENT then
 end
 
 
--- FAIL SAFES (TO PREVENT INFINITE DEBUFFS)
--- Ticks in the background every x Seconds forever (Expensive, but needed)
-
-if SERVER then
-
-function JM_Buffs_FailSafes() 
-
-    for _, v in ipairs(player.GetAll()) do
-        if IsValid(v) then
-            
-            -- Unfreeze stuck players
-            if (v:GetNWBool("isTased") == false and v:GetNWBool("isBearTrapped") == false) then
-                v:Freeze(false)
-            end
-
-        end
-    end
-
-end
-
-failSafeTimerName = "timer_buffs_failsafes"
-failSafeTimerDelay = 1 
-timer.Create(failSafeTimerName, failSafeTimerDelay, 0, JM_Buffs_FailSafesend)
-
-end
-
-
 -- Stat changes via hooks
 hook.Add("TTTPlayerSpeedModifier", "JM_GrenadeSlowEffect", function(ply, _, _, speedMultiplierModifier)
-	if not IsValid(ply)then return end
-   speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
-   if ply:GetNWBool("isStunGrenaded") == true then 
-	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
-   end   
+    if (not ply:IsValid() or not ply:IsPlayer())then return end
+    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+    if ply:GetNWBool("isStunGrenaded") == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+    end   
 end)
 
 
 hook.Add("TTTPlayerSpeedModifier", "JM_SilencedSlowEffect", function(ply, _, _, speedMultiplierModifier)
-	if not IsValid(ply)then return end
-   speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
-   if ply:GetNWBool("isSilencedPistoled") == true then 
-	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
-   end   
+	if (not ply:IsValid() or not ply:IsPlayer())then return end
+    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+    if ply:GetNWBool("isSilencedPistoled") == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+    end   
 end)
 
 hook.Add("TTTPlayerSpeedModifier", "JM_FireWallSlowEffect", function(ply, _, _, speedMultiplierModifier)
-	if not IsValid(ply)then return end
-   speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
-   if ply:GetNWBool("isFireWalled") == true then 
-	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
-   end   
+	if (not ply:IsValid() or not ply:IsPlayer())then return end
+    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+    if ply:GetNWBool("isFireWalled") == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
+    end   
 end)
 
+hook.Add("TTTPlayerSpeedModifier", "JM_TaserSlowEffect", function(ply, _, _, speedMultiplierModifier)
+	if (not ply:IsValid() or not ply:IsPlayer())then return end
+    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.0
+    if ply:GetNWBool("isTased") == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0
+    end   
+end)
 

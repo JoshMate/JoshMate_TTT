@@ -1,0 +1,81 @@
+[ Update 26 ] - (Josh Mate's TTT2 Server)
+
+[Server] 
+
+- Changed [Hit Markers] Time Before damage number stacking effect fades: 1 -> 2 Seconds
+- Changed [Hit Markers] Adjusted some of the colours for damage numbers
+
+- Changed [Roles] Traitor percentage: 35% -> 30%
+
+[Gameplay]
+
+- Rework [Taser] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Taser] No longer strips all weapons, but instead drops current weapon (Like Silenced Pistol)
+- Changed [Taser] No longer locks all your controls, but instead just prevents you from moving
+- Changed [Taser] You now now push tased targets around (Don't abuse this on Innocents)
+
+- Rework [Silenced Pistol] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Silenced Pistol] Better visual feedback to the user when they land a hit
+
+- Rework [Poison Dart] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Poison Dart] Better visual feedback to the user when they land a hit
+// it is now the same damage and healing, but over 15 rather than 30 seconds (Less Flinching and more effective)
+
+- Rework [Tracking Dart] A Complete rewrite of the code to try and fix the constant bugs that plague this type of weapon
+- Changed [Tracking Dart] Better visual feedback to the user when they land a hit
+
+- Reworked [Firewall] When placing it, it will be invisible for 15 seconds then deploy instantly.
+// People will not know that you have placed it, until it appears and you are long gone
+// Before firewall was really hard to use because everyone could see you place it and all attack you
+// This should make it more covert and more of a long term trap
+// Added a HUD UI marker for fellow Traitors
+
+- Buffed [Newton Launcher] Push Radius: 400 -> 500
+- Buffed [Newton Launcher] Push Force: 300 -> 400
+- Changed [Newton Launcher] No longer pushes physics props (Inc Ammo and weapons)
+// This last bit is a HUGE performance boost and was causing lag spikes on the server and on the weaker PCs
+
+- Buffed [Frag Grenade] Damage: 70 -> 80
+- Buffed [Frag Grenade] Radius: 300 -> 400
+
+- Buffed [Tag Grenade] Now reveals players visually for 2 seconds upon tagging them (Like Tracking Dart)
+- Buffed [Tag Grenade] Radius: 300 -> 400
+
+- Buffed [Barrier] Duration: 30 -> 60 Seconds
+- Nerfed [Barrier] Arm Time: 2 -> 3 Seconds
+- Nerfed [Barrier] Number of Uses: 3 -> 2
+- Changed [Barrier] Added more visual effects to let players avoid being stuck inside
+
+- Buffed [Binoculars] Body Scan Time: 2 -> 0.5 Seconds
+
+- Buffed [Tree of Life] Place Range: 200 -> 300
+
+- Buffed [Light Pistol] Accuracy Spread: 0.0150 -> 0.0125
+
+- Buffed [Heavy Pistol] Accuracy Spread: 0.0150 -> 0.0125
+
+- Fixed [Soap] It no longer makes a weird clicking noise when you place it (Which was audible to others)
+- Fixed  [Tree of Life] It no longer makes a weird clicking noise when you place it (Which was audible to others)
+
+[Maps]
+
+- New Map [Dread Hollow Light] A new lighter version of dread hollow
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- New Map [Warmup] A Brand new pre-game lobby map. Now with the ULTIMATE LADDER HACK
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] New Coloured Coded Signs improve visibility of what station you are on
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Abyss] HUGE Redesign of the out islands to be more user friendly and interesting
+- Changed [Abyss] Huge rework and clean up of the whole map
+- Changed [Abyss] The upper skybox no longer insta kills you when you touch it (Slowly Damages)
+- Changed [Abyss] Got rid of the invisible walls above the roofs (It now damages rather than blocking)
+- Changed [Abyss] Added signs so you know which side you are on
+- Changed [Abyss] Added more spawn variety and stopped the Hold W on Spawn brainletts
+- Changed [Abyss] Slightly increased view distance in the fog to make fog hack less powerful
+- Changed [Abyss] Re-did weapon spawns in a much better way
+- Changed [Abyss] Huge Prop Cleanup
+- Changed [Abyss] Added Turtle 2.0 Functionality
+// [LATEST VERSION ON THE WORKSHOP NOW]

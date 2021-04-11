@@ -9,9 +9,24 @@ ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(255,255,255,150)
 
 
-local JM_Tag_Radius        = 300
+local JM_Tag_Radius  = 400
 
+local JM_Tag_Duration = 2
+local JM_Tag_Colour = Color( 255, 255, 255 )
 
+function ENT:HitEffectsInit(ent)
+   if not IsValid(ent) then return end
+
+   local effect = EffectData()
+   local ePos = ent:GetPos()
+   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+   effect:SetStart(ePos)
+   effect:SetOrigin(ePos)
+   
+   util.Effect("TeslaZap", effect, true, true)
+   util.Effect("TeslaHitboxes", effect, true, true)
+   util.Effect("cball_explode", effect, true, true)
+end
 
 function ENT:Explode(tr)
    if (SERVER) then
@@ -30,19 +45,30 @@ function ENT:Explode(tr)
 
             if pl:IsTerror() and pl:Alive() then
                totalPeopleTagged = totalPeopleTagged + 1
-               pl:ChatPrint("[Tag Grenade] - You have been Tagged!")
 
                -- Hit Markers
                net.Start( "hitmarker" )
                net.WriteFloat(0)
                net.Send(self:GetOwner())
                -- End of Hit Markers
-                     
+
+               -- Wall Hack
+               self:HitEffectsInit(pl)
+               STATUS:AddTimedStatus(pl, "jm_tag", JM_Tag_Duration, 1)
+               timerName = "timer_Tag_RemoveTimer" .. pl:SteamID64()
+               if(timer.Exists(timerName)) then timer.Remove(timerName) end
+               timer.Create(timerName, JM_Tag_Duration, 1, 
+                     function() 
+                        if pl:IsPlayer() then
+                           pl:SetNWBool("isTagged", false)
+                        end
+               end)
+               pl:SetNWBool("isTagged", true)
+               pl:ChatPrint("[Tag Grenade] - You are being tracked!")     
             end
 
          end
       end
-      self:GetOwner():ChatPrint("[Tag Grenade] - People Tagged: " .. totalPeopleTagged)
       self.Entity:Remove();
    end
    if (CLIENT) then
@@ -57,3 +83,21 @@ function ENT:Explode(tr)
    end
 
 end
+
+
+-- ESP Halo effect
+hook.Add( "PreDrawHalos", "Halos_Tag_Grenade", function()
+
+   local players = {}
+	local count = 0
+
+	for _, ply in ipairs( player.GetAll() ) do
+		if (ply:IsTerror() and ply:Alive() and ply:GetNWBool("isTagged") ) then
+            count = count + 1
+			players[ count ] = ply
+		end
+	end
+
+    halo.Add( players, JM_Tag_Colour, 1, 1, 1, true, true )
+
+end )

@@ -1,0 +1,20 @@
+[ Update 26 ] - (Josh Mate's TTT2 Server)
+
+- Added [] 
+- Reworked [] 
+- Changed [] 
+- Fixed [] 
+- Buffed [] 
+- Nerfed [] 
+// Comments
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+[Server]
+
+
+
+[Gameplay]
+
+
+
+[Maps]

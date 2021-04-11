@@ -38,16 +38,13 @@ function ENT:Explode(tr)
                pl:SetNWBool("isStunGrenaded", true)
 
                -- Drop currently Held Weapon
-               if ( pl:IsValid() ) then
+               if(pl:IsValid() and pl:IsPlayer()) then
                   local curWep = pl:GetActiveWeapon()
                   pl:GetActiveWeapon():PreDrop()
-                  if curWep == nil or curWep.AllowDrop == nil or curWep.AllowDrop == false then
-                     pl:SelectWeapon("weapon_zm_improvised")
-                  end
-                  if curWep.AllowDrop == true then
+                  if (curWep.AllowDrop) then
                      pl:DropWeapon()
-                     pl:SelectWeapon("weapon_zm_improvised")
                   end
+                  pl:SelectWeapon("weapon_zm_improvised")
                end
                -- End of Drop
 
@@ -58,8 +55,9 @@ function ENT:Explode(tr)
                -- End of Hit Markers
                
                local timerName = "timer_FlashBangBlind_" .. pl:SteamID64()
+               if(timer.Exists(timerName)) then timer.Remove(timerName) end
                timer.Create( timerName, JM_FlashBang_Duration, 1, function () 
-                  if IsValid(pl) then
+                  if IsValid(pl) and pl:IsPlayer() then
                      STATUS:RemoveStatus(pl,"jm_stungrenade")
                      pl:SetNWBool("isStunGrenaded",false)
                      return

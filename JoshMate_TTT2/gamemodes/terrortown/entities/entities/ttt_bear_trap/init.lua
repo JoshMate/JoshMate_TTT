@@ -83,7 +83,7 @@ function ENT:Touch(toucher)
 			if not toucher:IsTerror() or not toucher:Alive() or not toucher:GetNWBool("isBearTrapped") or not IsValid(self) then
 				timer.Destroy("beartrapdmg" .. toucher:EntIndex())
 				toucher:SetNWBool("isBearTrapped", false)
-				if (toucher:GetNWBool("isTased") == false) then toucher:Freeze(false) end 
+				toucher:Freeze(false)
 
 				if toucher:Health() > 0 then
 					toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
@@ -139,7 +139,7 @@ function ENT:Use(act)
 					if IsValid(toucher) then
 						timer.Destroy("beartrapdmg" .. toucher:EntIndex())
 						toucher:SetNWBool("isBearTrapped", false)
-						if (toucher:GetNWBool("isTased") == false) then toucher:Freeze(false) end 
+						toucher:Freeze(false)
 						toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
 				
 						if TTT2 then -- remove element to HUD if TTT2 is loaded
@@ -154,7 +154,7 @@ function ENT:Use(act)
 					if IsValid(toucher) then
 						timer.Destroy("beartrapdmg" .. toucher:EntIndex())
 						toucher:SetNWBool("isBearTrapped", false)
-						if (toucher:GetNWBool("isTased") == false) then toucher:Freeze(false) end 
+						toucher:Freeze(false)
 						toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
 				
 						if TTT2 then -- remove element to HUD if TTT2 is loaded

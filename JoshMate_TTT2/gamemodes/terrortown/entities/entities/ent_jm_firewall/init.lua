@@ -3,9 +3,9 @@ AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
 local JM_Barrier_LifeTime			= 120
-local JM_Barrier_ArmTime			= 2
+local JM_Barrier_ArmTime			= 15
 
-local JM_Barrier_Colour_PreArm		= Color( 255, 150, 0, 255 )
+local JM_Barrier_Colour_PreArm		= Color( 0, 0, 0, 0 )
 local JM_Barrier_Colour_Dormant		= Color( 0, 0, 0, 0 )
 
 local JM_Barrier_Sound_Placed		= "firewall_place.wav"
@@ -35,6 +35,9 @@ function ENT:Barrier_Effects_Destroyed()
 function ENT:Barrier_Arm()
 	if SERVER then
 		if IsValid(self) then 
+			
+			-- Play Place Sound
+			self:EmitSound(JM_Barrier_Sound_Placed);
 			self:EmitSound(JM_Barrier_Sound_Armed)
 
 			self:SetMaterial("models/props_combine/tprings_globe")
@@ -50,6 +53,7 @@ function ENT:Barrier_Die()
 	if SERVER then
 		
 		if IsValid(self) then 
+			self:SendWarn(false)
 			self:Barrier_Effects_Destroyed()
 			self:EmitSound(JM_Barrier_Sound_Destroyed);
 			self:Extinguish()
@@ -78,10 +82,6 @@ function ENT:Initialize()
 		self:GetPhysicsObject():EnableMotion(false)
 	end
 
-	-- Play Place Sound
-	self:EmitSound(JM_Barrier_Sound_Placed);
-
-
 	-- JoshMate Changed
 	self:SetMaterial("joshmate/barrier")
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
@@ -93,6 +93,9 @@ function ENT:Initialize()
 
 	-- Timer To Delete this Ent
 	timer.Simple(JM_Barrier_LifeTime, function() if IsValid(self) then  self:Barrier_Die() end end)
+
+	-- Warning
+	self:SendWarn(true)
 
 	
 
@@ -162,4 +165,24 @@ function ENT:Touch(toucher)
 	end
 
 	
+end
+
+--- Josh Mate Hud Warning
+if SERVER then
+	function ENT:SendWarn(armed)
+		net.Start("TTT_HazardWarn")
+		net.WriteUInt(self:EntIndex(), 16)
+		net.WriteBit(armed)
+
+		if armed then
+			net.WriteVector(self:GetPos())
+			net.WriteString(TEAM_TRAITOR)
+		end
+
+		net.Broadcast()
+	end
+
+	function ENT:OnRemove()
+		self:SendWarn(false)
+	end
 end
