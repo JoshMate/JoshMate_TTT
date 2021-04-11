@@ -20,7 +20,7 @@ The target will drop their currently held weapon
    
 Has 3 uses, silent, perfect acccuracy and long range
 ]]
-   };
+};
 
    SWEP.Icon               = "vgui/ttt/icon_silenced"
 end
