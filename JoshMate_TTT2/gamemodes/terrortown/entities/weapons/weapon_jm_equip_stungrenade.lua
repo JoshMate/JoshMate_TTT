@@ -13,13 +13,11 @@ if (CLIENT) then
 		type = "item_weapon",
 		desc = [[A Non-Lethal Grenade
 		
-Targets are slowed by 70%
-	 
-Targets drop their currently equipped weapon
+Targets are slowed by 70% for 5 seconds
 	 
 Targets also have their vision distorted
 
-3 uses and lasts for (5 Seconds)
+Has 3 Uses
 ]]
 };
 end
@@ -42,5 +40,5 @@ SWEP.Primary.ClipSize      = 3
 SWEP.Primary.DefaultClip   = 3
 
 function SWEP:GetGrenadeName()
-   return "ent_jm_flashbanggrenade_proj"
+   return "ent_jm_stungrenade_proj"
 end

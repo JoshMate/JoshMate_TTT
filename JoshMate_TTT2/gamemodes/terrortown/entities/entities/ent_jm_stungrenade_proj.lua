@@ -10,7 +10,6 @@ ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(0,70,255,150)
 
 local JM_FlashBang_Radius        = 500
-local JM_FlashBang_Duration      = 5
 
 
 function ENT:Explode(tr)
@@ -34,38 +33,22 @@ function ENT:Explode(tr)
 
             if not tr.HitWorld and pl:IsTerror() and pl:Alive() then
                totalPeopleFlashed = totalPeopleFlashed + 1
-               STATUS:AddTimedStatus(pl, "jm_stungrenade", JM_FlashBang_Duration, 1)
-               pl:SetNWBool("isStunGrenaded", true)
 
-               -- Drop currently Held Weapon
-               if(pl:IsValid() and pl:IsPlayer()) then
-                  local curWep = pl:GetActiveWeapon()
-                  pl:GetActiveWeapon():PreDrop()
-                  if (curWep.AllowDrop) then
-                     pl:DropWeapon()
-                  end
-                  pl:SelectWeapon("weapon_zm_improvised")
-               end
-               -- End of Drop
+               -- Set Status and print Message
+               JM_GiveBuffToThisPlayer("jm_buff_stungrenade",pl,self:GetOwner())
+               -- End Of
 
                -- Hit Markers
                net.Start( "hitmarker" )
                net.WriteFloat(0)
                net.Send(self:GetOwner())
                -- End of Hit Markers
-               
-               if(timer.Exists(("timer_FlashBangBlind_" .. pl:SteamID64()))) then timer.Remove(("timer_FlashBangBlind_" .. pl:SteamID64())) end
-               timer.Create( ("timer_FlashBangBlind_" .. pl:SteamID64()), JM_FlashBang_Duration, 1, function () 
-                     if (not pl:IsValid() or not pl:IsPlayer()) then timer.Remove(("timer_FlashBangBlind_" .. pl:SteamID64())) return end
-                     STATUS:RemoveStatus(pl,"jm_stungrenade")
-                     pl:SetNWBool("isStunGrenaded",false)
-                     timer.Remove(("timer_FlashBangBlind_" .. pl:SteamID64()))
-               end )         
+                      
             end
 
          end
       end
-      self:GetOwner():ChatPrint("[Stun Grenade] - People Stunned: " .. totalPeopleFlashed)
+      self:GetOwner():ChatPrint("[Stun Grenade]: You stunned: " .. tostring(totalPeopleFlashed) .. " people")
       self.Entity:Remove();
    end
    if (CLIENT) then

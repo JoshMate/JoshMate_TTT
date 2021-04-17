@@ -60,16 +60,16 @@ function ENT:Touch(toucher)
 			return
 		end
 
-		if toucher:GetNWBool("isBearTrapped") then return end
+		if toucher:GetNWBool(JM_Global_Buff_BearTrap_NWBool) then return end
 
-		toucher:SetNWBool("isBearTrapped", true)
+		toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, true)
 		if IsValid(toucher) then
 			
 			toucher:Freeze(true)
 		end
 
 		if TTT2 then -- add element to HUD if TTT2 is loaded
-			STATUS:AddStatus(toucher, "ttt2_beartrap")
+			STATUS:AddStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 		end
 
 		self.fingerprints = {}
@@ -80,9 +80,9 @@ function ENT:Touch(toucher)
 		timer.Create("beartrapdmg" .. toucher:EntIndex(), 0.5, 0, function()
 			if !IsValid(toucher) then timer.Destroy("beartrapdmg" .. toucher:EntIndex()) return end			
 
-			if not toucher:IsTerror() or not toucher:Alive() or not toucher:GetNWBool("isBearTrapped") or not IsValid(self) then
+			if not toucher:IsTerror() or not toucher:Alive() or not toucher:GetNWBool(JM_Global_Buff_BearTrap_NWBool) or not IsValid(self) then
 				timer.Destroy("beartrapdmg" .. toucher:EntIndex())
-				toucher:SetNWBool("isBearTrapped", false)
+				toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
 				toucher:Freeze(false)
 
 				if toucher:Health() > 0 then
@@ -90,7 +90,7 @@ function ENT:Touch(toucher)
 				end
 
 				if TTT2 then -- remove element to HUD if TTT2 is loaded
-					STATUS:RemoveStatus(toucher, "ttt2_beartrap")
+					STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 				end
 
 				return
@@ -138,12 +138,12 @@ function ENT:Use(act)
 					self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
 					if IsValid(toucher) then
 						timer.Destroy("beartrapdmg" .. toucher:EntIndex())
-						toucher:SetNWBool("isBearTrapped", false)
+						toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
 						toucher:Freeze(false)
 						toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
 				
 						if TTT2 then -- remove element to HUD if TTT2 is loaded
-							STATUS:RemoveStatus(toucher, "ttt2_beartrap")
+							STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 						end
 					end
 				end
@@ -153,12 +153,12 @@ function ENT:Use(act)
 					self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
 					if IsValid(toucher) then
 						timer.Destroy("beartrapdmg" .. toucher:EntIndex())
-						toucher:SetNWBool("isBearTrapped", false)
+						toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
 						toucher:Freeze(false)
 						toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
 				
 						if TTT2 then -- remove element to HUD if TTT2 is loaded
-							STATUS:RemoveStatus(toucher, "ttt2_beartrap")
+							STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 						end
 					end
 				end

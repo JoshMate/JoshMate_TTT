@@ -54,20 +54,16 @@ function ENT:Explode(tr)
 
                -- Wall Hack
                self:HitEffectsInit(pl)
-               STATUS:AddTimedStatus(pl, "jm_tag", JM_Tag_Duration, 1)
-
-               if(timer.Exists(("timer_Tag_RemoveTimer" .. pl:SteamID64()))) then timer.Remove(("timer_Tag_RemoveTimer" .. pl:SteamID64())) end
-               timer.Create(("timer_Tag_RemoveTimer" .. pl:SteamID64()), JM_Tag_Duration, 1,function() 
-                     if (not pl:IsValid() or not pl:IsPlayer()) then timer.Remove(("timer_Tag_RemoveTimer" .. pl:SteamID64())) return end
-                     pl:SetNWBool("isTagged", false)
-                     timer.Remove(("timer_Tag_RemoveTimer" .. pl:SteamID64()))
-               end)
-               pl:SetNWBool("isTagged", true)
-               pl:ChatPrint("[Tag Grenade] - You are being tracked!")     
+               -- Set Status and print Message
+               
+               JM_GiveBuffToThisPlayer("jm_buff_taggrenade",pl,self:GetOwner())
+               -- End Of
             end
 
          end
       end
+      
+      self:GetOwner():ChatPrint("[Tag Grenade]: You tagged: " .. tostring(totalPeopleTagged) .. " people")
       self.Entity:Remove();
    end
    if (CLIENT) then

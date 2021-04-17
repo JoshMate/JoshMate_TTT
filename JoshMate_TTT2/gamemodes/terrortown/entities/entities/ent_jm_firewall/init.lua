@@ -102,44 +102,6 @@ function ENT:Initialize()
 end
 
 
-function FireWallEffect_Tick(ent, attacker, timerName)
-	if SERVER then
-		if not IsValid(ent) then
-			timer.Remove(timerName)
-			return
-		  end
-		 if not ent:IsPlayer() then
-		 timer.Remove(timerName)
-		 return
-		 end
-		 if not ent:Alive() then
-		 timer.Remove(timerName)
-		 return
-		 end
-		 if not ent:GetNWBool("isFireWalled") then
-		 timer.Remove(timerName)
-		 return
-		 end
- 
-	   local dmginfo = DamageInfo()
-	   dmginfo:SetDamage(JM_FireWall_Damage_Amount)
-
-	   dmginfo:SetAttacker(attacker)
-
-	   local inflictor = ents.Create("weapon_jm_equip_firewall")
-	   dmginfo:SetInflictor(inflictor)
-	   dmginfo:SetDamageType(DMG_BURN)
-	   dmginfo:SetDamagePosition(ent:GetPos())
-	   ent:TakeDamageInfo(dmginfo)
- 
-	end
- 
-end
-
-function RemoveFireWall(ent)
-	
-end
-
 function ENT:Use( activator, caller )
 end
 
@@ -156,27 +118,13 @@ function ENT:Touch(toucher)
 		if(not toucher:IsTerror()) then return end
 		if(not toucher:Alive()) then return end
 		if(not GAMEMODE:AllowPVP()) then return end
-		if(toucher:GetNWBool("isFireWalled")) then return end
+		if(toucher:GetNWBool(JM_Global_Buff_FireWall_NWBool)) then return end
 
-		toucher:SetNWBool("isFireWalled", true)
-		STATUS:AddTimedStatus(toucher, "jm_firewall", JM_FireWall_Damage_Duration, 1)
 		toucher:EmitSound(JM_Barrier_Sound_HitPlayer);
+		-- Set Status and print Message
+		JM_GiveBuffToThisPlayer("jm_buff_firewall",toucher,self:GetOwner())
+		-- End Of
 	
-		-- Remove the existing Timer then reset it (To prevent Duplication)
-		if(timer.Exists(("timer_FireWall_Damage_" .. toucher:SteamID64()))) then timer.Remove(("timer_FireWall_Damage_" .. toucher:SteamID64())) end
-		timer.Create( ("timer_FireWall_Damage_" .. toucher:SteamID64()), JM_FireWall_Damage_Delay, JM_FireWall_Damage_Duration * 5, function ()
-			  if (not toucher:IsValid() or not toucher:IsPlayer()) then timer.Remove(("timer_FireWall_Damage_" .. toucher:SteamID64())) return end
-			  FireWallEffect_Tick(toucher, self.JM_Owner, ("timer_FireWall_Damage_" .. toucher:SteamID64()) )
-		end )
-
-		-- Remove the existing Timer then reset it (To prevent Duplication) 
-		if(timer.Exists(("timer_FireWall_Remove_" .. toucher:SteamID64()))) then timer.Remove(("timer_FireWall_Remove_" .. toucher:SteamID64())) end
-		timer.Create( ("timer_FireWall_Remove_" .. toucher:SteamID64()), JM_FireWall_Damage_Duration, 1, function ()
-			  if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_FireWall_Remove_" .. toucher:SteamID64())) return end
-			  STATUS:RemoveStatus(toucher, "jm_firewall")
-			  toucher:SetNWBool("isFireWalled", false)
-		end )
-
 	end
 
 	

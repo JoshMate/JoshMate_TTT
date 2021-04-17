@@ -46,8 +46,6 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_357.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_357.mdl")
 
-local JM_Tracker_Duration           = 60
-local JM_Tracker_Colour             = Color( 255, 255, 0 )
 local JM_Shoot_Range                = 10000
 
 function SWEP:HitEffectsInit(ent)
@@ -71,14 +69,10 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
       
-      -- Remove the existing Timer then reset it (To prevent Duplication)
-      if(timer.Exists(("timer_TrackingEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_TrackingEndTimer_" .. ent:SteamID64())) end
-      timer.Create( ("timer_TrackingEndTimer_" .. ent:SteamID64()), JM_Tracker_Duration, 1, function ()
-            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_TrackingEndTimer_" .. ent:SteamID64())) return end
-            ent:SetNWBool("isTracked", false)
-            STATUS:RemoveStatus(ent, "jm_tracker")
-            timer.Remove(("timer_TrackingEndTimer_" .. ent:SteamID64()))
-      end )
+      -- Set Status and print Message
+      weaponOwner:ChatPrint("[Tracking Dart]: You hit someone!")
+      JM_GiveBuffToThisPlayer("jm_buff_trackingdart",ent,self:GetOwner())
+      -- End Of
 
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )
@@ -86,12 +80,6 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       net.Send(weaponOwner)
       -- End Of
 
-      -- Set Status and print Message
-      STATUS:AddTimedStatus(ent, "jm_tracker", JM_Tracker_Duration, 1)
-      ent:SetNWBool("isTracked", true)
-      ent:ChatPrint("[Tracking Dart]: You're being tracked")
-      weaponOwner:ChatPrint("[Tracking Dart]: You have hit someone!")
-      -- End Of
    end
 end
 
@@ -127,13 +115,8 @@ function SWEP:PrimaryAttack()
 
 end
 
-
-
-
 function SWEP:SecondaryAttack()
 end
-
-
 
 
 -- Hud Help Text
@@ -155,19 +138,3 @@ end
 --
 
 
--- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Tracking_Dart", function()
-
-   local players = {}
-	local count = 0
-
-	for _, ply in ipairs( player.GetAll() ) do
-		if (ply:IsTerror() and ply:Alive() and ply:GetNWBool("isTracked") ) then
-            count = count + 1
-			players[ count ] = ply
-		end
-	end
-
-    halo.Add( players, JM_Tracker_Colour, 5, 5, 2, true, true )
-
-end )

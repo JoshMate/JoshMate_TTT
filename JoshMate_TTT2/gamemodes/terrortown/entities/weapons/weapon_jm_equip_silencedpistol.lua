@@ -50,7 +50,6 @@ SWEP.WorldModel            = "models/weapons/w_pist_usp_silencer.mdl"
 
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 
-local JM_Silenced_Pistol_Duration   = 5
 local JM_Shoot_Range                = 10000
 
 
@@ -79,20 +78,16 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    self:HitEffectsInit(ent)
    
    if SERVER then
-      
-      -- Remove the existing Timer then reset it (To prevent Duplication)
-      if(timer.Exists(("timer_SilencedPistolEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_SilencedPistolEndTimer_" .. ent:SteamID64())) end
-      timer.Create( ("timer_SilencedPistolEndTimer_" .. ent:SteamID64()), JM_Silenced_Pistol_Duration, 1, function ()
-            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_SilencedPistolEndTimer_" .. ent:SteamID64())) return end
-            ent:SetNWBool("isSilencedPistoled", false)
-            STATUS:RemoveStatus(ent, "jm_silencedpistol")
-            timer.Remove(("timer_SilencedPistolEndTimer_" .. ent:SteamID64()))
-      end)
 
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )
       net.WriteFloat(0)
       net.Send(weaponOwner)
+      -- End Of
+
+      -- Set Status and print Message
+      weaponOwner:ChatPrint("[Silenced Pistol]: You hit someone!")
+      JM_GiveBuffToThisPlayer("jm_buff_silencedPistol",ent,self:GetOwner())
       -- End Of
       
       -- Drop currently Held Weapon
@@ -106,12 +101,8 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       end
       -- End of Drop
 
-      -- Set Status and print Message
-      STATUS:AddTimedStatus(ent, "jm_silencedpistol", JM_Silenced_Pistol_Duration, 1)
-      ent:SetNWBool("isSilencedPistoled", true)
-      ent:ChatPrint("[Silenced Pistol]: You have been hit!")
-      weaponOwner:ChatPrint("[Silenced Pistol]: You have hit someone!")
-      -- End Of
+      
+
    end
 end
 

@@ -66,7 +66,7 @@ function SWEP:PrimaryAttack()
 	ang:RotateAroundAxis(ang:Right(), -90)
 	ent:SetAngles(ang)
 	ent:Spawn()
-	ent.SetOwner(self:GetOwner())
+	ent:SetOwner(self:GetOwner())
 	ent.fingerprints = {}
 	ent.JM_Owner = self:GetOwner()
 	self:TakePrimaryAmmo(1)

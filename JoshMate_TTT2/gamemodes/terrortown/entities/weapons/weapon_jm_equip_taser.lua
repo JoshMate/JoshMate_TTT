@@ -49,7 +49,6 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_pistol.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_pistol.mdl")
 
-local Taser_Stun_Duration      = 10
 local JM_Shoot_Range         = 10000
 
 function SWEP:HitEffectsInit(ent)
@@ -73,19 +72,15 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
       
-      -- Remove the existing Timer then reset it (To prevent Duplication)
-      if(timer.Exists(("timer_TaserEndTimer_" .. ent:SteamID64()))) then timer.Remove(("timer_TaserEndTimer_" .. ent:SteamID64())) end
-      timer.Create( ("timer_TaserEndTimer_" .. ent:SteamID64()), Taser_Stun_Duration, 1, function ()
-            if (not ent:IsValid() or not ent:IsPlayer()) then timer.Remove(("timer_TaserEndTimer_" .. ent:SteamID64())) return end
-            ent:SetNWBool("isTased", false)
-            STATUS:RemoveStatus(ent, "jm_taser")
-            timer.Remove(("timer_TaserEndTimer_" .. ent:SteamID64()))
-      end )
-
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )
       net.WriteFloat(0)
       net.Send(weaponOwner)
+      -- End Of
+
+      -- Set Status and print Message
+      weaponOwner:ChatPrint("[Taser]: You hit someone!")
+      JM_GiveBuffToThisPlayer("jm_buff_taser",ent,self:GetOwner())
       -- End Of
       
       -- Drop currently Held Weapon
@@ -99,12 +94,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       end
       -- End of Drop
 
-      -- Set Status and print Message
-      STATUS:AddTimedStatus(ent, "jm_taser", Taser_Stun_Duration, 1)
-      ent:SetNWBool("isTased", true)
-      ent:ChatPrint("[Taser]: You have been Tased!")
-      weaponOwner:ChatPrint("[Taser]: You have tased someone!")
-      -- End Of
+      
    end
 end
 

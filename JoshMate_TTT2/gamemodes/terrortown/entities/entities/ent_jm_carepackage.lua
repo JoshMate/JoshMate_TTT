@@ -62,7 +62,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 12)
+			local randomLootChoice = math.random(1, 14)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -96,29 +96,37 @@ function ENT:Use( activator, caller )
 
 			
 			if randomLootChoice == 6 then
-				activator:ChatPrint("[Care Package] - Loot: +50 Max HP and a Full Heal")
+				activator:ChatPrint("[Care Package] - Loot: Health Boost")
 				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
 				activator:SetHealth(activator:GetMaxHealth())
+				JM_GiveBuffToThisPlayer(jm_buff_health, activator, self)
 			end
 
 
 			if randomLootChoice == 7 then
-				activator:ChatPrint("[Care Package] - Loot: 20% Speed Boost")
-				activator:SetNWBool("isCarePackageBuffSpeed", true)
+				activator:ChatPrint("[Care Package] - Loot: Speed Boost")
+				JM_GiveBuffToThisPlayer(jm_buff_speedboost, activator, self)
 			end
 			
-
 			if randomLootChoice == 8 then
+				activator:ChatPrint("[Care Package] - Loot: Health Regeneration")
+				JM_GiveBuffToThisPlayer(jm_buff_regeneration, activator, self)
+			end
+
+			
+			
+
+			if randomLootChoice == 9 then
 				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw Radio")
 				Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
 			end
 
-			if randomLootChoice == 9 then
+			if randomLootChoice == 10 then
 				activator:ChatPrint("[Care Package] - Loot: A little Friend")
 				Loot_SpawnThis(self,"npc_rollermine")
 			end
 
-			if randomLootChoice == 10 then
+			if randomLootChoice == 11 then
 				activator:ChatPrint("[Care Package] - Loot: Manhacks!")
 
 				local JM_ManHackLifeStart = CurTime()
@@ -131,7 +139,6 @@ function ENT:Use( activator, caller )
 					npc:SetPos(self.GetPos())
 					npc:SetShouldServerRagdoll(false)
 					npc:Spawn()
-					npc:SetNWEntity("giveHitMarkersTo", self.Owner)
 					npc.JM_ManHackLifeStart = JM_ManHackLifeStart         
 				end
 
@@ -147,33 +154,26 @@ function ENT:Use( activator, caller )
 				end)
 			end
 
-			if randomLootChoice == 11 then
+			if randomLootChoice == 12 then
 				activator:ChatPrint("[Care Package] - Loot: Pigeon")
 				Loot_SpawnThis(self,"npc_pigeon")
 			end
 
-			if randomLootChoice == 12 then
+			if randomLootChoice == 13 then
 				activator:ChatPrint("[Care Package] - Loot: Mega Tracker")
-			
 				for _, ply in ipairs( player.GetAll() ) do
 					if (ply:IsTerror() and ply:Alive() and not ply:SteamID64() == activator:SteamID64() ) then
-
-						STATUS:AddTimedStatus(ply, "jm_mega_tracker", 30, 1)
-						ply:SetNWBool("isMegaTracked", true)
-
-						if(timer.Exists(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64()))) then timer.Remove(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64())) end
-						timer.Create(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64()), 30, 1,function() 
-								if (not ply:IsValid() or not ply:IsPlayer()) then timer.Remove(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64())) return end
-								ply:SetNWBool("isMegaTracked", false)
-								timer.Remove(("timer_MegaTracker_RemoveTimer" .. ply:SteamID64()))
-						end)
-						
+						JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,self)
 					end
 				end
-
-
-
 			end
+			
+			if randomLootChoice == 14 then
+				activator:ChatPrint("[Care Package] - Loot: Mega Frag Grenade")
+				Loot_SpawnThis(self,"weapon_jm_zloot_mega_frag")
+			end
+
+			
 
 			
 

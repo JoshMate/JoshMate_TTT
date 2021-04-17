@@ -9,13 +9,13 @@ if CLIENT then
 
 SWEP.PrintName				= "Chameleon"
 SWEP.Author			    	= "Josh Mate"
-SWEP.Instructions			= "Hold out to go invisible"
+SWEP.Instructions			= "Go invisible"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
-SWEP.Primary.Delay 			= 1
-SWEP.Primary.ClipSize		= -1
-SWEP.Primary.DefaultClip	= -1
-SWEP.Primary.Automatic		= false
+SWEP.Primary.Delay 			= 0.5
+SWEP.Primary.ClipSize		= 100
+SWEP.Primary.DefaultClip	= 100
+SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
@@ -41,42 +41,58 @@ if CLIENT then
 	   name = "Chameleon",
 	   desc = [[A Utility Item:
 	
-		+ Invisibility while standing still 
+		+ Invisibility while holding left click
 
-		- You must be holding this weapon
-		- Takes 3 seconds to activate
-		- You will stay invisible until you:
-		- Change weapons, Move, Get pushed, Get hurt
+		- Greatly slows the player
+		- Can only be invisible for a finite amount of time
+		- Entering / leaving invisibility is noisy
 	]]
 }
 end
 
-local Chameleon_Tick				= 1
-local Chameleon_Delay				= 3
-SWEP.Chameleon_LastHP_Check			= -1
+
+SWEP.Chameleon_LastLeftClick		= CurTime()
 
 function Invisibility_Remove(player) 
-	player:SetNWBool("isChameleoned", false)
-	player:SetNWFloat("lastTimePlayerDidInput", CurTime())
 	STATUS:RemoveStatus(player,"jm_chameleon")
+	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, false)
+	player:EmitSound(Sound("chameleon_activate.wav"))
 	if SERVER then
 		ULib.invisible(player,false,255)
 	end
 end
 
 function Invisibility_Give(player) 
-	if player:GetNWInt("isChameleoned") == false then
-		if SERVER then
-			ULib.invisible(player,true,255)
-		end
-		STATUS:AddStatus(player,"jm_chameleon")
-		player:EmitSound(Sound("chameleon_activate.wav"))
+	STATUS:AddStatus(player,"jm_chameleon")
+	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
+	player:EmitSound(Sound("chameleon_activate.wav"))
+	if SERVER then
+		ULib.invisible(player,true,255)
 	end
-
-	player:SetNWBool("isChameleoned", true)
 end
 
 function SWEP:PrimaryAttack()
+
+	self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+   	if not self:CanPrimaryAttack() then return end
+
+	self.Chameleon_LastLeftClick = CurTime()
+	if (not self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+		Invisibility_Give(self:GetOwner()) 
+	end
+
+	self:TakePrimaryAmmo( 1 )
+
+	 -- Remove Weapon When out of Ammo
+	 if SERVER then
+		if self:Clip1() <= 0 then
+			Invisibility_Remove(self:GetOwner()) 
+		   	self:Remove()
+		end
+	 end
+	 -- #########
+
+
 end
 
 function SWEP:SecondaryAttack()
@@ -84,20 +100,26 @@ end
 
 -- Remove Invisibility on changing weapons
 function SWEP:Holster( wep )
-	Invisibility_Remove(self:GetOwner()) 
+	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+		Invisibility_Remove(self:GetOwner()) 
+	end
 	return self.BaseClass.Holster(self)
 end
 
 -- Remove Invisibility on dropping weapons (This prevent tase from giving INF invisibiltiy)
 function SWEP:PreDrop()
-	Invisibility_Remove(self:GetOwner()) 
+	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+		Invisibility_Remove(self:GetOwner()) 
+	end
 	return self.BaseClass.PreDrop(self)
  end
 
 -- Stop random Cur Time when going invisible
 function SWEP:Deploy()
-self:GetOwner():SetNWFloat("lastTimePlayerDidInput", CurTime())
-return self.BaseClass.Deploy(self)
+	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+		Invisibility_Remove(self:GetOwner()) 
+	end
+	return self.BaseClass.Deploy(self)
 end
 
 -- Handle Invisibility checking
@@ -109,33 +131,32 @@ function SWEP:Think()
 		if not player:IsTerror() then return end
 		if not player:Alive() then return end
 
-		-- Take Away if hurt (Healing doesn't affect this)
-		if (not self.Chameleon_LastHP_Check == -1 and player:Health() < self.Chameleon_LastHP_Check) then Invisibility_Remove(player) end
-		self.Chameleon_LastHP_Check = player:Health()
-
-		-- Take Away invisility if moving
-		if not player:GetVelocity():IsZero() then Invisibility_Remove(player) end
-
-		-- Give Invisibility if AFK for x Seconds
-		if player:GetNWFloat("lastTimePlayerDidInput") <= (CurTime() - Chameleon_Delay) then Invisibility_Give(player) end
+		if ((self.Chameleon_LastLeftClick+1) <= CurTime() and player:GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+			Invisibility_Remove(player) 
+		end
 
 	end
 
 end
 
+
+
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-		self:AddTTT2HUDHelp("Stand still while holding this weapon to go invisible!", nil, true)
+		self:AddTTT2HUDHelp("Hold to go Invisible", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
-      end
+		if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+			Invisibility_Remove(self:GetOwner()) 
+		end
+		if self.Owner:IsValid() and self.Owner:IsTerror() then
+			self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+		end
    end
 end
 -- 
@@ -144,6 +165,9 @@ end
 -- Josh Mate No World Model
 
 function SWEP:OnDrop()
+	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
+		Invisibility_Remove(self:GetOwner()) 
+	end
 	self:Remove()
  end
   

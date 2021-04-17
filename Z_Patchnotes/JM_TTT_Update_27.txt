@@ -2,7 +2,9 @@
 
 [Server]
 
-- Added [HUD Kill Cards] A pop up on death shows who killed you, how they did it and with how much damage
+- Added [HUD] A pop up on death shows who killed you, how they did it and with how much damage
+
+- Changed [HUD] The HUD warning for friendly Traitor traps is now much bigger and easier to see
 
 - Changed [Map Vote] There are now 6 maps per row in the map Vote (As we have sooo many maps now)
 - Fixed [Map Vote] Server Errors on typing showmap when there is no vote happening
@@ -11,38 +13,75 @@
 // Traitors will always get +1 Credit for looting Care packages on top of the standard rewards
 // The list of possible Care Package Loot items is:
 
-
+// The Helpful Loot
 - Added [Loot] Advanced Rifle 		- The Rifle But: 			1 Tap headshots and 2 tap body shots
 - Added [Loot] Advanced SMG 		- The SMG But: 			60 bullets in a mag and faster firing
 - Added [Loot] Advanced Shotgun 	- The Shotgun But: 		Semi Automatic and slightly more damage
 - Added [Loot] Advanced Sniper 	- The Sniper But: 		Semi Automatic and slightly more damage
 - Added [Loot] Advanced Pistol 		- The Pistol But: 			More Damage, Faster Firing less recoil
-- Added [Loot] Gus Radio: A radio that plays the whole Gus is My name song and then expolodes.
+- Added [Loot] Mega Tracker: Everyone, apart from you gets tracked for 45 seconds
+- Added [Loot] Mega Frag Grenade: A weapon that launches 6 frags in one throw
 - Added [Loot] Max Health: +50 Max HPand get fully healed (Stacks with other sources)
 - Added [Loot] Speed Buff: +20% movement speed (Stacks with other sources)
+- Added [Loot] Regeneration: +2 HP/s Health Regen (Stacks with other sources)
+
+
+// The Unhelpful Loot
+- Added [Loot] Gus Radio: A radio that plays the whole Gus is My name song and then expolodes.
 - Added [Loot] Roller mine: An invulerable combine roller mine that will harrass anyone it sees
 - Added [Loot] Manhacks: A bundle of manhacks that will attack anyone who they see
-- Added [Loot] Pigeon: just a pigeon, that is litterally it...
-- Added [Loot] Mega Tracker: Everyone, apart from you gets tracked for 30 seconds
+- Added [Loot] Pigeon: just a pigeon, that is literally it...
+
 
 
 [Gameplay]
 
+- Rework [JM Buffs 2.0] Fully Rewrote the entire Buff / Effects system in a new safe, effecienct and practical way.
+- Rework [JM Buffs 2.0] Rewrote Taser
+- Rework [JM Buffs 2.0] Rewrote Silenced Pistol
+- Rework [JM Buffs 2.0] Rewrote Stun Grenade
+- Rework [JM Buffs 2.0] Rewrote Tracking Dart
+- Rework [JM Buffs 2.0] Rewrote Tag Grenade
+- Rework [JM Buffs 2.0] Rewrote Fire Wall
+- Rework [JM Buffs 2.0] Rewrote Poison Dart
+- Rework [JM Buffs 2.0] Rewrote BearTrap
+- Rework [JM Buffs 2.0] Rewrote Tree of Life
+- Rework [JM Buffs 2.0] Rewrote Vigor
+
+- Rework [Chameleon] to be less of a cheesy boring camp tool, and more useful and responsive
+// + Invisibility while holding left click
+// - Slows the player while invisible
+// - Can only be invisible for a finite amount of time
+// - Entering / leaving invisibility is noisy
+// Effectively making it the spy watch from TF2 (But less OP)
+
 - Removed [The Defender] It was re-purposed into the Advanced Weapon System
 
-- Buffed [Firewal] Damge per Tick: 2 -> 3
-- Buffed [Firewal] Damage Duration: 7 -> 5 Seconds
-- Buffed [Firewal] Total Damage: 70 -> 75
-- Buffed [Firewall] Slow Amount: 50% -> 70%
+- Buffed [Firewal] Duration: 7 -> 10 Seconds
+- Buffed [Firewall] Players who walk through the fire wall also get tracked
 
 - Buffed [Tracking Dart] Increased the size of the glow effect
 - Buffed [Tag Grenade] Increased the size of the glow effect
+- Changed [Tag Grenade] The Tag Colour is now yellow to match tracking dart
 
 - Buffed [Light Pistol] Increased Spread Accuracy: 0.0125 -> 0.010
 - Buffed [Heavy Pistol] Increased Spread Accuracy: 0.0125 -> 0.010
 
 - Buffed [Man Hack Swarm] Increased Lifetime: 30 -> 60 Seconds
 
-- Fixed [Buff Effect Weapons] Addd even more checks and memory management to Taser and the other broken things
+- Buffed [Stun Grenade] Your Vision is Distorted Even more
+- Buffed [Stun Grenade] Duration: 5 -> 7 Seconds
+- Nerfed [Stun Grenade] No longer makes targets drop their weapons
+
+- Buffed [Vigor] HP heal per second: 1 -> 2
+- Buffed [Vigor] Max HP: +25 -> +30
+
+- Buffed [Taser] Stun Duration: 10 -> 12 Seconds
+
+- Nerfed [Shotgun] Accuracy Spread: 0.130 -> 0.150
+
+- Fixed [Vigor] No longer healing when it should be
+- Fixed [Taser] Stunning you forever (GOD PLEASE WORK)
+- Fixed [All Buffs] from staying after they should have gone
 
 [Maps]

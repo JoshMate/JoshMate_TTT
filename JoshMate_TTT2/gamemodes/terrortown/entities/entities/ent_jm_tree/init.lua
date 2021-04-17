@@ -83,8 +83,7 @@ function HealSphere(ent)
 		d = diff:Dot(diff)
 
 		if d >= r then continue end
-		
-		STATUS:AddTimedStatus(ply, "jm_treeoflife", 1, 1)
+		STATUS:AddTimedStatus(ply, JM_Global_Buff_TreeOfLife_IconName, 1, 1)
 
 		if(ply:Health() >= ply:GetMaxHealth()) then continue end
 
