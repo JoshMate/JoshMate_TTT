@@ -31,7 +31,8 @@ local weps = {
    weapon_jm_primary_lmg         = {name="P LMG", snd=nil},
    weapon_jm_grenade_push        = {name="G Jump Grenade",  snd=nil},
    weapon_jm_grenade_fire        = {name="G Frag Grenade",  snd=nil},
-   weapon_jm_grenade_smoke       = {name="G Tag Grenade", snd=nil}
+   weapon_jm_grenade_smoke       = {name="G Tag Grenade", snd=nil},
+   ent_jm_carepackage_spawn      = {name="Z Care Package Spawn", snd=nil}
 };
 
 local mdls = {
@@ -48,7 +49,8 @@ local mdls = {
    weapon_jm_grenade_smoke          = "models/weapons/w_eq_smokegrenade.mdl",
    item_jm_ammo_light               = "models/items/357ammo.mdl",
    item_jm_ammo_medium              = "models/items/boxsrounds.mdl",
-   item_jm_ammo_heavy               = "models/items/boxbuckshot.mdl"
+   item_jm_ammo_heavy               = "models/items/boxbuckshot.mdl",
+   ent_jm_carepackage_spawn         = "models/Items/item_item_crate.mdl"
 };
 
 -- special colours for certain ents
@@ -65,12 +67,7 @@ local function DummyInit(s)
    s:SetSolid(SOLID_VPHYSICS)
    s:SetMoveType(MOVETYPE_VPHYSICS)
 
-   if s:GetClass() == "ttt_playerspawn" then
-      s:PhysicsInitBox(Vector(-18, -18, -0.1), Vector(18, 18, 66))
-      s:SetPos(s:GetPos() + Vector(0, 0, 1))
-   else
-      s:PhysicsInit(SOLID_VPHYSICS)
-   end
+   s:PhysicsInit(SOLID_VPHYSICS)
 
    s:SetModel(s.Model)
 end
@@ -197,12 +194,10 @@ else
    concommand.Add("tttweaponplacer_queryimport", function() BroadcastLua("QueryImportName()") end)
 end
 
-WEAPON_secondary_ = 1
-WEAPON_heavy = 2
+WEAPON_PISTOL = 1
+WEAPON_HEAVY = 2
 WEAPON_NADE = 3
-WEAPON_RANDOM = 4
-
-PLAYERSPAWN = 5
+PLAYERSPAWN = 4
 
 local enttypes = {
    weapon_jm_secondary_light        = WEAPON_PISTOL,
@@ -215,7 +210,8 @@ local enttypes = {
    weapon_jm_primary_lmg            = WEAPON_HEAVY,
    weapon_jm_grenade_push           = WEAPON_NADE,
    weapon_jm_grenade_fire           = WEAPON_NADE,
-   weapon_jm_grenade_smoke          = WEAPON_NADE
+   weapon_jm_grenade_smoke          = WEAPON_NADE,
+   ent_jm_carepackage_spawn         = PLAYERSPAWN
 };
 
 local function PrintCount(ply)
@@ -238,7 +234,7 @@ local function PrintCount(ply)
    ply:ChatPrint("Secondary weapons: " .. count[WEAPON_PISTOL])
    ply:ChatPrint("Grenades: " .. count[WEAPON_NADE])
    ply:ChatPrint("Random weapons: " .. count[WEAPON_RANDOM])
-   ply:ChatPrint("Player spawns: " .. count[PLAYERSPAWN])
+   ply:ChatPrint("Care Package Spawns: " .. count[PLAYERSPAWN])
 end
 concommand.Add("tttweaponplacer_count", PrintCount)
 

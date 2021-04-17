@@ -55,7 +55,13 @@ function ENT:Initialize()
         end
 
         -- Add the Buff Icon to their Screen and send them the NWBool for their client effects
-        STATUS:AddTimedStatus(self.targetPlayer, self.BuffIconName, self.BuffDuration, 1)
+        if (self.BuffDuration > 0) then
+            STATUS:AddTimedStatus(self.targetPlayer, self.BuffIconName, self.BuffDuration, 1)
+        end
+        if (self.BuffDuration <= 0) then
+            STATUS:AddStatus(self.targetPlayer, self.BuffIconName)
+        end
+        
         self.targetPlayer:SetNWBool(self.BuffNWBool, true)
         self.targetPlayer:ChatPrint("[Buff] - You Recieve The Effect: " .. tostring(self.PrintName))
 

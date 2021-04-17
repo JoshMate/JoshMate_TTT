@@ -11,19 +11,42 @@ if SERVER then
 
     function JMGlobal_SpawnCarePackage(Forced)
 
+        local foundASpawn = false
+        local spawn = nil
+        local randomChoice = nil
+        local possibleSpawns = nil
+
         net.Start("JM_CarePackage_Arrival")
         net.Broadcast()
 
-        local possibleSpawns = ents.FindByClass( "info_player_start" )
-        local randomChoice = math.random(1, #possibleSpawns)
-        local spawn = possibleSpawns[randomChoice]
+        -- Check if manual spawns exist
+        possibleSpawns = ents.FindByClass( "ent_jm_carepackage_spawn" )
+        if #possibleSpawns > 0 then
+            randomChoice = math.random(1, #possibleSpawns)
+            spawn = possibleSpawns[randomChoice]
+            foundASpawn = true
+        end
+
+        -- Fall back to player spawns
+        if not foundASpawn then
+            print("[JM Care Package] - WARNING: No Manual spawns found! Falling back to player spawns...")
+            possibleSpawns = ents.FindByClass( "info_player_start" )
+            randomChoice = math.random(1, #possibleSpawns)
+            spawn = possibleSpawns[randomChoice]
+        end
+
         local ent = ents.Create("ent_jm_carepackage")
 		ent:SetPos(spawn:GetPos())
         ent:Spawn()     
        
+
         if Forced then print("[JM Care Package] - Force spawning a Care Package!") end
         if not Forced then print("[JM Care Package] - Naturally Spawning Care package after: " .. tostring(JM_CarePackage_Spawn_Timer_Final) .. " Seconds") end 
         print("[JM Care Package] - Spawning Care package at Spawn: " .. tostring(randomChoice) .. " / " .. tostring(#possibleSpawns))
+
+        JM_CarePackage_Spawn_Timer_Final = math.random( JM_CarePackage_Spawn_Timer_Min, JM_CarePackage_Spawn_Timer_Max )
+        JM_CarePackage_Spawn_Timer_Final = math.Round( JM_CarePackage_Spawn_Timer_Final)
+        timer.Simple(JM_CarePackage_Spawn_Timer_Final, function () JMGlobal_SpawnCarePackage(false) end)
 
     end
 
@@ -32,10 +55,8 @@ if SERVER then
 
         JM_CarePackage_Spawn_Timer_Final = math.random( JM_CarePackage_Spawn_Timer_Min, JM_CarePackage_Spawn_Timer_Max )
         JM_CarePackage_Spawn_Timer_Final = math.Round( JM_CarePackage_Spawn_Timer_Final)
+        timer.Simple(JM_CarePackage_Spawn_Timer_Final, function () JMGlobal_SpawnCarePackage(false) end)     
 
-        if(timer.Exists("JMCarePackageSpawnTimer")) then timer.Remove("JMCarePackageSpawnTimer") end
-        timer.Create("JMCarePackageSpawnTimer", JM_CarePackage_Spawn_Timer_Final, 5, function () JMGlobal_SpawnCarePackage(false) end)
-        
     end)
 
 end

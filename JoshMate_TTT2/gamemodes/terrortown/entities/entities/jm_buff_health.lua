@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_Health_Name
-local JM_BuffNWBool             = JM_Global_Buff_Health_NWBool
-local JM_BuffDuration           = JM_Global_Buff_Health_Duration
-local JM_BuffIconName           = JM_Global_Buff_Health_IconName
-local JM_BuffIconPath           = JM_Global_Buff_Health_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_HealthIconGoodBad
+local JM_PrintName              = JM_Global_Buff_Care_Health_Name
+local JM_BuffNWBool             = JM_Global_Buff_Care_Health_NWBool
+local JM_BuffDuration           = JM_Global_Buff_Care_Health_Duration
+local JM_BuffIconName           = JM_Global_Buff_Care_Health_IconName
+local JM_BuffIconPath           = JM_Global_Buff_Care_Health_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_Care_HealthIconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)

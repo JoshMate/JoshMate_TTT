@@ -54,7 +54,6 @@ function ENT:Use( activator, caller )
 		if activator:IsTerror() and activator:Alive() then
 			
 			self:EmitSound("carepackage_open.wav")
-			activator:ChatPrint("[Care Package] - You have looted a care package!")
 
 			if(activator:IsTraitor()) then
 				activator:ChatPrint("[Care Package] - Loot: +1 Credit (Traitor Bonus Loot)")
@@ -99,22 +98,19 @@ function ENT:Use( activator, caller )
 				activator:ChatPrint("[Care Package] - Loot: Health Boost")
 				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
 				activator:SetHealth(activator:GetMaxHealth())
-				JM_GiveBuffToThisPlayer(jm_buff_health, activator, self)
+				JM_GiveBuffToThisPlayer("jm_buff_health", activator, self)
 			end
 
 
 			if randomLootChoice == 7 then
 				activator:ChatPrint("[Care Package] - Loot: Speed Boost")
-				JM_GiveBuffToThisPlayer(jm_buff_speedboost, activator, self)
+				JM_GiveBuffToThisPlayer("jm_buff_speedboost", activator, self)
 			end
 			
 			if randomLootChoice == 8 then
 				activator:ChatPrint("[Care Package] - Loot: Health Regeneration")
-				JM_GiveBuffToThisPlayer(jm_buff_regeneration, activator, self)
+				JM_GiveBuffToThisPlayer("jm_buff_regeneration", activator, self)
 			end
-
-			
-			
 
 			if randomLootChoice == 9 then
 				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw Radio")
@@ -136,7 +132,7 @@ function ENT:Use( activator, caller )
 				local npc = nil
 				for i = deployAmount,1,-1 do 
 					npc = ents.Create("npc_manhack")
-					npc:SetPos(self.GetPos())
+					npc:SetPos(self:GetPos())
 					npc:SetShouldServerRagdoll(false)
 					npc:Spawn()
 					npc.JM_ManHackLifeStart = JM_ManHackLifeStart         
