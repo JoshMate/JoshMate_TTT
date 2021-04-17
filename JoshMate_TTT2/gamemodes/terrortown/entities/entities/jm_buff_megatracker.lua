@@ -51,7 +51,7 @@ end
 
 
 -- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Tracking_Dart", function()
+hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
     local players = {}
      local count = 0

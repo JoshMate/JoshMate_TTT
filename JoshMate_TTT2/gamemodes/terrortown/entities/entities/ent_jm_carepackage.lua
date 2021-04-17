@@ -175,6 +175,11 @@ function ENT:Use( activator, caller )
 
 				local phexp = ents.Create("env_physexplosion")
 					if IsValid(phexp) then
+
+						local vel = activator:GetVelocity()
+						vel.z = vel.z + 120
+						activator:SetVelocity(vel)
+
 						phexp:SetPos(self:GetPos())
 						phexp:SetKeyValue("magnitude", 500) --max
 						phexp:SetKeyValue("radius", 500)
