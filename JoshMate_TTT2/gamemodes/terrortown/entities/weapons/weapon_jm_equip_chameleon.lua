@@ -13,8 +13,8 @@ SWEP.Instructions			= "Go invisible"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 100
-SWEP.Primary.DefaultClip	= 100
+SWEP.Primary.ClipSize		= 60
+SWEP.Primary.DefaultClip	= 60
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -46,6 +46,7 @@ if CLIENT then
 		- Greatly slows the player
 		- Can only be invisible for a finite amount of time
 		- Entering / leaving invisibility is noisy
+		- Foot steps and your player name are still there
 	]]
 }
 end

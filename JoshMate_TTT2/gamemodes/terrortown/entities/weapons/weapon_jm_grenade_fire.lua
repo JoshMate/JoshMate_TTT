@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName       = "Mega Frag Grenade"
+   SWEP.PrintName       = "Frag Grenade"
    SWEP.Slot            = 3
 
    SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_nade"

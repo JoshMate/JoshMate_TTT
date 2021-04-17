@@ -61,7 +61,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 15)
+			local randomLootChoice = math.random(13, 13)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -158,7 +158,7 @@ function ENT:Use( activator, caller )
 			if randomLootChoice == 13 then
 				activator:ChatPrint("[Care Package] - Loot: Mega Tracker")
 				for _, ply in ipairs( player.GetAll() ) do
-					if (ply:IsTerror() and ply:Alive() and not ply:SteamID64() == activator:SteamID64() ) then
+					if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
 						JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,self)
 					end
 				end
@@ -177,12 +177,12 @@ function ENT:Use( activator, caller )
 					if IsValid(phexp) then
 
 						local vel = activator:GetVelocity()
-						vel.z = vel.z + 120
+						vel.z = vel.z + 180
 						activator:SetVelocity(vel)
 
 						phexp:SetPos(self:GetPos())
-						phexp:SetKeyValue("magnitude", 500) --max
-						phexp:SetKeyValue("radius", 500)
+						phexp:SetKeyValue("magnitude", 1000) --max
+						phexp:SetKeyValue("radius", 1000)
 						-- 1 = no dmg, 2 = push ply, 4 = push radial, 8 = los, 16 = viewpunch
 						phexp:SetKeyValue("spawnflags", 1 + 2 + 16)
 						phexp:Spawn()

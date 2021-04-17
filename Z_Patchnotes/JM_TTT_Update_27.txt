@@ -2,7 +2,7 @@
 
 [Server]
 
-- Added [Gozilla]
+- Added [Godzilla] Finally
 
 - Added [HUD] A pop up on death shows who killed you, how they did it and with how much damage
 
@@ -21,7 +21,6 @@
 - Added [Loot] Advanced Shotgun 	- The Shotgun But: 		Semi Automatic and slightly more damage
 - Added [Loot] Advanced Sniper 	- The Sniper But: 		Semi Automatic and slightly more damage
 - Added [Loot] Advanced Pistol 		- The Pistol But: 			More Damage, Faster Firing less recoil
-- Added [Loot] Mega Tracker: Everyone, apart from you gets tracked for 45 seconds
 - Added [Loot] Mega Frag Grenade: A weapon that launches 6 frags in one throw
 - Added [Loot] Max Health: +50 Max HPand get fully healed (Stacks with other sources)
 - Added [Loot] Speed Buff: +20% movement speed (Stacks with other sources)
@@ -33,7 +32,8 @@
 - Added [Loot] Roller mine: An invulerable combine roller mine that will harrass anyone it sees
 - Added [Loot] Manhacks: A bundle of manhacks that will attack anyone who they see
 - Added [Loot] Pigeon: just a pigeon, that is literally it...
-- Added [Loot] Godzilla: Finally...
+- Added [Loot] Godzilla Roar: no aliens though... yet... 
+- Added [Loot] Mega Tracker: Everyone gets tracked for 45 seconds
 
 
 
@@ -89,3 +89,7 @@
 - Fixed [Weapon Spawner] ttt weapon spawner from creating errors when placing weapons
 
 [Maps]
+
+- New Map [Rooftop Party] Seb's first ever map!
+
+- Changed [Elevator] There are now only pistols!

@@ -107,7 +107,7 @@ JM_Global_Buff_Chameleon_IconGoodBad                    = "good"
 -- Care Package Buffs
 
 JM_Global_Buff_Care_MegaTracker_Name                     = "Mega Tracker"
-JM_Global_Buff_Care_MegaTracker_Duration                 = 45
+JM_Global_Buff_Care_MegaTracker_Duration                 = 30
 JM_Global_Buff_Care_MegaTracker_NWBool                   = "JM_Buff_NWBool_IsCareMegaTracker"
 JM_Global_Buff_Care_MegaTracker_IconName                 = "JM_Buff_Icon_CareMegaTracker"
 JM_Global_Buff_Care_MegaTracker_IconPath                 = "vgui/ttt/joshmate/hud_tracker.png"
