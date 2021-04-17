@@ -288,10 +288,6 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 		-- JM Changes, linear damage fall off
 		
 		dmg = damage * (1-( distance / radius))
-		print("---------------")
-		print("Distance = " .. distance)
-		print("Radius = " .. radius)
-		print("Damage = " .. dmg)
 
 		local dmginfo = DamageInfo()
 		dmginfo:SetDamage(dmg)
