@@ -56,8 +56,8 @@ SWEP.Chameleon_LastLeftClick		= CurTime()
 function Invisibility_Remove(player) 
 	STATUS:RemoveStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, false)
-	player:EmitSound(Sound("chameleon_activate.wav"))
 	if SERVER then
+		player:EmitSound(Sound("chameleon_activate.wav"))
 		ULib.invisible(player,false,255)
 	end
 end
@@ -65,8 +65,8 @@ end
 function Invisibility_Give(player) 
 	STATUS:AddStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
-	player:EmitSound(Sound("chameleon_activate.wav"))
 	if SERVER then
+		player:EmitSound(Sound("chameleon_activate.wav")) 
 		ULib.invisible(player,true,255)
 	end
 end

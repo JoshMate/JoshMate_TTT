@@ -46,7 +46,8 @@ if SERVER then
 
         JM_CarePackage_Spawn_Timer_Final = math.random( JM_CarePackage_Spawn_Timer_Min, JM_CarePackage_Spawn_Timer_Max )
         JM_CarePackage_Spawn_Timer_Final = math.Round( JM_CarePackage_Spawn_Timer_Final)
-        timer.Simple(JM_CarePackage_Spawn_Timer_Final, function () JMGlobal_SpawnCarePackage(false) end)
+        if(timer.Exists("JMCarePackageSpawnTimer")) then timer.Remove("JMCarePackageSpawnTimer") end
+        timer.Create("JMCarePackageSpawnTimer", JM_CarePackage_Spawn_Timer_Final, 1, function () JMGlobal_SpawnCarePackage(false) end)
 
     end
 
@@ -55,7 +56,9 @@ if SERVER then
 
         JM_CarePackage_Spawn_Timer_Final = math.random( JM_CarePackage_Spawn_Timer_Min, JM_CarePackage_Spawn_Timer_Max )
         JM_CarePackage_Spawn_Timer_Final = math.Round( JM_CarePackage_Spawn_Timer_Final)
-        timer.Simple(JM_CarePackage_Spawn_Timer_Final, function () JMGlobal_SpawnCarePackage(false) end)     
+
+        if(timer.Exists("JMCarePackageSpawnTimer")) then timer.Remove("JMCarePackageSpawnTimer") end
+        timer.Create("JMCarePackageSpawnTimer", JM_CarePackage_Spawn_Timer_Final, 1, function () JMGlobal_SpawnCarePackage(false) end) 
 
     end)
 

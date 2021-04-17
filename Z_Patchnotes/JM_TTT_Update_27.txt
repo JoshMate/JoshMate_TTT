@@ -2,6 +2,8 @@
 
 [Server]
 
+- Added [Gozilla]
+
 - Added [HUD] A pop up on death shows who killed you, how they did it and with how much damage
 
 - Changed [HUD] The HUD warning for friendly Traitor traps is now much bigger and easier to see
@@ -31,6 +33,7 @@
 - Added [Loot] Roller mine: An invulerable combine roller mine that will harrass anyone it sees
 - Added [Loot] Manhacks: A bundle of manhacks that will attack anyone who they see
 - Added [Loot] Pigeon: just a pigeon, that is literally it...
+- Added [Loot] Godzilla: Finally...
 
 
 
@@ -83,5 +86,6 @@
 - Fixed [Vigor] No longer healing when it should be
 - Fixed [Taser] Stunning you forever (GOD PLEASE WORK)
 - Fixed [All Buffs] from staying after they should have gone
+- Fixed [Weapon Spawner] ttt weapon spawner from creating errors when placing weapons
 
 [Maps]

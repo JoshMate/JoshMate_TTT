@@ -61,7 +61,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 14)
+			local randomLootChoice = math.random(1, 15)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -167,6 +167,24 @@ function ENT:Use( activator, caller )
 			if randomLootChoice == 14 then
 				activator:ChatPrint("[Care Package] - Loot: Mega Frag Grenade")
 				Loot_SpawnThis(self,"weapon_jm_zloot_mega_frag")
+			end
+
+			if randomLootChoice == 15 then
+				activator:ChatPrint("[Care Package] - Loot: Godzilla")
+				if SERVER then self:EmitSound(Sound("godzillaroar.wav"))
+
+				local phexp = ents.Create("env_physexplosion")
+					if IsValid(phexp) then
+						phexp:SetPos(self:GetPos())
+						phexp:SetKeyValue("magnitude", 500) --max
+						phexp:SetKeyValue("radius", 500)
+						-- 1 = no dmg, 2 = push ply, 4 = push radial, 8 = los, 16 = viewpunch
+						phexp:SetKeyValue("spawnflags", 1 + 2 + 16)
+						phexp:Spawn()
+						phexp:Fire("Explode", "", 0.2)
+					end
+				end
+
 			end
 
 			
