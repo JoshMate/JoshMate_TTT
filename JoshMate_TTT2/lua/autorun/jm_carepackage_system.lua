@@ -29,7 +29,7 @@ if SERVER then
 
         -- Fall back to player spawns
         if not foundASpawn then
-            print("[JM Care Package] - WARNING: No Manual spawns found! Falling back to player spawns...")
+            print("[JM Care Package] - WARNING: No Manual spawns found! using player spawn instead...")
             possibleSpawns = ents.FindByClass( "info_player_start" )
             randomChoice = math.random(1, #possibleSpawns)
             spawn = possibleSpawns[randomChoice]

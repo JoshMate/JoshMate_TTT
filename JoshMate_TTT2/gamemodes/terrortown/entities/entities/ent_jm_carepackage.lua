@@ -61,7 +61,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(13, 13)
+			local randomLootChoice = math.random(1, 17)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -190,6 +190,16 @@ function ENT:Use( activator, caller )
 					end
 				end
 
+			end
+
+			if randomLootChoice == 16 then
+				activator:ChatPrint("[Care Package] - Loot: Mega Jump Grenade")
+				Loot_SpawnThis(self,"weapon_jm_zloot_mega_jump")
+			end
+
+			if randomLootChoice == 17 then
+				activator:ChatPrint("[Care Package] - Loot: Mega Jump Grenade")
+				Loot_SpawnThis(self,"weapon_jm_zloot_ninja_stick")
 			end
 
 			

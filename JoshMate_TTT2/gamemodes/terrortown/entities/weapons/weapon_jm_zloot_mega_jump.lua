@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName       = "Jump Grenade"
+   SWEP.PrintName       = "Mega Jump Grenade"
    SWEP.Slot            = 3
 
    SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_nade"
@@ -22,11 +22,11 @@ SWEP.Spawnable          = true
 SWEP.CanBuy             = {}
 SWEP.LimitedStock       = true
 
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 
 SWEP.detonate_timer        = 0.15
 
 function SWEP:GetGrenadeName()
-   return "ent_jm_grenade_push_proj"
+   return "ent_jm_zloot_megajump_proj"
 end
