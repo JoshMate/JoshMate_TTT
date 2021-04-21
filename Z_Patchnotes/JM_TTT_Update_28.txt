@@ -1,0 +1,10 @@
+[ Update 27 ] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+[Gameplay]
+
+[Maps]
+
+- Fixed [Rooftop Party] Re-placed props dodgey props
+- Fixed [Rooftop Party] Re-aligned dodgey textures 
