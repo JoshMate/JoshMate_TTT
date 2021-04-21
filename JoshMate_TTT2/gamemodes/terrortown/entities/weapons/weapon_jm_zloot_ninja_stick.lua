@@ -28,7 +28,7 @@ SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = true
 SWEP.Secondary.Ammo = "none"
-SWEP.Secondary.Delay = 1
+SWEP.Secondary.Delay = 2.5
 
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.WeaponID = AMMO_NINJASTICK
@@ -146,15 +146,11 @@ function SWEP:SecondaryAttack()
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end
 	
-	local velOrig = owner:GetVelocity()
-	local velNew  = owner:GetVelocity()
-
-	velNew.x = 0
-	velNew.y = 0
-	velNew.z = 120
-	owner:SetVelocity(velNew)
-
-	owner:SetVelocity(velOrig * 2)
+	local vel = owner:GetVelocity()
+	vel.x = vel.x * 2.5
+	vel.y = vel.y * 2.5
+	vel.z = 300
+	owner:SetVelocity(vel)
 
 	self:EmitSound("ninjastick_dash.wav")
 	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)

@@ -61,7 +61,7 @@ function ENT:Use( activator, caller )
 			end
 			
 
-			local randomLootChoice = math.random(1, 17)
+			local randomLootChoice = math.random(1, 16)
 
 			if randomLootChoice == 1 then
 				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
@@ -123,39 +123,11 @@ function ENT:Use( activator, caller )
 			end
 
 			if randomLootChoice == 11 then
-				activator:ChatPrint("[Care Package] - Loot: Manhacks!")
-
-				local JM_ManHackLifeStart = CurTime()
-				local deployAmount = 12
-				local deployLifeTime = 60
-
-				local npc = nil
-				for i = deployAmount,1,-1 do 
-					npc = ents.Create("npc_manhack")
-					npc:SetPos(self:GetPos())
-					npc:SetShouldServerRagdoll(false)
-					npc:Spawn()
-					npc.JM_ManHackLifeStart = JM_ManHackLifeStart         
-				end
-
-				timer.Simple(deployLifeTime, function () 
-
-					for k, v in ipairs( ents.FindByClass("npc_manhack") ) do
-						if (v.JM_ManHackLifeStart <= CurTime() - (deployLifeTime - 1)) then
-						Barrier_Effects_Destroyed(v) 
-						v:Remove()
-						end
-					end
-
-				end)
-			end
-
-			if randomLootChoice == 12 then
 				activator:ChatPrint("[Care Package] - Loot: Pigeon")
 				Loot_SpawnThis(self,"npc_pigeon")
 			end
 
-			if randomLootChoice == 13 then
+			if randomLootChoice == 12 then
 				activator:ChatPrint("[Care Package] - Loot: Mega Tracker")
 				for _, ply in ipairs( player.GetAll() ) do
 					if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
@@ -164,12 +136,12 @@ function ENT:Use( activator, caller )
 				end
 			end
 			
-			if randomLootChoice == 14 then
+			if randomLootChoice == 13 then
 				activator:ChatPrint("[Care Package] - Loot: Mega Frag Grenade")
 				Loot_SpawnThis(self,"weapon_jm_zloot_mega_frag")
 			end
 
-			if randomLootChoice == 15 then
+			if randomLootChoice == 14 then
 				activator:ChatPrint("[Care Package] - Loot: Godzilla")
 				if SERVER then self:EmitSound(Sound("godzillaroar.wav"))
 
@@ -177,12 +149,12 @@ function ENT:Use( activator, caller )
 					if IsValid(phexp) then
 
 						local vel = activator:GetVelocity()
-						vel.z = vel.z + 180
+						vel.z = vel.z + 500
 						activator:SetVelocity(vel)
 
 						phexp:SetPos(self:GetPos())
-						phexp:SetKeyValue("magnitude", 1000) --max
-						phexp:SetKeyValue("radius", 1000)
+						phexp:SetKeyValue("magnitude", 300) --max
+						phexp:SetKeyValue("radius", 300)
 						-- 1 = no dmg, 2 = push ply, 4 = push radial, 8 = los, 16 = viewpunch
 						phexp:SetKeyValue("spawnflags", 1 + 2 + 16)
 						phexp:Spawn()
@@ -192,13 +164,13 @@ function ENT:Use( activator, caller )
 
 			end
 
-			if randomLootChoice == 16 then
+			if randomLootChoice == 15 then
 				activator:ChatPrint("[Care Package] - Loot: Mega Jump Grenade")
 				Loot_SpawnThis(self,"weapon_jm_zloot_mega_jump")
 			end
 
-			if randomLootChoice == 17 then
-				activator:ChatPrint("[Care Package] - Loot: Mega Jump Grenade")
+			if randomLootChoice == 16 then
+				activator:ChatPrint("[Care Package] - Loot: Ninja Stick")
 				Loot_SpawnThis(self,"weapon_jm_zloot_ninja_stick")
 			end
 
