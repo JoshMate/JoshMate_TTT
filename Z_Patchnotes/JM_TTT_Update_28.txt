@@ -6,5 +6,10 @@
 
 [Maps]
 
-- Fixed [Rooftop Party] Re-placed props dodgey props
+- Added [Rooftop Party] Crack den now has custom music (courtesy of Vinny)
+- Improved [Rooftop Party] Glass physics changed to act more realistically
+- Fixed [Rooftop Party] Increased height of the flowerbed to allow Traitors with Ninja pro to jump from the garden area to the pool
+- Fixed [Rooftop Party] Re-placed dodgey props
+- Fixed [Rooftop Party] Re-placed dodgey weapons
 - Fixed [Rooftop Party] Re-aligned dodgey textures 
+- Fixed [Rooftop Party] Turtle reeeeeee sound re-recorded by Seb
