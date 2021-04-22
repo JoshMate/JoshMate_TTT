@@ -115,7 +115,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 		 end
 	 end
  
-	 halo.Add( players, Color( 255, 255, 0 ), 3, 3, 2, true, true )
+	 halo.Add( players, Color( 255, 255, 0 ), 2, 2, 3, true, true )
  
  end )
 
@@ -176,7 +176,7 @@ function ENT:Loot_Good( activator, caller )
 	end
 
 	if RNG_Good == 10 then
-		activator:ChatPrint("[Care Package] - Good Loot: Ninja Stick")
+		activator:ChatPrint("[Care Package] - Good Loot: Ninja Blade")
 		Loot_SpawnThis(self,"weapon_jm_zloot_ninjablade")
 	end
 

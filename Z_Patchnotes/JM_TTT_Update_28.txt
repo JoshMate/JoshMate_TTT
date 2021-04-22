@@ -33,6 +33,8 @@
 - Reworked [Mega Frag] It now launches 10 grenades instead of 7
 - Reworked [Mega Frag] You throw them much further to account for all this new lethality (Can still half throw)
 
+- Removed [Visualiser] It is no longer buyable or part of the detectives default loadout
+
 - Buffed [Taser] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
 - Buffed [Tracker] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
 - Buffed [Silenced Pistol] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
