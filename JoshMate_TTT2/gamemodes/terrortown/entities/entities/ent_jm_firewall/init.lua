@@ -13,10 +13,6 @@ local JM_Barrier_Sound_Armed		= "firewall_arm.wav"
 local JM_Barrier_Sound_Destroyed	= "firewall_destroy.wav"
 local JM_Barrier_Sound_HitPlayer	= "firewall_hit.wav"
 
-local JM_FireWall_Damage_Amount		= 3
-local JM_FireWall_Damage_Delay		= 0.20
-local JM_FireWall_Damage_Duration	= 5
-
 ENT.JM_IsLethal					= false
 
 function ENT:Barrier_Effects_Destroyed()
@@ -60,17 +56,14 @@ function ENT:Barrier_Die()
 			self:SetMaterial("joshmate/barrier")
 			self:SetRenderMode( RENDERMODE_TRANSCOLOR )
 			self:SetColor(JM_Barrier_Colour_Dormant) 
-			self.JM_IsLethal = false
-			-- We go dormant until all players are no longer on fire (For hitmarkers / damage ownership reasons)
-			timer.Simple(JM_FireWall_Damage_Duration, function () self:Remove() end)
-			
+			self.JM_IsLethal = false			
 		end 
 		
 	end
 end
 
 function ENT:Initialize()
-	self:SetModel( "models/hunter/plates/plate3x5.mdl" )
+	self:SetModel( "models/hunter/plates/plate4x6.mdl" )
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetMoveType( MOVETYPE_VPHYSICS ) 
 	self:SetSolid( SOLID_VPHYSICS)

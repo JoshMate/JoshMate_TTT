@@ -2,11 +2,11 @@
 
 [Server]
 
+- Changed [Care Package] Reduced Carepackage Maximum spawn Time: 5 -> 4 Minutes
+
+- Changed [Care Package] New Loot table logic: Good Item = 70%  || Bad Item = 30% Chance
 
 [Gameplay]
-
-- Changed [Care Package] Reduced Carepackage Maximum spawn Time: 5 -> 4 Minutes
-- Changed [Care Package] New Loot table logic: Good Item = 70%  || Bad Item = 30% Chance
 
 - Added [Care Package Loot] Good: Turns innocents into a detective || Ds / Ts get +3 Credits
 - Added [Care Package Loot] Bad: Tripping balls gives you some HORRIFIC Drug inspired screen effects for a bit
@@ -34,6 +34,13 @@
 - Reworked [Mega Frag] You throw them much further to account for all this new lethality (Can still half throw)
 
 - Removed [Visualiser] It is no longer buyable or part of the detectives default loadout
+
+- Nerfed [Barrier] HP: Infinite -> 350
+- Buffed [Barrier] Duration: 60s -> Infinite
+- Buffed [Barrier] Uses: 2 -> 3
+- Buffed [Barrier] Wall Size: 3x5 -> 4x6
+
+- Buffed [Fire Wall] Wall Size: 3x5 -> 4x6
 
 - Buffed [Taser] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
 - Buffed [Tracker] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)

@@ -2,8 +2,8 @@ AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
-local JM_Barrier_LifeTime			= 60
 local JM_Barrier_ArmTime			= 3
+local JM_Barrier_HP					= 350
 
 local JM_Barrier_Colour_PreArm		= Color( 0, 180, 255, 180 )
 
@@ -52,10 +52,11 @@ function ENT:Barrier_Die()
 end
 
 function ENT:Initialize()
-	self:SetModel( "models/hunter/plates/plate3x5.mdl" )
+	self:SetModel( "models/hunter/plates/plate4x6.mdl" )
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetMoveType( MOVETYPE_VPHYSICS ) 
 	self:SetSolid( SOLID_NONE )
+	self.HP = JM_Barrier_HP
 
     local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
@@ -75,11 +76,16 @@ function ENT:Initialize()
 	-- Timer To arm this Ent
 	timer.Simple(JM_Barrier_ArmTime, function() if IsValid(self) then self:Barrier_Arm() end end)
 
-	-- Timer To Delete this Ent
-	timer.Simple(JM_Barrier_LifeTime, function() if IsValid(self) then  self:Barrier_Die() end end)
-
 end
 
+function ENT:OnTakeDamage(dmginfo)
+
+    self.HP = self.HP - dmginfo:GetDamage()
+
+    if self.HP <= 0 then
+        self:Barrier_Die()
+    end
+end
 
 
 function ENT:Use( activator, caller )

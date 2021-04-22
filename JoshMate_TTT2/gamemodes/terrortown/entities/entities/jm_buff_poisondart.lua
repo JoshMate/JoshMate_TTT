@@ -63,7 +63,7 @@ end
 
 function ENT:BuffTickEffect()
 
-    local poisonDartDamageTick = 3
+    local poisonDartDamageTick = 2
     
     local dmginfo = DamageInfo()
     dmginfo:SetDamage(poisonDartDamageTick)
@@ -92,7 +92,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 
     -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.5
+    self.buffTickDelay  = 0.25
     self.buffTickNext   = CurTime()
 
 end
