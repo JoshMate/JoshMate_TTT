@@ -1,0 +1,19 @@
+"VertexLitGeneric"
+{
+	$basetexture				"models\weapons\tanto\tanto_d"
+	$bumpmap					"models\weapons\tanto\tanto_n"
+	"$phongexponenttexture"		"models\weapons\tanto\tanto_s"
+	"$color2"					"[0 0 0]"
+//	"$color2"					"[0 0 0]"
+	"$translucent"				"1"	
+	$envmap						env_cubemap
+	$envmaptint					"[ .02 .02 .02 ]"
+        $phongalbedotint			"1"
+	$phongalbedoboost 		"48"
+	$phong						1
+	$phongexponent				35
+	$phongboost					16
+	$phongfresnelranges			"[0.25 0.5 1]"
+	$phongalbedotint			"1"
+	$phongalbedoboost 		"48"
+}

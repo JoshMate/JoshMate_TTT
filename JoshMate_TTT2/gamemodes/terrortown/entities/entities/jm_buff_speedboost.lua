@@ -52,7 +52,7 @@ end
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.3
     end 
 end)
 

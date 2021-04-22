@@ -6,7 +6,7 @@ if SERVER then
     util.AddNetworkString("JM_CarePackage_Arrival")
 
     local JM_CarePackage_Spawn_Timer_Min    = 30
-    local JM_CarePackage_Spawn_Timer_Max    = 300
+    local JM_CarePackage_Spawn_Timer_Max    = 240
     local JM_CarePackage_Spawn_Timer_Final  = 0
 
     function JMGlobal_SpawnCarePackage(Forced)

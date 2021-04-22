@@ -1,4 +1,5 @@
 AddCSLuaFile()
+include("ent_jm_carepackage_loot.lua")
 
 if CLIENT then
     function ENT:Draw()
@@ -33,7 +34,7 @@ function Loot_SpawnThis(carepackage,thingToSpawn)
     ent:Spawn()
 end
 
-function Barrier_Effects_Destroyed(ent)
+function CarePackageUsedEffect(ent)
 	if not IsValid(ent) then return end
  
 	local effect = EffectData()
@@ -53,132 +54,35 @@ function ENT:Use( activator, caller )
 
 		if activator:IsTerror() and activator:Alive() then
 			
+			-- All Care Packages
+
 			self:EmitSound("carepackage_open.wav")
+			CarePackageUsedEffect(self)
 
 			if(activator:IsTraitor()) then
 				activator:ChatPrint("[Care Package] - Loot: +1 Credit (Traitor Bonus Loot)")
 				activator:AddCredits(1)
 			end
+
+			-- Random Roller
 			
+			local RNGGoodOrBad = math.random(1, 100)
+			local ChanceOfBad	= 30 -- Change of Good will be 100 minus this number
 
-			local randomLootChoice = math.random(1, 16)
-
-			if randomLootChoice == 1 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Pistol")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_pistol")
+			
+			if (RNGGoodOrBad <= ChanceOfBad) then
 				
-			end
+				self:Loot_Bad( activator, caller )
 
-			if randomLootChoice == 2 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced SMG")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_smg")
-				
-			end
+			else
 
-			if randomLootChoice == 3 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Shotgun")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_shotgun")
-				
-			end
-			
-			if randomLootChoice == 4 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Rifle")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_rifle")
-				
-			end
-
-			if randomLootChoice == 5 then
-				activator:ChatPrint("[Care Package] - Loot: Advanced Sniper")
-				Loot_SpawnThis(self,"weapon_jm_zloot_advanced_sniper")
-				
-			end
-
-			
-			if randomLootChoice == 6 then
-				activator:ChatPrint("[Care Package] - Loot: Health Boost")
-				activator:SetMaxHealth(activator:GetMaxHealth() + 50)
-				activator:SetHealth(activator:GetMaxHealth())
-				JM_GiveBuffToThisPlayer("jm_buff_health", activator, self)
-			end
-
-
-			if randomLootChoice == 7 then
-				activator:ChatPrint("[Care Package] - Loot: Speed Boost")
-				JM_GiveBuffToThisPlayer("jm_buff_speedboost", activator, self)
-			end
-			
-			if randomLootChoice == 8 then
-				activator:ChatPrint("[Care Package] - Loot: Health Regeneration")
-				JM_GiveBuffToThisPlayer("jm_buff_regeneration", activator, self)
-			end
-
-			if randomLootChoice == 9 then
-				activator:ChatPrint("[Care Package] - Loot: Gus Adamiw Radio")
-				Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
-			end
-
-			if randomLootChoice == 10 then
-				activator:ChatPrint("[Care Package] - Loot: A little Friend")
-				Loot_SpawnThis(self,"npc_rollermine")
-			end
-
-			if randomLootChoice == 11 then
-				activator:ChatPrint("[Care Package] - Loot: Pigeon")
-				Loot_SpawnThis(self,"npc_pigeon")
-			end
-
-			if randomLootChoice == 12 then
-				activator:ChatPrint("[Care Package] - Loot: Mega Tracker")
-				for _, ply in ipairs( player.GetAll() ) do
-					if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-						JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,self)
-					end
-				end
-			end
-			
-			if randomLootChoice == 13 then
-				activator:ChatPrint("[Care Package] - Loot: Mega Frag Grenade")
-				Loot_SpawnThis(self,"weapon_jm_zloot_mega_frag")
-			end
-
-			if randomLootChoice == 14 then
-				activator:ChatPrint("[Care Package] - Loot: Godzilla")
-				if SERVER then self:EmitSound(Sound("godzillaroar.wav"))
-
-				local phexp = ents.Create("env_physexplosion")
-					if IsValid(phexp) then
-
-						local vel = activator:GetVelocity()
-						vel.z = vel.z + 500
-						activator:SetVelocity(vel)
-
-						phexp:SetPos(self:GetPos())
-						phexp:SetKeyValue("magnitude", 300) --max
-						phexp:SetKeyValue("radius", 300)
-						-- 1 = no dmg, 2 = push ply, 4 = push radial, 8 = los, 16 = viewpunch
-						phexp:SetKeyValue("spawnflags", 1 + 2 + 16)
-						phexp:Spawn()
-						phexp:Fire("Explode", "", 0.2)
-					end
-				end
+				self:Loot_Good( activator, caller )
 
 			end
-
-			if randomLootChoice == 15 then
-				activator:ChatPrint("[Care Package] - Loot: Mega Jump Grenade")
-				Loot_SpawnThis(self,"weapon_jm_zloot_mega_jump")
-			end
-
-			if randomLootChoice == 16 then
-				activator:ChatPrint("[Care Package] - Loot: Ninja Stick")
-				Loot_SpawnThis(self,"weapon_jm_zloot_ninja_stick")
-			end
-
-			
-
-			
-
+		
+			Loot_SpawnThis(self,"weapon_jm_zloot_ninjablade")
 			self:Remove()
+
 		end
 		
 	end
@@ -211,6 +115,135 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 		 end
 	 end
  
-	 halo.Add( players, Color( 255, 255, 0 ), 5, 5, 2, true, true )
+	 halo.Add( players, Color( 255, 255, 0 ), 3, 3, 2, true, true )
  
  end )
+
+
+ -- ####################################################
+ -- ###### Care Package Loot
+ -- ####################################################
+
+function ENT:Loot_Good( activator, caller ) 
+
+	local RNG_Good = math.random(1, 11)
+
+	if RNG_Good == 1 then
+		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
+		Loot_SpawnThis(self,"weapon_jm_zloot_advanced_pistol")
+	end
+
+	if RNG_Good == 2 then
+		activator:ChatPrint("[Care Package] - Good Loot: Advanced SMG")
+		Loot_SpawnThis(self,"weapon_jm_zloot_advanced_smg")
+	end
+
+	if RNG_Good == 3 then
+		activator:ChatPrint("[Care Package] - Good Loot: Advanced Shotgun")
+		Loot_SpawnThis(self,"weapon_jm_zloot_advanced_shotgun")
+	end
+	
+	if RNG_Good == 4 then
+		activator:ChatPrint("[Care Package] - Good Loot: Advanced Rifle")
+		Loot_SpawnThis(self,"weapon_jm_zloot_advanced_rifle")
+	end
+
+	if RNG_Good == 5 then
+		activator:ChatPrint("[Care Package] - Good Loot: Advanced Sniper")
+		Loot_SpawnThis(self,"weapon_jm_zloot_advanced_sniper")
+	end
+
+	if RNG_Good == 6 then
+		activator:ChatPrint("[Care Package] - Good Loot: Health Boost")
+		activator:SetMaxHealth(activator:GetMaxHealth() + 100)
+		activator:SetHealth(activator:GetMaxHealth())
+		JM_GiveBuffToThisPlayer("jm_buff_health", activator, self)
+	end
+
+	if RNG_Good == 7 then
+		activator:ChatPrint("[Care Package] - Good Loot: Speed Boost")
+		JM_GiveBuffToThisPlayer("jm_buff_speedboost", activator, self)
+	end
+	
+	if RNG_Good == 8 then
+		activator:ChatPrint("[Care Package] - Good Loot: Health Regeneration")
+		JM_GiveBuffToThisPlayer("jm_buff_regeneration", activator, self)
+	end
+
+	if RNG_Good == 9 then
+		activator:ChatPrint("[Care Package] - Good Loot: Mega Frag Grenade")
+		Loot_SpawnThis(self,"weapon_jm_zloot_mega_frag")
+	end
+
+	if RNG_Good == 10 then
+		activator:ChatPrint("[Care Package] - Good Loot: Ninja Stick")
+		Loot_SpawnThis(self,"weapon_jm_zloot_ninjablade")
+	end
+
+	if RNG_Good == 11 then
+		Loot_SpawnThis(self,"npc_pigeon")
+		if(activator:IsTraitor() or activator:IsDetective()) then
+			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (+3 Credits)")
+			activator:AddCredits(3)
+		else
+			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (You have been made a Detective!)")
+			activator:SetRole(ROLE_DETECTIVE)
+		end
+	end
+
+ end
+
+function ENT:Loot_Bad( activator, caller ) 
+
+	local RNG_Bad = math.random(1, 6)
+
+	if RNG_Bad == 1 then
+		activator:ChatPrint("[Care Package] - Bad Loot: A little Friend")
+		Loot_SpawnThis(self,"npc_rollermine")
+	end
+
+	if RNG_Bad == 2 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Pigeon")
+		Loot_SpawnThis(self,"npc_pigeon")
+	end
+
+	if RNG_Bad == 3 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Gus Adamiw Radio")
+		Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
+	end
+
+	if RNG_Bad == 4 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Mega Tracker")
+		for _, ply in ipairs( player.GetAll() ) do
+			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+				JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,self)
+			end
+		end
+	end
+
+	if RNG_Bad == 5 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Godzilla")
+		if SERVER then activator:EmitSound(Sound("godzillaroar.wav")) end
+
+		local pushForce = 5000
+		local pos = self:GetPos()
+		local tpos = activator:LocalToWorld(activator:OBBCenter())
+        local dir = (tpos - pos):GetNormal()
+
+		dir.z = math.abs(dir.z) + 1
+
+		local push = dir * pushForce
+		local vel = activator:GetVelocity() + push
+
+		activator:SetVelocity(vel)
+		
+
+	end
+
+	if RNG_Bad == 6 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Tripping Balls")
+		JM_GiveBuffToThisPlayer("jm_buff_trippingballs", activator, self)
+
+	end
+
+end

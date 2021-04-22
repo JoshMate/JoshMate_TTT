@@ -96,13 +96,22 @@ function SWEP:PrimaryAttack()
    end
    -- #########
 
-   -- New Direct Effect Code (Cuts out all the bullet callback code)
-   if SERVER then
-      local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Shoot_Range, filter = self.Owner})
-      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-         self:ApplyEffect(tr.Entity, self:GetOwner())
-      end
+   -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
+   
+   local owner = self:GetOwner()
+   if not IsValid(owner) then return end
+
+   if isfunction(owner.LagCompensation) then -- for some reason not always true
+      owner:LagCompensation(true)
    end
+   
+   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
+   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+      self:ApplyEffect(tr.Entity, owner)
+   end
+
+   owner:LagCompensation(false)
+
    -- #########
 
    -- Remove Weapon When out of Ammo

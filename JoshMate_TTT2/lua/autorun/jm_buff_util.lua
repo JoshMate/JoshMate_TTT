@@ -133,3 +133,10 @@ JM_Global_Buff_Care_Regeneration_NWBool                  = "JM_Buff_NWBool_IsReg
 JM_Global_Buff_Care_Regeneration_IconName                = "JM_Buff_Icon_Regeneration"
 JM_Global_Buff_Care_Regeneration_IconPath                = "vgui/ttt/joshmate/hud_heal.png"
 JM_Global_Buff_Care_Regeneration_IconGoodBad             = "good"
+
+JM_Global_Buff_Care_TrippingBalls_Name                   = "Tripping Balls"
+JM_Global_Buff_Care_TrippingBalls_Duration               = 30
+JM_Global_Buff_Care_TrippingBalls_NWBool                 = "JM_Buff_NWBool_IsTrippingBalls"
+JM_Global_Buff_Care_TrippingBalls_IconName               = "JM_Buff_Icon_TrippingBalls"
+JM_Global_Buff_Care_TrippingBalls_IconPath               = "vgui/ttt/joshmate/hud_trippingballs.png"
+JM_Global_Buff_Care_TrippingBalls_IconGoodBad            = "bad"

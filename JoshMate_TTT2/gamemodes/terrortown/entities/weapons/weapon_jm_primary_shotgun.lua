@@ -31,7 +31,7 @@ SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
 
-SWEP.HeadshotMultiplier    = 1.5
+SWEP.HeadshotMultiplier    = 1
 SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false

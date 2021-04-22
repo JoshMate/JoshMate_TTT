@@ -2,9 +2,51 @@
 
 [Server]
 
+
 [Gameplay]
 
+- Changed [Care Package] Reduced Carepackage Maximum spawn Time: 5 -> 4 Minutes
+- Changed [Care Package] New Loot table logic: Good Item = 70%  || Bad Item = 30% Chance
+
+- Added [Care Package Loot] Good: Turns innocents into a detective || Ds / Ts get +3 Credits
+- Added [Care Package Loot] Bad: Tripping balls gives you some HORRIFIC Drug inspired screen effects for a bit
+
+- Removed [Care Package Loot] Man Hacks as a loot option
+- Removed [Care Package Loot] Mega Jump Grenade
+
+- Buffed [Care Package Loot] Health Boost Max HP: 50 -> 100
+
+- Buffed [Care Package Loot] Health Boost Max HP: 50 -> 100
+- Buffed [Care Package Loot] Speed Boost Speed: 20 -> 30%
+- Buffed [Care Package Loot] Regeneration HP/s: 2 -> 4
+
+- Buffed [Care Package Loot] Adv Rifle Recoil: 2 -> 1.5
+- Buffed [Care Package Loot] Adv Pistol Recoil: 1 -> 0.5
+
+- Rework [Ninja Blade] Ninja Stick is now Ninja Blade (And has a new HD model)
+- Rework [Ninja Blade] Now Launches you in the direction you are facing consistently
+- Rework [Ninja Blade] Damage: 55 -> 65
+- Rework [Ninja Blade] Held Movement Speed: 100% -> 120%
+- Rework [Ninja Blade] Now has a 2 second delay on the dash to reduce exploits
+
+- Reworked [Mega Frag] to act more as a shotgun blast of grenades rather than a hose pipe of grenades
+- Reworked [Mega Frag] It now launches 10 grenades instead of 7
+- Reworked [Mega Frag] You throw them much further to account for all this new lethality (Can still half throw)
+
+- Buffed [Taser] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
+- Buffed [Tracker] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
+- Buffed [Silenced Pistol] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
+- Buffed [Poison Dart] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
+
+- Nerfed [Shotgun] Headshot Damage  Multiplier: 1.5 -> 1.0
+
+- Fixed [Bug] Reduced how blurry the trackd effect outline was on players and objects
+- Fixed [Bug] Stopped Health Boost from giving you regen when it shouldn't have been
+
 [Maps]
+
+- Reworked [Warmup] To be a better warm up map
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Fixed [Rooftop Party] Re-placed props dodgey props
 - Fixed [Rooftop Party] Re-aligned dodgey textures 

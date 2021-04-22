@@ -63,7 +63,7 @@ hook.Add( "PreDrawHalos", "Halos_Tag_Grenade", function()
          end
      end
  
-     halo.Add( players, Color( 255, 255, 0 ), 5, 5, 2, true, true )
+     halo.Add( players, Color( 255, 255, 0 ), 3, 3, 2, true, true )
  
  end )
 
