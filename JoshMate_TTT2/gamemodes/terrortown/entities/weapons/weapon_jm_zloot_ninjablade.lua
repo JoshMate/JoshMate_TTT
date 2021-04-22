@@ -192,6 +192,3 @@ if SERVER then
 end
 --
 
-function SWEP:OnDrop()
-	self:Remove()
-end

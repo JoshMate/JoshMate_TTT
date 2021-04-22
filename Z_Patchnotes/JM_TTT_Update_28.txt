@@ -39,6 +39,8 @@
 - Buffed [Barrier] Duration: 60s -> Infinite
 - Buffed [Barrier] Uses: 2 -> 3
 - Buffed [Barrier] Wall Size: 3x5 -> 4x6
+- Buffed [Barrier] The Owner can walk through their own walls (not shoot through)
+
 
 - Buffed [Fire Wall] Wall Size: 3x5 -> 4x6
 
