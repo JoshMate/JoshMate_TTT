@@ -80,7 +80,6 @@ function ENT:Use( activator, caller )
 
 			end
 		
-			Loot_SpawnThis(self,"weapon_jm_zloot_ninjablade")
 			self:Remove()
 
 		end
