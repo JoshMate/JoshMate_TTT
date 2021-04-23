@@ -15,8 +15,6 @@
 - Removed [Care Package Loot] Mega Jump Grenade
 
 - Buffed [Care Package Loot] Health Boost Max HP: 50 -> 100
-
-- Buffed [Care Package Loot] Health Boost Max HP: 50 -> 100
 - Buffed [Care Package Loot] Speed Boost Speed: 20 -> 30%
 - Buffed [Care Package Loot] Regeneration HP/s: 2 -> 4
 
@@ -33,14 +31,11 @@
 - Reworked [Mega Frag] It now launches 10 grenades instead of 7
 - Reworked [Mega Frag] You throw them much further to account for all this new lethality (Can still half throw)
 
-- Removed [Visualiser] It is no longer buyable or part of the detectives default loadout
-
 - Nerfed [Barrier] HP: Infinite -> 350
 - Buffed [Barrier] Duration: 60s -> Infinite
 - Buffed [Barrier] Uses: 2 -> 3
 - Buffed [Barrier] Wall Size: 3x5 -> 4x6
-- Buffed [Barrier] The Owner can walk through their own walls (not shoot through)
-
+- Buffed [Barrier] The Owner can walk through their own walls
 
 - Buffed [Fire Wall] Wall Size: 3x5 -> 4x6
 
@@ -51,7 +46,9 @@
 
 - Nerfed [Shotgun] Headshot Damage  Multiplier: 1.5 -> 1.0
 
-- Fixed [Bug] Reduced how blurry the trackd effect outline was on players and objects
+- Removed [Visualiser] It is no longer buyable or part of the detectives default loadout
+
+- Fixed [Bug] Reduced how blurry the tracked effect outline was on players and objects
 - Fixed [Bug] Stopped Health Boost from giving you regen when it shouldn't have been
 
 [Maps]

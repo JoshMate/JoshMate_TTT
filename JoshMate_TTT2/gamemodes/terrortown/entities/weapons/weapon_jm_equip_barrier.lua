@@ -41,11 +41,11 @@ if CLIENT then
 	   name = "Barrier",
 	   desc = [[Place down a defensive barrier
 	
-Left click to place the barrier right in front of you
+Left click to place a destrucible barrier in front of you
 
-After 3s the barrier will arm blocking all passage and projectiles
+After 3s the barrier will arm blocking passage and projectiles
 
-It will last for 60 seconds and has 2 uses
+It has 3 uses
 ]]
 	}
 end
