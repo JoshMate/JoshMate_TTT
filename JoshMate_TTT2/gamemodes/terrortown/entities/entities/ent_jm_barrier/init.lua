@@ -3,13 +3,24 @@ AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
 local JM_Barrier_ArmTime			= 3
-local JM_Barrier_HP					= 350
+local JM_Barrier_HP					= 500
 
-local JM_Barrier_Colour_PreArm		= Color( 0, 180, 255, 180 )
+local JM_Barrier_Colour_PreArm		= Color( 255, 255, 255, 100 )
 
 local JM_Barrier_Sound_Placed		= "weapons/ar2/ar2_reload_rotate.wav"
 local JM_Barrier_Sound_Armed		= "weapons/ar2/ar2_reload_push.wav"
 local JM_Barrier_Sound_Destroyed	= "weapons/ar2/npc_ar2_altfire.wav"
+
+function ENT:CalculateColour()
+
+	local r = 255 * ( 1 - (self.HP / JM_Barrier_HP))
+	local g = 150 * (self.HP / JM_Barrier_HP)
+	local b = 255 * (self.HP / JM_Barrier_HP)
+	local t = 215
+	
+	self:SetColor(Color( r, g, b, t))
+
+end
 
 function ENT:Barrier_Effects_Destroyed()
 	if not IsValid(self) then return end
@@ -30,8 +41,8 @@ function ENT:Barrier_Arm()
 			self:EmitSound(JM_Barrier_Sound_Armed);
 			self:SetSolid( SOLID_VPHYSICS ) 
 			self:Barrier_Effects_Destroyed()
-			self:SetMaterial("models/props_combine/stasisshield_sheet")
-			self:SetRenderMode( RENDERMODE_NORMAL )
+			self:SetRenderMode( RENDERMODE_TRANSCOLOR )
+			self:CalculateColour()
 			self:DrawShadow(false) 
 
 
@@ -81,6 +92,8 @@ end
 function ENT:OnTakeDamage(dmginfo)
 
     self.HP = self.HP - dmginfo:GetDamage()
+
+	self:CalculateColour()
 
     if self.HP <= 0 then
         self:Barrier_Die()

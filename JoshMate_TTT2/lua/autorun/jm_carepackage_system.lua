@@ -4,9 +4,9 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 if SERVER then
 
     util.AddNetworkString("JM_CarePackage_Arrival")
-
-    local JM_CarePackage_Spawn_Timer_Min    = 30
-    local JM_CarePackage_Spawn_Timer_Max    = 240
+    
+    local JM_CarePackage_Spawn_Timer_Min    = 15
+    local JM_CarePackage_Spawn_Timer_Max    = 210
     local JM_CarePackage_Spawn_Timer_Final  = 0
 
     function JMGlobal_SpawnCarePackage(Forced)

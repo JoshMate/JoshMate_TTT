@@ -182,8 +182,8 @@ function ENT:Loot_Good( activator, caller )
 	if RNG_Good == 11 then
 		Loot_SpawnThis(self,"npc_pigeon")
 		if(activator:IsTraitor() or activator:IsDetective()) then
-			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (+3 Credits)")
-			activator:AddCredits(3)
+			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (+2 Credits)")
+			activator:AddCredits(2)
 		else
 			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (You have been made a Detective!)")
 			activator:SetRole(ROLE_DETECTIVE)

@@ -2,13 +2,14 @@
 
 [Server]
 
-- Changed [Care Package] Reduced Carepackage Maximum spawn Time: 5 -> 4 Minutes
+- Changed [Care Package] Reduced Carepackage Minimum spawn Time: 30 -> 15 Seconds
+- Changed [Care Package] Reduced Carepackage Maximum spawn Time: 5 -> 3.5 Minutes
 
 - Changed [Care Package] New Loot table logic: Good Item = 70%  || Bad Item = 30% Chance
 
 [Gameplay]
 
-- Added [Care Package Loot] Good: Turns innocents into a detective || Ds / Ts get +3 Credits
+- Added [Care Package Loot] Good: Turns innocents into a detective || Ds / Ts get +2 Credits
 - Added [Care Package Loot] Bad: Tripping balls gives you some HORRIFIC Drug inspired screen effects for a bit
 
 - Removed [Care Package Loot] Man Hacks as a loot option
@@ -31,13 +32,17 @@
 - Reworked [Mega Frag] It now launches 10 grenades instead of 7
 - Reworked [Mega Frag] You throw them much further to account for all this new lethality (Can still half throw)
 
-- Nerfed [Barrier] HP: Infinite -> 350
+- Nerfed [Barrier] HP: Infinite -> 500
 - Buffed [Barrier] Duration: 60s -> Infinite
 - Buffed [Barrier] Uses: 2 -> 3
 - Buffed [Barrier] Wall Size: 3x5 -> 4x6
 - Buffed [Barrier] The Owner can walk through their own walls
+- Buffed [Barrier] Will change colour based on how much HP it has left
 
 - Buffed [Fire Wall] Wall Size: 3x5 -> 4x6
+- Buffed [Fire Wall] Damage Duration: 10 -> 12 Seconds
+
+- Buffed [Poison Dart] Duration: 10 -> 12 Seconds
 
 - Buffed [Taser] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
 - Buffed [Tracker] Added Lag Compensation network code to prevent whiffing (When the shot should have hit)
@@ -48,9 +53,12 @@
 
 - Removed [Visualiser] It is no longer in the game as it was unused and messy
 
+- Changed [Frag Grenade] Trail is now Red to better show danger
+
 - Fixed [Bug] Reduced how blurry the tracked effect outline was on players and objects
 - Fixed [Bug] Stopped Health Boost from giving you regen when it shouldn't have been
 - Fixed [Bug] Stopped Poison Dart effect from stacking allowing you very quickly kill someone
+- Fixed [Bug] Stopped stacking buffs from causing a few frames of flicker between stacks timing out
 
 [Maps]
 

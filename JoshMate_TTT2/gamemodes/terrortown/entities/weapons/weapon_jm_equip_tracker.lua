@@ -39,8 +39,8 @@ SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_tracker.wav"
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
-SWEP.LimitedStock          = true -- only buyable once
+SWEP.CanBuy                = {ROLE_DETECTIVE}
+SWEP.LimitedStock          = true
 SWEP.WeaponID              = AMMO_TRACKER
 SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_357.mdl")
@@ -71,6 +71,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       
       -- Set Status and print Message
       weaponOwner:ChatPrint("[Tracking Dart]: You hit someone!")
+      JM_RemoveBuffFromThisPlayer("jm_buff_trackingdart",ent)
       JM_GiveBuffToThisPlayer("jm_buff_trackingdart",ent,self:GetOwner())
       -- End Of
 
