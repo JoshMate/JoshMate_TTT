@@ -46,12 +46,16 @@
 
 - Nerfed [Shotgun] Headshot Damage  Multiplier: 1.5 -> 1.0
 
-- Removed [Visualiser] It is no longer buyable or part of the detectives default loadout
+- Removed [Visualiser] It is no longer in the game as it was unused and messy
 
 - Fixed [Bug] Reduced how blurry the tracked effect outline was on players and objects
 - Fixed [Bug] Stopped Health Boost from giving you regen when it shouldn't have been
+- Fixed [Bug] Stopped Poison Dart effect from stacking allowing you very quickly kill someone
 
 [Maps]
+
+- New Map [Space Station] 
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Reworked [Warmup] To be a better warm up map
 // [LATEST VERSION ON THE WORKSHOP NOW]
