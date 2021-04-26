@@ -26,6 +26,8 @@ function ENT:Initialize()
 		self:GetPhysicsObject():EnableMotion(true)
 	end
 
+	if SERVER then self:SendWarn(true) end 
+
 end
 
 function Loot_SpawnThis(carepackage,thingToSpawn)
@@ -67,7 +69,7 @@ function ENT:Use( activator, caller )
 			-- Random Roller
 			
 			local RNGGoodOrBad = math.random(1, 100)
-			local ChanceOfBad	= 30 -- Change of Good will be 100 minus this number
+			local ChanceOfBad	= 20 -- Change of Good will be 100 minus this number
 
 			
 			if (RNGGoodOrBad <= ChanceOfBad) then
@@ -187,6 +189,8 @@ function ENT:Loot_Good( activator, caller )
 		else
 			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (You have been made a Detective!)")
 			activator:SetRole(ROLE_DETECTIVE)
+			SendFullStateUpdate()
+			activator:AddCredits(3)
 		end
 	end
 
@@ -245,4 +249,23 @@ function ENT:Loot_Bad( activator, caller )
 
 	end
 
+end
+
+--- Josh Mate Hud Warning
+if SERVER then
+	function ENT:SendWarn(armed)
+		net.Start("TTT_LootWarn")
+		net.WriteUInt(self:EntIndex(), 16)
+		net.WriteBit(armed)
+
+		if armed then
+			net.WriteVector(self:GetPos())
+		end
+
+		net.Broadcast()
+	end
+
+	function ENT:OnRemove()
+		self:SendWarn(false)
+	end
 end

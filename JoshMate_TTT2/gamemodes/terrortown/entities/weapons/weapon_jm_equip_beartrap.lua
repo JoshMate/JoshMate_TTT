@@ -47,7 +47,7 @@ if SERVER then
 
 	function SWEP:PrimaryAttack()
 		local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 100, filter = self.Owner})
-		if (tr.HitWorld or (tr.Entity:GetClass() == "func_breakable"))then
+		if (tr.HitWorld or (tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable")))then
 			local dot = vector_up:Dot(tr.HitNormal)
 			if dot > 0.55 and dot <= 1 then
 				local ent = ents.Create("ttt_bear_trap")

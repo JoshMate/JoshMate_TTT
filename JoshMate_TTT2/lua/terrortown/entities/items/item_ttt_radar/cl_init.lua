@@ -12,8 +12,9 @@ local pairs = pairs
 local IsValid = IsValid
 
 local indicator = surface.GetTextureID("effects/select_ring")
-local c4warn = surface.GetTextureID("vgui/ttt/icon_c4warn")
+local c4warn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_c4")
 local hazardwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_hazard")
+local lootwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_loot")
 local sample_scan = surface.GetTextureID("vgui/ttt/sample_scan")
 local det_beacon = surface.GetTextureID("vgui/ttt/det_beacon")
 local near_cursor_dist = 180
@@ -28,6 +29,8 @@ RADAR.bombs = {}
 RADAR.bombs_count = 0
 RADAR.hazards = {}
 RADAR.hazards_count = 0
+RADAR.loots = {}
+RADAR.loots_count = 0
 RADAR.repeating = true
 RADAR.samples = {}
 RADAR.samples_count = 0
@@ -69,20 +72,34 @@ function RADAR.CacheEnts()
 
 	if RADAR.bombs_count > 0 then  
 
-	-- Update bomb positions for those we know about
-	for idx, b in pairs(RADAR.bombs) do
-		local ent = Entity(idx)
+		-- Update bomb positions for those we know about
+		for idx, b in pairs(RADAR.bombs) do
+			local ent = Entity(idx)
 
-		if IsValid(ent) then
-			b.pos = ent:GetPos()
+			if IsValid(ent) then
+				b.pos = ent:GetPos()
+			end
 		end
-	end
 
 	end
+
 	if RADAR.hazards_count > 0 then  
 
 		-- Update hazard positions for those we know about
 		for idx, b in pairs(RADAR.hazards) do
+			local ent = Entity(idx)
+	
+			if IsValid(ent) then
+				b.pos = ent:GetPos()
+			end
+		end
+	
+	end
+
+	if RADAR.loots_count > 0 then  
+
+		-- Update hazard positions for those we know about
+		for idx, b in pairs(RADAR.loots) do
 			local ent = Entity(idx)
 	
 			if IsValid(ent) then
@@ -129,7 +146,7 @@ local function DrawTarget(tgt, size, offset, no_shrink)
 		local w, h = surface.GetTextSize(text)
 
 		-- Show range to target
-		surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + offset * sz - h * 0.5)
+		surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 1)
 		surface.DrawText(text)
 
 		if tgt.t then
@@ -137,14 +154,14 @@ local function DrawTarget(tgt, size, offset, no_shrink)
 			text = util.SimpleTime(tgt.t - CurTime(), "%02i:%02i")
 			w, h = surface.GetTextSize(text)
 
-			surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 0.5)
+			surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 1.7)
 			surface.DrawText(text)
 		elseif tgt.nick then
 			-- Show nickname
 			text = tgt.nick
 			w, h = surface.GetTextSize(text)
 
-			surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 0.5)
+			surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 1.7)
 			surface.DrawText(text)
 		end
 	end
@@ -165,8 +182,8 @@ function RADAR:Draw(client)
 	-- C4 warnings
 	if self.bombs_count ~= 0 and client:IsActive() and not client:GetSubRoleData().unknownTeam then
 		surface.SetTexture(c4warn)
-		surface.SetTextColor(client:GetRoleColor())
-		surface.SetDrawColor(255, 255, 255, 200)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, bomb in pairs(self.bombs) do
 			if bomb.team ~= nil and bomb.team == client:GetTeam() then
@@ -178,13 +195,24 @@ function RADAR:Draw(client)
 	-- Hazard warnings
 	if self.hazards_count ~= 0 and client:IsActive() and not client:GetSubRoleData().unknownTeam then
 		surface.SetTexture(hazardwarn)
-		surface.SetTextColor(client:GetRoleColor())
-		surface.SetDrawColor(255, 255, 255, 200)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, hazard in pairs(self.hazards) do
 			if hazard.team ~= nil and hazard.team == client:GetTeam() then
 				DrawTarget(hazard, 24, 0, true)
 			end
+		end
+	end
+
+	-- Loot Warnings
+	if self.loots_count ~= 0 then
+		surface.SetTexture(lootwarn)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
+
+		for _, loot in pairs(self.loots) do
+			DrawTarget(loot, 24, 0, true)
 		end
 	end
 
@@ -288,6 +316,23 @@ local function RecieveHazardWarn()
 	RADAR.hazards_count = table.Count(RADAR.hazards)
 end
 net.Receive("TTT_HazardWarn", RecieveHazardWarn)
+
+-- Josh Mate Changes
+local function RecieveLootWarn()
+	local idx = net.ReadUInt(16)
+	local armed = net.ReadBit() == 1
+
+	if armed then
+		local pos = net.ReadVector()
+
+		RADAR.loots[idx] = {pos = pos}
+	else
+		RADAR.loots[idx] = nil
+	end
+
+	RADAR.loots_count = table.Count(RADAR.loots)
+end
+net.Receive("TTT_LootWarn", RecieveLootWarn)
 
 local function TTT_CorpseCall()
 	local pos = net.ReadVector()

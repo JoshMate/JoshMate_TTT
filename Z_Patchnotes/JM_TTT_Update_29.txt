@@ -1,0 +1,45 @@
+[ Update 29 ] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Added [HUD] Care Packages now have an onscreen icon when they spawn (Like the skull for traitor traps) but for everyone
+
+- Changed [HUD] C4 / Hazard / Care package HUD icon Text (Distance / time left) to be white and much clearer
+- Changed [HUD] C4 / Hazard / Care package HUD icon Pictures to be much brighter and better presented
+
+
+- Changed [Care Package] New Loot table logic: Good Item = 80%  || Bad Item = 20% Chance
+
+- Changed [Care Package] Minimum Spawn Delay:  15 -> 20 Seconds
+- Changed [Care Package] Maximum Spawn Delay: 3.5 -> 3 Minutes
+
+
+[Gameplay]
+
+
+- Reworked [Fire Wall] It encouraged stalemates and slow games
+// Deals no damage
+// Slows and tracks the target for 15 seconds
+// Lasts forever
+// Is very hard to see and makes no sounds
+// Breaks after the first person touches it
+// 10 Second Arm Time
+
+- Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.015
+- Nerfed [Light Pistol] Magizine Capacity: 20 -> 16
+// It is meant to be a jack of all trades between the up close shred of the Auto and long range accuracy of the Heavy
+// The last update made it feel like it could do both quite well
+
+- Buffed [Heavy Pistol] Fire Rate Delay: 0.40 -> 0.30
+- Buffed [Heavy Pistol] Recoil: 15 -> 12
+- Nerfed [Heavy Pistol] Damage: 40 -> 35
+// Even more emphasis on carefully planned 1 taps and snipes
+// 1 hit kill head shots and the lowest DPS in the game on NON-Headshots
+
+- Buffed [Barrier] HP: 500 -> 650
+
+- Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
+
+[Maps]
+
+

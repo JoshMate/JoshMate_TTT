@@ -73,10 +73,10 @@ JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud
 JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
 
 JM_Global_Buff_FireWall_Name                            = "Fire Wall"
-JM_Global_Buff_FireWall_Duration                        = 12
+JM_Global_Buff_FireWall_Duration                        = 15
 JM_Global_Buff_FireWall_NWBool                          = "JM_Buff_NWBool_IsFireWall"
 JM_Global_Buff_FireWall_IconName                        = "JM_Buff_Icon_FireWall"
-JM_Global_Buff_FireWall_IconPath                        = "vgui/ttt/joshmate/hud_firewall.png"
+JM_Global_Buff_FireWall_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
 JM_Global_Buff_FireWall_IconGoodBad                     = "bad"
 
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"

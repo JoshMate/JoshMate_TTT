@@ -3,7 +3,7 @@ AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
 local JM_Barrier_ArmTime			= 3
-local JM_Barrier_HP					= 500
+local JM_Barrier_HP					= 650
 
 local JM_Barrier_Colour_PreArm		= Color( 255, 255, 255, 100 )
 

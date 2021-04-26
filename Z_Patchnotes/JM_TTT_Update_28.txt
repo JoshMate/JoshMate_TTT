@@ -1,4 +1,4 @@
-[ Update 27 ] - (Josh Mate's TTT2 Server)
+[ Update 28 ] - (Josh Mate's TTT2 Server)
 
 [Server]
 

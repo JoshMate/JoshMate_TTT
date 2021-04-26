@@ -2,14 +2,11 @@ AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
-local JM_Barrier_LifeTime			= 120
-local JM_Barrier_ArmTime			= 15
+local JM_Barrier_ArmTime			= 10
 
-local JM_Barrier_Colour_PreArm		= Color( 0, 0, 0, 0 )
 local JM_Barrier_Colour_Dormant		= Color( 0, 0, 0, 0 )
+local JM_Barrier_Colour_Active		= Color( 50, 50, 50, 50 )
 
-local JM_Barrier_Sound_Placed		= "firewall_place.wav"
-local JM_Barrier_Sound_Armed		= "firewall_arm.wav"
 local JM_Barrier_Sound_Destroyed	= "firewall_destroy.wav"
 local JM_Barrier_Sound_HitPlayer	= "firewall_hit.wav"
 
@@ -26,18 +23,15 @@ function ENT:Barrier_Effects_Destroyed()
 	util.Effect("TeslaZap", effect, true, true)
 	util.Effect("TeslaHitboxes", effect, true, true)
 	util.Effect("cball_explode", effect, true, true)
+
  end
 
 function ENT:Barrier_Arm()
 	if SERVER then
 		if IsValid(self) then 
-			
-			-- Play Place Sound
-			self:EmitSound(JM_Barrier_Sound_Placed);
-			self:EmitSound(JM_Barrier_Sound_Armed)
 
-			self:SetMaterial("models/props_combine/tprings_globe")
-			self:SetRenderMode( RENDERMODE_NORMAL )
+			self:SetRenderMode( RENDERMODE_TRANSCOLOR )
+			self:SetColor(JM_Barrier_Colour_Active) 
 			self:DrawShadow(false) 
 
 			self.JM_IsLethal = true
@@ -52,11 +46,8 @@ function ENT:Barrier_Die()
 			self:SendWarn(false)
 			self:Barrier_Effects_Destroyed()
 			self:EmitSound(JM_Barrier_Sound_Destroyed);
-			self:Extinguish()
-			self:SetMaterial("joshmate/barrier")
-			self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-			self:SetColor(JM_Barrier_Colour_Dormant) 
-			self.JM_IsLethal = false			
+			self.JM_IsLethal = false	
+			self:Remove()		
 		end 
 		
 	end
@@ -78,14 +69,11 @@ function ENT:Initialize()
 	-- JoshMate Changed
 	self:SetMaterial("joshmate/barrier")
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor(JM_Barrier_Colour_PreArm) 
+	self:SetColor(JM_Barrier_Colour_Dormant) 
 	self:DrawShadow(false)
 
 	-- Timer To arm this Ent
 	timer.Simple(JM_Barrier_ArmTime, function() if IsValid(self) then self:Barrier_Arm() end end)
-
-	-- Timer To Delete this Ent
-	timer.Simple(JM_Barrier_LifeTime, function() if IsValid(self) then  self:Barrier_Die() end end)
 
 	-- Warning
 	self:SendWarn(true)
@@ -113,10 +101,14 @@ function ENT:Touch(toucher)
 		if(not GAMEMODE:AllowPVP()) then return end
 		if(toucher:GetNWBool(JM_Global_Buff_FireWall_NWBool)) then return end
 
-		toucher:EmitSound(JM_Barrier_Sound_HitPlayer);
+		
+
 		-- Set Status and print Message
 		JM_GiveBuffToThisPlayer("jm_buff_firewall",toucher,self:GetOwner())
 		-- End Of
+
+		self:Barrier_Die()
+		toucher:EmitSound(JM_Barrier_Sound_HitPlayer);
 	
 	end
 
