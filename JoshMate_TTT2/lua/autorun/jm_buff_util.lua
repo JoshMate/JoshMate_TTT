@@ -72,12 +72,12 @@ JM_Global_Buff_TagGrenade_IconName                      = "JM_Buff_Icon_TagGrena
 JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud_tracker.png"
 JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
 
-JM_Global_Buff_FireWall_Name                            = "Fire Wall"
-JM_Global_Buff_FireWall_Duration                        = 15
-JM_Global_Buff_FireWall_NWBool                          = "JM_Buff_NWBool_IsFireWall"
-JM_Global_Buff_FireWall_IconName                        = "JM_Buff_Icon_FireWall"
-JM_Global_Buff_FireWall_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_FireWall_IconGoodBad                     = "bad"
+JM_Global_Buff_PulsePad_Name                            = "Pulse Pad"
+JM_Global_Buff_PulsePad_Duration                        = 15
+JM_Global_Buff_PulsePad_NWBool                          = "JM_Buff_NWBool_IsPulsePad"
+JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad"
+JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
+JM_Global_Buff_PulsePad_IconGoodBad                     = "bad"
 
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
 JM_Global_Buff_PoisonDart_Duration                      = 12

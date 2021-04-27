@@ -2,28 +2,30 @@
 
 [Server]
 
-- Added [HUD] Care Packages now have an onscreen icon when they spawn (Like the skull for traitor traps) but for everyone
-
+- Changed [HUD] Care Packages now have an onscreen icon when they spawn (Like the skull for traitor traps) but for everyone
 - Changed [HUD] C4 / Hazard / Care package HUD icon Text (Distance / time left) to be white and much clearer
 - Changed [HUD] C4 / Hazard / Care package HUD icon Pictures to be much brighter and better presented
 
+- Changed [HUD] Reduced alot of the chat message spam from buffs / events / weapons
 
 - Changed [Care Package] New Loot table logic: Good Item = 80%  || Bad Item = 20% Chance
 
 - Changed [Care Package] Minimum Spawn Delay:  15 -> 20 Seconds
 - Changed [Care Package] Maximum Spawn Delay: 3.5 -> 3 Minutes
+- Changed [Care Package] No longer always gives Traitors a Credit (But some loot still give credits)
+
 
 
 [Gameplay]
 
 
-- Reworked [Fire Wall] It encouraged stalemates and slow games
-// Deals no damage
-// Slows and tracks the target for 15 seconds
-// Lasts forever
-// Is very hard to see and makes no sounds
-// Breaks after the first person touches it
-// 10 Second Arm Time
+- Removed [Fire Wall] as it encouraged stalemates and slow camping games
+// It has been replaced by the Pulse Pad
+
+- Added [Pulse Pad] A Traitor Trap Weapon
+// Placed in the same way as soap and bear trap
+// When a player walks over it, it slows and tracks them for 15 seconds
+// You get 3 and they are very hard to see
 
 - Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.015
 - Nerfed [Light Pistol] Magizine Capacity: 20 -> 16
@@ -39,6 +41,7 @@
 - Buffed [Barrier] HP: 500 -> 650
 
 - Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
+- Fixed [Soap] Rewrote the whole weapon / Entity to have better presentation
 
 [Maps]
 

@@ -67,6 +67,5 @@ end
 if CLIENT then
     net.Receive("JM_CarePackage_Arrival", function(_) 
         surface.PlaySound("carepackage_arrive.wav")
-        LocalPlayer():ChatPrint("[Care Package] - A Care Package has appeared somewhere on the map!")
     end)
 end

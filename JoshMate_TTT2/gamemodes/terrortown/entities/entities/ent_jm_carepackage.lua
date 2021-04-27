@@ -61,11 +61,6 @@ function ENT:Use( activator, caller )
 			self:EmitSound("carepackage_open.wav")
 			CarePackageUsedEffect(self)
 
-			if(activator:IsTraitor()) then
-				activator:ChatPrint("[Care Package] - Loot: +1 Credit (Traitor Bonus Loot)")
-				activator:AddCredits(1)
-			end
-
 			-- Random Roller
 			
 			local RNGGoodOrBad = math.random(1, 100)

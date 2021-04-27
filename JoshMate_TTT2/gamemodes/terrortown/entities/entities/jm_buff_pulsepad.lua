@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_FireWall_Name
-local JM_BuffNWBool             = JM_Global_Buff_FireWall_NWBool
-local JM_BuffDuration           = JM_Global_Buff_FireWall_Duration
-local JM_BuffIconName           = JM_Global_Buff_FireWall_IconName
-local JM_BuffIconPath           = JM_Global_Buff_FireWall_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_FireWall_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_PulsePad_Name
+local JM_BuffNWBool             = JM_Global_Buff_PulsePad_NWBool
+local JM_BuffDuration           = JM_Global_Buff_PulsePad_Duration
+local JM_BuffIconName           = JM_Global_Buff_PulsePad_IconName
+local JM_BuffIconPath           = JM_Global_Buff_PulsePad_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_PulsePad_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -58,7 +58,7 @@ hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintNa
 end)
 
 -- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_FireWall", function()
+hook.Add( "PreDrawHalos", "Halos_PulsePad", function()
 
     local players = {}
      local count = 0

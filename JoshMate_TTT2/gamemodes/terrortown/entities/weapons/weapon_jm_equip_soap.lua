@@ -31,15 +31,13 @@ if CLIENT then
 	SWEP.EquipMenuData = {
 	   type = "item_weapon",
 	   name = "Soap",
-	   desc = [[Place down a soapy trap!
+	   desc = [[Trap Weapon
 	
-Any one who touches it will slip
+Left click to place a hard to see soap trap on the floor
 
-Slipping players are launched in the direction they are moving
+Any player who walks over the soap will be launched into the air
 
-Your traps will show up to other Traitors
-
-Each soap can slip one person (You get 2 soaps)
+It has 3 uses
 ]]
 	}
 	
@@ -48,32 +46,32 @@ Each soap can slip one person (You get 2 soaps)
 	end
 end
 
+local JM_Trap_PlaceRange				= 128
 
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-	self:ThrowSoap("models/soap.mdl")
+	self:PlaceTrap()
 	
 end
 
 function SWEP:SecondaryAttack()
 end
 
-function SWEP:ThrowSoap( model_file )
+function SWEP:PlaceTrap()
 	if (CLIENT) then return end
 
-	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 100, filter = self.Owner})
+	local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * JM_Trap_PlaceRange, filter = self:GetOwner()})
 	if (tr.HitWorld or tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable"))then
 		local dot = vector_up:Dot(tr.HitNormal)
 		if dot > 0.55 and dot <= 1 then
-			local ent = ents.Create("ttt_soap")
-			ent:SetModel( model_file )
+			local ent = ents.Create("ent_jm_equip_soap")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), -90)
 			ent:SetAngles(ang)
 			ent:Spawn()
-			ent.Owner = self.Owner
+			ent.Owner = self:GetOwner()
 			ent.fingerprints = self.fingerprints
 			self:TakePrimaryAmmo(1)
 			if SERVER then
@@ -95,7 +93,7 @@ if CLIENT then
 end
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() then
          self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
       end
    end
