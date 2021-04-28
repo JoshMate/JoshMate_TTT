@@ -19,9 +19,9 @@ SWEP.CanBuy                = {}
 SWEP.Kind                  = WEAPON_PISTOL
 SWEP.WeaponID              = AMMO_PISTOL
 
-SWEP.Primary.Damage        = 30
+SWEP.Primary.Damage        = 20
 SWEP.Primary.Delay         = 0.15
-SWEP.Primary.Cone          = 0.015
+SWEP.Primary.Cone          = 0.0125
 SWEP.Primary.Recoil        = 2
 SWEP.Primary.ClipSize      = 16
 SWEP.Primary.DefaultClip   = 16

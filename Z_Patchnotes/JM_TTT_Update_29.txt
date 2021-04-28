@@ -10,14 +10,11 @@
 
 - Changed [Care Package] New Loot table logic: Good Item = 80%  || Bad Item = 20% Chance
 
-- Changed [Care Package] Minimum Spawn Delay:  15 -> 20 Seconds
+- Changed [Care Package] Minimum Spawn Delay: 15 -> 20 Seconds
 - Changed [Care Package] Maximum Spawn Delay: 3.5 -> 3 Minutes
 - Changed [Care Package] No longer always gives Traitors a Credit (But some loot still give credits)
 
-
-
 [Gameplay]
-
 
 - Removed [Fire Wall] as it encouraged stalemates and slow camping games
 // It has been replaced by the Pulse Pad
@@ -27,21 +24,13 @@
 // When a player walks over it, it slows and tracks them for 15 seconds
 // You get 3 and they are very hard to see
 
-- Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.015
-- Nerfed [Light Pistol] Magizine Capacity: 20 -> 16
-// It is meant to be a jack of all trades between the up close shred of the Auto and long range accuracy of the Heavy
-// The last update made it feel like it could do both quite well
-
-- Buffed [Heavy Pistol] Fire Rate Delay: 0.40 -> 0.30
-- Buffed [Heavy Pistol] Recoil: 15 -> 12
-- Nerfed [Heavy Pistol] Damage: 40 -> 35
-// Even more emphasis on carefully planned 1 taps and snipes
-// 1 hit kill head shots and the lowest DPS in the game on NON-Headshots
+- Nerfed [Light Pistol] Damage: 30 -> 20
+- Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.0125
 
 - Buffed [Barrier] HP: 500 -> 650
 
 - Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
-- Fixed [Soap] Rewrote the whole weapon / Entity to have better presentation
+- Fixed [Soap] Rewrote it to have better presentation / less prone to bugs
 
 [Maps]
 

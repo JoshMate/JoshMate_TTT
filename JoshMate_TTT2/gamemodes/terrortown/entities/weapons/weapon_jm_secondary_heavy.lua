@@ -19,10 +19,10 @@ SWEP.Kind                  = WEAPON_PISTOL
 SWEP.WeaponID              = AMMO_DEAGLE
 
 
-SWEP.Primary.Damage        = 35
-SWEP.Primary.Delay         = 0.30
+SWEP.Primary.Damage        = 40
+SWEP.Primary.Delay         = 0.40
 SWEP.Primary.Cone          = 0.010
-SWEP.Primary.Recoil        = 12
+SWEP.Primary.Recoil        = 15
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
