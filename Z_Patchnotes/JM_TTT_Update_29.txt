@@ -2,7 +2,7 @@
 
 [Server]
 
-- Changed [HUD] Care Packages now have an onscreen icon when they spawn (Like the skull for traitor traps) but for everyone
+- Changed [HUD] Care Packages now have an onscreen icon when twhey spawn (Like the skull for traitor traps) but for everyone
 - Changed [HUD] C4 / Hazard / Care package HUD icon Text (Distance / time left) to be white and much clearer
 - Changed [HUD] C4 / Hazard / Care package HUD icon Pictures to be much brighter and better presented
 
@@ -24,14 +24,22 @@
 // When a player walks over it, it slows and tracks them for 15 seconds
 // You get 3 and they are very hard to see
 
-- Nerfed [Light Pistol] Damage: 30 -> 20
-- Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.0125
+- Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.014
+- Nerfed [Light Pistol] Fire Rate Delay: 0.15 -> 0.18
+- Nerfed [Light Pistol] Magizine Capacity: 20 -> 16
 
 - Buffed [Barrier] HP: 500 -> 650
 
 - Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
-- Fixed [Soap] Rewrote it to have better presentation / less prone to bugs
+- Fixed [Soap] Rewrote the code to have better presentation / less prone to bugs
 
 [Maps]
 
+- Changed [Space Station] Made it clearer what you should jump to in the space walk parkour
+- Changed [Space Station] Made the space walk damage just do a flat 4 HP/s rather than 0.1to6HP/s
+- Changed [Space Station] Fixed the AMOOOGUS easter egg
+- Changed [Space Station] Fixed the flying corpses bug
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
+- Changed [Transit] Replaced the blurry ceiling texture with a nicer one (Just for you Kurt)
+// [LATEST VERSION ON THE WORKSHOP NOW]
