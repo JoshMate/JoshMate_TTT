@@ -46,7 +46,7 @@ function SWEP:ProduceMegaFrags(count)
    for i=1,count do 
       A_Vel = ply:GetAimVector()
       A_Vel:Add(Vector(math.Rand(-0.1, 0.1), math.Rand(-0.1, 0.1), 0))
-      A_Vel = A_Vel * (self.JM_Throw_Power * self.JM_Throw_PowerMult )
+      A_Vel = A_Vel * ((self.JM_Throw_Power * self.JM_Throw_PowerMult ) * math.Rand(0.8, 1.2))
 
       self.detonate_timer = math.random(3, 5)
 

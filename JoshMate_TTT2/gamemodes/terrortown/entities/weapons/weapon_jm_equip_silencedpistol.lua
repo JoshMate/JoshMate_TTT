@@ -87,6 +87,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 
       -- Set Status and print Message
       weaponOwner:ChatPrint("[Silenced Pistol]: You hit someone!")
+      JM_RemoveBuffFromThisPlayer("jm_buff_silencedPistol",ent)
       JM_GiveBuffToThisPlayer("jm_buff_silencedPistol",ent,self:GetOwner())
       -- End Of
       

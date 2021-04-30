@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_FireWall_Name
-local JM_BuffNWBool             = JM_Global_Buff_FireWall_NWBool
-local JM_BuffDuration           = JM_Global_Buff_FireWall_Duration
-local JM_BuffIconName           = JM_Global_Buff_FireWall_IconName
-local JM_BuffIconPath           = JM_Global_Buff_FireWall_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_FireWall_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_PulsePad_Name
+local JM_BuffNWBool             = JM_Global_Buff_PulsePad_NWBool
+local JM_BuffDuration           = JM_Global_Buff_PulsePad_Duration
+local JM_BuffIconName           = JM_Global_Buff_PulsePad_IconName
+local JM_BuffIconPath           = JM_Global_Buff_PulsePad_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_PulsePad_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -31,29 +31,6 @@ ENT.BuffIconName                = JM_BuffIconName
 
 if CLIENT then
 
-    
-    -- Set up screen effect table
-    local effectTable_FireWall = {
-
-        ["$pp_colour_addr"] = 0.25,
-        ["$pp_colour_addg"] = 0.10,
-        ["$pp_colour_addb"] = 0,
-        ["$pp_colour_brightness"] = 0,
-        ["$pp_colour_contrast"] = 1,
-        ["$pp_colour_colour"] = 1,
-        ["$pp_colour_mulr"] = 0,
-        ["$pp_colour_mulg"] = 0,
-        ["$pp_colour_mulb"] = 0
-    }
-
-    -- Render Any Screen Effects
-    hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
-
-        if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
-            DrawColorModify( effectTable_FireWall)
-        end 
-    
-    end)
 
 end
 
@@ -61,55 +38,27 @@ end
 -- The Actual Effects of this buff
 -- #############################################
 
-function ENT:BuffTickEffect()
-
-    local dmginfo = DamageInfo()
-    dmginfo:SetDamage(2)
-
-    dmginfo:SetAttacker(self.buffGiver)
-
-    local inflictor = ents.Create("weapon_jm_equip_firewall")
-    dmginfo:SetInflictor(inflictor)
-    dmginfo:SetDamageType(DMG_BURN)
-    dmginfo:SetDamagePosition(self.targetPlayer:GetPos())
-    self.targetPlayer:TakeDamageInfo(dmginfo)
-
-
-
-end
 
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-
-    -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.25
-    self.buffTickNext   = CurTime()
 
 end
 
 function ENT:Think()
     self.BaseClass.Think(self)
 
-    -- Handle Buff Effect Ticking
-    if(not self:IsValid()) then return end
-
-    if(CurTime() >= self.buffTickNext) then
-        self.buffTickNext = CurTime() + self.buffTickDelay
-        self:BuffTickEffect()
-    end
-
 end
 
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
     end 
 end)
 
 -- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_FireWall", function()
+hook.Add( "PreDrawHalos", "Halos_PulsePad", function()
 
     local players = {}
      local count = 0

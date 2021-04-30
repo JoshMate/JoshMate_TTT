@@ -4,9 +4,9 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 if SERVER then
 
     util.AddNetworkString("JM_CarePackage_Arrival")
-
-    local JM_CarePackage_Spawn_Timer_Min    = 30
-    local JM_CarePackage_Spawn_Timer_Max    = 240
+    
+    local JM_CarePackage_Spawn_Timer_Min    = 20
+    local JM_CarePackage_Spawn_Timer_Max    = 180
     local JM_CarePackage_Spawn_Timer_Final  = 0
 
     function JMGlobal_SpawnCarePackage(Forced)
@@ -67,6 +67,5 @@ end
 if CLIENT then
     net.Receive("JM_CarePackage_Arrival", function(_) 
         surface.PlaySound("carepackage_arrive.wav")
-        LocalPlayer():ChatPrint("[Care Package] - A Care Package has appeared somewhere on the map!")
     end)
 end

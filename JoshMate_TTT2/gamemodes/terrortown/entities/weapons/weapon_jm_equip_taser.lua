@@ -14,7 +14,7 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Non-Lethal Weapon
 	
-Prevents the target from moving for 10 seconds
+Prevents the target from moving for 12 seconds
    
 The target will drop their currently held weapon
    
@@ -80,6 +80,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 
       -- Set Status and print Message
       weaponOwner:ChatPrint("[Taser]: You hit someone!")
+      JM_RemoveBuffFromThisPlayer("jm_buff_taser",ent)
       JM_GiveBuffToThisPlayer("jm_buff_taser",ent,self:GetOwner())
       -- End Of
       

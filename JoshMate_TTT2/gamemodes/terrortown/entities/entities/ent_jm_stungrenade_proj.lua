@@ -35,6 +35,7 @@ function ENT:Explode(tr)
                totalPeopleFlashed = totalPeopleFlashed + 1
 
                -- Set Status and print Message
+               JM_RemoveBuffFromThisPlayer("jm_buff_stungrenade",ent)
                JM_GiveBuffToThisPlayer("jm_buff_stungrenade",pl,self:GetOwner())
                -- End Of
 

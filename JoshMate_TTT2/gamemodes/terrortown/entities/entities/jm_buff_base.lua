@@ -63,7 +63,7 @@ function ENT:Initialize()
         end
         
         self.targetPlayer:SetNWBool(self.BuffNWBool, true)
-        self.targetPlayer:ChatPrint("[Buff] - You Recieve The Effect: " .. tostring(self.PrintName))
+        if SERVER then print("[Buff] - " .. tostring(self.targetPlayer:Nick()) .. " Recieves The Effect: " .. tostring(self.PrintName)) end
 
 end
 

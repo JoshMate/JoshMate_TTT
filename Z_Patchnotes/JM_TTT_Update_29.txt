@@ -1,0 +1,52 @@
+[ Update 29 ] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+- Changed [HUD] New Player Radar Icon (Easier to see)
+- Changed [HUD] New C4 Radar Icon (Easier to see)
+- Changed [HUD] New Care Package Radar Icon (Everyone can see these, makes carepackages easier to locate)
+- Changed [HUD] New Radar Icon Text colour, size and location (Easier to read)
+
+- Changed [HUD] Reduced alot of the chat message spam from buffs / events / weapons
+
+- Changed [Care Package] New Loot table logic: Good Item = 80%  || Bad Item = 20% Chance
+
+- Changed [Care Package] Minimum Spawn Delay: 15 -> 20 Seconds
+- Changed [Care Package] Maximum Spawn Delay: 3.5 -> 3 Minutes
+- Changed [Care Package] No longer always gives Traitors a Credit ontop of regular loot (But some loot still give credits)
+
+- Changed [Map Vote] Increased number of maps per row to accommodate all the new maps
+- Changed [Map Vote] Merged the code into Josh Mate TTT2 rather than being standalone (Easier to manage)
+
+[Gameplay]
+
+- Removed [Fire Wall] as it encouraged stalemates and slow camping games
+// It has been replaced by the Pulse Pad
+
+- Added [Pulse Pad] A Traitor Trap Weapon
+// Placed in the same way as soap and bear trap
+// When a player walks over it, it slows and tracks them for 15 seconds
+// You get 3 and they are very hard to see
+
+- Nerfed [Light Pistol] Accuracy Spread: 0.010 -> 0.014
+- Nerfed [Light Pistol] Fire Rate Delay: 0.15 -> 0.18
+- Nerfed [Light Pistol] Magizine Capacity: 20 -> 16
+
+- Buffed [Barrier] HP: 500 -> 650
+
+- Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
+- Fixed [Soap] Rewrote the code to have better presentation / less prone to bugs
+
+[Maps]
+
+- New Map [Speed Dating] A close quarters and intimate map to get to know your fellow Bachelor terrorists!
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Space Station] Made it clearer what you should jump to in the space walk parkour
+- Changed [Space Station] Made the space walk damage just do a flat 4 HP/s rather than 0.1to6HP/s
+- Changed [Space Station] Fixed the AMOOOGUS easter egg
+- Changed [Space Station] Fixed the flying corpses bug?
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] Replaced the blurry ceiling texture with a nicer one (Just for you Kurt)
+// [LATEST VERSION ON THE WORKSHOP NOW]

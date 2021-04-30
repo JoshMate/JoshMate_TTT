@@ -7,9 +7,9 @@ if CLIENT then
 	SWEP.ViewModelFOV		= 10
  end
 
-SWEP.PrintName				= "Fire Wall"
+SWEP.PrintName				= "Pulse Pad"
 SWEP.Author			    	= "Josh Mate"
-SWEP.Instructions			= "Leftclick to place a Fire Wall"
+SWEP.Instructions			= "Leftclick to place a Pulse Pad"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
@@ -34,51 +34,57 @@ SWEP.AutoSpawnable			= false
 SWEP.LimitedStock 			= true
 
 if CLIENT then
-	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_firewall.png"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_pulsepad.png"
  
 	SWEP.EquipMenuData = {
 	   type = "item_weapon",
-	   name = "Fire Wall",
-	   desc = [[Place down a lethal fire wall
+	   name = "Pulse Pad",
+	   desc = [[Trap Weapon
 	
-Left click to place the Fire Wall right in front of you. It will be invisible until it arms
+Left click to place a hard to see pulse pad on the floor
 
-After 15s the barrier will arm, becoming visible and hurting and slowing all who pass through it
+Any player who walks over the pad will be tracked and slowed for 15 seconds
 
-It will last for 2 Minutes and has 2 uses
+It has 3 uses
 ]]
 	}
 end
 
-local JM_Barrier_PlaceRange				= 64
+local JM_Trap_PlaceRange				= 128
 
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-
-	
-	if (CLIENT) then return end
-
-	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Barrier_PlaceRange, filter = self.Owner})
-	local ent = ents.Create("ent_jm_firewall")
-	ent:SetPos(tr.HitPos)
-	local ang = tr.Normal:Angle()
-	ang:RotateAroundAxis(ang:Right(), -90)
-	ent:SetAngles(ang)
-	ent:Spawn()
-	ent:SetOwner(self:GetOwner())
-	ent.fingerprints = {}
-	ent.JM_Owner = self:GetOwner()
-	self:TakePrimaryAmmo(1)
-	if SERVER then
-		if self:Clip1() <= 0 then
-			self:Remove()
-		end
-	end
+	self:PlaceTrap()
 	
 end
 
 function SWEP:SecondaryAttack()
+end
+
+function SWEP:PlaceTrap()
+	if (CLIENT) then return end
+
+	local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * JM_Trap_PlaceRange, filter = self:GetOwner()})
+	if (tr.HitWorld or tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable"))then
+		local dot = vector_up:Dot(tr.HitNormal)
+		if dot > 0.55 and dot <= 1 then
+			local ent = ents.Create("ent_jm_equip_pulsepad")
+			ent:SetPos(tr.HitPos + tr.HitNormal)
+			local ang = tr.HitNormal:Angle()
+			ang:RotateAroundAxis(ang:Right(), -90)
+			ent:SetAngles(ang)
+			ent:Spawn()
+			ent.Owner = self:GetOwner()
+			ent.fingerprints = self.fingerprints
+			self:TakePrimaryAmmo(1)
+			if SERVER then
+				if self:Clip1() <= 0 then
+					self:Remove()
+				end
+			end
+		end
+	end
 end
 
 -- Hud Help Text
@@ -91,7 +97,7 @@ if CLIENT then
 end
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() then
          self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
       end
    end
