@@ -35,7 +35,7 @@ SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = "shoot_yaiyai.wav"                                 --REPLACE
+SWEP.Primary.Sound         = "shoot_yaiyai.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_DETECTIVE} 
@@ -52,8 +52,6 @@ local SpawnDistance = 40
 local StoredProp = nil
 
 function SWEP:PrimaryAttack()
-   
-
    local owner = self:GetOwner()
    if not IsValid(owner) then return end
    
