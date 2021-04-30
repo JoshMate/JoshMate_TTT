@@ -2,9 +2,10 @@
 
 [Server]
 
-- Changed [HUD] Care Packages now have an onscreen icon when twhey spawn (Like the skull for traitor traps) but for everyone
-- Changed [HUD] C4 / Hazard / Care package HUD icon Text (Distance / time left) to be white and much clearer
-- Changed [HUD] C4 / Hazard / Care package HUD icon Pictures to be much brighter and better presented
+- Changed [HUD] New Player Radar Icon (Easier to see)
+- Changed [HUD] New C4 Radar Icon (Easier to see)
+- Changed [HUD] New Care Package Radar Icon (Everyone can see these, makes carepackages easier to locate)
+- Changed [HUD] New Radar Icon Text colour, size and location (Easier to read)
 
 - Changed [HUD] Reduced alot of the chat message spam from buffs / events / weapons
 
@@ -13,6 +14,9 @@
 - Changed [Care Package] Minimum Spawn Delay: 15 -> 20 Seconds
 - Changed [Care Package] Maximum Spawn Delay: 3.5 -> 3 Minutes
 - Changed [Care Package] No longer always gives Traitors a Credit ontop of regular loot (But some loot still give credits)
+
+- Changed [Map Vote] Increased number of maps per row to accommodate all the new maps
+- Changed [Map Vote] Merged the code into Josh Mate TTT2 rather than being standalone (Easier to manage)
 
 [Gameplay]
 

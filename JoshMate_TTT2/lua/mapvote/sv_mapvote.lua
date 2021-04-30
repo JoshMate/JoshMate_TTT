@@ -89,7 +89,6 @@ end
 function MapVote:InitConfig()
     local defaultConfig = {
         voteTime = 30,
-        mapsToVote = 15,
         mapPrefixes = {"ttt_"},
         mapExcludes = {}
     }

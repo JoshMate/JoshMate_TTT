@@ -11,7 +11,7 @@ local net = net
 local pairs = pairs
 local IsValid = IsValid
 
-local indicator = surface.GetTextureID("effects/select_ring")
+local indicator = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_player")
 local c4warn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_c4")
 local hazardwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_hazard")
 local lootwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_loot")
@@ -219,8 +219,8 @@ function RADAR:Draw(client)
 	-- Corpse calls
 	if not table.IsEmpty(self.called_corpses) then
 		surface.SetTexture(det_beacon)
-		surface.SetTextColor(255, 255, 255, 240)
-		surface.SetDrawColor(255, 255, 255, 230)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, corpse in pairs(self.called_corpses) do
 			DrawTarget(corpse, 16, 0.5)
@@ -230,8 +230,8 @@ function RADAR:Draw(client)
 	-- Samples
 	if self.samples_count ~= 0 then
 		surface.SetTexture(sample_scan)
-		surface.SetTextColor(200, 50, 50, 255)
-		surface.SetDrawColor(255, 255, 255, 240)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, sample in pairs(self.samples) do
 			DrawTarget(sample, 16, 0.5, true)
@@ -270,10 +270,10 @@ function RADAR:Draw(client)
 
 			if tgt.color then
 				surface.SetDrawColor(tgt.color.r, tgt.color.g, tgt.color.b, alpha)
-				surface.SetTextColor(tgt.color.r, tgt.color.g, tgt.color.b, alpha)
+				surface.SetTextColor(255, 255, 255, 255)
 			else
 				surface.SetDrawColor(c.r, c.g, c.b, alpha)
-				surface.SetTextColor(c.r, c.g, c.b, alpha)
+				surface.SetTextColor(255, 255, 255, 255)
 			end
 
 			DrawTarget(tgt, 24, 0)
