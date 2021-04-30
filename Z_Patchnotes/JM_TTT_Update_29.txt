@@ -12,7 +12,7 @@
 
 - Changed [Care Package] Minimum Spawn Delay: 15 -> 20 Seconds
 - Changed [Care Package] Maximum Spawn Delay: 3.5 -> 3 Minutes
-- Changed [Care Package] No longer always gives Traitors a Credit (But some loot still give credits)
+- Changed [Care Package] No longer always gives Traitors a Credit ontop of regular loot (But some loot still give credits)
 
 [Gameplay]
 
@@ -35,10 +35,13 @@
 
 [Maps]
 
+- New Map [Speed Dating] A close quarters and intimate map to get to know your fellow Bachelor terrorists!
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
 - Changed [Space Station] Made it clearer what you should jump to in the space walk parkour
 - Changed [Space Station] Made the space walk damage just do a flat 4 HP/s rather than 0.1to6HP/s
 - Changed [Space Station] Fixed the AMOOOGUS easter egg
-- Changed [Space Station] Fixed the flying corpses bug
+- Changed [Space Station] Fixed the flying corpses bug?
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Changed [Transit] Replaced the blurry ceiling texture with a nicer one (Just for you Kurt)
