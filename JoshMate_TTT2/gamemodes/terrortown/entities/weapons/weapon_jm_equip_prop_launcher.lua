@@ -35,15 +35,15 @@ SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = "shoot_poisondart.wav"                                 --REPLACE
+SWEP.Primary.Sound         = "shoot_yaiyai.wav"                                 --REPLACE
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_DETECTIVE} 
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_PROPLAUNCHER
 SWEP.UseHands              = true
-SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_aug.mdl")          --REPLACE
-SWEP.WorldModel            = Model("models/weapons/w_rif_aug.mdl")                  --REPLACE
+SWEP.ViewModel             = Model("models/weapons/c_rpg.mdl")
+SWEP.WorldModel            = Model("models/weapons/w_rocket_launcher.mdl")
 SWEP.IronSightsPos         = Vector( 5, -15, -2 )
 SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
 
@@ -52,13 +52,7 @@ local SpawnDistance = 40
 local StoredProp = nil
 
 function SWEP:PrimaryAttack()
-   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-   if not self:CanPrimaryAttack() then return end
-   self:EmitSound( self.Primary.Sound )
-   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
-   if IsValid(self:GetOwner()) then
-      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-   end
+   
 
    local owner = self:GetOwner()
    if not IsValid(owner) then return end
@@ -71,6 +65,7 @@ function SWEP:PrimaryAttack()
             tr.Entity:Remove()
          end
       end
+      FireAnim()
    else
       if SERVER then
          local object = ents.Create("prop_physics")
@@ -87,6 +82,7 @@ function SWEP:PrimaryAttack()
          objectphysics:AddVelocity(owner:GetAimVector() * 3000)
       end
       StoredProp = nil
+      FireAnim()
       self:TakePrimaryAmmo( 1 )
    end
 
@@ -95,7 +91,16 @@ function SWEP:PrimaryAttack()
          self:Remove()
       end
    end
-   -- #########
+end
+
+function FireAnim() 
+   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+   if not self:CanPrimaryAttack() then return end
+   self:EmitSound( self.Primary.Sound )
+   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+   if IsValid(self:GetOwner()) then
+      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
+   end
 end
 
 function SWEP:PreDrop()
