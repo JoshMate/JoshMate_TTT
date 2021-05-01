@@ -44,10 +44,12 @@
 [Maps]
 
 - New Map [Block Alley] Minecraft themed map, made by Seb.
-
-- Changed [Roof Party] Crack den music now controlled by a button.
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 - New Map [Speed Dating] A close quarters and intimate map to get to know your fellow Bachelor terrorists!
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Roof Party] Crack den music now controlled by a button.
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Changed [Space Station] Made it clearer what you should jump to in the space walk parkour
