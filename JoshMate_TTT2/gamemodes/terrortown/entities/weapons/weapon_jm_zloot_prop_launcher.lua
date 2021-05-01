@@ -45,7 +45,7 @@ local PropLauncher_Sound_Shoot                  = "proplauncher_shoot.wav"
 local PropLauncher_Sound_Reload                 = "proplauncher_reload.wav"
 local PropLauncher_Sound_Fail                   = "proplauncher_fail.wav"
 
-local PropLauncher_PropLauncher_StoredProp      = nil
+local PropLauncher_StoredProp                   = nil
 
 
 function Effects_PropMagic(ent)
