@@ -1,7 +1,7 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "ar2"
+SWEP.HoldType              = "rpg"
 
 if CLIENT then
    SWEP.PrintName          = "Prop Launcher"
