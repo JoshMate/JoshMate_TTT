@@ -9,6 +9,8 @@
 
 - Changed [HUD] Reduced alot of the chat message spam from buffs / events / weapons
 
+- Added [Loot] New Carepackage Good Loot: Prop Launcher
+
 - Changed [Care Package] New Loot table logic: Good Item = 80%  || Bad Item = 20% Chance
 
 - Changed [Care Package] Minimum Spawn Delay: 15 -> 20 Seconds
@@ -33,6 +35,8 @@
 - Nerfed [Light Pistol] Magizine Capacity: 20 -> 16
 
 - Buffed [Barrier] HP: 500 -> 650
+
+- Buffed [Radar] Scan Delay: 15 -> 10 Seconds
 
 - Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
 - Fixed [Soap] Rewrote the code to have better presentation / less prone to bugs

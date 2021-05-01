@@ -122,7 +122,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
 function ENT:Loot_Good( activator, caller ) 
 
-	local RNG_Good = math.random(1, 11)
+	local RNG_Good = math.random(1, 12)
 
 	if RNG_Good == 1 then
 		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
@@ -187,6 +187,11 @@ function ENT:Loot_Good( activator, caller )
 			SendFullStateUpdate()
 			activator:AddCredits(3)
 		end
+	end
+
+	if RNG_Good == 12 then
+		activator:ChatPrint("[Care Package] - Good Loot: Prop Launcher")
+		Loot_SpawnThis(self,"weapon_jm_zloot_prop_launcher")
 	end
 
  end

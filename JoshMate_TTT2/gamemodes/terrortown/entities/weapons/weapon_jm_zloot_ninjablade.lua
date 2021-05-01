@@ -163,8 +163,6 @@ end
 
 function SWEP:SecondaryAttack()
 
-	self:SetNextSecondaryFire(CurTime() + 0.1)
-	
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end
 	
