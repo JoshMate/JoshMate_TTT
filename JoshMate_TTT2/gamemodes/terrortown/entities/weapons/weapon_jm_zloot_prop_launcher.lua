@@ -45,7 +45,7 @@ local PropLauncher_Sound_Shoot                  = "proplauncher_shoot.wav"
 local PropLauncher_Sound_Reload                 = "proplauncher_reload.wav"
 local PropLauncher_Sound_Fail                   = "proplauncher_fail.wav"
 
-local PropLauncher_StoredProp                   = nil
+SWEP.PropLauncher_StoredProp                   = nil
 
 
 function Effects_PropMagic(ent)
@@ -69,12 +69,12 @@ function SWEP:PrimaryAttack()
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
    
-   if PropLauncher_StoredProp == nil then
+   if self.PropLauncher_StoredProp == nil then
       self:EmitSound(PropLauncher_Sound_Fail)
    else
       if SERVER then
          local object = ents.Create("prop_physics")
-         object:SetModel(PropLauncher_StoredProp)
+         object:SetModel(self.PropLauncher_StoredProp)
          object:SetPos(owner:GetShootPos() + owner:GetAimVector() * PropLauncher_Muzzle_Offset)
          object:PhysicsInit(SOLID_VPHYSICS)
          object:SetMoveType(MOVETYPE_VPHYSICS)
@@ -93,7 +93,7 @@ function SWEP:PrimaryAttack()
          objectphysics:AddGameFlag(FVPHYSICS_WAS_THROWN)
          
       end
-      PropLauncher_StoredProp = nil
+      self.PropLauncher_StoredProp = nil
       self:Animation_Fire()
       self:TakePrimaryAmmo( 1 )
    end
@@ -116,10 +116,10 @@ function SWEP:SecondaryAttack()
 
    -- Attempt to store a prop
 
-   if PropLauncher_StoredProp == nil then
+   if self.PropLauncher_StoredProp == nil then
       local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * PropLauncher_Range_Pickup, filter = owner})
       if (tr.Entity:IsValid() and tr.Entity:GetClass() == "prop_physics") then
-         PropLauncher_StoredProp = tr.Entity:GetModel()
+         self.PropLauncher_StoredProp = tr.Entity:GetModel()
          if SERVER then
             Effects_PropMagic(tr.Entity)
             tr.Entity:Remove()
