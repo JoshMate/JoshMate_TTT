@@ -11,7 +11,7 @@ if CLIENT then
 	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_mel"
 end
 
-SWEP.Base = "weapon_tttbase"
+SWEP.Base = "weapon_jm_base_gun"
 
 SWEP.UseHands               = true
 SWEP.ViewModelFlip			= false
@@ -184,7 +184,7 @@ end
 if SERVER then
    function SWEP:OnRemove()
       if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end

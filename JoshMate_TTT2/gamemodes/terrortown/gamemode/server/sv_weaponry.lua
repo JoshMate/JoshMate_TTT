@@ -118,9 +118,9 @@ local function GetLoadoutWeapons(subrole)
 
 	-- default loadout, insert it at the end
 	local default = {
-		"weapon_zm_carry",
-		"weapon_ttt_unarmed",
-		"weapon_zm_improvised"
+		"weapon_jm_special_pickup",
+		"weapon_jm_special_hands",
+		"weapon_jm_special_crowbar"
 	}
 
 	for i = 1, #default do
@@ -193,7 +193,7 @@ local function GetResetLoadoutWeapons(ply)
 	for i = 1, #weps do
 		local cls = WEPS.GetClass(weps[i])
 
-		if table.HasValue(ply.loadoutWeps, cls) and cls ~= "weapon_ttt_unarmed" then
+		if table.HasValue(ply.loadoutWeps, cls) and cls ~= "weapon_jm_special_hands" then
 			tmp[#tmp + 1] = cls
 		end
 	end
@@ -503,7 +503,7 @@ function WEPS.DropNotifiedWeapon(ply, wep, deathDrop, keepSelection)
 	-- After dropping a weapon, always switch to holstered, so that traitors
 	-- will never accidentally pull out a traitor weapon
 	if not keepSelection then
-		ply:SelectWeapon("weapon_ttt_unarmed")
+		ply:SelectWeapon("weapon_jm_special_hands")
 	end
 end
 

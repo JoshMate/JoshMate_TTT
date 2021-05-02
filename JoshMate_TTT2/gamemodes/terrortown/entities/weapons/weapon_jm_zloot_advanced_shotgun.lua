@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS "weapon_tttbase"
+DEFINE_BASECLASS "weapon_jm_base_gun"
 
 SWEP.HoldType              = "shotgun"
 
@@ -15,7 +15,7 @@ if CLIENT then
    SWEP.IconLetter         = "B"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_HEAVY

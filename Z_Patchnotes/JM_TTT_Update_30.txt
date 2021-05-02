@@ -1,0 +1,16 @@
+[ Update 30 ] - (Josh Mate's TTT2 Server)
+
+[Server]
+
+
+
+[Gameplay]
+
+
+
+- Fixed [Code] Huge Weapon code cleanup to standardise all the files
+
+[Maps]
+
+
+// [LATEST VERSION ON THE WORKSHOP NOW]

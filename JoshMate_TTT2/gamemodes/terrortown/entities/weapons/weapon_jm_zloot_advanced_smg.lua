@@ -13,7 +13,7 @@ if CLIENT then
    SWEP.IconLetter       = "l"
 end
 
-SWEP.Base                = "weapon_tttbase"
+SWEP.Base                = "weapon_jm_base_gun"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                = WEAPON_HEAVY

@@ -494,7 +494,7 @@ function HUDDrawTargetIDDNAScanner(tData)
 	local client = LocalPlayer()
 	local ent = tData:GetEntity()
 
-	if not IsValid(client:GetActiveWeapon()) or client:GetActiveWeapon():GetClass() ~= "weapon_ttt_wtester"
+	if not IsValid(client:GetActiveWeapon()) or client:GetActiveWeapon():GetClass() ~= "weapon_jm_equip_dna"
 		or tData:GetEntityDistance() > 400 or not IsValid(ent) then return end
 
 	-- add an empty line if there's already data in the description area
@@ -862,7 +862,7 @@ function HUDDrawTargetIDRagdolls(tData)
 
 	local corpse_found = CORPSE.GetFound(ent, false) or not DetectiveMode()
 	local role_found = corpse_found and ent.search_result and ent.search_result.role
-	local binoculars_useable = IsValid(c_wep) and c_wep:GetClass() == "weapon_ttt_binoculars" or false
+	local binoculars_useable = IsValid(c_wep) and c_wep:GetClass() == "weapon_jm_equip_binoculars" or false
 	local role = roles.GetByIndex(role_found and ent.search_result.role or 1)
 
 	-- enable targetID rendering

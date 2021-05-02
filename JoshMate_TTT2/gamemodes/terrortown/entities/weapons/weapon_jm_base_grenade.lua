@@ -2,7 +2,7 @@
 
 AddCSLuaFile()
 
-DEFINE_BASECLASS "weapon_tttbase"
+DEFINE_BASECLASS "weapon_jm_base_gun"
 
 SWEP.HoldType              = "grenade"
 SWEP.HoldReady             = "grenade"
@@ -21,7 +21,7 @@ if CLIENT then
    SWEP.Icon               = "vgui/ttt/icon_nades"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.UseHands           = true
 SWEP.ViewModel             = "models/weapons/v_eq_flashbang.mdl"
@@ -108,7 +108,7 @@ function SWEP:Throw()
       self:TakePrimaryAmmo(1)
       if self:Clip1() <= 0 then
          self:Remove()
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end

@@ -35,7 +35,7 @@
 ]
 
 @PointClass base(Weapon) studio("models/weapons/w_shot_xm1014.mdl") = weapon_zm_shotgun : "Shotgun" []
-@PointClass base(Weapon) studio("models/weapons/w_crowbar.mdl") = weapon_zm_improvised : "Crowbar" []
+@PointClass base(Weapon) studio("models/weapons/w_crowbar.mdl") = weapon_jm_special_crowbar : "Crowbar" []
 @PointClass base(Weapon) studio("models/weapons/w_pist_fiveseven.mdl") = weapon_zm_pistol : "Pistol" []
 @PointClass base(Weapon) studio("models/weapons/w_snip_scout.mdl") = weapon_zm_rifle : "Carbine" []
 @PointClass base(Weapon) studio("models/weapons/w_eq_flashbang.mdl") = weapon_zm_molotov : "Incendiary Grenade" []

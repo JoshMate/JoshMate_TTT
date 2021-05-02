@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() ~= "terrortown" then return end
-SWEP.Base = "weapon_tttbase"
+SWEP.Base = "weapon_jm_base_gun"
 SWEP.Author = "Josh Mate"
 SWEP.HoldType = "normal"
 SWEP.ViewModel = "models/weapons/v_crowbar.mdl"

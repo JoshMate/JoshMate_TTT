@@ -104,7 +104,7 @@ end
 
 -- People spawn with these, so remove any pickups (ZM maps have them)
 local function RemoveCrowbars()
-	local crowbars = ents.FindByClass("weapon_zm_improvised")
+	local crowbars = ents.FindByClass("weapon_jm_special_crowbar")
 
 	for i = 1, #crowbars do
 		crowbars[i]:Remove()
@@ -495,7 +495,7 @@ local function RemoveWeaponEntities()
 	for i = 1, #wepEnts do
 		ent = wepEnts[i]
 
-		if not hl2_weapon_replace[ent:GetClass()] and ent:GetClass() ~= "weapon_zm_improvised" then continue end
+		if not hl2_weapon_replace[ent:GetClass()] and ent:GetClass() ~= "weapon_jm_special_crowbar" then continue end
 
 		ent:Remove()
 	end

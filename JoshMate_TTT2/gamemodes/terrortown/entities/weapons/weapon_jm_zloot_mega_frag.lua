@@ -69,7 +69,7 @@ function SWEP:Throw()
       self:TakePrimaryAmmo(1)
       if self:Clip1() <= 0 then
          self:Remove()
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end

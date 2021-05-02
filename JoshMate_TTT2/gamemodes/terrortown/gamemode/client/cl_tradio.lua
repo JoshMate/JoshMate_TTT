@@ -99,7 +99,7 @@ function TRADIO.CreateMenu(parent)
 
 	if IsValid(client.radio) then
 		CreateSoundBoard(wrap) -- local board
-	elseif client:HasWeapon("weapon_ttt_radio") then
+	elseif client:HasWeapon("weapon_jm_equip_radio") then
 		dhelp:SetText(LANG.GetTranslation("radio_notplaced"))
 	end
 

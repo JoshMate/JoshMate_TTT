@@ -13,21 +13,26 @@ if CLIENT then
    SWEP.IconLetter         = "c"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.CanBuy                = {}
 
-SWEP.Primary.Damage        = 20
-SWEP.Primary.Delay         = 0.08
-SWEP.Primary.Cone          = 0.050
+-- // Gun Stats
+
+SWEP.Primary.Damage        = 1
+SWEP.Primary.Delay         = 0.10
+SWEP.Primary.Cone          = 0.01
 SWEP.Primary.Recoil        = 1
-SWEP.Primary.ClipSize      = 20
-SWEP.Primary.DefaultClip   = 20
-SWEP.Primary.ClipMax       = 40
+SWEP.Primary.Range         = 1000
+SWEP.Primary.ClipSize      = 100
+SWEP.Primary.DefaultClip   = 100
+SWEP.Primary.ClipMax       = 0
 
 SWEP.HeadshotMultiplier    = 2
-SWEP.DeploySpeed           = 2
+SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = true
+
+-- // End of Gun Stats
 
 SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = "shoot_autopistol.wav"

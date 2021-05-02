@@ -53,7 +53,7 @@ function ENT:UseOverride(activator)
 		local prints = self.fingerprints or {}
 
 		-- picks up weapon, switches if possible and needed, returns weapon if successful
-		local wep = activator:SafePickupWeaponClass("weapon_ttt_radio", true)
+		local wep = activator:SafePickupWeaponClass("weapon_jm_equip_radio", true)
 
 		if not IsValid(wep) then return end
 

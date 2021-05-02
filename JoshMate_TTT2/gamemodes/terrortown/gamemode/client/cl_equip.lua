@@ -736,7 +736,7 @@ function TraitorMenuPopup()
 	end
 
 	-- Weapon/item control
-	if IsValid(ply.radio) or ply:HasWeapon("weapon_ttt_radio") then
+	if IsValid(ply.radio) or ply:HasWeapon("weapon_jm_equip_radio") then
 		local dradio = TRADIO.CreateMenu(dsheet)
 
 		dsheet:AddSheet(GetTranslation("radio_name"), dradio, "icon16/transmit.png", false, false, GetTranslation("equip_tooltip_radio"))

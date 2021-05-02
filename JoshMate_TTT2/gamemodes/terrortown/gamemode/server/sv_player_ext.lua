@@ -876,7 +876,7 @@ function plymeta:Revive(delay, OnRevive, DoCheck, needsCorpse, blockRound, OnFai
 			hook.Run("PlayerLoadout", self, true)
 
 			self:SetCredits(CORPSE.GetCredits(corpse, 0))
-			self:SelectWeapon("weapon_zm_improvised")
+			self:SelectWeapon("weapon_jm_special_crowbar")
 
 			if IsValid(corpse) then
 				corpse:Remove()
@@ -1375,7 +1375,7 @@ function plymeta:SafePickupWeapon(wep, ammoOnly, forcePickup, dropBlockingWeapon
 
 		-- set to holstered if current weapon is dropped to prevent short crowbar selection
 		if isActiveWeapon then
-			self:SelectWeapon("weapon_ttt_unarmed")
+			self:SelectWeapon("weapon_jm_special_hands")
 		end
 	end
 
