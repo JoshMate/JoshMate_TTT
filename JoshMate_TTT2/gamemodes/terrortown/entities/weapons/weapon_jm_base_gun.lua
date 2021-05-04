@@ -135,6 +135,7 @@ SWEP.Secondary.ClipMax = -1
 SWEP.Secondary.IsDelayedByPrimary = 1
 
 SWEP.HeadshotMultiplier = 2.7
+SWEP.BulletForce	= 10
 
 SWEP.StoredAmmo = 0
 SWEP.IsDropped = false
@@ -505,7 +506,33 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 	self:GetOwner():MuzzleFlash()
 	self:GetOwner():SetAnimation(PLAYER_ATTACK1)
 
-	local sights = self:GetIronsights()
+	local owner = self:GetOwner()
+
+	-- Josh Mate Range Checks
+
+	local range_Damage = dmg
+
+	if isfunction(owner.LagCompensation) then -- for some reason not always true
+		owner:LagCompensation(true)
+	 end
+	 
+	 local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * 99999, filter = owner})
+	 
+	 local range_Distance = owner:GetShootPos():Distance(tr.HitPos)
+
+	 if (range_Distance > (self.Primary.Range * 1.0)) 	then range_Damage = (dmg *0.75) end
+	 if (range_Distance > (self.Primary.Range * 1.25)) 	then range_Damage = (dmg *0.50) end
+	 if (range_Distance > (self.Primary.Range * 1.50)) 	then range_Damage = (dmg *0.25) end
+  
+	 owner:LagCompensation(false)
+
+	 range_Damage = math.ceil( range_Damage )
+	 range_Distance = math.Round( range_Distance )
+
+	 print("Distance: " .. tostring(range_Distance) .. " Range: " .. tostring(self.Primary.Range) .. " Damage: " ..  tostring(range_Damage))
+
+	-- End of
+
 
 	numbul = numbul or 1
 	cone = cone or 0.01
@@ -515,10 +542,10 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 	bullet.Src = self:GetOwner():GetShootPos()
 	bullet.Dir = self:GetOwner():GetAimVector()
 	bullet.Spread = Vector(cone, cone, 0)
-	bullet.Tracer = 3
+	bullet.Tracer = 1
 	bullet.TracerName = self.Tracer or "Tracer"
-	bullet.Force = 10
-	bullet.Damage = dmg
+	bullet.Force = self.BulletForce
+	bullet.Damage = range_Damage
 
 	if CLIENT and sparkle:GetBool() then
 		bullet.Callback = Sparklies
@@ -532,7 +559,6 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 	if game.SinglePlayer() and SERVER
 	or not game.SinglePlayer() and CLIENT and IsFirstTimePredicted() then
 		-- reduce recoil if ironsighting
-		recoil = sights and (recoil * 0.6) or recoil
 
 		local eyeang = self:GetOwner():EyeAngles()
 		eyeang.pitch = eyeang.pitch - recoil

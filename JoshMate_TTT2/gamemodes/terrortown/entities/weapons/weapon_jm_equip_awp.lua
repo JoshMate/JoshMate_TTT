@@ -32,21 +32,26 @@ SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 
-SWEP.Primary.Recoil        = 5
-SWEP.Primary.Damage        = 5000
-SWEP.HeadshotMultiplier    = 1
-SWEP.Primary.Delay         = 1.25
-SWEP.Primary.Cone          = 0.1
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+-- // Gun Stats
+
+SWEP.Primary.Damage        = 1
+SWEP.Primary.Delay         = 0.10
+SWEP.Primary.Cone          = 0.01
+SWEP.Primary.Recoil        = 1
+SWEP.Primary.Range         = 1000
+SWEP.Primary.ClipSize      = 100
+SWEP.Primary.DefaultClip   = 100
 SWEP.Primary.ClipMax       = 0
+
+SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 40
-SWEP.IsSilent 			      = true
+SWEP.Primary.SoundLevel    = 100
+SWEP.Primary.Automatic     = true
 
+-- // End of Gun Stats
 
--- Josh Mate Changes
 SWEP.Secondary.IsDelayedByPrimary = 0
+SWEP.IsSilent 			      = true
 
 local JM_Cone_NoScope      = 0.1
 local JM_Cone_Scope        = 0
@@ -178,7 +183,7 @@ end
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Snipe an enemy", nil, true)
+	   self:AddTTT2HUDHelp("Snipe an enemy", "Scope in / out", true)
  
 	   return self.BaseClass.Initialize(self)
 	end

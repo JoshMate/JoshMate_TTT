@@ -21,19 +21,21 @@ SWEP.WeaponID              = AMMO_RIFLE
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 1
-SWEP.Primary.Delay         = 0.10
-SWEP.Primary.Cone          = 0.01
-SWEP.Primary.Recoil        = 1
-SWEP.Primary.Range         = 1000
-SWEP.Primary.ClipSize      = 100
-SWEP.Primary.DefaultClip   = 100
-SWEP.Primary.ClipMax       = 0
+SWEP.Primary.Damage        = 80
+SWEP.Primary.NumShots      = 1
+SWEP.Primary.Delay         = 1
+SWEP.Primary.Cone          = 0
+SWEP.Primary.Recoil        = 10
+SWEP.Primary.Range         = 5000
+SWEP.Primary.ClipSize      = 5
+SWEP.Primary.DefaultClip   = 5
+SWEP.Primary.ClipMax       = 10
+SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2
-SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
-SWEP.Primary.Automatic     = true
+SWEP.DeploySpeed           = 0.5
+SWEP.BulletForce           = 30
+SWEP.Primary.Automatic     = false
 
 -- // End of Gun Stats
 

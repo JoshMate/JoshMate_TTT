@@ -8,7 +8,7 @@ if CLIENT then
 	SWEP.ViewModelFlip = false
 	SWEP.ViewModelFOV = 72
 
-	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_mel"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_special.png"
 end
 
 SWEP.Base = "weapon_jm_base_gun"

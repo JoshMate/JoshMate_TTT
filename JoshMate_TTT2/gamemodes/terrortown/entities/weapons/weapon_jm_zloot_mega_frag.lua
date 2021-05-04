@@ -4,7 +4,7 @@ if CLIENT then
    SWEP.PrintName       = "Mega Frag Grenade"
    SWEP.Slot            = 3
 
-   SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_nade"
+   SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_special.png"
    SWEP.IconLetter      = "P"
 end
 

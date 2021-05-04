@@ -10,7 +10,7 @@ if CLIENT then
    SWEP.ViewModelFOV       = 54
    SWEP.ViewModelFlip      = false
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_prim" -- TODO Give this and the other Care Package Loot items their own icon
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_special.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"

@@ -2,15 +2,77 @@
 
 [Server]
 
-
+- Changed [HUD] gave a special kill icon to care package loot weapons
 
 [Gameplay]
 
+- Reworked [All Weapons] all weapons have had their stats erased and rebalanced from scratch
 
+-- ########################
+-- ### Notable Weapon Changes
+-- ########################
+
+- All guns are much more accurate
+- All guns have slightly better stats than before
+- Range now plays a HUGE part in weapon choice
+- Rifle can now 1 tap headshot
+- Rifle now has a faster fire rate and is harder to control
+- SMG is now much more accurate but has sharp range damage falloff
+- Shotgun is now much more accurate but has AGGRESIVE range damage falloff
+- Shotgun now has 2x headshot damage again
+- Pistols are much more powerful but have terrible range
+
+Light Pistol: 	Medium accuracy 	| medium dps | Good all-rounder
+Auto Pistol: 		Lowest accuracy 	| highest dps 	| Good at very close range
+Heavy Pistol: 	Highest accuracy 	| lowest dps 	| Good for 1 tap headshots
+
+Shotgun:			Lowest accuracy	 	| lowest range 	| Can body shot insta kill at close range
+SMG:				Low accuracy 			| low range 		| Very high DPS at close range
+Rifle:				High accuracy 		| high range 		| Can 1 tap headshot
+LMG: 				Medium accuracy 	| medium range | Good all-rounder with HUGE mag cap
+Sniper:				Higest accuracy 		| higest range		| Can 1 tap headshot and has a scope
+
+
+Time To Kill Close Range: 			Shotgun > SMG > Rifle > LMG > Sniper
+
+Time To Kill Medium Range: 		Rifle > SMG > LMG > Sniper > Shotgun
+
+Time To Kill Long Range: 			Sniper > Rifle > LMG > SMG > Shotgun
+
+-- ########################
+-- ### Weapon Range
+-- ########################
+
+New weapon "Range" stat for all bullet firing weapons
+Range decides how much damage guns do at different distances
+I wanted to keep it simple, so range works like this:
+
+*The following numbers are not final and this is just an example
+
+Light Pistol Damage: 100 HP
+Light Pistol Range: 300 Units
+
+Body shot your target who is 000 units away: 100 Damage
+Body shot your target who is 299 units away: 100 Damage
+body shot your target who is 301 units away: 75 Damage
+body shot your target who is 375 units away: 50 Damage
+body shot your target who is 450 units away: 25 Damage
+
+Head shot your target who is 000 units away: 200 Damage
+Head shot your target who is 450 units away: 50 Damage
+
+-- ########################
+
+
+- Changed [Holstered] is now called "Hands"
+- Changed [Magneeto Stick] is now called "Pickup Stick"
 
 - Fixed [Code] Huge Weapon code cleanup to standardise all the files
-
+- Fixed [Pulse Pad] No longer listed as  fire wall in HUD controls help
+    
+	
 [Maps]
 
-
+- Changed [Transit] Added a new Laura voice line for south and Josh line for north
+- Changed [Transit] Map icon has been updated
 // [LATEST VERSION ON THE WORKSHOP NOW]

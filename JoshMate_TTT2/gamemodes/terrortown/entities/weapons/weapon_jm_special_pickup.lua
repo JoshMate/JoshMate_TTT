@@ -18,7 +18,7 @@ local color_cached = Color(50, 250, 50, 240)
 SWEP.HoldType = "pistol"
 
 if CLIENT then
-	SWEP.PrintName = "magnet_name"
+	SWEP.PrintName = "Pickup Stick"
 	SWEP.Slot = 4
 
 	SWEP.DrawCrosshair = false
