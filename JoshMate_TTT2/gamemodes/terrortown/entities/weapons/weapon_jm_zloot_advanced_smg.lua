@@ -19,18 +19,25 @@ SWEP.CanBuy                = {}
 SWEP.Kind                = WEAPON_HEAVY
 SWEP.WeaponID            = AMMO_ADVANCED_SMG
 
+-- // Gun Stats
+
 SWEP.Primary.Damage        = 30
-SWEP.Primary.Delay         = 0.065
-SWEP.Primary.Cone          = 0.05
+SWEP.Primary.NumShots      = 1
+SWEP.Primary.Delay         = 0.070
+SWEP.Primary.Cone          = 0.030
 SWEP.Primary.Recoil        = 0.5
+SWEP.Primary.Range         = 600
 SWEP.Primary.ClipSize      = 60
 SWEP.Primary.DefaultClip   = 60
 SWEP.Primary.ClipMax       = 60
+SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.BulletForce           = 20
 SWEP.Primary.Automatic     = true
+
+-- // End of Gun Stats
 
 SWEP.Primary.Ammo        = "smg1"
 SWEP.Primary.Sound       = "shoot_advanced_smg.wav"

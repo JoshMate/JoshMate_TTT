@@ -16,7 +16,7 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A silent long range weapon
 	
-Perfect accuracy and 1 hit kill
+Perfect accuracy and is 1 hit kill
       
 Targets will not scream when killed
       
@@ -34,19 +34,21 @@ SWEP.LimitedStock          = true -- only buyable once
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 1
-SWEP.Primary.Delay         = 0.10
-SWEP.Primary.Cone          = 0.01
-SWEP.Primary.Recoil        = 1
-SWEP.Primary.Range         = 1000
-SWEP.Primary.ClipSize      = 100
-SWEP.Primary.DefaultClip   = 100
+SWEP.Primary.Damage        = 5000
+SWEP.Primary.NumShots      = 1
+SWEP.Primary.Delay         = 1
+SWEP.Primary.Cone          = 0
+SWEP.Primary.Recoil        = 10
+SWEP.Primary.Range         = 10000
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
+SWEP.Primary.SoundLevel    = 30
 
 SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
-SWEP.Primary.Automatic     = true
+SWEP.BulletForce           = 100
+SWEP.Primary.Automatic     = false
 
 -- // End of Gun Stats
 

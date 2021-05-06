@@ -58,13 +58,6 @@ JM_Global_Buff_StunGrenade_IconName                     = "JM_Buff_Icon_StunGren
 JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
-JM_Global_Buff_TrackingDart_Name                         = "Tracking Dart"
-JM_Global_Buff_TrackingDart_Duration                     = 60
-JM_Global_Buff_TrackingDart_NWBool                       = "JM_Buff_NWBool_IsTrackingDart"
-JM_Global_Buff_TrackingDart_IconName                     = "JM_Buff_Icon_TrackingDart"
-JM_Global_Buff_TrackingDart_IconPath                     = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_TrackingDart_IconGoodBad                  = "bad"
-
 JM_Global_Buff_TagGrenade_Name                          = "Tag Grenade"
 JM_Global_Buff_TagGrenade_Duration                      = 2
 JM_Global_Buff_TagGrenade_NWBool                        = "JM_Buff_NWBool_IsTagGrenade"
@@ -73,7 +66,7 @@ JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud
 JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
 
 JM_Global_Buff_PulsePad_Name                            = "Pulse Pad"
-JM_Global_Buff_PulsePad_Duration                        = 15
+JM_Global_Buff_PulsePad_Duration                        = 60
 JM_Global_Buff_PulsePad_NWBool                          = "JM_Buff_NWBool_IsPulsePad"
 JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad"
 JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
@@ -152,3 +145,10 @@ JM_Global_Buff_Care_TrippingBalls_NWBool                 = "JM_Buff_NWBool_IsTri
 JM_Global_Buff_Care_TrippingBalls_IconName               = "JM_Buff_Icon_TrippingBalls"
 JM_Global_Buff_Care_TrippingBalls_IconPath               = "vgui/ttt/joshmate/hud_trippingballs.png"
 JM_Global_Buff_Care_TrippingBalls_IconGoodBad            = "bad"
+
+JM_Global_Buff_Care_RapidFire_Name                      = "Rapid Fire"
+JM_Global_Buff_Care_RapidFire_Duration                  = 0
+JM_Global_Buff_Care_RapidFire_NWBool                    = "JM_Buff_NWBool_IsRapidFire"
+JM_Global_Buff_Care_RapidFire_IconName                  = "JM_Buff_Icon_RapidFire"
+JM_Global_Buff_Care_RapidFire_IconPath                  = "vgui/ttt/joshmate/hud_rapidfire.png"
+JM_Global_Buff_Care_RapidFire_IconGoodBad               = "good"

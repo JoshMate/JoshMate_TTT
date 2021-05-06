@@ -416,7 +416,13 @@ end
 -- @realm shared
 function SWEP:PrimaryAttack(worldsnd)
 	if self.Secondary.IsDelayedByPrimary == 1 then self:SetNextSecondaryFire(CurTime() + self.Primary.Delay) end 
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+
+	-- Rapid Fire Changes
+	local owner = self:GetOwner()
+	if (not owner:GetNWBool(JM_Global_Buff_Care_RapidFire_NWBool)) then self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	else self:SetNextPrimaryFire(CurTime() + (self.Primary.Delay*0.70)) end
+	-- End of Rapid Fire Changes
+
 
 	if not self:CanPrimaryAttack() then return end
 
@@ -429,7 +435,7 @@ function SWEP:PrimaryAttack(worldsnd)
 	self:ShootBullet(self.Primary.Damage, self.Primary.Recoil, self.Primary.NumShots, self:GetPrimaryCone())
 	self:TakePrimaryAmmo(1)
 
-	local owner = self:GetOwner()
+	
 
 	if not IsValid(owner) or owner:IsNPC() or not owner.ViewPunch then return end
 

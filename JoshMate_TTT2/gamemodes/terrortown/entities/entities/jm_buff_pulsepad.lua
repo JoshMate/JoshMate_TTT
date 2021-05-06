@@ -50,13 +50,6 @@ function ENT:Think()
 
 end
 
--- Hooks
-hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
-    if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
-    end 
-end)
-
 -- ESP Halo effect
 hook.Add( "PreDrawHalos", "Halos_PulsePad", function()
 

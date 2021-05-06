@@ -22,19 +22,25 @@ SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_ADVANCED_SHOTGUN
 
 
-SWEP.Primary.Damage        = 10
-SWEP.Primary.NumShots      = 20
-SWEP.Primary.Delay         = 0.3
-SWEP.Primary.Cone          = 0.150
-SWEP.Primary.Recoil        = 15
+-- // Gun Stats
+
+SWEP.Primary.Damage        = 15
+SWEP.Primary.NumShots      = 10
+SWEP.Primary.Delay         = 0.30
+SWEP.Primary.Cone          = 0.065
+SWEP.Primary.Recoil        = 5
+SWEP.Primary.Range         = 200
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
+SWEP.Primary.SoundLevel    = 75
 
-SWEP.HeadshotMultiplier    = 1
+SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.BulletForce           = 10
 SWEP.Primary.Automatic     = false
+
+-- // End of Gun Stats
 
 
 SWEP.Primary.Ammo          = "357"

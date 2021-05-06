@@ -19,18 +19,25 @@ SWEP.CanBuy                = {}
 SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_ADVANCED_SNIPER
 
-SWEP.Primary.Damage        = 90
-SWEP.Primary.Delay         = 0.3
-SWEP.Primary.Cone          = 0.1
+-- // Gun Stats
+
+SWEP.Primary.Damage        = 80
+SWEP.Primary.NumShots      = 1
+SWEP.Primary.Delay         = 0.30
+SWEP.Primary.Cone          = 0
 SWEP.Primary.Recoil        = 5
+SWEP.Primary.Range         = 5000
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
+SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2
-SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.DeploySpeed           = 0.75
+SWEP.BulletForce           = 30
 SWEP.Primary.Automatic     = false
+
+-- // End of Gun Stats
 
 -- Josh Mate Changes
 SWEP.Secondary.IsDelayedByPrimary = 0

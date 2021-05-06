@@ -10,9 +10,13 @@ ENT.AdminSpawnable      = false
 
 
 local JM_PulsePad_Model                 = "models/props_junk/sawblade001a.mdl"
-local JM_PulsePad_Colour_Active         = Color( 255, 255, 255, 30 )
+local JM_PulsePad_Colour_Dormant        = Color( 255, 255, 0, 200 )
+local JM_PulsePad_Colour_Armed          = Color( 255, 255, 0, 20 )
 local JM_PulsePad_Sound_HitPlayer       = "pulsepad_hit.wav"
 local JM_PulsePad_Sound_Destroyed       = "0_main_click.wav"
+local JM_Barrier_ArmTime				= 0.4
+
+ENT.isArmed								= false
 
 if CLIENT then
     function ENT:Draw()
@@ -33,11 +37,19 @@ function ENT:Initialize()
 
 	-- JoshMate Changed
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor(JM_PulsePad_Colour_Active) 
+	self:SetColor(JM_PulsePad_Colour_Dormant) 
 	self:DrawShadow(false)
 
-	-- Warning
-	if SERVER then self:SendWarn(true) end
+	-- Timer To arm this Ent
+	timer.Simple(JM_Barrier_ArmTime, function()
+
+		 if IsValid(self) then 
+			self.isArmed = true	
+			self:SetColor(JM_PulsePad_Colour_Armed)  
+		end 
+
+	end)
+
 
 end
 
@@ -50,7 +62,6 @@ function ENT:Use( activator, caller )
 		if activator:IsTerror() then
 			self.Owner:ChatPrint("[Pulse Pad] - Your Pulse Pad has been removed!")
             self:Effect_Sparks()
-            self:SendWarn(false)
 			self:Remove()
 		end
 		
@@ -61,13 +72,15 @@ end
 function ENT:Touch(toucher)
 
 	if SERVER then
-
+		if(not self.isArmed) then return end
         if(not toucher:IsValid()) then return end
         if(not toucher:IsPlayer()) then return end
         if(not toucher:IsTerror()) then return end
         if(not toucher:Alive()) then return end
         if(not GAMEMODE:AllowPVP()) then return end
         if(toucher:GetNWBool(JM_Global_Buff_PulsePad_NWBool)) then return end
+
+		if(toucher == self.Owner) then return end
 
         -- Give Buff
         JM_GiveBuffToThisPlayer("jm_buff_pulsepad",toucher,self.Owner)
@@ -86,7 +99,6 @@ function ENT:Touch(toucher)
 
         toucher:EmitSound(JM_PulsePad_Sound_HitPlayer);
         self:Effect_Sparks()
-        self:SendWarn(false)
         self:Remove()
 	
 	end
@@ -107,25 +119,5 @@ function ENT:Effect_Sparks()
 	util.Effect("TeslaHitboxes", effect, true, true)
 	util.Effect("cball_explode", effect, true, true)
 
-end
-
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_HazardWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-			net.WriteString(TEAM_TRAITOR)
-		end
-
-		net.Broadcast()
-	end
-
-	function ENT:OnRemove()
-		self:SendWarn(false)
-	end
 end
 

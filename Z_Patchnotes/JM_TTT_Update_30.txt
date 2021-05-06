@@ -2,6 +2,8 @@
 
 [Server]
 
+- Added [Carepackage Loot] Rapid fire, a full round long buff that increases your attack speed with Most weapons
+
 - Changed [HUD] gave a special kill icon to care package loot weapons
 
 [Gameplay]
@@ -21,6 +23,12 @@
 - Shotgun is now much more accurate but has AGGRESIVE range damage falloff
 - Shotgun now has 2x headshot damage again
 - Pistols are much more powerful but have terrible range
+- All advanced weapons have got these new stats too
+- All advanced weapons are FLAT upgrades to their standard counterparts 
+
+-- ########################
+-- ### Weapon Roles
+-- ########################
 
 Light Pistol: 	Medium accuracy 	| medium dps | Good all-rounder
 Auto Pistol: 		Lowest accuracy 	| highest dps 	| Good at very close range
@@ -32,12 +40,21 @@ Rifle:				High accuracy 		| high range 		| Can 1 tap headshot
 LMG: 				Medium accuracy 	| medium range | Good all-rounder with HUGE mag cap
 Sniper:				Higest accuracy 		| higest range		| Can 1 tap headshot and has a scope
 
-
 Time To Kill Close Range: 			Shotgun > SMG > Rifle > LMG > Sniper
 
 Time To Kill Medium Range: 		Rifle > SMG > LMG > Sniper > Shotgun
 
 Time To Kill Long Range: 			Sniper > Rifle > LMG > SMG > Shotgun
+
+-- ########################
+-- ### Advanced Weapons
+-- ########################
+
+Advanced Pistol: 			Bigger Magazine | More Damage | Less Recoil
+Advanced Shotgun:  		Semi Auto | Faster Fire Rate | Less Recoil
+Advanced SMG:  			Bigger Magazine | Faster Fire Rate 
+Advanced Rifle:  				Bigger Magazine | Less Recoil
+Advanced Sniper:  			Semi Auto | Faster Fire Rate | Less Recoil
 
 -- ########################
 -- ### Weapon Range
@@ -62,7 +79,22 @@ Head shot your target who is 000 units away: 200 Damage
 Head shot your target who is 450 units away: 50 Damage
 
 -- ########################
+-- #### End of Weapon Rework
+-- ########################
 
+- Removed [Tracking Dart] It effects and usage have been merged into Pulse Pad
+
+- Reworked [Pulse Pad]
+// It is now a Detective weapon
+// When stepped on it tracks the victim for 60 seconds
+// Detectives can't trigger on their own pulse pads
+// No longer slows the victim
+// can be used as a trap to get intel about peoples locations
+// or placed directly under someone to track them instantly like the old tracking dart gun
+// It tells the detective who stood on the pulse pads
+// Players can't trigger pulse pads while they are already tracked by another pulse pad
+
+- Buffed [Barrier] Arm Time: 3 -> 2 seconds
 
 - Changed [Holstered] is now called "Hands"
 - Changed [Magneeto Stick] is now called "Pickup Stick"
@@ -73,6 +105,11 @@ Head shot your target who is 450 units away: 50 Damage
 	
 [Maps]
 
-- Changed [Transit] Added a new Laura voice line for south and Josh line for north
+- Changed [Transit] Added a new Laura voice line for south and Josh line for north  gas wall event
 - Changed [Transit] Map icon has been updated
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Space Station] New Lockdown event that locks down the whole station and it gradually unlocks randomly over time
+- Changed [Space Station] Added a new Laura voice line for the lockdown event
+- Changed [Space Station] Doubled space walk damage (from about 20 to 40 per trip)
 // [LATEST VERSION ON THE WORKSHOP NOW]

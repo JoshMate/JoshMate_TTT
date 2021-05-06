@@ -28,15 +28,15 @@ SWEP.Primary.Damage        = 35
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.120
 SWEP.Primary.Cone          = 0.0125
-SWEP.Primary.Recoil        = 0.5
-SWEP.Primary.Range         = 1200
+SWEP.Primary.Recoil        = 0.75
+SWEP.Primary.Range         = 800
 SWEP.Primary.ClipSize      = 100
 SWEP.Primary.DefaultClip   = 100
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2
-SWEP.DeploySpeed           = 0.5
+SWEP.DeploySpeed           = 0.75
 SWEP.BulletForce           = 20
 SWEP.Primary.Automatic     = true
 

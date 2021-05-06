@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_TrackingDart_Name
-local JM_BuffNWBool             = JM_Global_Buff_TrackingDart_NWBool
-local JM_BuffDuration           = JM_Global_Buff_TrackingDart_Duration
-local JM_BuffIconName           = JM_Global_Buff_TrackingDart_IconName
-local JM_BuffIconPath           = JM_Global_Buff_TrackingDart_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_TrackingDart_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_Care_RapidFire_Name
+local JM_BuffNWBool             = JM_Global_Buff_Care_RapidFire_NWBool
+local JM_BuffDuration           = JM_Global_Buff_Care_RapidFire_Duration
+local JM_BuffIconName           = JM_Global_Buff_Care_RapidFire_IconName
+local JM_BuffIconPath           = JM_Global_Buff_Care_RapidFire_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_Care_RapidFire_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -48,25 +48,6 @@ function ENT:Think()
     self.BaseClass.Think(self)
 
 end
-
-
--- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Tracking_Dart", function()
-
-    local players = {}
-     local count = 0
- 
-     for _, ply in ipairs( player.GetAll() ) do
-         if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) ) then
-             count = count + 1
-             players[ count ] = ply
-         end
-     end
- 
-     halo.Add( players, Color( 255, 255, 0 ), 2, 2, 3, true, true )
- 
- end )
-
 
 
 -- #############################################

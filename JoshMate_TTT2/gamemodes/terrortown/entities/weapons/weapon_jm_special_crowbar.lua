@@ -125,7 +125,11 @@ function SWEP:OpenEnt(hitEnt)
 end
 
 function SWEP:PrimaryAttack()
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	-- Rapid Fire Changes
+	local owner = self:GetOwner()
+	if (not owner:GetNWBool(JM_Global_Buff_Care_RapidFire_NWBool)) then self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	else self:SetNextPrimaryFire(CurTime() + (self.Primary.Delay*0.70)) end
+	-- End of Rapid Fire Changes
 
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end

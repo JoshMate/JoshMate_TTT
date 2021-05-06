@@ -29,7 +29,7 @@ SWEP.AllowDrop 				= true
 SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind                  	= WEAPON_EQUIP
 SWEP.WeaponID              	= AMMO_BARRIER
-SWEP.CanBuy                	= {ROLE_TRAITOR}
+SWEP.CanBuy                	= {ROLE_DETECTIVE}
 SWEP.AutoSpawnable			= false
 SWEP.LimitedStock 			= true
 
@@ -43,7 +43,7 @@ if CLIENT then
 	
 Left click to place a hard to see pulse pad on the floor
 
-Any player who walks over the pad will be tracked and slowed for 15 seconds
+Any player who walks over the pad will be tracked for 60 seconds
 
 It has 3 uses
 ]]

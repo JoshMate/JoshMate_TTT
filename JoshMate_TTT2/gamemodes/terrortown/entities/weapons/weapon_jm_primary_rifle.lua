@@ -25,13 +25,13 @@ SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.120
 SWEP.Primary.Cone          = 0.008
 SWEP.Primary.Recoil        = 2.5
-SWEP.Primary.Range         = 2000
+SWEP.Primary.Range         = 1250
 SWEP.Primary.ClipSize      = 20
 SWEP.Primary.DefaultClip   = 20
 SWEP.Primary.ClipMax       = 60
 SWEP.Primary.SoundLevel    = 75
 
-SWEP.HeadshotMultiplier    = 2
+SWEP.HeadshotMultiplier    = 3
 SWEP.DeploySpeed           = 1
 SWEP.BulletForce           = 20
 SWEP.Primary.Automatic     = true
@@ -50,3 +50,7 @@ SWEP.WorldModel            = "models/weapons/w_rif_ak47.mdl"
 SWEP.IronSightsPos         = Vector(-3, -15, 3)
 SWEP.IronSightsAng         = Vector(5, 0, 0)
 
+-- No Iron Sights
+function SWEP:SecondaryAttack()
+   return
+end
