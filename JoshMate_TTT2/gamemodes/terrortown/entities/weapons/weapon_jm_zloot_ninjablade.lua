@@ -18,7 +18,7 @@ SWEP.ViewModelFlip			= false
 SWEP.ViewModel				= "models/weapons/v_tanto_knife.mdl"	-- Weapon view model
 SWEP.WorldModel				= "models/weapons/w_tanto_knife.mdl"	-- Weapon world model
 
-SWEP.Primary.Damage = 65
+SWEP.Primary.Damage = 80
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true

@@ -96,6 +96,8 @@ Head shot your target who is 450 units away: 50 Damage
 
 - Buffed [Barrier] Arm Time: 3 -> 2 seconds
 
+- Buffed [Ninja Blade] Damage: 65 -> 80
+
 - Changed [Holstered] is now called "Hands"
 - Changed [Magneeto Stick] is now called "Pickup Stick"
 
