@@ -107,11 +107,16 @@ Head shot your target who is 450 units away: 50 Damage
 	
 [Maps]
 
-- Changed [Transit] Added a new Laura voice line for south and Josh line for north  gas wall event
-- Changed [Transit] Map icon has been updated
-// [LATEST VERSION ON THE WORKSHOP NOW]
-
 - Changed [Space Station] New Lockdown event that locks down the whole station and it gradually unlocks randomly over time
 - Changed [Space Station] Added a new Laura voice line for the lockdown event
 - Changed [Space Station] Doubled space walk damage (from about 20 to 40 per trip)
 // [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Speed Dating] Time spent in the pods at the start has been increased
+- Changed [Speed Dating] Easter Egg jumps are now easier to make
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Transit] Added a new Laura voice line for south and Josh line for north  gas wall event
+- Changed [Transit] Map icon has been updated
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
