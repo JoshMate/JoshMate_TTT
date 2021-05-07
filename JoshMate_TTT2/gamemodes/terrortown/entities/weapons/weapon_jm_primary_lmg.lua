@@ -24,11 +24,11 @@ SWEP.WeaponID              = AMMO_M249
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 35
+SWEP.Primary.Damage        = 30
 SWEP.Primary.NumShots      = 1
-SWEP.Primary.Delay         = 0.120
-SWEP.Primary.Cone          = 0.0125
-SWEP.Primary.Recoil        = 0.75
+SWEP.Primary.Delay         = 0.115
+SWEP.Primary.Cone          = 0.0150
+SWEP.Primary.Recoil        = 1
 SWEP.Primary.Range         = 900
 SWEP.Primary.ClipSize      = 100
 SWEP.Primary.DefaultClip   = 100

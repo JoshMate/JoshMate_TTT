@@ -7,7 +7,7 @@ local karmacolors = {
 	top         = Color(   80, 255,    255),
     good        = Color(   80, 255,    100),
 	bad         = Color(   255, 255,    80),
-	terrible    = Color(   255, 150,    80), 
+	terrible    = Color(   255, 150,    80),
 	bottom      = Color(   150,   0,      0),
 	default     = Color(   255, 255,    255),
 };
@@ -20,15 +20,15 @@ hook.Add("TTTScoreboardColumns", "JM_ScoreBoard_ColouredKarma", function (panel)
 			
             color = karmacolors.bottom
 
-			if karma >= 1250 then
+			if karma >= 1001 then
 				color = karmacolors.top
 			elseif karma >= 1000 then
 				color = karmacolors.good
-			elseif karma >= 700 then
+			elseif karma >= 750 then
 				color = karmacolors.bad
-			elseif karma >= 300 then
+			elseif karma >= 500 then
 				color = karmacolors.terrible
-            end
+			end
 			
 			lbl:SetText(karma)
 			lbl:SetTextColor(color)

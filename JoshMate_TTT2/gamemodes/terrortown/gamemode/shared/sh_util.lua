@@ -524,16 +524,16 @@ if CLIENT then
 		elseif karma >= 1000 then
 			color = karmacolors.good
 			text = "Good"
-		elseif karma >= 900 then
+		elseif karma >= 800 then
 			color = karmacolors.bad
 			text = "Questionable"
-		elseif karma >= 700 then
+		elseif karma >= 600 then
 			color = karmacolors.bad
 			text = "Crude"
-		elseif karma >= 500 then
+		elseif karma >= 400 then
 			color = karmacolors.terrible
 			text = "Bad"
-		elseif karma >= 300 then
+		elseif karma >= 200 then
 			color = karmacolors.terrible
 			text = "Very Bad"
 		end

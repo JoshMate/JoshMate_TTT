@@ -1,5 +1,4 @@
 AddCSLuaFile()
-include("ent_jm_carepackage_loot.lua")
 
 if CLIENT then
     function ENT:Draw()

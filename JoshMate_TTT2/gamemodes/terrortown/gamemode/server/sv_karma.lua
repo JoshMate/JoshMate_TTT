@@ -130,22 +130,22 @@ end
 -- @param Player ply
 -- @realm server
 function KARMA.ApplyKarma(ply)
-	local df = 1
 
-	-- any karma at 1000 or over guarantees a df of 1, only when it's lower do we
-	-- need the penalty curve
-	if ply:GetBaseKarma() < 1000 then
-		local k = ply:GetBaseKarma() - 1000
+	-- Josh Mate Changes
+	-- Punished Damage
+	local JM_Karma_Damage_Max = 1.0
+	local JM_Karma_Damage_Min = 0.5
 
-		if config.strict:GetBool() then
-			-- this penalty curve sinks more quickly, less parabolic
-			df = 1 + 0.0007 * k + -0.000002 * (k ^ 2)
-		else
-			df = 1 + -0.0000025 * (k ^ 2)
-		end
-	end
+	local JM_Karma_Damage_Mult = 1.0
+    local JM_Karma_Current = ply:GetBaseKarma()
 
-	ply:SetDamageFactor(math.Clamp(df, 0.1, 1.0))
+    JM_Karma_Damage_Mult = (JM_Karma_Current / 1000)
+
+    JM_Karma_Damage_Mult = math.Round(JM_Karma_Damage_Mult, 1)
+
+    JM_Karma_Damage_Mult = math.Clamp(JM_Karma_Damage_Mult, JM_Karma_Damage_Min, JM_Karma_Damage_Max)   
+
+	ply:SetDamageFactor(JM_Karma_Damage_Mult)
 
 	if IsDebug() then
 		print(Format("%s has karma %f and gets df %f", ply:Nick(), ply:GetBaseKarma(), df))
@@ -172,19 +172,19 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 		local penalty = KARMA.GetHurtPenalty(victim:GetLiveKarma(), hurt_amount)
 
 		-- JoshMate Changes
-		local KarmaPerHPDMGMult = 2
+		local KarmaPerHPDMGMult = 3
 		penalty = penalty * KarmaPerHPDMGMult
-		penalty = math.Round( penalty )
+		penalty = math.ceil( penalty )
 
 
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[DMG] [KARMA] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [DMG] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[DMG] [KARMA] - %s Lost %i Karma", attacker:Nick(), penalty))
+			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [DMG] - %s Lost %i Karma", attacker:Nick(), penalty))
 		end
 		
 	end
@@ -206,11 +206,11 @@ function KARMA.Killed(attacker, victim, dmginfo)
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KILL] [KARMA] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [Kill] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KILL] [KARMA] - %s Lost %i Karma", attacker:Nick(), penalty))
+			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [Kill] - %s Lost %i Karma", attacker:Nick(), penalty))
 		end
 	
 	end

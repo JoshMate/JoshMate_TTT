@@ -1110,7 +1110,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 			-- if the faller was pushed, that person should get attrib
 			local push = ply.was_pushed
 
-			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - 4 then
+			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - 12 then
 				-- TODO: move push time checking stuff into fn?
 				att = push.att
 			end
