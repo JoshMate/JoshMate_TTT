@@ -4,38 +4,23 @@
 
 - Reworked [Karma] 
 // The system is now hits MUCH harder, but will let you get back to normal faster
-// So you will now spend 1-5 rounds HARSHLY Punished rather than 3-15 moderately punished
-
-- Changed [Karma] Karma lost per HP done wrongly: 2 -> 3
-// Deal 100 -> 0 damage to a player will cost you 500 karma
-
-- Changed [Karma] Karma Punishment: Movement Speed
-// Your movement speed will be linked to your karma ( The less karma, the slower you move)
-// Your speed can be reduced to a minimum of 50%
-// You can thank Vinny for this EVIL idea
-
-- Changed [Karma] Karma Punishment: Max HP
-// Your max HP will be linked to your karma ( The less karma, the less health you have)
-// Your max health can be reduced to a minimum of 10
-
-- Changed [Karma] Karma Punishment: Damage
-// Your damage will be linked to your karma ( The less karma, the less damage you deal)
-// Your damage can be reduced to a minimum of 50%
-// Before it could go down all the way to 10%
 
 - Changed [Karma] Reduced Max Karma: 1250 -> 1000
 // This is to prevent "Free Kills" and also make it easier for me to reset peoples karmas
 
-- Changed [Karma]  Karma Healed at the end of ALL rounds: 20 -> 0
-- Changed [Karma]  Karma Healed at the end of CLEAN rounds: 30 -> 200
-// This should get you back to normal faster, and reward clean rounds (Not losing any karma in a round)
-// It will also stop times where you reach 0 karma and just sit the rest of the map out
+- Changed [Karma] Karma lost per HP done wrongly: 2 -> 3
+// Deal 100 -> 0 damage to a player will cost you 500 karma
 
-- Changed [Karma]  Karma now persists through maps / rounds 
-// This stops people from getting away with RDM when there is only 1 or 2 rounds left in the map
+- Changed [Karma] Karma Punishment: Damage
+// Your damage will be linked to your karma ( The less karma, the less damage you deal)
+// Your damage can be reduced to a minimum of 50%
+// With the old system it could go down all the way to 10%
 
-- Changed [Karma] Karma now effects your traitor rounds too
-// If you were traitor a few times after RDMing you wouldn't even be punished before
+- Changed [Karma] Karma Punishment: Slay
+// If you are BELOW 300 Karma you will be slayed at the start of the next round and you karma reset to 300
+// If you are BELOW 600 Karma you will be slayed at the start of the next round and you karma reset to 600
+// For Example: At 200 Karma you will be slayed twice over the next two rounds and end up with 600 karma
+// While you karma is atleast 600, you will heal 100 karma per round back up to 1000
 
 - Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage from a fall
 - Changed [Karma] Tele fragging now gives out karma hits
@@ -51,6 +36,7 @@
 - Nerfed [Rifle] Fire Rate Delay: 0.120 -> 0.130
 
 - Nerfed [SMG] Range: 600 -> 500
+- Nerfed [SMG] Accuracy Spread: 0.030 -> 0.035
 
 - Buffed [LMG] Fire Rate Delay: 0.120 -> 0.115
 - Nerfed [LMG] Damage: 35 -> 30

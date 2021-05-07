@@ -153,7 +153,7 @@ function SWEP:PrimaryAttack()
       effect:SetOrigin(tr.HitPos)
       
       util.Effect("TeslaZap", effect, true, true)
-      util.Effect("TeslaHitboxes", effect, true, true)
+      
       util.Effect("cball_explode", effect, true, true)
       sound.Play(Sound("npc/assassin/ball_zap1.wav"), tr.HitPos, 100, 100)
 

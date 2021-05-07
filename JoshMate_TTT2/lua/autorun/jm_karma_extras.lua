@@ -5,35 +5,39 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 
 
--- Punished Movement Speed
-local JM_Karma_Speed_Max = 1.0
-local JM_Karma_Speed_Min = 0.5
-
-hook.Add("TTTPlayerSpeedModifier", "KarmaMovementSpeedPunish", function(ply, _, _, speedMultiplierModifier)
-	if not IsValid(ply)then return end
-
-    local JM_Karma_Speed_Mult = 1.0
-    local JM_Karma_Current = ply:GetBaseKarma()
-
-    JM_Karma_Speed_Mult = (JM_Karma_Current / 1000)
-
-    JM_Karma_Speed_Mult = math.Round(JM_Karma_Speed_Mult, 1)
-
-    JM_Karma_Speed_Mult = math.Clamp(JM_Karma_Speed_Mult, JM_Karma_Speed_Min, JM_Karma_Speed_Max)    
-
-
-	speedMultiplierModifier[1] = speedMultiplierModifier[1] * JM_Karma_Speed_Mult
-
-
-end)
 
 if SERVER then
 
-    -- Punish Max HP
-    local JM_Karma_HP_Max = 1.0
-    local JM_Karma_HP_Min = 0.01
+    local function Effects_Slay(playerToSlay) 
 
-    hook.Add("TTTBeginRound", "KarmaMaxHPPunish", function()
+        if not playerToSlay:IsValid() then return end
+    
+        local pos = playerToSlay:GetShootPos()
+        local effect = EffectData()
+        effect:SetStart(pos)
+        effect:SetOrigin(pos)
+        util.Effect("cball_explode", effect, true, true)
+        
+        playerToSlay:EmitSound("karmaslay.wav")
+    
+        playerToSlay:Kill()
+        playerToSlay:SetLiveKarma(JM_Karma_Slay_Threshold_First)
+        net.Start("JM_KarmaSlayMessage")
+        net.WriteString(tostring(playerToSlay:Nick()))
+        net.Broadcast()
+    
+    end
+
+
+    -- Slay players who are below certain thresholds
+    local JM_Karma_Slay_Threshold_First     = 300
+    local JM_Karma_Slay_Threshold_Second    = 600
+    local JM_Karma_Heal_Max                 = 1000
+    local JM_Karma_Heal_After_Slays         = 100
+
+    util.AddNetworkString("JM_KarmaSlayMessage")
+
+    hook.Add("TTTBeginRound", "JMKarmaSlayAtStartOfRound", function()
         
         local plys = player.GetAll()    
         for i = 1, #plys do
@@ -41,19 +45,35 @@ if SERVER then
             local ply = plys[i]
             if not ply:IsValid() or not ply:IsTerror() then continue end
 
-            local JM_Karma_HP_Mult = 1.0
             local JM_Karma_Current = ply:GetBaseKarma()
 
-            JM_Karma_HP_Mult = (JM_Karma_Current / 1000)
-            JM_Karma_HP_Mult = math.Round(JM_Karma_HP_Mult, 2)
-            JM_Karma_HP_Mult = math.Clamp(JM_Karma_HP_Mult, JM_Karma_HP_Min, JM_Karma_HP_Max)    
+            if JM_Karma_Current < JM_Karma_Slay_Threshold_First then
 
-            ply:SetMaxHealth( ply:GetMaxHealth() *  JM_Karma_HP_Mult)
-            ply:SetHealth(ply:GetMaxHealth())
-            
+                Effects_Slay(ply) 
+                ply:SetLiveKarma(JM_Karma_Slay_Threshold_First)
+                
+            elseif JM_Karma_Current < JM_Karma_Slay_Threshold_Second then
+
+                Effects_Slay(ply) 
+                ply:SetLiveKarma(JM_Karma_Slay_Threshold_Second)
+
+            elseif JM_Karma_Current >= JM_Karma_Slay_Threshold_Second then
+
+                local newValue = JM_Karma_Current + JM_Karma_Heal_After_Slays
+                ply:SetLiveKarma(math.Clamp(newValue, JM_Karma_Slay_Threshold_Second, JM_Karma_Heal_Max) )
+
+            end
+        
         end
     end)
 end
 
+if CLIENT then
+    net.Receive("JM_KarmaSlayMessage", function(_) 
+        local nameOfPlayerSlayed = net.ReadString()
+
+        chat.AddText( Color( 255, 0, 0 ), "[KARMA] - ", Color( 255, 255, 0 ), tostring(nameOfPlayerSlayed), Color( 255, 255, 255 ), " was killed because they had low karma!")
+    end)
+end
 
 

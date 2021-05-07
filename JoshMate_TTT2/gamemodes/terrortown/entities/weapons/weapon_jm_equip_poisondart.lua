@@ -68,7 +68,7 @@ function SWEP:HitEffectsInit(ent)
    effect:SetOrigin(ePos)
    
    util.Effect("TeslaZap", effect, true, true)
-   util.Effect("TeslaHitboxes", effect, true, true)
+   
    util.Effect("cball_explode", effect, true, true)
 end
 
