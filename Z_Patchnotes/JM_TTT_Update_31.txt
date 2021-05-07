@@ -37,8 +37,8 @@
 - Changed [Karma] Karma now effects your traitor rounds too
 // If you were traitor a few times after RDMing you wouldn't even be punished before
 
-- Fixed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage from a fall
-- Fixed [Karma] Tele fragging now gives out karma hits
+- Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage from a fall
+- Changed [Karma] Tele fragging now gives out karma hits
 
 -- ################################
 -- #### Gameplay
@@ -57,7 +57,13 @@
 - Nerfed [LMG] Recoil: 0.75 -> 1
 - Nerfed [LMG] Accuracy Spread: 0.0125 -> 0.0150
 
+- Buffed [Man Hacks] Damage: 30 -> 40
+
 - Buffed [Gus Radio] The Explosion is now MUCH bigger
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
 
 - Fixed [Bug] Awp, Sniper and Advanced Sniper had incorrect hip fire accuracy
     
