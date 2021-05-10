@@ -238,7 +238,7 @@ local function DoTeleport(ply, teleport, weapon)
             end
          else
             fail = true
-            ply:ChatPrint("[Teleporter]: Teleport Failed... (A Player is Blocking You) (Wait 5 Seconds before you can telefrag them)")
+            ply:ChatPrint("[Teleporter]: Teleport Failed... (A Player is Blocking You)")
          end
       end
 

@@ -2,6 +2,9 @@
 -- ### Server
 -- ################################
 
+- Reoworked [Rules]
+// The !MOTD has been re-written to be much clearer and shorter
+
 - Reworked [Karma] 
 // The system is now hits MUCH harder, but will let you get back to normal faster
 
@@ -23,7 +26,6 @@
 // While you karma is atleast 600, you will heal 100 karma per round back up to 1000
 
 - Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage from a fall
-- Changed [Karma] Tele fragging now gives out karma hits
 
 -- ################################
 -- #### Gameplay
@@ -44,6 +46,7 @@
 - Nerfed [LMG] Accuracy Spread: 0.0125 -> 0.0150
 
 - Buffed [Man Hacks] Damage: 30 -> 40
+- Buffed [Man Hacks] Deploy Range: 650 -> 800
 
 - Buffed [Gus Radio] The Explosion is now MUCH bigger
 
@@ -57,5 +60,24 @@
 -- ##### Maps
 -- ################################
 
+- Removed [Rising Tide] It is going to be reworked into another map
+
+- Reworked [Dread Hollow]
+// A new map Icon
+// Added the lights from the light mode version
+// Removed the Score Objective from the map.
+// Improved the entrace to the underground from the saloon
+// Added some more props to decorate the saloon
+// Added more screens to watch the live stream from around the map
+// Added more lights to the forest
+// Added more detail, cover and props to the forest
+// Cleaned up some trees that clipped though some wall
+// Added a rare chance to spawn outside of the saloon
+// Various other little tweaks and fixes
+// Redid the weapon + care package spawns
+// Certain weapon types now only spawn at certain land marks (You'll Learn them)
+// Added the The Josh Mate 2.0 Turtles
 // [LATEST VERSION ON THE WORKSHOP NOW]
+
+
 

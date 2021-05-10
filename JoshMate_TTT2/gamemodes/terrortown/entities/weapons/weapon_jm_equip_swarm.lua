@@ -37,7 +37,7 @@ SWEP.ViewModel             = "models/weapons/v_crowbar.mdl"
 SWEP.WorldModel            = "models/weapons/w_crowbar.mdl"
 SWEP.HoldType 				   = "normal" 
 
-local deployRange = 650
+local deployRange = 800
 local deployAmount = 12
 local deployLifeTime = 60
 
