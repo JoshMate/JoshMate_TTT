@@ -13,7 +13,7 @@ ITEM.EquipMenuData = {
 		+ Silent Footsteps
 		+ Immunity to Fall & Drown Damage
 		+ 20% Movement Speed 
-		+ 50% Better Jump Height & Crouch Walking
+		+ 60% Better Jump Height & Crouch Walking
 ]]
 }
 
@@ -52,8 +52,8 @@ hook.Add("TTTPlayerSpeedModifier", "NinjaProMoveSpeed", function(ply, _, _, spee
 	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
 
 	if SERVER then
-		ply:SetJumpPower(250)
-		ply:SetCrouchedWalkSpeed(0.50)
+		ply:SetJumpPower(280)
+		ply:SetCrouchedWalkSpeed(0.60)
 	end
 end)
 

@@ -51,7 +51,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 
     -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.25
+    self.buffTickDelay  = 0.20
     self.buffTickNext   = CurTime()
 
 end

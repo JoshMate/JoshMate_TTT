@@ -25,7 +25,8 @@
 // For Example: At 200 Karma you will be slayed twice over the next two rounds and end up with 600 karma
 // While you karma is atleast 600, you will heal 100 karma per round back up to 1000
 
-- Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage from a fall
+- Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage as a result of your push
+- Changed [Karma] You must have 1000 Karma to be selected as the detective
 
 -- ################################
 -- #### Gameplay
@@ -50,17 +51,27 @@
 
 - Buffed [Gus Radio] The Explosion is now MUCH bigger
 
+- Buffed [Care Package Regen Buff] HP/s: 4 -> 5
+
+- Buffed [Ninja Pro] Jump Height: 250 -> 280
+- Buffed [Ninja Pro] Crouch Speed: 0.50 -> 0.60
+
+
 -- ################################
 -- #### Bug Fixes
 -- ################################
 
 - Fixed [Bug] Awp, Sniper and Advanced Sniper had incorrect hip fire accuracy
+- Fixed [Bug] C4 was purchasable multiple times in the same round
     
 -- ################################
 -- ##### Maps
 -- ################################
 
 - Removed [Rising Tide] It is going to be reworked into another map
+
+- New Map [Mile High Club] A claustrophobic map set on a mid-flight passenger plane
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Reworked [Dread Hollow]
 // A new map Icon
@@ -73,10 +84,10 @@
 // Added more detail, cover and props to the forest
 // Cleaned up some trees that clipped though some wall
 // Added a rare chance to spawn outside of the saloon
-// Various other little tweaks and fixes
 // Redid the weapon + care package spawns
 // Certain weapon types now only spawn at certain land marks (You'll Learn them)
 // Added the The Josh Mate 2.0 Turtles
+// Various other little tweaks and fixes
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
 
