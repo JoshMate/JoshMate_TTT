@@ -43,6 +43,9 @@ end
 local function PlayerCanHearTeam(listener, speaker, speakerTeam)
 	local speakerSubRoleData = speaker:GetSubRoleData()
 
+	-- Josh Mate Changes - Dead players can hear Traitor Chat
+	if listener:IsSpec() then return true, loc_voice:GetBool() end
+
 	-- Speaker checks
 	if speakerTeam == TEAM_NONE or speakerSubRoleData.unknownTeam or speakerSubRoleData.disabledTeamVoice then
 		return false, false

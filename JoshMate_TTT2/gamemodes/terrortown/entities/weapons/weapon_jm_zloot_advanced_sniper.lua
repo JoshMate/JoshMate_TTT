@@ -21,7 +21,7 @@ SWEP.WeaponID              = AMMO_ADVANCED_SNIPER
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 80
+SWEP.Primary.Damage        = 85
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0.1

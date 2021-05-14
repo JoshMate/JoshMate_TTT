@@ -2,6 +2,12 @@
 -- ### Server
 -- ################################
 
+- Changed [Voice Chat] Dead players can now hear Traitor Voice Chat
+// Thanks Vinny for the idea
+
+- Changed [Roles] The "Avoid being selected as Detective" Button now actually stops you from being Detective 
+// Thaks to India for suggesting I finish it off finally
+
 - Reoworked [Rules]
 // The !MOTD has been re-written to be much clearer and shorter
 
@@ -32,7 +38,9 @@
 -- #### Gameplay
 -- ################################
 
-- Buffed [Sniper] Damage: 80 -> 90
+- Buffed [Sniper] Damage: 80 -> 85
+
+- Buffed [Advanced Sniper] Damage: 80 -> 85
 
 - Buffed [Rifle] Damage: 40 -> 45
 - Nerfed [Rifle] Headshot Damage: 120 -> 90
@@ -46,23 +54,31 @@
 - Nerfed [LMG] Recoil: 0.75 -> 1
 - Nerfed [LMG] Accuracy Spread: 0.0125 -> 0.0150
 
+- Buffed [Frag Grenade] Avg Damage: 40 -> 50
+
+- Buffed [Jump Grenade] Blast Radius: 350 -> 400 (Same as all other grenades for consistency)
+
 - Buffed [Man Hacks] Damage: 30 -> 40
 - Buffed [Man Hacks] Deploy Range: 650 -> 800
+
+- Buffed [Ninja Pro] Jump Height: 250 -> 280
+- Buffed [Ninja Pro] Crouch Speed: 0.50 -> 0.60
 
 - Buffed [Gus Radio] The Explosion is now MUCH bigger
 
 - Buffed [Care Package Regen Buff] HP/s: 4 -> 5
 
-- Buffed [Ninja Pro] Jump Height: 250 -> 280
-- Buffed [Ninja Pro] Crouch Speed: 0.50 -> 0.60
+- Changed [Drowning] Damage Per Second: 15 -> 20
+
 
 
 -- ################################
 -- #### Bug Fixes
 -- ################################
 
-- Fixed [Bug] Awp, Sniper and Advanced Sniper had incorrect hip fire accuracy
+- Fixed [Bug] Awp, Sniper and Advanced Sniper's first noscope was more accurate than your other no scopes
 - Fixed [Bug] C4 was purchasable multiple times in the same round
+- Fixed [Bug] Being Disguised with Ninja Pro would still cause you make drowning noises (Even though you're immune)
     
 -- ################################
 -- ##### Maps

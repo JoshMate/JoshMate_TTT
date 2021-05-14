@@ -9,7 +9,7 @@ ENT.Model = Model("models/weapons/w_eq_fraggrenade_thrown.mdl")
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(255,0,0,150)
 
-local JM_Explosive_Blast_Damage    = 40
+local JM_Explosive_Blast_Damage    = 50
 local JM_Explosive_Blast_Radius    = 400
 
 function ENT:Explode(tr)

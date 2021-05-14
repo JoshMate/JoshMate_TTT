@@ -167,7 +167,7 @@ function GM:Tick()
 				local drowningTime = ply.drowningTime or MAX_DROWN_TIME
 
 				if ply.drowning then
-					if ply:HasEquipmentItem("item_ttt_nodrowningdmg") then
+					if ply:HasEquipmentItem("item_jm_passive_ninjapro") and ply:GetNWBool("disguised") then
 						ply.drowningProgress = MAX_DROWN_TIME
 						ply.drowning = CurTime() + MAX_DROWN_TIME
 					else
@@ -177,7 +177,7 @@ function GM:Tick()
 					if SERVER and ply.drowning < CurTime() then
 						local dmginfo = DamageInfo()
 
-						dmginfo:SetDamage(15)
+						dmginfo:SetDamage(20)
 						dmginfo:SetDamageType(DMG_DROWN)
 						dmginfo:SetAttacker(game.GetWorld())
 						dmginfo:SetInflictor(game.GetWorld())

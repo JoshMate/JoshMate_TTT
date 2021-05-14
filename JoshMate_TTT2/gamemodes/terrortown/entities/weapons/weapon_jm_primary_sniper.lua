@@ -21,7 +21,7 @@ SWEP.WeaponID              = AMMO_RIFLE
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 90
+SWEP.Primary.Damage        = 85
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 1
 SWEP.Primary.Cone          = 0.1

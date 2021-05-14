@@ -8,7 +8,7 @@ ENT.Model = Model("models/weapons/w_eq_flashbang_thrown.mdl")
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(0,255,0,150)
 
-local JM_Jump_Radius       = 350
+local JM_Jump_Radius       = 400
 local JM_Jump_Force        = 500
 
 function ENT:Explode(tr)

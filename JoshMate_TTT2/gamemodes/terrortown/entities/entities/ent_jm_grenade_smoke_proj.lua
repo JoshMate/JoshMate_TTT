@@ -11,8 +11,6 @@ ENT.Trail_Colour = Color(255,255,255,150)
 
 local JM_Tag_Radius  = 400
 
-local JM_Tag_Duration = 2
-local JM_Tag_Colour = Color( 255, 255, 255 )
 
 function ENT:HitEffectsInit(ent)
    if not IsValid(ent) then return end
@@ -78,21 +76,3 @@ function ENT:Explode(tr)
    end
 
 end
-
-
--- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Tag_Grenade", function()
-
-   local players = {}
-	local count = 0
-
-	for _, ply in ipairs( player.GetAll() ) do
-		if (ply:IsTerror() and ply:Alive() and ply:GetNWBool("isTagged") ) then
-            count = count + 1
-			players[ count ] = ply
-		end
-	end
-
-    halo.Add( players, JM_Tag_Colour, 5, 5, 2, true, true )
-
-end )
