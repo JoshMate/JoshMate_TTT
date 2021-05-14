@@ -152,3 +152,12 @@ JM_Global_Buff_Care_RapidFire_NWBool                    = "JM_Buff_NWBool_IsRapi
 JM_Global_Buff_Care_RapidFire_IconName                  = "JM_Buff_Icon_RapidFire"
 JM_Global_Buff_Care_RapidFire_IconPath                  = "vgui/ttt/joshmate/hud_rapidfire.png"
 JM_Global_Buff_Care_RapidFire_IconGoodBad               = "good"
+
+-- Special Buffs
+
+JM_Global_Buff_SuddenDeath_Name                     = "Sudden Death"
+JM_Global_Buff_SuddenDeath_Duration                 = 0
+JM_Global_Buff_SuddenDeath_NWBool                   = "JM_Buff_NWBool_IsSuddenDeath"
+JM_Global_Buff_SuddenDeath_IconName                 = "JM_Buff_Icon_SuddenDeath"
+JM_Global_Buff_SuddenDeath_IconPath                 = "vgui/ttt/joshmate/hud_tracker.png"
+JM_Global_Buff_SuddenDeath_IconGoodBad              = "bad"

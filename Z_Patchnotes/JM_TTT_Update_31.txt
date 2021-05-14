@@ -2,11 +2,11 @@
 -- ### Server
 -- ################################
 
+- Added [Sudden Death] A new mechanic which sometimes triggers when there is only two people left and the match isn't ending
+// Both players will become tracked and gain a small movement speed buff
+
 - Changed [Voice Chat] Dead players can now hear Traitor Voice Chat
 // Thanks Vinny for the idea
-
-- Changed [Roles] The "Avoid being selected as Detective" Button now actually stops you from being Detective 
-// Thaks to India for suggesting I finish it off finally
 
 - Reoworked [Rules]
 // The !MOTD has been re-written to be much clearer and shorter
@@ -34,6 +34,8 @@
 - Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage as a result of your push
 - Changed [Karma] You must have atleast 1000 Karma to be selected as the detective
 
+- Added [Admin] Added new scripts and tools to help me manage the server
+
 -- ################################
 -- #### Gameplay
 -- ################################
@@ -56,7 +58,7 @@
 
 - Buffed [Frag Grenade] Avg Damage: 40 -> 50
 
-- Buffed [Jump Grenade] Blast Radius: 350 -> 400 (Same as all other grenades for consistency)
+- Buffed [Jump Grenade] Blast Radius: 350 -> 400
 
 - Buffed [Man Hacks] Damage: 30 -> 40
 - Buffed [Man Hacks] Deploy Range: 650 -> 800
@@ -71,7 +73,6 @@
 - Changed [Drowning] Damage Per Second: 15 -> 20
 
 
-
 -- ################################
 -- #### Bug Fixes
 -- ################################
@@ -79,6 +80,7 @@
 - Fixed [Bug] Awp, Sniper and Advanced Sniper's first noscope was more accurate than your other no scopes
 - Fixed [Bug] C4 was purchasable multiple times in the same round
 - Fixed [Bug] Being Disguised with Ninja Pro would still cause you make drowning noises (Even though you're immune)
+- Fixed [Bug] Being able to get stuck in or on your own pulse pads
     
 -- ################################
 -- ##### Maps

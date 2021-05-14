@@ -76,6 +76,7 @@ function SWEP:PlaceTrap()
 			ent:SetAngles(ang)
 			ent:Spawn()
 			ent.Owner = self:GetOwner()
+			ent:SetOwner(self:GetOwner())
 			ent.fingerprints = self.fingerprints
 			self:TakePrimaryAmmo(1)
 			if SERVER then
