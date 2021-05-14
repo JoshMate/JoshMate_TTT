@@ -529,7 +529,7 @@ if CLIENT then
 			text = "Questionable"
 		elseif karma >= 600 then
 			color = karmacolors.bad
-			text = "Crude"
+			text = "Dodgy"
 		elseif karma >= 400 then
 			color = karmacolors.terrible
 			text = "Bad"

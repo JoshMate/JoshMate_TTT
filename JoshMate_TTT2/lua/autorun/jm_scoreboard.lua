@@ -4,7 +4,8 @@ AddCSLuaFile()
 if engine.ActiveGamemode() ~= "terrortown" then return end
 
 local karmacolors = {
-	top         = Color(   80, 255,    255),
+	max         = Color(   0, 255,    255),
+	great       = Color(   0, 180,    180),
     good        = Color(   80, 255,    100),
 	bad         = Color(   255, 255,    80),
 	terrible    = Color(   255, 150,    80),
@@ -20,8 +21,10 @@ hook.Add("TTTScoreboardColumns", "JM_ScoreBoard_ColouredKarma", function (panel)
 			
             color = karmacolors.bottom
 
-			if karma >= 1001 then
-				color = karmacolors.top
+			if karma == 1250 then
+				color = karmacolors.max
+			elseif karma >= 1001 then
+				color = karmacolors.great
 			elseif karma >= 1000 then
 				color = karmacolors.good
 			elseif karma >= 750 then

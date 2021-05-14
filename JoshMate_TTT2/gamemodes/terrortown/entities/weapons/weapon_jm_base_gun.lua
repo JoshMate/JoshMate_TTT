@@ -526,6 +526,9 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 	 
 	 local range_Distance = owner:GetShootPos():Distance(tr.HitPos)
 
+	 range_Distance = math.Round( range_Distance )
+
+
 	 if (range_Distance > (self.Primary.Range * 1.0)) 	then range_Damage = (dmg *0.75) end
 	 if (range_Distance > (self.Primary.Range * 1.25)) 	then range_Damage = (dmg *0.50) end
 	 if (range_Distance > (self.Primary.Range * 1.50)) 	then range_Damage = (dmg *0.25) end
@@ -533,9 +536,6 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 	 owner:LagCompensation(false)
 
 	 range_Damage = math.ceil( range_Damage )
-	 range_Distance = math.Round( range_Distance )
-
-	 print("Distance: " .. tostring(range_Distance) .. " Range: " .. tostring(self.Primary.Range) .. " Damage: " ..  tostring(range_Damage))
 
 	-- End of
 

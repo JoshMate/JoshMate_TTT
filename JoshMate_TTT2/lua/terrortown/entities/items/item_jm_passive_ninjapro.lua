@@ -10,10 +10,10 @@ ITEM.EquipMenuData = {
 		The Ability to Diguise your name
 
 		Whiles Disguised:
-		+ Silent Footsteps
-		+ Immunity to Fall & Drown Damage
-		+ 20% Movement Speed 
-		+ 60% Better Jump Height & Crouch Walking
+		+ Silent footsteps
+		+ Immunity to fall & drown damage
+		+ Move faster
+		+ Jump higher
 ]]
 }
 

@@ -8,25 +8,25 @@
 - Reworked [Karma] 
 // The system is now hits MUCH harder, but will let you get back to normal faster
 
-- Changed [Karma] Reduced Max Karma: 1250 -> 1000
-// This is to prevent "Free Kills" and also make it easier for me to reset peoples karmas
-
 - Changed [Karma] Karma lost per HP done wrongly: 2 -> 3
 // Deal 100 -> 0 damage to a player will cost you 500 karma
 
 - Changed [Karma] Karma Punishment: Damage
 // Your damage will be linked to your karma ( The less karma, the less damage you deal)
-// Your damage can be reduced to a minimum of 50%
+// Your damage can be reduced to a minimum of 50% at 500 Karma
 // With the old system it could go down all the way to 10%
 
-- Changed [Karma] Karma Punishment: Slay
-// If you are BELOW 300 Karma you will be slayed at the start of the next round and you karma reset to 300
-// If you are BELOW 600 Karma you will be slayed at the start of the next round and you karma reset to 600
-// For Example: At 200 Karma you will be slayed twice over the next two rounds and end up with 600 karma
-// While you karma is atleast 600, you will heal 100 karma per round back up to 1000
+- Changed [Karma] Karma Punishment: Sit Out
+// If you are BELOW 500 Karma you will sit the next round out and your karma will be reset to 500
+// Sitting out players are counted as spectators when it comes to assigned roles
+// For example: 7 players - 1 sitting out = no detective that round as there are only 6 players
+
+- Changed [Karma] Karma Healing
+// While you karma is atleast 500, you will heal 100 karma per round back up to 1000
+// While you karma is atleast 1000, you will heal 50 karma per round back up to 1250
 
 - Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage as a result of your push
-- Changed [Karma] You must have 1000 Karma to be selected as the detective
+- Changed [Karma] You must have atleast 1000 Karma to be selected as the detective
 
 -- ################################
 -- #### Gameplay
@@ -68,9 +68,12 @@
 -- ##### Maps
 -- ################################
 
-- Removed [Rising Tide] It is going to be reworked into another map
+- Removed [Rising Tide] I have plans for it being reworked into another map later
 
 - New Map [Mile High Club] A claustrophobic map set on a mid-flight passenger plane
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- New Map [Lost At Seas] 4 coloured ships on an open ocean. You can swim between them or stay on your boat.
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Reworked [Dread Hollow]

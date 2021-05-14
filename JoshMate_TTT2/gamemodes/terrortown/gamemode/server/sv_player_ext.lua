@@ -615,7 +615,7 @@ function plymeta:ShouldSpawn()
 	end
 
 	-- do not spawn forced specs
-	if self:IsSpec() and self:GetForceSpec() then
+	if self:GetNWBool("JM_NWBOOL_IsSittingRoundOut") or self:IsSpec() and self:GetForceSpec() then
 		return false
 	end
 
@@ -654,6 +654,7 @@ function plymeta:SpawnForRound(dead_only)
 	end
 
 	self:StripAll()
+	
 	self:SetTeam(TEAM_TERROR)
 	self:Spawn()
 
