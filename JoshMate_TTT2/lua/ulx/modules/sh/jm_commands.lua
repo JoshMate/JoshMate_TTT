@@ -233,8 +233,10 @@ function ulx.suddendeath( calling_ply)
 
 	for i = 1, #plys do
 		local ply = plys[i]
-		JM_RemoveBuffFromThisPlayer("jm_buff_suddendeath",ply)
-      	JM_GiveBuffToThisPlayer("jm_buff_suddendeath",ply,ply)	
+		if ply:IsValid() and ply:Alive() and ply:IsTerror() then 
+			JM_RemoveBuffFromThisPlayer("jm_buff_suddendeath",ply)
+			JM_GiveBuffToThisPlayer("jm_buff_suddendeath",ply,ply)	
+		end
 	end
 
 

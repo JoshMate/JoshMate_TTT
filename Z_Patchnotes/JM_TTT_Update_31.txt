@@ -112,5 +112,28 @@
 // Various other little tweaks and fixes
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
+- Changed [Sky Town] Added a new sound for when the traitor tester is unlocked
+- Changed [Sky Town] Gave Pharmacy Roof a Make Over
+- Changed [Sky Town] Added Moon Gang Easter Egg
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Rework [Block Alley] Josh Mate has gotten involved and done the following changes:
+- Changed [Block Alley] Huge optimisation effort and compiled with high quality settings
+- Changed [Block Alley] Fixed the FPS issues, it should now play at a buttery smooth 60+ fps (I get 280 fps)
+- Changed [Block Alley] Added some movable minecarts and some tracks for decoration
+- Changed [Block Alley] Made the cake heal you when you press E on it
+- Changed [Block Alley] Added a Emerald Block to the underground that gives a credit when you press E on it
+- Changed [Block Alley] Stopped the lava from creating water splashing effects
+- Changed [Block Alley] Modified the underground lava pool to be a single object and improved its shape
+- Changed [Block Alley] Added a little stone arch way to better show where the ladder down to the mine is
+- Changed [Block Alley] Added a new melon course room to allow spectators to get SPECIAL melons into the map
+- Changed [Block Alley] Added a spectator spawn to stop spectators from spawning in the void
+- Changed [Block Alley] Those weird corner lights in the underground from leeding bleeding through the walls
+- Changed [Block Alley] Fixed up the weights and lighting of the movable blocksw
+- Changed [Block Alley] Fixed Dodgey mis-aligned textures on all the double chests
+- Changed [Block Alley] Redid the weapon spawns
+- Changed [Block Alley] Greatly Reduced the size of the skybox and the out of bounds area to improve performance
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
 
 
