@@ -1,0 +1,31 @@
+-- ################################
+-- ### Server
+-- ################################
+
+- Changed [Karma] Karma healed per round when at over 1000 karma: 50 -> 25
+// Bonus karma takes longer to build up, but it lasts all night (until you rdm)
+
+- Changed [Karma] While healing up to 1000, you can no longer over heal past it in 1 round
+// E.G, if you're on 999, you'd go to 1099. Now you'd just go to 1000, then start the next healing stage next round.
+
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+- Changed [t] 
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed [Bug] Mega Tracker wasn't tracking everyone
+    
+-- ################################
+-- ##### Maps
+-- ################################
+
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+
+

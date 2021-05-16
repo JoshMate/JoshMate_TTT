@@ -58,7 +58,7 @@ end)
 
 
 -- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
+hook.Add( "PreDrawHalos", "Halos_Sudden_Death", function()
 
     local players = {}
      local count = 0

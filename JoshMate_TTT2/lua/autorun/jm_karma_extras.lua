@@ -13,7 +13,7 @@ if SERVER then
     local JM_Karma_Heal_Max                 = 1000
     local JM_Karma_Heal_To_Max              = 100
     local JM_Karma_Heal_Bonus               = 1250
-    local JM_Karma_Heal_To_Bonus            = 50
+    local JM_Karma_Heal_To_Bonus            = 25
 
     util.AddNetworkString("JM_KarmaSlayMessage")
 
@@ -62,13 +62,17 @@ if SERVER then
 
                 if JM_Karma_Current >= JM_Karma_Slay_Threshold then 
                     newValue = JM_Karma_Current + JM_Karma_Heal_To_Max
+
+                    newValue = math.Clamp(newValue, JM_Karma_Slay_Threshold, JM_Karma_Heal_Max)
                 end
 
                 if JM_Karma_Current >= JM_Karma_Heal_Max then 
                     newValue = JM_Karma_Current + JM_Karma_Heal_To_Bonus
+
+                    newValue = math.Clamp(newValue, JM_Karma_Heal_Max, JM_Karma_Heal_Bonus)
                 end
                     
-                ply:SetLiveKarma(math.Clamp(newValue, JM_Karma_Slay_Threshold, JM_Karma_Heal_Bonus) )
+                ply:SetLiveKarma(newValue)
 
             end
         
