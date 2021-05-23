@@ -53,22 +53,35 @@ end
 
 
 SWEP.Chameleon_LastLeftClick		= CurTime()
+SWEP.Chameleon_DefaultPlayerColour 	= nil
+SWEP.Chameleon_NewColour			= nil
 
-function Invisibility_Remove(player) 
+function SWEP:Invisibility_Remove(player) 
+	if not player:IsValid() then return end
 	STATUS:RemoveStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, false)
 	if SERVER then
 		player:EmitSound(Sound("chameleon_activate.wav"))
-		ULib.invisible(player,false,255)
+		player:SetRenderMode( RENDERMODE_NORMAL )
+		if not self.Chameleon_DefaultPlayerColour then 
+			player:SetColor(self.Chameleon_DefaultPlayerColour)
+		end
+		
+		
 	end
 end
 
-function Invisibility_Give(player) 
+function SWEP:Invisibility_Give(player) 
+	if not player:IsValid() then return end
 	STATUS:AddStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
 	if SERVER then
 		player:EmitSound(Sound("chameleon_activate.wav")) 
-		ULib.invisible(player,true,255)
+		self.Chameleon_DefaultPlayerColour = player:GetColor()
+		player:SetRenderMode( RENDERMODE_TRANSCOLOR )
+		self.Chameleon_NewColour = self.Chameleon_DefaultPlayerColour
+		self.Chameleon_NewColour.a = 0
+		player:SetColor(self.Chameleon_NewColour)
 	end
 end
 
@@ -79,7 +92,7 @@ function SWEP:PrimaryAttack()
 
 	self.Chameleon_LastLeftClick = CurTime()
 	if (not self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Give(self:GetOwner()) 
+		self:Invisibility_Give(self:GetOwner()) 
 	end
 
 	self:TakePrimaryAmmo( 1 )
@@ -87,7 +100,7 @@ function SWEP:PrimaryAttack()
 	 -- Remove Weapon When out of Ammo
 	 if SERVER then
 		if self:Clip1() <= 0 then
-			Invisibility_Remove(self:GetOwner()) 
+			self:Invisibility_Remove(self:GetOwner()) 
 		   	self:Remove()
 		end
 	 end
@@ -102,7 +115,7 @@ end
 -- Remove Invisibility on changing weapons
 function SWEP:Holster( wep )
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	return self.BaseClass.Holster(self)
 end
@@ -110,7 +123,7 @@ end
 -- Remove Invisibility on dropping weapons (This prevent tase from giving INF invisibiltiy)
 function SWEP:PreDrop()
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	return self.BaseClass.PreDrop(self)
  end
@@ -118,7 +131,7 @@ function SWEP:PreDrop()
 -- Stop random Cur Time when going invisible
 function SWEP:Deploy()
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	return self.BaseClass.Deploy(self)
 end
@@ -133,7 +146,7 @@ function SWEP:Think()
 		if not player:Alive() then return end
 
 		if ((self.Chameleon_LastLeftClick+1) <= CurTime() and player:GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-			Invisibility_Remove(player) 
+			self:Invisibility_Remove(player) 
 		end
 
 	end
@@ -153,7 +166,7 @@ end
 if SERVER then
    function SWEP:OnRemove()
 		if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-			Invisibility_Remove(self:GetOwner()) 
+			self:Invisibility_Remove(self:GetOwner()) 
 		end
 		if self.Owner:IsValid() and self.Owner:IsTerror() then
 			self:GetOwner():SelectWeapon("weapon_jm_special_hands")
@@ -167,7 +180,7 @@ end
 
 function SWEP:OnDrop()
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	self:Remove()
  end

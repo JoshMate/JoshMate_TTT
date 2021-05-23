@@ -9,17 +9,35 @@
 // Example: If you're on 999, you used to go to 1099. Now you'd just go to 1000
 // This is to make sure you only get bonus karma using the slower 25 per round karma gain
 
+- Changed [Voice Chat] Spectators can now see when a traitor is using their red team chat
+// Before all speakers would be green regardless of what chat they were using
+
+- Changed [Hit Markers] Damage Numbers on screen now account for Karma / Damage Multipliers
+// Before, you always look like you were doing full damage even if you weren't 
+// Now your hit marker damage numbers will say the exact amount of damgae you actually did
+
 -- ################################
 -- #### Gameplay
 -- ################################
 
-- Changed [t] 
+- Buffed [Chameleon] You no longer have a feint outline while invisible (You are now completely Invisible)
+- Buffed [Chameleon] You now longer get blood splatters on you while invisible
+// Although these two effects were cool, they were inconsistent and it was frustrating to die because of them
+
+- Buffed [Pulse Pad] Duration: 60 -> 90 Seconds
+- Nerfed [Pulse Pad] Only The detective can see players tracked by the pulse pad
+
+- Buffed [Poison Dart] Duration: 12 -> 15 Seconds
+- Buffed [Poison Dart] Total Damage/Healing: 62 -> 75 HP
 
 -- ################################
 -- #### Bug Fixes
 -- ################################
 
 - Fixed [Bug] Mega Tracker wasn't tracking everyone when it was meant to be
+- Fixed [Bug] Players who were sitting out could still be selected as Traitors or Detectives
+- Fixed [Bug] Sitting out players were not affecting the Traitor Percentage, making more Ts than there should have been
+- Fixed [Bug] The scoreboard would show players who are sitting out as alive confusing who's actually left
     
 -- ################################
 -- ##### Maps

@@ -63,7 +63,9 @@ hook.Add( "PreDrawHalos", "Halos_PulsePad", function()
          end
      end
  
-     halo.Add( players, Color( 255, 255, 0 ), 2, 2, 3, true, true )
+     if CLIENT and LocalPlayer():IsDetective() then
+        halo.Add( players, Color( 255, 255, 0 ), 2, 2, 3, true, true )
+     end
  
  end )
 

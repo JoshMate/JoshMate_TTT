@@ -14,7 +14,7 @@ hook.Add( "EntityTakeDamage", "hitmarkers", function( tar, info )
 	-- The Player Route
 	if att:IsPlayer() then
 		net.Start( "hitmarker" )
-		net.WriteFloat(info:GetDamage())
+		net.WriteFloat(info:GetDamage() * att:GetDamageFactor())
 		net.Send( att )
 		return
 	end

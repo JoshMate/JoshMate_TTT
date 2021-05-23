@@ -38,7 +38,7 @@ function roleselection.GetCurrentRoleAmount(subrole)
 		for i = 1, #plys do
 			local ply = plys[i]
 
-			if not IsValid(ply) or ply:GetForceSpec() or ply:GetSubRole() ~= subrole then continue end
+			if not IsValid(ply) or ply:GetForceSpec() or ply:GetSubRole() ~= subrole or ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut")  then continue end
 
 			tmp = tmp + 1
 		end
@@ -92,7 +92,8 @@ function roleselection.GetSelectablePlayers(plys)
 		local ply = plys[i]
 
 		-- everyone on the spec team is in specmode
-		if not ply:GetForceSpec() and not hook.Run("TTT2DisableRoleSelection", ply) then
+		-- Josh Mate Changes: DOn't incldue sitting out players in player count
+		if not ply:GetForceSpec() and not hook.Run("TTT2DisableRoleSelection", ply) and not ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then
 			tmp[#tmp + 1] = ply
 		end
 	end
@@ -422,10 +423,15 @@ local function SelectBaseRolePlayers(plys, roleData, roleAmount)
 		then
 			table.remove(plys, pick)
 
-			curRoles = curRoles + 1
-			plysList[curRoles] = ply
+			-- Josh Mate Changes: Don't make sitting out palyers, Ds or Ts
+			if not ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then
+				curRoles = curRoles + 1
+				plysList[curRoles] = ply
+	
+				roleselection.finalRoles[ply] = roleData.index -- give the player the final baserole (maybe he will receive his subrole later)
+			end
 
-			roleselection.finalRoles[ply] = roleData.index -- give the player the final baserole (maybe he will receive his subrole later)
+			
 		end
 	end
 

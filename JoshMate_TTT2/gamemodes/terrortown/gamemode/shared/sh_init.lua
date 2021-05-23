@@ -741,7 +741,7 @@ function EquipmentIsBuyable(tbl, ply)
 			local v = plys[i]
 
 			-- everyone on the forcespec team is in specmode
-			if not IsValid(v) or v:GetForceSpec() then continue end
+			if not IsValid(v) or v:GetForceSpec() or v:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then continue end
 
 			choices[#choices + 1] = v
 		end

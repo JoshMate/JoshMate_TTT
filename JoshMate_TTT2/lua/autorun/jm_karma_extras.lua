@@ -31,6 +31,7 @@ if SERVER then
     
         playerToSlay:Kill()
         playerToSlay:SetNWBool("JM_NWBOOL_IsSittingRoundOut", true)
+        playerToSlay:SetTeam(TEAM_SPEC)
 
         playerToSlay:SetLiveKarma(JM_Karma_Slay_Threshold)
         net.Start("JM_KarmaSlayMessage")
@@ -78,6 +79,29 @@ if SERVER then
         
         end
     end)
+
+
+    hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
+
+        local plys = player.GetAll()    
+        for i = 1, #plys do
+
+            local ply = plys[i]
+            if not ply:IsValid() then continue end
+
+            if ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then
+
+                ply:ConfirmPlayer(true)
+
+			    SendPlayerToEveryone(ply)
+
+            end
+
+        end
+
+
+    end)
+     
 
 
 

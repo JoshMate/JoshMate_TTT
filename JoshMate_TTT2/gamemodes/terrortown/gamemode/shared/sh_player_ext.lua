@@ -33,7 +33,7 @@ end
 -- @return boolean
 -- @realm shared
 function plymeta:IsSpec()
-	return self:Team() == TEAM_SPEC
+	return self:Team() == TEAM_SPEC or self:GetNWBool("JM_NWBOOL_IsSittingRoundOut")
 end
 
 ---
@@ -41,7 +41,7 @@ end
 -- @return boolean
 -- @realm shared
 function plymeta:GetForceSpec()
-	return self:GetNWBool("force_spec")
+	return self:GetNWBool("force_spec") or self:GetNWBool("JM_NWBOOL_IsSittingRoundOut")
 end
 
 ---

@@ -14,7 +14,7 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Lethal Weapon
 
-Steals 60 HP from the target over 15 seconds
+Steals 75 HP from the target over 15 seconds
 
 Targets flinch while they are poisoned
    
