@@ -5,9 +5,9 @@
 - Changed [Karma] Karma healed per round when at over 1000 karma: 50 -> 25
 // Bonus karma takes longer to build up, but it lasts all night (until you rdm)
 
-- Changed [Karma] While healing up to 1000, you can no longer over heal past it in 1 round
-// E.G, if you're on 999, you'd go to 1099. Now you'd just go to 1000, then start the next healing stage next round.
-
+- Changed [Karma] While healing up to 1000, you can no longer over heal in the same round fully heal
+// Example: If you're on 999, you used to go to 1099. Now you'd just go to 1000
+// This is to make sure you only get bonus karma using the slower 25 per round karma gain
 
 -- ################################
 -- #### Gameplay
@@ -19,13 +19,25 @@
 -- #### Bug Fixes
 -- ################################
 
-- Fixed [Bug] Mega Tracker wasn't tracking everyone
+- Fixed [Bug] Mega Tracker wasn't tracking everyone when it was meant to be
     
 -- ################################
 -- ##### Maps
 -- ################################
 
+- Reworked [Speed Dating]
+// Before, being stuck in a pod with a traitor was basically just wait to get knifed
+// People would just constantly scream who their with and it didn't really play very well
+// The map now is split down the middle at the start of the round, and there are now only "2 Pods"
+// The north and the south side of the map, so you will be with one half of the players at a time
+// You can explore your entire half of the map, but the barrier in the middle doesn't go until after 30 - 60 seconds
+// The map should now be less of a maze too
+// There is a new grand central room
+// The hall ways are now much better lit up with lights
 // [LATEST VERSION ON THE WORKSHOP NOW]
+
+
+
 
 
 
