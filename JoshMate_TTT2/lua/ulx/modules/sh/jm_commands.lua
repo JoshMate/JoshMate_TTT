@@ -225,8 +225,25 @@ announce:help( "Sends a message to everyone" )
 function ulx.suddendeath( calling_ply)
 
 	net.Start("JM_ULX_Announcement")
-    net.WriteString("Sudden Death Has Begun!")
+    net.WriteString("Sudden Death!")
 	net.WriteUInt(1, 16)
+    net.Broadcast()
+
+end
+
+local suddendeath = ulx.command( CATEGORY_NAME, "jm x suddendeath", ulx.suddendeath, "!suddendeath")
+suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
+suddendeath:help( "Starts Sudden Death" )
+
+-- #########################
+-- #####  Track Everyone #####
+-- #########################
+
+function ulx.trackall( calling_ply)
+
+	net.Start("JM_ULX_Announcement")
+    net.WriteString("Everyone is now Tracked!")
+	net.WriteUInt(2, 16)
     net.Broadcast()
 
 	local plys = player.GetAll()
@@ -242,9 +259,9 @@ function ulx.suddendeath( calling_ply)
 
 end
 
-local suddendeath = ulx.command( CATEGORY_NAME, "jm x suddendeath", ulx.suddendeath, "!suddendeath")
-suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
-suddendeath:help( "Starts Sudden Death" )
+local trackall = ulx.command( CATEGORY_NAME, "jm x trackall", ulx.trackall, "!trackall")
+trackall:defaultAccess( ULib.ACCESS_ADMIN )
+trackall:help( "Starts Sudden Death" )
 
 
 -- Extra
@@ -284,6 +301,7 @@ if CLIENT then
 		surface.PlaySound("0_main_popup.wav")
 
 		if messageType == 1 then surface.PlaySound("0_main_suddendeath.mp3") end
+		if messageType == 2 then surface.PlaySound("pulsepad_hit.wav") end
 		
         chat.AddText( Color( 255, 0, 0 ), "[Announcement] - ", Color( 255, 255, 0 ), tostring(message))
     end)

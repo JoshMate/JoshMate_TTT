@@ -45,7 +45,7 @@ JM_Global_Buff_Taser_IconPath                           = "vgui/ttt/joshmate/hud
 JM_Global_Buff_Taser_IconGoodBad                        = "bad"
 
 JM_Global_Buff_SilencedPistol_Name                      = "Silenced Pistol"
-JM_Global_Buff_SilencedPistol_Duration                  = 5
+JM_Global_Buff_SilencedPistol_Duration                  = 7
 JM_Global_Buff_SilencedPistol_NWBool                    = "JM_Buff_NWBool_IsSilencedPistol"
 JM_Global_Buff_SilencedPistol_IconName                  = "JM_Buff_Icon_SilencedPistol"
 JM_Global_Buff_SilencedPistol_IconPath                  = "vgui/ttt/joshmate/hud_silencedpistol.png"
