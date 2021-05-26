@@ -184,8 +184,8 @@ function GM:PlayerStartVoice(ply)
 			if not client[tm .. "_gvoice"] then
 				pnl.Color = TEAMS[tm].color
 			end
-			-- Josh Mate Changes to make the spec Card Red for Specs
-		elseif ply:IsSpec() or (ply:IsInTeam(client) and not (ply:GetSubRoleData().disabledTeamVoice or clrd.disabledTeamVoiceRecv)) then
+
+		elseif (ply:IsInTeam(client) and not (ply:GetSubRoleData().disabledTeamVoice or clrd.disabledTeamVoiceRecv)) then
 			if not ply[tm .. "_gvoice"] then
 				pnl.Color = TEAMS[tm].color
 			end

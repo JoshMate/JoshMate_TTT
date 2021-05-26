@@ -274,9 +274,23 @@ end
 -- @ref https://wiki.facepunch.com/gmod/GM:PlayerSwitchFlashlight
 -- @local
 function GM:PlayerSwitchFlashlight(ply, on)
-	if not IsValid(ply) then
+
+	if not IsValid(ply) or not ply:Alive() or not ply:IsTerror() then
 		return false
 	end
+
+	if not ply:IsDetective() then
+
+		if ply:GetNWFloat("JM_LastHello") <= (CurTime() - 5) then 
+		
+			ply:SetNWFloat("JM_LastHello", CurTime())
+			ply:AnimPerformGesture(ACT_GMOD_GESTURE_WAVE)
+			ply:EmitSound("hello.wav", 75, 100, 0.5, CHAN_AUTO)
+		end
+
+		return false
+	end
+
 
 	-- add the flashlight "effect" here, and then deny the switch
 	-- this prevents the sound from playing, fixing the exploit
@@ -287,11 +301,8 @@ function GM:PlayerSwitchFlashlight(ply, on)
 		ply:RemoveEffects(EF_DIMLIGHT)
 	end
 
-	-- Josh Mate Changes (No Flashlight on This map)
-	if (game.GetMap() == "ttt_elevator" or game.GetMap() == "ttt_industrial") then
-		ply:RemoveEffects(EF_DIMLIGHT)
-	end
-
+	ply:EmitSound("flashlight.wav", 75, 100, 0.35, CHAN_AUTO)
+	
 	return false
 end
 

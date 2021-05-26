@@ -66,7 +66,7 @@ JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud
 JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
 
 JM_Global_Buff_PulsePad_Name                            = "Pulse Pad"
-JM_Global_Buff_PulsePad_Duration                        = 90
+JM_Global_Buff_PulsePad_Duration                        = 120
 JM_Global_Buff_PulsePad_NWBool                          = "JM_Buff_NWBool_IsPulsePad"
 JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad"
 JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
