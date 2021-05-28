@@ -279,18 +279,10 @@ function GM:PlayerSwitchFlashlight(ply, on)
 		return false
 	end
 
-	if not ply:IsDetective() then
-
-		if ply:GetNWFloat("JM_LastHello") <= (CurTime() - 5) then 
-		
-			ply:SetNWFloat("JM_LastHello", CurTime())
-			ply:AnimPerformGesture(ACT_GMOD_GESTURE_WAVE)
-			ply:EmitSound("hello.wav", 75, 100, 0.5, CHAN_AUTO)
-		end
-
+	if (game.GetMap() == "ttt_elevator" or game.GetMap() == "ttt_industrial") then
+		ply:RemoveEffects(EF_DIMLIGHT)
 		return false
 	end
-
 
 	-- add the flashlight "effect" here, and then deny the switch
 	-- this prevents the sound from playing, fixing the exploit
@@ -301,7 +293,7 @@ function GM:PlayerSwitchFlashlight(ply, on)
 		ply:RemoveEffects(EF_DIMLIGHT)
 	end
 
-	ply:EmitSound("flashlight.wav", 75, 100, 0.35, CHAN_AUTO)
+	ply:EmitSound("flashlight.wav", 60, 100, 0.35, CHAN_AUTO)
 	
 	return false
 end

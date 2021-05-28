@@ -13,7 +13,7 @@ Deploy a swarm of Manhacks where you are looking
    
 They will attack ANYONE they see (Including You)
    
-They will last for 30 seconds or until destroyed
+They will last for 45 seconds or until destroyed
 ]]
    };
 
@@ -23,7 +23,7 @@ end
 SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.DeploySpeed           = 4
-SWEP.Primary.SoundLevel    = 100
+SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Ammo          = "AirboatGun"
@@ -37,9 +37,9 @@ SWEP.ViewModel             = "models/weapons/v_crowbar.mdl"
 SWEP.WorldModel            = "models/weapons/w_crowbar.mdl"
 SWEP.HoldType 				   = "normal" 
 
-local deployRange = 800
-local deployAmount = 12
-local deployLifeTime = 60
+local deployRange = 1500
+local deployAmount = 8
+local deployLifeTime = 45
 
 
 function Barrier_Effects_Destroyed(ent)

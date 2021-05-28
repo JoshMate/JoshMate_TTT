@@ -33,15 +33,7 @@
 // Although these two effects were cool, they were inconsistent and it was frustrating to die because of them
 
 [Flash Light]
-- Is now detective Only (They get it by default, no purchase needed)
 - Makes a sound when activated
-- No longer has certain map restrictions
-- Is and Ts using flashligh will instead perform the "Hand Wave" gesture
-// The flashlight is a powerful tool for seeing in dark places, revealing traps and hidden players
-// Making it Detective only fits their investigation role
-// It will make Ts fear Ds more (As they can find their traps and reveal their Chameleons etc..)
-// It also gives Ds another way to help innocents (By Revealing traps)
-// Innocents having it, made Traps / Chameleon Trivial to fight as you just leave your flash light on at all times
 
 [Pulse Pad]
 - Track Duration: 60 -> 120 Seconds
@@ -92,11 +84,3 @@
 // Added a Sea Shanty 2 as an Easet Egg (Hint: avian extermination)
 // You can no longer possess the raft (Stops spectators being able to insta kill other people)
 [LATEST VERSION ON THE WORKSHOP NOW]
-
-
-
-
-
-
-
-

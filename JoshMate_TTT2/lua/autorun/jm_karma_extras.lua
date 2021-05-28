@@ -13,7 +13,7 @@ if SERVER then
     local JM_Karma_Heal_Max                 = 1000
     local JM_Karma_Heal_To_Max              = 100
     local JM_Karma_Heal_Bonus               = 1250
-    local JM_Karma_Heal_To_Bonus            = 25
+    local JM_Karma_Heal_To_Bonus            = 10
 
     util.AddNetworkString("JM_KarmaSlayMessage")
 

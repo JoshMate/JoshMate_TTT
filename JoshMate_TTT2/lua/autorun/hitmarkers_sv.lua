@@ -14,7 +14,10 @@ hook.Add( "EntityTakeDamage", "hitmarkers", function( tar, info )
 	-- The Player Route
 	if att:IsPlayer() then
 		net.Start( "hitmarker" )
-		net.WriteFloat(info:GetDamage() * att:GetDamageFactor())
+		if engine.ActiveGamemode() == "terrortown" then net.WriteFloat(info:GetDamage() * att:GetDamageFactor()) 
+		else
+			net.WriteFloat(info:GetDamage()) 
+		end
 		net.Send( att )
 		return
 	end

@@ -488,14 +488,55 @@ function SWEP:CanSecondaryAttack()
 	return true
 end
 
-local function Sparklies(attacker, tr, dmginfo)
-	if not tr.HitWorld or tr.MatType ~= MAT_METAL then return end
+local function JMDefaultBulletCallBack(attacker, tr, dmginfo)
 
-	local eff = EffectData()
-	eff:SetOrigin(tr.HitPos)
-	eff:SetNormal(tr.HitNormal)
+	-- Josh Mate Range Damage Calculation
+	if SERVER then
+		
 
-	util.Effect("cball_bounce", eff)
+		local dmg = dmginfo:GetDamage()
+		local range_Damage = dmg
+		local range_Distance = attacker:GetShootPos():Distance(tr.HitPos)
+
+		range_Distance = math.Round( range_Distance )
+
+		-- Try and get the weapons base range from the gun, skip range if gun is not valid
+		if attacker and attacker:GetActiveWeapon() and attacker:GetActiveWeapon().Primary.Range then 
+			
+			local Range = attacker:GetActiveWeapon().Primary.Range
+
+			if (range_Distance > (Range * 0.80)) 	then range_Damage = (dmg *0.90) end
+			if (range_Distance > (Range * 0.90)) 	then range_Damage = (dmg *0.80) end
+			if (range_Distance > (Range * 1.00)) 	then range_Damage = (dmg *0.70) end
+			if (range_Distance > (Range * 1.10)) 	then range_Damage = (dmg *0.60) end
+			if (range_Distance > (Range * 1.20)) 	then range_Damage = (dmg *0.50) end
+			if (range_Distance > (Range * 1.30)) 	then range_Damage = (dmg *0.40) end
+			if (range_Distance > (Range * 1.40)) 	then range_Damage = (dmg *0.30) end
+			if (range_Distance > (Range * 1.50)) 	then range_Damage = (dmg *0.20) end
+
+		end
+
+		range_Damage = math.ceil( range_Damage )
+
+		dmginfo:SetDamage(range_Damage)
+
+		print("[Range Check] " .. tostring(range_Distance) .. " | " .. tostring(dmg) .. " -> ".. tostring(range_Damage))
+
+	end
+
+	-- Josh Mate Weapon Spark Effects
+	if CLIENT then
+		
+		if not tr.HitWorld or tr.MatType ~= MAT_METAL then return end
+
+		local eff = EffectData()
+		eff:SetOrigin(tr.HitPos)
+		eff:SetNormal(tr.HitNormal)
+
+		util.Effect("cball_bounce", eff)
+
+	end
+	
 end
 
 ---
@@ -514,31 +555,6 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 
 	local owner = self:GetOwner()
 
-	-- Josh Mate Range Checks
-
-	local range_Damage = dmg
-
-	if isfunction(owner.LagCompensation) then -- for some reason not always true
-		owner:LagCompensation(true)
-	 end
-	 
-	 local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * 99999, filter = owner})
-	 
-	 local range_Distance = owner:GetShootPos():Distance(tr.HitPos)
-
-	 range_Distance = math.Round( range_Distance )
-
-
-	 if (range_Distance > (self.Primary.Range * 1.0)) 	then range_Damage = (dmg *0.75) end
-	 if (range_Distance > (self.Primary.Range * 1.25)) 	then range_Damage = (dmg *0.50) end
-	 if (range_Distance > (self.Primary.Range * 1.50)) 	then range_Damage = (dmg *0.25) end
-  
-	 owner:LagCompensation(false)
-
-	 range_Damage = math.ceil( range_Damage )
-
-	-- End of
-
 
 	numbul = numbul or 1
 	cone = cone or 0.01
@@ -551,11 +567,12 @@ function SWEP:ShootBullet(dmg, recoil, numbul, cone)
 	bullet.Tracer = 1
 	bullet.TracerName = self.Tracer or "Tracer"
 	bullet.Force = self.BulletForce
-	bullet.Damage = range_Damage
-
-	if CLIENT and sparkle:GetBool() then
-		bullet.Callback = Sparklies
-	end
+	bullet.Damage = dmg
+	
+	bullet.Range = self.Primary.Range
+	bullet.Callback = JMDefaultBulletCallBack
+	
+	
 
 	self:GetOwner():FireBullets(bullet)
 
