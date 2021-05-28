@@ -520,7 +520,8 @@ local function JMDefaultBulletCallBack(attacker, tr, dmginfo)
 
 		dmginfo:SetDamage(range_Damage)
 
-		print("[Range Check] " .. tostring(range_Distance) .. " | " .. tostring(dmg) .. " -> ".. tostring(range_Damage))
+		-- Josh Mate Debug Print for Range
+		--print("[Range Check] " .. tostring(range_Distance) .. " | " .. tostring(dmg) .. " -> ".. tostring(range_Damage))
 
 	end
 
