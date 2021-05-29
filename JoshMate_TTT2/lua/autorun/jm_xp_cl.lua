@@ -27,6 +27,7 @@ net.Receive("JM_Send_LeveledUp_To_Client", function(_)
         readName = "You"
         connector = " Have "
     end
+    if readName == nil then readName = "Disconected Player" end
     chat.AddText( Color( 255, 150, 0 ), "[JM XP] - ", Color( 255, 255, 0 ), tostring(readName), Color( 255, 255, 255 ), connector, "Leveled Up!")
 end)
 

@@ -26,6 +26,13 @@
 - Manhack life span: 60 -> 45 Seconds
 - Increased range of deployment: 800 -> 1500 Units
 
+[Portable Tester]
+- A [Good] loot from the care package
+- Shoot a player to reveal if they are a traitor!
+// Has only a single shot and the "scan" takes 10 seconds to complete
+// Both parties will be informed about who is scanning and for how long
+// This gives the target time to react, however the tester must be equipped to finish the scan
+
 [Care Package Loot]
 - Ninja Blade Movement speed Bonus: 20% -> 30%
 - Mega Tracker now plays Jake's Ping sound when it activates
@@ -37,6 +44,7 @@
 -- #### Bug Fixes
 -- ################################
 
+- Fixed a bug were you were able to buy more than 1 beartrap per round
     
 -- ################################
 -- ##### Maps	

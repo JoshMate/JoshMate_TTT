@@ -15,7 +15,7 @@ SWEP.UseHands	= true
 SWEP.Kind = WEAPON_EQUIP2
 SWEP.AutoSpawnable = false
 SWEP.CanBuy = { ROLE_TRAITOR }
-SWEP.LimitedStock = false
+SWEP.LimitedStock = true
 SWEP.DeploySpeed           = 4
 
 if CLIENT then
