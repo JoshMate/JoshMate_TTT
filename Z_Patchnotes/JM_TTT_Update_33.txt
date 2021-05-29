@@ -26,6 +26,11 @@
 - Manhack life span: 60 -> 45 Seconds
 - Increased range of deployment: 800 -> 1500 Units
 
+[Care Package Loot]
+- Ninja Blade Movement speed Bonus: 20% -> 30%
+- Mega Tracker now plays Jake's Ping sound when it activates
+- Tripping balls has even worse screen effects
+
 
 
 -- ################################

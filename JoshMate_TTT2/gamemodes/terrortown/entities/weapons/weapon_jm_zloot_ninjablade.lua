@@ -41,7 +41,7 @@ SWEP.Weight = 5
 SWEP.AutoSpawnable = false
 
 -- JM Changes, Movement Speed
-SWEP.MoveMentMultiplier = 1.2
+SWEP.MoveMentMultiplier = 1.3
 -- End of
 
 SWEP.Offset = {

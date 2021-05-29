@@ -223,6 +223,7 @@ function ENT:Loot_Bad( activator, caller )
 		activator:ChatPrint("[Care Package] - Bad Loot: Mega Tracker")
 		for _, ply in ipairs( player.GetAll() ) do
 			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+				if SERVER then ply:EmitSound(Sound("ping_jake.wav")) end
 				JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,self)
 			end
 		end
@@ -232,12 +233,10 @@ function ENT:Loot_Bad( activator, caller )
 		activator:ChatPrint("[Care Package] - Bad Loot: Godzilla")
 		if SERVER then activator:EmitSound(Sound("godzillaroar.wav")) end
 
-		local pushForce = 5000
+		local pushForce = 10000
 		local pos = self:GetPos()
 		local tpos = activator:LocalToWorld(activator:OBBCenter())
         local dir = (tpos - pos):GetNormal()
-
-		dir.z = math.abs(dir.z) + 1
 
 		local push = dir * pushForce
 		local vel = activator:GetVelocity() + push
@@ -250,7 +249,6 @@ function ENT:Loot_Bad( activator, caller )
 	if RNG_Bad == 6 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Tripping Balls")
 		JM_GiveBuffToThisPlayer("jm_buff_trippingballs", activator, self)
-
 	end
 
 end
