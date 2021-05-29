@@ -97,8 +97,6 @@ function GM:HUDPaint()
 		HUDManager.DrawHUD()
 	end
 
-	if not client:Alive() or client:Team() == TEAM_SPEC then return end
-
 	if hook.Call("HUDShouldDraw", GAMEMODE, "TTTRadar") then
 		RADAR:Draw(client)
 	end

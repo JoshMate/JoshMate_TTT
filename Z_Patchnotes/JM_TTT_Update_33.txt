@@ -2,6 +2,11 @@
 -- ### Server
 -- ################################
 
+[Spectator]
+- You can now see all traps / hazards / care packages / while dead 
+- You can also still see your radar scans if you died with one.
+// This will give the spectators more information about what is going on
+
 [Karma]
 - Post 1000 Bonus Karma Gains: 25 -> 10 Per Round
 
@@ -21,6 +26,8 @@
 - Manhack life span: 60 -> 45 Seconds
 - Increased range of deployment: 800 -> 1500 Units
 
+
+
 -- ################################
 -- #### Bug Fixes
 -- ################################
@@ -38,4 +45,4 @@
 - Fixed the dodgey Physics interactions with cars that can crash the server
 - Made the whiteclaw easter egg easier to do (3 Cans now rather than 6)
 - Added Various bits of Graffiti to the map
-// Latest Version now on the Workshop
+## Latest Version now on the Workshop

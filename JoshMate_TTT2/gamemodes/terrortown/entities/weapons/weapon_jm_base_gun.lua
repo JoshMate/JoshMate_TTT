@@ -523,21 +523,7 @@ local function JMDefaultBulletCallBack(attacker, tr, dmginfo)
 		-- Josh Mate Debug Print for Range
 		--print("[Range Check] " .. tostring(range_Distance) .. " | " .. tostring(dmg) .. " -> ".. tostring(range_Damage))
 
-	end
-
-	-- Josh Mate Weapon Spark Effects
-	if CLIENT then
-		
-		if not tr.HitWorld or tr.MatType ~= MAT_METAL then return end
-
-		local eff = EffectData()
-		eff:SetOrigin(tr.HitPos)
-		eff:SetNormal(tr.HitNormal)
-
-		util.Effect("cball_bounce", eff)
-
-	end
-	
+	end	
 end
 
 ---
