@@ -180,26 +180,26 @@ function RADAR:Draw(client)
 	surface.SetFont("HudSelectionText")
 
 	-- C4 warnings
-	if self.bombs_count ~= 0 and client:IsActive() then
+	if self.bombs_count ~= 0 and client:IsSpec() or client:IsActive() and not client:GetSubRoleData().unknownTeam then
 		surface.SetTexture(c4warn)
 		surface.SetTextColor(255, 255, 255, 255)
 		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, bomb in pairs(self.bombs) do
-			if bomb.team ~= nil and bomb.team == client:GetTeam() or client:GetTeam() == TEAM_SPEC then
+			if client:GetTeam() == TEAM_SPEC or bomb.team ~= nil and bomb.team == client:GetTeam()then
 				DrawTarget(bomb, 24, 0, true)
 			end
 		end
 	end
 
 	-- Hazard warnings
-	if self.hazards_count ~= 0 and client:IsActive() then
+	if self.hazards_count ~= 0 and client:IsSpec() or client:IsActive() and not client:GetSubRoleData().unknownTeam  then
 		surface.SetTexture(hazardwarn)
 		surface.SetTextColor(255, 255, 255, 255)
 		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, hazard in pairs(self.hazards) do
-			if hazard.team ~= nil and hazard.team == client:GetTeam() or client:GetTeam() == TEAM_SPEC then
+			if client:GetTeam() == TEAM_SPEC or hazard.team ~= nil and hazard.team == client:GetTeam() then
 				DrawTarget(hazard, 24, 0, true)
 			end
 		end
@@ -239,6 +239,9 @@ function RADAR:Draw(client)
 	end
 
 	-- Player radar
+
+	if client:GetTeam() == TEAM_SPEC or not client:Alive() or not client:IsTerror() then return end
+
 	if not self.enable then return end
 
 	surface.SetTexture(indicator)

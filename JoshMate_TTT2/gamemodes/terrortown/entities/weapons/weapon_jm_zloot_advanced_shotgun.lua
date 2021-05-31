@@ -29,7 +29,7 @@ SWEP.Primary.NumShots      = 10
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0.065
 SWEP.Primary.Recoil        = 5
-SWEP.Primary.Range         = 200
+SWEP.Primary.Range         = 300
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
@@ -38,7 +38,7 @@ SWEP.Primary.SoundLevel    = 75
 SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 1
 SWEP.BulletForce           = 10
-SWEP.Primary.Automatic     = false
+SWEP.Primary.Automatic     = true
 
 -- // End of Gun Stats
 

@@ -8,8 +8,17 @@ local CATEGORY_NAME = "JoshMate"
 -- ### Spawn Care Package
 -- ##################################################
 
-local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME, "jm carepackage spawn", function () JMGlobal_SpawnCarePackage(true) end, "!spawncarepackage")
+local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME, "jm spawn carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
 cmdSpawnCarePackage:defaultAccess(ULib.ACCESS_ADMIN)
+
+local CATEGORY_NAME = "JoshMate"
+
+-- ##################################################
+-- ### Spawn Emergency Airdrop
+-- ##################################################
+
+local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME, "jm spawn emergencyairdrop", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
+cmdEmergencyAirdrop:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- #########################
 -- ######## Mapvote ########
@@ -23,6 +32,8 @@ cmdMapvote:addParam{ type=ULib.cmds.NumArg, min=15, default=20, max=60, ULib.cmd
 cmdMapvote:addParam{ type=ULib.cmds.BoolArg, invisible=true } -- isOppositeCmd param
 cmdMapvote:defaultAccess(ULib.ACCESS_ADMIN)
 cmdMapvote:setOpposite("jm mapvote end", {_, _, true}, "!unmapvote")
+
+
 
 -- #########################
 -- ####### RTV reset #######

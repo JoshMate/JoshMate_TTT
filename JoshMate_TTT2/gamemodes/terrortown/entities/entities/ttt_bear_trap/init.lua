@@ -37,6 +37,20 @@ local function DoBleed(ent)
 end
 
 
+function ENT:HitEffectsInit(ent)
+	if not IsValid(ent) then return end
+ 
+	local effect = EffectData()
+	local ePos = ent:GetPos()
+	if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+	effect:SetStart(ePos)
+	effect:SetOrigin(ePos)
+	
+	util.Effect("TeslaZap", effect, true, true)
+	
+	util.Effect("cball_explode", effect, true, true)
+ end
+
 
 function ENT:Touch(toucher)
 	if not IsValid(toucher) or not IsValid(self) or !toucher:IsPlayer() then return end
@@ -45,6 +59,7 @@ function ENT:Touch(toucher)
 		self:SetCycle(0)
 		self:SetSequence("Snap")
 		self:EmitSound("beartrap.wav")
+		self:HitEffectsInit(toucher)
 
 		-- JoshMate Changed
 		self:SetRenderMode( RENDERMODE_TRANSCOLOR )
@@ -124,83 +139,37 @@ function ENT:Touch(toucher)
 end
 
 function ENT:Use(act)
-	if IsValid(act) and act:IsPlayer() and IsValid(self) then
 
-		-- Josh Mate Changes
-		if IsValid(self.toucher) then
-			if act ~= self.toucher then
+	if IsValid(act) and act:IsPlayer() and IsValid(self) and IsValid(self.toucher) then
 
-				if act:IsTerror() and act:IsTraitor() then
-					if !act:HasWeapon("weapon_jm_equip_beartrap") then
-						act:Give("weapon_jm_equip_beartrap")
-					end
-					self:Remove()
-					self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
-					if IsValid(toucher) then
-						timer.Destroy("beartrapdmg" .. toucher:EntIndex())
-						toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
-						toucher:Freeze(false)
-						toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
-				
-						if TTT2 then -- remove element to HUD if TTT2 is loaded
-							STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
-						end
+		if act ~= self.toucher then
+
+			if act:IsTerror() then
+				self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
+				if IsValid(toucher) then
+					timer.Destroy("beartrapdmg" .. toucher:EntIndex())
+					toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
+					toucher:Freeze(false)
+					toucher:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick()))
+			
+					if TTT2 then -- remove element to HUD if TTT2 is loaded
+						STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 					end
 				end
-
-				if act:IsTerror() then
-					self:Remove()
-					self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
-					if IsValid(toucher) then
-						timer.Destroy("beartrapdmg" .. toucher:EntIndex())
-						toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
-						toucher:Freeze(false)
-						toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
-				
-						if TTT2 then -- remove element to HUD if TTT2 is loaded
-							STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
-						end
-					end
-				end
+				self:HitEffectsInit(self)
+				self:SendWarn(false)
+				self:Remove()
 			end
-			return
-		end
-
-		if act:IsTerror() and act:IsTraitor() then
-			if !act:HasWeapon("weapon_jm_equip_beartrap") then
-				act:Give("weapon_jm_equip_beartrap")
-			end
-			self:Remove()
-			self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
-			self:SendWarn(false)
-			return
-		end
-		if act:IsTerror() then
-			self:Remove()
-			self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
-			self:SendWarn(false)
-			return
 		end
 	end
-
-	-- End of JoshMate Changes
 end
 
 function ENT:OnTakeDamage(dmg)
 	if not IsValid(self) then return end
-	self.dmg = self.dmg + dmg:GetDamage()
-	if self.dmg >= 25 then
-		if self:GetSequence() ~= 0 and self:GetSequence() ~= 2 then
-			self.Owner:ChatPrint("[Bear Trap] - Your trap has been damaged!")
-			self:SetPlaybackRate(1)
-			self:SetCycle(0)
-			self:SetSequence("Snap")
-			timer.Simple(0.1, function()
-				if not IsValid(self) then return end
-				self:SetSequence("ClosedIdle")
-			end)
-		end
-	end
+	self.Owner:ChatPrint("[Bear Trap] - Your trap has been destroyed!")
+	self:HitEffectsInit(self)
+	self:SendWarn(false)
+	self:Remove()
 end
 
 

@@ -1,3 +1,4 @@
+AddCSLuaFile()
 if CLIENT then
    SWEP.Slot      = 7
 
@@ -17,6 +18,10 @@ SWEP.AutoSpawnable = false
 SWEP.CanBuy = { ROLE_TRAITOR }
 SWEP.LimitedStock = true
 SWEP.DeploySpeed           = 4
+
+SWEP.Primary.Delay 			= 0.3
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 
 if CLIENT then
    SWEP.Icon = "vgui/ttt/joshmate/icon_jm_beartrap.png"
@@ -41,15 +46,16 @@ if CLIENT then
 	end
 end
 
-if SERVER then
-	AddCSLuaFile()
+function SWEP:PrimaryAttack()
 
+	if not self:CanPrimaryAttack() then return end
+	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 
-	function SWEP:PrimaryAttack()
-		local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 100, filter = self.Owner})
-		if (tr.HitWorld or (tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable")))then
-			local dot = vector_up:Dot(tr.HitNormal)
-			if dot > 0.55 and dot <= 1 then
+	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 100, filter = self.Owner})
+	if (tr.HitWorld or (tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable")))then
+		local dot = vector_up:Dot(tr.HitNormal)
+		if dot > 0.55 and dot <= 1 then
+			if SERVER then
 				local ent = ents.Create("ttt_bear_trap")
 				ent:SetPos(tr.HitPos + tr.HitNormal)
 				local ang = tr.HitNormal:Angle()
@@ -58,11 +64,13 @@ if SERVER then
 				ent:Spawn()
 				ent.Owner = self.Owner
 				ent.fingerprints = self.fingerprints
-				self:Remove()
+				self:TakePrimaryAmmo(1)
+				if self:Clip1() <= 0 then
+					self:Remove()
+				end
 			end
 		end
 	end
-
 end
 
 -- Hud Help Text

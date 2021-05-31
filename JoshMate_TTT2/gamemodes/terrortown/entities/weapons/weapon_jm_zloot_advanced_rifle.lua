@@ -47,6 +47,8 @@ SWEP.AmmoEnt               = "item_jm_ammo_medium"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_rif_m4a1.mdl"
 SWEP.WorldModel            = "models/weapons/w_rif_m4a1.mdl"
-SWEP.IronSightsPos         = Vector(-3, -15, 3)
-SWEP.IronSightsAng         = Vector(5, 0, 0)
 
+-- No Iron Sights
+function SWEP:SecondaryAttack()
+   return
+end

@@ -28,13 +28,13 @@ SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 2
+SWEP.Primary.Delay         = 1
 SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_portable_tester_fire.wav"
@@ -102,7 +102,7 @@ function SWEP:Think()
 
       if self.ScanPhase == 0 then return end
 
-      if self.ScanTime <= CurTime() -6 and self.ScanPhase == 1 then
+      if self.ScanTime <= CurTime() -5 and self.ScanPhase == 1 then
 
          if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
             self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (5 seconds)")
@@ -111,7 +111,7 @@ function SWEP:Think()
          self.ScanPhase = 2
       end
 
-      if self.ScanTime <= CurTime() -11 and self.ScanPhase == 2 then
+      if self.ScanTime <= CurTime() -10 and self.ScanPhase == 2 then
 
          if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
             self:HitEffectsInit(self.ScanTarget)
@@ -119,7 +119,6 @@ function SWEP:Think()
             self.ScanOwner:ChatPrint("[Portable Tester]: " .. tostring(self.ScanTarget:Nick()) .. " is a " .. tostring(self.ScanTarget:GetRoleStringRaw()))
             self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
             self.ScanTarget:EmitSound("shoot_portable_tester_done.wav")
-            
          end  
          self:Remove()
       end

@@ -66,6 +66,7 @@ function SWEP:PrimaryAttack()
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
    if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+      if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
       return
    end
    
@@ -79,7 +80,7 @@ function SWEP:SecondaryAttack()
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
    if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...")
+     if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
       return
    end
 
