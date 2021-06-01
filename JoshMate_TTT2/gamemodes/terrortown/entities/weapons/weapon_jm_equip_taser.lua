@@ -152,7 +152,7 @@ end
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Tase an Player", nil, true)
+	   self:AddTTT2HUDHelp("Tase a Player", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
