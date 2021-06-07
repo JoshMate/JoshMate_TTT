@@ -50,7 +50,7 @@
 // This is to prevent the infinite trap exploit that soap/traps used to have
 // But the more I think about it, it helps balance out the new 2 use Bear Trap
 
-[LMG] 
+[LMG]
 - Fire Rate Delay : 0.115 -> 0.090
 - Damage: 30 -> 20 HP
 - Spread Accuracy: 0.015 -> 0.020
@@ -67,7 +67,7 @@
 // The fire rate is unchanged, you just hold instead of tapping now
 
 [Auto Pistol]
-- Spread Accuracy Size: 0.30 -> 0.40 
+- Spread Accuracy Size: 0.30 -> 0.40
 - Range: 350 -> 300 Units
 
 [Light Pistol]
@@ -88,8 +88,18 @@
 - Fixed a bug where the advanced rifle had a right click zoom
 - Fixed aload of bugs with the new spectator HUD icons for Care pacakges etc...
 - Fixed a bug where attempting to use a grenade during prep time would print the incorrect chat messages
-    
+
 -- ################################
--- ##### Maps	
+-- ##### Maps
 -- ################################
+
+[Circuit]
+- New Map!
+- A circuit of stations connected via a train that travels between them
+
+[Cathedral]
+- Made the see through metal fences amd netting "Wall-bang-able" so you can shoot through them
+- Removed the care package spawns from the car tunnel
+- Added some more loot to the graves
+#### Uploaded to Workshop
 
