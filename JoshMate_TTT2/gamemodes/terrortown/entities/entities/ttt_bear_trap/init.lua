@@ -2,6 +2,8 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+ENT.TrappedPerson = nil
+
 function ENT:Initialize()
 	self:SetModel("models/stiffy360/beartrap.mdl")
 	self:PhysicsInit(SOLID_VPHYSICS)
@@ -53,7 +55,11 @@ function ENT:HitEffectsInit(ent)
 
 
 function ENT:Touch(toucher)
+
 	if not IsValid(toucher) or not IsValid(self) or !toucher:IsPlayer() then return end
+
+	self.TrappedPerson = toucher
+
 	if self:GetSequence() ~= 0 and self:GetSequence() ~= 2 then
 		self:SetPlaybackRate(1)
 		self:SetCycle(0)
@@ -140,27 +146,29 @@ end
 
 function ENT:Use(act)
 
-	if IsValid(act) and act:IsPlayer() and IsValid(self) and IsValid(self.toucher) then
+	if IsValid(self) and IsValid(act) and act:IsPlayer() then
 
-		if act ~= self.toucher then
+		if act:IsTerror() and act:IsTerror() ~= self.TrappedPerson then
 
-			if act:IsTerror() then
-				self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
-				if IsValid(toucher) then
-					timer.Destroy("beartrapdmg" .. toucher:EntIndex())
-					toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
-					toucher:Freeze(false)
-					toucher:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick()))
-			
-					if TTT2 then -- remove element to HUD if TTT2 is loaded
-						STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
-					end
+			self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
+
+			if IsValid(self.TrappedPerson) then
+
+				timer.Destroy("beartrapdmg" .. self.TrappedPerson:EntIndex())
+				self.TrappedPerson:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
+				self.TrappedPerson:Freeze(false)
+				self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick()))
+		
+				if TTT2 then -- remove element to HUD if TTT2 is loaded
+					STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 				end
-				self:HitEffectsInit(self)
-				self:SendWarn(false)
-				self:Remove()
 			end
+			self:EmitSound("0_main_click.wav")
+			self:HitEffectsInit(self)
+			self:SendWarn(false)
+			self:Remove()
 		end
+
 	end
 end
 
