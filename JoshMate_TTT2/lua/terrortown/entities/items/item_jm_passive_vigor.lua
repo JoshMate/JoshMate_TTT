@@ -25,7 +25,7 @@ if SERVER then
 
 	function ITEM:Equip(buyer)
 
-		buyer:SetMaxHealth(buyer:GetMaxHealth() + 30)
+		buyer:SetMaxHealth(buyer:GetMaxHealth() + 50)
 		-- Set Status and print Message
 		JM_GiveBuffToThisPlayer("jm_buff_vigor",buyer,buyer)
 		-- End Of
@@ -34,7 +34,7 @@ if SERVER then
 	end
 
 	function ITEM:Reset(buyer)
-		buyer:SetMaxHealth(buyer:GetMaxHealth() - 30)
+		buyer:SetMaxHealth(buyer:GetMaxHealth() - 50)
 	end
 
 end

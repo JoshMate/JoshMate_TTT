@@ -41,7 +41,7 @@ SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = Sound( "Weapon_USP.SilencedShot" )
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
+SWEP.CanBuy                = {} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_SILENCED
 SWEP.UseHands              = true

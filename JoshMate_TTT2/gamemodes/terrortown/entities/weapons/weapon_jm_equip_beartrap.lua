@@ -56,7 +56,7 @@ function SWEP:PrimaryAttack()
 		local dot = vector_up:Dot(tr.HitNormal)
 		if dot > 0.55 and dot <= 1 then
 			if SERVER then
-				local ent = ents.Create("ttt_bear_trap")
+				local ent = ents.Create("ent_jm_equip_beartrap")
 				ent:SetPos(tr.HitPos + tr.HitNormal)
 				local ang = tr.HitNormal:Angle()
 				ang:RotateAroundAxis(ang:Right(), -90)

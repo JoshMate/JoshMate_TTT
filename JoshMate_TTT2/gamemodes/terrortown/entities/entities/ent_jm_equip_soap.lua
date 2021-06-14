@@ -10,12 +10,16 @@ ENT.AdminSpawnable      = false
 
 
 local JM_Soap_Model                 = "models/soap.mdl"
-local JM_Soap_Colour_Active         = Color( 255, 255, 255, 30 )
+local JM_Soap_Colour_Active         = Color( 255, 255, 255, 25 )
 local JM_Soap_Sound_HitPlayer       = "slip.wav"
 local JM_Soap_Sound_Destroyed       = "0_main_click.wav"
 
 local JM_Soap_Velocity_Up 			= 700
 local JM_Soap_Velocity_Direction	= 1500
+
+ENT.Velocity_Soap_UP				= nil
+ENT.Velocity_Soap_Direction			= nil
+
 
 if CLIENT then
     function ENT:Draw()
@@ -71,12 +75,30 @@ function ENT:Touch(toucher)
         if(not toucher:Alive()) then return end
         if(not GAMEMODE:AllowPVP()) then return end
 
+		-- Drop currently Held Weapon
+		local curWep = toucher:GetActiveWeapon()
+		toucher:GetActiveWeapon():PreDrop()
+		if (curWep.AllowDrop) then
+			toucher:DropWeapon()
+		end
+		toucher:SelectWeapon("weapon_jm_special_crowbar")
+		-- End of Drop
+
 		-- Soap Launch Effect
+
+		if toucher:HasEquipmentItem("item_jm_passive_bombsquad") then 
+			self.Velocity_Soap_UP 			=  JM_Soap_Velocity_Up / 2
+			self.Velocity_Soap_Direction 	=  JM_Soap_Velocity_Direction / 2
+		else
+			self.Velocity_Soap_UP 			=  JM_Soap_Velocity_Up
+			self.Velocity_Soap_Direction 	=  JM_Soap_Velocity_Direction
+		end
+
 		self:EmitSound(JM_Soap_Sound_HitPlayer)
 		local directionFacing = toucher:GetAimVector()
-		local upwards = Vector( 0, 0, JM_Soap_Velocity_Up)
+		local upwards = Vector( 0, 0, self.Velocity_Soap_UP)
 		local directionWithoutY = Vector(directionFacing.x, directionFacing.y, 0)
-		local velocity = (directionWithoutY * JM_Soap_Velocity_Direction)  + upwards
+		local velocity = (directionWithoutY * self.Velocity_Soap_Direction)  + upwards
 		toucher:SetVelocity(velocity);
 		-- End Of
 

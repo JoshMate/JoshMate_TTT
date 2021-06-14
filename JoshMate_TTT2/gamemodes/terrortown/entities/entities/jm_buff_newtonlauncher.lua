@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_Chameleon_Name
-local JM_BuffNWBool             = JM_Global_Buff_Chameleon_NWBool
-local JM_BuffDuration           = JM_Global_Buff_Chameleon_Duration
-local JM_BuffIconName           = JM_Global_Buff_Chameleon_IconName
-local JM_BuffIconPath           = JM_Global_Buff_Chameleon_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_Chameleon_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_NewtonLauncher_Name
+local JM_BuffNWBool             = JM_Global_Buff_NewtonLauncher_NWBool
+local JM_BuffDuration           = JM_Global_Buff_NewtonLauncher_Duration
+local JM_BuffIconName           = JM_Global_Buff_NewtonLauncher_IconName
+local JM_BuffIconPath           = JM_Global_Buff_NewtonLauncher_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_NewtonLauncher_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -31,14 +31,13 @@ ENT.BuffIconName                = JM_BuffIconName
 
 if CLIENT then
 
-    
-    -- Set up screen effect table
-    local effectTable_Chameleon = {
+     -- Set up screen effect table
+     local effectTable_Stun = {
 
         ["$pp_colour_addr"] = 0,
         ["$pp_colour_addg"] = 0,
         ["$pp_colour_addb"] = 0,
-        ["$pp_colour_brightness"] = 0.25,
+        ["$pp_colour_brightness"] = 0,
         ["$pp_colour_contrast"] = 1,
         ["$pp_colour_colour"] = 1,
         ["$pp_colour_mulr"] = 0,
@@ -50,25 +49,37 @@ if CLIENT then
     hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
 
         if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
-            DrawColorModify( effectTable_Chameleon)
+            DrawColorModify( effectTable_Stun )
+            DrawMotionBlur( 0.05, 1, 0.05 )
         end 
     
     end)
-
+    
+    
 end
 
 -- #############################################
 -- The Actual Effects of this buff
 -- #############################################
 
--- This buff is managed in the chameleon weapon file, so only uses this file to init it's values
+function ENT:Initialize()
+    self.BaseClass.Initialize(self)
+
+end
+
+function ENT:Think()
+    self.BaseClass.Think(self)
+
+end
 
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
     end 
 end)
+
+
 
 -- #############################################
 -- AUTOMATICALLY GENERATED STUFF

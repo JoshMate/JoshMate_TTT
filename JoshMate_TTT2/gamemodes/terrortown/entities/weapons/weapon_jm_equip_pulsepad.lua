@@ -43,7 +43,9 @@ if CLIENT then
 	
 Left click to place a hard to see pulse pad on the floor
 
-Any player who walks over the pad will be tracked for 60 seconds
+Walking on the pad will track that player for the rest of the round
+
+It will also tase them for 3 seconds
 
 It has 3 uses
 ]]

@@ -17,11 +17,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A lethal utility weapon
 	
-Creates a physics explosion at your cursor
+Shoot a huge burst of energy at a taget location
       
-Players and props will be pushed violently
-      
-2 uses and has perfect accuracy and range
+Players will be pushed away from the blast
+
+They will be dazed and their weapons dropped      
 ]]
 
    };
@@ -70,7 +70,7 @@ end
 
 local function PushPullRadius(pos, pusher)
    local radius = 500
-   local push_force = 400
+   local push_force = 500
 
    -- push players
    for k, target in ipairs(ents.FindInSphere(pos, radius)) do
@@ -86,6 +86,15 @@ local function PushPullRadius(pos, pusher)
             net.WriteFloat(0)
             net.Send(pusher)
             -- End Of
+
+            -- Drop currently Held Weapon
+            local curWep = target:GetActiveWeapon()
+            target:GetActiveWeapon():PreDrop()
+            if (curWep.AllowDrop) then
+               target:DropWeapon()
+            end
+            target:SelectWeapon("weapon_jm_special_crowbar")
+            -- End of Drop
 
             -- always need an upwards push to prevent the ground's friction from
             -- stopping nearly all movement

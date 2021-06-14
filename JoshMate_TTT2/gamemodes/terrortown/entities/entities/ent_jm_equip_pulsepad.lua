@@ -10,11 +10,11 @@ ENT.AdminSpawnable      = false
 
 
 local JM_PulsePad_Model                 = "models/props_junk/sawblade001a.mdl"
-local JM_PulsePad_Colour_Dormant        = Color( 255, 255, 0, 200 )
-local JM_PulsePad_Colour_Armed          = Color( 255, 255, 0, 20 )
+local JM_PulsePad_Colour_Dormant        = Color( 0, 0, 255, 200 )
+local JM_PulsePad_Colour_Armed          = Color( 0, 0, 255, 25 )
 local JM_PulsePad_Sound_HitPlayer       = "pulsepad_hit.wav"
 local JM_PulsePad_Sound_Destroyed       = "0_main_click.wav"
-local JM_Barrier_ArmTime				= 0.4
+local JM_PulsePad_ArmTime				= 0.8
 
 ENT.isArmed								= false
 
@@ -41,7 +41,7 @@ function ENT:Initialize()
 	self:DrawShadow(false)
 
 	-- Timer To arm this Ent
-	timer.Simple(JM_Barrier_ArmTime, function()
+	timer.Simple(JM_PulsePad_ArmTime, function()
 
 		 if IsValid(self) then 
 			self.isArmed = true	
@@ -84,6 +84,8 @@ function ENT:Touch(toucher)
 
         -- Give Buff
         JM_GiveBuffToThisPlayer("jm_buff_pulsepad",toucher,self.Owner)
+		JM_RemoveBuffFromThisPlayer("jm_buff_pulsepad_Tase",toucher)
+		JM_GiveBuffToThisPlayer("jm_buff_pulsepad_Tase",toucher,self.Owner)
         -- End Of
 
         -- JM Changes Extra Hit Marker
@@ -94,7 +96,7 @@ function ENT:Touch(toucher)
 
         -- HUD Message
         toucher:ChatPrint("[Pulse Pad] - You have stepped on a Pulse Pad!")
-        self.Owner:ChatPrint("[Pulse Pad] - " .. toucher:GetName() .. " has stepped on your Pulse Pad!" )
+        self.Owner:ChatPrint("[Pulse Pad] - Somone has stepped on your Pulse Pad!" )
         -- End Of
 
         toucher:EmitSound(JM_PulsePad_Sound_HitPlayer);

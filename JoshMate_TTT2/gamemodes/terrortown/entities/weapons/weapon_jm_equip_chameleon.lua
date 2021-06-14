@@ -13,8 +13,8 @@ SWEP.Instructions			= "Go invisible"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 60
-SWEP.Primary.DefaultClip	= 60
+SWEP.Primary.ClipSize		= 30
+SWEP.Primary.DefaultClip	= 30
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -42,11 +42,10 @@ if CLIENT then
 	   desc = [[A Utility Item:
 	
 		+ Invisibility while holding left click
+		+ Your name is hidden while invisible
 
-		- Greatly slows the player
 		- Can only be invisible for a finite amount of time
 		- Entering / leaving invisibility is noisy
-		- Foot steps and your player name are still there
 	]]
 }
 end

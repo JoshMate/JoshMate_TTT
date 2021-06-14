@@ -66,11 +66,18 @@ JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud
 JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
 
 JM_Global_Buff_PulsePad_Name                            = "Pulse Pad"
-JM_Global_Buff_PulsePad_Duration                        = 120
+JM_Global_Buff_PulsePad_Duration                        = 300
 JM_Global_Buff_PulsePad_NWBool                          = "JM_Buff_NWBool_IsPulsePad"
 JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad"
 JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
 JM_Global_Buff_PulsePad_IconGoodBad                     = "bad"
+
+JM_Global_Buff_PulsePadTase_Name                        = "Pulse Pad Tase"
+JM_Global_Buff_PulsePadTase_Duration                    = 3
+JM_Global_Buff_PulsePadTase_NWBool                      = "JM_Buff_NWBool_IsPulsePadTase"
+JM_Global_Buff_PulsePadTase_IconName                    = "JM_Buff_Icon_PulsePadTase"
+JM_Global_Buff_PulsePadTase_IconPath                    = "vgui/ttt/joshmate/hud_taser.png"
+JM_Global_Buff_PulsePadTase_IconGoodBad                 = "bad"
 
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
 JM_Global_Buff_PoisonDart_Duration                      = 15
@@ -106,6 +113,13 @@ JM_Global_Buff_Chameleon_NWBool                         = "JM_Buff_NWBool_IsCham
 JM_Global_Buff_Chameleon_IconName                       = "JM_Buff_Icon_Chameleon"
 JM_Global_Buff_Chameleon_IconPath                       = "vgui/ttt/joshmate/hud_chameleon.png"
 JM_Global_Buff_Chameleon_IconGoodBad                    = "good"
+
+JM_Global_Buff_NewtonLauncher_Name                         = "Newton Launcher"
+JM_Global_Buff_NewtonLauncher_Duration                     = 7
+JM_Global_Buff_NewtonLauncher_NWBool                       = "JM_Buff_NWBool_IsNewtonLauncher"
+JM_Global_Buff_NewtonLauncher_IconName                     = "JM_Buff_Icon_NewtonLauncher"
+JM_Global_Buff_NewtonLauncher_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
+JM_Global_Buff_NewtonLauncher_IconGoodBad                  = "bad"
 
 
 

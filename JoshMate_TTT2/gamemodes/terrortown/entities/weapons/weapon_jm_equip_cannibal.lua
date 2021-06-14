@@ -14,9 +14,9 @@ if CLIENT then
 	
 Left Click: Consume a Body
    
-Consuming a Body grants +25 Max HP
+Consuming a Body grants +25 Max HP and heals 50
    
-Only has 4 uses
+Only has 6 uses
 ]]
    };
 
@@ -32,8 +32,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.45
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 6
+SWEP.Primary.DefaultClip   = 6
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 10
 SWEP.Primary.SoundLevel    = 50
@@ -50,8 +50,7 @@ SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
 local Cannibal_Eat_MaxHP      = 25
-local Cannibal_Eat_MaxHP_Last = 50
-local Cannibal_Eat_Range      = 125
+local Cannibal_Eat_Range      = 150
 
 if TTT2 and CLIENT then
 	hook.Add("Initialize", "jm_cannibalInit", function() 
@@ -81,15 +80,13 @@ function SWEP:PrimaryAttack()
       if IsValid(target) then
          if target:GetClass() == "prop_ragdoll" then
 
-            if self:Clip1() == 1 then
-               self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP_Last)
-               self:GetOwner():SetHealth(self:GetOwner():GetMaxHealth())
-            else
-               self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP)
-               self:GetOwner():SetHealth(self:GetOwner():Health() + Cannibal_Eat_MaxHP)
-            end
-            
+            local own = self:GetOwner()
 
+            own:SetMaxHealth(own:GetMaxHealth() + Cannibal_Eat_MaxHP)
+            own:SetHealth(own:Health() + (Cannibal_Eat_MaxHP * 2))
+
+            own:SetHealth(math.Clamp(own:Health(), 0, own:GetMaxHealth()))
+            
             targetPos = target:GetPos()
 
             target:EmitSound("physics/flesh/flesh_bloody_break.wav")

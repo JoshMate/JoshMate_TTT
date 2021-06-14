@@ -769,6 +769,7 @@ function HUDDrawTargetIDPlayers(tData)
 	if not ent:IsPlayer() then return end
 
 	local disguised = ent:GetNWBool("disguised", false)
+	local jm_is_chameleon = ent:GetNWBool(JM_Global_Buff_Chameleon_NWBool, false)
 
 	-- oof TTT, why so hacky?! Sets last seen player. Dear reader I don't like this as well, but it has to stay that way
 	-- for compatibility reasons. At least it is uncluttered now!
@@ -779,6 +780,8 @@ function HUDDrawTargetIDPlayers(tData)
 
 	-- disguised players are not shown to normal players, except: same team, unknown team or to spectators
 	if disguised and not (client:IsInTeam(ent) and not client:GetSubRoleData().unknownTeam or client:IsSpec()) then return end
+	if jm_is_chameleon and not (client:IsInTeam(ent) and not client:GetSubRoleData().unknownTeam or client:IsSpec()) then return end
+	
 
 	-- show the role of a player if it is known to the client
 	local rstate = GetRoundState()

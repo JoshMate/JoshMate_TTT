@@ -1,8 +1,29 @@
-AddCSLuaFile("shared.lua")
-AddCSLuaFile("cl_init.lua")
-include("shared.lua")
+AddCSLuaFile()
+
+ENT.Type = "anim"
+ENT.Base = "base_anim"
+ENT.PrintName = ""
+ENT.Author = "Josh Mate"
+ENT.Spawnable = false
+ENT.AdminSpawnable = false
+ENT.AutomaticFrameAdvance = true
+
+function ENT:Think()
+	self:NextThink(CurTime())
+	return true
+end
 
 ENT.TrappedPerson = nil
+
+if CLIENT then
+
+	function ENT:Draw()
+		self:DrawModel()
+	end
+
+	-- CLIENT CAN'T GO PAST HERE
+	return
+end
 
 function ENT:Initialize()
 	self:SetModel("models/stiffy360/beartrap.mdl")
@@ -23,7 +44,7 @@ function ENT:Initialize()
 
 	-- JoshMate Changed
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor( Color( 255, 255, 255, 50 ) ) 
+	self:SetColor( Color( 255, 255, 255, 40 ) ) 
 	self:SendWarn(true)
 end
 
@@ -95,8 +116,8 @@ function ENT:Touch(toucher)
 
 		self.fingerprints = {}
 
-		toucher:ChatPrint("[Bear Trap] - You're trapped, Ask for help!")
-		self.Owner:ChatPrint("[Bear Trap] - Your trap has caught: " .. toucher:GetName())
+		if IsValid(toucher) then toucher:ChatPrint("[Bear Trap] - You're trapped, Ask for help!") end
+		if IsValid(self.Owner) then self.Owner:ChatPrint("[Bear Trap] - Your trap has caught: " .. toucher:GetName()) end
 
 		timer.Create("beartrapdmg" .. toucher:EntIndex(), 0.5, 0, function()
 			if !IsValid(toucher) then timer.Destroy("beartrapdmg" .. toucher:EntIndex()) return end			
@@ -105,14 +126,8 @@ function ENT:Touch(toucher)
 				timer.Destroy("beartrapdmg" .. toucher:EntIndex())
 				toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
 				toucher:Freeze(false)
-
-				if toucher:Health() > 0 then
-					toucher:ChatPrint("[Bear Trap] - You've been released from the trap!")
-				end
-
-				if TTT2 then -- remove element to HUD if TTT2 is loaded
-					STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
-				end
+				toucher:ChatPrint("[Bear Trap] - The Trap no longer holds you...")
+				STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 
 				return
 			end
@@ -127,9 +142,15 @@ function ENT:Touch(toucher)
 			end
 
 			dmg:SetAttacker(attacker)
-			local inflictor = ents.Create("ttt_bear_trap")
+			local inflictor = ents.Create("ent_jm_equip_beartrap")
 			dmg:SetInflictor(inflictor)
-			dmg:SetDamage(3)
+
+			if toucher:HasEquipmentItem("item_jm_passive_bombsquad") then 
+				dmg:SetDamage(2) 
+			else
+				dmg:SetDamage(3) 
+			end
+			
 			dmg:SetDamageType(DMG_GENERIC)
 
 			toucher:TakeDamageInfo(dmg)
@@ -146,40 +167,26 @@ end
 
 function ENT:Use(act)
 
-	if IsValid(self) and IsValid(act) and act:IsPlayer() then
+	if IsValid(self.Owner) then
+		self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
+	end
 
-		if act:IsTerror() and act:IsTerror() ~= self.TrappedPerson then
+	if IsValid(self.TrappedPerson) then
+		timer.Destroy("beartrapdmg" .. self.TrappedPerson:EntIndex())
+		self.TrappedPerson:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
+		self.TrappedPerson:Freeze(false)
+		if IsValid(act) then self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick())) end
+		if not IsValid(act) then self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: UNKOWN PLAYER") end
+		STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
+	end
 
-			self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
-
-			if IsValid(self.TrappedPerson) then
-
-				timer.Destroy("beartrapdmg" .. self.TrappedPerson:EntIndex())
-				self.TrappedPerson:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
-				self.TrappedPerson:Freeze(false)
-				self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick()))
-		
-				if TTT2 then -- remove element to HUD if TTT2 is loaded
-					STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
-				end
-			end
-			self:EmitSound("0_main_click.wav")
-			self:HitEffectsInit(self)
-			self:SendWarn(false)
-			self:Remove()
-		end
-
+	if IsValid(self) then
+		self:EmitSound("0_main_click.wav")
+		self:HitEffectsInit(self)
+		self:SendWarn(false)
+		self:Remove()
 	end
 end
-
-function ENT:OnTakeDamage(dmg)
-	if not IsValid(self) then return end
-	self.Owner:ChatPrint("[Bear Trap] - Your trap has been destroyed!")
-	self:HitEffectsInit(self)
-	self:SendWarn(false)
-	self:Remove()
-end
-
 
 --- Josh Mate Hud Warning
 if SERVER then

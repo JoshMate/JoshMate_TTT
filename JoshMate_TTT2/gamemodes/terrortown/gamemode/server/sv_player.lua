@@ -275,7 +275,12 @@ end
 -- @local
 function GM:PlayerSwitchFlashlight(ply, on)
 
-	if not IsValid(ply) or not ply:Alive() or not ply:IsTerror() then
+	if not IsValid(ply) then return end
+
+	ply:RemoveEffects(EF_DIMLIGHT)
+	
+	if not ply:Alive() or not ply:IsTerror() then
+		
 		return false
 	end
 
