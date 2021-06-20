@@ -118,7 +118,7 @@ JM_Global_Buff_NewtonLauncher_Name                         = "Newton Launcher"
 JM_Global_Buff_NewtonLauncher_Duration                     = 7
 JM_Global_Buff_NewtonLauncher_NWBool                       = "JM_Buff_NWBool_IsNewtonLauncher"
 JM_Global_Buff_NewtonLauncher_IconName                     = "JM_Buff_Icon_NewtonLauncher"
-JM_Global_Buff_NewtonLauncher_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
+JM_Global_Buff_NewtonLauncher_IconPath                     = "vgui/ttt/joshmate/hud_newtonlauncher.png"
 JM_Global_Buff_NewtonLauncher_IconGoodBad                  = "bad"
 
 

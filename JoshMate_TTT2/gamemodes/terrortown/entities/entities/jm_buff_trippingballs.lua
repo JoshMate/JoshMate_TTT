@@ -39,7 +39,7 @@ if CLIENT then
         ["$pp_colour_addg"] = 0,
         ["$pp_colour_addb"] = 0,
         ["$pp_colour_brightness"] = 0,
-        ["$pp_colour_contrast"] = 2.5,
+        ["$pp_colour_contrast"] = 1,
         ["$pp_colour_colour"] = 5,
         ["$pp_colour_mulr"] = 0,
         ["$pp_colour_mulg"] = 0,
@@ -51,10 +51,9 @@ if CLIENT then
 
         if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
             DrawColorModify( effectTable_TrippingBalls )
-            DrawSobel( 1 )
-            DrawBloom( 0.65, 2, 9, 9, 1, 1, 1, 1, 1 )
-            DrawToyTown(2, ScrH() / 2)
-            DrawMotionBlur( 0.1, 0.8, 0.01 )
+            DrawSobel( 0.01 )
+            DrawMaterialOverlay( "models/props_lab/tank_glass001", -0.01 )
+            DrawMotionBlur( 0.03, 1, 0 )
         end 
     
     end)

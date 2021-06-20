@@ -1,0 +1,65 @@
+-- ################################
+-- ### Server
+-- ################################
+
+
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Newton Launcher]
+- Debuff now has it's own unique icon
+- Now has it's own unique screen effects
+
+[Shotgun]
+- Increased Fire Rate: 1.00 -> 0.90
+- Increased Range: 350 -> 400
+
+[Tripping Balls]
+- Got a brand new super cool visual effect
+
+[Chameleon]
+- Now always gives you the 20% speed bonus while holding it rather than just when it's activated
+// This mimics the functionality of being Holstered
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed a bug that prevented the newton launcher from being removed on out of ammo
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[Elevator 2]
+- New Map
+- The long awaited sequel to the cult classic map
+- Multiple Elevators move up and down the side of a tall building
+- You can jump between the elevators or stay along for the ride
+- Traitor buttons can stop the elevators dead in their tracks
+
+[Pit]
+- New Map
+- A ridiculously deep pit.
+- Players start at the top and must make their way down to the bottom of the map to unlock the ladders.
+- Traitors can use a traitor button to teleport back up to the top of the map.
+
+[The Thing]
+- Overhualed the Armoury
+- Overhauled the Hot Tub Room
+- The airlock now deals damage when the power is off (Like the rest of the base does)
+- The hottub no longer works when the power is out
+- The airlock is now 3 seconds faster to cycle
+- Removed the top layer of outdoor fog to improve Frame Rate by about 35%
+- Greatly Reduced the cooldown of all the traitor buttons: 10 -> 2 Seconds
+- Greatly Increased the range in which the traitor buttons can be seen an used
+- The Fuel can should no longer glitch out when it resets and prop kill people
+- Added a audio warning for when you are almost out of fuel
+- Added a fuel guage and cctv screen to the entrace to the base
+- Increased the size of the traitor one way mirror into the control room
+- Improved the lighting around the base (less dark corners when the power is on)
+- The Hottub now heals you faster
+- Small improvements to the outdoor generator Shed
+- Little Detail Changes across the hole map

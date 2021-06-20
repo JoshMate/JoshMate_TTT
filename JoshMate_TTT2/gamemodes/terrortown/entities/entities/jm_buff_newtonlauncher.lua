@@ -31,26 +31,13 @@ ENT.BuffIconName                = JM_BuffIconName
 
 if CLIENT then
 
-     -- Set up screen effect table
-     local effectTable_Stun = {
-
-        ["$pp_colour_addr"] = 0,
-        ["$pp_colour_addg"] = 0,
-        ["$pp_colour_addb"] = 0,
-        ["$pp_colour_brightness"] = 0,
-        ["$pp_colour_contrast"] = 1,
-        ["$pp_colour_colour"] = 1,
-        ["$pp_colour_mulr"] = 0,
-        ["$pp_colour_mulg"] = 0,
-        ["$pp_colour_mulb"] = 0
-    }
-
     -- Render Any Screen Effects
     hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
 
         if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
-            DrawColorModify( effectTable_Stun )
-            DrawMotionBlur( 0.05, 1, 0.05 )
+            DrawMotionBlur( 0.10, 0.90, 0.05 )
+            DrawMaterialOverlay( "effects/tp_eyefx/tpeye", -0.01 )
+            
         end 
     
     end)

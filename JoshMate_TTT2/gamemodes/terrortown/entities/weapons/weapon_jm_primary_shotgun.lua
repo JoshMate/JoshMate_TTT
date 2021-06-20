@@ -26,10 +26,10 @@ SWEP.WeaponID              = AMMO_SHOTGUN
 
 SWEP.Primary.Damage        = 15
 SWEP.Primary.NumShots      = 10
-SWEP.Primary.Delay         = 1
+SWEP.Primary.Delay         = 0.90
 SWEP.Primary.Cone          = 0.065
 SWEP.Primary.Recoil        = 10
-SWEP.Primary.Range         = 350
+SWEP.Primary.Range         = 400
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10

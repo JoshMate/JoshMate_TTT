@@ -77,7 +77,7 @@ function ENT:Touch(toucher)
 
 		-- Drop currently Held Weapon
 		local curWep = toucher:GetActiveWeapon()
-		toucher:GetActiveWeapon():PreDrop()
+		if (toucher:GetActiveWeapon():PreDrop()) then toucher:GetActiveWeapon():PreDrop() end
 		if (curWep.AllowDrop) then
 			toucher:DropWeapon()
 		end

@@ -33,8 +33,8 @@ SWEP.Primary.Damage        = 10
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
 SWEP.Primary.Recoil        = 0
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 
 SWEP.HeadshotMultiplier    = 2
@@ -89,12 +89,17 @@ local function PushPullRadius(pos, pusher)
 
             -- Drop currently Held Weapon
             local curWep = target:GetActiveWeapon()
-            target:GetActiveWeapon():PreDrop()
+            if (target:GetActiveWeapon():PreDrop()) then target:GetActiveWeapon():PreDrop() end
             if (curWep.AllowDrop) then
                target:DropWeapon()
             end
             target:SelectWeapon("weapon_jm_special_crowbar")
             -- End of Drop
+
+            -- Set Status and print Message
+            JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
+            JM_GiveBuffToThisPlayer("jm_buff_newtonlauncher",target,pusher)
+            -- End Of
 
             -- always need an upwards push to prevent the ground's friction from
             -- stopping nearly all movement
@@ -183,7 +188,7 @@ end
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-		self:AddTTT2HUDHelp("To Launch players", nil, true)
+	   self:AddTTT2HUDHelp("Launch a burst of energy", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

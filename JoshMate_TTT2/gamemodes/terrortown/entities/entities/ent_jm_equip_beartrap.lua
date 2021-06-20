@@ -177,15 +177,14 @@ function ENT:Use(act)
 		self.TrappedPerson:Freeze(false)
 		if IsValid(act) then self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick())) end
 		if not IsValid(act) then self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: UNKOWN PLAYER") end
-		STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
+		STATUS:RemoveStatus(self.TrappedPerson, JM_Global_Buff_BearTrap_IconName)
 	end
 
-	if IsValid(self) then
-		self:EmitSound("0_main_click.wav")
-		self:HitEffectsInit(self)
-		self:SendWarn(false)
-		self:Remove()
-	end
+	self:EmitSound("0_main_click.wav")
+	self:HitEffectsInit(self)
+	self:SendWarn(false)
+	self:Remove()
+
 end
 
 --- Josh Mate Hud Warning

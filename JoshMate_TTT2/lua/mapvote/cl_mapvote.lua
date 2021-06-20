@@ -67,7 +67,7 @@ end)
 
 -- ConVars (clientsided)
 local cv_spacing = 4
-local cv_max_button_row = 7
+local cv_max_button_row = 8
 local cv_button_size = 100
 local cv_avatar_size = 32
 local cv_avatar = 1

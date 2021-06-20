@@ -87,7 +87,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- Drop currently Held Weapon
       if(ent:IsValid() and ent:IsPlayer()) then
          local curWep = ent:GetActiveWeapon()
-         ent:GetActiveWeapon():PreDrop()
+         if (ent:GetActiveWeapon():PreDrop()) then ent:GetActiveWeapon():PreDrop() end
          if (curWep.AllowDrop) then
             ent:DropWeapon()
          end
