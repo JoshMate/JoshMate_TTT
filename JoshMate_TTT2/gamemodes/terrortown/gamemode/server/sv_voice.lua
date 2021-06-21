@@ -20,7 +20,9 @@ end
 -- Communication control
 local sv_voiceenable = GetConVar("sv_voiceenable")
 local cv_ttt_limit_spectator_voice = CreateConVar("ttt_limit_spectator_voice", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+-- Josh Mate Proxy Audio
 local loc_voice = CreateConVar("ttt_locational_voice", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+local loc_voice_distance = CreateConVar("ttt_locational_voice_distance", "800", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
 hook.Add("TTT2SyncGlobals", "AddVoiceGlobals", function()
 	SetGlobalBool(sv_voiceenable:GetName(), sv_voiceenable:GetBool())
@@ -100,6 +102,13 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 	local isGlobalVoice = speaker[speakerTeam .. "_gvoice"]
 
 	if PlayerIsMuted(listener, speaker) then
+		return false, false
+	end
+
+	-- Distance Check for when Proxy Voice is turned on
+	local distance = listener:GetPos():Distance(speaker:GetPos())
+
+	if (distance > loc_voice_distance:GetFloat()) then
 		return false, false
 	end
 
