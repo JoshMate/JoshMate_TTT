@@ -212,7 +212,7 @@ function ENT:Loot_Good( activator, caller )
 
 	if RNG_Good == 16 then
 		activator:ChatPrint("[Care Package] - Good Loot: Silenced Pistol")
-		Loot_SpawnThis(self,"weapon_jm_equip_silencedpistol")
+		Loot_SpawnThis(self,"weapon_jm_zloot_silenced_pistol")
 		
 	end	
 

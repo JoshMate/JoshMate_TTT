@@ -1,5 +1,14 @@
-AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
-include('shared.lua')
+AddCSLuaFile()
+
+ENT.Type = "anim"
+ENT.PrintName= "Tree of Life"
+ENT.Author= "Josh Mate"
+ENT.Purpose= "Healer"
+ENT.Instructions= "Healer"
+ENT.Spawnable = true
+ENT.AdminSpawnable = false
+
+
 
 local JM_Tree_Duration				= 30
 local JM_Tree_Radius				= 150
@@ -44,7 +53,7 @@ function DetectTreeStacking(ent)
 	-- Destroy other trees to prevent stacking
 	local d = 0.0
 	local diff = nil
-	local trees = ents.FindByClass( "ent_jm_tree" )
+	local trees = ents.FindByClass( "ent_jm_equip_tree" )
 	
 	for i = 1, #trees do
 		local tree = trees[i]
