@@ -23,122 +23,57 @@ if CLIENT then
     SWEP.EquipMenuData = {
         type = "item_weapon",
         name = "CCTV Camera",
-        desc = [[Place down CCTV Camera
+        desc = [[Place a CCTV Camera
         
-    Left Click to attached to a wall
+    Left Click to place the camera
 
     A screen will appear on your hud with a live streamed view
     of what the camera can see
 
-    Your camera can be disconnected by anyone, but only you can pick it back up
+    Infinite uses, but you can only have one camera active at once
     ]]
     }
-
-    surface.CreateFont("JM_CCTVCAM_HUD_TEXT", {
-        font = "Roboto",
-        size = 32,
-        weight = 800,
-        antialias = true
-    })
-
-    function SWEP:PrimaryAttack()
-        self.DrawInstructions = true
-        RENDER_CONNECTION_LOST = false
-    end
-
-    function SWEP:Deploy()
-        if IsValid(self:GetOwner()) then
-            self:GetOwner():DrawViewModel(false)
-        end
-
-        return true
-    end
-
-    function SWEP:DrawWorldModel()
-    end
-
-    function SWEP:OnRemove()
-        if IsValid(self:GetOwner()) and self:GetOwner() == LocalPlayer() then
-            self:GetOwner():ConCommand("lastinv")
-        end
-    end
-
-    surface.SetFont("TabLarge")
-    local w = surface.GetTextSize("Use [Mouse UP/DOWN] to pitch the camera")
-
-    function SWEP:DrawHUD()
-
-        self.BaseClass.DrawHUD(self)
-
-        if self.DrawInstructions then
-            surface.SetFont("JM_CCTVCAM_HUD_TEXT")
-            surface.SetTextColor(Color(255, 255, 255, 255))
-            surface.SetTextPos(ScrW() / 2 - w / 2, ScrH() / 2 + 50)
-            surface.DrawText("Use [Mouse UP/DOWN] to pitch the camera")
-        end
-    end
-
-    net.Receive("TTTCamera.Instructions", function()
-        local p = LocalPlayer()
-
-        if p.GetWeapon and IsValid(p:GetWeapon("weapon_jm_equip_camera")) then
-            p:GetWeapon("weapon_jm_equip_camera").DrawInstructions = false
-        end
-    end)
-end
-
-
-
-
-function SWEP:Deploy()
-    self:GetOwner():DrawViewModel(false)
-    self:GetOwner():DrawWorldModel(false)
 end
 
 function SWEP:PrimaryAttack()
-    if not IsFirstTimePredicted() then return end
 
-    local tr = util.TraceLine({
-        start = self:GetOwner():GetShootPos(),
-        endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * 100,
-        filter = self:GetOwner()
-    })
+    if SERVER then
 
-    if IsValid(self.camera) and self.camera:GetShouldPitch() then
-        self.camera:SetShouldPitch(false)
-        self:Remove()
-    end
+        for _, v in ipairs(ents.FindByClass("ent_jm_equip_cctv")) do
+            if v:GetNWEntity("JM_Camera_PlayerOwner")  == self:GetOwner() then
+                v:Remove() -- if the player already has a camera, remove it
+            end
+        end
 
-    if tr.HitWorld and not self.camera then
-        local camera = ents.Create("ttt_detective_camera")
-        camera:SetPlayer(self:GetOwner())
-        camera:SetPos(tr.HitPos - self:GetOwner():EyeAngles():Forward())
-        camera:SetAngles((self:GetOwner():EyeAngles():Forward() * -1):Angle())
-        camera:SetWelded(true)
+        local camera = ents.Create("ent_jm_equip_cctv")
+        camera:SetPos(self:GetOwner():EyePos())
+        camera:SetAngles(self:GetOwner():EyeAngles())
         camera:Spawn()
         camera:Activate()
-        camera:SetPos(tr.HitPos - self:GetOwner():EyeAngles():Forward())
-        camera:SetAngles((self:GetOwner():EyeAngles():Forward() * -1):Angle())
-
-        timer.Simple(0, function()
-            constraint.Weld(camera, tr.Entity, 0, 0, 0, true)
-        end)
-
-        camera:SetShouldPitch(true)
-        self.camera = camera
+        camera:SetNetworkedEntity("JM_Camera_PlayerOwner", self:GetOwner())
     end
 
-    for _, v in ipairs(ents.FindByClass("ttt_detective_camera")) do
-        if v:GetPlayer() == self:GetOwner() and v ~= self.camera then
-            v:Remove() -- if the player already has a camera, remove it
+    
+end
+
+function SWEP:SecondaryAttack()
+
+    if SERVER then
+
+        for _, v in ipairs(ents.FindByClass("ent_jm_equip_cctv")) do
+            if v:GetNWEntity("JM_Camera_PlayerOwner") == self:GetOwner() then
+                v:Remove() -- if the player already has a camera, remove it
+            end
         end
+
     end
+
 end
 
 -- Hud Help Text
 if CLIENT then
     function SWEP:Initialize()
-       self:AddTTT2HUDHelp("Place a CCTV Camera", nil, true)
+       self:AddTTT2HUDHelp("Place a CCTV Camera", "Remove your CCTV Camera", true)
     end
  end
  -- 

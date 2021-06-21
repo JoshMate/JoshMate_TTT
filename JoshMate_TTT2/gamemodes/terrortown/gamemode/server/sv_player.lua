@@ -12,6 +12,9 @@ local hook = hook
 local ttt_bots_are_spectators = CreateConVar("ttt_bots_are_spectators", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 local ttt_dyingshot = CreateConVar("ttt_dyingshot", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
+local JM_WasPushed_Linger			= 15
+local JM_WasPushed_Linger_Goomba	= 7
+
 CreateConVar("ttt_killer_dna_range", "550", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt_killer_dna_basetime", "100", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
@@ -1118,7 +1121,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 			-- if the faller was pushed, that person should get attrib
 			local push = ply.was_pushed
 
-			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - 12 then
+			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - JM_WasPushed_Linger_Goomba then
 				-- TODO: move push time checking stuff into fn?
 				att = push.att
 			end
@@ -1133,16 +1136,18 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 				dmg:SetDamageType(DMG_CRUSH)
 			end
 
+			ply:EmitSound("goombastomp.wav", 100, 100, 1)
+
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)
 			dmg:SetDamageForce(Vector(0, 0, -1))
-			dmg:SetDamage(damage*3)
+			dmg:SetDamage(damage*4)
 
 			ground:TakeDamageInfo(dmg)
 		end
 
 		-- our own falling damage is cushioned
-		damage = damage / 5
+		damage = damage / 6
 	end
 
 	if math.floor(damage) > 0 then
@@ -1156,7 +1161,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 
 		ply:TakeDamageInfo(dmg)
 		-- play CS:S fall sound if we got somewhat significant damage
-		if damage > 5 then
+		if damage > 1 then
 			if not ply:HasEquipmentItem("item_jm_passive_ninjapro") then
 			sound.Play(fallsounds[math.random(fallsounds_count)], ply:GetShootPos(), 55 + math.Clamp(damage, 0, 50), 100)
 			end
@@ -1268,7 +1273,7 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 
 				local t = math.max(push.t or 0, push.hurt or 0)
 
-				if t > owner_time and t > CurTime() - 4 then
+				if t > owner_time and t > CurTime() - JM_WasPushed_Linger then
 					owner = push.att
 
 					-- pushed by a trap?
@@ -1276,8 +1281,6 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 						dmginfo:SetInflictor(push.infl)
 					end
 
-					-- for slow-hurting traps we do leech-like damage timing
-					push.hurt = CurTime()
 				end
 			end
 		end

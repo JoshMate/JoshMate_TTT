@@ -27,7 +27,7 @@ if SERVER then
         effect:SetOrigin(pos)
         util.Effect("cball_explode", effect, true, true)
         
-        playerToSlay:EmitSound("karmaslay.wav")
+        
     
         playerToSlay:Kill()
         playerToSlay:SetNWBool("JM_NWBOOL_IsSittingRoundOut", true)
@@ -112,6 +112,7 @@ if CLIENT then
     net.Receive("JM_KarmaSlayMessage", function(_) 
         local nameOfPlayerSlayed = net.ReadString()
 
+        surface.PlaySound("karmaslay.wav")
         chat.AddText( Color( 255, 0, 0 ), "[KARMA] - ", Color( 255, 255, 0 ), tostring(nameOfPlayerSlayed), Color( 255, 255, 255 ), " is sitting this Round out due to low Karma")
     end)
 end

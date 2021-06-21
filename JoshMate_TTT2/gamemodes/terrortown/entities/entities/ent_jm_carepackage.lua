@@ -121,7 +121,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
 function ENT:Loot_Good( activator, caller ) 
 
-	local RNG_Good = math.random(1, 17)
+	local RNG_Good = math.random(1, 16)
 
 	if RNG_Good == 1 then
 		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
@@ -151,31 +151,25 @@ function ENT:Loot_Good( activator, caller )
 	if RNG_Good == 6 then
 		activator:ChatPrint("[Care Package] - Good Loot: Health Boost")
 		activator:SetMaxHealth(activator:GetMaxHealth() + 100)
-		activator:SetHealth(activator:GetMaxHealth())
-		JM_GiveBuffToThisPlayer("jm_buff_health", activator, self)
+		JM_GiveBuffToThisPlayer("jm_buff_regeneration", activator, self)
 	end
 
 	if RNG_Good == 7 then
 		activator:ChatPrint("[Care Package] - Good Loot: Speed Boost")
 		JM_GiveBuffToThisPlayer("jm_buff_speedboost", activator, self)
 	end
-	
-	if RNG_Good == 8 then
-		activator:ChatPrint("[Care Package] - Good Loot: Health Regeneration")
-		JM_GiveBuffToThisPlayer("jm_buff_regeneration", activator, self)
-	end
 
-	if RNG_Good == 9 then
+	if RNG_Good == 8 then
 		activator:ChatPrint("[Care Package] - Good Loot: Mega Frag Grenade")
 		Loot_SpawnThis(self,"weapon_jm_zloot_mega_frag")
 	end
 
-	if RNG_Good == 10 then
+	if RNG_Good == 9 then
 		activator:ChatPrint("[Care Package] - Good Loot: Ninja Blade")
 		Loot_SpawnThis(self,"weapon_jm_zloot_ninjablade")
 	end
 
-	if RNG_Good == 11 then
+	if RNG_Good == 10 then
 		Loot_SpawnThis(self,"npc_pigeon")
 		if(activator:IsTraitor() or activator:IsDetective()) then
 			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (+2 Credits)")
@@ -188,35 +182,35 @@ function ENT:Loot_Good( activator, caller )
 		end
 	end
 
-	if RNG_Good == 12 then
+	if RNG_Good == 11 then
 		activator:ChatPrint("[Care Package] - Good Loot: Prop Launcher")
 		Loot_SpawnThis(self,"weapon_jm_zloot_prop_launcher")
 	end
 
-	if RNG_Good == 13 then
+	if RNG_Good == 12 then
 		activator:ChatPrint("[Care Package] - Good Loot: Rapid Fire")
 		JM_GiveBuffToThisPlayer("jm_buff_rapidfire", activator, self)
 	end
 
-	if RNG_Good == 14 then
+	if RNG_Good == 13 then
 		activator:ChatPrint("[Care Package] - Good Loot: Portable Tester")
 		Loot_SpawnThis(self,"weapon_jm_zloot_traitor_tester")
 		
 	end
 
-	if RNG_Good == 15 then
+	if RNG_Good == 14 then
 		activator:ChatPrint("[Care Package] - Good Loot: Big Boy")
 		Loot_SpawnThis(self,"weapon_jm_zloot_explosive_gun")
 		
 	end
 
-	if RNG_Good == 16 then
+	if RNG_Good == 15 then
 		activator:ChatPrint("[Care Package] - Good Loot: Shredder")
 		Loot_SpawnThis(self,"weapon_jm_zloot_shredder")
 		
 	end	
 
-	if RNG_Good == 17 then
+	if RNG_Good == 16 then
 		activator:ChatPrint("[Care Package] - Good Loot: Silenced Pistol")
 		Loot_SpawnThis(self,"weapon_jm_equip_silencedpistol")
 		
