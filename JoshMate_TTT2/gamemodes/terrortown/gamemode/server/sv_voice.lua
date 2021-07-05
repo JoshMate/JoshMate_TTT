@@ -110,12 +110,12 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 
 	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
 	if listener:IsSpec() or listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR then 
-		return true, true
+		return true, false
 	end
 
 	-- Spectators can chat to other specs globally
 	if listener:IsSpec() and speaker:IsSpec() then 
-		return true, true
+		return true, false
 	end
 
 	-- Distance Check for when Proxy Voice is turned on
