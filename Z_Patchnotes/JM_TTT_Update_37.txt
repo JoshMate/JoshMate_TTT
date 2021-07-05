@@ -3,11 +3,34 @@
 -- ################################
 
 [Proximity Voice]
+- The speaker card telling you who is talking will now fade out the further away the speaker is to you
+- Traitor Chat can now always be heard anywhere on the map by Traitors and spectators
+- Spectators now only hear what the person they are spectating / near can hear (Including T chat)
+- Sepctators can now talk to other Spectators globally without any 3D effects or fall off
+// These changes only effect Proximity Voice, regular voice chat is unaffected
 
+[Admin Controls]
+- Added a new spawn command I can use to spawn anything
+- Added a new spawn command where I can give all players weapons / items
+// Mainly used for testing purposes
+// But can be used for example to give everyone Ninja Blades for a fun bonus round
+
+[Care Package System]
+- Certain server affecting care packages now announce to all players what is going on
+// Text will appear on your screen informing you of what effect is now happening to you all.
 
 -- ################################
 -- #### Gameplay
 -- ################################
+
+[Barrel Swep]
+- Care Package: Good Loot
+- A utility weapon with 5 uses
+- Left click welds an explosive barrel to the surface you are looking at
+- Right click spwans a movable explosive barrel in front of you
+- Has a view model rather than just an empty screen
+// Other players won't see this, just the user in 1st person
+// Can be used as a deadly expliosive trap or used to create a stair case
 
 [Low Gravity]
 - Care Package: Bad Loot
@@ -22,18 +45,61 @@
 - Shooting / pushing / blasting players now sends them flying
 - Happens once instantly when you open the care package
 
-[Teleportation]
+[Swapping Places]
 - Care Package: Bad Loot
 - You and another randomly selected player swap places.
 - If no one is in a suitable location to be swapped you will just teleport to a random spot on the map
 - Happens once instantly when you open the care package
 
+[View Models]
+// All weapons now have a view model (Something you hold in 1st person view)
+// Before your screen was just blank as if you were holding no weapon
+// This means you can actually tell what weapon you are holding
+// This is ONLY VISIBLE to you in 1st person and not anyone else!
+// List of weapons which now have a view model:
+- Pulse Pad
+- Man Hacks Swarm
+- Tree of Life
+- Barrier
+- CCTV Camera
+- Teleporter
+- Chameleon
+- Decoy Radio
+
+[Prop Launcher]
+- Response time for left and right clicks greatly improved
+- Can now suck up a prop when you already have a prop stored (Replaces currently stored prop)
+- You now can't fire the prop launcher while being close to and looking directly at a solid object 
+// This prevents you insta killing yourself or firing through walls or DDOSing the server with prop lag
+
+[Big Boy]
+- Starting reserve ammo: 0 -> 1
+// Still has 1 Magazine Capacity and 10 Max ammo in Reserve
+
+[Soap]
+- Increased Placement Range: 128 -> 192
+
+[Beartrap]
+- Increased Placement Range: 100 -> 192
+
+[Pulse Pad]
+- Increased Placement Range: 128 -> 192
+- No longer tases the target
+- Increased Ammo: 3 -> 5
+
+[Chameleon]
+- Ammo: 30 -> 40
+
+[Cannibal]
+- The bones created by this weapon now have better movement and physics
 
 -- ################################
 -- #### Bug Fixes
 -- ################################
 
-
+- Newton launcher should now properly remove itself after firing
+- Teleporter now removes itself after being used up
+- Pulse pad instructions no longer call it a fire wall
 
 -- ################################
 -- ##### Maps
@@ -46,5 +112,3 @@
 [Pit]
 - New map
 - Completely Recreated from scratch to be a similar idea and theme but with greatly improved execution
- 
-

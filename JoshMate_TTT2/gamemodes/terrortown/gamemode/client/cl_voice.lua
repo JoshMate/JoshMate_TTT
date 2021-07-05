@@ -92,12 +92,12 @@ bind.Register("ttt2_voice", VoiceTryEnable, VoiceTryDisable, "TTT2 Bindings", "f
 -- register a binding for the team voicechat
 bind.Register("ttt2_voice_team", VoiceTeamTryEnable, VoiceTeamTryDisable, "TTT2 Bindings", "f1_bind_voice_team", input.GetKeyCode(input.LookupBinding("+speed") or KEY_LSHIFT))
 
--- 255 at 100
--- 5 at 5000
 local function VoiceNotifyThink(pnl)
 	local client = LocalPlayer()
 
+	local proxVoice = GetGlobalBool("ttt_locational_voice", 0)
 	local proxVoiceDistance = GetGlobalFloat("ttt_locational_voice_distance", 850)
+
 
 	if not IsValid(pnl) or not IsValid(client) or not IsValid(pnl.ply)
 	or not GetConVar("ttt_locational_voice") or pnl.ply:IsSpec() or pnl.ply == client
@@ -108,9 +108,10 @@ local function VoiceNotifyThink(pnl)
 		and not client:GetSubRoleData().disabledTeamVoiceRecv
 	) then return end
 
-	if (GetConVar("ttt_locational_voice")) then
+	if (proxVoice) then
 		local d = client:GetPos():Distance(pnl.ply:GetPos())
-		pnl:SetAlpha(  255 * (1 - (d / proxVoiceDistance)))
+		local finalOpacity = math.Clamp(255 * (1 - (d / proxVoiceDistance)), 10, 255)
+		pnl:SetAlpha(finalOpacity)
 	else
 		pnl:SetAlpha(255)
 	end

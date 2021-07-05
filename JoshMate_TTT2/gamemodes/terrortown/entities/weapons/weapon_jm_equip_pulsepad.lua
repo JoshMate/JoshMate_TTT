@@ -4,7 +4,7 @@ if CLIENT then
 	SWEP.Slot      = 7
  
 	SWEP.ViewModelFlip		= false
-	SWEP.ViewModelFOV		= 10
+
  end
 
 SWEP.PrintName				= "Pulse Pad"
@@ -19,10 +19,10 @@ SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel             = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel              = "models/props_junk/sawblade001a.mdl"
+SWEP.WorldModel             = "models/props_junk/sawblade001a.mdl"
 SWEP.HoldType 				= "normal" 
-SWEP.UseHands 				= true
+SWEP.UseHands              = false
 SWEP.AllowDrop 				= true
 
 -- TTT Customisation
@@ -45,14 +45,17 @@ Left click to place a hard to see pulse pad on the floor
 
 Walking on the pad will track that player for the rest of the round
 
-It will also tase them for 3 seconds
-
-It has 3 uses
+It has 5 uses
 ]]
 	}
+
+	function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 25 - ang:Right() * -15 - ang:Up() * 15, ang
+	end
+
 end
 
-local JM_Trap_PlaceRange				= 128
+local JM_Trap_PlaceRange				= 192
 
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
@@ -93,7 +96,7 @@ end
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Place a Fire Wall", nil, true)
+	   self:AddTTT2HUDHelp("Place a Pulse Pad", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

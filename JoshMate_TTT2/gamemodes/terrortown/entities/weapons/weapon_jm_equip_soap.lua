@@ -46,7 +46,7 @@ It has 3 uses
 	end
 end
 
-local JM_Trap_PlaceRange				= 128
+local JM_Trap_PlaceRange				= 192
 
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end

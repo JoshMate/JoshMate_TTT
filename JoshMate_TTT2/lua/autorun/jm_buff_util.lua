@@ -72,13 +72,6 @@ JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad
 JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
 JM_Global_Buff_PulsePad_IconGoodBad                     = "bad"
 
-JM_Global_Buff_PulsePadTase_Name                        = "Pulse Pad Tase"
-JM_Global_Buff_PulsePadTase_Duration                    = 3
-JM_Global_Buff_PulsePadTase_NWBool                      = "JM_Buff_NWBool_IsPulsePadTase"
-JM_Global_Buff_PulsePadTase_IconName                    = "JM_Buff_Icon_PulsePadTase"
-JM_Global_Buff_PulsePadTase_IconPath                    = "vgui/ttt/joshmate/hud_taser.png"
-JM_Global_Buff_PulsePadTase_IconGoodBad                 = "bad"
-
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
 JM_Global_Buff_PoisonDart_Duration                      = 15
 JM_Global_Buff_PoisonDart_NWBool                        = "JM_Buff_NWBool_IsPoisonDart"

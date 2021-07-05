@@ -8,7 +8,7 @@ local CATEGORY_NAME = "JoshMate"
 -- ### Spawn Care Package
 -- ##################################################
 
-local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME, "jm spawn carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
+local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME, "jm carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
 cmdSpawnCarePackage:defaultAccess(ULib.ACCESS_ADMIN)
 
 local CATEGORY_NAME = "JoshMate"
@@ -17,8 +17,60 @@ local CATEGORY_NAME = "JoshMate"
 -- ### Spawn Emergency Airdrop
 -- ##################################################
 
-local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME, "jm spawn emergencyairdrop", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
+local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME, "jm carepacakage x3", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
 cmdEmergencyAirdrop:defaultAccess(ULib.ACCESS_ADMIN)
+
+-- #########################
+-- #####  Spawn Item #####
+-- #########################
+
+function ulx.spawnthing( calling_ply, message )
+
+	local ent = ents.Create(message)
+	if ent:IsValid() then
+		ent:SetPos(calling_ply:GetPos())
+		ent:Spawn()
+	end
+
+end
+
+local spawnthis = ulx.command( CATEGORY_NAME, "jm creatething", ulx.spawnthing, "!spawnthis")
+spawnthis:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
+spawnthis:defaultAccess( ULib.ACCESS_ADMIN )
+spawnthis:help( "Spawns the given entity name: eg. weapon_jm_zloot_prop_launcher" )
+
+-- #########################
+-- #####  Spawn Item All ###
+-- #########################
+
+function ulx.spawnthing( calling_ply, message )
+
+	net.Start("JM_ULX_Announcement")
+    net.WriteString("Giving Everyone: " .. tostring(message))
+	net.WriteUInt(0, 16)
+    net.Broadcast()
+
+	local plys = player.GetAll()
+
+	for i = 1, #plys do
+		local ply = plys[i]
+		if ply:IsValid() and ply:Alive() and ply:IsTerror() then 
+			local ent = ents.Create(message)
+			if ent:IsValid() then
+				ent:SetPos(ply:GetPos())
+				ent:Spawn()
+			end
+		end
+	end
+
+	
+
+end
+
+local spawnthis = ulx.command( CATEGORY_NAME, "jm creatething all", ulx.spawnthing, "!spawnthisforall")
+spawnthis:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
+spawnthis:defaultAccess( ULib.ACCESS_ADMIN )
+spawnthis:help( "Spawns the given entity name for everyone: eg. weapon_jm_zloot_prop_launcher" )
 
 -- #########################
 -- ######## Mapvote ########
@@ -27,24 +79,11 @@ function ulx.mapvote(calling_ply, time, isOppositeCmd)
     if isOppositeCmd then MapVote:Stop() else MapVote:Start(time) end
 end
 
-local cmdMapvote = ulx.command(CATEGORY_NAME, "jm mapvote start", ulx.mapvote, "!mapvote")
-cmdMapvote:addParam{ type=ULib.cmds.NumArg, min=15, default=20, max=60, ULib.cmds.optional, hint="Votetime" } -- time param
+local cmdMapvote = ulx.command(CATEGORY_NAME, "jm map vote", ulx.mapvote, "!mapvote")
+cmdMapvote:addParam{ type=ULib.cmds.NumArg, min=10, default=30, max=60, ULib.cmds.optional, hint="Votetime" } -- time param
 cmdMapvote:addParam{ type=ULib.cmds.BoolArg, invisible=true } -- isOppositeCmd param
 cmdMapvote:defaultAccess(ULib.ACCESS_ADMIN)
 cmdMapvote:setOpposite("jm mapvote end", {_, _, true}, "!unmapvote")
-
-
-
--- #########################
--- ####### RTV reset #######
--- #########################
-function ulx.rtvreset(calling_ply)
-    PrintMessage(HUD_PRINTTALK, calling_ply:Nick() .. " resets the RTV.")
-    RTV:Reset()
-end
-
-local cmdRtv = ulx.command(CATEGORY_NAME, "jm mapvote resetrtv", ulx.rtvreset, "!resetrtv")
-cmdRtv:defaultAccess(ULib.ACCESS_ADMIN)
 
 
 -- #########################
@@ -56,7 +95,7 @@ function ulx.resetmaplist(calling_ply)
     ConfigHelper:WritePlayedMaps({}) 
 end
 
-local cmdResetMapList = ulx.command(CATEGORY_NAME, "jm mapvote resetlist", ulx.resetmaplist, "!resetmaplist")
+local cmdResetMapList = ulx.command(CATEGORY_NAME, "jm map resetlist", ulx.resetmaplist, "!resetmaplist")
 cmdResetMapList:defaultAccess(ULib.ACCESS_ADMIN)
 
 
@@ -312,7 +351,7 @@ if CLIENT then
 		surface.PlaySound("0_main_popup.wav")
 
 		if messageType == 1 then surface.PlaySound("0_main_suddendeath.mp3") end
-		if messageType == 2 then surface.PlaySound("pulsepad_hit.wav") end
+		if messageType == 2 then surface.PlaySound("ping_jake.wav") end
 		
         chat.AddText( Color( 255, 0, 0 ), "[Announcement] - ", Color( 255, 255, 0 ), tostring(message))
     end)

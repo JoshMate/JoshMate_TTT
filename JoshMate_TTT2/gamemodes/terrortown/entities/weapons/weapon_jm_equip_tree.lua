@@ -4,7 +4,6 @@ if CLIENT then
 	SWEP.PrintName          = "Tree of Life"
 	SWEP.Slot               = 6
  
-	SWEP.ViewModelFOV       = 10
 	SWEP.ViewModelFlip      = false
  
 	SWEP.EquipMenuData = {
@@ -22,6 +21,10 @@ if CLIENT then
 	};
  
 	SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_tree.png"
+
+	function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 17 - ang:Right() * -7 - ang:Up() * 8, ang
+	end
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -43,10 +46,11 @@ SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_TREE
-SWEP.UseHands              = true
+
 SWEP.IsSilent              = true
-SWEP.ViewModel             = "models/weapons/c_crowbar.mdl"
-SWEP.WorldModel            = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel             = "models/props_lab/cactus.mdl"
+SWEP.WorldModel            = "models/props_lab/cactus.mdl"
+SWEP.UseHands              = false
 
 local JM_Tree_Place_Range		= 300
 

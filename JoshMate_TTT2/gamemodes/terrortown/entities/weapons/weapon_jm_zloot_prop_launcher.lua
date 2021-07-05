@@ -18,7 +18,7 @@ SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 1.30
+SWEP.Primary.Delay         = 1.50
 SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 10
 SWEP.Primary.DefaultClip   = 10
@@ -66,12 +66,23 @@ function SWEP:PrimaryAttack()
    if not IsValid(owner) then return end
    if not self:CanPrimaryAttack() then return end
 
-   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-   self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+   
+
+   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * PropLauncher_Muzzle_Offset, filter = owner})
+   if (tr.Hit) then
+      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay/4 )
+      self:SetNextSecondaryFire(CurTime() + self.Primary.Delay/4 )
+      self:EmitSound(PropLauncher_Sound_Fail)
+      return
+   end
    
    if self.PropLauncher_StoredProp == nil then
+      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay/4 )
+      self:SetNextSecondaryFire(CurTime() + self.Primary.Delay/4 )
       self:EmitSound(PropLauncher_Sound_Fail)
    else
+      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay/2 )
+      self:SetNextSecondaryFire(CurTime() + self.Primary.Delay/2 )
       if SERVER then
          local object = ents.Create("prop_physics")
          object:SetModel(self.PropLauncher_StoredProp)
@@ -114,23 +125,24 @@ function SWEP:SecondaryAttack()
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
-   -- Attempt to store a prop
+   -- Store a prop
 
-   if self.PropLauncher_StoredProp == nil then
-      local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * PropLauncher_Range_Pickup, filter = owner})
-      if (tr.Entity:IsValid() and tr.Entity:GetClass() == "prop_physics") then
-         self.PropLauncher_StoredProp = tr.Entity:GetModel()
-         if SERVER then
-            Effects_PropMagic(tr.Entity)
-            tr.Entity:Remove()
-         end
-         self:Animation_Reload()
-      else
-         self:EmitSound(PropLauncher_Sound_Fail)
-      end      
+   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * PropLauncher_Range_Pickup, filter = owner})
+   if (tr.Entity:IsValid() and tr.Entity:GetClass() == "prop_physics") then
+      self.PropLauncher_StoredProp = tr.Entity:GetModel()
+      if SERVER then
+         Effects_PropMagic(tr.Entity)
+         tr.Entity:Remove()
+      end
+      self:Animation_Reload()
+      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+      self:SetNextSecondaryFire(CurTime() + self.Primary.Delay )
    else
       self:EmitSound(PropLauncher_Sound_Fail)
-   end	
+      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay/4 )
+      self:SetNextSecondaryFire(CurTime() + self.Primary.Delay/4 )
+   end  
+      	
 end
 
 function SWEP:Animation_Fire() 

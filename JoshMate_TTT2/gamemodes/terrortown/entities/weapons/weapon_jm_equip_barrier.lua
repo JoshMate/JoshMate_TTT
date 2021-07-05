@@ -4,7 +4,6 @@ if CLIENT then
 	SWEP.Slot      = 7
  
 	SWEP.ViewModelFlip		= false
-	SWEP.ViewModelFOV		= 10
  end
 
 SWEP.PrintName				= "Barrier"
@@ -19,10 +18,10 @@ SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel             = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel              = "models/props/cs_office/TV_plasma.mdl"
+SWEP.WorldModel             = "models/props/cs_office/TV_plasma.mdl"
 SWEP.HoldType 				= "normal" 
-SWEP.UseHands 				= true
+SWEP.UseHands               = false
 SWEP.AllowDrop 				= true
 
 -- TTT Customisation
@@ -48,6 +47,10 @@ After 3s the barrier will arm blocking passage and projectiles
 It has 3 uses
 ]]
 	}
+
+	function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 55 - ang:Right() * -25 - ang:Up() * 55, ang
+	 end
 end
 
 local JM_Barrier_PlaceRange				= 64

@@ -46,12 +46,14 @@ if CLIENT then
 	end
 end
 
+local JM_Trap_PlaceRange				= 192
+
 function SWEP:PrimaryAttack()
 
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 
-	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 100, filter = self.Owner})
+	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Trap_PlaceRange, filter = self.Owner})
 	if (tr.HitWorld or (tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable")))then
 		local dot = vector_up:Dot(tr.HitNormal)
 		if dot > 0.55 and dot <= 1 then

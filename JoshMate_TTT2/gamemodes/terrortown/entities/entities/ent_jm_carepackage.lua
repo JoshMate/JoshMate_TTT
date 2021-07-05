@@ -121,7 +121,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
 function ENT:Loot_Good( activator, caller ) 
 
-	local RNG_Good = math.random(1, 16)
+	local RNG_Good = math.random(1, 17)
 
 	if RNG_Good == 1 then
 		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
@@ -216,6 +216,14 @@ function ENT:Loot_Good( activator, caller )
 		
 	end	
 
+	if RNG_Good == 17 then
+		activator:ChatPrint("[Care Package] - Good Loot: Barrel Swep")
+		Loot_SpawnThis(self,"weapon_jm_zloot_barrel")
+		
+	end	
+
+	
+
  end
 
 function ENT:Loot_Bad( activator, caller ) 
@@ -239,6 +247,12 @@ function ENT:Loot_Bad( activator, caller )
 
 	if RNG_Bad == 4 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Mega Tracker")
+		
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: You are all being tracked!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
 		for _, ply in ipairs( player.GetAll() ) do
 			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
 				if SERVER then ply:EmitSound(Sound("ping_jake.wav")) end
@@ -270,6 +284,12 @@ function ENT:Loot_Bad( activator, caller )
 	end
 
 	if RNG_Bad == 7 then
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: Gravity is now much weaker!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
 		activator:ChatPrint("[Care Package] - Bad Loot: Low Gravity")
 		RunConsoleCommand("sv_gravity", 100)
 		RunConsoleCommand("sv_airaccelerate", 12)
@@ -281,6 +301,12 @@ function ENT:Loot_Bad( activator, caller )
 	end
 
 	if RNG_Bad == 8 then
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: The floors are now slippery!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
 		activator:ChatPrint("[Care Package] - Bad Loot: Slippery Floors")
 		RunConsoleCommand("sv_friction", 0)
 		RunConsoleCommand("sv_accelerate", 5)
@@ -300,9 +326,6 @@ function ENT:Loot_Bad( activator, caller )
 		for _, ply in ipairs( player.GetAll() ) do
 
 			if (ply:IsValid() and ply:IsTerror() and ply:Alive() and not ply:Crouching()) then
-				
-				print("Player: " .. tostring(ply:GetPos()))
-				print("Activator: " .. tostring(activator:GetPos()))
 
 				if ply:GetPos():Distance(activator:GetPos()) >= 32  then
 					PossibleVictims[#PossibleVictims+1] = ply
@@ -312,9 +335,6 @@ function ENT:Loot_Bad( activator, caller )
 		end
 
 		-- Work out who the victim is
-
-		print("Table Size: " .. tostring(table.Count(PossibleVictims)))
-		print("Table Index 1: " .. tostring(PossibleVictims[1]))
 
 		local Victim = nil
 

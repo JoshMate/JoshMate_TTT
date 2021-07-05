@@ -74,50 +74,44 @@ local function PushPullRadius(pos, pusher)
 
    -- push players
    for k, target in ipairs(ents.FindInSphere(pos, radius)) do
-      if IsValid(target) and target:IsPlayer() then
+      if target:IsValid() and target:IsPlayer() and target:Alive() and target:IsTerror() then
          local tpos = target:LocalToWorld(target:OBBCenter())
          local dir = (tpos - pos):GetNormal()
-         local phys = target:GetPhysicsObject()
-
-         if target:IsPlayer() and (not target:IsFrozen()) and ((not target.was_pushed) or target.was_pushed.t != CurTime()) then
             
-            -- JM Changes Extra Hit Marker
-            net.Start( "hitmarker" )
-            net.WriteFloat(0)
-            net.Send(pusher)
-            -- End Of
+         -- JM Changes Extra Hit Marker
+         net.Start( "hitmarker" )
+         net.WriteFloat(0)
+         net.Send(pusher)
+         -- End Of
 
-            -- Drop currently Held Weapon
-            local curWep = target:GetActiveWeapon()
-            if (target:GetActiveWeapon():PreDrop()) then target:GetActiveWeapon():PreDrop() end
-            if (curWep.AllowDrop) then
-               target:DropWeapon()
-            end
-            target:SelectWeapon("weapon_jm_special_crowbar")
-            -- End of Drop
-
-            -- Set Status and print Message
-            JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
-            JM_GiveBuffToThisPlayer("jm_buff_newtonlauncher",target,pusher)
-            -- End Of
-
-            -- always need an upwards push to prevent the ground's friction from
-            -- stopping nearly all movement
-            dir.z = math.abs(dir.z) + 1
-
-            local push = dir * push_force
-
-            -- try to prevent excessive upwards force
-            local vel = target:GetVelocity() + push
-            vel.z = math.min(vel.z, push_force)
-
-            target:SetVelocity(vel)
-
-            target.was_pushed = {att=pusher, t=CurTime(), wep="weapon_jm_equip_newtonlauncher"}
-
-         elseif IsValid(phys) then
-            phys:ApplyForceCenter(dir * -1 * phys_force)
+         -- Drop currently Held Weapon
+         local curWep = target:GetActiveWeapon()
+         if curWep and curWep:IsValid() and (target:GetActiveWeapon():PreDrop()) then target:GetActiveWeapon():PreDrop() end
+         if (curWep.AllowDrop) then
+            target:DropWeapon()
          end
+         target:SelectWeapon("weapon_jm_special_crowbar")
+         -- End of Drop
+
+         -- Set Status and print Message
+         JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
+         JM_GiveBuffToThisPlayer("jm_buff_newtonlauncher",target,pusher)
+         -- End Of
+
+         -- always need an upwards push to prevent the ground's friction from
+         -- stopping nearly all movement
+         dir.z = math.abs(dir.z) + 1
+
+         local push = dir * push_force
+
+         -- try to prevent excessive upwards force
+         local vel = target:GetVelocity() + push
+         vel.z = math.min(vel.z, push_force)
+
+         target:SetVelocity(vel)
+
+         target.was_pushed = {att=pusher, t=CurTime(), wep="weapon_jm_equip_newtonlauncher"}
+
       end
    end
 end
@@ -175,11 +169,8 @@ function SWEP:PrimaryAttack()
    end
 
    if SERVER then
-      if self:Clip1() <= 0 then
-         self:Remove()
-      end
+      self:Remove()
    end
-
 
 end
 

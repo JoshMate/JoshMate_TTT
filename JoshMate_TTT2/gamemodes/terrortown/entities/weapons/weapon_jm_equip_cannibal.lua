@@ -93,13 +93,13 @@ function SWEP:PrimaryAttack()
             target:SetNotSolid(true)
             target:Remove()
 
-            CreateProp(targetPos, "models/gibs/hgibs.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_spine.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_spine.mdl")
 
             -- JM Changes Extra Hit Marker
             net.Start( "hitmarker" )
@@ -135,26 +135,32 @@ function SWEP:SecondaryAttack()
    return
 end
 
-function CreateProp(targetPos, model)
+function SWEP:CreateProp(targetPos, model)
    local skull = ents.Create( "prop_physics" )
    skull:SetModel(model)
    -- Add a bit of jitter to spawning
    local newPos = targetPos
-   newPos.x = newPos.x + math.Rand( 0, 16 )
-   newPos.y = newPos.y + math.Rand( 0, 16 )
-   newPos.x = newPos.x - math.Rand( 0, 16 )
-   newPos.y = newPos.y - math.Rand( 0, 16 )
-   newPos.z = newPos.z + math.Rand( 0, 8 )
+   newPos.x = newPos.x + math.random( 0, 16 )
+   newPos.y = newPos.y + math.random( 0, 16 )
+   newPos.x = newPos.x - math.random( 0, 16 )
+   newPos.y = newPos.y - math.random( 0, 16 )
+   newPos.z = newPos.z + math.random( 0, 4  )
    skull:SetPos(newPos)
    skull:PhysicsInit(SOLID_VPHYSICS)
    skull:SetMoveType(MOVETYPE_VPHYSICS)
    skull:SetSolid(SOLID_VPHYSICS)
    skull:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
    skull:Spawn()
+
    local skullPhysics = skull:GetPhysicsObject()
    if skullPhysics:IsValid() then
       skullPhysics:Wake()
    end
+
+   local vel = skull:GetPhysicsObject():GetVelocity()
+   vel.z = vel.z + math.random( 150, 300 )
+   skull:GetPhysicsObject():AddVelocity( vel )
+
 end
 
 -- Hud Help Text

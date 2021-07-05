@@ -91,6 +91,7 @@ end
 -- @ref https://wiki.facepunch.com/gmod/GM:PlayerCanHearPlayersVoice
 -- @local
 function GM:PlayerCanHearPlayersVoice(listener, speaker)
+
 	if speaker.blockVoice then
 		return false, false
 	end
@@ -107,9 +108,14 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		return false, false
 	end
 
-	-- Josh Mate Changes - Dead players can hear Traitor Chat
-	if listener:IsSpec() then 
-		return true, false
+	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
+	if listener:IsSpec() or listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR then 
+		return true, true
+	end
+
+	-- Spectators can chat to other specs globally
+	if listener:IsSpec() and speaker:IsSpec() then 
+		return true, true
 	end
 
 	-- Distance Check for when Proxy Voice is turned on
@@ -121,14 +127,6 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 			return false, false
 		end
 	end
-
-	-- custom post-settings
-	local can_hear, is_locational = hook.Run("TTT2CanHearVoiceChat", listener, speaker, not isGlobalVoice)
-
-	if can_hear ~= nil then
-		return can_hear, is_locational or false
-	end
-
 
 	if speaker:IsSpec() and isGlobalVoice then
 		-- Check that the speaker was not previously sending voice on the team chat

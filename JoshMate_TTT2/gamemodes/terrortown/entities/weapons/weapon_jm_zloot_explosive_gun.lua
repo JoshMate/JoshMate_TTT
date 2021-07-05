@@ -29,7 +29,7 @@ SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Delay         = 0.03
 SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 100
 

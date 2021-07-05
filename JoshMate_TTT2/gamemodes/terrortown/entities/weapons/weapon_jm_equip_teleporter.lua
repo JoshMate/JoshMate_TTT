@@ -9,7 +9,6 @@ if CLIENT then
    SWEP.Slot               = 7
 
    SWEP.ViewModelFlip      = false
-   SWEP.ViewModelFOV       = 10
    SWEP.DrawCrosshair      = false
    SWEP.CSMuzzleFlashes    = false
 
@@ -25,13 +24,18 @@ Right-Click: Mark a location in the map
 ]]
 };
 
+   function SWEP:GetViewModelPosition(pos, ang)
+      return pos + ang:Forward() * 15 - ang:Right() *-15 - ang:Up() * 28, ang
+   end
+
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_teleporter.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
 
-SWEP.ViewModel             = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel            = "models/weapons/w_slam.mdl"
+SWEP.ViewModel             = "models/props_trainstation/payphone_reciever001a.mdl"
+SWEP.WorldModel            = "models/props_trainstation/payphone_reciever001a.mdl"
+SWEP.UseHands              = false
 
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
@@ -98,7 +102,16 @@ function SWEP:PrimaryAttack()
    if SERVER then
       self:TeleportRecall()
    end
+
+   -- Remove Weapon When out of Ammo
+	 if SERVER then
+		if self:Clip1() <= 0 then
+		   	self:Remove()
+		end
+	 end
+	 -- #########
 end
+
 function SWEP:SecondaryAttack()
    self:SetNextSecondaryFire( CurTime() + self.Secondary.Delay )
    if not self:CanSecondaryAttack() then return end
@@ -311,14 +324,6 @@ function SWEP:Reload()
 end
 
 
-if CLIENT then
-   function SWEP:Initialize()
-      self:AddTTT2HUDHelp("Teleport to a marked location", "Mark a location", true)
-
-      return self.BaseClass.Initialize(self)
-   end
-end
-
 function SWEP:Deploy()
    if SERVER and IsValid(self:GetOwner()) then
       self:GetOwner():DrawViewModel(false)
@@ -328,6 +333,23 @@ function SWEP:Deploy()
 end
 
 function SWEP:ShootEffects() end
+
+-- Hud Help Text
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Teleport to a marked location", "Mark a location", true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+-- 
 
 
 -- Josh Mate No World Model

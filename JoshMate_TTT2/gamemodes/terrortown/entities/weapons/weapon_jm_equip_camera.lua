@@ -3,10 +3,11 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 SWEP.Base = "weapon_jm_base_gun"
 SWEP.Author = "Josh Mate"
 SWEP.HoldType = "normal"
-SWEP.ViewModel = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel = "models/props/cs_office/Cardboard_box02.mdl"
+SWEP.ViewModel = "models/dav0r/camera.mdl"
+SWEP.WorldModel = "models/dav0r/camera.mdl"
 SWEP.Kind = WEAPON_EQUIP2
 SWEP.AutoSpawnable = false
+SWEP.UseHands              = false
 
 SWEP.CanBuy = {ROLE_DETECTIVE}
 
@@ -16,7 +17,6 @@ SWEP.AllowDrop = true
 if CLIENT then 
     SWEP.PrintName = "CCTV Camera"
     SWEP.Slot = 7
-    SWEP.ViewModelFOV = 10
     SWEP.ViewModelFlip = false
     SWEP.Icon = "vgui/ttt/joshmate/icon_jm_camera.png"
 
@@ -33,6 +33,11 @@ if CLIENT then
     Infinite uses, but you can only have one camera active at once
     ]]
     }
+
+    function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 55 - ang:Right() * -25 - ang:Up() * 55, ang
+	end
+
 end
 
 function SWEP:PrimaryAttack()

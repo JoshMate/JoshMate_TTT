@@ -9,7 +9,6 @@ if CLIENT then
    SWEP.Slot                = 7
 
    SWEP.ViewModelFlip       = false
-   SWEP.ViewModelFOV        = 10
    SWEP.DrawCrosshair       = false
 
    SWEP.EquipMenuData = {
@@ -24,12 +23,16 @@ Also acts as a decoy until it is destroyed or picked up
 ]]
    };
 
+   function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 25 - ang:Right() * -17 - ang:Up() * 18, ang
+	end
+
    SWEP.Icon                = "vgui/ttt/icon_radio"
 end
 
 SWEP.Base                   = "weapon_jm_base_gun"
 
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
+SWEP.ViewModel              = "models/props/cs_office/radio.mdl"
 SWEP.WorldModel             = "models/props/cs_office/radio.mdl"
 
 SWEP.Primary.ClipSize       = -1
@@ -51,6 +54,7 @@ SWEP.WeaponID               = AMMO_RADIO
 
 SWEP.AllowDrop              = false
 SWEP.NoSights               = true
+SWEP.UseHands 				= false
 
 function SWEP:OnDrop()
    self:Remove()

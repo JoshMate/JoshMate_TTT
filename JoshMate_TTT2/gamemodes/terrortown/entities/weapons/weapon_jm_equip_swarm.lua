@@ -2,7 +2,6 @@ if CLIENT then
    SWEP.PrintName          = "Manhack Swarm"
    SWEP.Slot               = 6
 
-   SWEP.ViewModelFOV       = 10
    SWEP.ViewModelFlip      = false
 
    SWEP.EquipMenuData = {
@@ -18,6 +17,11 @@ They will last for 45 seconds or until destroyed
    };
 
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_swarm"
+
+   function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 25 - ang:Right() * -20 - ang:Up() * 10, ang
+	end
+
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -32,9 +36,9 @@ SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR}
 SWEP.LimitedStock          = true
 SWEP.WeaponID              = AMMO_SWARM
-SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel            = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel             = "models/manhack.mdl"
+SWEP.WorldModel            = "models/manhack.mdl"
+SWEP.UseHands              = false
 SWEP.HoldType 				   = "normal" 
 
 local deployRange = 1500

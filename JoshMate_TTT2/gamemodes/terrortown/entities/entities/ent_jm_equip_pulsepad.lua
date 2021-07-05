@@ -84,8 +84,6 @@ function ENT:Touch(toucher)
 
         -- Give Buff
         JM_GiveBuffToThisPlayer("jm_buff_pulsepad",toucher,self.Owner)
-		JM_RemoveBuffFromThisPlayer("jm_buff_pulsepad_Tase",toucher)
-		JM_GiveBuffToThisPlayer("jm_buff_pulsepad_Tase",toucher,self.Owner)
         -- End Of
 
         -- JM Changes Extra Hit Marker

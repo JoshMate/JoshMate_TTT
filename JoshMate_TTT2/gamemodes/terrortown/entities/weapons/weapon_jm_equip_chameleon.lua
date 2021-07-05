@@ -4,7 +4,6 @@ if CLIENT then
 	SWEP.Slot      = 7
  
 	SWEP.ViewModelFlip		= false
-	SWEP.ViewModelFOV		= 10
  end
 
 SWEP.PrintName				= "Chameleon"
@@ -13,16 +12,16 @@ SWEP.Instructions			= "Go invisible"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 30
-SWEP.Primary.DefaultClip	= 30
+SWEP.Primary.ClipSize		= 40
+SWEP.Primary.DefaultClip	= 40
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel             = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel              = "models/Items/combine_rifle_ammo01.mdl"
+SWEP.WorldModel             = "models/Items/combine_rifle_ammo01.mdl"
 SWEP.HoldType 				= "normal" 
-SWEP.UseHands 				= true
+SWEP.UseHands               = false
 SWEP.AllowDrop 				= true
 
 -- TTT Customisation
@@ -48,6 +47,11 @@ if CLIENT then
 		- Entering / leaving invisibility is noisy
 	]]
 }
+
+	function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 15 - ang:Right() *-11 - ang:Up() * 13, ang
+	end
+
 end
 
 
