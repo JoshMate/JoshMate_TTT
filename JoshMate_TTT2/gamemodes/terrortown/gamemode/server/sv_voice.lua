@@ -46,7 +46,9 @@ local function PlayerCanHearTeam(listener, speaker, speakerTeam)
 	local speakerSubRoleData = speaker:GetSubRoleData()
 
 	-- Josh Mate Changes - Dead players can hear Traitor Chat
-	if listener:IsSpec() then return true, loc_voice:GetBool() end
+	if listener:IsSpec() then 
+		return true, false 
+	end
 
 	-- Speaker checks
 	if speakerTeam == TEAM_NONE or speakerSubRoleData.unknownTeam or speakerSubRoleData.disabledTeamVoice then
@@ -105,11 +107,19 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		return false, false
 	end
 
-	-- Distance Check for when Proxy Voice is turned on
-	local distance = listener:GetPos():Distance(speaker:GetPos())
+	-- Josh Mate Changes - Dead players can hear Traitor Chat
+	if listener:IsSpec() then 
+		return true, false
+	end
 
-	if (distance > loc_voice_distance:GetFloat()) then
-		return false, false
+	-- Distance Check for when Proxy Voice is turned on
+	if (loc_voice:GetBool()) then
+
+		local distance = listener:GetPos():Distance(speaker:GetPos())
+
+		if (distance > loc_voice_distance:GetFloat()) then
+			return false, false
+		end
 	end
 
 	-- custom post-settings

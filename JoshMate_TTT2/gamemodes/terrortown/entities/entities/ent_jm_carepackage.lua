@@ -220,7 +220,7 @@ function ENT:Loot_Good( activator, caller )
 
 function ENT:Loot_Bad( activator, caller ) 
 
-	local RNG_Bad = math.random(1, 6)
+	local RNG_Bad = math.random(1, 9)
 
 	if RNG_Bad == 1 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend")
@@ -269,6 +269,85 @@ function ENT:Loot_Bad( activator, caller )
 		JM_GiveBuffToThisPlayer("jm_buff_trippingballs", activator, self)
 	end
 
+	if RNG_Bad == 7 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Low Gravity")
+		RunConsoleCommand("sv_gravity", 100)
+		RunConsoleCommand("sv_airaccelerate", 12)
+		for _, ply in ipairs( player.GetAll() ) do
+			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+				if SERVER then ply:EmitSound(Sound("effect_low_gravity.mp3")) end
+			end
+		end
+	end
+
+	if RNG_Bad == 8 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Slippery Floors")
+		RunConsoleCommand("sv_friction", 0)
+		RunConsoleCommand("sv_accelerate", 5)
+		for _, ply in ipairs( player.GetAll() ) do
+			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+				if SERVER then ply:EmitSound(Sound("effect_slippery_floors.mp3")) end
+			end
+		end
+	end
+
+	if RNG_Bad == 9 then
+
+		local PossibleVictims = {}
+
+		-- Find out who is eligible to be swapped
+
+		for _, ply in ipairs( player.GetAll() ) do
+
+			if (ply:IsValid() and ply:IsTerror() and ply:Alive() and not ply:Crouching()) then
+				
+				print("Player: " .. tostring(ply:GetPos()))
+				print("Activator: " .. tostring(activator:GetPos()))
+
+				if ply:GetPos():Distance(activator:GetPos()) >= 32  then
+					PossibleVictims[#PossibleVictims+1] = ply
+				end				
+			end
+			
+		end
+
+		-- Work out who the victim is
+
+		print("Table Size: " .. tostring(table.Count(PossibleVictims)))
+		print("Table Index 1: " .. tostring(PossibleVictims[1]))
+
+		local Victim = nil
+
+		if #PossibleVictims < 1 then 
+
+			activator:ChatPrint("[Care Package] - Bad Loot: Teleportation (Random Place)")
+			local possibleSpawns = ents.FindByClass( "info_player_start" )
+			Victim = table.Random(possibleSpawns)
+			-- Perform the actual swap
+			local PosActivator 	= activator:GetPos()
+			local PosVictim 	= Victim:GetPos()
+			activator:SetPos(PosVictim)
+			if SERVER then activator:EmitSound(Sound("effect_swapping_places.mp3")) end
+			
+		else
+
+			activator:ChatPrint("[Care Package] - Bad Loot: Teleportation (Swapped with another player)")
+            Victim = PossibleVictims[ math.random( #PossibleVictims ) ]
+			-- Perform the actual swap
+			local PosActivator = activator:GetPos()
+			local PosVictim = Victim:GetPos()
+			activator:SetPos(PosVictim)
+			Victim:SetPos(PosActivator)
+			if SERVER then activator:EmitSound(Sound("effect_swapping_places.mp3")) end
+			if SERVER then Victim:EmitSound(Sound("effect_swapping_places.mp3")) end
+			Victim:ChatPrint("[Care Package] - Bad Loot: Teleportation (Swapped with another player)")
+
+		end
+		
+
+		
+	end
+
 end
 
 --- Josh Mate Hud Warning
@@ -288,4 +367,16 @@ if SERVER then
 	function ENT:OnRemove()
 		self:SendWarn(false)
 	end
+end
+
+
+if SERVER then
+	--- Josh Mate Reset Gravity Etc...
+	--Remove This Buff at the start of the round
+	hook.Add("TTTPrepareRound", "JM_Prep_Reset_CVars", function()
+		RunConsoleCommand("sv_gravity", 600)
+		RunConsoleCommand("sv_friction", 8)
+		RunConsoleCommand("sv_airaccelerate", 10)
+		RunConsoleCommand("sv_accelerate", 10)
+	end)
 end

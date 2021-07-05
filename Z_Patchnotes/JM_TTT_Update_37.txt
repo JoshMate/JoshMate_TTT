@@ -1,0 +1,50 @@
+-- ################################
+-- ### Server
+-- ################################
+
+[Proximity Voice]
+
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Low Gravity]
+- Care Package: Bad Loot
+- Makes everyone get moon like low gravity for the rest of the round
+- Also affects props / and items. Reduces fall damage (as you fall slower)
+- Happens once instantly when you open the care package
+
+[Slippery Floors]
+- Care Package: Bad Loot
+- Makes everyone act as if they are sliding on ice for the rest of the round
+- Colliding with a prop at speed because you are slipping deals big damage (An Entertaining side effect)
+- Shooting / pushing / blasting players now sends them flying
+- Happens once instantly when you open the care package
+
+[Teleportation]
+- Care Package: Bad Loot
+- You and another randomly selected player swap places.
+- If no one is in a suitable location to be swapped you will just teleport to a random spot on the map
+- Happens once instantly when you open the care package
+
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[Elevator 2]
+- New map
+- Completely Recreated from scratch to be a similar idea and theme but with greatly improved execution
+
+[Pit]
+- New map
+- Completely Recreated from scratch to be a similar idea and theme but with greatly improved execution
+ 
+

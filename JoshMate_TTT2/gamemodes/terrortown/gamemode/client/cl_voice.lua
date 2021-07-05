@@ -97,7 +97,7 @@ bind.Register("ttt2_voice_team", VoiceTeamTryEnable, VoiceTeamTryDisable, "TTT2 
 local function VoiceNotifyThink(pnl)
 	local client = LocalPlayer()
 
-	local proxVoiceDistance = GetGlobalFloat("ttt_locational_voice_distance", 800)
+	local proxVoiceDistance = GetGlobalFloat("ttt_locational_voice_distance", 850)
 
 	if not IsValid(pnl) or not IsValid(client) or not IsValid(pnl.ply)
 	or not GetConVar("ttt_locational_voice") or pnl.ply:IsSpec() or pnl.ply == client
@@ -108,9 +108,12 @@ local function VoiceNotifyThink(pnl)
 		and not client:GetSubRoleData().disabledTeamVoiceRecv
 	) then return end
 
-	local d = client:GetPos():Distance(pnl.ply:GetPos())
-
-	pnl:SetAlpha(  255 * (1 - (d / proxVoiceDistance)))
+	if (GetConVar("ttt_locational_voice")) then
+		local d = client:GetPos():Distance(pnl.ply:GetPos())
+		pnl:SetAlpha(  255 * (1 - (d / proxVoiceDistance)))
+	else
+		pnl:SetAlpha(255)
+	end
 end
 
 local PlayerVoicePanels = {}
