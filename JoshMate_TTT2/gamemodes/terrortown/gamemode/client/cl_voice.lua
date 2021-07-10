@@ -107,19 +107,11 @@ local function VoiceNotifyThink(pnl)
 		and not pnl.ply:GetSubRoleData().disabledTeamVoice
 		and not client:GetSubRoleData().disabledTeamVoiceRecv
 	) then return end
+
+	local d = client:GetPos():Distance(pnl.ply:GetPos())
+	local finalOpacity = math.Clamp(255 * (1 - (d / proxVoiceDistance)), 50, 255)
+	pnl:SetAlpha(finalOpacity)
 	
-
-	print("Voice Prox: " .. tostring(proxVoice) )
-
-	if (proxVoice) then
-		
-		local d = client:GetPos():Distance(pnl.ply:GetPos())
-		local finalOpacity = math.Clamp(255 * (1 - (d / proxVoiceDistance)), 10, 255)
-		pnl:SetAlpha(finalOpacity)
-		print("Opacity: " .. tostring(finalOpacity) )
-	else
-		pnl:SetAlpha(255)
-	end
 end
 
 local PlayerVoicePanels = {}

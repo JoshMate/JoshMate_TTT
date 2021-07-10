@@ -109,7 +109,7 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 	end
 
 	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
-	if listener:IsSpec() or listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR then 
+	if listener:IsSpec() or listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
 		return true, false
 	end
 
