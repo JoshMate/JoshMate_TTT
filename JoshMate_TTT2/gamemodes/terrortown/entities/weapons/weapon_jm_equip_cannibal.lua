@@ -14,7 +14,7 @@ if CLIENT then
 	
 Left Click: Consume a Body
    
-Consuming a Body grants +25 Max HP and heals 50
+Consuming a Body grants +25 Max HP and heals 75
    
 Only has 6 uses
 ]]
@@ -83,7 +83,7 @@ function SWEP:PrimaryAttack()
             local own = self:GetOwner()
 
             own:SetMaxHealth(own:GetMaxHealth() + Cannibal_Eat_MaxHP)
-            own:SetHealth(own:Health() + (Cannibal_Eat_MaxHP * 2))
+            own:SetHealth(own:Health() + (Cannibal_Eat_MaxHP * 3))
 
             own:SetHealth(math.Clamp(own:Health(), 0, own:GetMaxHealth()))
             

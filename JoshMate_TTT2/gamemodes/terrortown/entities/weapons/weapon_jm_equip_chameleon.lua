@@ -12,8 +12,8 @@ SWEP.Instructions			= "Go invisible"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 40
-SWEP.Primary.DefaultClip	= 40
+SWEP.Primary.ClipSize		= 30
+SWEP.Primary.DefaultClip	= 30
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -78,7 +78,7 @@ function SWEP:Invisibility_Give(player)
 	STATUS:AddStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
 	if SERVER then
-		player:EmitSound(Sound("chameleon_activate.wav"), 125, 100, 1, CHAN_AUTO)
+		player:EmitSound(Sound("chameleon_activate.wav"), 140, 100, 1, CHAN_AUTO)
 		self.Chameleon_DefaultPlayerColour = player:GetColor()
 		player:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		self.Chameleon_NewColour = self.Chameleon_DefaultPlayerColour

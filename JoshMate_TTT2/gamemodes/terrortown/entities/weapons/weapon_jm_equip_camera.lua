@@ -35,7 +35,7 @@ if CLIENT then
     }
 
     function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 55 - ang:Right() * -25 - ang:Up() * 55, ang
+		return pos + ang:Forward() * 25 - ang:Right() * -25 - ang:Up() * 10, ang
 	end
 
 end

@@ -7,7 +7,7 @@ ITEM.EquipMenuData = {
 	name = "Vigor",
 	desc = [[Passively grants:
 	
-		+ 30 Max Health 
+		+ 50 Max Health 
 		+ Grants 2 HP/s regeneration
 	]]
 }

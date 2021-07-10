@@ -6,8 +6,8 @@ SWEP.Instructions			= "Leftclick to place an explosive barrel"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 5
-SWEP.Primary.DefaultClip	= 5
+SWEP.Primary.ClipSize		= 6
+SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -70,6 +70,7 @@ function SWEP:CreateProp(targetPos, model)
 	skull:SetSolid(SOLID_VPHYSICS)
 	skull:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 	skull:Spawn()
+	skull:SetColor(Color(255, 0, 0, 255) )
 	local skullPhysics = skull:GetPhysicsObject()
 	if skullPhysics:IsValid() then
 	   skullPhysics:Wake()

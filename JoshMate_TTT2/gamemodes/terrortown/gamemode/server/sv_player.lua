@@ -12,8 +12,8 @@ local hook = hook
 local ttt_bots_are_spectators = CreateConVar("ttt_bots_are_spectators", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 local ttt_dyingshot = CreateConVar("ttt_dyingshot", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
-local JM_WasPushed_Linger			= 15
-local JM_WasPushed_Linger_Goomba	= 7
+local JM_WasPushed_Linger			= 10
+local JM_WasPushed_Linger_Goomba	= 10
 
 CreateConVar("ttt_killer_dna_range", "550", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt_killer_dna_basetime", "100", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
@@ -1136,7 +1136,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 				dmg:SetDamageType(DMG_CRUSH)
 			end
 
-			ply:EmitSound("goombastomp.wav", 100, 100, 1)
+			ply:EmitSound("goombastomp.wav", 140, 100, 1)
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)

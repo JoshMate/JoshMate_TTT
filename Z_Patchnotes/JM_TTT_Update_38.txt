@@ -3,20 +3,46 @@
 -- ################################
 
 [Proximity Voice]
+- Player Name Cards will fade from 100% to 20% Transparency depending on how far away the speaker is
 
+[Karma]
+- Reduced "Was Pushed  By Crowbar" killed attributing timer from: 15 -> 10 Seconds
+// This means that you will still be counted as the killer 10 seconds after the push rather than 15
+// If the person you pushed was to die to a map hazard or fall damage
 
 -- ################################
 -- #### Gameplay
 -- ################################
 
-[Barrel Swep]
+[Barrier]
+- Detectives can no longer walk and shoot through their own barriers
+// This was encouraging detectives to lock them selves in small fotresses and then just shoot out at you
+// This was a VERY hard to counter tactic, and was ultimately just very boring to play against
 
+[Chameleon]
+- Reduced Ammo: 40 -> 30
+- Increased the volume of  the sound played when going invisible
+
+[Cannibal]
+- Increased the per body healing from: 50 -> 75 HP
+// This does not affect the +25 max hp you get per body
+
+[Pulse Pad]
+- Can no longer be destroyed or defused or picked up by anyone
+
+[Barrel Swep]
+- Ammo: 5 -> 6
+- Spawned Barrels are now red to indicate they aren't naturally occuring
+
+[Goomba Stomp]
+- Increased the volume of  the sound played when goomba stomping someone
 
 -- ################################
 -- #### Bug Fixes
 -- ################################
 
-- 
+- Corrected the vigor description to say the correct 50 Max HP rather than 30
+- Fixed the CCTV Camera view model as it was invisible for some reason
 
 -- ################################
 -- ##### Maps

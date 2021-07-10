@@ -96,7 +96,7 @@ local function VoiceNotifyThink(pnl)
 	local client = LocalPlayer()
 
 	local proxVoice = GetGlobalBool("ttt_locational_voice", 0)
-	local proxVoiceDistance = GetGlobalFloat("ttt_locational_voice_distance", 850)
+	local proxVoiceDistance = GetGlobalInt("ttt_locational_voice_distance", 850)
 
 
 	if not IsValid(pnl) or not IsValid(client) or not IsValid(pnl.ply)
@@ -108,8 +108,17 @@ local function VoiceNotifyThink(pnl)
 		and not client:GetSubRoleData().disabledTeamVoiceRecv
 	) then return end
 
-	local d = client:GetPos():Distance(pnl.ply:GetPos())
-	local finalOpacity = math.Clamp(255 * (1 - (d / proxVoiceDistance)), 50, 255)
+	local finalOpacity = 0
+
+	if proxVoice then
+		local d = client:GetPos():Distance(pnl.ply:GetPos())
+		local finalOpacity = 255 * (1 - (d / proxVoiceDistance))
+	else
+		finalOpacity = 255
+	end
+
+	finalOpacity = math.Clamp(finalOpacity, 40, 255)
+
 	pnl:SetAlpha(finalOpacity)
 	
 end

@@ -27,11 +27,18 @@ local loc_voice_distance = CreateConVar("ttt_locational_voice_distance", "800", 
 hook.Add("TTT2SyncGlobals", "AddVoiceGlobals", function()
 	SetGlobalBool(sv_voiceenable:GetName(), sv_voiceenable:GetBool())
 	SetGlobalBool(loc_voice:GetName(), loc_voice:GetBool())
+	SetGlobalInt(loc_voice_distance:GetName(), loc_voice_distance:GetInt())
 end)
 
 cvars.AddChangeCallback(loc_voice:GetName(), function(cv, old, new)
 	SetGlobalBool(loc_voice:GetName(), tobool(tonumber(new)))
 end)
+
+cvars.AddChangeCallback(loc_voice:GetName(), function(cv, old, new)
+	SetGlobalInt(loc_voice_distance:GetName(), tonumber(new))
+end)
+
+
 
 local function PlayerCanHearSpectator(listener, speaker, roundState)
 	local isSpec = listener:IsSpec()

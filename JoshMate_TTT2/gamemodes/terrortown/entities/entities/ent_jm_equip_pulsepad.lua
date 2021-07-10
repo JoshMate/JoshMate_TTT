@@ -54,19 +54,7 @@ function ENT:Initialize()
 end
 
 function ENT:Use( activator, caller )
-
-    if CLIENT then return end
-
-    if IsValid(activator) and activator:IsPlayer() and IsValid(self) then
-
-		if activator:IsTerror() then
-			self.Owner:ChatPrint("[Pulse Pad] - Your Pulse Pad has been removed!")
-            self:Effect_Sparks()
-			self:Remove()
-		end
-		
-	end
-
+    return
 end
 
 function ENT:Touch(toucher)
