@@ -40,51 +40,6 @@ end)
 
 
 
-local function PlayerCanHearSpectator(listener, speaker, roundState)
-	local isSpec = listener:IsSpec()
-
-	-- limited if specific convar is on, or we're in detective mode
-	local limit = DetectiveMode() or cv_ttt_limit_spectator_voice:GetBool()
-
-	return isSpec or not limit or roundState ~= ROUND_ACTIVE, not isSpec and loc_voice:GetBool() and roundState ~= ROUND_POST
-end
-
-local function PlayerCanHearTeam(listener, speaker, speakerTeam)
-	local speakerSubRoleData = speaker:GetSubRoleData()
-
-	-- Josh Mate Changes - Dead players can hear Traitor Chat
-	if listener:IsSpec() then 
-		return true, false 
-	end
-
-	-- Speaker checks
-	if speakerTeam == TEAM_NONE or speakerSubRoleData.unknownTeam or speakerSubRoleData.disabledTeamVoice then
-		return false, false
-	end
-
-	-- Listener checks
-	if listener:GetSubRoleData().disabledTeamVoiceRecv or not listener:IsActive() or not listener:IsInTeam(speaker) then
-		return false, false
-	end
-
-	if TEAMS[speakerTeam].alone then
-		return false, false
-	end
-
-	return true, loc_voice:GetBool()
-end
-
-local function PlayerIsMuted(listener, speaker)
-	-- Enforced silence and specific mute
-	if mute_all or listener:IsSpec() and listener.mute_team == speaker:Team() or listener.mute_team == MUTE_ALL then
-		return true
-	end
-end
-
-local function PlayerCanHearGlobal(roundState)
-	return true, loc_voice:GetBool() and roundState ~= ROUND_POST
-end
-
 ---
 -- Decides whether a @{Player} can hear another @{Player} using voice chat.
 -- @note This hook is called several times a tick, so ensure your code is efficient.
@@ -111,19 +66,25 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 	local roundState = GetRoundState()
 	local isGlobalVoice = speaker[speakerTeam .. "_gvoice"]
 
-	if PlayerIsMuted(listener, speaker) then
-		return false, false
-	end
-
-	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
-	if listener:IsSpec() or listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
-		return true, false
-	end
-
 	-- Spectators can chat to other specs globally
 	if listener:IsSpec() and speaker:IsSpec() then 
 		return true, false
 	end
+
+	-- Traitors can hear alive traitors always (Globally no 3D ever)
+	if listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
+		return true, false
+	end
+
+	-- Spectators can hear Dead and Alive traitor chat (Globally no 3D ever)
+	if listener:IsSpec() and speaker:GetTeam() == TEAM_TRAITOR then 
+		return true, false
+	end
+
+	-- At the end of the round, everyone can hear everyone (Globally no 3D ever)
+	if roundState == ROUND_POST then 
+		return true, false
+	end 
 
 	-- Distance Check for when Proxy Voice is turned on
 	if (loc_voice:GetBool()) then
@@ -135,14 +96,9 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		end
 	end
 
-	if speaker:IsSpec() and isGlobalVoice then
-		-- Check that the speaker was not previously sending voice on the team chat
-		return PlayerCanHearSpectator(listener, speaker, roundState)
-	elseif isGlobalVoice then
-		return PlayerCanHearGlobal(roundState)
-	else
-		return PlayerCanHearTeam(listener, speaker, speakerTeam)
-	end
+	-- Finally just regular old chat with 3D if enabled
+	return true, loc_voice:GetBool()
+
 end
 
 ---

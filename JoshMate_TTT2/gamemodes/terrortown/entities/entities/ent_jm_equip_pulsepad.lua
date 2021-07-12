@@ -10,8 +10,8 @@ ENT.AdminSpawnable      = false
 
 
 local JM_PulsePad_Model                 = "models/props_junk/sawblade001a.mdl"
-local JM_PulsePad_Colour_Dormant        = Color( 0, 0, 255, 200 )
-local JM_PulsePad_Colour_Armed          = Color( 0, 0, 255, 25 )
+local JM_PulsePad_Colour_Dormant        = Color( 0, 0, 255, 255 )
+local JM_PulsePad_Colour_Armed          = Color( 0, 0, 255, 20 )
 local JM_PulsePad_Sound_HitPlayer       = "pulsepad_hit.wav"
 local JM_PulsePad_Sound_Destroyed       = "0_main_click.wav"
 local JM_PulsePad_ArmTime				= 0.8

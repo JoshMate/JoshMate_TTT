@@ -54,30 +54,6 @@ function SWEP:SecondaryAttack()
 	self:TrapPlace()
 end
 
-function SWEP:CreateProp(targetPos, model)
-	local skull = ents.Create( "prop_physics" )
-	skull:SetModel(model)
-	-- Add a bit of jitter to spawning
-	local newPos = targetPos
-	newPos.x = newPos.x + math.Rand( 0, 16 )
-	newPos.y = newPos.y + math.Rand( 0, 16 )
-	newPos.x = newPos.x - math.Rand( 0, 16 )
-	newPos.y = newPos.y - math.Rand( 0, 16 )
-	newPos.z = newPos.z + math.Rand( 0, 8 )
-	skull:SetPos(newPos)
-	skull:PhysicsInit(SOLID_VPHYSICS)
-	skull:SetMoveType(MOVETYPE_VPHYSICS)
-	skull:SetSolid(SOLID_VPHYSICS)
-	skull:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-	skull:Spawn()
-	skull:SetColor(Color(255, 0, 0, 255) )
-	local skullPhysics = skull:GetPhysicsObject()
-	if skullPhysics:IsValid() then
-	   skullPhysics:Wake()
-	end
- end
-
-
 function SWEP:TrapWeld()
 
 	local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * JM_Trap_WeldRange, filter = self:GetOwner()})
@@ -101,6 +77,9 @@ function SWEP:TrapWeld()
 		ent:SetCollisionGroup(COLLISION_GROUP_NONE)
 
 		ent:Spawn()
+
+		ent:SetRenderMode( RENDERMODE_TRANSCOLOR )
+		ent:SetColor(Color( 255, 50, 50, 255))
 
 		ent:GetPhysicsObject():EnableMotion( false )
 
@@ -134,6 +113,10 @@ function SWEP:TrapPlace()
 	ent:SetCollisionGroup(COLLISION_GROUP_NONE)
 
 	ent:Spawn()
+
+	ent:SetRenderMode( RENDERMODE_TRANSCOLOR )
+	ent:SetColor(Color( 255, 50, 50, 255))
+
 	ent:GetPhysicsObject():EnableMotion(true)
 	ent.fingerprints = self.fingerprints
 	self:TakePrimaryAmmo(1)
