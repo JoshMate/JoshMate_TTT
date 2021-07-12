@@ -116,7 +116,7 @@ local function VoiceNotifyThink(pnl)
 	local finalOpacity = 255
 
 	if proxVoice then
-		finalOpacity = 190
+		finalOpacity = 200
 	else
 		finalOpacity = 255
 	end
