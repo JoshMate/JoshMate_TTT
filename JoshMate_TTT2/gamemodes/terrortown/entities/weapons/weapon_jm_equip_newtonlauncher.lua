@@ -68,7 +68,7 @@ function SWEP:Initialize()
 end
 
 
-local function PushPullRadius(pos, pusher)
+local function PushPullRadius(pos, pusher, newtonLauncher)
    local radius = 500
    local push_force = 500
 
@@ -86,12 +86,14 @@ local function PushPullRadius(pos, pusher)
 
          -- Drop currently Held Weapon
          local curWep = target:GetActiveWeapon()
-         if curWep and curWep:IsValid() and (target:GetActiveWeapon():PreDrop()) then target:GetActiveWeapon():PreDrop() end
-         if (curWep.AllowDrop) then
-            target:DropWeapon()
+         if not curWep == newtonLauncher then 
+            if curWep and curWep:IsValid() and (target:GetActiveWeapon():PreDrop()) then target:GetActiveWeapon():PreDrop() end
+            if (curWep.AllowDrop) then
+               target:DropWeapon()
+            end
+            target:SelectWeapon("weapon_jm_special_crowbar")
+            -- End of Drop
          end
-         target:SelectWeapon("weapon_jm_special_crowbar")
-         -- End of Drop
 
          -- Set Status and print Message
          JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
@@ -165,7 +167,7 @@ function SWEP:PrimaryAttack()
       util.Effect("cball_explode", effect, true, true)
       sound.Play(Sound("npc/assassin/ball_zap1.wav"), tr.HitPos, 100, 100)
 
-      PushPullRadius(tr.HitPos, owner)
+      PushPullRadius(tr.HitPos, owner, self)
    end
 
    if SERVER then

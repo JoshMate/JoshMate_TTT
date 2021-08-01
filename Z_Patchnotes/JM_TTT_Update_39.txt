@@ -8,7 +8,12 @@
 -- ################################
 
 [Super Crowbar]
+- Increased Righ Click push force: 1500 -> 2000
+- Increased Left Click Damage: 40 -> 45
+- Increased Melee Range for both Left/Right Click: 100 -> 200
 
+[Newton Launcher]
+- Players no longer drop their owner weapon when firing their own newton launcher
 
 -- ################################
 -- #### Bug Fixes

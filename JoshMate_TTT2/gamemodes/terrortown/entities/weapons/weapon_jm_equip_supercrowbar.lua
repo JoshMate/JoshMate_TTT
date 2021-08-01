@@ -1,5 +1,5 @@
 local cv_crowbar_unlocks
-local cv_crowbar_pushforce = 1500
+local cv_crowbar_pushforce = 2000
 
 if SERVER then
 	AddCSLuaFile()
@@ -20,7 +20,7 @@ if CLIENT then
 A regular looking crowbar that has stronger stats
 	
 	+ 2x Melee Damage
-	+ 3x Push Force
+	+ 4x Push Force
 	+ Faster Pushing
 	+ Instantly Destroys D Barriers
 ]]
@@ -37,13 +37,15 @@ A regular looking crowbar that has stronger stats
 	end
 end
 
+local SuperCrowbar_Range	= 200
+
 SWEP.Base = "weapon_jm_base_gun"
 
 SWEP.UseHands = false
 SWEP.ViewModel = "models/weapons/c_crowbar.mdl"
 SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
 
-SWEP.Primary.Damage = 40
+SWEP.Primary.Damage = 45
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
@@ -151,7 +153,7 @@ function SWEP:PrimaryAttack()
 	end
 
 	local spos = owner:GetShootPos()
-	local sdest = spos + owner:GetAimVector() * 100
+	local sdest = spos + owner:GetAimVector() * SuperCrowbar_Range
 
 	local tr_main = util.TraceLine({
 		start = spos,
@@ -259,7 +261,7 @@ function SWEP:SecondaryAttack()
 	local tr = owner:GetEyeTrace(MASK_SHOT)
 	local ply = tr.Entity
 
-	if tr.Hit and IsValid(ply) and ply:IsPlayer() and (owner:EyePos() - tr.HitPos):Length() < 100 then
+	if tr.Hit and IsValid(ply) and ply:IsPlayer() and (owner:EyePos() - tr.HitPos):Length() < SuperCrowbar_Range then
 		if SERVER and not ply:IsFrozen() and not hook.Run("TTT2PlayerPreventPush", owner, ply) then
 			local pushvel = tr.Normal * cv_crowbar_pushforce
 			pushvel.z = math.Clamp(pushvel.z, 50, 100) -- limit the upward force to prevent launching
