@@ -45,11 +45,6 @@ end
 local function PlayerCanHearTeam(listener, speaker, speakerTeam)
 	local speakerSubRoleData = speaker:GetSubRoleData()
 
-	-- Josh Mate Changes - Dead players can hear Traitor Chat
-	if listener:IsSpec() then 
-		return true, false 
-	end
-
 	-- Speaker checks
 	if speakerTeam == TEAM_NONE or speakerSubRoleData.unknownTeam or speakerSubRoleData.disabledTeamVoice then
 		return false, false
@@ -109,7 +104,12 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 	end
 
 	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
-	if listener:IsSpec() or listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
+	if listener:IsSpec() and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
+		return true, false
+	end
+
+	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
+	if listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
 		return true, false
 	end
 
