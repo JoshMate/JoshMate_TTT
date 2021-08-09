@@ -12,8 +12,8 @@ SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
 SWEP.WeaponID           = AMMO_NADE_FRAG
 
-SWEP.ViewModel          = "models/weapons/cstrike/c_eq_fraggrenade.mdl"
-SWEP.WorldModel         = "models/weapons/w_eq_fraggrenade.mdl"
+SWEP.ViewModel          = "models/weapons/c_grenade.mdl"
+SWEP.WorldModel         = "models/weapons/w_grenade.mdl"
 
 
 SWEP.AutoSpawnable      = true

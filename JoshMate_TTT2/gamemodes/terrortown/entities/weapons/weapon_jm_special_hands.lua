@@ -3,7 +3,7 @@ AddCSLuaFile()
 SWEP.HoldType               = "normal"
 
 if CLIENT then
-   SWEP.PrintName           = "Hands"
+   SWEP.PrintName           = "Bare Hands"
    SWEP.Slot                = 5
 
    SWEP.ViewModelFOV        = 10

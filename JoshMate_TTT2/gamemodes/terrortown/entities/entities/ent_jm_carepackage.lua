@@ -228,7 +228,7 @@ function ENT:Loot_Good( activator, caller )
 
 function ENT:Loot_Bad( activator, caller ) 
 
-	local RNG_Bad = math.random(1, 11)
+	local RNG_Bad = math.random(1, 12)
 
 	if RNG_Bad == 1 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend")
@@ -376,6 +376,29 @@ function ENT:Loot_Bad( activator, caller )
 	if RNG_Bad == 11 then
 		activator:ChatPrint("[Care Package] - Bad Loot: 1 HP")
 		activator:SetHealth(1)
+	end
+
+	if RNG_Bad == 12 then
+
+		activator:StripWeapons()
+		
+		if(activator:IsTraitor() or activator:IsDetective()) then
+			activator:ChatPrint("[Care Package] - Bad Loot: Stripped of your weapons (Also + 2 Credits)")
+			activator:AddCredits(2)
+		else
+			activator:ChatPrint("[Care Package] - Bad Loot: Stripped of your weapons")
+		end
+
+		-- Give them back their Bare Hands
+
+		local ent = ents.Create("weapon_jm_special_hands")
+		if ent:IsValid() then
+			ent:SetPos(activator:GetPos())
+			ent:Spawn()
+		end
+
+		activator:SelectWeapon("weapon_jm_special_hands")
+		
 	end
 
 end

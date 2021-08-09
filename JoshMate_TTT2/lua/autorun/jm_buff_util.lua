@@ -114,6 +114,13 @@ JM_Global_Buff_NewtonLauncher_IconName                     = "JM_Buff_Icon_Newto
 JM_Global_Buff_NewtonLauncher_IconPath                     = "vgui/ttt/joshmate/hud_newtonlauncher.png"
 JM_Global_Buff_NewtonLauncher_IconGoodBad                  = "bad"
 
+JM_Global_Buff_DemonForm_Name                               = "Demon Form"
+JM_Global_Buff_DemonForm_Duration                           = 0
+JM_Global_Buff_DemonForm_NWBool                             = "JM_Buff_NWBool_IsDemonForm"
+JM_Global_Buff_DemonForm_IconName                           = "JM_Buff_Icon_DemonForm"
+JM_Global_Buff_DemonForm_IconPath                           = "vgui/ttt/joshmate/hud_demonform.png"
+JM_Global_Buff_DemonForm_IconGoodBad                        = "good"
+
 
 
 -- Care Package Buffs

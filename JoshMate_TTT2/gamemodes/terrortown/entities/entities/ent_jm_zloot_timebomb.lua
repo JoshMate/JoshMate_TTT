@@ -68,7 +68,7 @@ function ENT:Initialize()
 	end
 
 	if SERVER then
-		self:EmitSound("ticking_time_bomb_music.mp3")
+		sound.Play("ticking_time_bomb_music.mp3", self:GetPos(), 150, 100)
 		local gusSongDurationSeconds = 30
 
 		timer.Simple(gusSongDurationSeconds, function()
@@ -87,8 +87,8 @@ function ENT:Initialize()
 			local JM_Gus_Explosive_Blast_Radius    = 3000
 
 			-- Sound
-			sound.Play("c4.explode", pos, 120, 100)
-			sound.Play("c4_huge_boom.wav", pos, 120, 100)
+			sound.Play("c4.explode", pos, 150, 100)
+			sound.Play("c4_huge_boom.wav", pos, 150, 100)
 
 			-- Blast
 			self:BombRadius(self, pos, JM_Gus_Explosive_Blast_Radius, JM_Gus_Explosive_Blast_Damage)

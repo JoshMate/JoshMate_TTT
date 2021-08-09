@@ -6,7 +6,26 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 
 
+
+
 if SERVER then
+
+    -- Give players Extra HP for bonus Karma
+
+    local function JM_F_GiveBonusKarmaHP(player)
+
+        local JM_Karma_BonusHP_Mult = 0.1
+
+        local FinalHP = 100 + ((player:GetBaseKarma() - 1000) * JM_Karma_BonusHP_Mult)
+
+        FinalHP = math.ceil(FinalHP)
+        
+        FinalHP = math.Clamp(FinalHP, 100, 125)
+
+        player:SetMaxHealth(FinalHP)
+        player:SetHealth(FinalHP)
+    
+    end
 
     -- Slay players who are below certain thresholds
     local JM_Karma_Slay_Threshold           = 500
@@ -48,6 +67,12 @@ if SERVER then
 
             local ply = plys[i]
             if not ply:IsValid() then continue end
+
+            -- Karma Bonus HP
+
+            JM_F_GiveBonusKarmaHP(ply)
+
+            -- Karma Slay
             
             ply:SetNWBool("JM_NWBOOL_IsSittingRoundOut", false)
 
@@ -88,6 +113,28 @@ if SERVER then
 
             local ply = plys[i]
             if not ply:IsValid() then continue end
+
+            -- Set Detective Player Model
+
+            if(ply:IsDetective()) then
+                ply:SetModel( "models/player/police.mdl" )
+            end
+
+            -- Karma Bonus Detective Credit
+
+            if(ply:IsDetective()) then
+                
+                if (ply:GetBaseKarma() >= 1250 ) then
+                    ply:AddCredits(1)
+                end
+
+            end
+
+            -- Karma Bonus HP
+
+            JM_F_GiveBonusKarmaHP(ply)
+
+            -- Karma Slay
 
             if ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then
 
