@@ -1,0 +1,29 @@
+-- ################################
+-- ### Server
+-- ################################
+
+- Max Rounds per map: 10 -> 6
+// This should help to keep things fresh and let us get through more maps
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Care Packages]
+- Chance of bad Loot: 20% -> 25%
+- Max Time Between Spawns: 180 -> 130 Second 
+- Min Time Between Spawns: 10 -> 15 Seconds
+// Care Packages will now spawn more frequently, but your chances of getting the funny/bad loot is slightly higher
+
+[Ticking Time Bomb]
+- Timer Reduced from: 68 -> 30
+- Remade the song to fit the new timer
+- Added a HUGE BOOM sound effect
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+-- ################################
+-- ##### Maps
+-- ################################

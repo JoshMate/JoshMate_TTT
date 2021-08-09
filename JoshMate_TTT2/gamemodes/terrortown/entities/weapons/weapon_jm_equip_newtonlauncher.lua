@@ -21,7 +21,7 @@ Shoot a huge burst of energy at a taget location
       
 Players will be pushed away from the blast
 
-They will be dazed and their weapons dropped      
+There vision will be distored too     
 ]]
 
    };
@@ -83,17 +83,6 @@ local function PushPullRadius(pos, pusher, newtonLauncher)
          net.WriteFloat(0)
          net.Send(pusher)
          -- End Of
-
-         -- Drop currently Held Weapon
-         local curWep = target:GetActiveWeapon()
-         if not curWep == newtonLauncher then 
-            if curWep and curWep:IsValid() and (target:GetActiveWeapon():PreDrop()) then target:GetActiveWeapon():PreDrop() end
-            if (curWep.AllowDrop) then
-               target:DropWeapon()
-            end
-            target:SelectWeapon("weapon_jm_special_crowbar")
-            -- End of Drop
-         end
 
          -- Set Status and print Message
          JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)

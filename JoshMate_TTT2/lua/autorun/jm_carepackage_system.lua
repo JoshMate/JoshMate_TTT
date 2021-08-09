@@ -9,8 +9,8 @@ if SERVER then
 
     util.AddNetworkString("JM_CarePackage_Arrival")
     
-    local JM_CarePackage_Spawn_Timer_Min    = 10
-    local JM_CarePackage_Spawn_Timer_Max    = 180
+    local JM_CarePackage_Spawn_Timer_Min    = 15
+    local JM_CarePackage_Spawn_Timer_Max    = 130
     local JM_CarePackage_Spawn_Timer_Final  = 0
 
     local JM_CarePackage_Spawn_Tripple_Chance = 10

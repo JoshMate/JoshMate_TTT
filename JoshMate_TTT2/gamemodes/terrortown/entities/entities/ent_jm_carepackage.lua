@@ -63,7 +63,7 @@ function ENT:Use( activator, caller )
 			-- Random Roller
 			
 			local RNGGoodOrBad = math.random(1, 100)
-			local ChanceOfBad	= 20 -- Change of Good will be 100 minus this number
+			local ChanceOfBad	= 25 -- Change of Good will be 100 minus this number
 
 			
 			if (RNGGoodOrBad <= ChanceOfBad) then
@@ -228,7 +228,7 @@ function ENT:Loot_Good( activator, caller )
 
 function ENT:Loot_Bad( activator, caller ) 
 
-	local RNG_Bad = math.random(1, 9)
+	local RNG_Bad = math.random(1, 11)
 
 	if RNG_Bad == 1 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend")
@@ -241,8 +241,8 @@ function ENT:Loot_Bad( activator, caller )
 	end
 
 	if RNG_Bad == 3 then
-		activator:ChatPrint("[Care Package] - Bad Loot: Gus Adamiw Radio")
-		Loot_SpawnThis(self,"ent_jm_zloot_gusradio")
+		activator:ChatPrint("[Care Package] - Bad Loot: Gus Radio (SAFE)")
+		Loot_SpawnThis(self,"ent_jm_zloot_radio_gus")
 	end
 
 	if RNG_Bad == 4 then
@@ -366,6 +366,16 @@ function ENT:Loot_Bad( activator, caller )
 		
 
 		
+	end
+
+	if RNG_Bad == 10 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Ticking Time Bomb")
+		Loot_SpawnThis(self,"ent_jm_zloot_timebomb")
+	end
+
+	if RNG_Bad == 11 then
+		activator:ChatPrint("[Care Package] - Bad Loot: 1 HP")
+		activator:SetHealth(1)
 	end
 
 end

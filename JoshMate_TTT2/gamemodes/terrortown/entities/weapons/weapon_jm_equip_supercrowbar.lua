@@ -1,5 +1,5 @@
 local cv_crowbar_unlocks
-local cv_crowbar_pushforce = 2000
+local cv_crowbar_pushforce = 1750
 
 if SERVER then
 	AddCSLuaFile()
@@ -37,7 +37,7 @@ A regular looking crowbar that has stronger stats
 	end
 end
 
-local SuperCrowbar_Range	= 200
+local SuperCrowbar_Range	= 130
 
 SWEP.Base = "weapon_jm_base_gun"
 
