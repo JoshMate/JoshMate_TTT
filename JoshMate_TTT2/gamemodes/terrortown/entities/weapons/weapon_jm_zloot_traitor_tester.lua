@@ -30,8 +30,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 1
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 75
@@ -120,7 +120,9 @@ function SWEP:Think()
             self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
             self.ScanTarget:EmitSound("shoot_portable_tester_done.wav")
          end  
-         self:Remove()
+         if self:Clip1() <= 0 then
+            self:Remove()
+         end
       end
    end
 

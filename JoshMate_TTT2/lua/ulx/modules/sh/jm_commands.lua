@@ -313,6 +313,55 @@ local trackall = ulx.command( CATEGORY_NAME, "jm x trackall", ulx.trackall, "!tr
 trackall:defaultAccess( ULib.ACCESS_ADMIN )
 trackall:help( "Starts Sudden Death" )
 
+-- #########################
+-- ####  Turn On Proxy Voice ###
+-- #########################
+
+function ulx.enableproxyvoice(calling_ply)
+
+	if GetConVar("gamemode"):GetString() ~= "terrortown" then
+		ULib.tsayError(calling_ply, gamemode_error, true)
+	else
+
+		local ConVarProxy_State = GetConVar("ttt_locational_voice")
+		local ConVarProxy_Range = GetConVar("ttt_locational_voice_distance")
+
+		if ConVarProxy_State:GetBool() == 0 or ConVarProxy_State:GetBool() == false then
+
+			ConVarProxy_State:SetBool( true )
+
+		else
+
+			ConVarProxy_State:SetBool( false )
+
+		end
+
+		ConVarProxy_State = GetConVar("ttt_locational_voice")
+		ConVarProxy_Range = GetConVar("ttt_locational_voice_distance")
+
+
+		local ConVarProxy_State_Text = "Enabled"
+
+		if ConVarProxy_State:GetBool() == false then
+			ConVarProxy_State_Text = "Disabled"
+		end
+
+		local ConVarProxy_Range_Text = ConVarProxy_Range:GetInt()
+
+        net.Start("JM_ULX_Announcement")
+		net.WriteString("Proximity Voice: " .. tostring(ConVarProxy_State_Text) .. " - (Range: " .. tostring(ConVarProxy_Range_Text) .. " Units)")
+		net.WriteUInt(3, 16)
+		net.Broadcast()
+
+	end
+
+	ulx.fancyLogAdmin(calling_ply, "#A has enabled: Proximity Voice")
+end
+
+local karma = ulx.command(CATEGORY_NAME, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
+karma:defaultAccess(ULib.ACCESS_ADMIN)
+karma:help("Enables Proxy Voice until the next map")
+
 
 -- Extra
 if SERVER then
@@ -352,6 +401,7 @@ if CLIENT then
 
 		if messageType == 1 then surface.PlaySound("0_main_suddendeath.mp3") end
 		if messageType == 2 then surface.PlaySound("ping_jake.wav") end
+		if messageType == 3 then surface.PlaySound("0_proximity_voice_toggle.wav") end
 		
         chat.AddText( Color( 255, 0, 0 ), "[Announcement] - ", Color( 255, 255, 0 ), tostring(message))
     end)

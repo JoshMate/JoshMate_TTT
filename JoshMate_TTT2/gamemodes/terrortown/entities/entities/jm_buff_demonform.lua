@@ -43,6 +43,9 @@ function ENT:BuffTickEffect()
     local newHP = self.targetPlayer:Health() - 5
 
     self.targetPlayer:SetHealth(newHP)
+    if self.targetPlayer:GetMaxHealth() > 100 then
+        self.targetPlayer:SetMaxHealth(newHP)
+    end
 
     if self.targetPlayer:Health() <= 0 then
         self.targetPlayer:Kill()
@@ -72,14 +75,20 @@ function ENT:Initialize()
     self.buffTickDelay  = 0.5
     self.buffTickNext   = CurTime()
 
+    -- Handle Sound Ticking
+    self.SoundbuffTickDelay_Min     = 10
+    self.SoundbuffTickDelay_Max     = 25
+    self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
+
     -- Demon Form
 
     local target = self.targetPlayer
     
-    target:SetMaxHealth(target:GetMaxHealth() + 400)
-    target:SetHealth(target:GetMaxHealth())
+    target:SetMaxHealth(500)
+    target:SetHealth(500)
 
 	target:SetModel("models/player/zombie_fast.mdl")
+    target:SetPlayerColor( Vector( 1, 0, 0 ) )
 
     DemonFormEffects(target)
     target:Extinguish()
@@ -88,10 +97,42 @@ function ENT:Initialize()
     sound.Play("npc/fast_zombie/fz_scream1.wav", target:GetPos(), 150, 100)
     DemonFormEffects(target)
 
+    target:StripWeapons()
+    local ent = ents.Create("weapon_jm_equip_demonmelee")
+    if ent:IsValid() then
+        ent:SetPos(target:GetPos())
+        ent:Spawn()
+    end
+
+    target:SelectWeapon("weapon_jm_equip_demonmelee")
+
+end
+
+-- Speed Buff
+hook.Add("TTTPlayerSpeedModifier", "DemonFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
+	if not IsValid(ply)then return end
+	if ply:GetNWBool(JM_BuffNWBool) == true then
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.4
+    end
+end)
+
+-- No fire damage on self
+if SERVER then
+    hook.Add("EntityTakeDamage", "DemonFormFireDamage", function(target, dmginfo)
+        if not IsValid(target) or not target:IsPlayer() or not dmginfo:IsDamageType(DMG_BURN) then return end
+
+        if target:Alive() and target:IsTerror() then
+	        if target:GetNWBool(JM_BuffNWBool) == true then
+                dmginfo:ScaleDamage(0)
+            end
+        end
+    end)
 end
 
 function ENT:Think()
     self.BaseClass.Think(self)
+
+    
 
     -- Handle Buff Effect Ticking
     if(not self:IsValid()) then return end
@@ -100,6 +141,17 @@ function ENT:Think()
         self.buffTickNext = CurTime() + self.buffTickDelay
         self:BuffTickEffect()
     end
+
+    -- Play Zombie Sounds
+    if(CurTime() >= self.SoundbuffTickNext) then
+        self.SoundbuffTickNext = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
+        sound.Play("npc/fast_zombie/fz_frenzy1.wav", self.targetPlayer:GetPos(), 110, 100)
+    end
+    
+
+    -- Make sure they are holding Demon Blade
+    if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end
+    self.targetPlayer:SelectWeapon("weapon_jm_equip_demonmelee")
 
 end
 

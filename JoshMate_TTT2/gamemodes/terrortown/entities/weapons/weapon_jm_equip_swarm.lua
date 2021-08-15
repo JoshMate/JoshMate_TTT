@@ -12,7 +12,7 @@ Deploy a swarm of Manhacks where you are looking
    
 They will attack ANYONE they see (Including You)
    
-They will last for 45 seconds or until destroyed
+They will last for 35 seconds or until destroyed
 ]]
    };
 
@@ -41,9 +41,9 @@ SWEP.WorldModel            = "models/manhack.mdl"
 SWEP.UseHands              = false
 SWEP.HoldType 				   = "normal" 
 
-local deployRange = 1500
-local deployAmount = 8
-local deployLifeTime = 45
+local deployRange = 9999
+local deployAmount = 9
+local deployLifeTime = 35
 
 
 function Barrier_Effects_Destroyed(ent)

@@ -7,11 +7,11 @@ ITEM.EquipMenuData = {
 	name = "Demon Form",
 	desc = [[Passively grants:
 	
-		+ Gain Large amounts of HP and Speed
+		+ Gain a large amount of HP and Speed
 		+ You deal constant AOE fire damage to nearby players
-		- Everyone will know what you have become
+		- Everyone will attack you on sight
+		- You are forced into using the Demon Blade
 		- You will slowly burn out and die
-		- You will be tormented by the burning pain
 	]]
 }
 
@@ -21,11 +21,7 @@ ITEM.hud = Material("vgui/ttt/joshmate/hud_demonform.png")
 ITEM.material = "vgui/ttt/joshmate/icon_jm_demonform.png"
 
 
-hook.Add("TTTPlayerSpeedModifier", "DemonFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
-	if not IsValid(ply)then return end
-	if not ply:HasEquipmentItem("item_jm_passive_demonform") then return end
-	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
-end)
+
 
 if SERVER then
 
@@ -40,13 +36,7 @@ if SERVER then
 
 	end
 
-	hook.Add("EntityTakeDamage", "DemonFormFireDamage", function(target, dmginfo)
-		if not IsValid(target) or not target:IsPlayer() or not dmginfo:IsDamageType(DMG_BURN) then return end
-
-		if target:Alive() and target:IsTerror() and target:HasEquipmentItem("item_jm_passive_demonform") then
-			dmginfo:ScaleDamage(0)
-		end
-	end)
+	
 
 	function ITEM:Reset(buyer)
 	end
