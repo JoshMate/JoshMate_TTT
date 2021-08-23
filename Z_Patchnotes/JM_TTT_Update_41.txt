@@ -11,26 +11,30 @@
 -- #### Gameplay
 -- ################################
 
+[Crate Swep]
+- New Care Package Good Loot (Weapon)
+- Allows you to build things with destructable wooden crates
+
+[Medkit]
+- New Care Package Good Loot (Weapon)
+- Allows you heal yourself and others by deploying medkits
+
+[Slo Mo Clock]
+- New Care Package Good Loot (Weapon)
+- Allows the user to slow down time on command, once for 20 seconds
+
 [Demon Form]
 - Increased Speed Buff: 20% -> 40%
 - Now Sets your HP to 500 rather than giving you 400 on top of what you had
 - You lose max HP while burning out to prevent using any items to heal back up
 - You can only use the demon form meele weapon (No guns or store bought items)
 - You now make random ambient zombie noises
-// This should make Demon Form less OP. 
-// It is now stronger, but you die faster and can't use guns / items 
-// Demon blade is a basic melee weapon with good DPS and speed
 
 [Super Crowbar]
 - Greatly increased its push force
+- Now pushes upwards too, so you can launch someone stood on solid ground
 - Removed it's ability to attack like a regular crowbar
-- Now only has 2 uses
-- Removed Velocity Clamps (No Push Restrictions)
-// This means you can now push in any direction up or down and they will fly there
-// Like the baseball bat from worms
-// Can also be used to boost / launch allies???
-// It's now MUCH stronger but has limited uses 
-// If you wanted a melee weapon to go on a rampage with, buy Demon Form
+- Now only has 1 use
 
 [Portable Traitor Tester]
 - Increased Uses: 1 -> 3

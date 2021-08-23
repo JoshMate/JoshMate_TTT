@@ -1,4 +1,5 @@
-local cv_crowbar_pushforce = 2500
+local JM_SuperCrowBar_Force_Forward = 2000
+local JM_SuperCrowBar_Force_Up = 600
 
 if SERVER then
 	AddCSLuaFile()
@@ -19,7 +20,7 @@ A regular looking crowbar that has huge push force
 
 Right or Left Click a player to launch them
 
-Only has 2 uses
+Only has 1 use
 ]]
 	 };
 
@@ -43,8 +44,8 @@ SWEP.ViewModel = "models/weapons/c_crowbar.mdl"
 SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
 
 SWEP.Primary.Damage = 0
-SWEP.Primary.ClipSize = 2
-SWEP.Primary.DefaultClip = 2
+SWEP.Primary.ClipSize = 1
+SWEP.Primary.DefaultClip = 1
 SWEP.Primary.Automatic = true
 SWEP.Primary.Delay = 1
 SWEP.Primary.Ammo = "none"
@@ -87,9 +88,9 @@ function SWEP:Push()
 
 	if tr.Hit and IsValid(ply) and ply:IsPlayer() and (owner:EyePos() - tr.HitPos):Length() < SuperCrowbar_Range then
 		if SERVER and not ply:IsFrozen() and not hook.Run("TTT2PlayerPreventPush", owner, ply) then
-			local pushvel = tr.Normal * cv_crowbar_pushforce
+			local pushvel = tr.Normal * JM_SuperCrowBar_Force_Forward
 
-			pushvel.z = math.Clamp(pushvel.z, 200, 1500) -- limit the upward force to prevent launching
+			pushvel.z = JM_SuperCrowBar_Force_Up -- limit the upward force to prevent launching
 
 			ply:SetVelocity(ply:GetVelocity() + pushvel)
 			owner:SetAnimation(PLAYER_ATTACK1)

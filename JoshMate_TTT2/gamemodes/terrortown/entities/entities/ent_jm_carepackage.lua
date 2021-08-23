@@ -121,7 +121,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
 function ENT:Loot_Good( activator, caller ) 
 
-	local RNG_Good = math.random(1, 17)
+	local RNG_Good = math.random(1, 20)
 
 	if RNG_Good == 1 then
 		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
@@ -218,17 +218,36 @@ function ENT:Loot_Good( activator, caller )
 
 	if RNG_Good == 17 then
 		activator:ChatPrint("[Care Package] - Good Loot: Barrel Swep")
-		Loot_SpawnThis(self,"weapon_jm_zloot_barrel")
+		Loot_SpawnThis(self,"weapon_jm_zloot_placer_barrel")
 		
 	end	
 
+	if RNG_Good == 18 then
+		activator:ChatPrint("[Care Package] - Good Loot: Crate Swep")
+		Loot_SpawnThis(self,"weapon_jm_zloot_placer_crate")
+		
+	end	
+
+	if RNG_Good == 19 then
+		activator:ChatPrint("[Care Package] - Good Loot: Medkit Swep")
+		Loot_SpawnThis(self,"weapon_jm_zloot_placer_medkit")
+		
+	end	
+
+	if RNG_Good == 20 then
+		activator:ChatPrint("[Care Package] - Good Loot: Slo-Mo Clock")
+		Loot_SpawnThis(self,"weapon_jm_zloot_slomo_clock")
+
+	end	
+
+	
 	
 
  end
 
 function ENT:Loot_Bad( activator, caller ) 
 
-	local RNG_Bad = math.random(1, 12)
+	local RNG_Bad = math.random(1, 13)
 
 	if RNG_Bad == 1 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend")
@@ -401,6 +420,34 @@ function ENT:Loot_Bad( activator, caller )
 		
 	end
 
+	if RNG_Bad == 13 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Proplosion")
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: Proplosion")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
+		for _, ent in ipairs( ents.FindByClass( "prop_physics" ) ) do
+
+			local pos = ent:GetPos()
+
+			local effect = EffectData()
+			effect:SetStart(pos)
+			effect:SetOrigin(pos)
+			util.Effect("Explosion", effect, true, true)
+			util.Effect("HelicopterMegaBomb", effect, true, true)
+
+			-- Blast
+			local JMThrower = self
+			local JM_Explosive_Blast_Damage    = 20
+			local JM_Explosive_Blast_Radius    = 500
+			util.BlastDamage(self, JMThrower, pos, JM_Explosive_Blast_Radius, JM_Explosive_Blast_Damage)
+		end
+	end
+
+	
+
 end
 
 --- Josh Mate Hud Warning
@@ -420,16 +467,4 @@ if SERVER then
 	function ENT:OnRemove()
 		self:SendWarn(false)
 	end
-end
-
-
-if SERVER then
-	--- Josh Mate Reset Gravity Etc...
-	--Remove This Buff at the start of the round
-	hook.Add("TTTPrepareRound", "JM_Prep_Reset_CVars", function()
-		RunConsoleCommand("sv_gravity", 600)
-		RunConsoleCommand("sv_friction", 8)
-		RunConsoleCommand("sv_airaccelerate", 10)
-		RunConsoleCommand("sv_accelerate", 10)
-	end)
 end
