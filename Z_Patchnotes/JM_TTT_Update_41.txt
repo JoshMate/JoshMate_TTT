@@ -23,6 +23,11 @@
 - New Care Package Good Loot (Weapon)
 - Allows the user to slow down time on command, once for 20 seconds
 
+[Proplosion]
+- New Care Package Bad Loot (World Effect)
+- All probs on the map explode, damaging nearby players
+- (Rest in Peace Koen's PC, this makes me drop frames on a 2080)
+
 [Demon Form]
 - Increased Speed Buff: 20% -> 40%
 - Now Sets your HP to 500 rather than giving you 400 on top of what you had
