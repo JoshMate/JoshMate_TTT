@@ -247,7 +247,7 @@ function ENT:Loot_Good( activator, caller )
 
 function ENT:Loot_Bad( activator, caller ) 
 
-	local RNG_Bad = math.random(1, 13)
+	local RNG_Bad = math.random(1, 14)
 
 	if RNG_Bad == 1 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend")
@@ -443,6 +443,21 @@ function ENT:Loot_Bad( activator, caller )
 			local JM_Explosive_Blast_Damage    = 20
 			local JM_Explosive_Blast_Radius    = 500
 			util.BlastDamage(self, JMThrower, pos, JM_Explosive_Blast_Radius, JM_Explosive_Blast_Damage)
+		end
+	end
+
+	if RNG_Bad == 14 then
+		activator:ChatPrint("[Care Package] - Bad Loot: 1 HP For All")
+		
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: You are all reduced to 1 HP!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
+		for _, ply in ipairs( player.GetAll() ) do
+			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+				ply:SetHealth(1)
+			end
 		end
 	end
 

@@ -21,14 +21,14 @@ SWEP.WeaponID            = AMMO_ADVANCED_SMG
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 30
+SWEP.Primary.Damage        = 35
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.070
 SWEP.Primary.Cone          = 0.035
-SWEP.Primary.Recoil        = 0.5
+SWEP.Primary.Recoil        = 0.4
 SWEP.Primary.Range         = 500
-SWEP.Primary.ClipSize      = 60
-SWEP.Primary.DefaultClip   = 60
+SWEP.Primary.ClipSize      = 50
+SWEP.Primary.DefaultClip   = 50
 SWEP.Primary.ClipMax       = 60
 SWEP.Primary.SoundLevel    = 75
 

@@ -33,7 +33,7 @@ SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 100
 
-SWEP.DeploySpeed           = 2
+SWEP.DeploySpeed           = 3
 SWEP.Primary.Automatic     = false
 
 -- // End of Gun Stats

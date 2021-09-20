@@ -56,7 +56,7 @@ INNO_EQUIPMENT = {
 	"item_jm_passive_ninjapro",
 	"item_jm_passive_bombsquad",
 	"item_jm_passive_vigor",
-	"item_jm_passive_demonform",
+	"item_jm_passive_zombiemode",
 	"item_ttt_armor",
 	"item_ttt_disguiser",
 	"item_ttt_radar"
@@ -102,7 +102,7 @@ SPECIAL_EQUIPMENT = {
 	"item_jm_passive_ninjapro",
 	"item_jm_passive_bombsquad",
 	"item_jm_passive_vigor",
-	"item_jm_passive_demonform",
+	"item_jm_passive_zombiemode",
 	"item_ttt_armor",
 	"item_ttt_disguiser",
 	"item_ttt_radar"
@@ -148,7 +148,7 @@ TRAITOR_EQUIPMENT = {
 	"item_jm_passive_ninjapro",
 	"item_jm_passive_bombsquad",
 	"item_jm_passive_vigor",
-	"item_jm_passive_demonform",
+	"item_jm_passive_zombiemode",
 	"item_ttt_armor",
 	"item_ttt_disguiser",
 	"item_ttt_radar"

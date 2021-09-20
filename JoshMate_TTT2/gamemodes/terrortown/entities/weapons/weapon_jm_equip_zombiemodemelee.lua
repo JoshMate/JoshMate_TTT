@@ -6,14 +6,14 @@ end
 SWEP.HoldType = "melee"
 
 if CLIENT then
-	SWEP.PrintName = "Demon Blade"
+	SWEP.PrintName = "Zombie Blade"
 	SWEP.Slot = 7
 
 	SWEP.EquipMenuData = {
 		type = "item_weapon",
 		desc = [[A Lethal Melee Weapon
 	  
-The Weapon that you use when you are in Demon Form
+The Weapon that you use when you are in Zombie Mode
 ]]
 	 };
 
@@ -28,7 +28,7 @@ The Weapon that you use when you are in Demon Form
 	end
 end
 
-local DemonBlade_Range	= 100
+local ZombieBlade_Range	= 100
 
 SWEP.Base = "weapon_jm_base_gun"
 
@@ -50,7 +50,7 @@ SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.Delay = 2
 
 SWEP.Kind = WEAPON_EQUIP1
-SWEP.WeaponID = AMMO_DEMONBLADE
+SWEP.WeaponID = AMMO_ZombieBlade
 
 SWEP.NoSights = true
 SWEP.IsSilent = true
@@ -81,7 +81,7 @@ function SWEP:PrimaryAttack()
 	end
 
 	local spos = owner:GetShootPos()
-	local sdest = spos + owner:GetAimVector() * DemonBlade_Range
+	local sdest = spos + owner:GetAimVector() * ZombieBlade_Range
 
 	local tr_main = util.TraceLine({
 		start = spos,
@@ -176,17 +176,17 @@ end
 
 function SWEP:OnHolster()
 	if ply:IsValid() and ply:Alive() and ply:IsTerror() then
-		self:GetOwner():SelectWeapon("weapon_jm_equip_demonmelee")
+		self:GetOwner():SelectWeapon("weapon_jm_equip_zombiemodemelee")
 	end
 	return
 end
 
 -- Stop Player Switching
-hook.Add( "PlayerSwitchWeapon", "DemonBladeCantSwitchWeapon", function( ply, oldWeapon, newWeapon )
+hook.Add( "PlayerSwitchWeapon", "ZombieBladeCantSwitchWeapon", function( ply, oldWeapon, newWeapon )
 
 	if ply:IsValid() and ply:Alive() and ply:IsTerror() then
-		if ply:GetActiveWeapon():IsValid() and ply:GetActiveWeapon():GetClass() == "weapon_jm_equip_demonmelee" then
-			ply:ChatPrint("[Demon Blade] - You can't change weapons while in Demon Form!") 
+		if ply:GetActiveWeapon():IsValid() and ply:GetActiveWeapon():GetClass() == "weapon_jm_equip_zombiemodemelee" then
+			ply:ChatPrint("[Zombie Blade] - You can't change weapons while in Zombie Form!") 
 			return true
 		end
 	end

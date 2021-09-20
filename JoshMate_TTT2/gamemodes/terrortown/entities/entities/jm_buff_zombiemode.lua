@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_DemonForm_Name
-local JM_BuffNWBool             = JM_Global_Buff_DemonForm_NWBool
-local JM_BuffDuration           = JM_Global_Buff_DemonForm_Duration
-local JM_BuffIconName           = JM_Global_Buff_DemonForm_IconName
-local JM_BuffIconPath           = JM_Global_Buff_DemonForm_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_DemonForm_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_ZombieMode_Name
+local JM_BuffNWBool             = JM_Global_Buff_ZombieMode_NWBool
+local JM_BuffDuration           = JM_Global_Buff_ZombieMode_Duration
+local JM_BuffIconName           = JM_Global_Buff_ZombieMode_IconName
+local JM_BuffIconPath           = JM_Global_Buff_ZombieMode_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_ZombieMode_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -54,7 +54,7 @@ function ENT:BuffTickEffect()
     
 end
 
-function DemonFormEffects(ent)
+function ZombieFormEffects(ent)
 	if not IsValid(ent) then return end
  
 	local effect = EffectData()
@@ -77,10 +77,10 @@ function ENT:Initialize()
 
     -- Handle Sound Ticking
     self.SoundbuffTickDelay_Min     = 10
-    self.SoundbuffTickDelay_Max     = 25
+    self.SoundbuffTickDelay_Max     = 20
     self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
 
-    -- Demon Form
+    -- Zombie Form
 
     local target = self.targetPlayer
     
@@ -90,35 +90,35 @@ function ENT:Initialize()
 	target:SetModel("models/player/zombie_fast.mdl")
     target:SetPlayerColor( Vector( 1, 0, 0 ) )
 
-    DemonFormEffects(target)
+    ZombieFormEffects(target)
     target:Extinguish()
     target:Ignite( 9999, 256)
-    DemonFormEffects(target)
+    ZombieFormEffects(target)
     sound.Play("npc/fast_zombie/fz_scream1.wav", target:GetPos(), 150, 100)
-    DemonFormEffects(target)
+    ZombieFormEffects(target)
 
     target:StripWeapons()
-    local ent = ents.Create("weapon_jm_equip_demonmelee")
+    local ent = ents.Create("weapon_jm_equip_zombiemodemelee")
     if ent:IsValid() then
         ent:SetPos(target:GetPos())
         ent:Spawn()
     end
 
-    target:SelectWeapon("weapon_jm_equip_demonmelee")
+    target:SelectWeapon("weapon_jm_equip_zombiemodemelee")
 
 end
 
 -- Speed Buff
-hook.Add("TTTPlayerSpeedModifier", "DemonFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
+hook.Add("TTTPlayerSpeedModifier", "ZombieFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
 	if not IsValid(ply)then return end
 	if ply:GetNWBool(JM_BuffNWBool) == true then
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.4
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.6
     end
 end)
 
 -- No fire damage on self
 if SERVER then
-    hook.Add("EntityTakeDamage", "DemonFormFireDamage", function(target, dmginfo)
+    hook.Add("EntityTakeDamage", "ZombieFormFireDamage", function(target, dmginfo)
         if not IsValid(target) or not target:IsPlayer() or not dmginfo:IsDamageType(DMG_BURN) then return end
 
         if target:Alive() and target:IsTerror() then
@@ -149,9 +149,9 @@ function ENT:Think()
     end
     
 
-    -- Make sure they are holding Demon Blade
+    -- Make sure they are holding Zombie Blade
     if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end
-    self.targetPlayer:SelectWeapon("weapon_jm_equip_demonmelee")
+    self.targetPlayer:SelectWeapon("weapon_jm_equip_zombiemodemelee")
 
 end
 
