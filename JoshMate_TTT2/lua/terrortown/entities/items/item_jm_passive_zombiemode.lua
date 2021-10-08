@@ -7,11 +7,9 @@ ITEM.EquipMenuData = {
 	name = "Zombie Mode",
 	desc = [[Passively grants:
 	
-		+ Gain a large amount of HP and Speed
-		+ You deal constant AOE fire damage to nearby players
-		- Everyone will attack you on sight
-		- You are forced into using the Zombie Blade
-		- You will slowly burn out and die
+		+ You become fast moving zombie
+		+ You gain the zombie blade and HP
+		- Everyone will shoot you on sight
 	]]
 }
 

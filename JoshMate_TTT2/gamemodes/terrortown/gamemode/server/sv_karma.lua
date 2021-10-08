@@ -180,11 +180,11 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [DMG] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [DMG] - %s Lost %i Karma", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma", attacker:Nick(), penalty))
 		end
 		
 	end
@@ -206,11 +206,11 @@ function KARMA.Killed(attacker, victim, dmginfo)
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [Kill] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KARMA] [Kill] - %s Lost %i Karma", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma", attacker:Nick(), penalty))
 		end
 	
 	end

@@ -51,7 +51,7 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_357.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_357.mdl")
 
-local ExplosiveGun_Boom_Damage               = 50
+local ExplosiveGun_Boom_Damage               = 60
 local ExplosiveGun_Boom_Radius               = 300
 
 local JM_Shoot_Range                         = 10000

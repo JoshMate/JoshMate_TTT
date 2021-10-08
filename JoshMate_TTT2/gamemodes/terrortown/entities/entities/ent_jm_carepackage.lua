@@ -247,7 +247,7 @@ function ENT:Loot_Good( activator, caller )
 
 function ENT:Loot_Bad( activator, caller ) 
 
-	local RNG_Bad = math.random(1, 14)
+	local RNG_Bad = math.random(1, 15)
 
 	if RNG_Bad == 1 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend")
@@ -421,32 +421,6 @@ function ENT:Loot_Bad( activator, caller )
 	end
 
 	if RNG_Bad == 13 then
-		activator:ChatPrint("[Care Package] - Bad Loot: Proplosion")
-
-		net.Start("JM_ULX_Announcement")
-		net.WriteString("Care Package: Proplosion")
-		net.WriteUInt(0, 16)
-		net.Broadcast()
-
-		for _, ent in ipairs( ents.FindByClass( "prop_physics" ) ) do
-
-			local pos = ent:GetPos()
-
-			local effect = EffectData()
-			effect:SetStart(pos)
-			effect:SetOrigin(pos)
-			util.Effect("Explosion", effect, true, true)
-			util.Effect("HelicopterMegaBomb", effect, true, true)
-
-			-- Blast
-			local JMThrower = self
-			local JM_Explosive_Blast_Damage    = 20
-			local JM_Explosive_Blast_Radius    = 500
-			util.BlastDamage(self, JMThrower, pos, JM_Explosive_Blast_Radius, JM_Explosive_Blast_Damage)
-		end
-	end
-
-	if RNG_Bad == 14 then
 		activator:ChatPrint("[Care Package] - Bad Loot: 1 HP For All")
 		
 		net.Start("JM_ULX_Announcement")
@@ -458,6 +432,76 @@ function ENT:Loot_Bad( activator, caller )
 			if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
 				ply:SetHealth(1)
 			end
+		end
+	end
+
+	if RNG_Bad == 14 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend Apocalypse")
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: Best Friend Apocalypse!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
+		local NumberToSpawn = 12
+		local possibleSpawns = ents.FindByClass( "info_player_start" )
+		
+		for i=1,NumberToSpawn do 
+
+			if #possibleSpawns > 0 then
+				local randomChoice = math.random(1, #possibleSpawns)
+				local spawn = possibleSpawns[randomChoice]
+				table.remove( possibleSpawns, randomChoice )
+				
+				local ent = ents.Create("npc_rollermine")
+				ent:SetPos(spawn:GetPos())
+				ent:Spawn()  
+			end
+
+		end
+	end
+
+	if RNG_Bad == 15 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Zombie Apocalypse")
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: Zombie Apocalypse!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
+		local NumberToSpawn = 16
+		local possibleSpawns = ents.FindByClass( "info_player_start" )
+		
+		for i=1,NumberToSpawn do 
+
+			if #possibleSpawns > 0 then
+				local randomChoice = math.random(1, #possibleSpawns)
+				local spawn = possibleSpawns[randomChoice]
+				table.remove( possibleSpawns, randomChoice )
+				
+
+				local RandChoice = math.random( 0, 14 )
+				if (RandChoice == 0) then RandZombie = "npc_zombie" end
+				if (RandChoice == 1) then RandZombie = "npc_zombie" end
+				if (RandChoice == 2) then RandZombie = "npc_zombie" end
+				if (RandChoice == 3) then RandZombie = "npc_zombie" end
+				if (RandChoice == 4) then RandZombie = "npc_zombie" end
+				if (RandChoice == 5) then RandZombie = "npc_fastzombie" end
+				if (RandChoice == 6) then RandZombie = "npc_fastzombie" end
+				if (RandChoice == 7) then RandZombie = "npc_fastzombie" end
+				if (RandChoice == 8) then RandZombie = "npc_fastzombie" end
+				if (RandChoice == 9) then RandZombie = "npc_fastzombie" end
+				if (RandChoice == 10) then RandZombie = "npc_headcrab" end
+				if (RandChoice == 11) then RandZombie = "npc_headcrab" end
+				if (RandChoice == 12) then RandZombie = "npc_headcrab_fast" end
+				if (RandChoice == 13) then RandZombie = "npc_headcrab_fast" end
+				if (RandChoice == 14) then RandZombie = "npc_poisonzombie" end
+
+				local ent = ents.Create(RandZombie)
+				ent:SetPos(spawn:GetPos())
+				ent:Spawn()  
+			end
+
 		end
 	end
 

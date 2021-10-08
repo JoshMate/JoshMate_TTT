@@ -731,9 +731,9 @@ function GM:DoPlayerDeath(ply, attacker, dmginfo)
 		if IsValid(attacker) and attacker:IsPlayer() then
 			attacker:RecordKill(ply)
 
-			DamageLog(Format("[KILL] %s [%s] killed %s [%s]", attacker:Nick(), attacker:GetRoleString(), ply:Nick(), ply:GetRoleString()))
+			DamageLog(Format("%s [%s] killed %s [%s]", attacker:Nick(), attacker:GetRoleString(), ply:Nick(), ply:GetRoleString()))
 		else
-			DamageLog(Format("[KILL] <SOMETHING> killed %s [%s]", ply:Nick(), ply:GetRoleString()))
+			DamageLog(Format("<> killed %s [%s]", ply:Nick(), ply:GetRoleString()))
 		end
 
 		KARMA.Killed(attacker, ply, dmginfo)
@@ -1135,8 +1135,8 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 				-- if attributing to pusher, show more generic crush msg for now
 				dmg:SetDamageType(DMG_CRUSH)
 			end
-
-			ply:EmitSound("goombastomp.wav", 140, 100, 1)
+			
+			ply:EmitSound("goombastomp_voice.mp3", 160, 100, 1)
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)
@@ -1382,7 +1382,7 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 			-- process the effects of the damage on karma
 			KARMA.Hurt(att, ent, dmginfo)
 
-			DamageLog(Format("[DMG] [%i] - %s [%s] Damaged %s [%s]", math.Round(dmginfo:GetDamage()), att:Nick(), att:GetRoleString(), ent:Nick(), ent:GetRoleString()))
+			DamageLog(Format("%s [%s] Did %i Damage to %s [%s]", att:Nick(), att:GetRoleString(), math.Round(dmginfo:GetDamage()), ent:Nick(), ent:GetRoleString()))
 		end
 	end
 

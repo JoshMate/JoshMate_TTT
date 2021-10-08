@@ -44,8 +44,8 @@ SWEP.ViewModel = "models/weapons/c_crowbar.mdl"
 SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
 
 SWEP.Primary.Damage = 0
-SWEP.Primary.ClipSize = 1
-SWEP.Primary.DefaultClip = 1
+SWEP.Primary.ClipSize = 2
+SWEP.Primary.DefaultClip = 2
 SWEP.Primary.Automatic = true
 SWEP.Primary.Delay = 1
 SWEP.Primary.Ammo = "none"

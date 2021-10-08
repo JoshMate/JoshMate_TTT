@@ -1,34 +1,51 @@
 -- ################################
--- ### Server
+-- #### Changes
 -- ################################
 
-- None
+[Best Friend Apocalypse]
+- New Bad Care Package Loot
+- Spawns 12 "Best Friends" randomly across the map
 
--- ################################
--- #### Gameplay
--- ################################
+[Zombie Apocalypse]
+- New Bad Care Package Loot
+- Spawns 16 Zombies randomly across the map
 
-[1 HP for all]
-- new Bad  Care Package Loot
-- Sets all player's current HP to 1
+[Proplosion]
+- Removed from the care package bad loot
+// It was really laggy and caused unfair and unavoidable deaths
 
-[Pistols]
-- You can now swap to all pistols much faster (Including  taser, big boy, silenced pistol etc..)
-- "Remember, switching to your side arm is faster than reloading" - Captain price
+[Super Crowbar]
+- Uses: 1 -> 2
 
-[Advanced Weapons]
-- Greatly Buffed ALL advanced weapons
-- This includes the Advanced: Pistol, SMG, Shotgun, Rifle and Sniper
+[Traitor Tester]
+- Reduced Test time from 10 seconds down to 5 Second
+- Slightly Increased its range
+
+[Goomba Stomps]
+- Added a new GRANDER sound effect for getting one
+
+[Big Boy]
+- Increased Max Damage: 100 -> 120
 
 [Zombie Mode]
-- Renamed: Demon Form -> Zombie Mode
-- Increased Speed Buff: 40% -> 60%
+- Removed Flame effects (Fixes Flame effects lingering post round)
+- Removed AOE Fire Damage
+- Removed Self inflicted damage over time
+- Removed Immunity to fire
+- You now gain +50 HP per alive player
+- Right click is now a dash (A much weaker ninja blade)
+- Increased movement speed: 160% -> 150%
+- Increased DPS of Zombie Blade
+- Increased the amount of ambient zombie noises you make
+
+[Karma]
+- Traitors now also get a bonus starting credit if they have 1250 Karma
+- Greatly improved clarity of Karma / Kill / Damage logs
+
 
 
 -- ################################
 -- ##### Maps
 -- ################################
 
-[Bong Palace]
-- A new medium sized map
-- A loose recreation of the legendary "Bong Palace" in which Seb and Vinny reside
+- None

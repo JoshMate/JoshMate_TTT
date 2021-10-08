@@ -36,21 +36,6 @@ ENT.BuffIconName                = JM_BuffIconName
 function ENT:BuffTickEffect()
 
     if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end
-
-    self.targetPlayer:Extinguish()
-    self.targetPlayer:Ignite( 9999, 256)
-			
-    local newHP = self.targetPlayer:Health() - 5
-
-    self.targetPlayer:SetHealth(newHP)
-    if self.targetPlayer:GetMaxHealth() > 100 then
-        self.targetPlayer:SetMaxHealth(newHP)
-    end
-
-    if self.targetPlayer:Health() <= 0 then
-        self.targetPlayer:Kill()
-    end
-
     
 end
 
@@ -71,31 +56,37 @@ end
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
 
-    -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.5
-    self.buffTickNext   = CurTime()
+    -- Target
+    local target = self.targetPlayer
 
     -- Handle Sound Ticking
-    self.SoundbuffTickDelay_Min     = 10
-    self.SoundbuffTickDelay_Max     = 20
+    self.SoundbuffTickDelay_Min     = 4
+    self.SoundbuffTickDelay_Max     = 12
     self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
 
-    -- Zombie Form
-
-    local target = self.targetPlayer
+    -- Zombie HP
+    local Zombie_HP_PerPerson       = 50
+    local Zombie_HP_People          = 0
+    local Zombie_HP_Final           = 0
     
-    target:SetMaxHealth(500)
-    target:SetHealth(500)
+    for _, ply in ipairs( player.GetAll() ) do
+        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+            Zombie_HP_People = Zombie_HP_People + 1
+        end
+    end
+
+    Zombie_HP_Final = (Zombie_HP_People * Zombie_HP_PerPerson) + target:GetMaxHealth()
+
+    target:SetMaxHealth(Zombie_HP_Final)
+    target:SetHealth(Zombie_HP_Final)
+
+    -- Zombie Form
 
 	target:SetModel("models/player/zombie_fast.mdl")
     target:SetPlayerColor( Vector( 1, 0, 0 ) )
 
     ZombieFormEffects(target)
-    target:Extinguish()
-    target:Ignite( 9999, 256)
-    ZombieFormEffects(target)
     sound.Play("npc/fast_zombie/fz_scream1.wav", target:GetPos(), 150, 100)
-    ZombieFormEffects(target)
 
     target:StripWeapons()
     local ent = ents.Create("weapon_jm_equip_zombiemodemelee")
@@ -112,40 +103,36 @@ end
 hook.Add("TTTPlayerSpeedModifier", "ZombieFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
 	if not IsValid(ply)then return end
 	if ply:GetNWBool(JM_BuffNWBool) == true then
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.6
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.5
     end
 end)
-
--- No fire damage on self
-if SERVER then
-    hook.Add("EntityTakeDamage", "ZombieFormFireDamage", function(target, dmginfo)
-        if not IsValid(target) or not target:IsPlayer() or not dmginfo:IsDamageType(DMG_BURN) then return end
-
-        if target:Alive() and target:IsTerror() then
-	        if target:GetNWBool(JM_BuffNWBool) == true then
-                dmginfo:ScaleDamage(0)
-            end
-        end
-    end)
-end
 
 function ENT:Think()
     self.BaseClass.Think(self)
 
-    
-
-    -- Handle Buff Effect Ticking
-    if(not self:IsValid()) then return end
-
-    if(CurTime() >= self.buffTickNext) then
-        self.buffTickNext = CurTime() + self.buffTickDelay
-        self:BuffTickEffect()
-    end
-
     -- Play Zombie Sounds
     if(CurTime() >= self.SoundbuffTickNext) then
         self.SoundbuffTickNext = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
-        sound.Play("npc/fast_zombie/fz_frenzy1.wav", self.targetPlayer:GetPos(), 110, 100)
+        local RandChoice = math.random( 0, 15 )
+        local RandSound = nil
+        if (RandChoice == 0) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
+        if (RandChoice == 1) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
+        if (RandChoice == 2) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
+        if (RandChoice == 3) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
+        if (RandChoice == 4) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
+        if (RandChoice == 5) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
+        if (RandChoice == 6) then RandSound = "npc/zombie/zombie_voice_idle1.wav" end
+        if (RandChoice == 7) then RandSound = "npc/zombie/zombie_voice_idle2.wav" end
+        if (RandChoice == 8) then RandSound = "npc/zombie/zombie_voice_idle3.wav" end
+        if (RandChoice == 9) then RandSound = "npc/zombie/zombie_voice_idle4.wav" end
+        if (RandChoice == 10) then RandSound = "npc/zombie/zombie_voice_idle5.wav" end
+        if (RandChoice == 11) then RandSound = "npc/zombie/zombie_voice_idle6.wav" end
+        if (RandChoice == 12) then RandSound = "npc/zombie/zombie_voice_idle7.wav" end
+        if (RandChoice == 13) then RandSound = "npc/zombie/zombie_voice_idle8.wav" end
+        if (RandChoice == 14) then RandSound = "npc/zombie/zombie_voice_idle9.wav" end
+        if (RandChoice == 15) then RandSound = "npc/zombie/zombie_voice_idle10.wav" end
+
+        sound.Play(RandSound, self.targetPlayer:GetPos(), 110, 100)
     end
     
 

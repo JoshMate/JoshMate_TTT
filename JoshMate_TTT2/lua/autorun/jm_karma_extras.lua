@@ -130,6 +130,16 @@ if SERVER then
 
             end
 
+            -- Karma Bonus Traitor Credit
+
+            if(ply:IsTraitor()) then
+                
+                if (ply:GetBaseKarma() >= 1250 ) then
+                    ply:AddCredits(1)
+                end
+
+            end
+
             -- Karma Bonus HP
 
             JM_F_GiveBonusKarmaHP(ply)

@@ -170,9 +170,10 @@ function SWEP:SecondaryAttack()
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end
 	
-	owner:SetVelocity(owner:GetAimVector()* 1000)
-
-	self:EmitSound("ninjastick_dash.wav")
+	local pushvel = owner:GetAimVector() * 1000
+	owner:SetVelocity(pushvel)
+	
+	sound.Play("ninjastick_dash.wav", self:GetPos(), 110, 100)
 	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
 
 end

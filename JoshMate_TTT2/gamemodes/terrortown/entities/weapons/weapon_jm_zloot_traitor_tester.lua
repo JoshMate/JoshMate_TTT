@@ -52,7 +52,7 @@ SWEP.ScanPhase             = 0
 SWEP.ScanTarget            = nil
 SWEP.ScanOwner             = nil
 
-local JM_Shoot_Range                = 300
+local JM_Shoot_Range                = 350
 
 
 function SWEP:HitEffectsInit(ent)
@@ -73,6 +73,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 
    if not IsValid(ent)then return end
    self:HitEffectsInit(ent)
+   self.ScanPhase = 1
    
    if SERVER then
 
@@ -85,11 +86,10 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- Set Status and print Message
       self.ScanTarget = ent
       self.ScanOwner = weaponOwner 
-      self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (10 seconds)")
-      self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " is revealing your role in (10 seconds)")
+      self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (6 seconds)")
+      self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " is revealing your role in (6 seconds)")
       self.ScanTarget:EmitSound("shoot_portable_tester_scan.wav")
       self.ScanTime = CurTime()
-      self.ScanPhase = 1
 
    end
 end
@@ -98,21 +98,23 @@ function SWEP:Think()
 
    self:CalcViewModel()
 
-   if SERVER then
+   
+   if self.ScanPhase == 0 then return end
 
-      if self.ScanPhase == 0 then return end
+   if self.ScanTime <= CurTime() -3 and self.ScanPhase == 1 then
 
-      if self.ScanTime <= CurTime() -5 and self.ScanPhase == 1 then
-
+      if SERVER then
          if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
-            self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (5 seconds)")
-            self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " is revealing your role in (5 seconds)")
+            self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (3 seconds)")
+            self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " is revealing your role in (3 seconds)")
          end  
-         self.ScanPhase = 2
       end
+      self.ScanPhase = 2
+   end
 
-      if self.ScanTime <= CurTime() -10 and self.ScanPhase == 2 then
+   if self.ScanTime <= CurTime() -6 and self.ScanPhase == 2 then
 
+      if SERVER then
          if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
             self:HitEffectsInit(self.ScanTarget)
             self.ScanOwner:EmitSound("shoot_portable_tester_done.wav")
@@ -120,9 +122,12 @@ function SWEP:Think()
             self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
             self.ScanTarget:EmitSound("shoot_portable_tester_done.wav")
          end  
-         if self:Clip1() <= 0 then
-            self:Remove()
-         end
+      end
+
+      self.ScanPhase = 0
+
+      if self:Clip1() <= 0 then
+         self:Remove()
       end
    end
 
@@ -133,6 +138,7 @@ function SWEP:OnDrop()
  end
 
 function SWEP:PrimaryAttack()
+
 
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
@@ -154,16 +160,22 @@ function SWEP:PrimaryAttack()
    end
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
-   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-      self:ApplyEffect(tr.Entity, owner)
-      self:TakePrimaryAmmo( 1 )
+
+   if self.ScanPhase == 0 then
+      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+         self:ApplyEffect(tr.Entity, owner)
+         self:TakePrimaryAmmo( 1 )
+      else
+         if SERVER then owner:ChatPrint("[Portable Tester]: No testable target in range...") end
+      end
    else
-      if SERVER then owner:ChatPrint("[Portable Tester]: No testable target in range...") end
+      if SERVER then owner:ChatPrint("[Portable Tester]: You are already testing someone...") end
    end
 
    owner:LagCompensation(false)
 
    -- #########
+
 
 end
 

@@ -40,12 +40,12 @@ SWEP.Primary.Damage = 40
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
-SWEP.Primary.Delay = 0.5
+SWEP.Primary.Delay = 0.40
 SWEP.Primary.Ammo = "none"
 
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
-SWEP.Secondary.Automatic = true
+SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.Delay = 2
 
@@ -167,7 +167,16 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
+
+	local owner = self:GetOwner()
+	if not IsValid(owner) then return end
 	
+	local pushvel = owner:GetAimVector() * 700
+	owner:SetVelocity(pushvel)
+
+	sound.Play("npc/fast_zombie/fz_alert_close1.wav", self:GetPos(), 110, 100)
+	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
+
 end
 
 function SWEP:OnDrop()
