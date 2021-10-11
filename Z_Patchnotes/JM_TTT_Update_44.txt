@@ -1,0 +1,20 @@
+-- ################################
+-- #### Changes
+-- ################################
+
+[Care Package Changes]
+- Added more possible spawns for Zombie Apocalypse and Little Friend Apocalypse 
+
+[Zombie Mode]
+- Removed the Dash (It was fun but ultimately super OP and annoying to fight against)
+- Zombie Blade Attack Speed Delay: 0.40 -> 0.50
+- Simplified HP Buff, now you always get set to 250HP even if you are above or below that
+- You can NO longer have armour while being a zombie (This was effectively doubling your HP again)
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[TTT Sky Walk]
+- New Map
+- Based on the Halo 3 map of the same name

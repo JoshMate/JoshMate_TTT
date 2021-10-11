@@ -122,13 +122,14 @@ function SWEP:Think()
             self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
             self.ScanTarget:EmitSound("shoot_portable_tester_done.wav")
          end  
+
+         if self:Clip1() <= 0 then
+            self:Remove()
+         end
       end
 
       self.ScanPhase = 0
-
-      if self:Clip1() <= 0 then
-         self:Remove()
-      end
+      
    end
 
 end

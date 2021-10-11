@@ -65,20 +65,8 @@ function ENT:Initialize()
     self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
 
     -- Zombie HP
-    local Zombie_HP_PerPerson       = 50
-    local Zombie_HP_People          = 0
-    local Zombie_HP_Final           = 0
-    
-    for _, ply in ipairs( player.GetAll() ) do
-        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-            Zombie_HP_People = Zombie_HP_People + 1
-        end
-    end
-
-    Zombie_HP_Final = (Zombie_HP_People * Zombie_HP_PerPerson) + target:GetMaxHealth()
-
-    target:SetMaxHealth(Zombie_HP_Final)
-    target:SetHealth(Zombie_HP_Final)
+    target:SetMaxHealth(250)
+    target:SetHealth(250)
 
     -- Zombie Form
 
@@ -113,7 +101,7 @@ function ENT:Think()
     -- Play Zombie Sounds
     if(CurTime() >= self.SoundbuffTickNext) then
         self.SoundbuffTickNext = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
-        local RandChoice = math.random( 0, 15 )
+        local RandChoice = math.random( 0, 20 )
         local RandSound = nil
         if (RandChoice == 0) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
         if (RandChoice == 1) then RandSound = "npc/fast_zombie/fz_frenzy1.wav" end
@@ -131,10 +119,18 @@ function ENT:Think()
         if (RandChoice == 13) then RandSound = "npc/zombie/zombie_voice_idle8.wav" end
         if (RandChoice == 14) then RandSound = "npc/zombie/zombie_voice_idle9.wav" end
         if (RandChoice == 15) then RandSound = "npc/zombie/zombie_voice_idle10.wav" end
+        if (RandChoice == 16) then RandSound = "npc/fast_zombie/fz_alert_close1.wav" end
+        if (RandChoice == 17) then RandSound = "npc/fast_zombie/fz_alert_close1.wav" end
+        if (RandChoice == 18) then RandSound = "npc/fast_zombie/fz_alert_close1.wav" end
+        if (RandChoice == 19) then RandSound = "npc/fast_zombie/fz_alert_close1.wav" end
+        if (RandChoice == 20) then RandSound = "npc/fast_zombie/fz_alert_close1.wav" end
+        
 
         sound.Play(RandSound, self.targetPlayer:GetPos(), 110, 100)
     end
     
+    -- Remove Armour 
+    self.targetPlayer:RemoveArmor(9999)
 
     -- Make sure they are holding Zombie Blade
     if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end

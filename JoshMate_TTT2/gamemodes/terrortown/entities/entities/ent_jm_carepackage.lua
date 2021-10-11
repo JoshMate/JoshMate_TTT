@@ -445,6 +445,7 @@ function ENT:Loot_Bad( activator, caller )
 
 		local NumberToSpawn = 12
 		local possibleSpawns = ents.FindByClass( "info_player_start" )
+		table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
 		
 		for i=1,NumberToSpawn do 
 
@@ -471,6 +472,7 @@ function ENT:Loot_Bad( activator, caller )
 
 		local NumberToSpawn = 16
 		local possibleSpawns = ents.FindByClass( "info_player_start" )
+		table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
 		
 		for i=1,NumberToSpawn do 
 
