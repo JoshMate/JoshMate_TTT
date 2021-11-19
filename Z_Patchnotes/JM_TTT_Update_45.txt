@@ -1,0 +1,20 @@
+-- ################################
+-- #### Changes
+-- ################################
+
+[Care Package Changes]
+
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[TTT Night Club]
+- The music is now louder
+- Overhauled The Sewer
+- Overhauled The Smoking Area
+- Made the parkour to the highest platform easier
+- Improved weapon placement around the map
+- Reduced the Smoke effects significantly (This should fix any low FPS)
+- Significantly reduced the number of physics props / Clutter around the map (This should fix the lag)
+- Added a ladder in the bathroom up to the balcony
