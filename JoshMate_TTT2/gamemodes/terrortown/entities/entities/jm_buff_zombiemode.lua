@@ -33,9 +33,28 @@ ENT.BuffIconName                = JM_BuffIconName
 -- The Actual Effects of this buff
 -- #############################################
 
+function ENT:RegenBuffTickEffect()
+
+    if self.targetPlayer:Health() >= self.targetPlayer:GetMaxHealth() then return end
+			
+    local newHP = self.targetPlayer:Health() + 1
+    if newHP > self.targetPlayer:GetMaxHealth() then newHP = self.targetPlayer:GetMaxHealth() end
+
+    self.targetPlayer:SetHealth(newHP)
+
+end
+
 function ENT:BuffTickEffect()
 
+    -- Handle Buff Effect Ticking
+    if(not self:IsValid()) then return end
+
     if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end
+
+    if(CurTime() >= self.buffTickNext) then
+        self.buffTickNext = CurTime() + self.buffTickDelay
+        self:BuffTickEffect()
+    end
     
 end
 
@@ -54,7 +73,12 @@ end
 
 
 function ENT:Initialize()
+
     self.BaseClass.Initialize(self)
+
+    -- Handle Buff Effect Ticking
+    self.buffTickDelay  = 0.5
+    self.buffTickNext   = CurTime()
 
     -- Target
     local target = self.targetPlayer
@@ -65,8 +89,7 @@ function ENT:Initialize()
     self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
 
     -- Zombie HP
-    target:SetMaxHealth(250)
-    target:SetHealth(250)
+    target:SetMaxHealth(target:GetMaxHealth() + 50)
 
     -- Zombie Form
 
@@ -76,27 +99,26 @@ function ENT:Initialize()
     ZombieFormEffects(target)
     sound.Play("npc/fast_zombie/fz_scream1.wav", target:GetPos(), 150, 100)
 
-    target:StripWeapons()
-    local ent = ents.Create("weapon_jm_equip_zombiemodemelee")
-    if ent:IsValid() then
-        ent:SetPos(target:GetPos())
-        ent:Spawn()
-    end
-
-    target:SelectWeapon("weapon_jm_equip_zombiemodemelee")
-
 end
 
 -- Speed Buff
 hook.Add("TTTPlayerSpeedModifier", "ZombieFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
 	if not IsValid(ply)then return end
 	if ply:GetNWBool(JM_BuffNWBool) == true then
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.5
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.1
     end
 end)
 
 function ENT:Think()
     self.BaseClass.Think(self)
+
+    -- Handle Buff Effect Ticking
+    if(not self:IsValid()) then return end
+
+    if(CurTime() >= self.buffTickNext) then
+        self.buffTickNext = CurTime() + self.buffTickDelay
+        self:RegenBuffTickEffect()
+    end
 
     -- Play Zombie Sounds
     if(CurTime() >= self.SoundbuffTickNext) then
@@ -128,14 +150,6 @@ function ENT:Think()
 
         sound.Play(RandSound, self.targetPlayer:GetPos(), 110, 100)
     end
-    
-    -- Remove Armour 
-    self.targetPlayer:RemoveArmor(9999)
-
-    -- Make sure they are holding Zombie Blade
-    if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end
-    self.targetPlayer:SelectWeapon("weapon_jm_equip_zombiemodemelee")
-
 end
 
 -- #############################################

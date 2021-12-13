@@ -1,0 +1,19 @@
+-- ################################
+-- #### Changes
+-- ################################
+
+[Zombie Mode]
+
+
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[TTT Garden]
+- NEW MAP
+- A Medium Sized map set in the sunny garden of a strange building.
+
+[TTT Lockdown]
+- NEW MAP
+- A Gimmick map that locks everyone is different rooms and lets RNG or the Traitors decide how the map is played.

@@ -2,7 +2,13 @@
 -- #### Changes
 -- ################################
 
-[Care Package Changes]
+[Zombie Mode]
+- Completely overhauled to ONLY give you the following and nothing else
+- You gain +50 Max HP
+- You gain +10% Movement Speed
+- You gain passive HP Regeneration
+- You will be shot on sight as you are now a zombie with all the sounds that go along with it.
+- (You no longer get access / are restricted to a zombie blade)
 
 
 -- ################################
