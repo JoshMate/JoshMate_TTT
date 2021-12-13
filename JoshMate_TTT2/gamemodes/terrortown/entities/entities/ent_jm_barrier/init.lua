@@ -2,7 +2,7 @@ AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
 include('shared.lua')
 
-local JM_Barrier_ArmTime			= 2
+local JM_Barrier_ArmTime			= 3
 local JM_Barrier_HP					= 850
 
 local JM_Barrier_Colour_PreArm		= Color( 255, 255, 255, 100 )

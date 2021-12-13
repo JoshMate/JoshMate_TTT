@@ -32,7 +32,7 @@ local function PlayRadioSound(snd)
 	local r = LocalPlayer().radio
 	if not IsValid(r) then return end
 
-	RunConsoleCommand("ttt_radio_play", tostring(r:EntIndex()), snd)
+	RunConsoleCommand("ent_jm_equip_moneyprinter_play", tostring(r:EntIndex()), snd)
 end
 
 local function ButtonClickPlay(s)

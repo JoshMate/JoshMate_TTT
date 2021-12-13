@@ -5,7 +5,7 @@ AddCSLuaFile()
 SWEP.HoldType               = "normal"
 
 if CLIENT then
-   SWEP.PrintName           = "Decoy Radio"
+   SWEP.PrintName           = "Money Printer"
    SWEP.Slot                = 7
 
    SWEP.ViewModelFlip       = false
@@ -15,11 +15,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A utility item
 	
-Can be used to play sounds remotely via a shop menu tab
-      
-Also acts as a decoy until it is destroyed or picked up
-      
-(All DNA and Radar scans will point to this instead of you)
+Once placed, touching bodies against it will give you +1 Credit
+
+DNA and Radar scans will point to this instead of you
+
+Can be destroyed by other players
 ]]
    };
 
@@ -27,13 +27,13 @@ Also acts as a decoy until it is destroyed or picked up
 		return pos + ang:Forward() * 25 - ang:Right() * -17 - ang:Up() * 18, ang
 	end
 
-   SWEP.Icon                = "vgui/ttt/icon_radio"
+   SWEP.Icon                = "vgui/ttt/joshmate/icon_jm_moneyprinter.png" 
 end
 
 SWEP.Base                   = "weapon_jm_base_gun"
 
-SWEP.ViewModel              = "models/props/cs_office/radio.mdl"
-SWEP.WorldModel             = "models/props/cs_office/radio.mdl"
+SWEP.ViewModel              = "models/props_c17/consolebox01a.mdl"
+SWEP.WorldModel             = "models/props_c17/consolebox01a.mdl"
 
 SWEP.Primary.ClipSize       = -1
 SWEP.Primary.DefaultClip    = -1
@@ -65,8 +65,7 @@ function SWEP:PrimaryAttack()
    self:RadioDrop()
 end
 function SWEP:SecondaryAttack()
-   self:SetNextSecondaryFire( CurTime() + self.Secondary.Delay )
-   self:RadioStick()
+   return
 end
 
 local throwsound = Sound( "Weapon_SLAM.SatchelThrow" )
@@ -85,12 +84,14 @@ function SWEP:RadioDrop()
       
       local vthrow = vvel + vang * 200
 
-      local radio = ents.Create("ttt_radio")
+      local radio = ents.Create("ent_jm_equip_moneyprinter")
       if IsValid(radio) then
          radio:SetPos(vsrc + vang * 10)
          radio:SetOwner(ply)
 		   radio:SetNWString("decoy_owner_team", ply:GetTeam())
          radio:Spawn()
+
+         radio:SetColor(Color( 255, 0, 0, 255))
 
          radio:PhysWake()
          local phys = radio:GetPhysicsObject()
@@ -108,55 +109,6 @@ function SWEP:RadioDrop()
    self:EmitSound(throwsound)
 end
 
--- hey look, more C4 code
-function SWEP:RadioStick()
-   if SERVER then
-      local ply = self:GetOwner()
-      if not IsValid(ply) then return end
-
-      if self.Planted then return end
-
-      local ignore = {ply, self}
-      local spos = ply:GetShootPos()
-      local epos = spos + ply:GetAimVector() * 80
-      local tr = util.TraceLine({start=spos, endpos=epos, filter=ignore, mask=MASK_SOLID})
-
-      if tr.HitWorld then
-         local radio = ents.Create("ttt_radio")
-         if IsValid(radio) then
-            radio:PointAtEntity(ply)
-
-            local tr_ent = util.TraceEntity({start=spos, endpos=epos, filter=ignore, mask=MASK_SOLID}, radio)
-
-            if tr_ent.HitWorld then
-
-               local ang = tr_ent.HitNormal:Angle()
-               ang:RotateAroundAxis(ang:Up(), -180)
-
-               radio:SetPos(tr_ent.HitPos + ang:Forward() * -2.5)
-               radio:SetAngles(ang)
-               radio:SetOwner(ply)
-               radio:SetNWString("decoy_owner_team", ply:GetTeam())
-               radio:Spawn()
-
-               local phys = radio:GetPhysicsObject()
-               if IsValid(phys) then
-                  phys:EnableMotion(false)
-               end
-
-               radio.IsOnWall = true
-
-               self:Remove()
-
-               self.Planted = true
-               self:GetOwner().decoy = radio
-               
-            end
-         end
-      end
-   end
-end
-
 function SWEP:Reload()
    return false
 end
@@ -169,7 +121,7 @@ end
 
 if CLIENT then
    function SWEP:Initialize()
-      self:AddTTT2HUDHelp("Place a Radio", nil, true)
+      self:AddTTT2HUDHelp("Place a Money Printer in front of you", nil, true)
 
       return self.BaseClass.Initialize(self)
    end

@@ -121,7 +121,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
 function ENT:Loot_Good( activator, caller ) 
 
-	local RNG_Good = math.random(1, 20)
+	local RNG_Good = math.random(1, 18)
 
 	if RNG_Good == 1 then
 		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
@@ -211,30 +211,18 @@ function ENT:Loot_Good( activator, caller )
 	end	
 
 	if RNG_Good == 16 then
-		activator:ChatPrint("[Care Package] - Good Loot: Silenced Pistol")
-		Loot_SpawnThis(self,"weapon_jm_zloot_silenced_pistol")
-		
-	end	
-
-	if RNG_Good == 17 then
-		activator:ChatPrint("[Care Package] - Good Loot: Barrel Swep")
-		Loot_SpawnThis(self,"weapon_jm_zloot_placer_barrel")
-		
-	end	
-
-	if RNG_Good == 18 then
 		activator:ChatPrint("[Care Package] - Good Loot: Crate Swep")
 		Loot_SpawnThis(self,"weapon_jm_zloot_placer_crate")
 		
 	end	
 
-	if RNG_Good == 19 then
+	if RNG_Good == 17 then
 		activator:ChatPrint("[Care Package] - Good Loot: Medkit Swep")
 		Loot_SpawnThis(self,"weapon_jm_zloot_placer_medkit")
 		
 	end	
 
-	if RNG_Good == 20 then
+	if RNG_Good == 18 then
 		activator:ChatPrint("[Care Package] - Good Loot: Slo-Mo Clock")
 		Loot_SpawnThis(self,"weapon_jm_zloot_slomo_clock")
 

@@ -26,13 +26,13 @@ SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.300
 SWEP.Primary.Cone          = 0.008
 SWEP.Primary.Recoil        = 10
-SWEP.Primary.Range         = 650
+SWEP.Primary.Range         = 750
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 75
 
-SWEP.HeadshotMultiplier    = 3
+SWEP.HeadshotMultiplier    = 2.5
 SWEP.DeploySpeed           = 3
 SWEP.BulletForce           = 30
 SWEP.Primary.Automatic     = false

@@ -20,7 +20,7 @@ A regular looking crowbar that has huge push force
 
 Right or Left Click a player to launch them
 
-Only has 1 use
+Has 2 uses
 ]]
 	 };
 

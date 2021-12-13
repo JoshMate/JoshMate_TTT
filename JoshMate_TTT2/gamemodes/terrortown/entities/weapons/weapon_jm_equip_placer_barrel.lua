@@ -13,7 +13,7 @@ SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
 SWEP.ViewModel 				= "models/props_c17/oildrum001_explosive.mdl"
-SWEP.WorldModel				= "models/props_junk/plasticbucket001a.mdl"
+SWEP.WorldModel				= "models/props_c17/oildrum001_explosive.mdl"
 SWEP.HoldType              = "grenade"
 SWEP.HoldReady             = "grenade"
 SWEP.HoldNormal            = "grenade"
@@ -24,7 +24,7 @@ SWEP.AllowDrop 				= true
 SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind 					= WEAPON_EQUIP1
 SWEP.AutoSpawnable			= false
-SWEP.CanBuy 				= {}
+SWEP.CanBuy 				= {ROLE_TRAITOR}
 SWEP.LimitedStock 			= true
 
 
@@ -39,7 +39,7 @@ SWEP.JM_Trap_Prop_Model					= "models/props_c17/oildrum001_explosive.mdl"
 
 
 if CLIENT then
-	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_special.png"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_barrelswep.png"
 	
 	function SWEP:GetViewModelPosition(pos, ang)
 		return pos + ang:Forward() * 55 - ang:Right() * -25 - ang:Up() * 55, ang
@@ -159,3 +159,19 @@ if SERVER then
    end
 end
 --
+
+-- Josh Mate No World Model
+
+function SWEP:OnDrop()
+	self:Remove()
+ end
+  
+ function SWEP:DrawWorldModel()
+	return
+ end
+ 
+ function SWEP:DrawWorldModelTranslucent()
+	return
+ end
+ 
+ -- END of Josh Mate World Model 

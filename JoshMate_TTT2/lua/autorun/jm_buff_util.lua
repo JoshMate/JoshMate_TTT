@@ -59,18 +59,11 @@ JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
 JM_Global_Buff_TagGrenade_Name                          = "Tag Grenade"
-JM_Global_Buff_TagGrenade_Duration                      = 2
+JM_Global_Buff_TagGrenade_Duration                      = 3
 JM_Global_Buff_TagGrenade_NWBool                        = "JM_Buff_NWBool_IsTagGrenade"
 JM_Global_Buff_TagGrenade_IconName                      = "JM_Buff_Icon_TagGrenade"
 JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud_tracker.png"
 JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
-
-JM_Global_Buff_PulsePad_Name                            = "Pulse Pad"
-JM_Global_Buff_PulsePad_Duration                        = 300
-JM_Global_Buff_PulsePad_NWBool                          = "JM_Buff_NWBool_IsPulsePad"
-JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad"
-JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_PulsePad_IconGoodBad                     = "bad"
 
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
 JM_Global_Buff_PoisonDart_Duration                      = 15

@@ -67,7 +67,7 @@ function RADAR.TriggerRadarScan(ply)
 
 		local scan_ents = player.GetAll()
 
-		table.Add(scan_ents, ents.FindByClass("ttt_radio"))
+		table.Add(scan_ents, ents.FindByClass("ent_jm_equip_moneyprinter"))
 
 		for i = 1, #scan_ents do
 			local ent = scan_ents[i]

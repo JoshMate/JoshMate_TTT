@@ -8,7 +8,6 @@ ITEM.EquipMenuData = {
 	desc = [[Passively grants:
 	
 		+ You gain +50 Max HP
-		+ You gain +10% Movement Speed
 		+ You gain passive HP Regeneration
 		- You will be shot on sight
 	]]

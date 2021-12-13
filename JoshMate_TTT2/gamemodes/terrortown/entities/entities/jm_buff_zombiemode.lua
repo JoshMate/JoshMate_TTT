@@ -77,7 +77,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 
     -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.5
+    self.buffTickDelay  = 0.3
     self.buffTickNext   = CurTime()
 
     -- Target
@@ -100,14 +100,6 @@ function ENT:Initialize()
     sound.Play("npc/fast_zombie/fz_scream1.wav", target:GetPos(), 150, 100)
 
 end
-
--- Speed Buff
-hook.Add("TTTPlayerSpeedModifier", "ZombieFormMoveSpeed", function(ply, _, _, speedMultiplierModifier)
-	if not IsValid(ply)then return end
-	if ply:GetNWBool(JM_BuffNWBool) == true then
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.1
-    end
-end)
 
 function ENT:Think()
     self.BaseClass.Think(self)

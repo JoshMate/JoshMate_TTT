@@ -458,7 +458,7 @@ function GM:TTTPlayerRadioCommand(ply, msg_name, msg_target)
 
 end
 
-local function ttt_radio_send(ply, cmd, args)
+local function ent_jm_equip_moneyprinter_send(ply, cmd, args)
 	if not IsValid(ply) or not ply:IsTerror() or #args ~= 2 then return end
 
 	local msg_name = args[1]
@@ -488,7 +488,7 @@ local function ttt_radio_send(ply, cmd, args)
 
 	if hook.Call("TTTPlayerRadioCommand", GAMEMODE, ply, msg_name, msg_target) then return end
 
-	net.Start("TTT_RadioMsg")
+	net.Start("ent_jm_equip_moneyprinterMsg")
 	net.WriteEntity(ply)
 	net.WriteString(msg_name)
 	net.WriteString(name)
@@ -499,4 +499,4 @@ local function ttt_radio_send(ply, cmd, args)
 
 	net.Broadcast()
 end
-concommand.Add("_ttt_radio_send", ttt_radio_send)
+concommand.Add("_ent_jm_equip_moneyprinter_send", ent_jm_equip_moneyprinter_send)

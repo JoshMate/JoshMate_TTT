@@ -4,7 +4,7 @@ AddCSLuaFile()
 SWEP.HoldType              = "pistol"
 
 if CLIENT then
-   SWEP.PrintName          = "Silenced Pistol"
+   SWEP.PrintName          = "Doom Dart"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -12,13 +12,13 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Non-Lethal Weapon
+      desc = [[A Set-Up Weapon
 	
-Slows the target for 5 seconds
-   
-The target will drop their currently held weapon
-   
-Has 3 uses, silent, perfect acccuracy and long range
+Hitting a target marks them with Doom.
+
+Doomed players explode on death dealing large DMG to others.
+
+Mark up to 2 players, who won't be informed they are doomed.
 ]]
 };
 
@@ -32,18 +32,18 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 3
-SWEP.Primary.SoundLevel    = 30
+SWEP.Primary.SoundLevel    = 20
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = Sound( "Weapon_USP.SilencedShot" )
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {} -- only traitors can buy
+SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_SILENCED
+SWEP.WeaponID              = AMMO_DOOMDART
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_pist_usp.mdl"
 SWEP.WorldModel            = "models/weapons/w_pist_usp_silencer.mdl"
@@ -58,24 +58,9 @@ function SWEP:Deploy()
    return self.BaseClass.Deploy(self)
 end
 
-function SWEP:HitEffectsInit(ent)
-   if not IsValid(ent) then return end
-
-   local effect = EffectData()
-   local ePos = ent:GetPos()
-   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
-   effect:SetStart(ePos)
-   effect:SetOrigin(ePos)
-   
-   util.Effect("TeslaZap", effect, true, true)
-   
-   util.Effect("cball_explode", effect, true, true)
-end
-
 function SWEP:ApplyEffect(ent,weaponOwner)
 
    if not IsValid(ent) then return end
-   self:HitEffectsInit(ent)
    
    if SERVER then
 
@@ -86,23 +71,16 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- End Of
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Silenced Pistol]: You hit someone!")
-      JM_RemoveBuffFromThisPlayer("jm_buff_silencedPistol",ent)
-      JM_GiveBuffToThisPlayer("jm_buff_silencedPistol",ent,self:GetOwner())
+      weaponOwner:ChatPrint("[Doom Dart]: " .. ent:Nick() .. " Has Been DOOMED to explode on death" )
       -- End Of
-      
-      -- Drop currently Held Weapon
-      if(ent:IsValid() and ent:IsPlayer()) then
-         local curWep = ent:GetActiveWeapon()
-         if (ent:GetActiveWeapon():PreDrop()) then ent:GetActiveWeapon():PreDrop() end
-         if (curWep.AllowDrop) then
-            ent:DropWeapon()
-         end
-         ent:SelectWeapon("weapon_jm_special_crowbar")
-      end
-      -- End of Drop
 
-      
+      -- Doom the Target
+      local doomDart = ents.Create("ent_jm_equip_doom_dart")
+      doomDart.doomedTarget = ent
+      doomDart.doomedBy = self:GetOwner()
+      doomDart:Spawn()
+      -- End of
+         
 
    end
 end
@@ -149,18 +127,16 @@ function SWEP:PrimaryAttack()
 end
 
 
-
-
 function SWEP:SecondaryAttack()
+   return
 end
-
 
 
 
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Shoot a Player", nil, true)
+	   self:AddTTT2HUDHelp("Doom a player to explode on death", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
