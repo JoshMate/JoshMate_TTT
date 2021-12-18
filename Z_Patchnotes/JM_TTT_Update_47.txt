@@ -1,0 +1,55 @@
+-- ################################
+-- #### TTT Update 47 - Patch Notes
+-- ################################
+
+[Money Printer]
+- New Detective Item
+- Once placed, begins to print rewards for the detective
+- Every 30 Seconds it gives the Detective +15 Max HP and 1 Credit (Only 2 Times)
+- Then every 30 seconds after that, it just gives the +15 Max HP
+- A Traitor can press E on it to destroy it and loot 1 credit from it
+- The Detective will be alerted his printer has been destroyed
+- The Detective will have to protect / hide their printer if they want the rewards
+- Innocents will be unable to interact with the printer at all
+
+[Agility]
+- New Detective Passive
+- Grants 20% movement speed
+- Grants 50% jump height
+- Grants 50% reduction to Fall Damage
+
+[Doom Dart]
+- Buffed Explosion Radius: 500 -> 600 Units
+- Increased Volume of the Bell Sound Effect
+
+[Vigor]
+- Nerfed Max HP Buff: 50 -> 25 HP 
+
+[Zombie Mode]
+- Buffed Max HP: 50 -> 100 HP
+- No longer gives you Health Regen
+
+[Tag Grenades]
+- Buffed Tracking Duration: 3 -> 4 Seconds
+
+[LMG]
+- Nerfed Spread Accuracy: 0.35 -> 0.40
+
+
+[Fixes]
+- Removed the Silenced pistol from the care package (Since it no-longer exists)
+- Changed the NinjaPro shop description to be more specific about values
+- Added the missing shop description for the barrel SWEP
+- New Icons for barrel SWEP and money printer to match the current art style
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[TTT Breakdown]
+- A new map
+- A map consisting entirely of breakable blocks 
+
+[TTT Lockdown]
+- A new map (Completely Reworked the old one)
+- Two stations in lockdown connected by moving trains.

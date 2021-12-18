@@ -3,11 +3,6 @@ AddCSLuaFile()
 
 if engine.ActiveGamemode() ~= "terrortown" then return end
 
-
-
-
-
-
 if SERVER then
 
     -- Give players Extra HP for bonus Karma

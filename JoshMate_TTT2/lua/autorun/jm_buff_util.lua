@@ -33,6 +33,20 @@ function JM_RemoveBuffFromThisPlayer(nameOfBuff, targetPlayer)
 
 end
 
+function JM_CheckIfPlayerHasBuff(nameOfBuff, targetPlayer)
+    
+    for k, buff in ipairs(ents.FindByClass(nameOfBuff)) do
+        
+        if (buff.targetPlayer == targetPlayer) then
+            return true
+        end
+
+    end
+
+    return false
+
+end
+
 -- #############################################
 -- All Global Buff Values
 -- #############################################
@@ -59,7 +73,7 @@ JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
 JM_Global_Buff_TagGrenade_Name                          = "Tag Grenade"
-JM_Global_Buff_TagGrenade_Duration                      = 3
+JM_Global_Buff_TagGrenade_Duration                      = 4
 JM_Global_Buff_TagGrenade_NWBool                        = "JM_Buff_NWBool_IsTagGrenade"
 JM_Global_Buff_TagGrenade_IconName                      = "JM_Buff_Icon_TagGrenade"
 JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud_tracker.png"
@@ -114,6 +128,13 @@ JM_Global_Buff_ZombieMode_IconName                           = "JM_Buff_Icon_Zom
 JM_Global_Buff_ZombieMode_IconPath                           = "vgui/ttt/joshmate/hud_zombiemode.png"
 JM_Global_Buff_ZombieMode_IconGoodBad                        = "good"
 
+JM_Global_Buff_MoneyPrinter_Name                               = "Money Printer"
+JM_Global_Buff_MoneyPrinter_Duration                           = 30
+JM_Global_Buff_MoneyPrinter_NWBool                             = "JM_Buff_NWBool_IsMoneyPrinter"
+JM_Global_Buff_MoneyPrinter_IconName                           = "JM_Buff_Icon_MoneyPrinter"
+JM_Global_Buff_MoneyPrinter_IconPath                           = "vgui/ttt/joshmate/hud_moneyprinter.png"
+JM_Global_Buff_MoneyPrinter_IconGoodBad                        = "good"
+
 
 
 -- Care Package Buffs
@@ -159,6 +180,7 @@ JM_Global_Buff_Care_RapidFire_NWBool                    = "JM_Buff_NWBool_IsRapi
 JM_Global_Buff_Care_RapidFire_IconName                  = "JM_Buff_Icon_RapidFire"
 JM_Global_Buff_Care_RapidFire_IconPath                  = "vgui/ttt/joshmate/hud_rapidfire.png"
 JM_Global_Buff_Care_RapidFire_IconGoodBad               = "good"
+
 
 -- Special Buffs
 

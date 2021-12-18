@@ -7,9 +7,9 @@ ITEM.EquipMenuData = {
 	name = "Zombie Mode",
 	desc = [[Passively grants:
 	
-		+ You gain +50 Max HP
-		+ You gain passive HP Regeneration
-		- You will be shot on sight
+		+ You gain +100 max HP
+		+ You heal 100 HP
+		- You become a very loud zombie
 	]]
 }
 

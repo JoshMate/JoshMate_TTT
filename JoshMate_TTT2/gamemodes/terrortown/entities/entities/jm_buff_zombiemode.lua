@@ -33,17 +33,6 @@ ENT.BuffIconName                = JM_BuffIconName
 -- The Actual Effects of this buff
 -- #############################################
 
-function ENT:RegenBuffTickEffect()
-
-    if self.targetPlayer:Health() >= self.targetPlayer:GetMaxHealth() then return end
-			
-    local newHP = self.targetPlayer:Health() + 1
-    if newHP > self.targetPlayer:GetMaxHealth() then newHP = self.targetPlayer:GetMaxHealth() end
-
-    self.targetPlayer:SetHealth(newHP)
-
-end
-
 function ENT:BuffTickEffect()
 
     -- Handle Buff Effect Ticking
@@ -76,10 +65,6 @@ function ENT:Initialize()
 
     self.BaseClass.Initialize(self)
 
-    -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.3
-    self.buffTickNext   = CurTime()
-
     -- Target
     local target = self.targetPlayer
 
@@ -89,7 +74,8 @@ function ENT:Initialize()
     self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
 
     -- Zombie HP
-    target:SetMaxHealth(target:GetMaxHealth() + 50)
+    target:SetMaxHealth(target:GetMaxHealth() + 100)
+    target:SetHealth(target:Health() + 100)
 
     -- Zombie Form
 
@@ -106,11 +92,6 @@ function ENT:Think()
 
     -- Handle Buff Effect Ticking
     if(not self:IsValid()) then return end
-
-    if(CurTime() >= self.buffTickNext) then
-        self.buffTickNext = CurTime() + self.buffTickDelay
-        self:RegenBuffTickEffect()
-    end
 
     -- Play Zombie Sounds
     if(CurTime() >= self.SoundbuffTickNext) then

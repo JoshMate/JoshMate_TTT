@@ -15,7 +15,7 @@ ITEM.EquipMenuData = {
 ]]
 }
 ITEM.material = "vgui/ttt/joshmate/icon_jm_radar"
-ITEM.CanBuy = {ROLE_TRAITOR, ROLE_DETECTIVE}
+ITEM.CanBuy = {ROLE_DETECTIVE}
 ITEM.oldId = EQUIP_RADAR or 2
 ITEM.InLoadoutFor           = {ROLE_TRAITOR}
 

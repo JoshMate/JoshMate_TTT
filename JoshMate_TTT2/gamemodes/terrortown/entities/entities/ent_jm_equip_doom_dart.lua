@@ -9,7 +9,7 @@ ENT.Spawnable           = false
 ENT.AdminSpawnable      = false
 
 local JM_DoomDart_Explosive_Blast_Damage    = 80
-local JM_DoomDart_Explosive_Blast_Radius    = 500
+local JM_DoomDart_Explosive_Blast_Radius    = 600
 
 
 if CLIENT then
@@ -36,7 +36,7 @@ function ENT:Think()
 			local JMThrower = self.doomedBy
 			util.BlastDamage(self, JMThrower, pos, JM_DoomDart_Explosive_Blast_Radius, JM_DoomDart_Explosive_Blast_Damage)
 
-			self.doomedTarget:EmitSound("DoomDart.mp3")
+			self.doomedTarget:EmitSound("DoomDart.mp3", 120)
 
 			self.doomedBy:ChatPrint("[Doom Dart]: " .. self.doomedTarget:Nick() .. " Has Exploded!" )
 
