@@ -27,14 +27,13 @@
 
 [Zombie Mode]
 - Buffed Max HP: 50 -> 100 HP
-- No longer gives you Health Regen
+- Nerfed Health Regen: 2 HP/s -> 0 HP/s
 
 [Tag Grenades]
 - Buffed Tracking Duration: 3 -> 4 Seconds
 
 [LMG]
 - Nerfed Spread Accuracy: 0.35 -> 0.40
-
 
 [Fixes]
 - Removed the Silenced pistol from the care package (Since it no-longer exists)
@@ -45,6 +44,10 @@
 -- ################################
 -- ##### Maps
 -- ################################
+
+[TTT Divide]
+- A new map
+- Two sides of the map split by a giant chasm that you must cross
 
 [TTT Breakdown]
 - A new map
