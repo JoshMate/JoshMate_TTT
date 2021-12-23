@@ -35,7 +35,7 @@ local function VoiceTryEnable()
 
 	if not VOICE.IsSpeaking() and VOICE.CanSpeak() then
 		VOICE.isTeam = false
-		RunConsoleCommand("+voicerecord")
+		permissions.EnableVoiceChat( true )
 
 		return true
 	end
@@ -45,7 +45,7 @@ end
 
 local function VoiceTryDisable()
 	if VOICE.IsSpeaking() and not VOICE.isTeam then
-		RunConsoleCommand("-voicerecord")
+		permissions.EnableVoiceChat( false )
 
 		return true
 	end
@@ -68,7 +68,7 @@ local function VoiceTeamTryEnable()
 	if not VOICE.IsSpeaking() and VOICE.CanSpeak() and client:IsActive() and tm ~= TEAM_NONE
 	and not TEAMS[tm].alone and not clientrd.unknownTeam and not clientrd.disabledTeamVoice then
 		VOICE.isTeam = true
-		RunConsoleCommand("+voicerecord")
+		permissions.EnableVoiceChat( true )
 
 		return true
 	end
@@ -78,7 +78,7 @@ end
 
 local function VoiceTeamTryDisable()
 	if VOICE.IsSpeaking() and VOICE.isTeam then
-		RunConsoleCommand("-voicerecord")
+		permissions.EnableVoiceChat( false )
 
 		return true
 	end
@@ -404,7 +404,7 @@ function VOICE.Tick()
 		if not VOICE.CanSpeak() then
 			client.voice_battery = 0
 
-			RunConsoleCommand("-voicerecord")
+			permissions.EnableVoiceChat( false )
 		end
 	elseif client.voice_battery < VOICE.battery_max then
 		client.voice_battery = client.voice_battery + GetRechargeRate()
