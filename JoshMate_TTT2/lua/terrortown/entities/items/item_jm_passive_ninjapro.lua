@@ -19,7 +19,7 @@ ITEM.EquipMenuData = {
 }
 
 
-ITEM.CanBuy = {ROLE_TRAITOR}
+ITEM.CanBuy = {}
 ITEM.hud = Material("vgui/ttt/joshmate/hud_ninjapro.png")
 ITEM.material = "vgui/ttt/joshmate/icon_jm_ninja"
 ITEM.oldId = EQUIP_DISGUISE or 4

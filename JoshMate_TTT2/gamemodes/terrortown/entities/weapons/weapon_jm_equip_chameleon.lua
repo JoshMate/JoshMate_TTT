@@ -42,9 +42,9 @@ if CLIENT then
 	
 		+ Invisibility while holding left click
 		+ Your name is hidden while invisible
-
+		+ Your footsteps are silent while invisible
 		- Can only be invisible for a finite amount of time
-		- Entering / leaving invisibility is noisy
+		- Entering invisibility is noisy
 	]]
 }
 
@@ -78,7 +78,7 @@ function SWEP:Invisibility_Give(player)
 	STATUS:AddStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
 	if SERVER then
-		player:EmitSound(Sound("chameleon_activate.wav"), 140, 100, 1, CHAN_AUTO)
+		player:EmitSound(Sound("chameleon_activate.wav"), 160, 100, 1, CHAN_AUTO)
 		self.Chameleon_DefaultPlayerColour = player:GetColor()
 		player:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		self.Chameleon_NewColour = self.Chameleon_DefaultPlayerColour
@@ -154,6 +154,13 @@ function SWEP:Think()
 	end
 
 end
+
+-- Quiet Footsteps
+hook.Add("PlayerFootstep", "ChameleonSilentFootsteps", function(ply)
+	if IsValid(ply) and ply:GetNWBool(JM_Global_Buff_Chameleon_NWBool, false) then
+		return true
+	end
+end)
 
 
 

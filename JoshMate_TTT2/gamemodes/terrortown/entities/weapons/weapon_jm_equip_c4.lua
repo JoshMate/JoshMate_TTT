@@ -29,7 +29,7 @@ Left or Right Click to Place, Then Press E to Arm
 ]]
    };
 
-   SWEP.Icon                = "vgui/ttt/icon_c4"
+   SWEP.Icon                = "vgui/ttt/joshmate/icon_jm_c4.png"
    SWEP.IconLetter          = "I"
 end
 

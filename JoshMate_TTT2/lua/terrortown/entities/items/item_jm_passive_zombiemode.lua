@@ -7,8 +7,10 @@ ITEM.EquipMenuData = {
 	name = "Zombie Mode",
 	desc = [[Passively grants:
 	
-		+ You gain +100 max HP
-		+ You heal 100 HP
+		+ 25 max HP
+		+ 20% movement speed
+		+ 50% jump height
+		+ 50% reduction to Fall Damage
 		- You become a very loud zombie
 	]]
 }
@@ -19,6 +21,24 @@ ITEM.hud = Material("vgui/ttt/joshmate/hud_zombiemode.png")
 ITEM.material = "vgui/ttt/joshmate/icon_jm_zombiemode.png"
 
 
+hook.Add("EntityTakeDamage", "ZombieModeFallDamage", function(target, dmginfo)
+	if not IsValid(target) or not target:IsPlayer() or not dmginfo:IsFallDamage() then return end
+	if target:Alive() and target:IsTerror() and target:HasEquipmentItem("item_jm_passive_zombiemode") then
+		dmginfo:ScaleDamage(0.50)
+	end
+end)
+
+hook.Add("TTTPlayerSpeedModifier", "ZombieModeMoveSpeed", function(ply, _, _, speedMultiplierModifier)
+	if not IsValid(ply)then return end
+	if not ply:HasEquipmentItem("item_jm_passive_zombiemode") then return end
+
+	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
+
+	if SERVER then
+		ply:SetJumpPower(280)
+	end
+	
+end)
 
 
 if SERVER then
@@ -33,8 +53,6 @@ if SERVER then
 
 
 	end
-
-	
 
 	function ITEM:Reset(buyer)
 	end

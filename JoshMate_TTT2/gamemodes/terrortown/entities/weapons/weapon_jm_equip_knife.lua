@@ -24,7 +24,7 @@ if CLIENT then
 	]]
 	}
 
-	SWEP.Icon = "vgui/ttt/icon_knife"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_knife.png"
 	SWEP.IconLetter = "j"
 end
 

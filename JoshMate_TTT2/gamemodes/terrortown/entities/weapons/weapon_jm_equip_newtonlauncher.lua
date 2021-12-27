@@ -11,7 +11,7 @@ if CLIENT then
    SWEP.ViewModelFlip       = false
    SWEP.ViewModelFOV        = 54
 
-   SWEP.Icon               = "vgui/ttt/icon_launch"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_newtonlauncher.png"
 
    SWEP.EquipMenuData = {
       type = "item_weapon",

@@ -22,7 +22,7 @@ Mark up to 2 players, who won't be informed they are doomed.
 ]]
 };
 
-   SWEP.Icon               = "vgui/ttt/icon_silenced"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_silencedpistol.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"

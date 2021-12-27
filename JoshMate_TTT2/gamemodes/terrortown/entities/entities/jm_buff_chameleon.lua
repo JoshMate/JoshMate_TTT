@@ -63,13 +63,6 @@ end
 
 -- This buff is managed in the chameleon weapon file, so only uses this file to init it's values
 
--- Hooks
-hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
-    if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
-    end 
-end)
-
 -- #############################################
 -- AUTOMATICALLY GENERATED STUFF
 -- #############################################
