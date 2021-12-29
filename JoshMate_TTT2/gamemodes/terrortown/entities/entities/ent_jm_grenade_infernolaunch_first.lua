@@ -9,7 +9,7 @@ ENT.Model = Model("models/props_junk/PopCan01a.mdl")
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(200,150,0,150)
 
-local InfernoLauncher_NumberOfNades    = 8
+local InfernoLauncher_NumberOfNades    = 12
 local InfernoLauncher_FuseDelay        = 3
 
 

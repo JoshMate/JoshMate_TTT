@@ -1,0 +1,17 @@
+-- ################################
+-- #### TTT Update 48 - Patch Notes
+-- ################################
+
+[Inferno Launcher]
+- Buffed Number of Projectiles: 8 -> 12 
+
+[Swapper]
+- NOT DONE THESE CHANGES YET
+- You can now only use of of each HP swap and Place Swap
+
+[Fixes]
+- 
+
+-- ################################
+-- ##### Maps
+-- ################################
