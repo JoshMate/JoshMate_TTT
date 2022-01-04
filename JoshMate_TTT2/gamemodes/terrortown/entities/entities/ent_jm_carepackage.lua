@@ -121,7 +121,7 @@ hook.Add( "PreDrawHalos", "Halos_Mega_Tracker", function()
 
 function ENT:Loot_Good( activator, caller ) 
 
-	local RNG_Good = math.random(1, 18)
+	local RNG_Good = math.random(1, 21)
 
 	if RNG_Good == 1 then
 		activator:ChatPrint("[Care Package] - Good Loot: Advanced Pistol")
@@ -169,64 +169,89 @@ function ENT:Loot_Good( activator, caller )
 		Loot_SpawnThis(self,"weapon_jm_zloot_ninjablade")
 	end
 
-	if RNG_Good == 10 then
-		Loot_SpawnThis(self,"npc_pigeon")
-		if(activator:IsTraitor() or activator:IsDetective()) then
-			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (+2 Credits)")
-			activator:AddCredits(2)
-		else
-			activator:ChatPrint("[Care Package] - Good Loot: - Pigeon? (You have been made a Detective!)")
-			activator:SetRole(ROLE_DETECTIVE)
-			SendFullStateUpdate()
-			activator:AddCredits(3)
-		end
-	end
 
-	if RNG_Good == 11 then
+	if RNG_Good == 10 then
 		activator:ChatPrint("[Care Package] - Good Loot: Prop Launcher")
 		Loot_SpawnThis(self,"weapon_jm_zloot_prop_launcher")
 	end
 
-	if RNG_Good == 12 then
+	if RNG_Good == 11 then
 		activator:ChatPrint("[Care Package] - Good Loot: Rapid Fire")
 		JM_GiveBuffToThisPlayer("jm_buff_rapidfire", activator, self)
 	end
 
-	if RNG_Good == 13 then
+	if RNG_Good == 12 then
 		activator:ChatPrint("[Care Package] - Good Loot: Portable Tester")
 		Loot_SpawnThis(self,"weapon_jm_zloot_traitor_tester")
 		
 	end
 
-	if RNG_Good == 14 then
+	if RNG_Good == 13 then
 		activator:ChatPrint("[Care Package] - Good Loot: Big Boy")
 		Loot_SpawnThis(self,"weapon_jm_zloot_explosive_gun")
 		
 	end
 
-	if RNG_Good == 15 then
+	if RNG_Good == 14 then
 		activator:ChatPrint("[Care Package] - Good Loot: Shredder")
 		Loot_SpawnThis(self,"weapon_jm_zloot_shredder")
 		
 	end	
 
-	if RNG_Good == 16 then
+	if RNG_Good == 15 then
 		activator:ChatPrint("[Care Package] - Good Loot: Crate Swep")
 		Loot_SpawnThis(self,"weapon_jm_zloot_placer_crate")
 		
 	end	
 
-	if RNG_Good == 17 then
+	if RNG_Good == 16 then
 		activator:ChatPrint("[Care Package] - Good Loot: Medkit Swep")
 		Loot_SpawnThis(self,"weapon_jm_zloot_placer_medkit")
 		
 	end	
 
-	if RNG_Good == 18 then
+	if RNG_Good == 17 then
 		activator:ChatPrint("[Care Package] - Good Loot: Slo-Mo Clock")
 		Loot_SpawnThis(self,"weapon_jm_zloot_slomo_clock")
 
 	end	
+
+	if RNG_Good == 18 then
+		Loot_SpawnThis(self,"npc_pigeon")
+		if(activator:IsTraitor() or activator:IsDetective()) then
+			activator:ChatPrint("[Care Package] - Good Loot: Role Change Blue (+1 Credit)")
+			activator:AddCredits(1)
+		else
+			activator:ChatPrint("[Care Package] - Good Loot: Role Change Blue (You are now a Detective!)")
+			activator:SetRole(ROLE_DETECTIVE)
+			SendFullStateUpdate()
+			activator:AddCredits(2)
+		end
+	end
+
+	if RNG_Good == 19 then
+		Loot_SpawnThis(self,"npc_pigeon")
+		if(activator:IsTraitor() or activator:IsDetective()) then
+			activator:ChatPrint("[Care Package] - Good Loot: Role Change Red (+1 Credit)")
+			activator:AddCredits(1)
+		else
+			activator:ChatPrint("[Care Package] - Good Loot: Role Change Red (You are now a Traitor!)")
+			activator:SetRole(ROLE_TRAITOR)
+			SendFullStateUpdate()
+			activator:AddCredits(2)
+		end
+	end
+
+	if RNG_Good == 20 then
+		Loot_SpawnThis(self,"npc_pigeon")
+		activator:ChatPrint("[Care Package] - Good Loot: Extra Credit (+3 Credits)")
+		activator:AddCredits(3)
+	end
+
+	if RNG_Bad == 21 then
+		activator:ChatPrint("[Care Package] - Good Loot: Gus Radio")
+		Loot_SpawnThis(self,"ent_jm_zloot_radio_gus")
+	end
 
 	
 	
@@ -243,16 +268,6 @@ function ENT:Loot_Bad( activator, caller )
 	end
 
 	if RNG_Bad == 2 then
-		activator:ChatPrint("[Care Package] - Bad Loot: Pigeon")
-		Loot_SpawnThis(self,"npc_pigeon")
-	end
-
-	if RNG_Bad == 3 then
-		activator:ChatPrint("[Care Package] - Bad Loot: Gus Radio (SAFE)")
-		Loot_SpawnThis(self,"ent_jm_zloot_radio_gus")
-	end
-
-	if RNG_Bad == 4 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Mega Tracker")
 		
 		net.Start("JM_ULX_Announcement")
@@ -268,7 +283,7 @@ function ENT:Loot_Bad( activator, caller )
 		end
 	end
 
-	if RNG_Bad == 5 then
+	if RNG_Bad == 3 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Godzilla")
 		if SERVER then activator:EmitSound(Sound("godzillaroar.wav")) end
 
@@ -285,12 +300,12 @@ function ENT:Loot_Bad( activator, caller )
 
 	end
 
-	if RNG_Bad == 6 then
+	if RNG_Bad == 4 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Tripping Balls")
 		JM_GiveBuffToThisPlayer("jm_buff_trippingballs", activator, self)
 	end
 
-	if RNG_Bad == 7 then
+	if RNG_Bad == 5 then
 
 		net.Start("JM_ULX_Announcement")
 		net.WriteString("Care Package: Gravity is now much weaker!")
@@ -307,7 +322,7 @@ function ENT:Loot_Bad( activator, caller )
 		end
 	end
 
-	if RNG_Bad == 8 then
+	if RNG_Bad == 6 then
 
 		net.Start("JM_ULX_Announcement")
 		net.WriteString("Care Package: The floors are now slippery!")
@@ -324,7 +339,7 @@ function ENT:Loot_Bad( activator, caller )
 		end
 	end
 
-	if RNG_Bad == 9 then
+	if RNG_Bad == 7 then
 
 		local PossibleVictims = {}
 
@@ -375,17 +390,17 @@ function ENT:Loot_Bad( activator, caller )
 		
 	end
 
-	if RNG_Bad == 10 then
+	if RNG_Bad == 8 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Ticking Time Bomb")
 		Loot_SpawnThis(self,"ent_jm_zloot_timebomb")
 	end
 
-	if RNG_Bad == 11 then
+	if RNG_Bad == 9 then
 		activator:ChatPrint("[Care Package] - Bad Loot: 1 HP")
 		activator:SetHealth(1)
 	end
 
-	if RNG_Bad == 12 then
+	if RNG_Bad == 10 then
 
 		activator:StripWeapons()
 		
@@ -408,7 +423,7 @@ function ENT:Loot_Bad( activator, caller )
 		
 	end
 
-	if RNG_Bad == 13 then
+	if RNG_Bad == 11 then
 		activator:ChatPrint("[Care Package] - Bad Loot: 1 HP For All")
 		
 		net.Start("JM_ULX_Announcement")
@@ -423,7 +438,7 @@ function ENT:Loot_Bad( activator, caller )
 		end
 	end
 
-	if RNG_Bad == 14 then
+	if RNG_Bad == 12 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Best Friend Apocalypse")
 
 		net.Start("JM_ULX_Announcement")
@@ -431,7 +446,7 @@ function ENT:Loot_Bad( activator, caller )
 		net.WriteUInt(0, 16)
 		net.Broadcast()
 
-		local NumberToSpawn = 12
+		local NumberToSpawn = 18
 		local possibleSpawns = ents.FindByClass( "info_player_start" )
 		table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
 		
@@ -450,7 +465,7 @@ function ENT:Loot_Bad( activator, caller )
 		end
 	end
 
-	if RNG_Bad == 15 then
+	if RNG_Bad == 13 then
 		activator:ChatPrint("[Care Package] - Bad Loot: Zombie Apocalypse")
 
 		net.Start("JM_ULX_Announcement")
@@ -458,7 +473,7 @@ function ENT:Loot_Bad( activator, caller )
 		net.WriteUInt(0, 16)
 		net.Broadcast()
 
-		local NumberToSpawn = 16
+		local NumberToSpawn = 18
 		local possibleSpawns = ents.FindByClass( "info_player_start" )
 		table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
 		
@@ -488,6 +503,60 @@ function ENT:Loot_Bad( activator, caller )
 				if (RandChoice == 14) then RandZombie = "npc_poisonzombie" end
 
 				local ent = ents.Create(RandZombie)
+				ent:SetPos(spawn:GetPos())
+				ent:Spawn()  
+			end
+
+		end
+	end
+
+	if RNG_Bad == 14 then
+		activator:ChatPrint("[Care Package] - Bad Loot: Antlion Infestation")
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: Antlion Infestation!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
+		local NumberToSpawn = 12
+		local possibleSpawns = ents.FindByClass( "info_player_start" )
+		table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
+		
+		for i=1,NumberToSpawn do 
+
+			if #possibleSpawns > 0 then
+				local randomChoice = math.random(1, #possibleSpawns)
+				local spawn = possibleSpawns[randomChoice]
+				table.remove( possibleSpawns, randomChoice )
+
+				local ent = ents.Create("npc_antlion")
+				ent:SetPos(spawn:GetPos())
+				ent:Spawn()  
+			end
+
+		end
+	end
+
+	if RNG_Bad == 15 then
+		activator:ChatPrint("[Care Package] - Bad Loot: The Flames of Hell")
+
+		net.Start("JM_ULX_Announcement")
+		net.WriteString("Care Package: The Flames of Hell!")
+		net.WriteUInt(0, 16)
+		net.Broadcast()
+
+		local NumberToSpawn = 18
+		local possibleSpawns = ents.FindByClass( "info_player_start" )
+		table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
+		
+		for i=1,NumberToSpawn do 
+
+			if #possibleSpawns > 0 then
+				local randomChoice = math.random(1, #possibleSpawns)
+				local spawn = possibleSpawns[randomChoice]
+				table.remove( possibleSpawns, randomChoice )
+				
+				local ent = ents.Create("ent_jm_base_fire")
 				ent:SetPos(spawn:GetPos())
 				ent:Spawn()  
 			end

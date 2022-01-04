@@ -9,8 +9,9 @@ ENT.Model = Model("models/props_junk/PopCan01a.mdl")
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(200,150,0,150)
 
-local JM_Explosive_Blast_Damage    = 15
-local JM_Explosive_Blast_Radius    = 400
+local JM_Explosive_Blast_Damage    = 8
+local JM_Explosive_Blast_Radius    = 500
+
 
 function ENT:Explode(tr)
    if SERVER then

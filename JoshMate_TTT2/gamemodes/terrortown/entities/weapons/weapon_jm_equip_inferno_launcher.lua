@@ -35,7 +35,7 @@ SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 1
+SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
 
@@ -49,13 +49,16 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/c_crossbow.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_crossbow.mdl")
 
+local JM_Explosive_FuseDelay       = 3
+local JM_Explosive_ShootForce      = 1350
+
 function SWEP:PrimaryAttack()
 
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    if not self:CanPrimaryAttack() then return end
    self:EmitSound( self.Primary.Sound )
-   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK ) 
    self:TakePrimaryAmmo( 1 )
    if IsValid(self:GetOwner()) then
       self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
@@ -69,7 +72,7 @@ function SWEP:PrimaryAttack()
 
       -- Control the power of the launch
       self.JM_Throw_PowerMult = 1
-      self.JM_Throw_Power = 1200
+      self.JM_Throw_Power = JM_Explosive_ShootForce
 
       -- Josh Mate Changes = Massively Simplified this for ease of use
       local A_Src = ply:GetShootPos()
@@ -118,7 +121,7 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
    end
 
    -- This has to happen AFTER Spawn() calls gren's Initialize()
-   gren:SetDetonateExact(CurTime() + 3)
+   gren:SetDetonateExact(CurTime() + JM_Explosive_FuseDelay)
 
    return gren
 end
@@ -129,6 +132,11 @@ end
 
 function SWEP:Reload()
    return false
+end
+
+function SWEP:Deploy()
+   self:SendWeaponAnim( ACT_VM_RELOAD )
+   return self.BaseClass.Deploy(self)
 end
 
 -- Hud Help Text

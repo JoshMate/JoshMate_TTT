@@ -18,7 +18,7 @@ Left Click: Swap HP with another player
 
 Right Click: Swap positions on the map
 
-Has 2 uses
+Has 2 uses (Can use each function once)
 ]]
 };
 
@@ -50,6 +50,12 @@ SWEP.WorldModel            = "models/weapons/w_smg_tmp.mdl"
 
 local JM_Shoot_Range                = 10000
 
+SWEP.JM_Swapper_Max_Use_HP         = 1
+SWEP.JM_Swapper_Max_Use_Location   = 1
+
+SWEP.Swapper_Use_Count_HP           = 0
+SWEP.Swapper_Use_Count_Location     = 0
+
 function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
 
    if not IsValid(ent) then return end
@@ -67,6 +73,8 @@ function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
       -- Swap
       if secondaryAttack == false then
 
+         self.Swapper_Use_Count_HP = self.Swapper_Use_Count_HP + 1
+
          self.Swapper_TempHP_Yours_Cur       = self:GetOwner():Health()
          self.Swapper_TempHP_Theirs_Cur      = ent:Health()
 
@@ -82,6 +90,9 @@ function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
          self:GetOwner():SetHealth(self.Swapper_TempHP_Theirs_Cur)
 
       else
+
+         self.Swapper_Use_Count_Location = self.Swapper_Use_Count_Location + 1
+
          activator = self:GetOwner()
          Victim = ent
 
@@ -102,6 +113,17 @@ function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
 end
 
 function SWEP:PrimaryAttack()
+
+   -- Check for Use Counters
+   if self.Swapper_Use_Count_HP >= self.JM_Swapper_Max_Use_HP then 
+
+      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+      if not self:CanPrimaryAttack() then return end
+
+      if SERVER then  self:GetOwner():ChatPrint("[Swapper] - You have already swapped HP the maximum amount of times") end
+      return
+   end
+   -- #########
 
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
@@ -144,46 +166,68 @@ end
 
 
 function SWEP:SecondaryAttack()
-      -- Weapon Animation, Sound and Cycle data
+
+   -- Check for Use Counters
+   if self.Swapper_Use_Count_Location >= self.JM_Swapper_Max_Use_Location then 
+
       self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
       if not self:CanSecondaryAttack() then return end
-      self:EmitSound( self.Primary.Sound )
-      self:SendWeaponAnim( self.PrimaryAnim )
-      self:TakePrimaryAmmo( 1 )
-      if IsValid(self:GetOwner()) then
-         self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
+
+      self:GetOwner():ChatPrint("[Swapper] - You have already swapped Places the maximum amount of times")
+      return
+   end
+   
+   -- #########
+
+   -- Check for crouching user
+
+   if self:GetOwner():Crouching() then
+
+      self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
+      if not self:CanSecondaryAttack() then return end
+
+      if SERVER then self:GetOwner():ChatPrint("[Swapper] - You can't swap places with someone while you are crouching!") end
+
+      return
+   end
+   -- #########
+
+   -- Weapon Animation, Sound and Cycle data
+   self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
+   if not self:CanSecondaryAttack() then return end
+   self:EmitSound( self.Primary.Sound )
+   self:SendWeaponAnim( self.PrimaryAnim )
+   self:TakePrimaryAmmo( 1 )
+   if IsValid(self:GetOwner()) then
+      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
+   end
+   -- #########
+
+   -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
+   
+   local owner = self:GetOwner()
+   if not IsValid(owner) then return end
+
+   if isfunction(owner.LagCompensation) then -- for some reason not always true
+      owner:LagCompensation(true)
+   end
+   
+   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
+   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+      self:ApplyEffect(tr.Entity, owner,true)
+   end
+
+   owner:LagCompensation(false)
+
+   -- #########
+
+   -- Remove Weapon When out of Ammo
+   if SERVER then
+      if self:Clip1() <= 0 then
+         self:Remove()
       end
-      -- #########
-   
-      -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
-      
-      local owner = self:GetOwner()
-      if not IsValid(owner) then return end
-   
-      if isfunction(owner.LagCompensation) then -- for some reason not always true
-         owner:LagCompensation(true)
-      end
-      
-      local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
-      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-         if not owner:Crouching() then
-            self:ApplyEffect(tr.Entity, owner,true)
-         else
-            if SERVER then owner:ChatPrint("[Swapper] - You can't swap places with someone while you are crouching!") end
-         end
-      end
-   
-      owner:LagCompensation(false)
-   
-      -- #########
-   
-      -- Remove Weapon When out of Ammo
-      if SERVER then
-         if self:Clip1() <= 0 then
-            self:Remove()
-         end
-      end
-      -- #########
+   end
+   -- #########
 end
 
 

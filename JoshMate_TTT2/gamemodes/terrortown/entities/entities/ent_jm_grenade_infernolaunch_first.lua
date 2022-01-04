@@ -41,7 +41,7 @@ function ENT:CreateInfernoLauncherSecondarys()
          -- Josh Mate Changes = Massively Simplified this for ease of use
          local A_Src = self:GetPos()
          local A_Angle = Angle(0,0,0)
-         local A_Vel = VectorRand(-1, 1 ) * VectorRand(-500, 500)
+         local A_Vel = VectorRand(-1, 1 ) * VectorRand(-600, 600)
          local A_AngImp = Vector(600, math.random(-1200, 1200), 0)
    
          self:CreateGrenade(A_Src, A_Angle, A_Vel, A_AngImp, self:GetOwner())
@@ -58,9 +58,9 @@ function ENT:CreateGrenade(src, ang, vel, angimp, ply)
    gren:SetOwner(ply)
    gren:SetThrower(ply)
 
-   gren:SetGravity(0.35)
-   gren:SetFriction(0.4)
-   gren:SetElasticity(0.6)
+   gren:SetGravity(2)
+   gren:SetFriction(0.3)
+   gren:SetElasticity(0.5)
    gren:SetColor(Color(200,150,0,150))
 
    gren:Spawn()

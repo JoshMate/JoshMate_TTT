@@ -23,7 +23,7 @@ function ENT:Initialize()
 	self.Print_Count 		= 0
 	self.Print_Count_Max	= 2
 	self.Print_Time_Delay	= 30
-	self.Print_HP_Bonus		= 15
+	self.Print_HP_Bonus		= 25
 
 	-- Set Status and print Message
 	if SERVER then JM_GiveBuffToThisPlayer("jm_buff_moneyprinter",self:GetOwner(),self:GetOwner()) end
@@ -36,13 +36,17 @@ function ENT:Initialize()
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
 		self:GetOwner():ChatPrint("[Money Printer] - Active and Printing in: " .. tostring(self.Print_Time_Delay) .. " Seconds")
 	end
+
+	-- UI HUD ICON
+	if SERVER then self:SendWarn(true) end 
+	-- END of 
 end
 
 function ENT:PrintMoney()
 
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
 
-		self:GetOwner():ChatPrint("[Money Printer] - You Printed: +15 Max HP")
+		self:GetOwner():ChatPrint("[Money Printer] - You Printed: +20 Max HP")
 		self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + self.Print_HP_Bonus)
 		self:GetOwner():SetHealth(self:GetOwner():Health() + self.Print_HP_Bonus)
 
@@ -66,6 +70,9 @@ function ENT:Use( activator, caller )
 
 		if IsValid(activator) and activator:Alive() and SERVER then
 			activator:ChatPrint("[Money Printer] - You Looted: 1 Credit")
+			activator:ChatPrint("[Money Printer] - You Looted: +25 Max HP")
+			activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
+			activator:SetHealth(activator:Health() + 25) 
 			activator:AddCredits(1)
 		end	
 		self:Remove()
@@ -74,6 +81,8 @@ end
 
 
 function ENT:OnRemove()
+
+	if SERVER then self:SendWarn(false) end
 
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
 		self:GetOwner():ChatPrint("[Money Printer] - Your Printer has been Destroyed!")
@@ -98,3 +107,17 @@ function ENT:Think()
 	end
 end
 
+--- Josh Mate Hud Warning
+if SERVER then
+	function ENT:SendWarn(armed)
+		net.Start("TTT_MoneyWarn")
+		net.WriteUInt(self:EntIndex(), 16)
+		net.WriteBit(armed)
+
+		if armed then
+			net.WriteVector(self:GetPos())
+		end
+
+		net.Broadcast()
+	end
+end

@@ -3,13 +3,13 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Model = Model("models/weapons/w_eq_flashbang_thrown.mdl")
 
-ENT.JM_Fire_Damage                  = 4
+ENT.JM_Fire_Damage                  = 5
 ENT.JM_Fire_Damage_Delay            = 0.2
 ENT.JM_Fire_Damage_Delay_Start      = 0
 ENT.JM_Fire_Duration                = 30
 ENT.JM_Fire_Duration_Start          = 0
 ENT.JM_Fire_Size_Sprite             = 128
-ENT.JM_Fire_Size_Radius             = 100
+ENT.JM_Fire_Size_Radius             = 120
 ENT.JM_Fire_Child                   = nil
 
 

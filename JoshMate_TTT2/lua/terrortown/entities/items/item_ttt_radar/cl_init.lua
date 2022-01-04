@@ -15,6 +15,7 @@ local indicator = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_player")
 local c4warn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_c4")
 local hazardwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_hazard")
 local lootwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_loot")
+local moneywarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_money")
 local sample_scan = surface.GetTextureID("vgui/ttt/sample_scan")
 local det_beacon = surface.GetTextureID("vgui/ttt/det_beacon")
 local near_cursor_dist = 180
@@ -31,6 +32,8 @@ RADAR.hazards = {}
 RADAR.hazards_count = 0
 RADAR.loots = {}
 RADAR.loots_count = 0
+RADAR.moneys = {}
+RADAR.moneys_count = 0
 RADAR.repeating = true
 RADAR.samples = {}
 RADAR.samples_count = 0
@@ -106,7 +109,18 @@ function RADAR.CacheEnts()
 				b.pos = ent:GetPos()
 			end
 		end
+	end
+
+	if RADAR.moneys_count > 0 then  
+
+		-- Update hazard positions for those we know about
+		for idx, b in pairs(RADAR.moneys) do
+			local ent = Entity(idx)
 	
+			if IsValid(ent) then
+				b.pos = ent:GetPos()
+			end
+		end
 	end
 end
 
@@ -213,6 +227,19 @@ function RADAR:Draw(client)
 
 		for _, loot in pairs(self.loots) do
 			DrawTarget(loot, 24, 0, true)
+		end
+	end
+
+	-- Money Warnings
+	if self.moneys_count ~= 0 then
+		surface.SetTexture(moneywarn)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
+
+		for _, money in pairs(self.moneys) do
+			if client:GetTeam() == TEAM_SPEC or client:GetTeam() == TEAM_TRAITOR or client:IsDetective() then
+				DrawTarget(money, 24, 0, true)
+			end
 		end
 	end
 
@@ -336,6 +363,24 @@ local function RecieveLootWarn()
 	RADAR.loots_count = table.Count(RADAR.loots)
 end
 net.Receive("TTT_LootWarn", RecieveLootWarn)
+
+-- Josh Mate Changes
+local function RecieveMoneyWarn()
+	local idx = net.ReadUInt(16)
+	local armed = net.ReadBit() == 1
+
+	if armed then
+		local pos = net.ReadVector()
+		local team = net.ReadString()
+
+		RADAR.moneys[idx] = {pos = pos, team = team}
+	else
+		RADAR.moneys[idx] = nil
+	end
+
+	RADAR.moneys_count = table.Count(RADAR.moneys)
+end
+net.Receive("TTT_MoneyWarn", RecieveMoneyWarn)
 
 local function TTT_CorpseCall()
 	local pos = net.ReadVector()

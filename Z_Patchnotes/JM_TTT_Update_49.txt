@@ -3,15 +3,52 @@
 -- ################################
 
 [Inferno Launcher]
-- Buffed Number of Projectiles: 8 -> 12 
+- Buffed Number of Projectiles: 8 -> 12 Projectiles
+- Buffed Fire Damage Per DOT Tick: 4 -> 5 Damage
+- Buffed the radius of the fire: 100 -> 120 Units
+- Buffed the radius of the explosion: 400 -> 500 Units
+- Buffed the aerodynamics and flattened the trajectory arc
+- Nerfed the initial explosion damage: 15 -> 8 Damage
+- Nerfed the length of the deploy animation (Slower to equip)
 
 [Swapper]
-- NOT DONE THESE CHANGES YET
-- You can now only use of of each HP swap and Place Swap
+- Still has 2 uses but you can only swap HP or Places a maximum of once each
+- Failing to swap places due to crouching no longer uses up ammo (As it failed)
+
+[Money Printer]
+- Buffed HP Gained per print: 15 -> 25 Max HP
+- Traitors, Detectives and Spectators can now see the location of the printer on their HUD
+- Traitors now loot +25 Max HP on top of the 1 credit when they press "e" on the printer
+
+[Care Package]
+- Removed the old pigeon loot
+- Removed the old detective role change loot
+
+[Care Package Loot: Role Change Blue]
+- Spawns a pigeon
+- If you are an innocent: you become an Detective
+- Otherwise +1 Credit
+
+[Care Package Loot: Role Change Red]
+- Spawns a pigeon
+- If you are an innocent: you become an Traitor (It's a secret to everyone else)
+- Otherwise +1 Credit
+
+[Care Package Loot: Extra Credit]
+- Spawns a pigeon
+- You get +3 credits
+
+[Care Package Loot: Antlion Infestation]
+- Spawns Antlions all over the map who kill on sight
+
+[Care Package Loot: Flames of Hell]
+- Spawns fire all over the map that burns players
 
 [Fixes]
-- 
+- None
 
 -- ################################
 -- ##### Maps
 -- ################################
+
+- None
