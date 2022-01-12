@@ -1,0 +1,15 @@
+[EMP]
+@@@ WORK NOT STARTED YET @@@
+- New Traitor Item
+- Single use global map coverage
+- Blacks out all non-traitors screens for 2 seconds
+- Prevents all voice chat for 10 Seconds
+
+[Promoter]
+@@@ WORK NOT STARTED YET @@@
+- New Detective Item
+- Use on 1 other player
+- Give them a unique and powerful weapon
+- Fully heals them and grants them +50 max HP
+- You will both be tracked on each others screens until the end of the round
+- Other players will see that they have been promoted and are "Trusted" by the detective

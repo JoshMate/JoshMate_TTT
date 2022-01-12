@@ -44,7 +44,7 @@ end)
 hook.Add("TTTPlayerSpeedModifier", "NinjaProMoveSpeed", function(ply, _, _, speedMultiplierModifier)
 	if not IsValid(ply)then return end
 	if SERVER then
-		ply:SetJumpPower(160)
+		ply:SetJumpPower(180)
 		ply:SetCrouchedWalkSpeed(0.3)
 	end
 	if not ply:HasEquipmentItem("item_jm_passive_ninjapro") then return end
@@ -53,7 +53,7 @@ hook.Add("TTTPlayerSpeedModifier", "NinjaProMoveSpeed", function(ply, _, _, spee
 	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
 
 	if SERVER then
-		ply:SetJumpPower(280)
+		ply:SetJumpPower(300)
 		ply:SetCrouchedWalkSpeed(0.60)
 	end
 end)

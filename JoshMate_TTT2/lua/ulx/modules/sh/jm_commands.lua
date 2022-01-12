@@ -2,22 +2,23 @@
 AddCSLuaFile()
 
 
-local CATEGORY_NAME = "JoshMate"
+local CATEGORY_NAME_JM_Karma 		= "JM Karma"
+local CATEGORY_NAME_JM_Maps 		= "JM Maps"
+local CATEGORY_NAME_JM_Fun 			= "JM Fun"
+local CATEGORY_NAME_JM_Tool 		= "JM Tools"
 
 -- ##################################################
 -- ### Spawn Care Package
 -- ##################################################
 
-local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME, "jm carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
+local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME_JM_Fun, "jm carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
 cmdSpawnCarePackage:defaultAccess(ULib.ACCESS_ADMIN)
-
-local CATEGORY_NAME = "JoshMate"
 
 -- ##################################################
 -- ### Spawn Emergency Airdrop
 -- ##################################################
 
-local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME, "jm carepacakage x3", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
+local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME_JM_Fun, "jm carepacakage x3", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
 cmdEmergencyAirdrop:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- #########################
@@ -34,7 +35,7 @@ function ulx.spawnthing( calling_ply, message )
 
 end
 
-local spawnthis = ulx.command( CATEGORY_NAME, "jm creatething", ulx.spawnthing, "!spawnthis")
+local spawnthis = ulx.command( CATEGORY_NAME_JM_Fun, "jm creatething", ulx.spawnthing, "!spawnthis")
 spawnthis:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
 spawnthis:defaultAccess( ULib.ACCESS_ADMIN )
 spawnthis:help( "Spawns the given entity name: eg. weapon_jm_zloot_prop_launcher" )
@@ -45,10 +46,7 @@ spawnthis:help( "Spawns the given entity name: eg. weapon_jm_zloot_prop_launcher
 
 function ulx.spawnthing( calling_ply, message )
 
-	net.Start("JM_ULX_Announcement")
-    net.WriteString("Giving Everyone: " .. tostring(message))
-	net.WriteUInt(0, 16)
-    net.Broadcast()
+	JM_Function_Announcement("Giving Everyone: " .. tostring(message), 0)
 
 	local plys = player.GetAll()
 
@@ -67,7 +65,7 @@ function ulx.spawnthing( calling_ply, message )
 
 end
 
-local spawnthis = ulx.command( CATEGORY_NAME, "jm creatething all", ulx.spawnthing, "!spawnthisforall")
+local spawnthis = ulx.command( CATEGORY_NAME_JM_Fun, "jm creatething all", ulx.spawnthing, "!spawnthisforall")
 spawnthis:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
 spawnthis:defaultAccess( ULib.ACCESS_ADMIN )
 spawnthis:help( "Spawns the given entity name for everyone: eg. weapon_jm_zloot_prop_launcher" )
@@ -79,7 +77,7 @@ function ulx.mapvote(calling_ply, time, isOppositeCmd)
     if isOppositeCmd then MapVote:Stop() else MapVote:Start(time) end
 end
 
-local cmdMapvote = ulx.command(CATEGORY_NAME, "jm map vote", ulx.mapvote, "!mapvote")
+local cmdMapvote = ulx.command(CATEGORY_NAME_JM_Maps, "jm map vote", ulx.mapvote, "!mapvote")
 cmdMapvote:addParam{ type=ULib.cmds.NumArg, min=10, default=30, max=60, ULib.cmds.optional, hint="Votetime" } -- time param
 cmdMapvote:addParam{ type=ULib.cmds.BoolArg, invisible=true } -- isOppositeCmd param
 cmdMapvote:defaultAccess(ULib.ACCESS_ADMIN)
@@ -95,7 +93,7 @@ function ulx.resetmaplist(calling_ply)
     ConfigHelper:WritePlayedMaps({}) 
 end
 
-local cmdResetMapList = ulx.command(CATEGORY_NAME, "jm map resetlist", ulx.resetmaplist, "!resetmaplist")
+local cmdResetMapList = ulx.command(CATEGORY_NAME_JM_Maps, "jm map resetlist", ulx.resetmaplist, "!resetmaplist")
 cmdResetMapList:defaultAccess(ULib.ACCESS_ADMIN)
 
 
@@ -122,7 +120,7 @@ function ulx.karmatotalreset(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A reset everyones KARMA")
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm karma reset all", ulx.karmatotalreset, "!karmatotalreset")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset all", ulx.karmatotalreset, "!karmatotalreset")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Resets All KARMA")
 
@@ -149,7 +147,7 @@ function ulx.karmapunish250(calling_ply, target_plys)
 	ulx.fancyLogAdmin(calling_ply, "#A punished #T for #i KARMA", target_plys, 250)
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm karma punish 250", ulx.karmapunish250, "!karmapunish250")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish 250", ulx.karmapunish250, "!karmapunish250")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Take away 250 KARMA")
@@ -177,7 +175,7 @@ function ulx.karmapunish500(calling_ply, target_plys)
 	ulx.fancyLogAdmin(calling_ply, "#A punished #T for #i KARMA", target_plys, 500)
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm karma punish 500", ulx.karmapunish500, "!karmapunish500")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish 500", ulx.karmapunish500, "!karmapunish500")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Take away 500 KARMA")
@@ -201,7 +199,7 @@ function ulx.karmaset1000(calling_ply, target_plys)
 	ulx.fancyLogAdmin(calling_ply, "#A set #T to #i KARMA", target_plys, 1000)
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm karma reset 1000", ulx.karmaset1000, "!karmaset1000")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1000", ulx.karmaset1000, "!karmaset1000")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Sets KARMA to 1000")
@@ -225,7 +223,7 @@ function ulx.karmaset1250(calling_ply, target_plys)
 	ulx.fancyLogAdmin(calling_ply, "#A set #T to #i KARMA", target_plys, 1250)
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm karma reset 1250", ulx.karmaset1250, "!karmaset1250")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1250", ulx.karmaset1250, "!karmaset1250")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Sets KARMA to 1250")
@@ -246,7 +244,7 @@ function ulx.slayeveryone(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A Slayed EVERYONE")
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm slay all", ulx.slayeveryone, "!slayeveryone")
+local karma = ulx.command(CATEGORY_NAME_JM_Tool, "jm slay all", ulx.slayeveryone, "!slayeveryone")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Slays Everyone")
 
@@ -256,17 +254,29 @@ karma:help("Slays Everyone")
 
 function ulx.announcement( calling_ply, message )
 
-	net.Start("JM_ULX_Announcement")
-    net.WriteString(tostring(message))
-	net.WriteUInt(0, 16)
-    net.Broadcast()
+	JM_Function_Announcement(message, 0)
 
 end
 
-local announce = ulx.command( CATEGORY_NAME, "jm announcement", ulx.announcement, "!announcement")
+local announce = ulx.command( CATEGORY_NAME_JM_Tool, "jm announcement", ulx.announcement, "!announcement")
 announce:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
 announce:defaultAccess( ULib.ACCESS_ADMIN )
 announce:help( "Sends a message to everyone" )
+
+-- #########################
+-- #####  Play Sound   #####
+-- #########################
+
+function ulx.playsound( calling_ply, message )
+
+	JM_Function_PlaySound(message)
+
+end
+
+local playsounds = ulx.command( CATEGORY_NAME_JM_Tool, "jm playsound", ulx.playsound, "!playsound")
+playsounds:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
+playsounds:defaultAccess( ULib.ACCESS_ADMIN )
+playsounds:help( "Play a client side sound on all players. Eg: ping_jake.wav" )
 
 -- #########################
 -- #####  Sudden Death #####
@@ -274,14 +284,14 @@ announce:help( "Sends a message to everyone" )
 
 function ulx.suddendeath( calling_ply)
 
-	net.Start("JM_ULX_Announcement")
+	net.Start("JM_Net_Announcement")
     net.WriteString("Sudden Death!")
 	net.WriteUInt(1, 16)
     net.Broadcast()
 
 end
 
-local suddendeath = ulx.command( CATEGORY_NAME, "jm x suddendeath", ulx.suddendeath, "!suddendeath")
+local suddendeath = ulx.command( CATEGORY_NAME_JM_Fun, "jm x suddendeath", ulx.suddendeath, "!suddendeath")
 suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
 suddendeath:help( "Starts Sudden Death" )
 
@@ -291,7 +301,7 @@ suddendeath:help( "Starts Sudden Death" )
 
 function ulx.trackall( calling_ply)
 
-	net.Start("JM_ULX_Announcement")
+	net.Start("JM_Net_Announcement")
     net.WriteString("Everyone is now Tracked!")
 	net.WriteUInt(2, 16)
     net.Broadcast()
@@ -309,7 +319,7 @@ function ulx.trackall( calling_ply)
 
 end
 
-local trackall = ulx.command( CATEGORY_NAME, "jm x trackall", ulx.trackall, "!trackall")
+local trackall = ulx.command( CATEGORY_NAME_JM_Fun, "jm x trackall", ulx.trackall, "!trackall")
 trackall:defaultAccess( ULib.ACCESS_ADMIN )
 trackall:help( "Starts Sudden Death" )
 
@@ -348,7 +358,7 @@ function ulx.enableproxyvoice(calling_ply)
 
 		local ConVarProxy_Range_Text = ConVarProxy_Range:GetInt()
 
-        net.Start("JM_ULX_Announcement")
+        net.Start("JM_Net_Announcement")
 		net.WriteString("Proximity Voice: " .. tostring(ConVarProxy_State_Text) .. " - (Range: " .. tostring(ConVarProxy_Range_Text) .. " Units)")
 		net.WriteUInt(3, 16)
 		net.Broadcast()
@@ -358,59 +368,49 @@ function ulx.enableproxyvoice(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A has enabled: Proximity Voice")
 end
 
-local karma = ulx.command(CATEGORY_NAME, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
+local karma = ulx.command(CATEGORY_NAME_JM_Tool, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Enables Proxy Voice until the next map")
 
 
--- Extra
-if SERVER then
-	util.AddNetworkString("JM_ULX_Announcement")
+-- ##################################################
+-- ### Reset Server Convars
+-- ##################################################
+
+local cmdResetServerCvars = ulx.command(CATEGORY_NAME_JM_Tool, "jm resetservercvars", function () JM_ResetAllSettings() end, "!resetservercvars")
+cmdResetServerCvars:defaultAccess(ULib.ACCESS_ADMIN)
+
+-- ##################################################
+-- ### Add Rounds
+-- ##################################################
+
+local function JM_ULX_Round_Add()
+
+	local curRounds = GetGlobalInt("ttt_rounds_left", 6)
+	curRounds = curRounds + 1
+	
+	SetGlobalInt("ttt_rounds_left",curRounds)
+
+	GAMEMODE:SyncGlobals()
 end
 
-if CLIENT then
+local cmdRoundAdd = ulx.command(CATEGORY_NAME_JM_Maps, "jm round add", function () JM_ULX_Round_Add()  end, "!roundadd")
+cmdRoundAdd:defaultAccess(ULib.ACCESS_ADMIN)
 
-	surface.CreateFont( "JoshMateFont_Announcements", {
-		font = "Calibri", --  Use the font-name which is shown to you by your operating system Font Viewer, not the file name
-		extended = false,
-		size = 48,
-		weight = 300,
-		blursize = 0,
-		scanlines = 0,
-		antialias = true,
-		underline = false,
-		italic = false,
-		strikeout = false,
-		symbol = false,
-		rotary = false,
-		shadow = false,
-		additive = false,
-		outline = true,
-	} )
+-- ##################################################
+-- ### Take away Rounds
+-- ##################################################
 
-	local message = nil
-	local messageTime = 0
+local function JM_ULX_Round_Remove()
 
-    net.Receive("JM_ULX_Announcement", function(_) 
-		
-        message = net.ReadString()
-		messageType = net.ReadUInt(16)
-		messageTime = CurTime()
+	local curRounds = GetGlobalInt("ttt_rounds_left", 6)
+	curRounds = curRounds - 1
+	
+	SetGlobalInt("ttt_rounds_left",curRounds)
 
-		surface.PlaySound("0_main_popup.wav")
-
-		if messageType == 1 then surface.PlaySound("0_main_suddendeath.mp3") end
-		if messageType == 2 then surface.PlaySound("ping_jake.wav") end
-		if messageType == 3 then surface.PlaySound("0_proximity_voice_toggle.wav") end
-		
-        chat.AddText( Color( 255, 0, 0 ), "[Announcement] - ", Color( 255, 255, 0 ), tostring(message))
-    end)
-
-	hook.Add( "HUDPaint", "JM_HOOK_DRAWANNOUNCEMENTTEXT", function()
-
-		if not message then return end
-		if messageTime < (CurTime() - 10) then message = nil return end
-
-		draw.DrawText(tostring(message), "JoshMateFont_Announcements", (ScrW()/2), (ScrH()/4), Color(255,255,0,255), TEXT_ALIGN_CENTER)
-	end )
+	GAMEMODE:SyncGlobals()
 end
+
+local cmdRoundRemove = ulx.command(CATEGORY_NAME_JM_Maps, "jm round remove", function () JM_ULX_Round_Remove() end, "!roundremove")
+cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
+

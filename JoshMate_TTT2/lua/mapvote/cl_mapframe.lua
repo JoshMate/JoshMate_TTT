@@ -9,23 +9,22 @@ surface.CreateFont("TimeLeftFont", {
 local PANEL = {}
 
 function PANEL:Init()
-    local width, height = self:CalcFrameSize()
     
-    self:SetSize(width, height)
-    self:SetPos(0, 100)
+    self:SetSize(ScrW(), ScrH())
+    self:SetPos(0, 0)
     self:CenterHorizontal()
 
     self.timeLeftLabel = vgui.Create("DLabel", self)
     self.timeLeftLabel:SetText("")
     self.timeLeftLabel:SetContentAlignment( 5 )
     self.timeLeftLabel:SetPos(0, 0)
-    self.timeLeftLabel:SetSize(width, 40)
+    self.timeLeftLabel:SetSize(ScrW(), 40)
     self.timeLeftLabel:SetFont("TimeLeftFont")
     self.timeLeftLabel:SetTextColor( Color( 255, 150, 0, 255 ) )
 
     self.scrollPanel = vgui.Create("DScrollPanel", self)
-    self.scrollPanel:SetSize(width, height - 50)
-    self.scrollPanel:SetPos(0, 50)
+    self.scrollPanel:SetSize(ScrW(), ScrH() - 50)
+    self.scrollPanel:SetPos(50, 50)
 
     self.mapButtonList = vgui.Create("DIconLayout", self.scrollPanel)
     self.mapButtonList:SetSpaceY(SPACING)
@@ -36,30 +35,9 @@ function PANEL:Init()
 
     self.voterIcons = {}
 
-    self.hideFrame = vgui.Create("DButton", self)
-    self.hideFrame:SetText("_")
-    self.hideFrame:SetSize(20, 20)
-    self.hideFrame:SetVisible(true)
-    self.hideFrame:SetPos(width - SPACING - 20, 20 + SPACING)
-    self.hideFrame.DoClick = function()
-        self:SetVisible(false)
-        LocalPlayer():ChatPrint("Mapvote hide - Type !mapvoteshow to show mapvote again.")
-    end
-
     self:ParentToHUD()
     self:MakePopup()
     self:SetKeyboardInputEnabled(false)
-end
-
-function PANEL:CalcFrameSize() 
-    local buttonsPerRow = math.Round(ScrW() / MAPBUTTON_W)
-    if buttonsPerRow > MAX_BUTTONROW then
-        buttonsPerRow = MAX_BUTTONROW
-    end
-
-    local width = buttonsPerRow * MAPBUTTON_W + buttonsPerRow * SPACING
-
-    return width, ScrH() - 100
 end
 
 function PANEL:AddMaps(maps) 
@@ -106,7 +84,11 @@ end
 function PANEL:Think()
     local time = math.ceil(MapVote.voteTimeEnd - CurTime())
     time = math.max(0, time)
-    self.timeLeftLabel:SetText(time .. " seconds left to vote")
+    self.timeLeftLabel:SetText(tostring(time))
+end
+
+function PANEL:Paint( w, h )
+    draw.RoundedBox( 0, 0, 0, w, h, Color( 0, 0, 0 ) )
 end
 
 

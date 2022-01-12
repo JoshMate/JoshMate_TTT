@@ -2,7 +2,7 @@
 AddCSLuaFile()
 
 -- Function To Reset Everything
-local function JM_ResetAllSettings()
+function JM_ResetAllSettings()
 
 	RunConsoleCommand("sv_gravity", 600)
 	RunConsoleCommand("sv_friction", 8)

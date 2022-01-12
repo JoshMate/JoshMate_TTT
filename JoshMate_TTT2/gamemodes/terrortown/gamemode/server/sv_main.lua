@@ -800,7 +800,7 @@ end
 -- @param number time_left time left before the next map switch in seconds
 -- @hook
 -- @realm server
-function GM:TTT2LoadNextMap(nextmap, rounds_left, time_left)
+function GM:TTT2LoadNxetMap(nextmap, rounds_left, time_left)
 	if rounds_left <= 0 then
 		LANG.Msg("limit_round", {mapname = nextmap})
 	elseif time_left <= 0 then

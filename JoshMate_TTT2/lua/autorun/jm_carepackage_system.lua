@@ -1,10 +1,5 @@
 if engine.ActiveGamemode() ~= "terrortown" then return end
 
-
-
-
-
-
 if SERVER then
 
     util.AddNetworkString("JM_CarePackage_Arrival")

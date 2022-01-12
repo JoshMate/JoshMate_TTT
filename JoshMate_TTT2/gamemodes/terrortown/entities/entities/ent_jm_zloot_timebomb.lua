@@ -68,7 +68,7 @@ function ENT:Initialize()
 	end
 
 	if SERVER then
-		sound.Play("ticking_time_bomb_music.mp3", self:GetPos(), 150, 100)
+		self:EmitSound("ticking_time_bomb_music.mp3")
 		local gusSongDurationSeconds = 30
 
 		timer.Simple(gusSongDurationSeconds, function()

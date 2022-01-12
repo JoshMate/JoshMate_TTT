@@ -35,7 +35,7 @@ hook.Add("TTTPlayerSpeedModifier", "ZombieModeMoveSpeed", function(ply, _, _, sp
 	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
 
 	if SERVER then
-		ply:SetJumpPower(280)
+		ply:SetJumpPower(300)
 	end
 	
 end)

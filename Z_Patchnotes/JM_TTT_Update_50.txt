@@ -1,0 +1,74 @@
+################################
+#### TTT Update 50 - Patch Notes
+################################
+
+[Player Movement]
+- Buffed default player Jump Height: 160 -> 180
+- Also increased other jump height buffs to stay in line with new changes
+- (This is a minor change and won't make impossible jumps suddenly doable)
+- (But it does make Jumping feel a bit smoother / nicer)
+
+[Map Voting]
+- Re wrote the vote menu look better and make better use of the screen
+- Put child locks on the menu to prevent hold w zoomers from closing it and not voting
+- Nerfed Seb's ability to get on your nerves by binding and spamming "!mapvoteshow"
+
+[Admin Controls]
+- Wrote new commands so I can Extend or shorten round limits per map in realtime
+
+[Care Package Loot: Reveal]
+- New Care Package Rare Loot
+- Reveals the looter's role to everyone else on the server
+
+[Care Package Loot: Full Heal]
+- New Care Package Rare Loot
+- Fully heal everyone who is Alive
+
+[Care Package Loot: Mega Godzilla]
+- New Care Package Rare Loot
+- Regular godzilla effect, but it hits EVERYONE
+
+[Care Package Loot: What the Dog Doing?]
+- New Care Package Rare Loot
+- What the dog doing?
+
+[Care Package Loot: Flames of Hell]
+- Fires now appear much closer to players
+- There are now much more fires in total
+
+################################
+##### Fixes + Extras
+################################
+
+- Rewrote all the care package code to be cleaner, flexible and expandable
+- Rewrote the admin menus to make them easier for me to use and expandable
+- Cleaned up care package related text messages you see when looting 
+- Fixed certain items having a extra unwanted yellow C icon in the shop
+- Fixed the ticking time bomb sound not following the bomb around the map
+
+################################
+##### Maps
+################################
+
+[TTT Traitor Express]
+- New Map
+- Set on a large cargo train moving quickly through the desert
+
+[TTT Tidal]
+- New Map
+- A map set on a large stone structure suspended above the ocean
+- This is a complete re-design of TTT Rising Tide as a proper Map
+
+[TTT Sanctum]
+- New Map (Created by Seb)
+- Set in an indoor foggy arena with moody lighting
+
+[TTT Warmup]
+- New Map
+- A complete re-make of Warmup to work better as a testing environment
+- It now contains lots of activities to keep the zoomers and ADHD childeren entertained
+
+[TTT Roof Party]
+- Made the crack den music louder and less buggy (not being able to hear it when you should)
+- Re made the crack den button so it now shows you its status with colours and sounds
+- Some minor texture fixes
