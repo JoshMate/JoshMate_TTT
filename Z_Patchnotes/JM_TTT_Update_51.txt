@@ -2,18 +2,32 @@
 #### TTT Update 51 - Patch Notes
 ################################
 
-[Player Movement]
-
+[UI]
+- New HUD text message system that has colour and sound effects
+- Currently only setup with Care Package loot notifications
+- But will eventually be incorporated into all systems on the server
 
 ################################
-##### Fixes + Extras
+##### Fixes & Extras
 ################################
 
-- 
+- Fixed Sudden Death, Jake Ping and various other broken global events
 
 ################################
 ##### Maps
 ################################
 
+[TTT House Party]
+- A New Map
+- A claustrophobic mansion with usable doors, vents, Traitor Buttons and secret passages
+
 [TTT Tidal]
-- 
+- Drastically reduced the total size of the map.
+- Cleaned up a lot of the props and streamlined the map
+- Re did weapon spawns for improved balance
+- Removed the teleporter and elaborate damage logic
+
+[TTT Sanctum]
+- (Seb) Swapped out the glass texture for a more obviously unbreakable one
+- (Seb) Fixed teleporter door not closing properly
+- (Seb) Fixed teleporter door allowing multiple people through

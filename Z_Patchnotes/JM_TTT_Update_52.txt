@@ -1,0 +1,23 @@
+################################
+#### TTT Update 51 - Patch Notes
+################################
+
+[UI]
+- // TODO repalce all Chat Prints with Josh Mate Prints
+
+################################
+##### Fixes & Extras
+################################
+
+################################
+##### Maps
+################################
+
+[TTT House Party]
+- Doors now look, sound and behave better
+- Doors are no longer breakable
+- Doors can now be opened in both directions
+
+
+- Make vents less campable
+- No more breakable doors

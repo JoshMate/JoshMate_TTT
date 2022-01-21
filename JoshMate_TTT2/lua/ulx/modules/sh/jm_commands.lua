@@ -286,8 +286,9 @@ function ulx.suddendeath( calling_ply)
 
 	net.Start("JM_Net_Announcement")
     net.WriteString("Sudden Death!")
-	net.WriteUInt(1, 16)
     net.Broadcast()
+
+	JM_Function_PlaySound("0_main_suddendeath.mp3")
 
 end
 
@@ -303,8 +304,9 @@ function ulx.trackall( calling_ply)
 
 	net.Start("JM_Net_Announcement")
     net.WriteString("Everyone is now Tracked!")
-	net.WriteUInt(2, 16)
     net.Broadcast()
+
+	JM_Function_PlaySound("ping_jake.wav")
 
 	local plys = player.GetAll()
 
@@ -360,8 +362,9 @@ function ulx.enableproxyvoice(calling_ply)
 
         net.Start("JM_Net_Announcement")
 		net.WriteString("Proximity Voice: " .. tostring(ConVarProxy_State_Text) .. " - (Range: " .. tostring(ConVarProxy_Range_Text) .. " Units)")
-		net.WriteUInt(3, 16)
 		net.Broadcast()
+
+		JM_Function_PlaySound("0_proximity_voice_toggle.wav")
 
 	end
 

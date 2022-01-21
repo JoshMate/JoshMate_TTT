@@ -19,6 +19,25 @@ end
 -- End of Play Sound Function
 -----------------------------------------------
 
+-----------------------------------------------
+--  Print Chat Function
+-----------------------------------------------
+
+
+function JM_Function_PrintChat(player, prefixMessageString, chatMessageString)
+
+    net.Start("JM_Net_PrintChat")
+    net.WriteString(tostring(prefixMessageString))
+	net.WriteString(tostring(chatMessageString))
+    net.Send(player)
+
+end
+
+
+-----------------------------------------------
+-- End of Print Chat Function
+-----------------------------------------------
+
 
 -----------------------------------------------
 -- Announcement Function
@@ -37,6 +56,7 @@ end
 if SERVER then
 	util.AddNetworkString("JM_Net_Announcement")
     util.AddNetworkString("JM_Net_PlaySound")
+	util.AddNetworkString("JM_Net_PrintChat")
 end
 
 if CLIENT then
@@ -62,26 +82,32 @@ if CLIENT then
 	local message = nil
 	local messageTime = 0
     local soundToPlay = nil
+	local chatMessage = nil
 
     net.Receive("JM_Net_Announcement", function(_) 
 		
         message = net.ReadString()
-		messageType = net.ReadUInt(16)
 		messageTime = CurTime()
 
 		surface.PlaySound("0_main_popup.wav")
 
-		if messageType == 1 then JM_Function_PlaySound("0_main_suddendeath.mp3") end
-		if messageType == 2 then JM_Function_PlaySound("ping_jake.wav") end
-		if messageType == 3 then JM_Function_PlaySound("0_proximity_voice_toggle.wav") end
-		
-        chat.AddText( Color( 255, 0, 0 ), "[Announcement] - ", Color( 255, 255, 0 ), tostring(message))
+		chat.AddText( Color( 255, 0, 0 ), "[Announcement] ", Color( 255, 255, 0 ), tostring(message))
     end)
 
     net.Receive("JM_Net_PlaySound", function(_) 
 		
         soundToPlay = net.ReadString()
 		surface.PlaySound(soundToPlay)
+    end)
+
+	net.Receive("JM_Net_PrintChat", function(_) 
+		
+        prefixMessage = net.ReadString()
+		chatMessage = net.ReadString()
+
+		surface.PlaySound("0_main_slight.wav")
+		
+        chat.AddText( Color( 255, 100, 0 ), "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)
 
 	hook.Add( "HUDPaint", "JM_HOOK_DRAWANNOUNCEMENTTEXT", function()
