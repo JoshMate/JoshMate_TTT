@@ -1,0 +1,20 @@
+################################
+#### TTT Update 53 - Patch Notes
+################################
+
+[Agent Maker]
+- Make being agented as a traitor give you +1 credit
+// TODO
+
+[Care Package Loot: Rooty Tooty Point and Shooty]
+- Buff
+// TODO
+
+
+################################
+##### Fixes & Extras
+################################
+
+################################
+##### Maps
+################################

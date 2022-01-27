@@ -18,7 +18,7 @@ cmdSpawnCarePackage:defaultAccess(ULib.ACCESS_ADMIN)
 -- ### Spawn Emergency Airdrop
 -- ##################################################
 
-local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME_JM_Fun, "jm carepacakage x3", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
+local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME_JM_Fun, "jm emergencyairdrop", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
 cmdEmergencyAirdrop:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- #########################
@@ -35,7 +35,7 @@ function ulx.spawnthing( calling_ply, message )
 
 end
 
-local spawnthis = ulx.command( CATEGORY_NAME_JM_Fun, "jm creatething", ulx.spawnthing, "!spawnthis")
+local spawnthis = ulx.command( CATEGORY_NAME_JM_Fun, "jm give", ulx.spawnthing, "!spawnthis")
 spawnthis:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
 spawnthis:defaultAccess( ULib.ACCESS_ADMIN )
 spawnthis:help( "Spawns the given entity name: eg. weapon_jm_zloot_prop_launcher" )
@@ -65,7 +65,7 @@ function ulx.spawnthing( calling_ply, message )
 
 end
 
-local spawnthis = ulx.command( CATEGORY_NAME_JM_Fun, "jm creatething all", ulx.spawnthing, "!spawnthisforall")
+local spawnthis = ulx.command( CATEGORY_NAME_JM_Fun, "jm give all", ulx.spawnthing, "!spawnthisforall")
 spawnthis:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
 spawnthis:defaultAccess( ULib.ACCESS_ADMIN )
 spawnthis:help( "Spawns the given entity name for everyone: eg. weapon_jm_zloot_prop_launcher" )
@@ -244,7 +244,7 @@ function ulx.slayeveryone(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A Slayed EVERYONE")
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Tool, "jm slay all", ulx.slayeveryone, "!slayeveryone")
+local karma = ulx.command(CATEGORY_NAME_JM_Fun, "jm x slayall", ulx.slayeveryone, "!slayeveryone")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Slays Everyone")
 
@@ -292,7 +292,7 @@ function ulx.suddendeath( calling_ply)
 
 end
 
-local suddendeath = ulx.command( CATEGORY_NAME_JM_Fun, "jm x suddendeath", ulx.suddendeath, "!suddendeath")
+local suddendeath = ulx.command( CATEGORY_NAME_JM_Fun, "jm v suddendeath", ulx.suddendeath, "!suddendeath")
 suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
 suddendeath:help( "Starts Sudden Death" )
 
@@ -321,7 +321,7 @@ function ulx.trackall( calling_ply)
 
 end
 
-local trackall = ulx.command( CATEGORY_NAME_JM_Fun, "jm x trackall", ulx.trackall, "!trackall")
+local trackall = ulx.command( CATEGORY_NAME_JM_Fun, "jm v trackall", ulx.trackall, "!trackall")
 trackall:defaultAccess( ULib.ACCESS_ADMIN )
 trackall:help( "Starts Sudden Death" )
 

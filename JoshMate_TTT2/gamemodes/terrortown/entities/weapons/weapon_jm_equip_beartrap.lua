@@ -46,6 +46,7 @@ if CLIENT then
 	end
 end
 
+
 local JM_Trap_PlaceRange				= 192
 
 function SWEP:PrimaryAttack()

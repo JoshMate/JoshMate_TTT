@@ -29,7 +29,7 @@ end
 -- Normal Loot Table
 function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
 
-    local RNG_Roll_Normal = math.random(1, 21)
+    local RNG_Roll_Normal = math.random(1, 22)
 
     -- Optional Override of loot outcome for debug / fun
     if not forcedLootIndex == 0 then RNG_Roll_Normal = forcedLootIndex end
@@ -55,6 +55,7 @@ function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
     if RNG_Roll_Normal == 19    then JM_CarePackage_Loot_Normal_19( activator, caller ) end
     if RNG_Roll_Normal == 20    then JM_CarePackage_Loot_Normal_20( activator, caller ) end
     if RNG_Roll_Normal == 21    then JM_CarePackage_Loot_Normal_21( activator, caller ) end
+    if RNG_Roll_Normal == 22    then JM_CarePackage_Loot_Normal_22( activator, caller ) end
 
 end
 
@@ -213,6 +214,11 @@ end
 function JM_CarePackage_Loot_Normal_21( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Gus Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_gus")
+end
+
+function JM_CarePackage_Loot_Normal_22( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Rooty Tooty Point and Shooty")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_mega_shotgun")
 end
 
 

@@ -135,6 +135,13 @@ JM_Global_Buff_MoneyPrinter_IconName                           = "JM_Buff_Icon_M
 JM_Global_Buff_MoneyPrinter_IconPath                           = "vgui/ttt/joshmate/hud_moneyprinter.png"
 JM_Global_Buff_MoneyPrinter_IconGoodBad                        = "good"
 
+JM_Global_Buff_Agent_Name                                       = "Agent"
+JM_Global_Buff_Agent_Duration                                   = 0
+JM_Global_Buff_Agent_NWBool                                     = "JM_Buff_NWBool_IsAgent"
+JM_Global_Buff_Agent_IconName                                   = "JM_Buff_Icon_Agent"
+JM_Global_Buff_Agent_IconPath                                   = "vgui/ttt/joshmate/hud_agent.png"
+JM_Global_Buff_Agent_IconGoodBad                                = "good"
+
 
 
 -- Care Package Buffs
