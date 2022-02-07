@@ -16,7 +16,7 @@ ITEM.EquipMenuData = {
 }
 
 
-ITEM.CanBuy = {ROLE_TRAITOR}
+ITEM.CanBuy = {}
 ITEM.hud = Material("vgui/ttt/joshmate/hud_zombiemode.png")
 ITEM.material = "vgui/ttt/joshmate/icon_jm_zombiemode.png"
 

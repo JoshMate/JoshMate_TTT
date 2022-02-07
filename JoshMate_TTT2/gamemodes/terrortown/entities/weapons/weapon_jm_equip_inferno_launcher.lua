@@ -134,11 +134,6 @@ function SWEP:Reload()
    return false
 end
 
-function SWEP:Deploy()
-   self:SendWeaponAnim( ACT_VM_RELOAD )
-   return self.BaseClass.Deploy(self)
-end
-
 -- Hud Help Text
 if CLIENT then
 	function SWEP:Initialize()

@@ -155,6 +155,7 @@ util.AddNetworkString("TTT_C4Warn")
 util.AddNetworkString("TTT_HazardWarn")
 util.AddNetworkString("TTT_LootWarn")
 util.AddNetworkString("TTT_MoneyWarn")
+util.AddNetworkString("TTT_ObjectiveWarn")
 util.AddNetworkString("TTT_ScanResult")
 util.AddNetworkString("TTT_FlareScorch")
 util.AddNetworkString("TTT_Radar")
@@ -1238,6 +1239,12 @@ end
 -- @internal
 function PrintResultMessage(result)
 	ServerLog("Round ended.\n")
+
+	if result == "JM_Objective_Victory" then
+		LANG.Msg("JM_Objective_Victory")
+		ServerLog("Result: Objectives Destroyed, traitors win.\n")
+		return
+	end
 
 	if result == WIN_TIMELIMIT then
 		LANG.Msg("win_time")

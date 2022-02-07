@@ -21,11 +21,11 @@ SWEP.WeaponID            = AMMO_MAC10
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 30
+SWEP.Primary.Damage        = 35
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.080
-SWEP.Primary.Cone          = 0.040
-SWEP.Primary.Recoil        = 0.5
+SWEP.Primary.Cone          = 0.045
+SWEP.Primary.Recoil        = 1.0
 SWEP.Primary.Range         = 500
 SWEP.Primary.ClipSize      = 30
 SWEP.Primary.DefaultClip   = 30

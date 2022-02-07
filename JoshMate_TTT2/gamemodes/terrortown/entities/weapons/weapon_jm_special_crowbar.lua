@@ -253,6 +253,7 @@ function SWEP:SecondaryAttack()
 			 -- JM Changes Extra Hit Marker
 			 net.Start( "hitmarker" )
 			 net.WriteFloat(0)
+			 net.WriteBool(false)
 			 net.Send(owner)
 			 -- End Of
 

@@ -279,6 +279,20 @@ playsounds:defaultAccess( ULib.ACCESS_ADMIN )
 playsounds:help( "Play a client side sound on all players. Eg: ping_jake.wav" )
 
 -- #########################
+-- ##  Protect The Server ##
+-- #########################
+
+function ulx.gmprotectserver( calling_ply)
+
+	JM_GameMode_Start_ProtectTheFiles()
+
+end
+
+local gmprotectserver = ulx.command( CATEGORY_NAME_JM_Fun, "jm z gmprotectservers", ulx.gmprotectserver, "!gmprotectservers")
+gmprotectserver:defaultAccess( ULib.ACCESS_ADMIN )
+gmprotectserver:help( "Starts the Gamemode: Protect the Servers" )
+
+-- #########################
 -- #####  Sudden Death #####
 -- #########################
 

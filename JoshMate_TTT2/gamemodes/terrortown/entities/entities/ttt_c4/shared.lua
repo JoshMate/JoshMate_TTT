@@ -272,6 +272,7 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 	local diff = nil
 	local dmg = 0
 	local plys = player.GetAll()
+	local playersCaughtInBlase = 0
 
 	for i = 1, #plys do
 		local ply = plys[i]
@@ -289,6 +290,11 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 		
 		dmg = damage * (1-( distance / radius))
 
+		-- Only hurt what they have, more accurate Hit Markers
+		if ply:Health() <= dmg then dmg = ply:Health() end
+
+		playersCaughtInBlase = playersCaughtInBlase + 1
+
 		local dmginfo = DamageInfo()
 		dmginfo:SetDamage(dmg)
 		dmginfo:SetAttacker(dmgowner)
@@ -299,6 +305,12 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 
 		ply:TakeDamageInfo(dmginfo)
 	end
+
+	-- Send Breakdown of damage to Traitor
+	if SERVER then
+		JM_Function_PrintChat(dmgowner, "C4", tostring(playersCaughtInBlase) .. " Players got caught in your C4's Blast!")
+	end
+
 end
 
 local c4boom = Sound("c4.explode")

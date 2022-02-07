@@ -106,8 +106,12 @@ if CLIENT then
 		chatMessage = net.ReadString()
 
 		surface.PlaySound("0_main_slight.wav")
+
+		local textPrefixColour =  Color( 255, 100, 0 )
+		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
+		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
 		
-        chat.AddText( Color( 255, 100, 0 ), "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
+        chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)
 
 	hook.Add( "HUDPaint", "JM_HOOK_DRAWANNOUNCEMENTTEXT", function()

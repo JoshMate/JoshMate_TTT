@@ -27,6 +27,7 @@ function ENT:Explode(tr)
             -- Hit Markers
             net.Start( "hitmarker" )
             net.WriteFloat(0)
+            net.WriteBool(false)
             net.Send(pl)
             -- End of Hit Markers
             

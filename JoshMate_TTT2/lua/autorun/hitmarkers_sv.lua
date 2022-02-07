@@ -11,13 +11,29 @@ hook.Add( "EntityTakeDamage", "hitmarkers", function( tar, info )
 	if not tar:IsPlayer() and not tar:IsNPC() then return end
 	local att = info:GetAttacker() 
 
+	local finDMG = 0
+	local didThisKill = false
+
+	if att:IsPlayer() and engine.ActiveGamemode() == "terrortown" then 
+		finDMG = info:GetDamage() * att:GetDamageFactor()
+		if finDMG >= tar:Health() then 
+			finDMG = tar:Health()
+			didThisKill = true
+		end
+	else
+		finDMG = info:GetDamage()
+		if finDMG >= tar:Health() then 
+			finDMG = tar:Health() 
+			didThisKill = true
+		end
+	end
+
+
 	-- The Player Route
 	if att:IsPlayer() then
 		net.Start( "hitmarker" )
-		if engine.ActiveGamemode() == "terrortown" then net.WriteFloat(info:GetDamage() * att:GetDamageFactor()) 
-		else
-			net.WriteFloat(info:GetDamage()) 
-		end
+		net.WriteFloat(finDMG) 
+		net.WriteBool(didThisKill)
 		net.Send( att )
 		return
 	end
@@ -26,8 +42,11 @@ hook.Add( "EntityTakeDamage", "hitmarkers", function( tar, info )
 	if not att:IsPlayer() then
 		if att:GetNWEntity("giveHitMarkersTo") == nil then return end
 		if not IsValid(att:GetNWEntity("giveHitMarkersTo")) then return end
+		finDMG = info:GetDamage()
+		if finDMG >= tar:Health() then finDMG = tar:Health() end
 		net.Start( "hitmarker" )
-		net.WriteFloat(info:GetDamage())
+		net.WriteFloat(finDMG)
+		net.WriteBool(didThisKill)
 		net.Send( att:GetNWEntity("giveHitMarkersTo") )
 		return
 	end

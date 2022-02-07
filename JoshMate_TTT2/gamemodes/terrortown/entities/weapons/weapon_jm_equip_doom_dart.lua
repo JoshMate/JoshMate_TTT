@@ -67,6 +67,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )
       net.WriteFloat(0)
+      net.WriteBool(false)
       net.Send(weaponOwner)
       -- End Of
 

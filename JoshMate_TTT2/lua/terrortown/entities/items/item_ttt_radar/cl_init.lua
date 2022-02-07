@@ -16,6 +16,7 @@ local c4warn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_c4")
 local hazardwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_hazard")
 local lootwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_loot")
 local moneywarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_money")
+local objectivewarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_objective")
 local sample_scan = surface.GetTextureID("vgui/ttt/sample_scan")
 local det_beacon = surface.GetTextureID("vgui/ttt/det_beacon")
 local near_cursor_dist = 180
@@ -34,6 +35,8 @@ RADAR.loots = {}
 RADAR.loots_count = 0
 RADAR.moneys = {}
 RADAR.moneys_count = 0
+RADAR.objectives = {}
+RADAR.objectives_count = 0
 RADAR.repeating = true
 RADAR.samples = {}
 RADAR.samples_count = 0
@@ -115,6 +118,18 @@ function RADAR.CacheEnts()
 
 		-- Update hazard positions for those we know about
 		for idx, b in pairs(RADAR.moneys) do
+			local ent = Entity(idx)
+	
+			if IsValid(ent) then
+				b.pos = ent:GetPos()
+			end
+		end
+	end
+
+	if RADAR.objectives_count > 0 then  
+
+		-- Update hazard positions for those we know about
+		for idx, b in pairs(RADAR.objectives) do
 			local ent = Entity(idx)
 	
 			if IsValid(ent) then
@@ -240,6 +255,17 @@ function RADAR:Draw(client)
 			if client:GetTeam() == TEAM_SPEC or client:GetTeam() == TEAM_TRAITOR or client:IsDetective() then
 				DrawTarget(money, 24, 0, true)
 			end
+		end
+	end
+
+	-- objective Warnings
+	if self.objectives_count ~= 0 then
+		surface.SetTexture(objectivewarn)
+		surface.SetTextColor(255, 255, 255, 255)
+		surface.SetDrawColor(255, 255, 255, 255)
+
+		for _, objective in pairs(self.objectives) do
+			DrawTarget(objective, 24, 0, true)
 		end
 	end
 
@@ -381,6 +407,24 @@ local function RecieveMoneyWarn()
 	RADAR.moneys_count = table.Count(RADAR.moneys)
 end
 net.Receive("TTT_MoneyWarn", RecieveMoneyWarn)
+
+-- Josh Mate Changes
+local function RecieveObjectiveWarn()
+	local idx = net.ReadUInt(16)
+	local armed = net.ReadBit() == 1
+
+	if armed then
+		local pos = net.ReadVector()
+		local team = net.ReadString()
+
+		RADAR.objectives[idx] = {pos = pos, team = team}
+	else
+		RADAR.objectives[idx] = nil
+	end
+
+	RADAR.objectives_count = table.Count(RADAR.objectives)
+end
+net.Receive("TTT_ObjectiveWarn", RecieveObjectiveWarn)
 
 local function TTT_CorpseCall()
 	local pos = net.ReadVector()

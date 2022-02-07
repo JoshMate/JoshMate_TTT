@@ -1136,7 +1136,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 				dmg:SetDamageType(DMG_CRUSH)
 			end
 			
-			ply:EmitSound("goombastomp_voice.mp3", 160, 100, 1)
+			JM_Function_PlaySound("goombastomp_voice.mp3")
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)

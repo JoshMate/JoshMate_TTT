@@ -78,7 +78,7 @@ function SWEP:Invisibility_Give(player)
 	STATUS:AddStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
 	if SERVER then
-		player:EmitSound(Sound("chameleon_activate.wav"), 160, 100, 1, CHAN_AUTO)
+		JM_Function_PlaySound("chameleon_activate.wav")
 		self.Chameleon_DefaultPlayerColour = player:GetColor()
 		player:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		self.Chameleon_NewColour = self.Chameleon_DefaultPlayerColour

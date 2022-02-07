@@ -121,6 +121,7 @@ if SERVER then
                 
                 if (ply:GetBaseKarma() >= 1250 ) then
                     ply:AddCredits(1)
+                    JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +1 Credit")
                 end
 
             end
@@ -131,6 +132,7 @@ if SERVER then
                 
                 if (ply:GetBaseKarma() >= 1250 ) then
                     ply:AddCredits(1)
+                    JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +1 Credit")
                 end
 
             end

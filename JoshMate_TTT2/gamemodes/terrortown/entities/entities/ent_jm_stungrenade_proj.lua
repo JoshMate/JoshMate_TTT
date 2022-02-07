@@ -42,6 +42,7 @@ function ENT:Explode(tr)
                -- Hit Markers
                net.Start( "hitmarker" )
                net.WriteFloat(0)
+               net.WriteBool(false)
                net.Send(self:GetOwner())
                -- End of Hit Markers
                       

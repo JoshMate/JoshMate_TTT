@@ -83,8 +83,8 @@ function ENT:Initialize()
 			util.Effect("Explosion", effect, true, true)
 			util.Effect("HelicopterMegaBomb", effect, true, true)
 
-			local JM_Gus_Explosive_Blast_Damage    = 200
-			local JM_Gus_Explosive_Blast_Radius    = 3000
+			local JM_Gus_Explosive_Blast_Damage    = 125
+			local JM_Gus_Explosive_Blast_Radius    = 2500
 
 			-- Sound
 			sound.Play("c4.explode", pos, 150, 100)

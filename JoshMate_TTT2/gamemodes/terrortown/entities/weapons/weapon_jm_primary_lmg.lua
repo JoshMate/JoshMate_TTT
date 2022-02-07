@@ -26,14 +26,14 @@ SWEP.WeaponID              = AMMO_M249
 
 SWEP.Primary.Damage        = 20
 SWEP.Primary.NumShots      = 1
-SWEP.Primary.Delay         = 0.075
+SWEP.Primary.Delay         = 0.070
 SWEP.Primary.Cone          = 0.040
-SWEP.Primary.Recoil        = 0.50
+SWEP.Primary.Recoil        = 0.5
 SWEP.Primary.Range         = 1250
 SWEP.Primary.ClipSize      = 100
 SWEP.Primary.DefaultClip   = 100
 SWEP.Primary.ClipMax       = 0
-SWEP.Primary.SoundLevel    = 75
+SWEP.Primary.SoundLevel    = 100
 
 SWEP.HeadshotMultiplier    = 2
 SWEP.DeploySpeed           = 0.75
@@ -51,6 +51,9 @@ SWEP.WorldModel            = "models/weapons/w_mach_m249para.mdl"
 SWEP.IronSightsPos         = Vector(-5.96, -5.119, 2.349)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 
+-- JM Changes, Movement Speed
+SWEP.MoveMentMultiplier = 0.8
+-- End of
 
 -- No Iron Sights
 function SWEP:SecondaryAttack()

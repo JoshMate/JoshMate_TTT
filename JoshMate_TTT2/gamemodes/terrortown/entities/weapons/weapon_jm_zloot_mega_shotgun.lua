@@ -24,11 +24,11 @@ SWEP.WeaponID              = AMMO_MEGA_SHOTGUN
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 20
+SWEP.Primary.Damage        = 25
 SWEP.Primary.NumShots      = 100
-SWEP.Primary.Delay         = 2.00
+SWEP.Primary.Delay         = 1.00
 SWEP.Primary.Cone          = 0.30
-SWEP.Primary.Recoil        = 5
+SWEP.Primary.Recoil        = 10
 SWEP.Primary.Range         = 3000
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 2

@@ -361,16 +361,13 @@ function JM_CarePackage_Loot_Rare_09( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_10( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","1 HP For All")
+    JM_Function_PrintChat(activator, "Care Package","Mass HP Buff")
 		
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: You are all reduced to 1 HP!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
+    JM_Function_Announcement("Care Package: You all gain +50 Max HP", 0)
 
     for _, ply in ipairs( player.GetAll() ) do
         if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-            ply:SetHealth(1)
+            ply:SetMaxHealth(ply:GetMaxHealth() + 30)
         end
     end
 end

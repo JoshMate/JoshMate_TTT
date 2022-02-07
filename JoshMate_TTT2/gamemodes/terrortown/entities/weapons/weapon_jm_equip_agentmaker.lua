@@ -16,7 +16,7 @@ if CLIENT then
 	
 Using this on a player makes them an agent
 
-Granting you both +50 Max HP and +20% Speed and Vision of each other
+Granting you both +50 HP, +20% Speed, HP Regen and Vision of each other
 
 Does not Overwrite or Reveal their current role
 ]]
@@ -77,6 +77,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- JM Changes Extra Hit Marker
       net.Start( "hitmarker" )
       net.WriteFloat(0)
+      net.WriteBool(false)
       net.Send(weaponOwner)
       -- End Of
 
@@ -89,15 +90,18 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_RemoveBuffFromThisPlayer("jm_buff_agent",ent)
       JM_GiveBuffToThisPlayer("jm_buff_agent",ent,self:GetOwner())
       ent:SetMaxHealth(ent:GetMaxHealth() + 50)
-      ent:SetHealth(ent:Health() + 50)
       ent:SetModel("models/player/leet.mdl")
+
+      if ent:IsTraitor() then
+         ent:AddCredits(1)
+         JM_Function_PrintChat(ent, "Agent Maker","As a TRAITOR you also earn +1 Credit")
+      end
 
 
       local det = self:GetOwner()
       JM_RemoveBuffFromThisPlayer("jm_buff_agent",det)
       JM_GiveBuffToThisPlayer("jm_buff_agent",det,det)
       det:SetMaxHealth(det:GetMaxHealth() + 50)
-      det:SetHealth(det:Health() + 50)
       -- End of
 
       -- Effects
