@@ -3,17 +3,32 @@
 ################################
 
 [Game Mode: Protect The Files]
-// Fix Bug where the end of the round ends the round 3 times due to onRemove()
-// Can only break the files with 3x crowbar hits
-// 
+- The only way to destroy  a file now is with 3 Crowbar Hits
+- Hitting a file as an innocent / Detective now kills you instantly
+- All players are now also get a message when an Objective has been destroyed
+- Improved the Variety of possible spawns for the Files
 
-// Make Tripping balls give super speed
+[Game Mode: Defuse the Bombs]
+- New Game mode
+- 3 Bombs will appear randomly on the map
+-All the bombs need to be defused by the Innocents within 60 Seconds
+- Failing to defuse the bombs will result in a Traitor Victory
+- Any player can defuse a bomb by hitting it 6 times with their crowbar
 
+[Care Package: Tripping Balls]
+- Now gives you SUPER SPEED
+- Reduced Duration: 30 -> 20 Seconds
 
 ################################
 ##### Fixes & Extras
 ################################
 
+- Completing the"Protect the Files" objective no longer takes 3 rounds off the round counter
+- Greatly Cleaned up the "Protect the Files" Code so it should be more stable
+- Cleaned up Josh Mate admin commands to allow for better control of Game Modes
+
 ################################
 ##### Maps
 ################################
+
+- None this week

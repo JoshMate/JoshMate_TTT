@@ -74,6 +74,13 @@ function ENT:Think()
 
 end
 
+-- Hooks
+hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
+    if ply:GetNWBool(JM_BuffNWBool) == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 2.5
+    end 
+end)
+
 -- #############################################
 -- AUTOMATICALLY GENERATED STUFF
 -- #############################################

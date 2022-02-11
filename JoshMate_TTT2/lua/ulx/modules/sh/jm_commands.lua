@@ -6,6 +6,7 @@ local CATEGORY_NAME_JM_Karma 		= "JM Karma"
 local CATEGORY_NAME_JM_Maps 		= "JM Maps"
 local CATEGORY_NAME_JM_Fun 			= "JM Fun"
 local CATEGORY_NAME_JM_Tool 		= "JM Tools"
+local CATEGORY_NAME_JM_Event 		= "JM Events"
 
 -- ##################################################
 -- ### Spawn Care Package
@@ -282,15 +283,29 @@ playsounds:help( "Play a client side sound on all players. Eg: ping_jake.wav" )
 -- ##  Protect The Server ##
 -- #########################
 
-function ulx.gmprotectserver( calling_ply)
+function ulx.protectthefilesfunction( calling_ply)
 
 	JM_GameMode_Start_ProtectTheFiles()
 
 end
 
-local gmprotectserver = ulx.command( CATEGORY_NAME_JM_Fun, "jm z gmprotectservers", ulx.gmprotectserver, "!gmprotectservers")
-gmprotectserver:defaultAccess( ULib.ACCESS_ADMIN )
-gmprotectserver:help( "Starts the Gamemode: Protect the Servers" )
+local protectthefiles = ulx.command( CATEGORY_NAME_JM_Event, "jm protectthefiles", ulx.protectthefilesfunction, "!protectthefiles")
+protectthefiles:defaultAccess( ULib.ACCESS_ADMIN )
+protectthefiles:help( "Starts the Gamemode: Protect the Files" )
+
+-- #########################
+-- ##  Defuse the Bombs  ##
+-- #########################
+
+function ulx.defusethebombsfunction( calling_ply)
+
+	JM_GameMode_Start_DefuseTheBombs()
+
+end
+
+local defusethebombs = ulx.command( CATEGORY_NAME_JM_Event, "jm defusethebombs", ulx.defusethebombsfunction, "!defusethebombs")
+defusethebombs:defaultAccess( ULib.ACCESS_ADMIN )
+defusethebombs:help( "Starts the Gamemode: Protect the Bombs" )
 
 -- #########################
 -- #####  Sudden Death #####
@@ -306,7 +321,7 @@ function ulx.suddendeath( calling_ply)
 
 end
 
-local suddendeath = ulx.command( CATEGORY_NAME_JM_Fun, "jm v suddendeath", ulx.suddendeath, "!suddendeath")
+local suddendeath = ulx.command( CATEGORY_NAME_JM_Event, "jm suddendeath", ulx.suddendeath, "!suddendeath")
 suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
 suddendeath:help( "Starts Sudden Death" )
 
@@ -335,7 +350,7 @@ function ulx.trackall( calling_ply)
 
 end
 
-local trackall = ulx.command( CATEGORY_NAME_JM_Fun, "jm v trackall", ulx.trackall, "!trackall")
+local trackall = ulx.command( CATEGORY_NAME_JM_Event, "jm trackall", ulx.trackall, "!trackall")
 trackall:defaultAccess( ULib.ACCESS_ADMIN )
 trackall:help( "Starts Sudden Death" )
 
@@ -385,7 +400,7 @@ function ulx.enableproxyvoice(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A has enabled: Proximity Voice")
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Tool, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
+local karma = ulx.command(CATEGORY_NAME_JM_Event, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Enables Proxy Voice until the next map")
 

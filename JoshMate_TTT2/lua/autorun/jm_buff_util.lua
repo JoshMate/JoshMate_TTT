@@ -175,7 +175,7 @@ JM_Global_Buff_Care_Regeneration_IconPath                = "vgui/ttt/joshmate/hu
 JM_Global_Buff_Care_Regeneration_IconGoodBad             = "good"
 
 JM_Global_Buff_Care_TrippingBalls_Name                   = "Tripping Balls"
-JM_Global_Buff_Care_TrippingBalls_Duration               = 30
+JM_Global_Buff_Care_TrippingBalls_Duration               = 20
 JM_Global_Buff_Care_TrippingBalls_NWBool                 = "JM_Buff_NWBool_IsTrippingBalls"
 JM_Global_Buff_Care_TrippingBalls_IconName               = "JM_Buff_Icon_TrippingBalls"
 JM_Global_Buff_Care_TrippingBalls_IconPath               = "vgui/ttt/joshmate/hud_trippingballs.png"

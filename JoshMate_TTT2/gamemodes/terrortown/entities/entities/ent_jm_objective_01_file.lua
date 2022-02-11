@@ -1,7 +1,7 @@
 if SERVER then
 	AddCSLuaFile()
 else
-	ENT.PrintName = "Objective: Server"
+	ENT.PrintName = "File"
 end
 
 ENT.Type = "anim"
@@ -19,7 +19,7 @@ function ENT:Initialize()
 	self:SetColor(Color( 255, 255, 255, 255))
 	
 	self.Objective_Server_Press_Count 	= 0
-	self.Objective_Server_Press_Max 	= 10
+	self.Objective_Server_Press_Max 	= 3
 	self.Objective_Server_Press_Colour	= Color( 255, 255, 255, 255)
 
 
@@ -33,37 +33,21 @@ function ENT:Initialize()
 	-- END of 
 end
 
-
-function ENT:Use( activator, caller )
+function ENT:TakesHit() 
 
 	if CLIENT then return end
 
-    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() then
+	self.Objective_Server_Press_Count = self.Objective_Server_Press_Count + 1
+	self:EmitSound("effect_objective_hit.mp3")
 
-		if IsValid(activator) and activator:Alive() and SERVER then
-			
-			self.Objective_Server_Press_Count = self.Objective_Server_Press_Count + 1
-			self:EmitSound("effect_objective_hit.mp3")
+	self.Objective_Server_Press_Colour = (self.Objective_Server_Press_Count * (255 / self.Objective_Server_Press_Max))
+	self.Objective_Server_Press_Colour = Color( 255, 255 - self.Objective_Server_Press_Colour, 255 - self.Objective_Server_Press_Colour, 255)
+	self:SetColor(self.Objective_Server_Press_Colour)
 
-			self.Objective_Server_Press_Colour = (self.Objective_Server_Press_Count * (255 / self.Objective_Server_Press_Max))
-			self.Objective_Server_Press_Colour = Color( 255 - self.Objective_Server_Press_Colour, 255 - self.Objective_Server_Press_Colour, 255 - self.Objective_Server_Press_Colour, 255)
-			self:SetColor(self.Objective_Server_Press_Colour)
+	if self.Objective_Server_Press_Count >= self.Objective_Server_Press_Max then
 
-			if self.Objective_Server_Press_Count >= self.Objective_Server_Press_Max then
+		self:Remove()
 
-				self:Remove()
-
-			end
-		end	
-	end
-end
-
-
-function ENT:OnRemove()
-
-	if SERVER then self:SendWarn(false) end
-
-	if SERVER then
 		JM_Function_PlaySound("pulsepad_hit.wav")
 
 		local effect = EffectData()
@@ -71,12 +55,63 @@ function ENT:OnRemove()
 		util.Effect("cball_explode", effect)
 		sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos())
 
+		if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
+
 		local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file" )
-		if #listOfObjectives <= 1 then
+		local numberOfFilesLeft = (#listOfObjectives - 2)
+		JM_Function_PrintChat_All("Objective", "A File has been destroyed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
+		self:SendWarn(false) 
+
+		if #listOfObjectives <= 2 then
+			JM_Function_PrintChat_All("Objective", "The Files have been Destroyed! Traitors Win...")
 			EndRound("traitors")
 			JM_Function_PlaySound("effect_objective_end.mp3")
 		end
 	end
+end
+
+function ENT:OnTakeDamage(dmginfo)
+
+	if CLIENT then return end
+
+	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
+
+	local activator = dmginfo:GetAttacker()
+
+	if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() and activator:Alive() then
+
+		local weaponUsed = dmginfo:GetInflictor()
+
+		if weaponUsed:GetClass() == "weapon_jm_special_crowbar" then
+			self:TakesHit() 
+		end
+
+	else
+
+		if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and not activator:IsTraitor() and activator:Alive() then
+
+			local weaponUsed = dmginfo:GetInflictor()
+
+			if weaponUsed:GetClass() == "weapon_jm_special_crowbar" then
+				local effect = EffectData()
+				effect:SetStart(self:GetPos())
+				effect:SetOrigin(self:GetPos())
+				util.Effect("Explosion", effect, true, true)
+				util.Effect("HelicopterMegaBomb", effect, true, true)
+
+				activator:TakeDamage( 9999, activator, self)
+			end
+
+		end
+
+	end
+
+end
+
+function ENT:OnRemove()
+
+	if SERVER then self:SendWarn(false) end
+
 end
 
 --- Josh Mate Hud Warning
@@ -99,8 +134,8 @@ end
 
 local JM_Server_Halo_Colour = Color(0,255,0,255)
 
-hook.Add( "PreDrawHalos", "Halos_Servers", function()
+hook.Add( "PreDrawHalos", "Halos_Files", function()
 
-    halo.Add( ents.FindByClass( "ent_jm_0_obj_server" ), JM_Server_Halo_Colour, 5, 5, 2, true, true )
+    halo.Add( ents.FindByClass( "ent_jm_objective_01_file" ), JM_Server_Halo_Colour, 5, 5, 2, true, true )
  
 end )

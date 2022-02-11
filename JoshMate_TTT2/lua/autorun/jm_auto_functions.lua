@@ -38,6 +38,25 @@ end
 -- End of Print Chat Function
 -----------------------------------------------
 
+-----------------------------------------------
+--  Print Chat All Function
+-----------------------------------------------
+
+
+function JM_Function_PrintChat_All(prefixMessageString, chatMessageString)
+
+    net.Start("JM_Net_PrintChat_All")
+    net.WriteString(tostring(prefixMessageString))
+	net.WriteString(tostring(chatMessageString))
+    net.Broadcast()
+
+end
+
+
+-----------------------------------------------
+-- End of Print Chat Function
+-----------------------------------------------
+
 
 -----------------------------------------------
 -- Announcement Function
@@ -57,6 +76,7 @@ if SERVER then
 	util.AddNetworkString("JM_Net_Announcement")
     util.AddNetworkString("JM_Net_PlaySound")
 	util.AddNetworkString("JM_Net_PrintChat")
+	util.AddNetworkString("JM_Net_PrintChat_All")
 end
 
 if CLIENT then
@@ -110,6 +130,22 @@ if CLIENT then
 		local textPrefixColour =  Color( 255, 100, 0 )
 		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
 		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
+		if prefixMessage == "Objective" then textPrefixColour = Color(0,255,0,255) end
+		
+        chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
+    end)
+
+	net.Receive("JM_Net_PrintChat_All", function(_) 
+		
+        prefixMessage = net.ReadString()
+		chatMessage = net.ReadString()
+
+		surface.PlaySound("0_main_slight.wav")
+
+		local textPrefixColour =  Color( 255, 100, 0 )
+		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
+		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
+		if prefixMessage == "Objective" then textPrefixColour = Color(0,255,0,255) end
 		
         chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)

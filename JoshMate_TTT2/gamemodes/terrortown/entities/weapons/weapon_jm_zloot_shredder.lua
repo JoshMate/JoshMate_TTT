@@ -86,7 +86,7 @@ function SWEP:PrimaryAttack()
 
    if self.Shredder_Spinup_Enabled == false then
 
-      self:EmitSound("shoot_shredder_spinup.wav", self.Primary.SoundLevel)
+      self:EmitSound("shoot_shredder_spinup.wav", 100)
       self.Shredder_Spinup_Enabled = true
       self.Shredder_Spinup_Time = CurTime()
 
