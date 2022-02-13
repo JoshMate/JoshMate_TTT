@@ -39,10 +39,10 @@ SWEP.Primary.Automatic     = true
 
 -- // End of Gun Stats
 
-SWEP.Primary.Ammo        = "smg1"
+SWEP.Primary.Ammo        = "pistol"
 SWEP.Primary.Sound       = "shoot_smg.wav"
 SWEP.AutoSpawnable       = true
-SWEP.AmmoEnt             = "item_jm_ammo_medium"
+SWEP.AmmoEnt             = "item_jm_ammo_light"
 SWEP.UseHands            = true
 SWEP.ViewModel           = "models/weapons/cstrike/c_smg_mp5.mdl"
 SWEP.WorldModel          = "models/weapons/w_smg_mp5.mdl"

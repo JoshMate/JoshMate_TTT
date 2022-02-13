@@ -142,6 +142,23 @@ JM_Global_Buff_Agent_IconName                                   = "JM_Buff_Icon_
 JM_Global_Buff_Agent_IconPath                                   = "vgui/ttt/joshmate/hud_agent.png"
 JM_Global_Buff_Agent_IconGoodBad                                = "good"
 
+JM_Global_Buff_HealthGrenade_Name                               = "Healing Grenade"
+JM_Global_Buff_HealthGrenade_Duration                           = 12
+JM_Global_Buff_HealthGrenade_NWBool                             = "JM_Buff_NWBool_IsHealthGrenade"
+JM_Global_Buff_HealthGrenade_IconName                           = "JM_Buff_Icon_HealthGrenade"
+JM_Global_Buff_HealthGrenade_IconPath                           = "vgui/ttt/joshmate/hud_heal.png"
+JM_Global_Buff_HealthGrenade_IconGoodBad                        = "good"
+
+
+JM_Global_Buff_GlueGrenade_Name                                 = "Glue Grenade"
+JM_Global_Buff_GlueGrenade_Duration                             = 5
+JM_Global_Buff_GlueGrenade_NWBool                               = "JM_Buff_NWBool_IsGlueGrenade"
+JM_Global_Buff_GlueGrenade_IconName                             = "JM_Buff_Icon_GlueGrenade"
+JM_Global_Buff_GlueGrenade_IconPath                             = "vgui/ttt/joshmate/hud_surpressionfield.png"
+JM_Global_Buff_GlueGrenade_IconGoodBad                          = "good"
+
+
+
 
 
 -- Care Package Buffs

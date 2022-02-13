@@ -29,7 +29,7 @@ SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Delay         = 0.03
 SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 100
 
@@ -67,7 +67,7 @@ function SWEP:HitEffectsInit(ent)
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
    
-   util.Effect("TeslaZap", effect, true, true)
+   
    
    util.Effect("cball_explode", effect, true, true)
 end

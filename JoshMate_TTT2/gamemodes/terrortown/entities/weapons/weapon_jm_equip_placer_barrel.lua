@@ -109,7 +109,7 @@ function SWEP:PlaceThing(isWelded)
 		ent:PhysicsInit(SOLID_VPHYSICS)
 		ent:SetMoveType(MOVETYPE_VPHYSICS)
 		ent:SetSolid(SOLID_VPHYSICS)
-		ent:SetCollisionGroup(COLLISION_GROUP_NONE)
+		ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
 		ent:Spawn()
 

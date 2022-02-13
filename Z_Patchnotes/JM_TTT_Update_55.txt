@@ -2,13 +2,45 @@
 #### TTT Update 55 - Patch Notes
 ################################
 
-[Game Mode: Protect The Files]
+[Overhaul: Ammo]
+- There are now only 2 Ammo Types (used to be 3)
+- Light Ammo (Max 60) Smg, Light Pistol, Rifle, etc...
+- Heavy Ammo (Max 10) Heavy Pistol, Shotgun, Sniper, etc...
+- You start with Max Ammo for both types
+- Ammo no longer spawns on maps
 
+[Overhaul: Grenades]
+- New Glue Grenade: An impact grenade that slows down players caught in the radius
+- New Healing Grenade: A single use item that heals the user over a short period of time
+- Their models have been reworked to be clearer which grenade you are holding
+- They now all Deploy instantly, so they can be used much faster than before
+- Jump Grenades no longer have a half a second delay before pushing you upwards
+
+[Overhaul: Weapon Placement]
+//TODO
+- I have PAINSTAKINGLY gone through and re-placed weapons on ALL the maps
+- This is to incorporate the new weapons / ammo changes
+- It will also bring the old maps inline with how weapons are placed on modern maps (Balance)
+
+[Barrel Swep]
+- Barrels no longer block player movement
+
+[Carepackage Loot: Rooty-Tooty]
+- Increased Magazine Capacity: 1 -> 3
 
 ################################
 ##### Fixes & Extras
 ################################
 
+- Fixed Objectives spawning in Unreachable areas
+
 ################################
 ##### Maps
 ################################
+
+[TTT Standoff]
+- Removed from the active vote rotation
+
+[TTT Warmup]
+- Minor changes to improve it's usage as a test map
+

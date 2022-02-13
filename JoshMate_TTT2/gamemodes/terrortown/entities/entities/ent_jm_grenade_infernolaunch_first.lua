@@ -3,14 +3,17 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.Base = "ttt_basegrenade_proj"
+ENT.Base = "ent_jm_base_grenade"
 ENT.Model = Model("models/props_junk/PopCan01a.mdl")
 
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(200,150,0,150)
 
+-- Grenade Type Setting
+ENT.GrenadeType_ExplodeOn_Impact    = true
+ENT.GrenadeType_Fuse_Timer          = 3
+
 local InfernoLauncher_NumberOfNades    = 12
-local InfernoLauncher_FuseDelay        = 3
 
 
 function ENT:Explode(tr)
@@ -30,8 +33,6 @@ function ENT:Explode(tr)
 
       -- Done
       self:Remove()
-   else
-      self:SetDetonateExact(0)
    end
 end
 
@@ -56,7 +57,6 @@ function ENT:CreateGrenade(src, ang, vel, angimp, ply)
    gren:SetAngles(ang)
 
    gren:SetOwner(ply)
-   gren:SetThrower(ply)
 
    gren:SetGravity(2)
    gren:SetFriction(0.3)
@@ -72,9 +72,6 @@ function ENT:CreateGrenade(src, ang, vel, angimp, ply)
       phys:SetVelocity(vel)
       phys:AddAngleVelocity(angimp)
    end
-
-   -- This has to happen AFTER Spawn() calls gren's Initialize()
-   gren:SetDetonateExact(CurTime() + InfernoLauncher_FuseDelay)
 
    return gren
 end

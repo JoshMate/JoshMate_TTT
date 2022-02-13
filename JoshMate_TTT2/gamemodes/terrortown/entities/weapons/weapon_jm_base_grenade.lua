@@ -48,7 +48,6 @@ SWEP.WeaponID              = AMMO_NADE_BASE
 SWEP.IsGrenade             = true
 
 SWEP.was_thrown            = false
-SWEP.detonate_timer        = 2
 SWEP.DeploySpeed           = 4
 
 -- JM Changes, Throwing
@@ -129,7 +128,6 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
 
    --   gren:SetVelocity(vel)
    gren:SetOwner(ply)
-   gren:SetThrower(ply)
 
    gren:SetGravity(0.25)
    gren:SetFriction(0.30)
@@ -144,9 +142,6 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
       phys:SetVelocity(vel)
       phys:AddAngleVelocity(angimp)
    end
-
-   -- This has to happen AFTER Spawn() calls gren's Initialize()
-   gren:SetDetonateExact(CurTime() + self.detonate_timer)
 
    return gren
 end

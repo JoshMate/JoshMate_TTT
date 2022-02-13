@@ -674,26 +674,9 @@ end
 -- does not occur when a drop happens for some reason. Hence this thing.
 -- @realm server
 function SWEP:PreDrop()
-	if CLIENT or not IsValid(self:GetOwner()) or self.Primary.Ammo == "none" then return end
 
-	local ammo = self:Ammo1()
-
-	-- Do not drop ammo if we have another gun that uses this type
-	local weps = self:GetOwner():GetWeapons()
-
-	for i = 1, #weps do
-		local w = weps[i]
-
-		if not IsValid(w) or w == self or w:GetPrimaryAmmoType() ~= self:GetPrimaryAmmoType() then continue end
-
-		ammo = 0
-	end
-
-	self.StoredAmmo = ammo
-
-	if ammo > 0 then
-		self:GetOwner():RemoveAmmo(ammo, self.Primary.Ammo)
-	end
+	-- Removed as part of the Big Ammo Mechanics Overhaul Update 11/02/2022
+	
 end
 
 ---
@@ -740,14 +723,6 @@ function SWEP:Equip(newowner)
 		self:SetKeyValue("spawnflags", newflags)
 	end
 
-	if IsValid(newowner) and self.StoredAmmo > 0 and self.Primary.Ammo ~= "none" then
-		local ammo = newowner:GetAmmoCount(self.Primary.Ammo)
-		local given = math.min(self.StoredAmmo, self.Primary.ClipMax - ammo)
-
-		newowner:GiveAmmo(given, self.Primary.Ammo)
-
-		self.StoredAmmo = 0
-	end
 end
 
 ---

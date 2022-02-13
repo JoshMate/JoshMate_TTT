@@ -3,11 +3,18 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.Base = "ttt_basegrenade_proj"
+ENT.Base = "ent_jm_base_grenade"
 ENT.Model = Model("models/props_junk/PopCan01a.mdl")
 
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(200,150,0,150)
+
+-- Grenade Type Setting
+ENT.GrenadeType_ExplodeOn_Impact    = false
+ENT.GrenadeType_Fuse_Timer          = 3
+
+-- Fix Scorch Spam
+ENT.GreandeHasScorched              = false
 
 local JM_Explosive_Blast_Damage    = 8
 local JM_Explosive_Blast_Radius    = 500
@@ -34,7 +41,7 @@ function ENT:Explode(tr)
       self:EmitSound(Sound("firewall_arm.wav"), 100, 80, 1)
 
       -- Blast
-      local JMThrower = self:GetThrower()
+      local JMThrower = self:GetOwner()
       util.BlastDamage(self, JMThrower, pos, JM_Explosive_Blast_Radius, JM_Explosive_Blast_Damage)
 
       -- Fire 
@@ -48,11 +55,12 @@ function ENT:Explode(tr)
       -- Done
       self:Remove()
    else
-      local spos = self:GetPos()
-      local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
-      util.Decal("Scorch", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
-
-      self:SetDetonateExact(0)
+      if self.GreandeHasScorched == false then 
+         self.GreandeHasScorched = true
+         local spos = self:GetPos()
+         local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
+         util.Decal("Scorch", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
+      end  
    end
 end
 

@@ -103,7 +103,6 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
    gren:SetAngles(ang)
 
    gren:SetOwner(ply)
-   gren:SetThrower(ply)
 
    gren:SetGravity(0.20)
    gren:SetFriction(0.20)
@@ -119,9 +118,6 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
       phys:SetVelocity(vel)
       phys:AddAngleVelocity(angimp)
    end
-
-   -- This has to happen AFTER Spawn() calls gren's Initialize()
-   gren:SetDetonateExact(CurTime() + JM_Explosive_FuseDelay)
 
    return gren
 end

@@ -29,7 +29,7 @@ SWEP.Primary.Recoil        = 1
 SWEP.Primary.Range         = 600
 SWEP.Primary.ClipSize      = 18
 SWEP.Primary.DefaultClip   = 18
-SWEP.Primary.ClipMax       = 40
+SWEP.Primary.ClipMax       = 60
 SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2

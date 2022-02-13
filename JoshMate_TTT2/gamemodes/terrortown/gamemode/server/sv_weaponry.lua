@@ -167,6 +167,8 @@ local function GiveLoadoutWeapons(ply)
 
 		GiveLoadoutWeapon(ply, cls)
 	end
+
+	
 end
 
 local function GetGiveLoadoutWeapons(ply)
@@ -393,6 +395,12 @@ function GM:PlayerLoadout(ply, isRespawn)
 
 	-- give default items
 	GiveLoadoutItems(ply)
+
+	-- Give Ammo with the new Ammo Overhaul 11/02/2022
+	ply:RemoveAmmo( 9999, "Pistol")
+	ply:RemoveAmmo( 9999, "357")
+	ply:GiveAmmo( 60, "Pistol", true)
+	ply:GiveAmmo( 10, "357", true)
 
 	-- reset default loadout
 	local reset = GetResetLoadoutWeapons(ply)

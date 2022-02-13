@@ -70,7 +70,7 @@ function JMTeleportEffectsInit(ent)
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
    
-   util.Effect("TeslaZap", effect, true, true)
+   
    
    util.Effect("cball_explode", effect, true, true)
 end

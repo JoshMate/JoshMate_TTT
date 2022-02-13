@@ -26,12 +26,12 @@ SWEP.WeaponID              = AMMO_MEGA_SHOTGUN
 
 SWEP.Primary.Damage        = 25
 SWEP.Primary.NumShots      = 100
-SWEP.Primary.Delay         = 1.00
+SWEP.Primary.Delay         = 1
 SWEP.Primary.Cone          = 0.30
 SWEP.Primary.Recoil        = 10
 SWEP.Primary.Range         = 3000
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 120
 

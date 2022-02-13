@@ -3,7 +3,7 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.Base = "ttt_basegrenade_proj"
+ENT.Base = "ent_jm_base_grenade"
 ENT.Model = "models/weapons/csgonade/w_eq_flashbang_thrown.mdl"
 
 ENT.Trail_Enabled = 1
@@ -59,7 +59,7 @@ function ENT:Explode(tr)
       local ePos = self:GetPos()
       effect:SetStart(ePos)
       effect:SetOrigin(ePos)
-      util.Effect("TeslaZap", effect, true, true)
+      
       
       util.Effect("cball_explode", effect, true, true)
    end

@@ -31,7 +31,7 @@ SWEP.Primary.Cone          = 0.060
 SWEP.Primary.Recoil        = 8
 SWEP.Primary.Range         = 400
 SWEP.Primary.ClipSize      = 6
-SWEP.Primary.DefaultClip   = 6
+SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 75
 

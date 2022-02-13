@@ -21,36 +21,37 @@ if CLIENT then
 end
 
 local weps = {
-   weapon_jm_secondary_light     = {name="S Light Pistol", snd="item_jm_ammo_light"},
-   weapon_jm_secondary_auto      = {name="S Auto Pistol", snd="item_jm_ammo_light"},
-   weapon_jm_secondary_heavy     = {name="S Heavy Pistol", snd="item_jm_ammo_heavy"},
-   weapon_jm_primary_rifle       = {name="P Rifle", snd="item_jm_ammo_medium"},
-   weapon_jm_primary_smg         = {name="P SMG", snd="item_jm_ammo_medium"},
-   weapon_jm_primary_shotgun     = {name="P Shotgun", snd="item_jm_ammo_heavy"},
-   weapon_jm_primary_sniper      = {name="P Sniper", snd="item_jm_ammo_heavy"},
-   weapon_jm_primary_lmg         = {name="P LMG", snd=nil},
-   weapon_jm_grenade_push        = {name="G Jump Grenade",  snd=nil},
-   weapon_jm_grenade_fire        = {name="G Frag Grenade",  snd=nil},
-   weapon_jm_grenade_smoke       = {name="G Tag Grenade", snd=nil},
-   ent_jm_carepackage_spawn      = {name="Z Care Package Spawn", snd=nil}
+   weapon_jm_secondary_light     = {name="[Pistol] Light", snd=nil},
+   weapon_jm_secondary_auto      = {name="[Pistol] Auto", snd=nil},
+   weapon_jm_secondary_heavy     = {name="[Pistol] Heavy", snd=nil},
+   weapon_jm_primary_rifle       = {name="[Main] Rifle", snd=nil},
+   weapon_jm_primary_smg         = {name="[Main] SMG", snd=nil},
+   weapon_jm_primary_shotgun     = {name="[Main] Shotgun", snd=nil},
+   weapon_jm_primary_sniper      = {name="[Main] Sniper", snd=nil},
+   weapon_jm_primary_lmg         = {name="[Main] LMG", snd=nil},
+   weapon_jm_grenade_jump        = {name="[Grenade] Jump",  snd=nil},
+   weapon_jm_grenade_frag        = {name="[Grenade] Frag",  snd=nil},
+   weapon_jm_grenade_tag         = {name="[Grenade] Tag", snd=nil},
+   weapon_jm_grenade_glue        = {name="[Grenade] Glue", snd=nil},
+   weapon_jm_grenade_health      = {name="[Grenade] Health", snd=nil},
+   ent_jm_carepackage_spawn      = {name="[Xtra] Care Package", snd=nil}
 };
 
 local mdls = {
-   weapon_jm_secondary_light        = "models/weapons/w_pist_p228.mdl",
-   weapon_jm_secondary_auto         = "models/weapons/w_pist_glock18.mdl",
-   weapon_jm_secondary_heavy        = "models/weapons/w_pist_deagle.mdl",
-   weapon_jm_primary_rifle         = "models/weapons/w_rif_ak47.mdl",
-   weapon_jm_primary_smg           = "models/weapons/w_smg_mp5.mdl",
-   weapon_jm_primary_shotgun       = "models/weapons/w_shot_m3super90.mdl",
-   weapon_jm_primary_sniper        = "models/weapons/w_snip_scout.mdl",
-   weapon_jm_primary_lmg           = "models/weapons/w_mach_m249para.mdl",
-   weapon_jm_grenade_push           = "models/weapons/w_eq_flashbang.mdl",
-   weapon_jm_grenade_fire           = "models/weapons/w_eq_fraggrenade.mdl", 
-   weapon_jm_grenade_smoke          = "models/weapons/w_eq_smokegrenade.mdl",
-   item_jm_ammo_light               = "models/items/357ammo.mdl",
-   item_jm_ammo_medium              = "models/items/boxsrounds.mdl",
-   item_jm_ammo_heavy               = "models/items/boxbuckshot.mdl",
-   ent_jm_carepackage_spawn         = "models/Items/item_item_crate.mdl"
+   weapon_jm_secondary_light           = "models/weapons/w_pist_p228.mdl",
+   weapon_jm_secondary_auto            = "models/weapons/w_pist_glock18.mdl",
+   weapon_jm_secondary_heavy           = "models/weapons/w_pist_deagle.mdl",
+   weapon_jm_primary_rifle             = "models/weapons/w_rif_ak47.mdl",
+   weapon_jm_primary_smg               = "models/weapons/w_smg_mp5.mdl",
+   weapon_jm_primary_shotgun           = "models/weapons/w_shot_m3super90.mdl",
+   weapon_jm_primary_sniper            = "models/weapons/w_snip_scout.mdl",
+   weapon_jm_primary_lmg               = "models/weapons/w_mach_m249para.mdl",
+   weapon_jm_grenade_jump              = "models/weapons/w_eq_flashbang.mdl",
+   weapon_jm_grenade_frag              = "models/weapons/w_eq_fraggrenade.mdl", 
+   weapon_jm_grenade_tag               = "models/weapons/w_eq_smokegrenade.mdl",
+   weapon_jm_grenade_glue              = "models/props_lab/jar01b.mdl",
+   weapon_jm_grenade_health            = "models/healthvial.mdl",
+   ent_jm_carepackage_spawn            = "models/Items/item_item_crate.mdl"
 };
 
 -- special colours for certain ents
@@ -208,9 +209,11 @@ local enttypes = {
    weapon_jm_primary_shotgun        = WEAPON_HEAVY,
    weapon_jm_primary_sniper         = WEAPON_HEAVY,
    weapon_jm_primary_lmg            = WEAPON_HEAVY,
-   weapon_jm_grenade_push           = WEAPON_NADE,
-   weapon_jm_grenade_fire           = WEAPON_NADE,
-   weapon_jm_grenade_smoke          = WEAPON_NADE,
+   weapon_jm_grenade_jump           = WEAPON_NADE,
+   weapon_jm_grenade_frag           = WEAPON_NADE,
+   weapon_jm_grenade_tag            = WEAPON_NADE,
+   weapon_jm_grenade_glue           = WEAPON_NADE,
+   weapon_jm_grenade_health         = WEAPON_NADE,
    ent_jm_carepackage_spawn         = PLAYERSPAWN
 };
 
@@ -219,7 +222,6 @@ local function PrintCount(ply)
       [WEAPON_PISTOL] = 0,
       [WEAPON_HEAVY] = 0,
       [WEAPON_NADE] = 0,
-      [WEAPON_RANDOM] = 0,
       [PLAYERSPAWN] = 0
    };
 
@@ -233,7 +235,6 @@ local function PrintCount(ply)
    ply:ChatPrint("Primary weapons: " .. count[WEAPON_HEAVY])
    ply:ChatPrint("Secondary weapons: " .. count[WEAPON_PISTOL])
    ply:ChatPrint("Grenades: " .. count[WEAPON_NADE])
-   ply:ChatPrint("Random weapons: " .. count[WEAPON_RANDOM])
    ply:ChatPrint("Care Package Spawns: " .. count[PLAYERSPAWN])
 end
 concommand.Add("tttweaponplacer_count", PrintCount)
