@@ -53,14 +53,7 @@ function ENT:Explode(tr)
       fire:Spawn()
       
       -- Done
-      self:Remove()
-   else
-      if self.GreandeHasScorched == false then 
-         self.GreandeHasScorched = true
-         local spos = self:GetPos()
-         local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
-         util.Decal("Scorch", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
-      end  
+      self:Remove() 
    end
 end
 

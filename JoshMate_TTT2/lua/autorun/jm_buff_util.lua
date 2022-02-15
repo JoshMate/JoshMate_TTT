@@ -73,7 +73,7 @@ JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
 JM_Global_Buff_TagGrenade_Name                          = "Tag Grenade"
-JM_Global_Buff_TagGrenade_Duration                      = 4
+JM_Global_Buff_TagGrenade_Duration                      = 5
 JM_Global_Buff_TagGrenade_NWBool                        = "JM_Buff_NWBool_IsTagGrenade"
 JM_Global_Buff_TagGrenade_IconName                      = "JM_Buff_Icon_TagGrenade"
 JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud_tracker.png"
@@ -155,7 +155,7 @@ JM_Global_Buff_GlueGrenade_Duration                             = 5
 JM_Global_Buff_GlueGrenade_NWBool                               = "JM_Buff_NWBool_IsGlueGrenade"
 JM_Global_Buff_GlueGrenade_IconName                             = "JM_Buff_Icon_GlueGrenade"
 JM_Global_Buff_GlueGrenade_IconPath                             = "vgui/ttt/joshmate/hud_surpressionfield.png"
-JM_Global_Buff_GlueGrenade_IconGoodBad                          = "good"
+JM_Global_Buff_GlueGrenade_IconGoodBad                          = "bad"
 
 
 

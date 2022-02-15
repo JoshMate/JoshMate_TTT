@@ -4,43 +4,98 @@
 
 [Overhaul: Ammo]
 - There are now only 2 Ammo Types (used to be 3)
-- Light Ammo (Max 60) Smg, Light Pistol, Rifle, etc...
+- Light Ammo (Max 60) SMG, Light Pistol, Rifle, etc...
 - Heavy Ammo (Max 10) Heavy Pistol, Shotgun, Sniper, etc...
 - You start with Max Ammo for both types
 - Ammo no longer spawns on maps
 
 [Overhaul: Grenades]
-- New Glue Grenade: An impact grenade that slows down players caught in the radius
-- New Healing Grenade: A single use item that heals the user over a short period of time
 - Their models have been reworked to be clearer which grenade you are holding
 - They now all Deploy instantly, so they can be used much faster than before
-- Jump Grenades no longer have a half a second delay before pushing you upwards
+- All Grenades now leave behind a mark on the floor where they exploded
+- All Grenades now have improved net-code and visual effects
+- New Grenade types, See later on in the patch notes for details
 
 [Overhaul: Weapon Placement]
-//TODO
 - I have PAINSTAKINGLY gone through and re-placed weapons on ALL the maps
+(This took me about 6 hours to do... FML)
 - This is to incorporate the new weapons / ammo changes
-- It will also bring the old maps inline with how weapons are placed on modern maps (Balance)
+- I have balanced all maps around the LMG and Sniper being rare and pistols common
+- I have also placed about 10x more Care package / Objective Spawns for variety
+
+[Overhaul: Game Modes]
+- I have written a Gamemode management system that will be in charge of
+making sure Gamemodes happen randomly but are not too common or too rare.
+- Game modes have a base 1/8 chance that increases each round without one
+- Fixed Objectives spawning in Unreachable areas and improved their overall placements
+
+[Glue Grenade]
+- A new basic grenade that appears around the map
+- A single use impact grenade that slows players in it's radius
+
+[Healing Grenade]
+- A new basic grenade that appears around the map
+- A single use temporary buff that heals you over time
+(The same as Sage's self heal from Valorant)
+
+[GameMode: Defuse the Bomb]
+- The amount of bombs that appear now depends on how many people are alive
+- To defuse a bomb you must press E on it with only bare hands equipped
+
+[GameMode: Protect the Files]
+- Attempting to destroy files as an innocent is impossible and no longer kills you
+- To defuse a bomb you must press E on it with only bare hands equipped
+
+[All Pistols]
+- Buffed movementspeed buff while equipped: +0% -> +10%
+
+[LMG]
+- Buffed Damage: 20 -> 30
+- Buffed movespeed penalty while equipped: -20% -> -10%
+- Buffed Bullets Pushing Force: 20 -> 50
+- This is now considered a power weapon and spawns rarely on maps
+
+[Tag Grenade]
+- Buffed Tracking duration: 4 -> 5 Seconds
+
+[Jump Grenade]
+- No longer have a half a second delay before pushing you upwards
 
 [Barrel Swep]
 - Barrels no longer block player movement
 
 [Carepackage Loot: Rooty-Tooty]
-- Increased Magazine Capacity: 1 -> 3
+- Has now been soo heavily buffed it's an ABSOLUTE BEAST
+- Is now a single shot one use weapon that can't be reloaded
+
+[Karma]
+- Being at max Karma now grants you a +5 HP bonus ontop of the previous +25 for +30
+- Improved the reward messages for Karma
 
 ################################
 ##### Fixes & Extras
 ################################
 
-- Fixed Objectives spawning in Unreachable areas
+- Updated the rules to address past arguments and moved them to Discord
+- Upgraded aload of text messages to the new JM Text Message system (TM)
+- An uncountable amount of little fixes and improvements to various things
 
 ################################
 ##### Maps
 ################################
 
+[TTT Sanctum] - Seb
+- Greatly improved vision in the fog
+- Slightly changed layout of teleport area up top
+- Buffed turtle easter egg damage
+- Buffed turtle easter egg knockback
+
+[TTT Roof Party]  - Seb
+- Added invisible wall on the big building outside of the map to stop prop surfing exploit
+
 [TTT Standoff]
 - Removed from the active vote rotation
 
 [TTT Warmup]
-- Minor changes to improve it's usage as a test map
+- Minor changes to improve it as a testing map
 

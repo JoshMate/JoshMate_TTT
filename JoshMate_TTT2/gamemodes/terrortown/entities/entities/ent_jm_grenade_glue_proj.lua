@@ -11,8 +11,10 @@ ENT.Trail_Colour = Color(255, 255, 0, 150)
 -- Grenade Type Setting
 ENT.GrenadeType_ExplodeOn_Impact    = true
 
+-- Fix Scorch Spam
+ENT.GreandeHasScorched              = false
 
-local JM_Tag_Radius  = 250
+local JM_Tag_Radius  = 200
 
 
 function ENT:HitEffectsInit(ent)
@@ -24,6 +26,7 @@ function ENT:HitEffectsInit(ent)
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
    util.Effect("AntlionGib", effect, true, true)
+   util.Effect("StriderBlood", effect, true, true)
 end
 
 function ENT:ExplodeEffects(pos)
@@ -31,16 +34,27 @@ function ENT:ExplodeEffects(pos)
    effect:SetStart(pos)
    effect:SetOrigin(pos)
    util.Effect("AntlionGib", effect, true, true)
+   util.Effect("StriderBlood", effect, true, true)
 end
 
 function ENT:Explode(tr)
+   -- Decal Effects
+   if (SERVER) then
+      if self.GreandeHasScorched == false then 
+         self.GreandeHasScorched = true
+         local spos = self:GetPos()
+         local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
+         util.Decal("BeerSplash", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)
+         util.Decal("YellowBlood", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)
+      end
+   end
+
+   -- Server Side Mechanics
    if (SERVER) then
       self.Entity:EmitSound(Sound("grenade_glue.wav"));
       self:ExplodeEffects(self:GetPos())
       local totalPeopleTagged = 0
       for _,pl in pairs(player.GetAll()) do
-
-         if pl == self:GetOwner() then continue end
 
          local playerPos = pl:GetShootPos()
          local nadePos = self:GetPos()
@@ -68,8 +82,9 @@ function ENT:Explode(tr)
 
          end
       end
-      
-      self:GetOwner():ChatPrint("[Glue Grenade]: You glued: " .. tostring(totalPeopleTagged) .. " people")
-      self.Entity:Remove();
+
+      JM_Function_PrintChat(self:GetOwner(), "Glue Grenade", "Hit: " .. tostring(totalPeopleTagged) .. " people.")
+      -- Done
+      self:Remove()
    end
 end

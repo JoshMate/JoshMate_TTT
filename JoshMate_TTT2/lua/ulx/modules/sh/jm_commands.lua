@@ -94,7 +94,7 @@ function ulx.resetmaplist(calling_ply)
     ConfigHelper:WritePlayedMaps({}) 
 end
 
-local cmdResetMapList = ulx.command(CATEGORY_NAME_JM_Maps, "jm map resetlist", ulx.resetmaplist, "!resetmaplist")
+local cmdResetMapList = ulx.command(CATEGORY_NAME_JM_Maps, "jm map reset", ulx.resetmaplist, "!resetmaplist")
 cmdResetMapList:defaultAccess(ULib.ACCESS_ADMIN)
 
 
@@ -113,23 +113,22 @@ function ulx.karmatotalreset(calling_ply)
         for i = 1, #plys do
             local ply = plys[i]
             ply:SetBaseKarma(1000)
-			ply:SetLiveKarma(1000)			
+			ply:SetLiveKarma(1000)		
+			
 		end
-
+		JM_Function_PrintChat_All("Karma", "EVERYONE has been reset to 1000 Karma")	
 	end
-
-	ulx.fancyLogAdmin(calling_ply, "#A reset everyones KARMA")
 end
 
 local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset all", ulx.karmatotalreset, "!karmatotalreset")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Resets All KARMA")
 
--- #########################
--- ###  Karma Punish 250 ###
--- #########################
+-- ###########################
+-- ###  Karma Punish Minor ###
+-- ###########################
 
-function ulx.karmapunish250(calling_ply, target_plys)
+function ulx.karmapunishminor(calling_ply, target_plys)
     
 	if GetConVar("gamemode"):GetString() ~= "terrortown" then
 		ULib.tsayError(calling_ply, gamemode_error, true)
@@ -142,44 +141,42 @@ function ulx.karmapunish250(calling_ply, target_plys)
 
 			pl:SetBaseKarma(plKarma)
 			pl:SetLiveKarma(plKarma)
+			JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " lost 250 Karma for breaking the rules (Minor)")
 		end
 	end
-
-	ulx.fancyLogAdmin(calling_ply, "#A punished #T for #i KARMA", target_plys, 250)
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish 250", ulx.karmapunish250, "!karmapunish250")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish minor", ulx.karmapunishminor, "!karmapunishminor")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Take away 250 KARMA")
 
 -- #########################
--- ###  Karma Punish 500 ###
+-- ###  Karma Punish RDM ###
 -- #########################
 
-function ulx.karmapunish500(calling_ply, target_plys)
+function ulx.karmapunishmajor(calling_ply, target_plys)
     
 	if GetConVar("gamemode"):GetString() ~= "terrortown" then
 		ULib.tsayError(calling_ply, gamemode_error, true)
 	else
 		for i = 1, #target_plys do
             local pl = target_plys[i]
-            plKarma = pl:GetLiveKarma() - 500
+            plKarma = pl:GetLiveKarma() - 650
 
             plKarma = math.Clamp(plKarma, 0, 1000)
 
 			pl:SetBaseKarma(plKarma)
 			pl:SetLiveKarma(plKarma)
+			JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " lost 650 Karma for RDMing (Major)")
 		end
 	end
-
-	ulx.fancyLogAdmin(calling_ply, "#A punished #T for #i KARMA", target_plys, 500)
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish 500", ulx.karmapunish500, "!karmapunish500")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish rdm", ulx.karmapunishmajor, "!karmapunishmajor")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
-karma:help("Take away 500 KARMA")
+karma:help("Take away 650 KARMA")
 
 -- #########################
 -- ###  Karma Set 1000 ###
@@ -195,9 +192,8 @@ function ulx.karmaset1000(calling_ply, target_plys)
             pl:SetBaseKarma(1000)
 			pl:SetLiveKarma(1000)			
 		end
+		JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " has been reset to 1000 Karma")
 	end
-
-	ulx.fancyLogAdmin(calling_ply, "#A set #T to #i KARMA", target_plys, 1000)
 end
 
 local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1000", ulx.karmaset1000, "!karmaset1000")
@@ -219,9 +215,8 @@ function ulx.karmaset1250(calling_ply, target_plys)
             pl:SetBaseKarma(1250)
 			pl:SetLiveKarma(1250)			
 		end
+		JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " has been reset to 1250 Karma")
 	end
-
-	ulx.fancyLogAdmin(calling_ply, "#A set #T to #i KARMA", target_plys, 1250)
 end
 
 local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1250", ulx.karmaset1250, "!karmaset1250")
@@ -245,7 +240,7 @@ function ulx.slayeveryone(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A Slayed EVERYONE")
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Fun, "jm x slayall", ulx.slayeveryone, "!slayeveryone")
+local karma = ulx.command(CATEGORY_NAME_JM_Fun, "jm slayall", ulx.slayeveryone, "!slayeveryone")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Slays Everyone")
 
@@ -299,7 +294,8 @@ protectthefiles:help( "Starts the Gamemode: Protect the Files" )
 
 function ulx.defusethebombsfunction( calling_ply)
 
-	JM_GameMode_Start_DefuseTheBombs()
+
+	JM_GameMode_DefuseBombsChoseBombAmountAndSpawn()
 
 end
 
@@ -445,4 +441,18 @@ end
 
 local cmdRoundRemove = ulx.command(CATEGORY_NAME_JM_Maps, "jm round remove", function () JM_ULX_Round_Remove() end, "!roundremove")
 cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
+
+-- ##################################################
+-- ### Next Map Random
+-- ##################################################
+
+local function JM_ULX_MapNextRandom()
+
+	JM_Function_PrintChat_All("Map", "The next map will be random!")
+	JM_Global_MapVote_NextWillBeRandom = true
+
+end
+
+local cmdRandomiseNextMap = ulx.command(CATEGORY_NAME_JM_Maps, "jm randomise nextmap", function () JM_ULX_MapNextRandom() end, "!mapnextrandom")
+cmdRandomiseNextMap:defaultAccess(ULib.ACCESS_ADMIN)
 

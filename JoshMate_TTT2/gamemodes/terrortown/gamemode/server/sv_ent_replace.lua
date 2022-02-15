@@ -326,23 +326,6 @@ local function PlaceWeapon(swep, pos, ang)
 	ent:SetAngles(VectorRand():Angle())
 	ent:Spawn()
 
-	-- Create some associated ammo (if any)
-	if ent.AmmoEnt then
-		local rndm = math.random(0, 3)
-
-		for i = 1, rndm do
-			local ammo = ents.Create(ent.AmmoEnt)
-			if not IsValid(ammo) then continue end
-
-			pos.z = pos.z + 2
-
-			ammo:SetPos(pos)
-			ammo:SetAngles(VectorRand():Angle())
-			ammo:Spawn()
-			ammo:PhysWake()
-		end
-	end
-
 	return ent
 end
 
@@ -498,16 +481,6 @@ local function RemoveWeaponEntities()
 		if not hl2_weapon_replace[ent:GetClass()] and ent:GetClass() ~= "weapon_jm_special_crowbar" then continue end
 
 		ent:Remove()
-	end
-
-	local spawnableAmmoEnts = ents.TTT.GetSpawnableAmmo()
-
-	for i = 1, #spawnableAmmoEnts do
-		local ammoClsEnts = entsFindByClass(spawnableAmmoEnts[i])
-
-		for k = 1, #ammoClsEnts do
-			ammoClsEnts[k]:Remove()
-		end
 	end
 
 	local spawnableWepEnts = ents.TTT.GetSpawnableSWEPs()

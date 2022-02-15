@@ -22,8 +22,6 @@ function ENT:Initialize()
 	self.Objective_Server_Press_Max 	= 3
 	self.Objective_Server_Press_Colour	= Color( 255, 255, 255, 255)
 
-
-
 	if SERVER then
 		self:SetUseType(SIMPLE_USE)
 	end
@@ -32,6 +30,24 @@ function ENT:Initialize()
 	if SERVER then self:SendWarn(true) end 
 	-- END of 
 end
+
+function ENT:Use( activator, caller )
+
+	if CLIENT then return end
+
+	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
+
+    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() and activator:Alive() then
+
+		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+			self:TakesHit() 
+		else
+			JM_Function_PrintChat(activator, "Objective", "You need your hands free to do that...")
+		end
+
+	end
+end
+
 
 function ENT:TakesHit() 
 
@@ -70,48 +86,8 @@ function ENT:TakesHit()
 	end
 end
 
-function ENT:OnTakeDamage(dmginfo)
-
-	if CLIENT then return end
-
-	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
-
-	local activator = dmginfo:GetAttacker()
-
-	if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() and activator:Alive() then
-
-		local weaponUsed = dmginfo:GetInflictor()
-
-		if weaponUsed:GetClass() == "weapon_jm_special_crowbar" then
-			self:TakesHit() 
-		end
-
-	else
-
-		if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and not activator:IsTraitor() and activator:Alive() then
-
-			local weaponUsed = dmginfo:GetInflictor()
-
-			if weaponUsed:GetClass() == "weapon_jm_special_crowbar" then
-				local effect = EffectData()
-				effect:SetStart(self:GetPos())
-				effect:SetOrigin(self:GetPos())
-				util.Effect("Explosion", effect, true, true)
-				util.Effect("HelicopterMegaBomb", effect, true, true)
-
-				activator:TakeDamage( 9999, activator, self)
-			end
-
-		end
-
-	end
-
-end
-
 function ENT:OnRemove()
-
 	if SERVER then self:SendWarn(false) end
-
 end
 
 --- Josh Mate Hud Warning

@@ -5,7 +5,7 @@ DEFINE_BASECLASS "weapon_jm_base_gun"
 SWEP.HoldType              = "shotgun"
 
 if CLIENT then
-   SWEP.PrintName          = "Rooty Tooty"
+   SWEP.PrintName          = "Rooty-Tooty"
    SWEP.Slot               = 2
 
    SWEP.ViewModelFlip      = false
@@ -24,151 +24,82 @@ SWEP.WeaponID              = AMMO_MEGA_SHOTGUN
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 25
-SWEP.Primary.NumShots      = 100
-SWEP.Primary.Delay         = 1
-SWEP.Primary.Cone          = 0.30
-SWEP.Primary.Recoil        = 10
-SWEP.Primary.Range         = 3000
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
-SWEP.Primary.ClipMax       = 10
+SWEP.Primary.Damage        = 35
+SWEP.Primary.NumShots      = 80
+SWEP.Primary.Delay         = 0.1
+SWEP.Primary.Cone          = 0.20
+SWEP.Primary.Recoil        = 15
+SWEP.Primary.Range         = 5000
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipMax       = 1
 SWEP.Primary.SoundLevel    = 120
 
-SWEP.HeadshotMultiplier    = 2
+SWEP.HeadshotMultiplier    = 1
 SWEP.DeploySpeed           = 1
-SWEP.BulletForce           = 30
+SWEP.BulletForce           = 50
 SWEP.Primary.Automatic     = false
 
 -- // End of Gun Stats
 
 
-SWEP.Primary.Ammo          = "357"
-SWEP.Primary.Sound         = "shoot_mega_shotgun.mp3"
+SWEP.Primary.Ammo          = "None"
+SWEP.Primary.Sound         = nil
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/c_shotgun.mdl"
 SWEP.WorldModel            = "models/weapons/w_shotgun.mdl"
 
 
-function SWEP:SetupDataTables()
-   self:NetworkVar("Bool", 0, "Reloading")
-   self:NetworkVar("Float", 0, "ReloadTimer")
 
-   return BaseClass.SetupDataTables(self)
-end
 
-function SWEP:Reload()
+function SWEP:PrimaryAttack(worldsnd)
+	if self.Secondary.IsDelayedByPrimary == 1 then self:SetNextSecondaryFire(CurTime() + self.Primary.Delay) end 
 
-   --if self:GetNWBool( "reloading", false ) then return end
-   if self:GetReloading() then return end
+	-- Rapid Fire Changes
+	local owner = self:GetOwner()
+	if (not owner:GetNWBool(JM_Global_Buff_Care_RapidFire_NWBool)) then self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	else self:SetNextPrimaryFire(CurTime() + (self.Primary.Delay*0.70)) end
+	-- End of Rapid Fire Changes
 
-   if self:Clip1() < self.Primary.ClipSize and self:GetOwner():GetAmmoCount( self.Primary.Ammo ) > 0 then
+	if not self:CanPrimaryAttack() then return end
 
-      if self:StartReload() then
-         return
-      end
+   if SERVER then
+	   JM_Function_PlaySound("shoot_mega_shotgun.mp3")
    end
 
-end
+	self:ShootBullet(self.Primary.Damage, self.Primary.Recoil, self.Primary.NumShots, self:GetPrimaryCone())
+	self:TakePrimaryAmmo(1)
 
-function SWEP:StartReload()
-   --if self:GetNWBool( "reloading", false ) then
-   if self:GetReloading() then
-      return false
+	if not IsValid(owner) or owner:IsNPC() or not owner.ViewPunch then return end
+
+	owner:ViewPunch(Angle(util.SharedRandom(self:GetClass(), -0.2, -0.1, 0) * self.Primary.Recoil, util.SharedRandom(self:GetClass(), -0.1, 0.1, 1) * self.Primary.Recoil, 0))
+
+   if SERVER then
+	   self:Remove()
    end
-
-   self:SetIronsights( false )
-
-   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-
-   local ply = self:GetOwner()
-
-   if not ply or ply:GetAmmoCount(self.Primary.Ammo) <= 0 then
-      return false
-   end
-
-   local wep = self
-
-   if wep:Clip1() >= self.Primary.ClipSize then
-      return false
-   end
-
-   wep:SendWeaponAnim(ACT_SHOTGUN_RELOAD_START)
-
-   self:SetReloadTimer(CurTime() + wep:SequenceDuration())
-
-   --wep:SetNWBool("reloading", true)
-   self:SetReloading(true)
-
-   return true
-end
-
-function SWEP:PerformReload()
-   local ply = self:GetOwner()
-
-   -- prevent normal shooting in between reloads
-   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-
-   if not ply or ply:GetAmmoCount(self.Primary.Ammo) <= 0 then return end
-
-   if self:Clip1() >= self.Primary.ClipSize then return end
-
-   self:GetOwner():RemoveAmmo( 1, self.Primary.Ammo, false )
-   self:SetClip1( self:Clip1() + 1 )
-
-   self:SendWeaponAnim(ACT_VM_RELOAD)
-
-   self:SetReloadTimer(CurTime() + self:SequenceDuration())
-end
-
-function SWEP:FinishReload()
-   self:SetReloading(false)
-   self:SendWeaponAnim(ACT_SHOTGUN_RELOAD_FINISH)
-
-   self:SetReloadTimer(CurTime() + self:SequenceDuration())
-end
-
-function SWEP:CanPrimaryAttack()
-   if self:Clip1() <= 0 then
-      self:EmitSound( "Weapon_Shotgun.Empty" )
-      self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-      return false
-   end
-   return true
-end
-
-function SWEP:Think()
-   BaseClass.Think(self)
-   if self:GetReloading() then
-      if self:GetOwner():KeyDown(IN_ATTACK) then
-         self:FinishReload()
-         return
-      end
-
-      if self:GetReloadTimer() <= CurTime() then
-
-         if self:GetOwner():GetAmmoCount(self.Primary.Ammo) <= 0 then
-            self:FinishReload()
-         elseif self:Clip1() < self.Primary.ClipSize then
-            self:PerformReload()
-         else
-            self:FinishReload()
-         end
-         return
-      end
-   end
-end
-
-function SWEP:Deploy()
-   self:SetReloading(false)
-   self:SetReloadTimer(0)
-   return BaseClass.Deploy(self)
 end
 
 -- No Iron Sights
 function SWEP:SecondaryAttack()
   return
 end
+
+-- Hud Help Text
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("DELETE EVERYTHING INFRONT OF YOU", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+if SERVER then
+   function SWEP:OnRemove()
+      self:PreDrop()
+      if self.Owner:IsValid() and self.Owner:IsTerror() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+-- 

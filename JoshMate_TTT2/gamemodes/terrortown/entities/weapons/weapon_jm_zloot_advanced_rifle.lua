@@ -43,7 +43,6 @@ SWEP.Primary.Ammo          = "pistol"
 SWEP.Primary.Sound         = "shoot_advanced_rifle.wav"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_light"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_rif_m4a1.mdl"
 SWEP.WorldModel            = "models/weapons/w_rif_m4a1.mdl"

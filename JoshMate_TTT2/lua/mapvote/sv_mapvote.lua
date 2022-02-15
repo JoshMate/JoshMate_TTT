@@ -16,10 +16,38 @@ net.Receive("MapVote_UpdateFromClient", function(len, ply)
     end
 end)
 
+JM_Global_MapVote_NextWillBeRandom = false
+
 function MapVote:Start(voteTime)
     if self.runs then return end
 
     self:Init() -- init server MapVote
+
+    -- JM Forcefully choose a random unplayed map instead of voting
+    if JM_Global_MapVote_NextWillBeRandom == true then
+
+        JM_Global_MapVote_NextWillBeRandom = false
+
+        local mapName = table.Random(MapVote.maps)
+
+        local playedMapsList = ConfigHelper:ReadPlayedMaps()
+        table.insert(playedMapsList, mapName)
+        ConfigHelper:WritePlayedMaps(playedMapsList) 
+
+        JM_Function_PrintChat_All("Map", "Randomly selecting your next map...")
+
+        timer.Simple(5, function()
+            JM_Function_PlaySound("effect_randommap.mp3")
+        end)
+        
+
+        timer.Simple(8, function()
+            RunConsoleCommand("changelevel", mapName)
+        end)
+
+        return
+
+    end
 
     MapVote.voteTime = voteTime and voteTime or self.config.voteTime
 

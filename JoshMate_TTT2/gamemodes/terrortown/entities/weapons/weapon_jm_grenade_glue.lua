@@ -35,4 +35,3 @@ SWEP.JM_Throw_Power        = 1000
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_glue_proj"
 end
-

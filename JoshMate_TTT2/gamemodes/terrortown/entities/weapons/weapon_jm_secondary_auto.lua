@@ -34,11 +34,14 @@ SWEP.DeploySpeed           = 3
 SWEP.BulletForce           = 10
 SWEP.Primary.Automatic     = true
 
+-- JM Changes, Movement Speed
+SWEP.MoveMentMultiplier = 1.1
+-- End of
+
 -- // End of Gun Stats
 
 SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = "shoot_autopistol.wav"
-SWEP.AmmoEnt               = "item_jm_ammo_light"
 SWEP.Kind                  = WEAPON_PISTOL
 SWEP.WeaponID              = AMMO_GLOCK
 SWEP.AutoSpawnable         = true

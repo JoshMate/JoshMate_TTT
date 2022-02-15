@@ -70,7 +70,7 @@ hook.Add( "PreDrawHalos", "Halos_Sudden_Death", function()
          end
      end
  
-     halo.Add( players, Color( 255, 255, 0 ), 2, 2, 3, true, true )
+     halo.Add( players, Color( 255, 255, 100 ), 2, 2, 3, true, true )
  
  end )
 

@@ -39,8 +39,6 @@ SWEP.Primary.Automatic     = false
 -- // End of Gun Stats
 
 SWEP.Primary.Ammo          = "357"
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
-
 SWEP.Primary.Sound         = "shoot_explosive_gun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP

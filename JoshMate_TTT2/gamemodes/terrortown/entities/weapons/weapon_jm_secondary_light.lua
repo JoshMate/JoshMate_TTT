@@ -37,12 +37,15 @@ SWEP.DeploySpeed           = 3
 SWEP.BulletForce           = 10
 SWEP.Primary.Automatic     = false
 
+-- JM Changes, Movement Speed
+SWEP.MoveMentMultiplier = 1.1
+-- End of
+
 -- // End of Gun Stats
 
 SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = "shoot_lightpistol.wav"
 SWEP.AutoSpawnable         = true
-SWEP.AmmoEnt               = "item_jm_ammo_light"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_pist_p228.mdl"
 SWEP.WorldModel            = "models/weapons/w_pist_p228.mdl"

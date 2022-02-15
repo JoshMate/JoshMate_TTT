@@ -49,7 +49,6 @@ SWEP.Primary.Ammo          = "357"
 SWEP.Primary.Sound         = Sound( "Weapon_M3.Single" )
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_shot_m3super90.mdl"
 SWEP.WorldModel            = "models/weapons/w_shot_m3super90.mdl"

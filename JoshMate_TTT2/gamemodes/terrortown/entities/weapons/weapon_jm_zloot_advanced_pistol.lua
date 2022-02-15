@@ -42,7 +42,6 @@ SWEP.Primary.Automatic     = false
 SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = "shoot_advanced_pistol.wav"
 SWEP.AutoSpawnable         = true
-SWEP.AmmoEnt               = "item_jm_ammo_light"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_pist_fiveseven.mdl"
 SWEP.WorldModel            = "models/weapons/w_pist_fiveseven.mdl"

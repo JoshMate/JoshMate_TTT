@@ -40,39 +40,32 @@ function SWEP:HitEffectsInit(ent)
    util.Effect("cball_explode", effect, true, true)
 end
 
-function SWEP:PrimaryAttack()
-   if not self:CanPrimaryAttack() then return end
-   self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-   self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
-   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
-      return
-   end
-   
-   -- Use The Grenade
+function SWEP:HealingGreande_HealTarget(target)
 
    if (SERVER) then
-      local pl = self:GetOwner()
-      pl:EmitSound(Sound("grenade_health.wav"))
 
-      if pl:IsTerror() and pl:Alive() then
+      target:EmitSound(Sound("grenade_health.wav"))
+
+      if target:IsTerror() and target:Alive() then
 
          -- Hit Markers
          net.Start( "hitmarker" )
          net.WriteFloat(0)
          net.WriteBool(false)
-         net.Send(pl)
+         net.Send(self:GetOwner())
          -- End of Hit Markers
 
          -- Effects
-         self:HitEffectsInit(pl)
+         self:HitEffectsInit(target)
          -- End of Effects
          
          -- Set Status and print Message
-         JM_RemoveBuffFromThisPlayer("jm_buff_healthgrenade",pl)
-         JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",pl,pl)
+         JM_RemoveBuffFromThisPlayer("jm_buff_healthgrenade",target)
+         JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",target,self:GetOwner())
          -- End Of
+
+         JM_Function_PrintChat(target, "Healing Grenade","You have been healed by: " .. tostring(self:GetOwner():Nick()))
 
       end
 
@@ -86,3 +79,45 @@ function SWEP:PrimaryAttack()
 
 end
 
+
+function SWEP:PrimaryAttack()
+   if not self:CanPrimaryAttack() then return end
+   self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+   self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+
+   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+      if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
+      return
+   end
+   
+   -- Use The Grenade
+   self:HealingGreande_HealTarget(self:GetOwner())
+
+
+end
+
+-- No Iron Sights
+function SWEP:SecondaryAttack()
+
+   -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
+   local JM_Shoot_Range = 150
+
+   local owner = self:GetOwner()
+   if not IsValid(owner) then return end
+
+   if isfunction(owner.LagCompensation) then -- for some reason not always true
+      owner:LagCompensation(true)
+   end
+   
+   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
+   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+      if SERVER then
+         -- Use The Grenade
+         self:HealingGreande_HealTarget(tr.Entity)
+      end
+   end
+   owner:LagCompensation(false)
+
+   -- #########
+   
+ end

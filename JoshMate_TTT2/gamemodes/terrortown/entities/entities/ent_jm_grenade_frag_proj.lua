@@ -20,6 +20,7 @@ local JM_Explosive_Blast_Damage    = 60
 local JM_Explosive_Blast_Radius    = 400
 
 function ENT:Explode(tr)
+   -- Server Side Mechanics
    if SERVER then
 
       self:SetNoDraw(true)
@@ -44,13 +45,6 @@ function ENT:Explode(tr)
       
       -- Done
       self:Remove()
-   else
-      if self.GreandeHasScorched == false then 
-         self.GreandeHasScorched = true
-         local spos = self:GetPos()
-         local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
-         util.Decal("Scorch", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
-      end
    end
 end
 

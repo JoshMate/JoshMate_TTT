@@ -525,59 +525,9 @@ concommand.Add("ttt_dropweapon", DropActiveWeapon)
 local function DropActiveAmmo(ply)
 	if not IsValid(ply) then return end
 
-	local wep = ply:GetActiveWeapon()
-
-	if not IsValid(wep) or not wep.AmmoEnt then return end
-
-	local hook_data = {wep:Clip1()}
-
-	if hook.Run("TTT2DropAmmo", ply, hook_data) == false then
-		LANG.Msg(ply, "drop_ammo_prevented", nil, MSG_CHAT_WARN)
-
-		return
-	end
-
-	local amt = hook_data[1]
-
-	if amt < 1 or amt <= wep.Primary.ClipSize * 0.25 then
-		LANG.Msg(ply, "drop_no_ammo", nil, MSG_CHAT_WARN)
-
-		return
-	end
-
-	local pos, ang = ply:GetShootPos(), ply:EyeAngles()
-	local dir = ang:Forward() * 32 + ang:Right() * 6 + ang:Up() * -5
-	local tr = util.QuickTrace(pos, dir, ply)
-
-	if tr.HitWorld then return end
-
-	wep:SetClip1(0)
-
-	ply:AnimPerformGesture(ACT_GMOD_GESTURE_ITEM_GIVE)
-
-	local box = ents.Create(wep.AmmoEnt)
-
-	if not IsValid(box) then return end
-
-	box:SetPos(pos + dir)
-	box:SetOwner(ply)
-	box:Spawn()
-	box:PhysWake()
-
-	local phys = box:GetPhysicsObject()
-
-	if IsValid(phys) then
-		phys:ApplyForceCenter(ang:Forward() * 1000)
-		phys:ApplyForceOffset(VectorRand(), vector_origin)
-	end
-
-	box.AmmoAmount = amt
-
-	timer.Simple(2, function()
-		if not IsValid(box) then return end
-
-		box:SetOwner(nil)
-	end)
+	-- This feature was removed by the 2022 Josh Mate Ammo Rework
+	JM_Function_PrintChat(ply, "Info", "This feature has been removed by the Great Josh Mate Ammo Rework of Feb 2022")
+	
 end
 concommand.Add("ttt_dropammo", DropActiveAmmo)
 

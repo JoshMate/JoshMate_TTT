@@ -12,6 +12,9 @@ ENT.Trail_Colour = Color(255, 255, 255, 150)
 ENT.GrenadeType_ExplodeOn_Impact    = false
 ENT.GrenadeType_Fuse_Timer          = 2
 
+-- Fix Scorch Spam
+ENT.GreandeHasScorched              = false
+
 
 local JM_Tag_Radius  = 400
 
@@ -35,6 +38,18 @@ function ENT:ExplodeEffects(pos)
 end
 
 function ENT:Explode(tr)
+
+   -- Decal Effects
+   if (SERVER) then
+      if self.GreandeHasScorched == false then 
+         self.GreandeHasScorched = true
+         local spos = self:GetPos()
+         local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
+         util.Decal("Splash.Large", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
+      end
+   end
+
+   -- Server Side Mechanics
    if (SERVER) then
       self.Entity:EmitSound(Sound("grenade_tag.wav"));
       self:ExplodeEffects(self:GetPos())
@@ -70,9 +85,9 @@ function ENT:Explode(tr)
 
          end
       end
-      
-      self:GetOwner():ChatPrint("[Tag Grenade]: You tagged: " .. tostring(totalPeopleTagged) .. " people")
-      self.Entity:Remove();
+      JM_Function_PrintChat(self:GetOwner(), "Tag Grenade", "Hit: " .. tostring(totalPeopleTagged) .. " people.")
+      -- Done
+      self:Remove()
    end
 
 end

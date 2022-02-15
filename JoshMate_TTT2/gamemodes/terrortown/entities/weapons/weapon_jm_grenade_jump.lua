@@ -87,3 +87,8 @@ function SWEP:PrimaryAttack()
    end
 
 end
+
+-- No Iron Sights
+function SWEP:SecondaryAttack()
+   return
+ end

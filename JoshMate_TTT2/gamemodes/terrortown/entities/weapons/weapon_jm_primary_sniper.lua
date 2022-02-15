@@ -51,7 +51,6 @@ SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Tracer                = "None"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_snip_scout.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_snip_scout.mdl")

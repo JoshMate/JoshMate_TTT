@@ -33,6 +33,3 @@ SWEP.Primary.DefaultClip   = 1
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_frag_proj"
 end
-
-
-

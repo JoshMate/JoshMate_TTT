@@ -5,23 +5,6 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 if SERVER then
 
-    -- Give players Extra HP for bonus Karma
-
-    local function JM_F_GiveBonusKarmaHP(player)
-
-        local JM_Karma_BonusHP_Mult = 0.1
-
-        local FinalHP = 100 + ((player:GetBaseKarma() - 1000) * JM_Karma_BonusHP_Mult)
-
-        FinalHP = math.ceil(FinalHP)
-        
-        FinalHP = math.Clamp(FinalHP, 100, 125)
-
-        player:SetMaxHealth(FinalHP)
-        player:SetHealth(FinalHP)
-    
-    end
-
     -- Slay players who are below certain thresholds
     local JM_Karma_Slay_Threshold           = 500
     local JM_Karma_Heal_Max                 = 1000
@@ -63,9 +46,6 @@ if SERVER then
             local ply = plys[i]
             if not ply:IsValid() then continue end
 
-            -- Karma Bonus HP
-
-            JM_F_GiveBonusKarmaHP(ply)
 
             -- Karma Slay
             
@@ -115,31 +95,31 @@ if SERVER then
                 ply:SetModel( "models/player/police.mdl" )
             end
 
-            -- Karma Bonus Detective Credit
-
-            if(ply:IsDetective()) then
-                
-                if (ply:GetBaseKarma() >= 1250 ) then
-                    ply:AddCredits(1)
-                    JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +1 Credit")
-                end
-
-            end
-
-            -- Karma Bonus Traitor Credit
-
-            if(ply:IsTraitor()) then
-                
-                if (ply:GetBaseKarma() >= 1250 ) then
-                    ply:AddCredits(1)
-                    JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +1 Credit")
-                end
-
-            end
-
             -- Karma Bonus HP
+            local JM_Karma_BonusHP_Mult = 0.1
 
-            JM_F_GiveBonusKarmaHP(ply)
+            if ply:GetBaseKarma() > 1000 and ply:GetBaseKarma() < 1250 then 
+                local BonusHPFromKarama = math.ceil(((ply:GetBaseKarma() - 1000) * JM_Karma_BonusHP_Mult))
+                local FinalHP = 100 + BonusHPFromKarama
+                FinalHP = math.Clamp(FinalHP, 100, 125)
+                JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +" .. tostring(BonusHPFromKarama) .. " HP")
+                ply:SetMaxHealth(FinalHP)
+                ply:SetHealth(FinalHP)
+            end
+
+            if ply:GetBaseKarma() == 1250 then 
+                local BonusHPFromKarama = 30
+                local FinalHP = 100 + BonusHPFromKarama
+                JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +" .. tostring(BonusHPFromKarama) .. " HP")
+                ply:SetMaxHealth(FinalHP)
+            ply:SetHealth(FinalHP)
+            end
+        
+            -- Karma Bonus Credit 
+            if ply:GetBaseKarma() == 1250 then 
+                ply:AddCredits(1)
+                JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +1 Credit")
+            end
 
             -- Karma Slay
 

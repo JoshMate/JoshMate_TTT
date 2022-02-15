@@ -39,6 +39,23 @@ function ENT:Initialize()
 	-- END of 
 end
 
+function ENT:Use( activator, caller )
+
+	if CLIENT then return end
+
+	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
+
+    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:Alive() then
+
+		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+			self:TakesHit() 
+		else
+			JM_Function_PrintChat(activator, "Objective", "You need your hands free to do that...")
+		end
+
+	end
+end
+
 function ENT:TakesHit() 
 
 	if CLIENT then return end
@@ -75,26 +92,6 @@ function ENT:TakesHit()
 
 		end
 	end
-end
-
-function ENT:OnTakeDamage(dmginfo)
-
-	if CLIENT then return end
-
-	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
-
-	local activator = dmginfo:GetAttacker()	
-
-	if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:Alive() then
-
-		local weaponUsed = dmginfo:GetInflictor()
-
-		if weaponUsed:GetClass() == "weapon_jm_special_crowbar" then
-			self:TakesHit() 
-		end
-
-	end
-
 end
 
 function ENT:OnRemove()

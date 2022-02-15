@@ -11,6 +11,9 @@ ENT.AdminSpawnable      = false
 local JM_DoomDart_Explosive_Blast_Damage    = 80
 local JM_DoomDart_Explosive_Blast_Radius    = 600
 
+-- Fix Scorch Spam
+ENT.GreandeHasScorched              = false
+
 
 if CLIENT then
 	return
@@ -22,6 +25,16 @@ end
 function ENT:Think()
 
 	if self.doomedTarget:IsValid() and not self.doomedTarget:Alive() then
+
+		 -- Decal Effects
+		 if (SERVER) then
+			if self.GreandeHasScorched == false then 
+			   self.GreandeHasScorched = true
+			   local spos = self.doomedTarget:GetPos()
+			   local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
+			   util.Decal("Cross", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
+			end
+		 end
 
 		if SERVER then 
 			local pos = self.doomedTarget:GetPos()
@@ -43,13 +56,6 @@ function ENT:Think()
 			self:Remove()
 
 		end
-
-		if CLIENT then
-			local spos = self.doomedTarget:GetPos()
-			local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
-			util.Decal("Scorch", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)   
-		end
-
 	end
 
 end

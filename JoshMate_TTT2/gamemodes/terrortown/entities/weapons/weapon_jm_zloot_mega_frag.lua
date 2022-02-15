@@ -6,14 +6,19 @@ if CLIENT then
 
    SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_special.png"
    SWEP.IconLetter      = "P"
+
+   function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 17 - ang:Right() * -8 - ang:Up() * 8, ang
+	end
 end
 
 SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
 SWEP.WeaponID           = AMMO_NADE_FRAG
 
-SWEP.ViewModel          = "models/weapons/c_grenade.mdl"
+SWEP.ViewModel          = "models/weapons/w_grenade.mdl"
 SWEP.WorldModel         = "models/weapons/w_grenade.mdl"
+SWEP.UseHands 				= false
 
 
 SWEP.AutoSpawnable      = true
@@ -30,7 +35,7 @@ SWEP.JM_Throw_Power        = 1200
 -- End of
 
 function SWEP:GetGrenadeName()
-   return "ent_jm_grenade_fire_proj"
+   return "ent_jm_grenade_frag_proj"
 end
 
 function SWEP:ProduceMegaFrags(count)

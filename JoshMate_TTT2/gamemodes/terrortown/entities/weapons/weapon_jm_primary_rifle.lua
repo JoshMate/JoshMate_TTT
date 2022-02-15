@@ -42,7 +42,6 @@ SWEP.Primary.Ammo          = "pistol"
 SWEP.Primary.Sound         = "shoot_assaultrifle.wav"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_light"
 SWEP.UseHands              = true
 SWEP.HoldType              = "ar2"
 SWEP.ViewModel             = "models/weapons/cstrike/c_rif_ak47.mdl"
