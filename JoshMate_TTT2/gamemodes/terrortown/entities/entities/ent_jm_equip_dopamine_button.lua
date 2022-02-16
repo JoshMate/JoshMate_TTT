@@ -57,6 +57,11 @@ function ENT:Use( activator, caller )
 
 				activator:TakeDamage( 9999, activator, self)
 				sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos())
+
+				net.Start("JM_Net_Announcement")
+				net.WriteString(tostring(activator:Nick()) .. " has chosen poorly")
+				net.WriteUInt(0, 16)
+				net.Broadcast()
 			else
 				self.Entity:EmitSound(Sound("grenade_glue.wav"));
 			end
