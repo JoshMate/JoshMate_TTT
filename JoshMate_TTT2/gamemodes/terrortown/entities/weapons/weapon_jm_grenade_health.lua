@@ -121,3 +121,11 @@ function SWEP:SecondaryAttack()
    -- #########
    
  end
+
+ -- Hud Help Text
+if CLIENT then
+   function SWEP:Initialize()
+      self:AddTTT2HUDHelp("Heal Your Self", "Heal Your Target", true)
+   end
+end
+-- 

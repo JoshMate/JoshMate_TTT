@@ -1,0 +1,31 @@
+################################
+#### TTT Update 55 - Patch Notes
+################################
+
+//TODO - Inferno Bomb Has weird kill message name
+//TODO - Karma Reset always says JoshMate in message
+//TODO - Make bombs take a bit longer to defuse
+//TODO - Make bombs appear more at higher player counts
+//TODO - Make gamemodes slightly more frequent
+//TODO - Fix traitors not being able to use traitor buttons
+//TODO - Soap and Beartrap unintentionally block collisions
+//TODO - Glue's Strider Blood effect appears in the skybox
+//TODO - Fix stuck spot under sniper tower on snowfield
+//TODO - Ali wants some gamble Russian roulette brainlet thing
+//TODO - Add a 70% power jump to right click on jump grenade
+//TODO - Stop manhacks from being grabbed with the magneeto stick
+//TODO - Glue Grenade Text appears twice (server and cLient sided)
+//TODO - Investigate Remove() in buff base class crashing the server
+//TODO - Make glue radius bigger
+
+################################
+##### Fixes & Extras
+################################
+
+
+
+################################
+##### Maps
+################################
+
+

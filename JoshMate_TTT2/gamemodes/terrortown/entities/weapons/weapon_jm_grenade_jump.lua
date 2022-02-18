@@ -92,3 +92,11 @@ end
 function SWEP:SecondaryAttack()
    return
  end
+
+  -- Hud Help Text
+if CLIENT then
+   function SWEP:Initialize()
+      self:AddTTT2HUDHelp("Jump Directly Upwards", nil, true)
+   end
+end
+-- 
