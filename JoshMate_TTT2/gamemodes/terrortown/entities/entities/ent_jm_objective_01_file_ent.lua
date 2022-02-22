@@ -42,7 +42,7 @@ function ENT:Use( activator, caller )
 		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
 			self:TakesHit() 
 		else
-			JM_Function_PrintChat(activator, "Objective", "You need your hands free to do that...")
+			JM_Function_PrintChat(activator, "Protect The Files", "You need your hands free to do that...")
 		end
 
 	end
@@ -54,7 +54,7 @@ function ENT:TakesHit()
 	if CLIENT then return end
 
 	self.Objective_Server_Press_Count = self.Objective_Server_Press_Count + 1
-	self:EmitSound("effect_objective_hit.mp3")
+	self:EmitSound("gamemode/file_hit.mp3")
 
 	self.Objective_Server_Press_Colour = (self.Objective_Server_Press_Count * (255 / self.Objective_Server_Press_Max))
 	self.Objective_Server_Press_Colour = Color( 255, 255 - self.Objective_Server_Press_Colour, 255 - self.Objective_Server_Press_Colour, 255)
@@ -73,15 +73,15 @@ function ENT:TakesHit()
 
 		if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 
-		local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file" )
+		local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file_ent" )
 		local numberOfFilesLeft = (#listOfObjectives - 2)
-		JM_Function_PrintChat_All("Objective", "A File has been destroyed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
+		JM_Function_PrintChat_All("Protect The Files", "A File has been destroyed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
 		self:SendWarn(false) 
 
 		if #listOfObjectives <= 2 then
-			JM_Function_PrintChat_All("Objective", "The Files have been Destroyed! Traitors Win...")
+			JM_Function_PrintChat_All("Protect The Files", "The Files have been Destroyed! Traitors Win...")
 			EndRound("traitors")
-			JM_Function_PlaySound("effect_objective_end.mp3")
+			JM_Function_PlaySound("gamemode/file_end.mp3")
 		end
 	end
 end

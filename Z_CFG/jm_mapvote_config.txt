@@ -1,0 +1,14 @@
+{
+	"mapPrefixes": [
+		"ttt_"
+	],
+	"voteTime": 35.0,
+	"mapExcludes": [
+		"ttt_warmup",
+		"ttt_lucker",
+		"ttt_standoff",
+        "ttt_elevator",
+        "ttt_elevator_2",
+        "ttt_breakdown"
+	]
+}

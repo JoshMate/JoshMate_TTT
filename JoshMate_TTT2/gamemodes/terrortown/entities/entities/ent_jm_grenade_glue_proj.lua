@@ -5,6 +5,9 @@ ENT.Type = "anim"
 ENT.Base = "ent_jm_base_grenade"
 ENT.Model = Model("models/props_lab/jar01b.mdl")
 
+-- Name of Ent in kill messages
+ENT.PrintName = "Glue Grenade"
+
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(255, 255, 0, 150)
 
@@ -14,7 +17,7 @@ ENT.GrenadeType_ExplodeOn_Impact    = true
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false
 
-local JM_Tag_Radius  = 200
+local JM_Tag_Radius  = 300
 
 
 function ENT:HitEffectsInit(ent)
@@ -26,7 +29,6 @@ function ENT:HitEffectsInit(ent)
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
    util.Effect("AntlionGib", effect, true, true)
-   util.Effect("StriderBlood", effect, true, true)
 end
 
 function ENT:ExplodeEffects(pos)
@@ -34,7 +36,6 @@ function ENT:ExplodeEffects(pos)
    effect:SetStart(pos)
    effect:SetOrigin(pos)
    util.Effect("AntlionGib", effect, true, true)
-   util.Effect("StriderBlood", effect, true, true)
 end
 
 function ENT:Explode(tr)
@@ -54,6 +55,7 @@ function ENT:Explode(tr)
       self.Entity:EmitSound(Sound("grenade_glue.wav"));
       self:ExplodeEffects(self:GetPos())
       local totalPeopleTagged = 0
+
       for _,pl in pairs(player.GetAll()) do
 
          local playerPos = pl:GetShootPos()
@@ -61,8 +63,6 @@ function ENT:Explode(tr)
 
          -- Do to all players in radius
          if nadePos:Distance(playerPos) <= JM_Tag_Radius then
-
-
             if pl:IsTerror() and pl:Alive() then
                totalPeopleTagged = totalPeopleTagged + 1
 
@@ -79,11 +79,9 @@ function ENT:Explode(tr)
                JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",pl,self:GetOwner())
                -- End Of
             end
-
          end
       end
-
-      JM_Function_PrintChat(self:GetOwner(), "Glue Grenade", "Hit: " .. tostring(totalPeopleTagged) .. " people.")
+      
       -- Done
       self:Remove()
    end

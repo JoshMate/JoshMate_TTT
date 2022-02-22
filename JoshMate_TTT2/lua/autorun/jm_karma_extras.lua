@@ -121,6 +121,13 @@ if SERVER then
                 JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: +1 Credit")
             end
 
+            -- Karma Good Boy Buff
+            if ply:GetBaseKarma() == 1250 then 
+                JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff",ply)
+                JM_GiveBuffToThisPlayer("jm_buff_karmabuff",ply,ply)
+                JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Good Boy Buff (+10% Movement Speed)")
+            end
+
             -- Karma Slay
 
             if ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then

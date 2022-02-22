@@ -32,6 +32,7 @@ function ulx.spawnthing( calling_ply, message )
 	if ent:IsValid() then
 		ent:SetPos(calling_ply:GetPos())
 		ent:Spawn()
+		JM_Function_PrintChat_All("Admin", tostring(calling_ply:Nick()) .. " Spawned: " .. tostring(message))	
 	end
 
 end
@@ -47,7 +48,7 @@ spawnthis:help( "Spawns the given entity name: eg. weapon_jm_zloot_prop_launcher
 
 function ulx.spawnthing( calling_ply, message )
 
-	JM_Function_Announcement("Giving Everyone: " .. tostring(message), 0)
+	JM_Function_PrintChat_All("Admin", tostring(calling_ply:Nick()) .. " Gave Everyone: " .. tostring(message))
 
 	local plys = player.GetAll()
 
@@ -75,6 +76,7 @@ spawnthis:help( "Spawns the given entity name for everyone: eg. weapon_jm_zloot_
 -- ######## Mapvote ########
 -- #########################
 function ulx.mapvote(calling_ply, time, isOppositeCmd)
+	JM_Function_PrintChat_All("Map", "Manually starting a Map Vote")
     if isOppositeCmd then MapVote:Stop() else MapVote:Start(time) end
 end
 
@@ -90,7 +92,7 @@ cmdMapvote:setOpposite("jm mapvote end", {_, _, true}, "!unmapvote")
 -- #########################
 
 function ulx.resetmaplist(calling_ply)
-    PrintMessage(HUD_PRINTTALK, calling_ply:Nick() .. " resets the list of played maps.")
+    JM_Function_PrintChat_All("Map", "The list of votable maps has been reset")	
     ConfigHelper:WritePlayedMaps({}) 
 end
 
@@ -141,7 +143,7 @@ function ulx.karmapunishminor(calling_ply, target_plys)
 
 			pl:SetBaseKarma(plKarma)
 			pl:SetLiveKarma(plKarma)
-			JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " lost 250 Karma for breaking the rules (Minor)")
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " lost 250 Karma for breaking the rules (Minor)")
 		end
 	end
 end
@@ -168,7 +170,7 @@ function ulx.karmapunishmajor(calling_ply, target_plys)
 
 			pl:SetBaseKarma(plKarma)
 			pl:SetLiveKarma(plKarma)
-			JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " lost 650 Karma for RDMing (Major)")
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " lost 650 Karma for RDMing (Major)")
 		end
 	end
 end
@@ -190,10 +192,11 @@ function ulx.karmaset1000(calling_ply, target_plys)
 		for i = 1, #target_plys do
             local pl = target_plys[i]
             pl:SetBaseKarma(1000)
-			pl:SetLiveKarma(1000)			
-		end
-		JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " has been reset to 1000 Karma")
+			pl:SetLiveKarma(1000)
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " has been reset to 1000 Karma")
+		end			
 	end
+		
 end
 
 local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1000", ulx.karmaset1000, "!karmaset1000")
@@ -213,9 +216,9 @@ function ulx.karmaset1250(calling_ply, target_plys)
 		for i = 1, #target_plys do
             local pl = target_plys[i]
             pl:SetBaseKarma(1250)
-			pl:SetLiveKarma(1250)			
+			pl:SetLiveKarma(1250)	
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " has been reset to 1250 Karma")		
 		end
-		JM_Function_PrintChat_All("Karma", tostring(calling_ply:Nick()) .. " has been reset to 1250 Karma")
 	end
 end
 
@@ -237,7 +240,7 @@ function ulx.slayeveryone(calling_ply)
         ply:Kill()			
     end
 
-	ulx.fancyLogAdmin(calling_ply, "#A Slayed EVERYONE")
+	JM_Function_PrintChat_All("Admin", "EVERYONE has been Slain")	
 end
 
 local karma = ulx.command(CATEGORY_NAME_JM_Fun, "jm slayall", ulx.slayeveryone, "!slayeveryone")
@@ -273,35 +276,6 @@ local playsounds = ulx.command( CATEGORY_NAME_JM_Tool, "jm playsound", ulx.plays
 playsounds:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
 playsounds:defaultAccess( ULib.ACCESS_ADMIN )
 playsounds:help( "Play a client side sound on all players. Eg: ping_jake.wav" )
-
--- #########################
--- ##  Protect The Server ##
--- #########################
-
-function ulx.protectthefilesfunction( calling_ply)
-
-	JM_GameMode_Start_ProtectTheFiles()
-
-end
-
-local protectthefiles = ulx.command( CATEGORY_NAME_JM_Event, "jm protectthefiles", ulx.protectthefilesfunction, "!protectthefiles")
-protectthefiles:defaultAccess( ULib.ACCESS_ADMIN )
-protectthefiles:help( "Starts the Gamemode: Protect the Files" )
-
--- #########################
--- ##  Defuse the Bombs  ##
--- #########################
-
-function ulx.defusethebombsfunction( calling_ply)
-
-
-	JM_GameMode_DefuseBombsChoseBombAmountAndSpawn()
-
-end
-
-local defusethebombs = ulx.command( CATEGORY_NAME_JM_Event, "jm defusethebombs", ulx.defusethebombsfunction, "!defusethebombs")
-defusethebombs:defaultAccess( ULib.ACCESS_ADMIN )
-defusethebombs:help( "Starts the Gamemode: Protect the Bombs" )
 
 -- #########################
 -- #####  Sudden Death #####
@@ -456,3 +430,46 @@ end
 local cmdRandomiseNextMap = ulx.command(CATEGORY_NAME_JM_Maps, "jm randomise nextmap", function () JM_ULX_MapNextRandom() end, "!mapnextrandom")
 cmdRandomiseNextMap:defaultAccess(ULib.ACCESS_ADMIN)
 
+
+-- #########################
+-- ##  Protect The Server ##
+-- #########################
+
+function ulx.protectthefilesfunction( calling_ply)
+
+	JM_GameMode_ProtectTheFiles_Init()
+
+end
+
+local protectthefiles = ulx.command( CATEGORY_NAME_JM_Event, "jm protectthefiles", ulx.protectthefilesfunction, "!protectthefiles")
+protectthefiles:defaultAccess( ULib.ACCESS_ADMIN )
+protectthefiles:help( "Starts the Gamemode: Protect the Files" )
+
+-- #########################
+-- ##  Defuse the Bombs  ##
+-- #########################
+
+function ulx.defusethebombsfunction( calling_ply)
+
+
+	JM_GameMode_DefuseTheBombs_Init()
+
+end
+
+local defusethebombs = ulx.command( CATEGORY_NAME_JM_Event, "jm defusethebombs", ulx.defusethebombsfunction, "!defusethebombs")
+defusethebombs:defaultAccess( ULib.ACCESS_ADMIN )
+defusethebombs:help( "Starts the Gamemode: Protect the Bombs" )
+
+-- #########################
+-- ##  Bounty Hunter      ##
+-- #########################
+
+function ulx.bountyhunterfunction( calling_ply)
+
+	JM_GameMode_BountyHunter_Init()
+
+end
+
+local bountyhunter = ulx.command( CATEGORY_NAME_JM_Event, "jm bountyhunter", ulx.bountyhunterfunction, "!bountyhunter")
+bountyhunter:defaultAccess( ULib.ACCESS_ADMIN )
+bountyhunter:help( "Starts the Gamemode: Protect the Bombs" )

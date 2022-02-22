@@ -130,7 +130,8 @@ if CLIENT then
 		local textPrefixColour =  Color( 255, 100, 0 )
 		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
 		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
-		if prefixMessage == "Objective" then textPrefixColour = Color(0,255,0,255) end
+		if prefixMessage == "Protect The Files" then textPrefixColour = Color(0,255,0,255) end
+		if prefixMessage == "Defuse The Bombs" then textPrefixColour = Color(0,255,0,255) end
 		
         chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)
@@ -145,7 +146,8 @@ if CLIENT then
 		local textPrefixColour =  Color( 255, 100, 0 )
 		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
 		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
-		if prefixMessage == "Objective" then textPrefixColour = Color(0,255,0,255) end
+		if prefixMessage == "Protect The Files" then textPrefixColour = Color(0,255,0,255) end
+		if prefixMessage == "Defuse The Bombs" then textPrefixColour = Color(0,255,0,255) end
 		
         chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)

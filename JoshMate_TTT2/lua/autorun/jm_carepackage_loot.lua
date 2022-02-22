@@ -29,7 +29,7 @@ end
 -- Normal Loot Table
 function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
 
-    local RNG_Roll_Normal = math.random(1, 22)
+    local RNG_Roll_Normal = math.random(1, 26)
 
     -- Optional Override of loot outcome for debug / fun
     if not forcedLootIndex == 0 then RNG_Roll_Normal = forcedLootIndex end
@@ -56,6 +56,10 @@ function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
     if RNG_Roll_Normal == 20    then JM_CarePackage_Loot_Normal_20( activator, caller ) end
     if RNG_Roll_Normal == 21    then JM_CarePackage_Loot_Normal_21( activator, caller ) end
     if RNG_Roll_Normal == 22    then JM_CarePackage_Loot_Normal_22( activator, caller ) end
+    if RNG_Roll_Normal == 23    then JM_CarePackage_Loot_Normal_23( activator, caller ) end
+    if RNG_Roll_Normal == 24    then JM_CarePackage_Loot_Normal_24( activator, caller ) end
+    if RNG_Roll_Normal == 25    then JM_CarePackage_Loot_Normal_25( activator, caller ) end
+    if RNG_Roll_Normal == 26    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
 
 end
 
@@ -220,6 +224,28 @@ function JM_CarePackage_Loot_Normal_22( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Rooty Tooty Point and Shooty")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_shotgun")
 end
+
+function JM_CarePackage_Loot_Normal_23( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Mega Tag Grenade")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_mega_tag")
+end
+
+function JM_CarePackage_Loot_Normal_24( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Mega Glue Grenade")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_mega_glue")
+end
+
+function JM_CarePackage_Loot_Normal_25( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Mega Jump Grenade")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_mega_jump")
+end
+
+function JM_CarePackage_Loot_Normal_26( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Lucker & Fenner")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_dual_pistols")
+end
+
+
 
 
 -------------------------------------------------
@@ -401,23 +427,11 @@ function JM_CarePackage_Loot_Rare_12( activator, caller )
     net.WriteUInt(0, 16)
     net.Broadcast()
 
-    local NumberToSpawn = 18
-    local possibleSpawns = ents.FindByClass( "info_player_start" )
-    table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
+    -- Spawn this thing randomly across the map
+    local ThingToSpawn = "npc_rollermine"
+    local NumberToSpawn = 20
+    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, numberOfTimes)
     
-    for i=1,NumberToSpawn do 
-
-        if #possibleSpawns > 0 then
-            local randomChoice = math.random(1, #possibleSpawns)
-            local spawn = possibleSpawns[randomChoice]
-            table.remove( possibleSpawns, randomChoice )
-            
-            local ent = ents.Create("npc_rollermine")
-            ent:SetPos(spawn:GetPos())
-            ent:Spawn()  
-        end
-
-    end
 end
 
 function JM_CarePackage_Loot_Rare_13( activator, caller )
@@ -426,9 +440,9 @@ function JM_CarePackage_Loot_Rare_13( activator, caller )
     net.Start("JM_Net_Announcement")
     net.WriteString("Care Package: Zombie Apocalypse!")
     net.WriteUInt(0, 16)
-    net.Broadcast()
+    net.Broadcast()    
 
-    local NumberToSpawn = 18
+    local NumberToSpawn = 20
     local possibleSpawns = ents.FindByClass( "info_player_start" )
     table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
     
@@ -473,23 +487,11 @@ function JM_CarePackage_Loot_Rare_14( activator, caller )
     net.WriteUInt(0, 16)
     net.Broadcast()
 
-    local NumberToSpawn = 12
-    local possibleSpawns = ents.FindByClass( "info_player_start" )
-    table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
-    
-    for i=1,NumberToSpawn do 
+    -- Spawn this thing randomly across the map
+    local ThingToSpawn = "npc_antlion"
+    local NumberToSpawn = 20
+    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, numberOfTimes)
 
-        if #possibleSpawns > 0 then
-            local randomChoice = math.random(1, #possibleSpawns)
-            local spawn = possibleSpawns[randomChoice]
-            table.remove( possibleSpawns, randomChoice )
-
-            local ent = ents.Create("npc_antlion")
-            ent:SetPos(spawn:GetPos())
-            ent:Spawn()  
-        end
-
-    end
 end
 
 function JM_CarePackage_Loot_Rare_15( activator, caller )
@@ -500,7 +502,7 @@ function JM_CarePackage_Loot_Rare_15( activator, caller )
     net.WriteUInt(0, 16)
     net.Broadcast()
 
-    local NumberToSpawn = 40
+    local NumberToSpawn = 50
     local possibleSpawns = ents.FindByClass( "info_player_start" )
     table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
     table.Add(possibleSpawns, player.GetAll())

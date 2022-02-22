@@ -157,6 +157,13 @@ JM_Global_Buff_GlueGrenade_IconName                             = "JM_Buff_Icon_
 JM_Global_Buff_GlueGrenade_IconPath                             = "vgui/ttt/joshmate/hud_surpressionfield.png"
 JM_Global_Buff_GlueGrenade_IconGoodBad                          = "bad"
 
+JM_Global_Buff_KarmaBuff_Name                                   = "Good Boy Buff"
+JM_Global_Buff_KarmaBuff_Duration                               = 0
+JM_Global_Buff_KarmaBuff_NWBool                                 = "JM_Buff_NWBool_IsKarmaBuff"
+JM_Global_Buff_KarmaBuff_IconName                               = "JM_Buff_Icon_KarmaBuff"
+JM_Global_Buff_KarmaBuff_IconPath                               = "vgui/ttt/joshmate/hud_karma.png"
+JM_Global_Buff_KarmaBuff_IconGoodBad                            = "good"
+
 
 
 

@@ -309,6 +309,11 @@ function SWEP:AllowPickup(target)
 	local phys = target:GetPhysicsObject()
 	local ply = self:GetOwner()
 
+	if target:GetClass() == "npc_manhack" or target:GetClass() == "npc_rollermine" then
+
+		return false
+	end
+
 	return IsValid(phys) and IsValid(ply)
 		and not phys:HasGameFlag(FVPHYSICS_NO_PLAYER_PICKUP)
 		and phys:GetMass() < CARRY_WEIGHT_LIMIT

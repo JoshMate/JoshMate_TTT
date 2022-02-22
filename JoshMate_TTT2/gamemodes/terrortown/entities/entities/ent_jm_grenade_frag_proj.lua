@@ -6,6 +6,9 @@ ENT.Type = "anim"
 ENT.Base = "ent_jm_base_grenade"
 ENT.Model = Model("models/weapons/w_eq_fraggrenade_thrown.mdl")
 
+-- Name of Ent in kill messages
+ENT.PrintName = "Frag Grenade"
+
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(255,0,0,150)
 

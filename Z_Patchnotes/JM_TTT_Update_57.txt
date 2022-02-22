@@ -1,0 +1,21 @@
+################################
+#### TTT Update 56 - Patch Notes
+################################
+
+// TODO: Buff Shotgun
+// TODO: Put Builty Differently in the care packlage
+// TODO: Right clicking into man hacks / flames of hell deals karma damage
+// TODO: Slippery floors persisted through roudns wtih this errros
+[Josh Mate TTT] gamemodes/terrortown/gamemode/server/sv_gamemsg.lua:491: Calling net.Start with unpooled message name! (Did you forget to call util.AddNetworkString serverside?)
+// TODO:  Make finding a corpse print to chat and make a horro sound?
+
+lua_run JM_ResetAllSettings()
+
+################################
+##### Fixes & Extras
+################################
+
+################################
+##### Maps
+################################
+

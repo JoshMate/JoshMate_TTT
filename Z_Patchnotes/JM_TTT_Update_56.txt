@@ -1,31 +1,91 @@
 ################################
-#### TTT Update 55 - Patch Notes
+#### TTT Update 56 - Patch Notes
 ################################
 
-//TODO - Inferno Bomb Has weird kill message name
-//TODO - Karma Reset always says JoshMate in message
-//TODO - Make bombs take a bit longer to defuse
-//TODO - Make bombs appear more at higher player counts
-//TODO - Make gamemodes slightly more frequent
-//TODO - Fix traitors not being able to use traitor buttons
-//TODO - Soap and Beartrap unintentionally block collisions
-//TODO - Glue's Strider Blood effect appears in the skybox
-//TODO - Fix stuck spot under sniper tower on snowfield
-//TODO - Ali wants some gamble Russian roulette brainlet thing
-//TODO - Add a 70% power jump to right click on jump grenade
-//TODO - Stop manhacks from being grabbed with the magneeto stick
-//TODO - Glue Grenade Text appears twice (server and cLient sided)
-//TODO - Investigate Remove() in buff base class crashing the server
-//TODO - Make glue radius bigger
+[New GameMode: Bounty Hunter]
+- Traitors will be given a single Innocent as their target
+- They will be unable to kill non-target players
+- They deal +30% damage to the target 
+- If the target player dies, they will receive a new target
+- This repeats until the traitors win
+
+[Hit Markers]
+- Now displays more accurate numbers by taking into account:
+- Your Karma Damage Reduction %
+- Pre and Post Round damage prevention
+- Detective's Armour
+- Bounty Hunters damage blocking
+- No more false skull markers
+
+[CarePackages] 
+- CarePackages appear about 10% more frequently
+- Emergency Airdrops (x3) appear a bit more frequently
+
+[GameModes]
+- GameModes appear about 30% more frequently
+- Rewrote some parts of the system to be more stable and allow for new GameModes
+
+[GameMode: Defuse the Bombs]
+- Increased number of presses to defuse a bomb: 6 -> 10 presses
+- Increased number of bombs at very high player counts
+
+[Karma]
+- At max Karma you now receive the "Good Boy Buff"
+- It grants +10% Movement Speed and +5 Max HP
+- You will have it every round you start with 1250 Karma
+
+[Glue Grenade]
+- Increased Blast Radius: 200 -> 300
+
+[Jump Grenade]
+- Added a right-click that jumps you with only 70% of normal height
+
+[Pickup Stick]
+- Pickup Stick can no longer pickup Manhacks and Rollermines
+
+[New CarePackage Loot: Mega Tag Grenade] (Seb)
+- You can thank Seb for brining this CURSED item to life
+- Upon pressing left click, your IRL floor will begin to shake
+- Your PC will begin spinning up, wind pressure spikes in the room from fans
+- CPU temp will cap at around 300 Degrees C
+- Ping jumps up by around 17,000%
+- You can run, but you can't hide
+
+[New CarePackage Loot: Mega Glue Grenade] (Seb)
+- Similar to Mega Frag, but with Glue
+
+[New CarePackage Loot: Mega Jump Grenade]
+- Like the regular Jump Grenade, only MEGA
+
+[New CarePackage Loot: Fenner & Lucker]
+- A powerful set of Dual Pistols
+
+[Care Packages]
+- Increased the amount of things that are spawned in map wide events (Eg. Zombie Apocalypse)
 
 ################################
 ##### Fixes & Extras
 ################################
 
-
+- All Grenades now display their correct name when you are killed by them
+- Reworked admin command print messages to fix bugs and be clearer
+- Fixed Glue Grenade's visual effect appearing in the skybox
+- Fixed Glue Grenade's print messages appearing more than once
+- Fixed CarePackage's collision model so you can't get stuck in it 
+- Fixed All Grenade's collision models so you can't get stuck in them
+- Fixed Loads more things Collision Models so you can't get stuck in them
+- Fixed Defuse the Bomb GameMode playing messages and sounds 3 times each
+- Changed Mega Frag's Model to be the same as the frag grenade
 
 ################################
 ##### Maps
 ################################
 
-
+[Wind-Down Maps]
+- The following maps have been moved to a separate "Wind-Down" pool
+- (This pool can't be played until later into the evening)
+- Elevator 
+- Elevator 2
+- Standoff
+- Breakdown
+- Lucker

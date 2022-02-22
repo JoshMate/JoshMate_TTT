@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_TagGrenade_Name
-local JM_BuffNWBool             = JM_Global_Buff_TagGrenade_NWBool
-local JM_BuffDuration           = JM_Global_Buff_TagGrenade_Duration
-local JM_BuffIconName           = JM_Global_Buff_TagGrenade_IconName
-local JM_BuffIconPath           = JM_Global_Buff_TagGrenade_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_TagGrenade_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_KarmaBuff_Name
+local JM_BuffNWBool             = JM_Global_Buff_KarmaBuff_NWBool
+local JM_BuffDuration           = JM_Global_Buff_KarmaBuff_Duration
+local JM_BuffIconName           = JM_Global_Buff_KarmaBuff_IconName
+local JM_BuffIconPath           = JM_Global_Buff_KarmaBuff_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_KarmaBuff_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -49,23 +49,12 @@ function ENT:Think()
 
 end
 
-
--- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Tag_Grenade", function()
-
-    local players = {}
-    local count = 0
- 
-    for _, ply in ipairs( player.GetAll() ) do
-         if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) ) then
-             count = count + 1
-             players[ count ] = ply
-         end
-    end
- 
-     halo.Add( players, Color( 255, 255, 100 ), 2, 2, 3, true, true )
- 
- end )
+-- Hooks
+hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
+    if ply:GetNWBool(JM_BuffNWBool) == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.1
+    end 
+end)
 
 
 

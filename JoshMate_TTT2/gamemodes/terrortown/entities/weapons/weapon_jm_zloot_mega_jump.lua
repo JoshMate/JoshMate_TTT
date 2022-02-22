@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName       = "Jump Grenade"
+   SWEP.PrintName       = "Mega Jump Grenade"
    SWEP.Slot            = 3
 
    SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_nade"
@@ -14,7 +14,7 @@ end
 
 SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
-SWEP.WeaponID           = AMMO_NADE_PUSH
+SWEP.WeaponID           = AMMO_NADE_PUSH_MEGA
 
 SWEP.ViewModel          = "models/weapons/w_eq_flashbang.mdl"
 SWEP.WorldModel         = "models/weapons/w_eq_flashbang.mdl"
@@ -30,7 +30,7 @@ SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 
 -- How High should this greande push you?
-local JM_Jump_Force        = 500
+local JM_Jump_Force        = 1500
 
 function SWEP:HitEffectsInit(ent)
    if not IsValid(ent) then return end

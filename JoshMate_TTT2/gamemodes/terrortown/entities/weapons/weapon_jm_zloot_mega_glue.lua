@@ -1,23 +1,23 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName       = "Mega Frag Grenade"
+   SWEP.PrintName       = "Mega Glue Grenade"
    SWEP.Slot            = 3
 
    SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_special.png"
    SWEP.IconLetter      = "P"
 
    function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 17 - ang:Right() * -8 - ang:Up() * 8, ang
+		return pos + ang:Forward() * 25 - ang:Right() * -12 - ang:Up() * 10, ang
 	end
 end
 
 SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
-SWEP.WeaponID           = AMMO_NADE_FRAG
+SWEP.WeaponID           = AMMO_NADE_GLUE_MEGA
 
-SWEP.ViewModel          = "models/weapons/w_eq_fraggrenade.mdl"
-SWEP.WorldModel         = "models/weapons/w_eq_fraggrenade.mdl"
+SWEP.ViewModel          = "models/props_lab/jar01b.mdl"
+SWEP.WorldModel         = "models/props_lab/jar01b.mdl"
 SWEP.UseHands 				= false
 
 
@@ -31,14 +31,14 @@ SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 
 -- JM Changes, Throwing
-SWEP.JM_Throw_Power        = 1200
+SWEP.JM_Throw_Power        = 1000
 -- End of
 
 function SWEP:GetGrenadeName()
-   return "ent_jm_grenade_frag_proj"
+   return "ent_jm_grenade_glue_proj"
 end
 
-function SWEP:ProduceMegaFrags(count)
+function SWEP:ProduceMegaGlues(count)
 
    local ply = self:GetOwner()
    local A_Src = ply:GetShootPos()
@@ -50,8 +50,8 @@ function SWEP:ProduceMegaFrags(count)
 
    for i=1,count do 
       A_Vel = ply:GetAimVector()
-      A_Vel:Add(Vector(math.Rand(-0.1, 0.1), math.Rand(-0.1, 0.1), 0))
-      A_Vel = A_Vel * ((self.JM_Throw_Power * self.JM_Throw_PowerMult ) * math.Rand(0.8, 1.2))
+      A_Vel:Add(Vector(math.Rand(-0.3, 0.3), math.Rand(-0.3, 0.3), 0))
+      A_Vel = A_Vel * ((self.JM_Throw_Power * self.JM_Throw_PowerMult ) * math.Rand(0.6, 2))
 
       self:CreateGrenade(A_Src, A_Angle, A_Vel, A_AngImp, ply)
    end 
@@ -66,7 +66,7 @@ function SWEP:Throw()
       local ply = self:GetOwner()
       if not IsValid(ply) then return end
 
-      self:ProduceMegaFrags(10)
+      self:ProduceMegaGlues(5)
    
       self:TakePrimaryAmmo(1)
       if self:Clip1() <= 0 then

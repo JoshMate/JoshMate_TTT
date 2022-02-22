@@ -6,6 +6,9 @@ ENT.Type = "anim"
 ENT.Base = "ent_jm_base_grenade"
 ENT.Model = Model("models/props_junk/PopCan01a.mdl")
 
+-- Name of Ent in kill messages
+ENT.PrintName = "Inferno Launcher Bomb"
+
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(200,150,0,150)
 

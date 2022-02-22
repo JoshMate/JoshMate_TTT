@@ -6,6 +6,9 @@ ENT.Type = "anim"
 ENT.Base = "ent_jm_base_grenade"
 ENT.Model = "models/weapons/csgonade/w_eq_flashbang_thrown.mdl"
 
+-- Name of Ent in kill messages
+ENT.PrintName = "Stun Grenade"
+
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(0,70,255,150)
 
@@ -91,7 +94,7 @@ function ENT:Explode(tr)
 
          end
       end
-      JM_Function_PrintChat(self:GetOwner(), "Stun Grenade", "Hit: " .. tostring(totalPeopleFlashed) .. " people.")
+
       self.Entity:Remove();
    end
 end

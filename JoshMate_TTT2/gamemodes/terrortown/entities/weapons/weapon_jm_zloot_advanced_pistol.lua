@@ -48,6 +48,10 @@ SWEP.WorldModel            = "models/weapons/w_pist_fiveseven.mdl"
 SWEP.IronSightsPos         = Vector(-5.95, -4, 2.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 
+-- JM Changes, Movement Speed
+SWEP.MoveMentMultiplier = 1.1
+-- End of
+
 -- No Iron Sights
 function SWEP:SecondaryAttack()
    return
