@@ -328,6 +328,11 @@ function SWEP:DoAttack(pickup)
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
 
+	if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+		if SERVER then JM_Function_PrintChat(self:GetOwner(), "Pickup Stick", "You can't do that during prep time!") end
+		return
+	end
+
 	if IsValid(self.EntHolding) then
 		self:SendWeaponAnim(ACT_VM_MISSCENTER)
 

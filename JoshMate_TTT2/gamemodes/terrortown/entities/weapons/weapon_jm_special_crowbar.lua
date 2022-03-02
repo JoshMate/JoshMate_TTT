@@ -229,11 +229,17 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
+	
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 	self:SetNextSecondaryFire(CurTime() + 0.1)
 
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end
+
+	if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+		if SERVER then JM_Function_PrintChat(self:GetOwner(), "Crowbar", "You can't do that during prep time!") end
+		return
+	end
 
 	if isfunction(owner.LagCompensation) then
 		owner:LagCompensation(true)

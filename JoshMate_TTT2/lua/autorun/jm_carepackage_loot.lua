@@ -29,7 +29,7 @@ end
 -- Normal Loot Table
 function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
 
-    local RNG_Roll_Normal = math.random(1, 26)
+    local RNG_Roll_Normal = math.random(1, 28)
 
     -- Optional Override of loot outcome for debug / fun
     if not forcedLootIndex == 0 then RNG_Roll_Normal = forcedLootIndex end
@@ -60,6 +60,8 @@ function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
     if RNG_Roll_Normal == 24    then JM_CarePackage_Loot_Normal_24( activator, caller ) end
     if RNG_Roll_Normal == 25    then JM_CarePackage_Loot_Normal_25( activator, caller ) end
     if RNG_Roll_Normal == 26    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
+    if RNG_Roll_Normal == 27    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
+    if RNG_Roll_Normal == 28    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
 
 end
 
@@ -243,6 +245,16 @@ end
 function JM_CarePackage_Loot_Normal_26( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Lucker & Fenner")
     Loot_SpawnThis(caller,"weapon_jm_zloot_dual_pistols")
+end
+
+function JM_CarePackage_Loot_Normal_27( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Built Differently Radio")
+    Loot_SpawnThis(caller,"ent_jm_zloot_radio_builtdifferently")
+end
+
+function JM_CarePackage_Loot_Normal_28( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","A Bird Flew In Radio")
+    Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
 end
 
 
@@ -430,7 +442,7 @@ function JM_CarePackage_Loot_Rare_12( activator, caller )
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_rollermine"
     local NumberToSpawn = 20
-    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, numberOfTimes)
+    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, NumberToSpawn)
     
 end
 
@@ -490,7 +502,7 @@ function JM_CarePackage_Loot_Rare_14( activator, caller )
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_antlion"
     local NumberToSpawn = 20
-    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, numberOfTimes)
+    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, NumberToSpawn)
 
 end
 
@@ -537,7 +549,7 @@ function JM_CarePackage_Loot_Rare_16( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_17( activator, caller )
-    net.Start("JM_Net_Announcement")
+    net.Start("JM_Net_Announcement") 
     net.WriteString("What the dog doin?")
     net.WriteUInt(0, 16)
     net.Broadcast()

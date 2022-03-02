@@ -77,6 +77,7 @@ if SERVER then
     util.AddNetworkString("JM_Net_PlaySound")
 	util.AddNetworkString("JM_Net_PrintChat")
 	util.AddNetworkString("JM_Net_PrintChat_All")
+	util.AddNetworkString("JM_Net_BodyDiscovered")
 end
 
 if CLIENT then
@@ -163,4 +164,71 @@ end
 
 -----------------------------------------------
 -- End of Announcement Function
+-----------------------------------------------
+
+
+
+
+
+
+
+-----------------------------------------------
+-- Start of Body Discovered Code
+-----------------------------------------------
+
+if SERVER then
+
+	function JM_Function_BodyDiscovered(finder, plyDiscovered)
+
+		local A = finder
+		local B = plyDiscovered:Nick()
+		local C = plyDiscovered:GetRoleStringRaw()
+
+		net.Start("JM_Net_BodyDiscovered")
+		net.WriteString(tostring(A))
+		net.WriteString(tostring(B))
+		net.WriteString(tostring(C))
+		net.Broadcast()
+
+	end
+
+end
+
+if CLIENT then
+	net.Receive("JM_Net_BodyDiscovered", function(_) 
+			
+		plyFinder = net.ReadString()
+		plyDiscoveredName = net.ReadString()
+		plyDiscoveredRole = net.ReadString()
+
+		surface.PlaySound("effect_discoverbody.mp3")
+
+		local textPrefixColour =  Color( 20, 20, 20 )
+		local textBodyColour =  Color( 255, 255, 255 )
+		local textFinalRoleName = "ERROR"
+
+		if plyDiscoveredRole == "innocent" then
+			textBodyColour =  Color( 0, 255, 0 )
+			textFinalRoleName = "Innocent"
+		end
+
+		if plyDiscoveredRole == "traitor" then
+			textBodyColour =  Color( 255, 0, 0 )
+			textFinalRoleName = "Traitor"
+		end
+
+		if plyDiscoveredRole == "detective" then
+			textBodyColour =  Color( 0, 0, 255)
+			textFinalRoleName = "Detective"
+		end
+
+	
+		chat.AddText( textPrefixColour, "[Dead Body] ", Color( 255, 255, 255 ), tostring(plyFinder), " found: ", tostring(plyDiscoveredName), textBodyColour, " [", tostring(textFinalRoleName),"]")
+		
+	end)
+end
+
+
+-----------------------------------------------
+-- End of Body Discovered Code
 -----------------------------------------------

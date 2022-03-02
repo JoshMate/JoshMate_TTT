@@ -1,0 +1,20 @@
+################################
+#### TTT Update 58 - Patch Notes
+################################
+
+[Crowbar]
+- Rightclicking is no longer possible in Pre-Round
+
+//TODO: Chameleon Weakens cloak on getting shot
+
+
+################################
+##### Fixes & Extras
+################################
+
+- Fixed bug that prevented Antlion and best friend apocalypse spawning
+
+################################
+##### Maps
+################################
+

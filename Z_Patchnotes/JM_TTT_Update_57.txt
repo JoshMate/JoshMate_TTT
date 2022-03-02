@@ -1,21 +1,29 @@
 ################################
-#### TTT Update 56 - Patch Notes
+#### TTT Update 57 - Patch Notes
 ################################
 
-// TODO: Buff Shotgun
-// TODO: Put Builty Differently in the care packlage
-// TODO: Right clicking into man hacks / flames of hell deals karma damage
-// TODO: Slippery floors persisted through roudns wtih this errros
-[Josh Mate TTT] gamemodes/terrortown/gamemode/server/sv_gamemsg.lua:491: Calling net.Start with unpooled message name! (Did you forget to call util.AddNetworkString serverside?)
-// TODO:  Make finding a corpse print to chat and make a horro sound?
+[Care Package Loot: New Radios]
+- Built Differently Radio
+- Bird flew into my room and died radio
 
-lua_run JM_ResetAllSettings()
+[HUD and UI]
+- A  new message and sound effect for when a body is discovered
+
+[Newton Launcher] (Seb)
+- Added a secondary fire that pulls rather than pushes
+
 
 ################################
 ##### Fixes & Extras
 ################################
 
+- Fixed Slippery Floors Persisting through round
+
 ################################
 ##### Maps
 ################################
+
+[TTT Dig Site]
+- New Map
+- An excavation of an old ruin inside of a deep ravine.
 

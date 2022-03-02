@@ -7,7 +7,7 @@ if CLIENT then
 end
 
 ENT.Type                        = "anim"
-ENT.PrintName                   = "Gus Radio"
+ENT.PrintName                   = "A Bird Flew In Radio"
 ENT.Author                      = "Josh Mate"
 ENT.Purpose                     = "Ent"
 ENT.Instructions                = "Ent"
@@ -27,7 +27,7 @@ function ENT:Initialize()
 	end
 
 	if SERVER then
-		self:EmitSound("Yeah_Gus_Is_My_Name.mp3", 110, 100, 1, CHAN_AUTO)
+		self:EmitSound("radio_birdflewin.mp3", 110, 100, 1, CHAN_AUTO)
 	end
 
 end
