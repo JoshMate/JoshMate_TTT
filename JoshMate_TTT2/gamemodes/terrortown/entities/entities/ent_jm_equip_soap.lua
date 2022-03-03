@@ -102,12 +102,9 @@ function ENT:Touch(toucher)
 		toucher:SetVelocity(velocity);
 		-- End Of
 
-        -- JM Changes Extra Hit Marker
-        net.Start( "hitmarker" )
-        net.WriteFloat(0)
-		net.WriteBool(false)
-        net.Send(self.Owner)
-        -- End Of
+		-- Give a Hit Marker to This Player
+		local hitMarkerOwner = self.Owner
+		JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
         -- HUD Message
         toucher:ChatPrint("[Soap] - You have slipped on some Soap!")

@@ -101,12 +101,9 @@ function SWEP:PrimaryAttack()
             self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
             self:CreateProp(targetPos, "models/gibs/hgibs_spine.mdl")
 
-            -- JM Changes Extra Hit Marker
-            net.Start( "hitmarker" )
-            net.WriteFloat(0)
-            net.WriteBool(false)
-            net.Send(self:GetOwner())
-            -- End Of
+            -- Give a Hit Marker to This Player
+		         local hitMarkerOwner = self:GetOwner()
+		         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
             self:TakePrimaryAmmo( 1 )
             ate = true

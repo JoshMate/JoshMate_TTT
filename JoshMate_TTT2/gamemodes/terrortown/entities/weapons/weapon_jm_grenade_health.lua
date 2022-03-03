@@ -49,12 +49,9 @@ function SWEP:HealingGreande_HealTarget(target)
 
       if target:IsTerror() and target:Alive() then
 
-         -- Hit Markers
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(self:GetOwner())
-         -- End of Hit Markers
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = self:GetOwner()
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
          self:HitEffectsInit(target)

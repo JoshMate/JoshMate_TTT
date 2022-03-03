@@ -256,12 +256,9 @@ function SWEP:SecondaryAttack()
 			ply:SetVelocity(ply:GetVelocity() + pushvel)
 			owner:SetAnimation(PLAYER_ATTACK1)
 
-			 -- JM Changes Extra Hit Marker
-			 net.Start( "hitmarker" )
-			 net.WriteFloat(0)
-			 net.WriteBool(false)
-			 net.Send(owner)
-			 -- End Of
+			-- Give a Hit Marker to This Player
+			local hitMarkerOwner = self:GetOwner()
+			JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
 			ply.was_pushed = {
 				att = owner,

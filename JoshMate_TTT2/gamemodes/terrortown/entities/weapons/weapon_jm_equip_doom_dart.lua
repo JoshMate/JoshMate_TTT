@@ -64,12 +64,8 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
 
-      -- JM Changes Extra Hit Marker
-      net.Start( "hitmarker" )
-      net.WriteFloat(0)
-      net.WriteBool(false)
-      net.Send(weaponOwner)
-      -- End Of
+      -- Give a Hit Marker to This Player
+      JM_Function_GiveHitMarkerToPlayer(weaponOwner, 0, false)
 
       -- Set Status and print Message
       weaponOwner:ChatPrint("[Doom Dart]: " .. ent:Nick() .. " Has Been DOOMED to explode on death" )

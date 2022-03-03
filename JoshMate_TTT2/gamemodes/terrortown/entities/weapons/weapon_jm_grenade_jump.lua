@@ -61,12 +61,9 @@ function SWEP:PrimaryAttack()
 
       if pl:IsTerror() and pl:Alive() then
 
-         -- Hit Markers
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(pl)
-         -- End of Hit Markers
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = self:GetOwner()
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
          self:HitEffectsInit(pl)
@@ -106,12 +103,9 @@ function SWEP:SecondaryAttack()
 
       if pl:IsTerror() and pl:Alive() then
 
-         -- Hit Markers
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(pl)
-         -- End of Hit Markers
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = self:GetOwner()
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
          self:HitEffectsInit(pl)

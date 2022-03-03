@@ -2,8 +2,9 @@
 #### TTT Update 58 - Patch Notes
 ################################
 
-[Crowbar]
-- Rightclicking is no longer possible in Pre-Round
+[Pre Round Prep Time]
+- Crowbar Right-Clicking is no longer possible in prep
+- Pick Up Stick picking up props is no longer possible in prep
 
 //TODO: Chameleon Weakens cloak on getting shot
 
@@ -12,7 +13,9 @@
 ##### Fixes & Extras
 ################################
 
-- Fixed bug that prevented Antlion and best friend apocalypse spawning
+- Fixed bug that prevented Antlions and best friend apocalypse spawning
+- (Code) Refactored / Commented / Tidied up all Shared Utility Functions
+- (Code) Converted the hit marker send code to a utility function for re-use
 
 ################################
 ##### Maps

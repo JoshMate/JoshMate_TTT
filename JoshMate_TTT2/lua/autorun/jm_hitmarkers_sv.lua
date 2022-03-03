@@ -4,7 +4,7 @@ AddCSLuaFile( "autorun/hitmarkers_cl.lua" )
 resource.AddFile( "sound/hitmarkers/hitmarker.ogg" )
 resource.AddFile( "materials/hitmarkers/hitmarker.png" )
 
-util.AddNetworkString( "hitmarker" )
+util.AddNetworkString( "JM_Net_HitMarker" )
 
 hook.Add( "PostEntityTakeDamage", "hitmarkers", function( tar, info, isTaken )
 
@@ -33,24 +33,13 @@ hook.Add( "PostEntityTakeDamage", "hitmarkers", function( tar, info, isTaken )
 		if att:GetNWEntity("giveHitMarkersTo") == nil then return end
 		if not IsValid(att:GetNWEntity("giveHitMarkersTo")) then return end
 
-		net.Start( "hitmarker" )
-		net.WriteFloat(finDMG)
-		net.WriteBool(didThisKill)
-		net.Send( att:GetNWEntity("giveHitMarkersTo") )
+		-- Give Hitmarkers to this player
+		JM_Function_GiveHitMarkerToPlayer(att:GetNWEntity("giveHitMarkersTo"), finDMG, didThisKill)
 		return
 	else
-
-		-- Send Hit Markers to Players
-		net.Start( "hitmarker" )
-		net.WriteFloat(finDMG) 
-		net.WriteBool(didThisKill)
-		net.Send( att )
-
+		-- Give Hitmarkers to this player
+		JM_Function_GiveHitMarkerToPlayer(att, finDMG, didThisKill)
+		return
 	end
-
-
-	
-
-	
 
 end)

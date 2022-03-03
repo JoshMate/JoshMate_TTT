@@ -45,7 +45,7 @@ if CLIENT then
 end
 
 local JM_Trap_PlaceRange				= 192
-at
+
 function SWEP:PrimaryAttack()
 
 	if not self:CanPrimaryAttack() then return end

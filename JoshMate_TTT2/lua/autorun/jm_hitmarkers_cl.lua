@@ -20,7 +20,7 @@ local damage = 0
 local wasKill = false
 local wasKillCount = 0
 
-net.Receive( "hitmarker", function()
+net.Receive( "JM_Net_HitMarker", function()
 	surface.PlaySound( snd_hitmarker )
 	last_time = (CurTime() + Hitmarkers_time)
 	stacker_time_last = (CurTime() + stacker_time)

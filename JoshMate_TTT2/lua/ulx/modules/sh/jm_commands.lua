@@ -379,7 +379,7 @@ karma:help("Enables Proxy Voice until the next map")
 -- ### Reset Server Convars
 -- ##################################################
 
-local cmdResetServerCvars = ulx.command(CATEGORY_NAME_JM_Tool, "jm resetservercvars", function () JM_ResetAllSettings() end, "!resetservercvars")
+local cmdResetServerCvars = ulx.command(CATEGORY_NAME_JM_Tool, "jm resetservercvars", function () JM_Function_ResetAllSettings() end, "!resetservercvars")
 cmdResetServerCvars:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- ##################################################

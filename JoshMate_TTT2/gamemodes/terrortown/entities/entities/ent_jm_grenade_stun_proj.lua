@@ -79,12 +79,9 @@ function ENT:Explode(tr)
                JM_GiveBuffToThisPlayer("jm_buff_stungrenade",pl,self:GetOwner())
                -- End Of
 
-               -- Hit Markers
-               net.Start( "hitmarker" )
-               net.WriteFloat(0)
-               net.WriteBool(false)
-               net.Send(self:GetOwner())
-               -- End of Hit Markers
+               -- Give a Hit Marker to This Player
+		         local hitMarkerOwner = self:GetOwner()
+		         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
                
 
                -- Glue Effects
