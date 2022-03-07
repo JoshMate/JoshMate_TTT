@@ -7,7 +7,7 @@ else
 end
 
 ENT.Type = "anim"
-ENT.Model = Model("models/props/de_nuke/emergency_lighta.mdl")
+ENT.Model = Model("models/dav0r/buttons/button.mdl")
 
 ENT.neetsThatPushedTheButton = {}
 
@@ -20,6 +20,7 @@ function ENT:Initialize()
 	self:SetSolid(SOLID_VPHYSICS)
 	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
+	self:SetPos(self:GetPos() + Vector(0, 0, 28))
 
 	if SERVER then
 		self:SetUseType(SIMPLE_USE)
@@ -66,24 +67,24 @@ function ENT:Use( activator, caller )
 				util.Effect("HelicopterMegaBomb", effect, true, true)
 
 				activator:TakeDamage( 9999, activator, self)
-				sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos())
+				activator:EmitSound(Sound("npc/assassin/ball_zap1.wav"));
 
 
 				if SERVER then
 					JM_Function_PlaySound("radio_bruh.wav") 
-					JM_Function_Announcement("[Dopamine Button] " .. tostring(activator:Nick()) .. " has chosen poorly")
+					JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " has chosen poorly")
 				end
 
 			else
-
+				JM_Function_PlaySound("dopamine_button_live.mp3")
 				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit)")
+				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine")
 				activator:AddCredits(1)
-				self.Entity:EmitSound(Sound("dopamine_button_live.mp3"));
 			end
 
 		else
-			self.Entity:EmitSound(Sound("dopamine_button_used.mp3"));
-			JM_Function_PrintChat(activator, "Care Package","You have already used this Dopamine Button")
+			activator:EmitSound(Sound("dopamine_button_used.mp3"));
+			JM_Function_PrintChat(activator, "Care Package","Your fate has already been decided")
 		end
 	end
 end

@@ -60,15 +60,15 @@ function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
     if RNG_Roll_Normal == 24    then JM_CarePackage_Loot_Normal_24( activator, caller ) end
     if RNG_Roll_Normal == 25    then JM_CarePackage_Loot_Normal_25( activator, caller ) end
     if RNG_Roll_Normal == 26    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
-    if RNG_Roll_Normal == 27    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
-    if RNG_Roll_Normal == 28    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
+    if RNG_Roll_Normal == 27    then JM_CarePackage_Loot_Normal_27( activator, caller ) end
+    if RNG_Roll_Normal == 28    then JM_CarePackage_Loot_Normal_28( activator, caller ) end
 
 end
 
 -- Rare Loot Table
 function JM_CarePackage_Use_LootRare( activator, caller, forcedLootIndex) 
 
-    local RNG_Roll_Rare = math.random(1, 19)
+    local RNG_Roll_Rare = math.random(1, 22)
 
     -- Optional Override of loot outcome for debug / fun
     if not forcedLootIndex == 0 then RNG_Roll_Rare = forcedLootIndex end
@@ -92,6 +92,9 @@ function JM_CarePackage_Use_LootRare( activator, caller, forcedLootIndex)
     if RNG_Roll_Rare == 17    then JM_CarePackage_Loot_Rare_17( activator, caller ) end
     if RNG_Roll_Rare == 18    then JM_CarePackage_Loot_Rare_18( activator, caller ) end
     if RNG_Roll_Rare == 19    then JM_CarePackage_Loot_Rare_19( activator, caller ) end
+    if RNG_Roll_Rare == 20    then JM_CarePackage_Loot_Rare_20( activator, caller ) end
+    if RNG_Roll_Rare == 21    then JM_CarePackage_Loot_Rare_21( activator, caller ) end
+    if RNG_Roll_Rare == 22    then JM_CarePackage_Loot_Rare_22( activator, caller ) end
 
 end
 
@@ -213,8 +216,8 @@ end
 
 function JM_CarePackage_Loot_Normal_20( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
-    JM_Function_PrintChat(activator, "Care Package","Extra Credit (+3 Credits)")
-    activator:AddCredits(3)
+    JM_Function_PrintChat(activator, "Care Package","Extra Credit (+1 Credits)")
+    activator:AddCredits(1)
 end
 
 function JM_CarePackage_Loot_Normal_21( activator, caller )
@@ -243,7 +246,7 @@ function JM_CarePackage_Loot_Normal_25( activator, caller )
 end
 
 function JM_CarePackage_Loot_Normal_26( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Lucker & Fenner")
+    JM_Function_PrintChat(activator, "Care Package","Vampire Pistols")
     Loot_SpawnThis(caller,"weapon_jm_zloot_dual_pistols")
 end
 
@@ -274,16 +277,14 @@ function JM_CarePackage_Loot_Rare_01( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_02( activator, caller )
+
     JM_Function_PrintChat(activator, "Care Package","Mega Tracker")
-		
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: You are all being tracked!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
+    JM_Function_Announcement("[Care Package] You are all being tracked!")
+
+    JM_Function_PlaySound("ping_jake.wav") 
 
     for _, ply in ipairs( player.GetAll() ) do
         if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-            if SERVER then ply:EmitSound(Sound("ping_jake.wav")) end
             JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,caller)
         end
     end
@@ -310,38 +311,30 @@ function JM_CarePackage_Loot_Rare_04( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_05( activator, caller )
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: Gravity is now much weaker!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
 
     JM_Function_PrintChat(activator, "Care Package","Low Gravity")
+    JM_Function_Announcement("[Care Package] Gravity is now much weaker!")
+    
     RunConsoleCommand("sv_gravity", 100)
     RunConsoleCommand("sv_airaccelerate", 12)
-    for _, ply in ipairs( player.GetAll() ) do
-        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-            if SERVER then ply:EmitSound(Sound("effect_low_gravity.mp3")) end
-        end
-    end
+
+    JM_Function_PlaySound("effect_low_gravity.mp3")
+
 end
 
 function JM_CarePackage_Loot_Rare_06( activator, caller )
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: The floors are now slippery!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
 
     JM_Function_PrintChat(activator, "Care Package","Slippery Floors")
+    JM_Function_Announcement("[Care Package] The floors are now slippery!")
+
     RunConsoleCommand("sv_friction", 0)
     RunConsoleCommand("sv_accelerate", 5)
-    for _, ply in ipairs( player.GetAll() ) do
-        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-            if SERVER then ply:EmitSound(Sound("effect_slippery_floors.mp3")) end
-        end
-    end
+
+    JM_Function_PlaySound("effect_slippery_floors.mp3")
 end
 
 function JM_CarePackage_Loot_Rare_07( activator, caller )
+    
     local PossibleVictims = {}
 
     -- Find out who is eligible to be swapped
@@ -383,7 +376,7 @@ function JM_CarePackage_Loot_Rare_07( activator, caller )
         Victim:SetPos(PosActivator)
         if SERVER then activator:EmitSound(Sound("effect_swapping_places.mp3")) end
         if SERVER then Victim:EmitSound(Sound("effect_swapping_places.mp3")) end
-        Victim:ChatPrint("Teleportation (Swapped with another player)")
+        JM_Function_PrintChat(Victim, "Care Package", "You have switched places with another player!")
 
     end
 end
@@ -432,29 +425,23 @@ function JM_CarePackage_Loot_Rare_11( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_12( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Best Friend Apocalypse")
 
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: Best Friend Apocalypse!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
+    JM_Function_PrintChat(activator, "Care Package","Best Friend Apocalypse")
+    JM_Function_Announcement("[Care Package] Best Friend Apocalypse!")
 
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_rollermine"
-    local NumberToSpawn = 20
-    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, NumberToSpawn)
+    local NumberToSpawn = 25
+    JM_GameMode_Function_SpawnThisThingRandomly(ThingToSpawn, NumberToSpawn)
     
 end
 
 function JM_CarePackage_Loot_Rare_13( activator, caller )
+
     JM_Function_PrintChat(activator, "Care Package","Zombie Apocalypse")
+    JM_Function_Announcement("[Care Package] Zombie Apocalypse!")  
 
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: Zombie Apocalypse!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()    
-
-    local NumberToSpawn = 20
+    local NumberToSpawn = 25
     local possibleSpawns = ents.FindByClass( "info_player_start" )
     table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
     
@@ -472,16 +459,15 @@ function JM_CarePackage_Loot_Rare_13( activator, caller )
             if (RandChoice == 2) then RandZombie = "npc_zombie" end
             if (RandChoice == 3) then RandZombie = "npc_zombie" end
             if (RandChoice == 4) then RandZombie = "npc_zombie" end
-            if (RandChoice == 5) then RandZombie = "npc_fastzombie" end
+            if (RandChoice == 5) then RandZombie = "npc_zombie" end
             if (RandChoice == 6) then RandZombie = "npc_fastzombie" end
             if (RandChoice == 7) then RandZombie = "npc_fastzombie" end
             if (RandChoice == 8) then RandZombie = "npc_fastzombie" end
-            if (RandChoice == 9) then RandZombie = "npc_fastzombie" end
+            if (RandChoice == 9) then RandZombie = "npc_headcrab" end
             if (RandChoice == 10) then RandZombie = "npc_headcrab" end
-            if (RandChoice == 11) then RandZombie = "npc_headcrab" end
+            if (RandChoice == 11) then RandZombie = "npc_headcrab_fast" end
             if (RandChoice == 12) then RandZombie = "npc_headcrab_fast" end
-            if (RandChoice == 13) then RandZombie = "npc_headcrab_fast" end
-            if (RandChoice == 14) then RandZombie = "npc_poisonzombie" end
+            if (RandChoice == 13) then RandZombie = "npc_poisonzombie" end
 
             local ent = ents.Create(RandZombie)
             ent:SetPos(spawn:GetPos())
@@ -492,27 +478,21 @@ function JM_CarePackage_Loot_Rare_13( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_14( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Antlion Infestation")
-
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: Antlion Infestation!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
+    
+    JM_Function_PrintChat(activator, "Care Package","Antlion Apocalypse")
+    JM_Function_Announcement("[Care Package] Antlion Apocalypse!")  
 
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_antlion"
-    local NumberToSpawn = 20
-    JM_GameMode_Function_SpawnThisThingRandomly(thingToSpawn, NumberToSpawn)
+    local NumberToSpawn = 25
+    JM_GameMode_Function_SpawnThisThingRandomly(ThingToSpawn, NumberToSpawn)
 
 end
 
 function JM_CarePackage_Loot_Rare_15( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","The Flames of Hell")
 
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: The Flames of Hell!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
+    JM_Function_PrintChat(activator, "Care Package","The Flames of Hell")
+    JM_Function_Announcement("[Care Package] The Flames of Hell!") 
 
     local NumberToSpawn = 50
     local possibleSpawns = ents.FindByClass( "info_player_start" )
@@ -535,36 +515,26 @@ function JM_CarePackage_Loot_Rare_15( activator, caller )
 end
 
 function JM_CarePackage_Loot_Rare_16( activator, caller )
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: " .. tostring(activator:Nick()) .. "'s role is [" .. tostring(activator:GetRoleStringRaw()) .. "]")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
 
     JM_Function_PrintChat(activator, "Care Package","Your role has been revealed to all")
-    for _, ply in ipairs( player.GetAll() ) do
-        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
-            if SERVER then ply:EmitSound(Sound("effect_dogbark.mp3")) end
-        end
-    end
+    JM_Function_Announcement("[Care Package] " .. tostring(activator:Nick()) .. "'s role is [" .. tostring(activator:GetRoleStringRaw()) .. "]") 
+
+    JM_Function_PlaySound("effect_dogbark.mp3") 
+    
 end
 
 function JM_CarePackage_Loot_Rare_17( activator, caller )
-    net.Start("JM_Net_Announcement") 
-    net.WriteString("What the dog doin?")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
 
     JM_Function_PrintChat(activator, "Care Package","What the dog doin?")
+    JM_Function_Announcement("[Care Package] What the dog doin?") 
+
     JM_Function_PlaySound("whatthedogdoing.mp3") 
 end
 
 function JM_CarePackage_Loot_Rare_18( activator, caller )
+
     JM_Function_PrintChat(activator, "Care Package","Everyone is fully healed")
-		
-    net.Start("JM_Net_Announcement")
-    net.WriteString("Care Package: Everyone is fully healed!")
-    net.WriteUInt(0, 16)
-    net.Broadcast()
+	JM_Function_Announcement("[Care Package] Everyone is fully healed!") 
 
     for _, ply in ipairs( player.GetAll() ) do
         if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
@@ -595,6 +565,82 @@ function JM_CarePackage_Loot_Rare_19( activator, caller )
     end
 
 end
+
+function JM_CarePackage_Loot_Rare_20( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Man Hack Apocalypse")
+    JM_Function_Announcement("[Care Package] Man Hack Apocalypse!")
+
+    -- Spawn this thing randomly across the map
+    local ThingToSpawn = "npc_manhack"
+    local NumberToSpawn = 25
+    JM_GameMode_Function_SpawnThisThingRandomly(ThingToSpawn, NumberToSpawn)
+    
+end
+
+function JM_CarePackage_Loot_Rare_21( activator, caller )
+
+    JM_Function_Announcement("[Care Package] Mass Teleportation!")
+
+    for _, plyBase in ipairs( player.GetAll() ) do
+
+        if (plyBase:IsValid() and plyBase:IsTerror() and plyBase:Alive() and not plyBase:Crouching()) then
+
+            local PossibleVictims = {}
+
+            -- Find out who is eligible to be swapped
+        
+            for _, ply in ipairs( player.GetAll() ) do
+        
+                if (ply:IsValid() and ply:IsTerror() and ply:Alive() and not ply:Crouching()) then
+        
+                    if ply:GetPos():Distance(activator:GetPos()) >= 32  then
+                        PossibleVictims[#PossibleVictims+1] = ply
+                    end				
+                end
+                
+            end
+        
+            -- Work out who the victim is
+        
+            local Victim = nil
+        
+            if #PossibleVictims < 1 then 
+        
+                JM_Function_PrintChat(plyBase, "Care Package","Mass Teleportation (Random Place)")
+                local possibleSpawns = ents.FindByClass( "info_player_start" )
+                Victim = table.Random(possibleSpawns)
+                -- Perform the actual swap
+                local PosActivator 	= plyBase:GetPos()
+                local PosVictim 	= Victim:GetPos()
+                plyBase:SetPos(PosVictim)
+                if SERVER then plyBase:EmitSound(Sound("effect_swapping_places.mp3")) end
+                
+            else
+        
+                JM_Function_PrintChat(plyBase, "Care Package","Mass Teleportation (Swapped with another player)")
+                Victim = PossibleVictims[ math.random( #PossibleVictims ) ]
+                -- Perform the actual swap
+                local PosActivator = plyBase:GetPos()
+                local PosVictim = Victim:GetPos()
+                plyBase:SetPos(PosVictim)
+                Victim:SetPos(PosActivator)
+                if SERVER then plyBase:EmitSound(Sound("effect_swapping_places.mp3")) end
+                if SERVER then Victim:EmitSound(Sound("effect_swapping_places.mp3")) end
+                JM_Function_PrintChat(Victim, "Care Package", "Mass Teleportation (Swapped with another player)")
+        
+            end
+        end
+    end
+    
+
+end
+
+function JM_CarePackage_Loot_Rare_22( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Dopamine Button")
+    Loot_SpawnThis(caller,"ent_jm_zloot_dopamine_button")
+end
+
 
 
 

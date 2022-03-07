@@ -49,7 +49,7 @@ SWEP.IsSilent              = true
 SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
-local Cannibal_Eat_MaxHP      = 25
+local Cannibal_Eat_MaxHP      = 30
 local Cannibal_Eat_Range      = 150
 
 if TTT2 and CLIENT then
@@ -114,10 +114,10 @@ function SWEP:PrimaryAttack()
 
    if SERVER then
       if ate == false then
-         self:GetOwner():ChatPrint("[Cannibal]: You can't eat that...")
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't eat that with Cannibal..." )
       end
       if ate == true then
-         self:GetOwner():ChatPrint("[Cannibal]: You have eaten a Body!")
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","Body Eaten (+25 HP)" )
       end
    end
 

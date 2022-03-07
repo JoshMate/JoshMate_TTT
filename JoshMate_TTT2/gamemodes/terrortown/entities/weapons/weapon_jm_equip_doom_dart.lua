@@ -68,7 +68,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_Function_GiveHitMarkerToPlayer(weaponOwner, 0, false)
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Doom Dart]: " .. ent:Nick() .. " Has Been DOOMED to explode on death" )
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Doom Darted!" )
       -- End Of
 
       -- Doom the Target

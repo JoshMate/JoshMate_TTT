@@ -27,7 +27,7 @@ function ENT:Initialize()
 	end
 
 	if SERVER then
-		self:EmitSound("radio_birdflewin.mp3", 110, 100, 1, CHAN_AUTO)
+		self:EmitSound("radio_birdflewin.mp3", 120, 100, 1, CHAN_AUTO)
 	end
 
 end

@@ -43,6 +43,7 @@ SWEP.Primary.Ammo        = "pistol"
 SWEP.Primary.Sound       = "shoot_advanced_smg.wav"
 SWEP.AutoSpawnable       = true
 SWEP.UseHands            = true
+SWEP.Tracer                = "AR2Tracer"
 SWEP.ViewModel           = "models/weapons/cstrike/c_smg_p90.mdl"
 SWEP.WorldModel          = "models/weapons/w_smg_p90.mdl"
 

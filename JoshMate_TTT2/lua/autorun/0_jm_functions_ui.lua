@@ -13,10 +13,29 @@ if SERVER then
 	util.AddNetworkString("JM_Net_PlaySound")
 end
 
+-----------------------------------------------
+-- Message Prefix Colour Calculator
+-----------------------------------------------
+
+function JM_Function_MessageColourCalculator(prefixMessage)
+
+	local textPrefixColour =  Color( 255, 255, 255 )
+	if prefixMessage == "Announcement" then textPrefixColour = Color( 255, 255, 0) end
+	if prefixMessage == "Admin" then textPrefixColour = Color( 255, 255, 0) end
+	if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255) end
+	if prefixMessage == "Karma Sit-Out" then textPrefixColour = Color(255,25,25) end
+	if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255) end
+	if prefixMessage == "Equipment" then textPrefixColour = Color( 255, 100, 0) end
+	if prefixMessage == "Protect The Files" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Defuse The Bombs" then textPrefixColour = Color(0,255,0) end
+	return textPrefixColour
+
+end
 
 -----------------------------------------------
 --  Print Chat Function (Send message to a player)
 -----------------------------------------------
+
 
 function JM_Function_PrintChat(player, prefixMessageString, chatMessageString)
 
@@ -37,15 +56,9 @@ if CLIENT then
         prefixMessage = net.ReadString()
 		chatMessage = net.ReadString()
 
-		surface.PlaySound("0_main_slight.wav")
+		surface.PlaySound("0_main_slight.wav")	
+        chat.AddText( JM_Function_MessageColourCalculator(prefixMessage), "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
 
-		local textPrefixColour =  Color( 255, 100, 0 )
-		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
-		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
-		if prefixMessage == "Protect The Files" then textPrefixColour = Color(0,255,0,255) end
-		if prefixMessage == "Defuse The Bombs" then textPrefixColour = Color(0,255,0,255) end
-		
-        chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)
 
 end
@@ -74,15 +87,9 @@ if CLIENT then
         prefixMessage = net.ReadString()
 		chatMessage = net.ReadString()
 
-		surface.PlaySound("0_main_slight.wav")
+		surface.PlaySound("0_main_slight.wav")		
+        chat.AddText( JM_Function_MessageColourCalculator(prefixMessage), "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
 
-		local textPrefixColour =  Color( 255, 100, 0 )
-		if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255 ) end
-		if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255,255) end
-		if prefixMessage == "Protect The Files" then textPrefixColour = Color(0,255,0,255) end
-		if prefixMessage == "Defuse The Bombs" then textPrefixColour = Color(0,255,0,255) end
-		
-        chat.AddText( textPrefixColour, "[".. tostring(prefixMessage) .."] ", Color( 255, 255, 255 ), tostring(chatMessage))
     end)
 
 end
@@ -93,14 +100,18 @@ end
 -- Announcement Function (Big Text to ALL)
 -----------------------------------------------
 
-function JM_Function_Announcement(messageToDisplay, messageExtraType)
+function JM_Function_Announcement(messageToDisplay)
 
 	if CLIENT then return end
 
+	if messageToDisplay == nil or messageToDisplay == "" or messageToDisplay == " " then messageToDisplay = "SAMPLE TEXT" end
+
 	net.Start("JM_Net_Announcement")
-	net.WriteString(messageToDisplay)
-	net.WriteUInt(messageExtraType, 16)
+	net.WriteString(tostring(messageToDisplay))
 	net.Broadcast()
+
+	JM_Function_PrintChat_All("Announcement", messageToDisplay)
+	JM_Function_PlaySound("0_main_popup.wav")
 
 end
 
@@ -135,17 +146,14 @@ if CLIENT then
         message = net.ReadString()
 		messageTime = CurTime()
 
-		surface.PlaySound("0_main_popup.wav")
-
-		chat.AddText( Color( 255, 0, 0 ), "[Announcement] ", Color( 255, 255, 0 ), tostring(message))
     end)
 
 	hook.Add( "HUDPaint", "JM_HOOK_DRAWANNOUNCEMENTTEXT", function()
 
 		if not message then return end
-		if messageTime < (CurTime() - 10) then message = nil return end
+		if messageTime < (CurTime() - 8) then message = nil return end
 
-		draw.DrawText(tostring(message), "JoshMateFont_Announcements", (ScrW()/2), (ScrH()/4), Color(255,255,0,255), TEXT_ALIGN_CENTER)
+		draw.DrawText(tostring(message), "JoshMateFont_Announcements", (ScrW()/2), (ScrH()/4), Color(255,255,65,255), TEXT_ALIGN_CENTER)
 	end )
 end
 

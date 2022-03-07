@@ -107,7 +107,7 @@ end
 -- @realm server
 function KARMA.GivePenalty(ply, penalty, victim)
 	if not hook.Call("TTTKarmaGivePenalty", nil, ply, penalty, victim) then
-		ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
+		ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, -9999))
 	end
 end
 
@@ -180,11 +180,11 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [!RDM!] " ..Format("%s Lost %i Karma [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		end
 		
 	end
@@ -206,11 +206,11 @@ function KARMA.Killed(attacker, victim, dmginfo)
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[" .. (GAMEMODE.roundCount-1) .. "] " ..Format("%s Lost %i Karma", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [!RDM!] " ..Format("%s Lost %i Karma [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		end
 	
 	end

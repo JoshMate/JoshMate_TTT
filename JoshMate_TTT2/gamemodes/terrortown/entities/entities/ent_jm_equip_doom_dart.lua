@@ -9,7 +9,7 @@ ENT.Spawnable           = false
 ENT.AdminSpawnable      = false
 
 local JM_DoomDart_Explosive_Blast_Damage    = 80
-local JM_DoomDart_Explosive_Blast_Radius    = 600
+local JM_DoomDart_Explosive_Blast_Radius    = 800
 
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false
@@ -51,7 +51,7 @@ function ENT:Think()
 
 			self.doomedTarget:EmitSound("DoomDart.mp3", 120)
 
-			self.doomedBy:ChatPrint("[Doom Dart]: " .. self.doomedTarget:Nick() .. " Has Exploded!" )
+			JM_Function_PrintChat(self.doomedBy, "Equipment", "Doomed " .. self.doomedTarget:Nick() .. " has EXPLODED!")
 
 			self:Remove()
 

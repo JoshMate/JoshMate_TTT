@@ -44,6 +44,7 @@ SWEP.Primary.Sound         = "shoot_advanced_rifle.wav"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
 SWEP.UseHands              = true
+SWEP.Tracer                = "AR2Tracer"
 SWEP.ViewModel             = "models/weapons/cstrike/c_rif_m4a1.mdl"
 SWEP.WorldModel            = "models/weapons/w_rif_m4a1.mdl"
 

@@ -48,6 +48,7 @@ SWEP.Primary.Sound         = "shoot_advanced_shotgun.wav"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
 SWEP.UseHands              = true
+SWEP.Tracer                = "AR2Tracer"
 SWEP.ViewModel             = "models/weapons/cstrike/c_shot_xm1014.mdl"
 SWEP.WorldModel            = "models/weapons/w_shot_xm1014.mdl"
 

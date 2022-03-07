@@ -84,7 +84,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Poison Dart]: You hit someone!")
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Poisoned!" )
       JM_RemoveBuffFromThisPlayer("jm_buff_poisondart",ent)
       JM_GiveBuffToThisPlayer("jm_buff_poisondart",ent,self:GetOwner())
       -- End Of

@@ -70,7 +70,7 @@ function ENT:Initialize()
 	end
 
 	if SERVER then
-		self:EmitSound("ticking_time_bomb_music.mp3")
+		self:EmitSound("ticking_time_bomb_music.mp3", 120, 100, 1, CHAN_AUTO)
 		local gusSongDurationSeconds = 30
 
 		timer.Simple(gusSongDurationSeconds, function()

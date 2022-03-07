@@ -34,7 +34,7 @@ function ENT:Initialize()
 	end
 
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
-		self:GetOwner():ChatPrint("[Money Printer] - Active and Printing in: " .. tostring(self.Print_Time_Delay) .. " Seconds")
+		JM_Function_PrintChat(self:GetOwner(), "Equipment", "Money Printing in " .. tostring(self.Print_Time_Delay) .. " Seconds")
 	end
 
 	-- UI HUD ICON
@@ -46,12 +46,12 @@ function ENT:PrintMoney()
 
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
 
-		self:GetOwner():ChatPrint("[Money Printer] - You Printed: +20 Max HP")
+		JM_Function_PrintChat(self:GetOwner(), "Equipment", "Money Printed (+20 Max HP)")
 		self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + self.Print_HP_Bonus)
 		self:GetOwner():SetHealth(self:GetOwner():Health() + self.Print_HP_Bonus)
 
 		if self.Print_Count < self.Print_Count_Max then
-			self:GetOwner():ChatPrint("[Money Printer] - You Printed: +1 Credits")
+			JM_Function_PrintChat(self:GetOwner(), "Equipment", "Money Printed (+1 Credit)")
 			self:GetOwner():AddCredits(1)
 		end
 
@@ -69,8 +69,8 @@ function ENT:Use( activator, caller )
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() then
 
 		if IsValid(activator) and activator:Alive() and SERVER then
-			activator:ChatPrint("[Money Printer] - You Looted: 1 Credit")
-			activator:ChatPrint("[Money Printer] - You Looted: +25 Max HP")
+			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+25 Max HP)")
+			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+1 Credit)")
 			activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
 			activator:SetHealth(activator:Health() + 25) 
 			activator:AddCredits(1)
@@ -85,7 +85,7 @@ function ENT:OnRemove()
 	if SERVER then self:SendWarn(false) end
 
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
-		self:GetOwner():ChatPrint("[Money Printer] - Your Printer has been Destroyed!")
+		JM_Function_PrintChat(self:GetOwner(), "Equipment", "Your Money Printer has been destroyed!")
 	end
 
 	local effect = EffectData()
