@@ -7,7 +7,7 @@ else
 end
 
 ENT.Type = "anim"
-ENT.Model = Model("models/props_c17/consolebox01a.mdl")
+ENT.Model = Model("models/props/de_nuke/emergency_lighta.mdl")
 
 ENT.neetsThatPushedTheButton = {}
 
@@ -82,7 +82,7 @@ function ENT:Use( activator, caller )
 
 		else
 			self.Entity:EmitSound(Sound("dopamine_button_used.mp3"));
-			activator:ChatPrint("Your fate has already been dicided")
+			activator:ChatPrint("Your fate has already been decided")
 		end
 	end
 end
