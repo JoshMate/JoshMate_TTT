@@ -60,9 +60,9 @@ function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
     if RNG_Roll_Normal == 24    then JM_CarePackage_Loot_Normal_24( activator, caller ) end
     if RNG_Roll_Normal == 25    then JM_CarePackage_Loot_Normal_25( activator, caller ) end
     if RNG_Roll_Normal == 26    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
-    if RNG_Roll_Normal == 27    then JM_CarePackage_Loot_Normal_27( activator, caller ) end
-    if RNG_Roll_Normal == 28    then JM_CarePackage_Loot_Normal_28( activator, caller ) end
-    if RNG_Roll_Normal == 29    then JM_CarePackage_Loot_Normal_29( activator, caller ) end
+    if RNG_Roll_Normal == 27    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
+    if RNG_Roll_Normal == 28    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
+
 end
 
 -- Rare Loot Table
@@ -255,11 +255,6 @@ end
 function JM_CarePackage_Loot_Normal_28( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","A Bird Flew In Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
-end
-
-function JM_CarePackage_Loot_Normal_29( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Dopamine Button")
-    Loot_SpawnThis(caller,"ent_atsm_equip_dopamine_button")
 end
 
 
