@@ -77,9 +77,9 @@ function ENT:TakesHit()
 		JM_Function_PrintChat_All("Defuse The Bombs", "A Bomb has been defused! (" .. tostring(numberOfFilesLeft) .. " Left!)")
 		self:SendWarn(false) 
 
-		if #numberOfFilesLeft <= 0 then
+		if numberOfFilesLeft <= 0 then
 
-			JM_Function_PrintChat_All("Objective", "All bombs have been defused!")
+			JM_Function_PrintChat_All("Defuse The Bombs", "All bombs have been defused!")
 			JM_Function_PlaySound("gamemode/bomb_alldefused.wav")
 
 		end

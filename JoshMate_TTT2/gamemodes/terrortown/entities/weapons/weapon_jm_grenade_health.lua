@@ -62,7 +62,7 @@ function SWEP:HealingGreande_HealTarget(target)
          JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",target,self:GetOwner())
          -- End Of
 
-         JM_Function_PrintChat(target, "Healing Grenade","You have been healed by: " .. tostring(self:GetOwner():Nick()))
+         JM_Function_PrintChat(target, "Equipment","You have been healed by: " .. tostring(self:GetOwner():Nick()))
 
       end
 
