@@ -51,7 +51,17 @@ SWEP.WorldModel            = "models/weapons/w_pist_usp_silencer.mdl"
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 
 local JM_Shoot_Range = 10000
-local isDoomableNPC = { npc_zombie = true, npc_fastzombie = true, npc_headcrab = true, npc_headcrab_fast = true, npc_poisonzombie = true}
+local isDoomableNPC = { 
+   npc_zombie = true,
+   npc_fastzombie = true,
+   npc_headcrab = true,
+   npc_headcrab_fast = true,
+   npc_poisonzombie = true,
+   npc_seagull = true,
+   npc_pigeon = true,
+   npc_crow = true,
+   npc_antlion = true
+}
 
 
 function SWEP:Deploy()
@@ -73,8 +83,8 @@ function SWEP:ApplyEffect(ent,weaponOwner, targetIsPlayer)
          JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Doom Darted!" )
          deathMessage = "Doomed " .. ent:Nick() .. " has EXPLODED!"
       else
-         JM_Function_PrintChat(weaponOwner, "Equipment", "Zombie has been Doom Darted!" )
-         deathMessage = "Doomed zombie has EXPLODED!"
+         JM_Function_PrintChat(weaponOwner, "Equipment", string.sub(ent:GetClass(), 5) .. " has been Doom Darted!" )
+         deathMessage = "Doomed " .. string.sub(ent:GetClass(), 5) ..  " has EXPLODED!"
       end
       
 
