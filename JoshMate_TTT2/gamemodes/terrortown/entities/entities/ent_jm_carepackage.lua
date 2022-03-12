@@ -59,7 +59,7 @@ function ENT:Use( activator, caller )
 			CarePackageUsedEffect(self)
 
 			-- Handle Loot
-			JM_CarePackage_Use_LootMaster(activator,self,0,0)
+			JM_CarePackage_Use_LootMaster(activator,self)
 		
 			self:Remove()
 		end
