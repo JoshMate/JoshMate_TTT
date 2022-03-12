@@ -24,17 +24,24 @@ end
 
 function ENT:Think()
 
-	if self.doomedTarget:IsValid() and not self.doomedTarget:Alive() then
+	local hasdied = self.doomedTarget:IsValid()
+	if self.targetIsPlayer then
+		hasdied = hasdied and not self.doomedTarget:Alive()
+	else
+		hasdied = hasdied and self.doomedTarget:Health() <= 0
+	end
 
-		 -- Decal Effects
-		 if (SERVER) then
+	if hasdied then
+
+		-- Decal Effects
+		if (SERVER) then
 			if self.GreandeHasScorched == false then 
 			   self.GreandeHasScorched = true
 			   local spos = self.doomedTarget:GetPos()
 			   local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
-			   util.Decal("Cross", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
+				util.Decal("Cross", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)      
 			end
-		 end
+		end
 
 		if SERVER then 
 			local pos = self.doomedTarget:GetPos()
@@ -51,7 +58,7 @@ function ENT:Think()
 
 			self.doomedTarget:EmitSound("DoomDart.mp3", 120)
 
-			JM_Function_PrintChat(self.doomedBy, "Equipment", "Doomed " .. self.doomedTarget:Nick() .. " has EXPLODED!")
+			JM_Function_PrintChat(self.doomedBy, "Equipment", self.deathMessage)
 
 			self:Remove()
 
