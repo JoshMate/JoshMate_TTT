@@ -52,7 +52,7 @@ if CLIENT then
 	function HUDELEMENT:ShouldDraw()
 		local client = LocalPlayer()
 
-		return client:Alive() or client:Team() == TEAM_TERROR
+		return client:Alive() or ATSM_IsPlayer(client)
 	end
 
 	function HUDELEMENT:DrawIcon(curY, item)

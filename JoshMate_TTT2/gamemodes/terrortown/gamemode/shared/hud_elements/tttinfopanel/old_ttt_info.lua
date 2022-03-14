@@ -53,7 +53,7 @@ if CLIENT then
 		local height = self.maxheight
 		local margin = self.margin
 
-		if client:Alive() and client:Team() == TEAM_TERROR then
+		if ATSM_IsLivingPlayer(client) then
 			self:DrawBg(x, y, width, height, client)
 
 			local bar_height = 25

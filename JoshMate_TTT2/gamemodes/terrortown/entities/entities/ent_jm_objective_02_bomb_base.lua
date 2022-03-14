@@ -81,7 +81,7 @@ function ENT:Think()
 			JM_Function_PlaySound("c4_huge_boom.wav")
 
 			for _, ply in ipairs( player.GetAll() ) do
-				if (ply:IsValid() and ply:IsTerror() and ply:Alive()) and not ply:IsTraitor() then
+				if (ATSM_IsPlayer(ply)) and not ATSM_IsTraitor(ply) then
 
 					local effect = EffectData()
 					effect:SetStart(ply:GetPos())

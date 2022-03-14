@@ -49,7 +49,7 @@ function ENT:Initialize()
 end
 
 local function DoBleed(ent)
-   if not IsValid(ent) or (ent:IsPlayer() and (not ent:Alive() or not ent:IsTerror())) then
+   if not ATSM_IsLivingPlayer(ent) then
       return
    end
 

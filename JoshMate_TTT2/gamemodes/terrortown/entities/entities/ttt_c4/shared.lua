@@ -277,7 +277,7 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 	for i = 1, #plys do
 		local ply = plys[i]
 
-		if ply:Team() ~= TEAM_TERROR then continue end
+		if not ATSM_IsLivingPlayer(ply) then continue end
 
 		-- dot of the difference with itself is distance squared
 		local distance = center:Distance(ply:GetPos())
@@ -684,7 +684,7 @@ if SERVER then
 		if IsValid(bomb) and bomb:GetClass() == "ttt_c4" and not bomb.DisarmCausedExplosion and bomb:GetArmed() then
 			if bomb:GetPos():Distance(ply:GetPos()) > 256 then
 				return
-			elseif bomb.SafeWires[wire] or ply:IsTraitor() or ply == bomb:GetOwner() or ply:HasEquipmentItem("item_jm_passive_bombsquad") then
+			elseif bomb.SafeWires[wire] or ATSM_IsTraitor(ply) or ply == bomb:GetOwner() or ply:HasEquipmentItem("item_jm_passive_bombsquad") then
 				LANG.Msg(ply, "c4_disarmed")
 
 				bomb:Disarm(ply)
@@ -822,8 +822,7 @@ if CLIENT then
 		local ent = tData:GetEntity()
 		local c_wep = client:GetActiveWeapon()
 
-		if not IsValid(client) or not client:IsTerror() or not client:Alive()
-		or not IsValid(ent) or tData:GetEntityDistance() > 100 or ent:GetClass() ~= "ttt_c4" then
+		if not ATSM_IsLivingPlayer(client) or not IsValid(ent) or tData:GetEntityDistance() > 100 or ent:GetClass() ~= "ttt_c4" then
 			return
 		end
 

@@ -31,7 +31,7 @@ function ENT:BombRadius(dmgowner, center, radius, damage)
 	for i = 1, #plys do
 		local ply = plys[i]
 
-		if ply:Team() ~= TEAM_TERROR then continue end
+		if not ATSM_IsPlayer(ply) then continue end
 
 		-- dot of the difference with itself is distance squared
 		local distance = center:Distance(ply:GetPos())

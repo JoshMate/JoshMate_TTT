@@ -33,7 +33,7 @@ function ENT:Think()
 	end
 
 	-- If they Become a Traitor Half Way through the round
-	if self.bountyHunter_CurrentTarget:IsTraitor() then
+	if ATSM_IsTraitor(self.bountyHunter_CurrentTarget) then
 		self.bountyHunter_CurrentTarget:SetNWBool("BountyHunterIsTarget", false)
 		self:BountyHunter_Select_NewTarget()
 	end
@@ -47,7 +47,7 @@ function ENT:BountyHunter_Select_NewTarget()
 
 	-- Build a list of possible targets
 	for _,pl in pairs(player.GetAll()) do
-		if pl:IsValid() and pl:Alive() and not pl:IsTraitor() then 
+		if ATSM_IsLivingPlayer(pl) and not ATSM_IsTraitor(ps) then 
 			table.insert(tableOfPossibleTargets, pl)
 		end
 	end
@@ -61,7 +61,7 @@ function ENT:BountyHunter_Select_NewTarget()
 
 		-- Inform the traitors of the new target
 		for _,pl in pairs(player.GetAll()) do
-			if pl:IsValid() and pl:IsTraitor() then 
+			if ATSM_IsTraitor(ps) then 
 
 				if SERVER then 
 					JM_Function_PrintChat(pl, "Bounty Hunter", "Your Target is: " .. tostring(self.bountyHunter_CurrentTarget:Nick())) 
@@ -105,10 +105,9 @@ hook.Add("EntityTakeDamage", "BountyHunter_TargetDamage", function(target, dmgin
 
 	if not IsValid(target) or not target:IsPlayer() then return end
 
-	if not dmginfo:GetAttacker():IsValid() or not dmginfo:GetAttacker():IsPlayer() then return end
+	if not ATSM_IsTraitor(dmginfo:GetAttacker()) then return end
 
-	if not dmginfo:GetAttacker():IsTerror() or not dmginfo:GetAttacker():IsTraitor() then return end
-
+	ATSM_IsLivingTraitor(activator)
 	if target:GetNWBool("BountyHunterIsTarget") == true then
 		dmginfo:SetDamage(dmginfo:GetDamage() * 1.3)
 	else
@@ -129,10 +128,10 @@ hook.Add( "PreDrawHalos", "Halos_BountyTarget", function()
 	local count = 0
 	local locpl = LocalPlayer()
 
-	if locpl:IsTraitor() or not locpl:Alive() then 
+	if ATSM_IsTraitor(locpl) or not locpl:Alive() then 
 
 		for _,pl in pairs(player.GetAll()) do
-			if pl:IsValid() and pl:Alive() and pl:GetNWBool("BountyHunterIsTarget") == true then 
+			if ATSM_IsLivingPlayer(pl) and pl:GetNWBool("BountyHunterIsTarget") == true then 
 				count = count + 1
 				players[ count ] = pl
 			end

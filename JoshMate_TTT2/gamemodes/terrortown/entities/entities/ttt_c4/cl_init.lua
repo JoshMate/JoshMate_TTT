@@ -399,7 +399,7 @@ function ShowC4Disarm(bomb)
    ddesc:SetFont("DermaDefaultBold")
    ddesc:SetSize(256, desc_h)
    ddesc:SetWrap(true)
-   if LocalPlayer():IsTraitor() then
+   if ATSM_IsTraitor(LocalPlayer()) then
       ddesc:SetText(T("c4_disarm_t"))
    elseif LocalPlayer() == bomb:GetOwner() then
       ddesc:SetText(T("c4_disarm_owned"))

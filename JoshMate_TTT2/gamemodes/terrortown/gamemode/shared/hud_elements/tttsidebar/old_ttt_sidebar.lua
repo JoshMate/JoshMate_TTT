@@ -45,7 +45,7 @@ if CLIENT then
 	function HUDELEMENT:Draw()
 		local client = LocalPlayer()
 
-		if not client:Alive() or client:Team() ~= TEAM_TERROR then return end
+		if not ATSM_IsLivingPlayer(client) then return end
 
 		local basepos = self:GetBasePos()
 

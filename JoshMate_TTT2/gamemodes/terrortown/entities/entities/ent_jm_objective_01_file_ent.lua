@@ -37,7 +37,7 @@ function ENT:Use( activator, caller )
 
 	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 
-    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() and activator:Alive() then
+    if ATSM_IsLivingTraitor(activator) and IsValid(self) then
 
 		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
 			self:TakesHit() 

@@ -554,7 +554,7 @@ local function RagdollPinnedTakeDamage(rag, dmginfo)
 end
 
 function SWEP:PinRagdoll()
-	if not GetGlobalBool("ttt_ragdoll_pinning") or not self:GetOwner():IsTraitor() and not GetGlobalBool("ttt_ragdoll_pinning_innocents") then return end
+	if not GetGlobalBool("ttt_ragdoll_pinning") or not ATSM_IsTraitor(self:GetOwner()) and not GetGlobalBool("ttt_ragdoll_pinning_innocents") then return end
 
 	local rag = self.EntHolding
 	local ply = self:GetOwner()
@@ -663,7 +663,7 @@ if CLIENT then
 		if self.dt.can_rag_pin and IsValid(self.dt.carried_rag) then
 			local client = LocalPlayer()
 
-			if client:IsSpec() or not client:IsTraitor() then return end
+			if client:IsSpec() or not ATSM_IsTraitor(client) then return end
 
 			local tr = util.TraceLine({
 				start = client:EyePos(),

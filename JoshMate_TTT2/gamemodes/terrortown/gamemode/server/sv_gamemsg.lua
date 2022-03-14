@@ -95,7 +95,7 @@ function ShowRoundStartPopup()
 	for i = 1, #plys do
 		local v = plys[i]
 
-		if not IsValid(v) or v:Team() ~= TEAM_TERROR or not v:Alive() then continue end
+		if not ATSM_IsLivingPlayer(v) then continue end
 
 		v:ConCommand("ttt_cl_startpopup")
 	end

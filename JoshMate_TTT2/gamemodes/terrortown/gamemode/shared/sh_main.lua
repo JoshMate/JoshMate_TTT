@@ -158,7 +158,7 @@ function GM:Tick()
 		ply = plys[i]
 		tm = ply:Team()
 
-		if tm == TEAM_TERROR and ply:Alive() then
+		if ATSM_IsLivingPlayer(ply) then
 			if ply:WaterLevel() == 3 then -- Drowning
 				if SERVER and ply:IsOnFire() then
 					ply:Extinguish()

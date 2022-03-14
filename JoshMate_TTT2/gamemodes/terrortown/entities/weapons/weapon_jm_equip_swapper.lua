@@ -66,7 +66,7 @@ function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
       local hitMarkerOwner = self:GetOwner()
       JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
-      if not ent:IsTerror() or not ent:Alive() then return end
+      if not ATSM_IsLivingPlayer(ent) then return end
 
       -- Swap
       if secondaryAttack == false then

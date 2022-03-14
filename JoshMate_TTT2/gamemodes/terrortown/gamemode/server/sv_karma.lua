@@ -178,7 +178,7 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 
 
 		-- JoshMate Changes No T on T Karam pen
-		if attacker:IsTraitor() and victim:IsTraitor() then
+		if ATSM_IsTraitor(attacker) and ATSM_IsTraitor(victim) then
 			penalty = 0
 			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		else
@@ -204,7 +204,7 @@ function KARMA.Killed(attacker, victim, dmginfo)
 		local penalty = KARMA.GetKillPenalty(victim:GetLiveKarma())
 
 		-- JoshMate Changes No T on T Karam pen
-		if attacker:IsTraitor() and victim:IsTraitor() then
+		if ATSM_IsTraitor(attacker) and ATSM_IsTraitor(victim) then
 			penalty = 0
 			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		else

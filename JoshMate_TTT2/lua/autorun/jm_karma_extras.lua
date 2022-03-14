@@ -122,7 +122,7 @@ hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
         end
     
         -- Karma Bonus Credit 
-        if ply:GetBaseKarma() == 1250 and ply:IsDetective() or ply:IsTraitor() then 
+        if ply:GetBaseKarma() == 1250 and ATSM_IsDetective(IsDetective) or ATSM_IsTraitor(IsTraitor) then 
             ply:AddCredits(1)
             JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Bonus Credit (+1 Credit)")
         end

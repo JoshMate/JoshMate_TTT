@@ -190,7 +190,7 @@ end
 
 function JM_CarePackage_Loot_Normal_18( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
-    if(activator:IsTraitor() or activator:IsDetective()) then
+    if(ATSM_IsTraitor(activator) or ATSM_IsDetective(activator)) then
         JM_Function_PrintChat(activator, "Care Package","Role Change Blue (+1 Credit)")
         activator:AddCredits(1)
     else
@@ -203,7 +203,7 @@ end
 
 function JM_CarePackage_Loot_Normal_19( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
-    if(activator:IsTraitor() or activator:IsDetective()) then
+    if(ATSM_IsTraitor(activator) or ATSM_IsDetective(activator)) then
         JM_Function_PrintChat(activator, "Care Package","Role Change Red (+1 Credit)")
         activator:AddCredits(1)
     else
@@ -406,7 +406,7 @@ end
 function JM_CarePackage_Loot_Rare_11( activator, caller )
     activator:StripWeapons()
 		
-    if(activator:IsTraitor() or activator:IsDetective()) then
+    if(ATSM_IsTraitor(activator) or ATSM_IsDetective(activator)) then
         JM_Function_PrintChat(activator, "Care Package","Stripped of your weapons (Also + 2 Credits)")
         activator:AddCredits(2)
     else

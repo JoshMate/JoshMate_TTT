@@ -66,7 +66,7 @@ function ENT:Use( activator, caller )
 
 	if CLIENT then return end
 
-    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() then
+    if ATSM_IsLivingTraitor(activator) and IsValid(self) then
 
 		if IsValid(activator) and activator:Alive() and SERVER then
 			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+25 Max HP)")

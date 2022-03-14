@@ -87,7 +87,7 @@ function HealSphere(ent)
 	for i = 1, #plys do
 		local ply = plys[i]
 		
-		if not ply:Team() == TEAM_TERROR  or not ply:Alive() then continue end
+		if not ATSM_IsLivingPlayer(ply) then continue end
 
 		-- dot of the difference with itself is distance squared
 		diff = center - ply:GetPos()

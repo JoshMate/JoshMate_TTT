@@ -316,7 +316,7 @@ function GetTraitors()
 	local plys = player.GetAll()
 
 	for i = 1, #plys do
-		if not plys[i]:IsTraitor() then continue end
+		if not ATSM_IsTraitor(plys[i]) then continue end
 
 		trs[#trs + 1] = plys[i]
 	end

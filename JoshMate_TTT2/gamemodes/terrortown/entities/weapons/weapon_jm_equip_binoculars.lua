@@ -227,7 +227,7 @@ if CLIENT then
 		local client = LocalPlayer()
 		local ent = tData:GetEntity()
 
-		if not IsValid(client) or not client:IsTerror() or not client:Alive() then return end
+		if not ATSM_IsLivingPlayer(client) then return end
 
 		local c_wep = client:GetActiveWeapon()
 

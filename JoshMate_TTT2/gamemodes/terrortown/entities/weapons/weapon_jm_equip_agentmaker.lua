@@ -89,7 +89,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       ent:SetMaxHealth(ent:GetMaxHealth() + 50)
       ent:SetModel("models/player/leet.mdl")
 
-      if ent:IsTraitor() then
+      if ATSM_IsTraitor(ent) then
          ent:AddCredits(1)
          JM_Function_PrintChat(ent, "Agent Maker","As a TRAITOR you also earn +1 Credit")
       end
@@ -133,7 +133,7 @@ function SWEP:PrimaryAttack()
    end
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
-   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive() and not tr.Entity:IsDetective())then
+   if (ATSM_IsLivingDetective(tr.Entity))then
       if SERVER then
          self:ApplyEffect(tr.Entity, owner)
          self:Remove()

@@ -308,8 +308,7 @@ if CLIENT then
 		local client = LocalPlayer()
 		local ent = tData:GetEntity()
 
-		if not IsValid(client) or not client:IsTerror() or not client:Alive()
-		or tData:GetEntityDistance() > 100 or not ent:IsPlayer() then
+		if not ATSM_IsLivingPlayer(client) or tData:GetEntityDistance() > 100 or not ent:IsPlayer() then
 			return
 		end
 

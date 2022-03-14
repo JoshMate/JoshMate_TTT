@@ -52,12 +52,9 @@ end
 
 function RadiusDamage(dmginfo, pos, radius, inflictor)
    for k, vic in ipairs(ents.FindInSphere(pos, radius)) do
-
-        if IsValid(vic) then
-            if vic:IsPlayer() and vic:Alive() and vic:Team() == TEAM_TERROR then
-                -- Deal Damage to players in the radius
-                vic:TakeDamageInfo(dmginfo)
-            end
+        if ATSM_IsPlayer(vic) then
+            -- Deal Damage to players in the radius
+            vic:TakeDamageInfo(dmginfo)
         end
    end
 end
