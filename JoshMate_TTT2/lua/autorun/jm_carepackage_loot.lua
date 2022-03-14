@@ -3,192 +3,177 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 local JM_CarePackageLoot_Chance_Rare = 25
 
+local lootTable = {
+    normal = {
+        JM_CarePackage_Loot_Advnced_Pistol,
+        JM_CarePackage_Loot_Advanced_Smg,
+        JM_CarePackage_Loot_Advanced_Shotgun,
+        JM_CarePackage_Loot_Advanced_Rifle,
+        JM_CarePackage_Loot_Advanced_Sniper,
+        JM_CarePackage_Loot_Health_Boost,
+        JM_CarePackage_Loot_Speed_Boost,
+        JM_CarePackage_Loot_Mega_Frag,
+        JM_CarePackage_Loot_Ninja_Blade,
+        JM_CarePackage_Loot_Prop_Launcher,
+        JM_CarePackage_Loot_Rapid_Fire,
+        JM_CarePackage_Loot_Portable_Tester,
+        JM_CarePackage_Loot_Big_Boy,
+        JM_CarePackage_Loot_Shredder,
+        JM_CarePackage_Loot_Crate_Swep,
+        JM_CarePackage_Loot_Medkit_Swep,
+        JM_CarePackage_Loot_Slow_Mo_Clock,
+        JM_CarePackage_Loot_Become_Detective,
+        JM_CarePackage_Loot_become_traitor,
+        JM_CarePackage_Loot_Pidgeon,
+        JM_CarePackage_Loot_Gus_Radio,
+        JM_CarePackage_Loot_Rooty_Tooty,
+        JM_CarePackage_Loot_Mega_Tag,
+        JM_CarePackage_Loot_Mega_Glue,
+        JM_CarePackage_Loot_Mega_Jump,
+        JM_CarePackage_Loot_Vampire_Pistols,
+        JM_CarePackage_Loot_Built_Differently_Radio,
+        JM_CarePackage_Loot_A_Bird_Flew_In_Radio
+    },
+    rare = {
+        JM_CarePackage_Loot_Best_Friend,
+        JM_CarePackage_Loot_Mega_Tracker,
+        JM_CarePackage_Loot_Godzilla,
+        JM_CarePackage_Loot_Tripping_Balls,
+        JM_CarePackage_Loot_Low_Gravity,
+        JM_CarePackage_Loot_Slippery_Floors,
+        JM_CarePackage_Loot_Swap,
+        JM_CarePackage_Loot_Time_Bomb,
+        JM_CarePackage_Loot_1_HP,
+        JM_CarePackage_Loot_Mass_HP_Buff,
+        JM_CarePackage_Loot_Strip_Weapons,
+        JM_CarePackage_Loot_Best_Friend_Apocalypse,
+        JM_CarePackage_Loot_Zombie_Apocalypse,
+        JM_CarePackage_Loot_Antlion_Apocalypse,
+        JM_CarePackage_Loot_Hell_Fire,
+        JM_CarePackage_Loot_Reveal_Role,
+        JM_CarePackage_Loot_What_The_Dog_Doin,
+        JM_CarePackage_Loot_Mass_Heal,
+        JM_CarePackage_Loot_Mega_Godzilla,
+        JM_CarePackage_Loot_Man_Hack_Apocalypse,
+        JM_CarePackage_Loot_Mass_Teleport,
+        JM_CarePackage_Loot_Dopamine_Button
+    }
+}
 -- Master Loot Table that decides on Rare or Normal loot
-function JM_CarePackage_Use_LootMaster(activator,caller,forcedLootType,forcedLootIndex)
+function JM_CarePackage_Use_LootMaster(activator, caller)
 
     if SERVER then
 
         -- Random Roller
-        local RNG_Roll = math.random(1, 100)
+        local lootTypeRoll = math.random(1, 100)
+        
+        local slectedLootTable
+        if lootTypeRoll > JM_CarePackageLoot_Chance_Rare then
+            -- Rolls a High Number (Normal Roll)
+            slectedLootTable = lootTable["normal"]
 
-        -- Rolls a High Number (Normal Roll)
-        if (RNG_Roll > JM_CarePackageLoot_Chance_Rare or forcedLootType == 1) then 
-            JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex )
-            return
+        else
+            -- Rolls a low number (Rare Roll)
+            slectedLootTable = lootTable["rare"]
         end
 
-        -- Rolls a low number (Rare Roll)
-        if (RNG_Roll <= JM_CarePackageLoot_Chance_Rare or forcedLootType == 2) then 
-            JM_CarePackage_Use_LootRare( activator, caller, forcedLootIndex ) 
-            return 
-        end
-    
+        local lootRoll = math.random(1, table.getn(slectedLootTable))
+
+        slectedLootTable[lootRoll](activator, caller)
     end
-end
-
--- Normal Loot Table
-function JM_CarePackage_Use_LootNormal( activator, caller, forcedLootIndex)
-
-    local RNG_Roll_Normal = math.random(1, 28)
-
-    -- Optional Override of loot outcome for debug / fun
-    if not forcedLootIndex == 0 then RNG_Roll_Normal = forcedLootIndex end
-
-    if RNG_Roll_Normal == 1     then JM_CarePackage_Loot_Normal_01( activator, caller ) end
-    if RNG_Roll_Normal == 2     then JM_CarePackage_Loot_Normal_02( activator, caller ) end
-    if RNG_Roll_Normal == 3     then JM_CarePackage_Loot_Normal_03( activator, caller ) end
-    if RNG_Roll_Normal == 4     then JM_CarePackage_Loot_Normal_04( activator, caller ) end
-    if RNG_Roll_Normal == 5     then JM_CarePackage_Loot_Normal_05( activator, caller ) end
-    if RNG_Roll_Normal == 6     then JM_CarePackage_Loot_Normal_06( activator, caller ) end
-    if RNG_Roll_Normal == 7     then JM_CarePackage_Loot_Normal_07( activator, caller ) end
-    if RNG_Roll_Normal == 8     then JM_CarePackage_Loot_Normal_08( activator, caller ) end
-    if RNG_Roll_Normal == 9     then JM_CarePackage_Loot_Normal_09( activator, caller ) end
-    if RNG_Roll_Normal == 10    then JM_CarePackage_Loot_Normal_10( activator, caller ) end
-    if RNG_Roll_Normal == 11    then JM_CarePackage_Loot_Normal_11( activator, caller ) end
-    if RNG_Roll_Normal == 12    then JM_CarePackage_Loot_Normal_12( activator, caller ) end
-    if RNG_Roll_Normal == 13    then JM_CarePackage_Loot_Normal_13( activator, caller ) end
-    if RNG_Roll_Normal == 14    then JM_CarePackage_Loot_Normal_14( activator, caller ) end
-    if RNG_Roll_Normal == 15    then JM_CarePackage_Loot_Normal_15( activator, caller ) end
-    if RNG_Roll_Normal == 16    then JM_CarePackage_Loot_Normal_16( activator, caller ) end
-    if RNG_Roll_Normal == 17    then JM_CarePackage_Loot_Normal_17( activator, caller ) end
-    if RNG_Roll_Normal == 18    then JM_CarePackage_Loot_Normal_18( activator, caller ) end
-    if RNG_Roll_Normal == 19    then JM_CarePackage_Loot_Normal_19( activator, caller ) end
-    if RNG_Roll_Normal == 20    then JM_CarePackage_Loot_Normal_20( activator, caller ) end
-    if RNG_Roll_Normal == 21    then JM_CarePackage_Loot_Normal_21( activator, caller ) end
-    if RNG_Roll_Normal == 22    then JM_CarePackage_Loot_Normal_22( activator, caller ) end
-    if RNG_Roll_Normal == 23    then JM_CarePackage_Loot_Normal_23( activator, caller ) end
-    if RNG_Roll_Normal == 24    then JM_CarePackage_Loot_Normal_24( activator, caller ) end
-    if RNG_Roll_Normal == 25    then JM_CarePackage_Loot_Normal_25( activator, caller ) end
-    if RNG_Roll_Normal == 26    then JM_CarePackage_Loot_Normal_26( activator, caller ) end
-    if RNG_Roll_Normal == 27    then JM_CarePackage_Loot_Normal_27( activator, caller ) end
-    if RNG_Roll_Normal == 28    then JM_CarePackage_Loot_Normal_28( activator, caller ) end
-
-end
-
--- Rare Loot Table
-function JM_CarePackage_Use_LootRare( activator, caller, forcedLootIndex) 
-
-    local RNG_Roll_Rare = math.random(1, 22)
-
-    -- Optional Override of loot outcome for debug / fun
-    if not forcedLootIndex == 0 then RNG_Roll_Rare = forcedLootIndex end
-
-    if RNG_Roll_Rare == 1     then JM_CarePackage_Loot_Rare_01( activator, caller ) end
-    if RNG_Roll_Rare == 2     then JM_CarePackage_Loot_Rare_02( activator, caller ) end
-    if RNG_Roll_Rare == 3     then JM_CarePackage_Loot_Rare_03( activator, caller ) end
-    if RNG_Roll_Rare == 4     then JM_CarePackage_Loot_Rare_04( activator, caller ) end
-    if RNG_Roll_Rare == 5     then JM_CarePackage_Loot_Rare_05( activator, caller ) end
-    if RNG_Roll_Rare == 6     then JM_CarePackage_Loot_Rare_06( activator, caller ) end
-    if RNG_Roll_Rare == 7     then JM_CarePackage_Loot_Rare_07( activator, caller ) end
-    if RNG_Roll_Rare == 8     then JM_CarePackage_Loot_Rare_08( activator, caller ) end
-    if RNG_Roll_Rare == 9     then JM_CarePackage_Loot_Rare_09( activator, caller ) end
-    if RNG_Roll_Rare == 10    then JM_CarePackage_Loot_Rare_10( activator, caller ) end
-    if RNG_Roll_Rare == 11    then JM_CarePackage_Loot_Rare_11( activator, caller ) end
-    if RNG_Roll_Rare == 12    then JM_CarePackage_Loot_Rare_12( activator, caller ) end
-    if RNG_Roll_Rare == 13    then JM_CarePackage_Loot_Rare_13( activator, caller ) end
-    if RNG_Roll_Rare == 14    then JM_CarePackage_Loot_Rare_14( activator, caller ) end
-    if RNG_Roll_Rare == 15    then JM_CarePackage_Loot_Rare_15( activator, caller ) end
-    if RNG_Roll_Rare == 16    then JM_CarePackage_Loot_Rare_16( activator, caller ) end
-    if RNG_Roll_Rare == 17    then JM_CarePackage_Loot_Rare_17( activator, caller ) end
-    if RNG_Roll_Rare == 18    then JM_CarePackage_Loot_Rare_18( activator, caller ) end
-    if RNG_Roll_Rare == 19    then JM_CarePackage_Loot_Rare_19( activator, caller ) end
-    if RNG_Roll_Rare == 20    then JM_CarePackage_Loot_Rare_20( activator, caller ) end
-    if RNG_Roll_Rare == 21    then JM_CarePackage_Loot_Rare_21( activator, caller ) end
-    if RNG_Roll_Rare == 22    then JM_CarePackage_Loot_Rare_22( activator, caller ) end
-
 end
 
 -------------------------------------------------
 -- Table of Normal Loots
 -------------------------------------------------
 
-function JM_CarePackage_Loot_Normal_01( activator, caller )
+function JM_CarePackage_Loot_Advnced_Pistol( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Advanced Pistol")
     Loot_SpawnThis(caller,"weapon_jm_zloot_advanced_pistol")
 end
 
-function JM_CarePackage_Loot_Normal_02( activator, caller )
+function JM_CarePackage_Loot_Advanced_Smg( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Advanced SMG")
     Loot_SpawnThis(caller,"weapon_jm_zloot_advanced_smg")
 end
 
-function JM_CarePackage_Loot_Normal_03( activator, caller )
+function JM_CarePackage_Loot_Advanced_Shotgun( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Advanced Shotgun")
     Loot_SpawnThis(caller,"weapon_jm_zloot_advanced_shotgun")
 end
 
-function JM_CarePackage_Loot_Normal_04( activator, caller )
+function JM_CarePackage_Loot_Advanced_Rifle( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Advanced Rifle")
     Loot_SpawnThis(caller,"weapon_jm_zloot_advanced_rifle")
 end
 
-function JM_CarePackage_Loot_Normal_05( activator, caller )
+function JM_CarePackage_Loot_Advanced_Sniper( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Advanced Sniper")
     Loot_SpawnThis(caller,"weapon_jm_zloot_advanced_sniper")
 end
 
-function JM_CarePackage_Loot_Normal_06( activator, caller )
+function JM_CarePackage_Loot_Health_Boost( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Health Boost")
     activator:SetMaxHealth(activator:GetMaxHealth() + 100)
     JM_GiveBuffToThisPlayer("jm_buff_regeneration", activator, caller)
 end
 
-function JM_CarePackage_Loot_Normal_07( activator, caller )
+function JM_CarePackage_Loot_Speed_Boost( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Speed Boost")
     JM_GiveBuffToThisPlayer("jm_buff_speedboost", activator, caller)
 end
 
-function JM_CarePackage_Loot_Normal_08( activator, caller )
+function JM_CarePackage_Loot_Mega_Frag( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Frag Grenade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_frag")
 end
 
-function JM_CarePackage_Loot_Normal_09( activator, caller )
+function JM_CarePackage_Loot_Ninja_Blade( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Ninja Blade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_ninjablade")
 end
 
-function JM_CarePackage_Loot_Normal_10( activator, caller )
+function JM_CarePackage_Loot_Prop_Launcher( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Prop Launcher")
     Loot_SpawnThis(caller,"weapon_jm_zloot_prop_launcher")
 end
 
-function JM_CarePackage_Loot_Normal_11( activator, caller )
+function JM_CarePackage_Loot_Rapid_Fire( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Rapid Fire")
     JM_GiveBuffToThisPlayer("jm_buff_rapidfire", activator, caller)
 end
 
-function JM_CarePackage_Loot_Normal_12( activator, caller )
+function JM_CarePackage_Loot_Portable_Tester( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Portable Tester")
     Loot_SpawnThis(caller,"weapon_jm_zloot_traitor_tester")
 end
 
-function JM_CarePackage_Loot_Normal_13( activator, caller )
+function JM_CarePackage_Loot_Big_Boy( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Big Boy")
     Loot_SpawnThis(caller,"weapon_jm_zloot_explosive_gun")
 end
 
-function JM_CarePackage_Loot_Normal_14( activator, caller )
+function JM_CarePackage_Loot_shredder( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Shredder")
     Loot_SpawnThis(caller,"weapon_jm_zloot_shredder")
 end
 
-function JM_CarePackage_Loot_Normal_15( activator, caller )
+function JM_CarePackage_Loot_crate_swep( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Crate Swep")
     Loot_SpawnThis(caller,"weapon_jm_zloot_placer_crate")
 end
 
-function JM_CarePackage_Loot_Normal_16( activator, caller )
+function JM_CarePackage_Loot_medkit_swep( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Medkit Swep")
     Loot_SpawnThis(caller,"weapon_jm_zloot_placer_medkit")
 end
 
-function JM_CarePackage_Loot_Normal_17( activator, caller )
+function JM_CarePackage_Loot_Slow_Mo_Clock( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Slo-Mo Clock")
     Loot_SpawnThis(caller,"weapon_jm_zloot_slomo_clock")
 end
 
-function JM_CarePackage_Loot_Normal_18( activator, caller )
+function JM_CarePackage_Loot_Become_Detective( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
     if(ATSM_IsTraitor(activator) or ATSM_IsDetective(activator)) then
         JM_Function_PrintChat(activator, "Care Package","Role Change Blue (+1 Credit)")
@@ -201,7 +186,7 @@ function JM_CarePackage_Loot_Normal_18( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Normal_19( activator, caller )
+function JM_CarePackage_Loot_become_traitor( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
     if(ATSM_IsTraitor(activator) or ATSM_IsDetective(activator)) then
         JM_Function_PrintChat(activator, "Care Package","Role Change Red (+1 Credit)")
@@ -214,69 +199,68 @@ function JM_CarePackage_Loot_Normal_19( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Normal_20( activator, caller )
+function JM_CarePackage_Loot_Pidgeon( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
     JM_Function_PrintChat(activator, "Care Package","Extra Credit (+1 Credits)")
     activator:AddCredits(1)
 end
 
-function JM_CarePackage_Loot_Normal_21( activator, caller )
+function JM_CarePackage_Loot_Gus_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Gus Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_gus")
 end
 
-function JM_CarePackage_Loot_Normal_22( activator, caller )
+function JM_CarePackage_Loot_Rooty_Tooty( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Rooty Tooty Point and Shooty")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_shotgun")
 end
 
-function JM_CarePackage_Loot_Normal_23( activator, caller )
+function JM_CarePackage_Loot_Mega_Tag( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Tag Grenade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_tag")
 end
 
-function JM_CarePackage_Loot_Normal_24( activator, caller )
+function JM_CarePackage_Loot_Mega_Glue( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Glue Grenade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_glue")
 end
 
-function JM_CarePackage_Loot_Normal_25( activator, caller )
+function JM_CarePackage_Loot_Mega_Jump( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Jump Grenade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_jump")
 end
 
-function JM_CarePackage_Loot_Normal_26( activator, caller )
+function JM_CarePackage_Loot_Vampire_Pistols( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Vampire Pistols")
     Loot_SpawnThis(caller,"weapon_jm_zloot_dual_pistols")
 end
 
-function JM_CarePackage_Loot_Normal_27( activator, caller )
+function JM_CarePackage_Loot_Built_Differently_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Built Differently Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_builtdifferently")
 end
 
-function JM_CarePackage_Loot_Normal_28( activator, caller )
+function JM_CarePackage_Loot_A_Bird_Flew_In_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","A Bird Flew In Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
 end
-
-
-
 
 -------------------------------------------------
 -- End of Table of Normal Loots
 -------------------------------------------------
 
+
+
 -------------------------------------------------
 -- Table of Rare Loots
 -------------------------------------------------
 
-function JM_CarePackage_Loot_Rare_01( activator, caller )
+function JM_CarePackage_Loot_Best_Friend( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Best Friend")
     Loot_SpawnThis(caller,"npc_rollermine")
 end
 
-function JM_CarePackage_Loot_Rare_02( activator, caller )
+function JM_CarePackage_Loot_Mega_Tracker( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Mega Tracker")
     JM_Function_Announcement("[Care Package] You are all being tracked!")
@@ -290,7 +274,7 @@ function JM_CarePackage_Loot_Rare_02( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Rare_03( activator, caller )
+function JM_CarePackage_Loot_Godzilla( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Godzilla")
     if SERVER then activator:EmitSound(Sound("godzillaroar.wav")) end
 
@@ -305,12 +289,12 @@ function JM_CarePackage_Loot_Rare_03( activator, caller )
     activator:SetVelocity(vel)
 end
 
-function JM_CarePackage_Loot_Rare_04( activator, caller )
+function JM_CarePackage_Loot_Tripping_Balls( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Tripping Balls")
     JM_GiveBuffToThisPlayer("jm_buff_trippingballs", activator, caller)
 end
 
-function JM_CarePackage_Loot_Rare_05( activator, caller )
+function JM_CarePackage_Loot_Low_Gravity( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Low Gravity")
     JM_Function_Announcement("[Care Package] Gravity is now much weaker!")
@@ -322,7 +306,7 @@ function JM_CarePackage_Loot_Rare_05( activator, caller )
 
 end
 
-function JM_CarePackage_Loot_Rare_06( activator, caller )
+function JM_CarePackage_Loot_Slippery_Floors( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Slippery Floors")
     JM_Function_Announcement("[Care Package] The floors are now slippery!")
@@ -333,7 +317,7 @@ function JM_CarePackage_Loot_Rare_06( activator, caller )
     JM_Function_PlaySound("effect_slippery_floors.mp3")
 end
 
-function JM_CarePackage_Loot_Rare_07( activator, caller )
+function JM_CarePackage_Loot_Swap( activator, caller )
     
     local PossibleVictims = {}
 
@@ -381,17 +365,17 @@ function JM_CarePackage_Loot_Rare_07( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Rare_08( activator, caller )
+function JM_CarePackage_Loot_Time_Bomb( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Ticking Time Bomb")
     Loot_SpawnThis(caller,"ent_jm_zloot_timebomb")
 end
 
-function JM_CarePackage_Loot_Rare_09( activator, caller )
+function JM_CarePackage_Loot_1_HP( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","1 HP")
     activator:SetHealth(1)
 end
 
-function JM_CarePackage_Loot_Rare_10( activator, caller )
+function JM_CarePackage_Loot_Mass_HP_Buff( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mass HP Buff")
 		
     JM_Function_Announcement("Care Package: You all gain +50 Max HP", 0)
@@ -403,7 +387,7 @@ function JM_CarePackage_Loot_Rare_10( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Rare_11( activator, caller )
+function JM_CarePackage_Loot_Strip_Weapons( activator, caller )
     activator:StripWeapons()
 		
     if(ATSM_IsTraitor(activator) or ATSM_IsDetective(activator)) then
@@ -424,7 +408,7 @@ function JM_CarePackage_Loot_Rare_11( activator, caller )
     activator:SelectWeapon("weapon_jm_special_hands")
 end
 
-function JM_CarePackage_Loot_Rare_12( activator, caller )
+function JM_CarePackage_Loot_Best_Friend_Apocalypse( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Best Friend Apocalypse")
     JM_Function_Announcement("[Care Package] Best Friend Apocalypse!")
@@ -436,7 +420,7 @@ function JM_CarePackage_Loot_Rare_12( activator, caller )
     
 end
 
-function JM_CarePackage_Loot_Rare_13( activator, caller )
+function JM_CarePackage_Loot_Zombie_Apocalypse( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Zombie Apocalypse")
     JM_Function_Announcement("[Care Package] Zombie Apocalypse!")  
@@ -477,7 +461,7 @@ function JM_CarePackage_Loot_Rare_13( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Rare_14( activator, caller )
+function JM_CarePackage_Loot_Antlion_Apocalypse( activator, caller )
     
     JM_Function_PrintChat(activator, "Care Package","Antlion Apocalypse")
     JM_Function_Announcement("[Care Package] Antlion Apocalypse!")  
@@ -489,7 +473,7 @@ function JM_CarePackage_Loot_Rare_14( activator, caller )
 
 end
 
-function JM_CarePackage_Loot_Rare_15( activator, caller )
+function JM_CarePackage_Loot_Hell_Fire( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","The Flames of Hell")
     JM_Function_Announcement("[Care Package] The Flames of Hell!") 
@@ -514,7 +498,7 @@ function JM_CarePackage_Loot_Rare_15( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Rare_16( activator, caller )
+function JM_CarePackage_Loot_Reveal_Role( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Your role has been revealed to all")
     JM_Function_Announcement("[Care Package] " .. tostring(activator:Nick()) .. "'s role is [" .. tostring(activator:GetRoleStringRaw()) .. "]") 
@@ -523,7 +507,7 @@ function JM_CarePackage_Loot_Rare_16( activator, caller )
     
 end
 
-function JM_CarePackage_Loot_Rare_17( activator, caller )
+function JM_CarePackage_Loot_What_The_Dog_Doin( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","What the dog doin?")
     JM_Function_Announcement("[Care Package] What the dog doin?") 
@@ -531,7 +515,7 @@ function JM_CarePackage_Loot_Rare_17( activator, caller )
     JM_Function_PlaySound("whatthedogdoing.mp3") 
 end
 
-function JM_CarePackage_Loot_Rare_18( activator, caller )
+function JM_CarePackage_Loot_Mass_Heal( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Everyone is fully healed")
 	JM_Function_Announcement("[Care Package] Everyone is fully healed!") 
@@ -543,7 +527,7 @@ function JM_CarePackage_Loot_Rare_18( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Rare_19( activator, caller )
+function JM_CarePackage_Loot_Mega_Godzilla( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Godzilla")
     
     JM_Function_Announcement("Care Package: Mega Godzilla", 0)
@@ -566,7 +550,7 @@ function JM_CarePackage_Loot_Rare_19( activator, caller )
 
 end
 
-function JM_CarePackage_Loot_Rare_20( activator, caller )
+function JM_CarePackage_Loot_Man_Hack_Apocalypse( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Man Hack Apocalypse")
     JM_Function_Announcement("[Care Package] Man Hack Apocalypse!")
@@ -578,7 +562,7 @@ function JM_CarePackage_Loot_Rare_20( activator, caller )
     
 end
 
-function JM_CarePackage_Loot_Rare_21( activator, caller )
+function JM_CarePackage_Loot_Mass_Teleport( activator, caller )
 
     JM_Function_Announcement("[Care Package] Mass Teleportation!")
 
@@ -636,17 +620,15 @@ function JM_CarePackage_Loot_Rare_21( activator, caller )
 
 end
 
-function JM_CarePackage_Loot_Rare_22( activator, caller )
+function JM_CarePackage_Loot_Dopamine_Button( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Dopamine Button")
     Loot_SpawnThis(caller,"ent_jm_zloot_dopamine_button")
 end
 
-
-
-
 -------------------------------------------------
 -- End of Table of Rare Loots
 -------------------------------------------------
+
 
 
 -------------------------------------------------
