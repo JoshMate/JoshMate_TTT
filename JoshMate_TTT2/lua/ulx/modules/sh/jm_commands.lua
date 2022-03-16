@@ -115,8 +115,8 @@ function ulx.karmatotalreset(calling_ply)
         for i = 1, #plys do
             local ply = plys[i]
             ply:SetBaseKarma(1000)
-			ply:SetLiveKarma(1000)		
-			
+			ply:SetLiveKarma(1000)	
+			ply:SetNWBool("JM_NWBOOL_IsSittingRoundOut", false)	
 		end
 		JM_Function_PrintChat_All("Karma", "EVERYONE has been reset to 1000 Karma")	
 	end
@@ -193,6 +193,7 @@ function ulx.karmaset1000(calling_ply, target_plys)
             local pl = target_plys[i]
             pl:SetBaseKarma(1000)
 			pl:SetLiveKarma(1000)
+			pl:SetNWBool("JM_NWBOOL_IsSittingRoundOut", false)
 			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " has been reset to 1000 Karma")
 		end			
 	end
@@ -217,6 +218,7 @@ function ulx.karmaset1250(calling_ply, target_plys)
             local pl = target_plys[i]
             pl:SetBaseKarma(1250)
 			pl:SetLiveKarma(1250)	
+			pl:SetNWBool("JM_NWBOOL_IsSittingRoundOut", false)
 			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " has been reset to 1250 Karma")		
 		end
 	end
@@ -283,10 +285,7 @@ playsounds:help( "Play a client side sound on all players. Eg: ping_jake.wav" )
 
 function ulx.suddendeath( calling_ply)
 
-	net.Start("JM_Net_Announcement")
-    net.WriteString("Sudden Death!")
-    net.Broadcast()
-
+	JM_Function_Announcement("[Game Mode] Sudden Death!") 
 	JM_Function_PlaySound("0_main_suddendeath.mp3")
 
 end
@@ -301,10 +300,7 @@ suddendeath:help( "Starts Sudden Death" )
 
 function ulx.trackall( calling_ply)
 
-	net.Start("JM_Net_Announcement")
-    net.WriteString("Everyone is now Tracked!")
-    net.Broadcast()
-
+	JM_Function_Announcement("[Game Mode] You are all Tracked!") 
 	JM_Function_PlaySound("ping_jake.wav")
 
 	local plys = player.GetAll()
@@ -316,8 +312,6 @@ function ulx.trackall( calling_ply)
 			JM_GiveBuffToThisPlayer("jm_buff_suddendeath",ply,ply)	
 		end
 	end
-
-
 end
 
 local trackall = ulx.command( CATEGORY_NAME_JM_Event, "jm trackall", ulx.trackall, "!trackall")
@@ -359,10 +353,7 @@ function ulx.enableproxyvoice(calling_ply)
 
 		local ConVarProxy_Range_Text = ConVarProxy_Range:GetInt()
 
-        net.Start("JM_Net_Announcement")
-		net.WriteString("Proximity Voice: " .. tostring(ConVarProxy_State_Text) .. " - (Range: " .. tostring(ConVarProxy_Range_Text) .. " Units)")
-		net.Broadcast()
-
+		JM_Function_Announcement("[Proxy Voice] ".. tostring(ConVarProxy_State_Text) .. " - (Range: " .. tostring(ConVarProxy_Range_Text) .. " Units)") 
 		JM_Function_PlaySound("0_proximity_voice_toggle.wav")
 
 	end
@@ -379,7 +370,7 @@ karma:help("Enables Proxy Voice until the next map")
 -- ### Reset Server Convars
 -- ##################################################
 
-local cmdResetServerCvars = ulx.command(CATEGORY_NAME_JM_Tool, "jm resetservercvars", function () JM_ResetAllSettings() end, "!resetservercvars")
+local cmdResetServerCvars = ulx.command(CATEGORY_NAME_JM_Tool, "jm resetservercvars", function () JM_Function_ResetAllSettings() end, "!resetservercvars")
 cmdResetServerCvars:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- ##################################################

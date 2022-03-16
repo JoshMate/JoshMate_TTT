@@ -116,8 +116,8 @@ function ENT:Touch(toucher)
 
 		self.fingerprints = {}
 
-		if IsValid(toucher) then toucher:ChatPrint("[Bear Trap] - You're trapped, Ask for help!") end
-		if IsValid(self.Owner) then self.Owner:ChatPrint("[Bear Trap] - Your trap has caught: " .. toucher:GetName()) end
+		JM_Function_PrintChat(toucher, "Equipment", "You are stuck in a Bear Trap!")
+		JM_Function_PrintChat(self.Owner, "Equipment", "Your Bear Trap has caught: " .. toucher:GetName())
 
 		timer.Create("beartrapdmg" .. toucher:EntIndex(), 0.5, 0, function()
 			if !IsValid(toucher) then timer.Destroy("beartrapdmg" .. toucher:EntIndex()) return end			
@@ -126,7 +126,7 @@ function ENT:Touch(toucher)
 				timer.Destroy("beartrapdmg" .. toucher:EntIndex())
 				toucher:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
 				toucher:Freeze(false)
-				toucher:ChatPrint("[Bear Trap] - The Trap no longer holds you...")
+				JM_Function_PrintChat(toucher, "Equipment", "You break free from the Bear Trap!")
 				STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
 
 				return
@@ -168,15 +168,19 @@ end
 function ENT:Use(act)
 
 	if IsValid(self.Owner) then
-		self.Owner:ChatPrint("[Bear Trap] - Your trap has been removed!")
+		JM_Function_PrintChat(self.Owner, "Equipment", "Your Bear Trap has been Destroyed!")
 	end
 
 	if IsValid(self.TrappedPerson) then
 		timer.Destroy("beartrapdmg" .. self.TrappedPerson:EntIndex())
 		self.TrappedPerson:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
 		self.TrappedPerson:Freeze(false)
-		if IsValid(act) then self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: " .. tostring(act:Nick())) end
-		if not IsValid(act) then self.TrappedPerson:ChatPrint("[Bear Trap] - You have been released by: UNKOWN PLAYER") end
+		if IsValid(act) then 
+			JM_Function_PrintChat(self.TrappedPerson, "Equipment", "You have been released by: " .. tostring(act:Nick()))
+		end
+		if not IsValid(act) then 
+			JM_Function_PrintChat(self.TrappedPerson, "Equipment", "You have been released by: UNKOWN PLAYER")
+		end
 		STATUS:RemoveStatus(self.TrappedPerson, JM_Global_Buff_BearTrap_IconName)
 	end
 

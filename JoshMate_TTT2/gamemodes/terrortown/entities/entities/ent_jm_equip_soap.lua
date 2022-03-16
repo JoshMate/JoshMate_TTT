@@ -55,7 +55,7 @@ function ENT:Use( activator, caller )
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) then
 
 		if activator:IsTerror() then
-			self.Owner:ChatPrint("[Soap] - Your Soap has been removed!")
+			JM_Function_PrintChat(self.Owner, "Equipment","Your Soap has been destroyed!")
             self:Effect_Sparks()
             self:SendWarn(false)
 			self:Remove()
@@ -102,16 +102,13 @@ function ENT:Touch(toucher)
 		toucher:SetVelocity(velocity);
 		-- End Of
 
-        -- JM Changes Extra Hit Marker
-        net.Start( "hitmarker" )
-        net.WriteFloat(0)
-		net.WriteBool(false)
-        net.Send(self.Owner)
-        -- End Of
+		-- Give a Hit Marker to This Player
+		local hitMarkerOwner = self.Owner
+		JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
         -- HUD Message
-        toucher:ChatPrint("[Soap] - You have slipped on some Soap!")
-        self.Owner:ChatPrint("[Soap] - " .. toucher:GetName() .. " has slipped on your Soap!" )
+		JM_Function_PrintChat(toucher, "Equipment","You have slipped on some Soap!")
+		JM_Function_PrintChat(self.Owner, "Equipment",toucher:GetName() .. " has slipped on your Soap!" )
         -- End Of
 
         toucher:EmitSound(JM_Soap_Sound_HitPlayer);

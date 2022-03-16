@@ -64,7 +64,7 @@ function SWEP:PrimaryAttack()
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
 
       if self:GetOwner():GetTeam() == TEAM_INNOCENT then 
-         if SERVER then self:GetOwner():ChatPrint("[C4]: Innocents can't plant C4...") end
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","Innocents can't plant C4" )
          return 
       end
 
@@ -75,7 +75,7 @@ function SWEP:SecondaryAttack()
    self:SetNextSecondaryFire( CurTime() + self.Secondary.Delay )
 
    if self:GetOwner():GetTeam() == TEAM_INNOCENT then 
-      if SERVER then self:GetOwner():ChatPrint("[C4]: Innocents can't plant C4...") end
+      JM_Function_PrintChat(self:GetOwner(), "Equipment","Innocents can't plant C4" )
       return 
    end
 

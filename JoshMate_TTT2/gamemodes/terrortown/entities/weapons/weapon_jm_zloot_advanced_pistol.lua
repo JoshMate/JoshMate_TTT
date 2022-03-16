@@ -43,6 +43,7 @@ SWEP.Primary.Ammo          = "Pistol"
 SWEP.Primary.Sound         = "shoot_advanced_pistol.wav"
 SWEP.AutoSpawnable         = true
 SWEP.UseHands              = true
+SWEP.Tracer                = "AR2Tracer"
 SWEP.ViewModel             = "models/weapons/cstrike/c_pist_fiveseven.mdl"
 SWEP.WorldModel            = "models/weapons/w_pist_fiveseven.mdl"
 SWEP.IronSightsPos         = Vector(-5.95, -4, 2.799)

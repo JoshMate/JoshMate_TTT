@@ -50,7 +50,18 @@ SWEP.WorldModel            = "models/weapons/w_pist_usp_silencer.mdl"
 
 SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
 
-local JM_Shoot_Range                = 10000
+local JM_Shoot_Range = 10000
+local isDoomableNPC = { 
+   npc_zombie = true,
+   npc_fastzombie = true,
+   npc_headcrab = true,
+   npc_headcrab_fast = true,
+   npc_poisonzombie = true,
+   npc_seagull = true,
+   npc_pigeon = true,
+   npc_crow = true,
+   npc_antlion = true
+}
 
 
 function SWEP:Deploy()
@@ -58,27 +69,31 @@ function SWEP:Deploy()
    return self.BaseClass.Deploy(self)
 end
 
-function SWEP:ApplyEffect(ent,weaponOwner)
+function SWEP:ApplyEffect(ent,weaponOwner, targetIsPlayer)
 
    if not IsValid(ent) then return end
    
    if SERVER then
 
-      -- JM Changes Extra Hit Marker
-      net.Start( "hitmarker" )
-      net.WriteFloat(0)
-      net.WriteBool(false)
-      net.Send(weaponOwner)
-      -- End Of
+      -- Give a Hit Marker to This Player
+      JM_Function_GiveHitMarkerToPlayer(weaponOwner, 0, false)
 
-      -- Set Status and print Message
-      weaponOwner:ChatPrint("[Doom Dart]: " .. ent:Nick() .. " Has Been DOOMED to explode on death" )
-      -- End Of
+      local deathMessage
+      if targetIsPlayer then
+         JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Doom Darted!" )
+         deathMessage = "Doomed " .. ent:Nick() .. " has EXPLODED!"
+      else
+         JM_Function_PrintChat(weaponOwner, "Equipment", string.sub(ent:GetClass(), 5) .. " has been Doom Darted!" )
+         deathMessage = "Doomed " .. string.sub(ent:GetClass(), 5) ..  " has EXPLODED!"
+      end
+      
 
       -- Doom the Target
       local doomDart = ents.Create("ent_jm_equip_doom_dart")
       doomDart.doomedTarget = ent
       doomDart.doomedBy = self:GetOwner()
+      doomDart.targetIsPlayer = targetIsPlayer
+      doomDart.deathMessage = deathMessage
       doomDart:Spawn()
       -- End of
          
@@ -109,8 +124,15 @@ function SWEP:PrimaryAttack()
    end
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
-   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-      self:ApplyEffect(tr.Entity, owner)
+
+   if tr.Entity:IsValid() then
+      if tr.Entity:IsNPC() and isDoomableNPC[tr.Entity:GetClass()] == true then
+         self:ApplyEffect(tr.Entity, owner, false)
+      end
+ 
+      if tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive()then
+         self:ApplyEffect(tr.Entity, owner, true)
+      end
    end
 
    owner:LagCompensation(false)
@@ -131,7 +153,6 @@ end
 function SWEP:SecondaryAttack()
    return
 end
-
 
 
 -- Hud Help Text

@@ -20,6 +20,7 @@ SWEP.HoldNormal            = "grenade"
 SWEP.UseHands 				= false
 SWEP.AllowDrop 				= true
 
+
 -- TTT Customisation
 SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind 					= WEAPON_EQUIP1
@@ -83,7 +84,7 @@ function SWEP:PlaceThing(isWelded)
 	local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.JM_Trap_PlaceRange, filter = self:GetOwner()})
 	if (tr.Hit) then
 
-		self:EmitSound("shoot_barrel.mp3")
+		self:GetOwner():EmitSound("shoot_barrel.mp3")
 
 		if CLIENT then return end
 		

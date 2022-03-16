@@ -49,12 +49,9 @@ function SWEP:HealingGreande_HealTarget(target)
 
       if target:IsTerror() and target:Alive() then
 
-         -- Hit Markers
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(self:GetOwner())
-         -- End of Hit Markers
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = self:GetOwner()
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
          self:HitEffectsInit(target)
@@ -65,7 +62,7 @@ function SWEP:HealingGreande_HealTarget(target)
          JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",target,self:GetOwner())
          -- End Of
 
-         JM_Function_PrintChat(target, "Healing Grenade","You have been healed by: " .. tostring(self:GetOwner():Nick()))
+         JM_Function_PrintChat(target, "Equipment","You have been healed by: " .. tostring(self:GetOwner():Nick()))
 
       end
 
@@ -86,7 +83,8 @@ function SWEP:PrimaryAttack()
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
    if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
+
+      JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't use Grenades in the Pre-Round..." )
       return
    end
    

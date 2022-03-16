@@ -86,12 +86,9 @@ local function PushRadius(pos, pusher, newtonLauncher)
          local tpos = target:LocalToWorld(target:OBBCenter())
          local dir = (tpos - pos):GetNormal()
             
-         -- JM Changes Extra Hit Marker
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(pusher)
-         -- End Of
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = pusher
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Set Status and print Message
          JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
@@ -126,12 +123,9 @@ local function PullRadius(pos, pusher, newtonLauncher)
          local tpos = target:LocalToWorld(target:OBBCenter())
          local dir = (tpos - pos):GetNormal()
             
-         -- JM Changes Extra Hit Marker
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(pusher)
-         -- End Of
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = pusher
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Set Status and print Message
          JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)

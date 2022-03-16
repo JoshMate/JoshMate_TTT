@@ -188,7 +188,7 @@ hook.Add( "PlayerSwitchWeapon", "ZombieBladeCantSwitchWeapon", function( ply, ol
 
 	if ply:IsValid() and ply:Alive() and ply:IsTerror() then
 		if ply:GetActiveWeapon():IsValid() and ply:GetActiveWeapon():GetClass() == "weapon_jm_equip_zombiemodemelee" then
-			ply:ChatPrint("[Zombie Blade] - You can't change weapons while in Zombie Form!") 
+			JM_Function_PrintChat(ply, "Equipment","A magical force prevents you from switching weapons" )
 			return true
 		end
 	end

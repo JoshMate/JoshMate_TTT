@@ -49,7 +49,7 @@ function SWEP:PrimaryAttack()
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
    if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
+      JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't use Grenades in the Pre-Round..." )
       return
    end
    
@@ -61,12 +61,9 @@ function SWEP:PrimaryAttack()
 
       if pl:IsTerror() and pl:Alive() then
 
-         -- Hit Markers
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(pl)
-         -- End of Hit Markers
+         -- Give a Hit Marker to This Player
+			local hitMarkerOwner = self:GetOwner()
+			JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
          self:HitEffectsInit(pl)
@@ -94,7 +91,7 @@ function SWEP:SecondaryAttack()
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
    if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      if SERVER then self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...") end
+      JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't use Grenades in the Pre-Round..." )
       return
    end
    
@@ -106,12 +103,9 @@ function SWEP:SecondaryAttack()
 
       if pl:IsTerror() and pl:Alive() then
 
-         -- Hit Markers
-         net.Start( "hitmarker" )
-         net.WriteFloat(0)
-         net.WriteBool(false)
-         net.Send(pl)
-         -- End of Hit Markers
+         -- Give a Hit Marker to This Player
+			local hitMarkerOwner = self:GetOwner()
+			JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
          self:HitEffectsInit(pl)

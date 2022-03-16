@@ -74,6 +74,7 @@ function SWEP:PrimaryAttack()
 			ent:SetAngles(ang)
 			ent:Spawn()
 			ent:SetOwner(self:GetOwner())
+			ent.owner = self:GetOwner()
 			ent.fingerprints = self.fingerprints
 			self:TakePrimaryAmmo(1)
 			if SERVER then

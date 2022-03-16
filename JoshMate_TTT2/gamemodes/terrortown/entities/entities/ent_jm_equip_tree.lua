@@ -66,6 +66,8 @@ function DetectTreeStacking(ent)
 		d = diff:Dot(diff)
 
 		if d >= (r*2.5)  then continue end
+
+		JM_Function_PrintChat(ent.owner, "Equipment", "Your Tree Of Life was too close to another...")
 		tree:Tree_Die()
 	end
 end

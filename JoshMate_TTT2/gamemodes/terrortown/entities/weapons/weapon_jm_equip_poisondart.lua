@@ -79,15 +79,12 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
       
-      -- JM Changes Extra Hit Marker
-      net.Start( "hitmarker" )
-      net.WriteFloat(0)
-      net.WriteBool(false)
-      net.Send(weaponOwner)
-      -- End Of
+      -- Give a Hit Marker to This Player
+      local hitMarkerOwner = self:GetOwner()
+      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Poison Dart]: You hit someone!")
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Poisoned!" )
       JM_RemoveBuffFromThisPlayer("jm_buff_poisondart",ent)
       JM_GiveBuffToThisPlayer("jm_buff_poisondart",ent,self:GetOwner())
       -- End Of

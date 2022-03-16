@@ -74,12 +74,9 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
 
-      -- JM Changes Extra Hit Marker
-      net.Start( "hitmarker" )
-      net.WriteFloat(0)
-      net.WriteBool(false)
-      net.Send(weaponOwner)
-      -- End Of
+      -- Give a Hit Marker to This Player
+      local hitMarkerOwner = self:GetOwner()
+      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
       -- Set Status and print Message
       JM_Function_PrintChat(weaponOwner, "Agent Maker","You have made " .. ent:Nick() .. " an Agent")

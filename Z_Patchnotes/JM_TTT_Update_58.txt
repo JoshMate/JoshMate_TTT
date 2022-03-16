@@ -1,20 +1,89 @@
-################################
-#### TTT Update 58 - Patch Notes
-################################
+###################################
+Josh Mate TTT Update 58 - Patch Notes
+###################################
+#### New Stuff
+###################################
 
-[Crowbar]
-- Rightclicking is no longer possible in Pre-Round
+[Map: TTT Cosmic]
+- New Maps
+- A small map consisting of islands floating in the middle of a void in another dimension
 
-//TODO: Chameleon Weakens cloak on getting shot
+[Care Package Loot: Vampire Pistols]
+- New Care Package Common Loot
+- A set of Life stealing dual pistols with great stats
+- Replaced Lucker & Fenner
 
+[Care Package Loot: Man Hack Apocalypse]
+- New Care Package Rare Loot
+- Spawns a load of Man Hacks around the map
 
-################################
-##### Fixes & Extras
-################################
+[Care Package Loot: Mass Teleportation]
+- New Care Package Rare Loot
+- Swaps everyone's position around with each other randomly
 
-- Fixed bug that prevented Antlion and best friend apocalypse spawning
+[Care Package Loot: Dopamine Button] (Simon)
+- New Care Package Rare Loot
+- A button which has a 75% chance of giving you a credit.
+- A 25% chance of killing you
+- A 100% chance of giving Ali a dopamine hit
 
-################################
-##### Maps
-################################
+###################################
+#### Changes
+###################################
 
+[Pre Round Prep Time]
+- Crowbar Right-Clicking is no longer possible in prep
+- Pick Up Stick picking up props is no longer possible in prep
+
+[Care Package Swep]
+- Buffed placement Range: 192 -> 255 Units
+- Now has a Shop Icon, place sound and view model
+
+[Care Package Loot: Rooty Tooty]
+- Buffed Damage: 3200 -> 4500
+- Buffed Number of projectiles: 80 -> 100
+
+[Weapon Tracers]
+- Added Blue Tracers to their bullets to show their uniqueness / power
+- Added to: All Carepackage weapons and Sniper
+
+[Cannibal]
+- Buffed Max HP Gained on Eat: 25 -> 30 HP
+- Buffed Max Healing on Eat: 75 -> 90 HP
+
+[Doom Dart]
+- Buffed DOOM blast radius: 600 -> 800 Units
+
+[Karma]
+- Now only Traitors and Detectives get their 1250 karma bonus Credit
+- Karma can now go below 0 into negative numbers
+- Upgraded Karma logs to included the weapon / object that dealt the damage
+- type "ttt_print_damagelog" into the console to see last round's damage logs
+- Upgraded my karma re-fund admin tools to be able to Un-Sit-out players
+
+[Karma Sitting out]
+- Getting your Karma below 0 will now cause you to sit out twice in a row to get back to 500
+(This is to prevent something I've seen before where people accidentally RDM once, and then just say:
+"well, I'm already sitting out, so I might as well not care now about karma for the rest of the round.")
+(It also helps to distinguish between an entire team wipe RDM, and just killing 1 person with higher karma)
+(It's also just funny to see huge negative numbers from massive accident game wiping RDMs)
+
+[Messages]
+- Went through and re-worked all 78 text messages to the new colour coded system
+- Greatly Improved how announcements / text is shown to players
+
+###################################
+##### Fixes & Small Changes
+###################################
+
+- Changed how the patch notes are formatted from now on
+- Increased the amount of NPC's included in Apocalypse events
+- Poison Dart now tells you who you've hit
+- Taser now tells you who you've hit
+- Greatly Improved how Care Package Global events play their sounds
+
+- Fixed Antlions and best friend apocalypse not spawning
+- Fixed Built Differently Radio not ever appearing
+
+- (Code) Refactored / Commented / Tidied up all Shared Utility Functions
+- (Code) Converted the hit marker send code to a utility function for re-use
