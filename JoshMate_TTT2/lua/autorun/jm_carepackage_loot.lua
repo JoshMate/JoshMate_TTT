@@ -3,6 +3,63 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 local JM_CarePackageLoot_Chance_Rare = 25
 
+local lootTable = {
+    normal = {
+        JM_CarePackage_Loot_Advnced_Pistol,
+        JM_CarePackage_Loot_Advanced_Smg,
+        JM_CarePackage_Loot_Advanced_Shotgun,
+        JM_CarePackage_Loot_Advanced_Rifle,
+        JM_CarePackage_Loot_Advanced_Sniper,
+        JM_CarePackage_Loot_Health_Boost,
+        JM_CarePackage_Loot_Speed_Boost,
+        JM_CarePackage_Loot_Mega_Frag,
+        JM_CarePackage_Loot_Ninja_Blade,
+        JM_CarePackage_Loot_Prop_Launcher,
+        JM_CarePackage_Loot_Rapid_Fire,
+        JM_CarePackage_Loot_Portable_Tester,
+        JM_CarePackage_Loot_Big_Boy,
+        JM_CarePackage_Loot_Shredder,
+        JM_CarePackage_Loot_Crate_Swep,
+        JM_CarePackage_Loot_Medkit_Swep,
+        JM_CarePackage_Loot_Slow_Mo_Clock,
+        JM_CarePackage_Loot_Become_Detective,
+        JM_CarePackage_Loot_become_traitor,
+        JM_CarePackage_Loot_Pidgeon,
+        JM_CarePackage_Loot_Gus_Radio,
+        JM_CarePackage_Loot_Rooty_Tooty,
+        JM_CarePackage_Loot_Mega_Tag,
+        JM_CarePackage_Loot_Mega_Glue,
+        JM_CarePackage_Loot_Mega_Jump,
+        JM_CarePackage_Loot_Vampire_Pistols,
+        JM_CarePackage_Loot_Built_Differently_Radio,
+        JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
+        JM_CarePackage_Loot_Glue_Gun
+    },
+    rare = {
+        JM_CarePackage_Loot_Best_Friend,
+        JM_CarePackage_Loot_Mega_Tracker,
+        JM_CarePackage_Loot_Godzilla,
+        JM_CarePackage_Loot_Tripping_Balls,
+        JM_CarePackage_Loot_Low_Gravity,
+        JM_CarePackage_Loot_Slippery_Floors,
+        JM_CarePackage_Loot_Swap,
+        JM_CarePackage_Loot_Time_Bomb,
+        JM_CarePackage_Loot_1_HP,
+        JM_CarePackage_Loot_Mass_HP_Buff,
+        JM_CarePackage_Loot_Strip_Weapons,
+        JM_CarePackage_Loot_Best_Friend_Apocalypse,
+        JM_CarePackage_Loot_Zombie_Apocalypse,
+        JM_CarePackage_Loot_Antlion_Apocalypse,
+        JM_CarePackage_Loot_Hell_Fire,
+        JM_CarePackage_Loot_Reveal_Role,
+        JM_CarePackage_Loot_What_The_Dog_Doin,
+        JM_CarePackage_Loot_Mass_Heal,
+        JM_CarePackage_Loot_Mega_Godzilla,
+        JM_CarePackage_Loot_Man_Hack_Apocalypse,
+        JM_CarePackage_Loot_Mass_Teleport,
+        JM_CarePackage_Loot_Dopamine_Button
+    }
+}
 -- Master Loot Table that decides on Rare or Normal loot
 function JM_CarePackage_Use_LootMaster(activator,caller,forcedLootType,forcedLootIndex)
 
@@ -257,8 +314,10 @@ function JM_CarePackage_Loot_Normal_28( activator, caller )
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
 end
 
-
-
+function JM_CarePackage_Loot_Glue_Gun( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Glue Gun")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_gluegun")
+end
 
 -------------------------------------------------
 -- End of Table of Normal Loots
