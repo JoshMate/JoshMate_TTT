@@ -11,7 +11,7 @@ if CLIENT then
    SWEP.ViewModelFlip      = false
 
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_pulsepad.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gluegun.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -28,7 +28,7 @@ SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = "shoot_poisondart.wav"
+SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {} -- only traitors can buy
@@ -38,7 +38,7 @@ SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_famas.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_rif_famas.mdl")
 
 
-local GlueGun_Range         = 1200
+local glueGunRange         = 1200
 
 function SWEP:HitEffectsInit(ent)
    if not IsValid(ent) then return end
@@ -50,8 +50,7 @@ function SWEP:HitEffectsInit(ent)
    effect:SetOrigin(ePos)
    
    
-   
-   util.Effect("cball_explode", effect, true, true)
+   util.Effect("AntlionGib", effect, true, true)
 end
 
 function SWEP:ApplyEffect(ent, weaponOwner)
@@ -68,7 +67,7 @@ function SWEP:ApplyEffect(ent, weaponOwner)
       -- End Of
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Glue Gun]: You've glued someone!")
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Glued!" )
       JM_RemoveBuffFromThisPlayer("jm_buff_gluegrenade",ent)
       JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",ent,self:GetOwner())
       -- End Of
@@ -97,7 +96,7 @@ function SWEP:PrimaryAttack()
       owner:LagCompensation(true)
    end
    
-   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * GlueGun_Range, filter = owner})
+   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * glueGunRange, filter = owner})
 
    if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
       self:ApplyEffect(tr.Entity, owner)
