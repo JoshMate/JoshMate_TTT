@@ -139,6 +139,31 @@ function SWEP:SecondaryAttack()
 
 end
 
-function SWEP:OnDrop()
-	self:Remove()
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("YEET a player across map", "YEET a player across map", true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
 end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
+	self:Remove()
+ end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

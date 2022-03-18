@@ -23,9 +23,9 @@ SWEP.Weight					= 5
 SWEP.Slot			    	= 7
 SWEP.ViewModel 				= "models/props_c17/consolebox01a.mdl"
 SWEP.WorldModel				= "models/props_c17/consolebox01a.mdl"
-SWEP.HoldType              = "grenade"
-SWEP.HoldReady             = "grenade"
-SWEP.HoldNormal            = "grenade"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 SWEP.UseHands 				= false
 SWEP.AllowDrop 				= true
 
@@ -140,35 +140,40 @@ function SWEP:SecondaryAttack()
 	self:PlaceThing()
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Weld to surface", "Weld to surface", true)
+	   self:AddTTT2HUDHelp("Place in front of you", "Weld to a surface", true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
-
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
 	self:Remove()
  end
-  
- function SWEP:DrawWorldModel()
-	return
- end
- 
- function SWEP:DrawWorldModelTranslucent()
-	return
- end
- 
- -- END of Josh Mate World Model 
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

@@ -40,10 +40,10 @@ SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 3
-SWEP.Primary.SoundLevel    = 20
+SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = "shoot_agentmaker.wav"
+SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
@@ -79,8 +79,8 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
       -- Set Status and print Message
-      JM_Function_PrintChat(weaponOwner, "Agent Maker","You have made " .. ent:Nick() .. " an Agent")
-      JM_Function_PrintChat(ent, "Agent Maker","You have been made an Agent by " .. weaponOwner:Nick())
+      JM_Function_PrintChat(weaponOwner, "Equipment","You have made " .. ent:Nick() .. " an Agent")
+      JM_Function_PrintChat(ent, "Equipment","You have been made an Agent by " .. weaponOwner:Nick())
       -- End Of
 
       -- Make you and the target Agents
@@ -88,10 +88,11 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_GiveBuffToThisPlayer("jm_buff_agent",ent,self:GetOwner())
       ent:SetMaxHealth(ent:GetMaxHealth() + 50)
       ent:SetModel("models/player/leet.mdl")
+      ent:SetColor(Color( 0, 255, 50 ))
 
       if ent:IsTraitor() then
          ent:AddCredits(1)
-         JM_Function_PrintChat(ent, "Agent Maker","As a TRAITOR you also earn +1 Credit")
+         JM_Function_PrintChat(ent, "Equipment","As a TRAITOR you also earn +1 Credit")
       end
 
 
@@ -101,8 +102,13 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       det:SetMaxHealth(det:GetMaxHealth() + 50)
       -- End of
 
+      -- Play Sound to ALL
+      JM_Function_PlaySound("shoot_agentmaker.wav") 
+
+      -- Announce to all
+      JM_Function_PrintChat_All("Equipment", self:GetOwner():Nick() .. " has made " .. ent:Nick() .. " an Agent")
+
       -- Effects
-      ent:EmitSound("shoot_agentmaker.wav")
       self:HitEffectsInit(ent)
       -- End of 
 
@@ -157,19 +163,42 @@ end
 
 
 
--- Hud Help Text
+
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Make someone an Agent", nil, true)
+	   self:AddTTT2HUDHelp("Turn a player into an Agent", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

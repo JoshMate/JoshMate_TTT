@@ -187,19 +187,27 @@ end
 
 
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Shoot a Player to test them (Must be holding to complete the test)", nil, true)
+	   self:AddTTT2HUDHelp("Test a player (Must hold weapon out to finish)", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

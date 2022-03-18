@@ -172,3 +172,28 @@ end
 function SWEP:SecondaryAttack()
   return
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Shoot", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

@@ -128,10 +128,36 @@ function SWEP:SecondaryAttack()
 end
 
 
-  -- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
-   function SWEP:Initialize()
-      self:AddTTT2HUDHelp("Jump Directly Upwards (Full Power)", "Jump Directly Upwards (Half Power)", true)
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Full power jump", "Half power jump", true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
    end
 end
--- 
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

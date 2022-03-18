@@ -164,6 +164,12 @@ JM_Global_Buff_KarmaBuff_IconName                               = "JM_Buff_Icon_
 JM_Global_Buff_KarmaBuff_IconPath                               = "vgui/ttt/joshmate/hud_karma.png"
 JM_Global_Buff_KarmaBuff_IconGoodBad                            = "good"
 
+JM_Global_Buff_Uav_Name                                         = "UAV Buff"
+JM_Global_Buff_Uav_Duration                                     = 8
+JM_Global_Buff_Uav_NWBool                                       = "JM_Buff_NWBool_IsUavBuff"
+JM_Global_Buff_Uav_IconName                                     = "JM_Buff_Icon_UavBuff"
+JM_Global_Buff_Uav_IconPath                                     = "vgui/ttt/joshmate/hud_uav.png"
+JM_Global_Buff_Uav_IconGoodBad                                  = "good"
 
 
 
