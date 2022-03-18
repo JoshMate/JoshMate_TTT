@@ -8,12 +8,14 @@ Josh Mate TTT Update 60 - Patch Notes
 // TODO Paranoia (Fake Sound effects)
 // TODO Mimic (Prop Hunt Item)
 // TODO Fix Print Chats that aren't updated to new JM
-// TODO Cannable prints wrong HP gain
+// TODO Cannibal prints wrong HP gain
 // TODO Care package rewards can only be had once a round
 
 
-[]
-- 
+[Loot: Glue Gun] (Vinny's first code!)
+- A new common Care Package Loot
+- A gun that glues people who you shoot
+- Deals no damage so is karma free
 
 ###################################
 #### Changes
