@@ -29,7 +29,8 @@ local lootTable = {
         JM_CarePackage_Loot_Mega_Jump,
         JM_CarePackage_Loot_Vampire_Pistols,
         JM_CarePackage_Loot_Built_Differently_Radio,
-        JM_CarePackage_Loot_A_Bird_Flew_In_Radio
+        JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
+        JM_CarePackage_Loot_Glue_Gun
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -250,7 +251,10 @@ function JM_CarePackage_Loot_A_Bird_Flew_In_Radio( activator, caller )
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
 end
 
-
+function JM_CarePackage_Loot_Glue_Gun( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Glue Gun")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_gluegun")
+end
 
 -------------------------------------------------
 -- End of Table of Normal Loots
