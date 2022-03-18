@@ -137,13 +137,13 @@ function ulx.karmapunishminor(calling_ply, target_plys)
 	else
 		for i = 1, #target_plys do
             local pl = target_plys[i]
-            plKarma = pl:GetLiveKarma() - 250
+            plKarma = pl:GetLiveKarma() - 300
 
-            plKarma = math.Clamp(plKarma, 0, 1000)
+            plKarma = math.Clamp(plKarma, -9999, 1000)
 
 			pl:SetBaseKarma(plKarma)
 			pl:SetLiveKarma(plKarma)
-			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " lost 250 Karma for breaking the rules (Minor)")
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " lost 300 Karma for breaking the rules (Minor)")
 		end
 	end
 end
@@ -151,7 +151,7 @@ end
 local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish minor", ulx.karmapunishminor, "!karmapunishminor")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
-karma:help("Take away 250 KARMA")
+karma:help("Take away 300 KARMA")
 
 -- #########################
 -- ###  Karma Punish RDM ###
@@ -164,13 +164,13 @@ function ulx.karmapunishmajor(calling_ply, target_plys)
 	else
 		for i = 1, #target_plys do
             local pl = target_plys[i]
-            plKarma = pl:GetLiveKarma() - 650
+            plKarma = pl:GetLiveKarma() - 700
 
-            plKarma = math.Clamp(plKarma, 0, 1000)
+            plKarma = math.Clamp(plKarma, -9999, 1000)
 
 			pl:SetBaseKarma(plKarma)
 			pl:SetLiveKarma(plKarma)
-			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " lost 650 Karma for RDMing (Major)")
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " lost 700 Karma for RDMing (Major)")
 		end
 	end
 end
@@ -178,7 +178,7 @@ end
 local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma punish rdm", ulx.karmapunishmajor, "!karmapunishmajor")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
-karma:help("Take away 650 KARMA")
+karma:help("Take away 700 KARMA")
 
 -- #########################
 -- ###  Karma Set 1000 ###
@@ -206,28 +206,28 @@ karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Sets KARMA to 1000")
 
 -- #########################
--- ###  Karma Set 1250 ###
+-- ###  Karma Set 1300 ###
 -- #########################
 
-function ulx.karmaset1250(calling_ply, target_plys)
+function ulx.karmaset1300(calling_ply, target_plys)
     
 	if GetConVar("gamemode"):GetString() ~= "terrortown" then
 		ULib.tsayError(calling_ply, gamemode_error, true)
 	else
 		for i = 1, #target_plys do
             local pl = target_plys[i]
-            pl:SetBaseKarma(1250)
-			pl:SetLiveKarma(1250)	
+            pl:SetBaseKarma(1300)
+			pl:SetLiveKarma(1300)	
 			pl:SetNWBool("JM_NWBOOL_IsSittingRoundOut", false)
-			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " has been reset to 1250 Karma")		
+			JM_Function_PrintChat_All("Karma", tostring(pl:Nick()) .. " has been reset to 1300 Karma")		
 		end
 	end
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1250", ulx.karmaset1250, "!karmaset1250")
+local karma = ulx.command(CATEGORY_NAME_JM_Karma, "jm karma reset 1300", ulx.karmaset1300, "!karmaset1300")
 karma:addParam{type = ULib.cmds.PlayersArg}
 karma:defaultAccess(ULib.ACCESS_ADMIN)
-karma:help("Sets KARMA to 1250")
+karma:help("Sets KARMA to 1300")
 
 -- #########################
 -- ####  Slay All Players ##

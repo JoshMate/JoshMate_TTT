@@ -4,9 +4,9 @@ AddCSLuaFile()
 
 DEFINE_BASECLASS "weapon_jm_base_gun"
 
-SWEP.HoldType              = "grenade"
-SWEP.HoldReady             = "grenade"
-SWEP.HoldNormal            = "grenade"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 
 if CLIENT then
    SWEP.PrintName          = "Base grenade"

@@ -291,16 +291,6 @@ function SWEP:PreDrop()
 	self.fingerprints = {}
 end
 
-function SWEP:OnRemove()
-	if SERVER then return end
-
-	local owner = self:GetOwner()
-
-	if IsValid(owner) and owner == LocalPlayer() and owner:Alive() then
-		RunConsoleCommand("lastinv")
-	end
-end
-
 if CLIENT then
 	local TryT = LANG.TryTranslation
 
@@ -343,3 +333,32 @@ if CLIENT then
 		surface.DrawLine(x + outer, y - outer, x + inner, y - inner)
 	end)
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Silenty Insta-Kill", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

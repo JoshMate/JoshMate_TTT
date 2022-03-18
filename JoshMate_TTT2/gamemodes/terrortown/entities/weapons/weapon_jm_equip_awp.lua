@@ -38,7 +38,7 @@ SWEP.Primary.Damage        = 5000
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 1
 SWEP.Primary.Cone          = 0.1
-SWEP.Primary.Recoil        = 10
+SWEP.Primary.Recoil        = 0
 SWEP.Primary.Range         = 10000
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
@@ -182,20 +182,31 @@ if CLIENT then
    end
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Snipe an enemy", "Scope in / out", true)
+	   self:AddTTT2HUDHelp("Shoot", "Scope In/Out", true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      self:PreDrop()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
--- 
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

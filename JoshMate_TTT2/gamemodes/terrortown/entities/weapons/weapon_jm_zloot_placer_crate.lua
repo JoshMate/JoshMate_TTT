@@ -12,11 +12,11 @@ SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel 				= "models/props_junk/wood_crate001a.mdl"
+SWEP.ViewModel 				= "models/hunter/blocks/cube025x025x025.mdl"
 SWEP.WorldModel				= "models/hunter/blocks/cube025x025x025.mdl"
-SWEP.HoldType              = "grenade"
-SWEP.HoldReady             = "grenade"
-SWEP.HoldNormal            = "grenade"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 SWEP.UseHands 				= false
 SWEP.AllowDrop 				= true
 
@@ -41,10 +41,6 @@ SWEP.JM_Trap_Prop_Model					= "models/props_junk/wood_crate001a.mdl"
 
 if CLIENT then
 	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_special.png"
-	
-	function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 35 - ang:Right() * -25 - ang:Up() * 30, ang
-	end
 end
 
 -- Fix Spawning
@@ -145,19 +141,69 @@ function SWEP:SecondaryAttack()
 	self:PlaceThing(true)
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate View Model Overide
+-- ##############################################
+SWEP.HoldType              = "normal" 
+if CLIENT then
+
+   	-- Adjust these variables to move the viewmodel's position
+   	function SWEP:GetViewModelPosition(EyePos, EyeAng)
+		-- Change the pos and ang
+		local viewModelPos  = Vector(11, 15,-12)
+		local viewModelAng  = Vector(0,0, 0)
+
+		EyeAng = EyeAng * 1
+		EyeAng:RotateAroundAxis(EyeAng:Right(), 	viewModelAng.x)
+		EyeAng:RotateAroundAxis(EyeAng:Up(), 		viewModelAng.y)
+		EyeAng:RotateAroundAxis(EyeAng:Forward(), viewModelAng.z)
+
+		local Right 	= EyeAng:Right()
+		local Up 		= EyeAng:Up()
+		local Forward 	= EyeAng:Forward()
+
+		EyePos = EyePos + viewModelPos.x * Right
+		EyePos = EyePos + viewModelPos.y * Forward
+		EyePos = EyePos + viewModelPos.z * Up
+	
+		return EyePos, EyeAng
+   	end
+
+end
+-- ##############################################
+-- End of Josh Mate View Model Overide
+-- ##############################################
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Place in front of you", "Weld to surface", true)
+	   self:AddTTT2HUDHelp("Place in front of you", "Weld to a surface", true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

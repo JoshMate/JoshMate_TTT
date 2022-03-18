@@ -75,26 +75,40 @@ function SWEP:SecondaryAttack()
 
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
-    function SWEP:Initialize()
-       self:AddTTT2HUDHelp("Place a CCTV Camera", "Remove your CCTV Camera", true)
-    end
- end
- -- 
-
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
-	self:Remove()
- end
-  
- function SWEP:DrawWorldModel()
-	return
- end
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Place a CCTV camera", "Remove your placed CCTV camera", true)
  
- function SWEP:DrawWorldModelTranslucent()
-	return
- end
- 
- -- END of Josh Mate World Model 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

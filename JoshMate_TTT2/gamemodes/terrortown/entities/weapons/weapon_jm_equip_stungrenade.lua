@@ -48,3 +48,18 @@ SWEP.Primary.DefaultClip   = 3
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_stun_proj"
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- Rest of these are handled in base class
+
+-- Delete on Drop
+function SWEP:OnDrop() 
+	self:Remove()
+ end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################
