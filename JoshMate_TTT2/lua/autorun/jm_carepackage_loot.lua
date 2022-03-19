@@ -54,7 +54,8 @@ local lootTable = {
         JM_CarePackage_Loot_Mega_Godzilla,
         JM_CarePackage_Loot_Man_Hack_Apocalypse,
         JM_CarePackage_Loot_Mass_Teleport,
-        JM_CarePackage_Loot_Dopamine_Button
+        JM_CarePackage_Loot_Dopamine_Button,
+        JM_CarePackage_Loot_Get_Glued
     }
 }
 
