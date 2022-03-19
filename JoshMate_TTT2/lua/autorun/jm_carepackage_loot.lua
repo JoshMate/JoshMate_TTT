@@ -636,6 +636,20 @@ function JM_CarePackage_Loot_Dopamine_Button( activator, caller )
     Loot_SpawnThis(caller,"ent_jm_zloot_dopamine_button")
 end
 
+function JM_CarePackage_Loot_Get_Glued( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Get Glued Fam")
+    JM_Function_Announcement("[Care Package] You're all bad, Get Glued!")
+
+    JM_Function_PlaySound("effect_getglued.wav") 
+
+    for _, ply in ipairs( player.GetAll() ) do
+        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+            JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",ply,caller)
+        end
+    end
+end
+
 -------------------------------------------------
 -- End of Table of Rare Loots
 -------------------------------------------------
