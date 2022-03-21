@@ -57,7 +57,8 @@ local lootTable = {
         JM_CarePackage_Loot_Mega_Godzilla,
         JM_CarePackage_Loot_Man_Hack_Apocalypse,
         JM_CarePackage_Loot_Mass_Teleport,
-        JM_CarePackage_Loot_Dopamine_Button
+        JM_CarePackage_Loot_Dopamine_Button,
+        JM_CarePackage_Manual_Breathing
     }
 }
 -- Master Loot Table that decides on Rare or Normal loot
@@ -278,6 +279,14 @@ function JM_CarePackage_Loot_Mega_Tracker( activator, caller )
             JM_GiveBuffToThisPlayer("jm_buff_megatracker",ply,caller)
         end
     end
+end
+
+function JM_CarePackage_Manual_Breathing( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Manual Breathing")
+    JM_Function_Announcement("[Care Package] Manual Breathing Mode Activated")
+
+    JM_Function_PlaySound("radio_bruh.wav") 
 end
 
 function JM_CarePackage_Loot_Godzilla( activator, caller )
