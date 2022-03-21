@@ -2,4 +2,7 @@
 
 ![ttt_icon](Z_Patchnotes/Misc/TTT2_Icon.png)
 
-A forked version of TTT2 repo, that has been heavily customised and re-purposed for my own TTT Server
+
+A HEAVILY modified fork of the TTT2 Codebase for Gmod written in LUA.
+
+

@@ -55,7 +55,8 @@ local lootTable = {
         JM_CarePackage_Loot_Man_Hack_Apocalypse,
         JM_CarePackage_Loot_Mass_Teleport,
         JM_CarePackage_Loot_Dopamine_Button,
-        JM_CarePackage_Manual_Breathing
+        JM_CarePackage_Manual_Breathing,
+        JM_CarePackage_Loot_Get_Glued
     }
 }
 
@@ -643,6 +644,20 @@ end
 function JM_CarePackage_Loot_Dopamine_Button( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Dopamine Button")
     Loot_SpawnThis(caller,"ent_jm_zloot_dopamine_button")
+end
+
+function JM_CarePackage_Loot_Get_Glued( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Get Glued Fam")
+    JM_Function_Announcement("[Care Package] You're all bad, Get Glued!")
+
+    JM_Function_PlaySound("effect_getglued.wav") 
+
+    for _, ply in ipairs( player.GetAll() ) do
+        if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+            JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",ply,caller)
+        end
+    end
 end
 
 -------------------------------------------------
