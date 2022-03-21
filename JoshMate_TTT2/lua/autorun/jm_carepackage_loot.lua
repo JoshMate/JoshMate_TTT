@@ -56,7 +56,8 @@ local lootTable = {
         JM_CarePackage_Loot_Built_Differently_Radio,
         JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
         JM_CarePackage_Loot_Glue,
-        JM_CarePackage_Loot_Mass_Glue
+        JM_CarePackage_Loot_Mass_Glue,
+        JM_CarePackage_Loot_Manual_Breathing
     }
 }
 
@@ -679,6 +680,12 @@ function JM_CarePackage_Loot_Mass_Glue( activator, caller )
             util.Effect("AntlionGib", effect, true, true)
         end
     end
+end
+
+function JM_CarePackage_Loot_Manual_Breathing( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Manual Breathing")
+    JM_Function_Announcement("[Care Package] Manual Breathing Mode Activated")
+    JM_Function_PlaySound("radio_kingdomlaugh.wav") 
 end
 
 -------------------------------------------------
