@@ -1,8 +1,5 @@
 if engine.ActiveGamemode() ~= "terrortown" then return end
 
-
-local JM_CarePackageLoot_Chance_Rare = 25
-
 local lootTable = {
     normal = {
         JM_CarePackage_Loot_Advnced_Pistol,
@@ -23,8 +20,8 @@ local lootTable = {
         JM_CarePackage_Loot_Medkit_Swep,
         JM_CarePackage_Loot_Slow_Mo_Clock,
         JM_CarePackage_Loot_Become_Detective,
-        JM_CarePackage_Loot_become_traitor,
-        JM_CarePackage_Loot_Pidgeon,
+        JM_CarePackage_Loot_Become_Traitor,
+        JM_CarePackage_Loot_Pigeon,
         JM_CarePackage_Loot_Gus_Radio,
         JM_CarePackage_Loot_Rooty_Tooty,
         JM_CarePackage_Loot_Mega_Tag,
@@ -61,7 +58,13 @@ local lootTable = {
         JM_CarePackage_Manual_Breathing
     }
 }
--- Master Loot Table that decides on Rare or Normal loot
+
+-------------------------------------------------
+-- Master Loot Table (Normal Or Rare)
+-------------------------------------------------
+
+local JM_CarePackageLoot_Chance_Rare = 25
+
 function JM_CarePackage_Use_LootMaster(activator, caller)
 
     if SERVER then
@@ -155,17 +158,17 @@ function JM_CarePackage_Loot_Big_Boy( activator, caller )
     Loot_SpawnThis(caller,"weapon_jm_zloot_explosive_gun")
 end
 
-function JM_CarePackage_Loot_shredder( activator, caller )
+function JM_CarePackage_Loot_Shredder( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Shredder")
     Loot_SpawnThis(caller,"weapon_jm_zloot_shredder")
 end
 
-function JM_CarePackage_Loot_crate_swep( activator, caller )
+function JM_CarePackage_Loot_Crate_Swep( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Crate Swep")
     Loot_SpawnThis(caller,"weapon_jm_zloot_placer_crate")
 end
 
-function JM_CarePackage_Loot_medkit_swep( activator, caller )
+function JM_CarePackage_Loot_Medkit_Swep( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Medkit Swep")
     Loot_SpawnThis(caller,"weapon_jm_zloot_placer_medkit")
 end
@@ -183,12 +186,14 @@ function JM_CarePackage_Loot_Become_Detective( activator, caller )
     else
         JM_Function_PrintChat(activator, "Care Package","Role Change Blue (You are now a Detective!)")
         activator:SetRole(ROLE_DETECTIVE)
+        activator:SetModel( "models/player/police.mdl" )
+        activator:SetColor(Color( 0, 50, 255 ))
         SendFullStateUpdate()
         activator:AddCredits(2)
     end
 end
 
-function JM_CarePackage_Loot_become_traitor( activator, caller )
+function JM_CarePackage_Loot_Become_Traitor( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
     if(activator:IsTraitor() or activator:IsDetective()) then
         JM_Function_PrintChat(activator, "Care Package","Role Change Red (+1 Credit)")
@@ -201,9 +206,9 @@ function JM_CarePackage_Loot_become_traitor( activator, caller )
     end
 end
 
-function JM_CarePackage_Loot_Pidgeon( activator, caller )
+function JM_CarePackage_Loot_Pigeon( activator, caller )
     Loot_SpawnThis(caller,"npc_pigeon")
-    JM_Function_PrintChat(activator, "Care Package","Extra Credit (+1 Credits)")
+    JM_Function_PrintChat(activator, "Care Package","Role Change Grey (+1 Credits)")
     activator:AddCredits(1)
 end
 
@@ -431,7 +436,7 @@ function JM_CarePackage_Loot_Best_Friend_Apocalypse( activator, caller )
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_rollermine"
     local NumberToSpawn = 25
-    JM_GameMode_Function_SpawnThisThingRandomly(ThingToSpawn, NumberToSpawn)
+    JM_Function_SpawnThisThingInRandomPlaces(ThingToSpawn, NumberToSpawn)
     
 end
 
@@ -484,7 +489,7 @@ function JM_CarePackage_Loot_Antlion_Apocalypse( activator, caller )
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_antlion"
     local NumberToSpawn = 25
-    JM_GameMode_Function_SpawnThisThingRandomly(ThingToSpawn, NumberToSpawn)
+    JM_Function_SpawnThisThingInRandomPlaces(ThingToSpawn, NumberToSpawn)
 
 end
 
@@ -573,7 +578,7 @@ function JM_CarePackage_Loot_Man_Hack_Apocalypse( activator, caller )
     -- Spawn this thing randomly across the map
     local ThingToSpawn = "npc_manhack"
     local NumberToSpawn = 25
-    JM_GameMode_Function_SpawnThisThingRandomly(ThingToSpawn, NumberToSpawn)
+    JM_Function_SpawnThisThingInRandomPlaces(ThingToSpawn, NumberToSpawn)
     
 end
 

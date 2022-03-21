@@ -14,9 +14,9 @@ SWEP.Weight					= 5
 SWEP.Slot			    	= 7
 SWEP.ViewModel 				= "models/props/de_nuke/clock.mdl"
 SWEP.WorldModel				= "models/props/de_inferno/clock01.mdl"
-SWEP.HoldType              = "grenade"
-SWEP.HoldReady             = "grenade"
-SWEP.HoldNormal            = "grenade"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 SWEP.UseHands 				= false
 SWEP.AllowDrop 				= true
 
@@ -70,19 +70,36 @@ end
 function SWEP:SecondaryAttack()
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Slow Down Time", nil, true)
+	   self:AddTTT2HUDHelp("Slow down time", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

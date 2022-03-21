@@ -47,7 +47,7 @@ function ENT:BountyHunter_Select_NewTarget()
 
 	-- Build a list of possible targets
 	for _,pl in pairs(player.GetAll()) do
-		if pl:IsValid() and pl:Alive() and not pl:IsTraitor() then 
+		if pl:IsValid() and pl:Alive() and not pl:IsSpec() and not pl:IsTraitor() then 
 			table.insert(tableOfPossibleTargets, pl)
 		end
 	end

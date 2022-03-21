@@ -126,7 +126,7 @@ function JM_GameMode_DefuseTheBombs_Start()
 	JM_Function_PlaySound("gamemode/bomb_started.wav")
 
 	-- Spawn the Objective Ents
-	JM_GameMode_Function_SpawnThisThingRandomly("ent_jm_objective_02_bomb_ent", NumberOfBombsToSpawn)
+	JM_Function_SpawnThisThingInRandomPlaces("ent_jm_objective_02_bomb_ent", NumberOfBombsToSpawn)
 
 
 end

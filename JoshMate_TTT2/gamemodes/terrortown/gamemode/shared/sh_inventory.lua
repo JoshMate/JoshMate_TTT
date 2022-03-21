@@ -7,7 +7,7 @@ local maxPrimarySlots = CreateConVar("ttt2_max_primary_slots", "1", {FCVAR_NOTIF
 local maxNadeSlots = CreateConVar("ttt2_max_nade_slots", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum amount of grenades, a player can carry (-1 = infinite)")
 local maxCarrySlots = CreateConVar("ttt2_max_carry_slots", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum amount of carry tools, a player can carry (-1 = infinite)")
 local maxUnarmedSlots = CreateConVar("ttt2_max_unarmed_slots", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum amount of unarmed slots, a player can have (-1 = infinite)")
-local maxSpecialSlots = CreateConVar("ttt2_max_special_slots", "2", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum amount of special weapons, a player can carry (-1 = infinite)")
+local maxSpecialSlots = CreateConVar("ttt2_max_special_slots", "3", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum amount of special weapons, a player can carry (-1 = infinite)")
 local maxExtraSlots = CreateConVar("ttt2_max_extra_slots", "-1", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Maximum amount of extra weapons, a player can carry (-1 = infinite)")
 
 hook.Add("TTT2SyncGlobals", "AddInventoryGlobals", function()
@@ -19,7 +19,7 @@ hook.Add("TTT2SyncGlobals", "AddInventoryGlobals", function()
 	SetGlobalInt(maxUnarmedSlots:GetName(), maxUnarmedSlots:GetInt())
 	SetGlobalInt(maxSpecialSlots:GetName(), maxSpecialSlots:GetInt())
 	SetGlobalInt(maxExtraSlots:GetName(), maxExtraSlots:GetInt())
-	SetGlobalInt("ttt2_max_class_slots", 2)
+	SetGlobalInt("ttt2_max_class_slots", 3)
 end)
 
 cvars.AddChangeCallback(maxMeleeSlots:GetName(), function(name, old, new)

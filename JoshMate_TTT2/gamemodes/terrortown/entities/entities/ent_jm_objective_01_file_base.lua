@@ -34,7 +34,7 @@ function JM_GameMode_ProtectTheFiles_Start()
     JM_Function_PlaySound("gamemode/file_start.wav")
 
 	-- Spawn the Objective Ents
-    JM_GameMode_Function_SpawnThisThingRandomly("ent_jm_objective_01_file_ent", NumberOfThingsToSpawn)
+    JM_Function_SpawnThisThingInRandomPlaces("ent_jm_objective_01_file_ent", NumberOfThingsToSpawn)
 
 
 end

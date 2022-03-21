@@ -130,19 +130,31 @@ function SWEP:Reload()
    return false
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Launch an Inferno Bomb", nil, true)
+	   self:AddTTT2HUDHelp("Launcher an Inferno Cluster Bomb", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

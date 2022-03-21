@@ -106,3 +106,66 @@ function JM_Function_GiveHitMarkerToPlayer(playerRecievingHitMarker, damageDealt
 	-- End Of
 
 end
+
+
+-----------------------------------------------
+-- Spawn ents randomly (Uses Care Package and Player Spawns)
+-----------------------------------------------
+
+function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
+
+    local NumberToSpawn = numberOfTimes
+    local possibleSpawns = ents.FindByClass( "ent_jm_carepackage_spawn" )
+    local possibleSpawnsPlayer = ents.FindByClass( "info_player_start" )
+    
+    for i=1,NumberToSpawn do 
+
+        local randomChoice = math.random( 0, 100 )
+
+        -- 5% chance to use a player spawn
+        if randomChoice > 5 then
+
+            if #possibleSpawns > 0 then
+                local randomChoice = math.random(1, #possibleSpawns)
+                local spawn = possibleSpawns[randomChoice]
+                table.remove( possibleSpawns, randomChoice )
+                
+                local ent = ents.Create(thingToSpawn)
+                ent:SetPos(spawn:GetPos() + Vector(0, 0, 14))
+                ent:Spawn()  
+                ent.gmEntIndex = i
+            else
+
+                if #possibleSpawnsPlayer > 0 then
+                    local randomChoice = math.random(1, #possibleSpawnsPlayer)
+                    local spawn = possibleSpawnsPlayer[randomChoice]
+                    table.remove( possibleSpawnsPlayer, randomChoice )
+                    
+                    local ent = ents.Create(thingToSpawn)
+                    ent:SetPos(spawn:GetPos() + Vector(0, 0, 6))
+                    ent:Spawn()  
+                    ent.gmEntIndex = i
+                end
+
+            end
+
+        else
+
+            if #possibleSpawnsPlayer > 0 then
+                local randomChoice = math.random(1, #possibleSpawnsPlayer)
+                local spawn = possibleSpawnsPlayer[randomChoice]
+                table.remove( possibleSpawnsPlayer, randomChoice )
+                
+                local ent = ents.Create(thingToSpawn)
+                ent:SetPos(spawn:GetPos() + Vector(0, 0, 6))
+                ent:Spawn()  
+                ent.gmEntIndex = i
+            end
+
+        end
+
+        
+
+    end
+
+end

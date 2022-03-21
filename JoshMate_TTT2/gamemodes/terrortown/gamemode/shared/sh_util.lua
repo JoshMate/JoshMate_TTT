@@ -497,7 +497,8 @@ if CLIENT then
 	end
 
 	local karmacolors = {
-		top         = Color(   80, 255,    255),
+		top         = Color(   90, 255,    255),
+		vgood       = Color(   60, 255,    255),
 		good        = Color(   80, 255,    100),
 		bad         = Color(   255, 255,    80),
 		terrible    = Color(   255, 150,    80), 
@@ -515,9 +516,12 @@ if CLIENT then
 		local color = karmacolors.bottom
 		local text = "Evil"
 
-		if karma >= 1250 then
+		if karma >= 1300 then
 			color = karmacolors.top
-			text = "Perfect"
+			text = "Godly"
+		elseif karma >= 1200 then
+			color = karmacolors.vgood
+			text = "Pure"
 		elseif karma >= 1100 then
 			color = karmacolors.good
 			text = "Very Good"

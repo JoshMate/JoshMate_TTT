@@ -87,20 +87,27 @@ function SWEP:SecondaryAttack()
   return
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("DELETE EVERYTHING INFRONT OF YOU", nil, true)
+	   self:AddTTT2HUDHelp("Delete EVERYTHING in front of you", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      self:PreDrop()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
--- 
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

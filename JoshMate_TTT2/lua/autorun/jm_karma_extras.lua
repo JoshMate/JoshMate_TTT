@@ -9,7 +9,7 @@ local JM_Karma_Slay_Minimum             = 0
 local JM_Karma_Slay_Threshold           = 500
 local JM_Karma_Heal_Max                 = 1000
 local JM_Karma_Heal_To_Max              = 100
-local JM_Karma_Heal_Bonus               = 1250
+local JM_Karma_Heal_Bonus               = 1300
 local JM_Karma_Heal_To_Bonus            = 10
 
 util.AddNetworkString("JM_KarmaSlayMessage")
@@ -95,40 +95,35 @@ hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
         local ply = plys[i]
         if not ply:IsValid() then continue end
 
-        -- Set Detective Player Model
+        -- Set Player model and Colour
+
+        ply:SetColor(Color( 200, 200, 200 ))
 
         if(ply:IsDetective()) then
             ply:SetModel( "models/player/police.mdl" )
+            ply:SetColor(Color( 0, 50, 255 ))
         end
 
         -- Karma Bonus HP
         local JM_Karma_BonusHP_Mult = 0.1
 
-        if ply:GetBaseKarma() > 1000 and ply:GetBaseKarma() < 1250 then 
+        if ply:GetBaseKarma() > 1000 then 
             local BonusHPFromKarama = math.ceil(((ply:GetBaseKarma() - 1000) * JM_Karma_BonusHP_Mult))
             local FinalHP = 100 + BonusHPFromKarama
-            FinalHP = math.Clamp(FinalHP, 100, 125)
+            FinalHP = math.Clamp(FinalHP, 100, 130)
             JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Bonus Health (+" .. tostring(BonusHPFromKarama) .. " HP)")
             ply:SetMaxHealth(FinalHP)
             ply:SetHealth(FinalHP)
         end
-
-        if ply:GetBaseKarma() == 1250 then 
-            local BonusHPFromKarama = 30
-            local FinalHP = 100 + BonusHPFromKarama
-            JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Bonus Health (+" .. tostring(BonusHPFromKarama) .. " HP)")
-            ply:SetMaxHealth(FinalHP)
-        ply:SetHealth(FinalHP)
-        end
     
         -- Karma Bonus Credit 
-        if ply:GetBaseKarma() == 1250 and ply:IsDetective() or ply:IsTraitor() then 
+        if ply:GetBaseKarma() == 1300 and (ply:IsDetective() or ply:IsTraitor()) then 
             ply:AddCredits(1)
             JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Bonus Credit (+1 Credit)")
         end
 
         -- Karma Good Boy Buff
-        if ply:GetBaseKarma() == 1250 then 
+        if ply:GetBaseKarma() == 1300 then 
             JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff",ply)
             JM_GiveBuffToThisPlayer("jm_buff_karmabuff",ply,ply)
             JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Good Boy Buff (+10% Movement Speed)")

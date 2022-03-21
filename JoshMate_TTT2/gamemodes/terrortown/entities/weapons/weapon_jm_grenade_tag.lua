@@ -32,3 +32,37 @@ SWEP.Primary.DefaultClip   = 1
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_tag_proj"
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Full Throw", "Half Throw", true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

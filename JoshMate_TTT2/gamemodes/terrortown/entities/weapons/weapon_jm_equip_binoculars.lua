@@ -39,7 +39,7 @@ SWEP.Secondary.Automatic = true
 SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.Delay = 0.2
 
-SWEP.Kind = WEAPON_CLASS
+SWEP.Kind = WEAPON_ROLE
 SWEP.CanBuy = {} -- only detectives can buy
 SWEP.WeaponID = AMMO_BINOCULARS
 SWEP.InLoadoutFor           = {ROLE_DETECTIVE}
