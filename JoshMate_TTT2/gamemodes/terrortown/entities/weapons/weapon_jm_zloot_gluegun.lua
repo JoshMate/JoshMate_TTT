@@ -24,8 +24,8 @@ SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 2
-SWEP.Primary.SoundLevel    = 40
+SWEP.DeploySpeed           = 1
+SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
@@ -38,7 +38,7 @@ SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_famas.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_rif_famas.mdl")
 
 
-local glueGunRange         = 1200
+local glueGunRange         = 3600
 
 function SWEP:HitEffectsInit(ent)
    if not IsValid(ent) then return end
@@ -68,7 +68,6 @@ function SWEP:ApplyEffect(ent, weaponOwner)
 
       -- Set Status and print Message
       JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Glued!" )
-      JM_RemoveBuffFromThisPlayer("jm_buff_gluegrenade",ent)
       JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",ent,self:GetOwner())
       -- End Of
    end
@@ -115,3 +114,28 @@ function SWEP:PrimaryAttack()
    -- #########
 
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Shoot", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

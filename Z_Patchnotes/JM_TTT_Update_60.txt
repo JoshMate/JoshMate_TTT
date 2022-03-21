@@ -47,8 +47,7 @@ Josh Mate TTT Update 60 - Patch Notes
 
 - Changed: Gus, Built Differently, and bird flew in radio have been moved to Rare Loots
 - Changed: Made the Innocents player model colour slightly brighter
-- Changed: Dopamine Button now has a thicker glowing outline
-- Changed: Slightly Increased chance of Game modes starting
+- Changed: Tweaked the game mode generation chances to be more consistent 
 
 - Fixed: Cannibal now tells you the correct HP values in its HUD messages
 

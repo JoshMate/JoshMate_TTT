@@ -683,8 +683,8 @@ function JM_CarePackage_Loot_Mass_Glue( activator, caller )
 end
 
 function JM_CarePackage_Loot_Manual_Breathing( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Manual Breathing")
-    JM_Function_Announcement("[Care Package] Manual Breathing Mode Activated")
+    JM_Function_PrintChat(activator, "Care Package","Manual Breathing Mode")
+    JM_Function_Announcement("[Care Package] You are all now in Manual Breathing Mode!")
     JM_Function_PlaySound("radio_kingdomlaugh.wav") 
 end
 
