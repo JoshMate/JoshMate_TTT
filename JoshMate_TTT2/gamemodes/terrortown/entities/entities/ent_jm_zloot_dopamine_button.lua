@@ -30,11 +30,15 @@ function ENT:Initialize()
 		JM_Function_Announcement("[Dopamine Button] Come get your dopamine here!")
 	end
 
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_button",self:GetPos(),0,true)
+
 end
 
+local JM_CarePackage_Halo_Colour = Color(150,0,255,255)
 
 hook.Add( "PreDrawHalos", "Halos_dopamine_button", function()
-    halo.Add( ents.FindByClass( "ent_jm_zloot_dopamine_button*" ), Color(143, 19, 70, 255), 5, 5, 2, true, true )
+    halo.Add( ents.FindByClass( "ent_jm_zloot_dopamine_button*" ), JM_CarePackage_Halo_Colour, 5, 5, 3, true, true )
  
 end )
 
@@ -77,8 +81,10 @@ function ENT:Use( activator, caller )
 
 			else
 				JM_Function_PlaySound("dopamine_button_live.mp3")
-				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit)")
+				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit) & (+25 Max HP)")
 				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine")
+				activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
+				activator:SetHealth(activator:Health() + 25) 
 				activator:AddCredits(1)
 			end
 
@@ -87,5 +93,12 @@ function ENT:Use( activator, caller )
 			JM_Function_PrintChat(activator, "Care Package","Your fate has already been decided")
 		end
 	end
+end
+
+function ENT:OnRemove()
+
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
+
 end
 

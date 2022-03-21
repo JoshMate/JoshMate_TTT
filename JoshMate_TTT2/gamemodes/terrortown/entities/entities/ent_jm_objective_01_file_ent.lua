@@ -26,9 +26,8 @@ function ENT:Initialize()
 		self:SetUseType(SIMPLE_USE)
 	end
 
-	-- UI HUD ICON
-	if SERVER then self:SendWarn(true) end 
-	-- END of 
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_objective_file",self:GetPos(),0,false)
 end
 
 function ENT:Use( activator, caller )
@@ -76,7 +75,8 @@ function ENT:TakesHit()
 		local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file_ent" )
 		local numberOfFilesLeft = (#listOfObjectives - 2)
 		JM_Function_PrintChat_All("Protect The Files", "A File has been destroyed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
-		self:SendWarn(false) 
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
 
 		if #listOfObjectives <= 2 then
 			JM_Function_PrintChat_All("Protect The Files", "The Files have been Destroyed! Traitors Win...")
@@ -87,24 +87,9 @@ function ENT:TakesHit()
 end
 
 function ENT:OnRemove()
-	if SERVER then self:SendWarn(false) end
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 end
-
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_ObjectiveWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-		end
-
-		net.Broadcast()
-	end
-end
-
 
 -- ESP Halo effect
 

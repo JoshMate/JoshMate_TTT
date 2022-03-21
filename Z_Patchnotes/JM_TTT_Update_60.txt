@@ -4,30 +4,52 @@ Josh Mate TTT Update 60 - Patch Notes
 #### New Stuff
 ###################################
 
-// TODO Speed steal gun
-// TODO Paranoia (Fake Sound effects)
-// TODO Mimic (Prop Hunt Item)
-// TODO Fix Print Chats that aren't updated to new JM
-// TODO Cannibal prints wrong HP gain
-// TODO Care package rewards can only be had once a round
-// TODO MASS GET GLUED loot
+[Map Voting]
+- Random Map selection is now built into the game and happens automatically
+- Every other map is randomly selected, the other is voted on
 
-
-[Loot: Glue Gun] (Vinny's first code!)
+[Loot: Glue Gun] (Vinny's First Code!)
 - A new common Care Package Loot
 - A gun that glues people who you shoot
 - Deals no damage so is karma free
+
+[Loot: Manual Breathing] (Vinny)
+- A new Rare Care Package Loot
+- Put you all into manual breathing mode
+
+[Loot: Mass Glue] (Ali's First Code!)
+- A new rare Care Package Loot
+- Everyone gets glued
+
+[Loot: Glue]
+- A new rare Care Package Loot
+- You get glued
 
 ###################################
 #### Changes
 ###################################
 
-[Player Models]
-- 
+[HUD Warning Icons]
+- Completely re-wrote the way HUD Warning icons are drawn on screen
+- Spectators can now see ALL icons regardless of their team when they were alive (C4s, soaps etc.)
+- Reduced the size of the radar scan player icons to de-clutter the screen
+- New Hud Icon for: Beartrap
+- New Hud Icon for: Soap
+- New Hud Icon for: Objective Files
+- New Hud Icon for: Objective Defuse Bombs
+- New Hud Icon for: C4
+- New Hud Icon for: Dopamine Button
 
 
 ###################################
-##### Fixes & Small Changes
+##### Small Changes - Fixes - Code 
 ###################################
 
-- 
+- Changed: Gus, Built Differently, and bird flew in radio have been moved to Rare Loots
+- Changed: Made the Innocents player model colour slightly brighter
+- Changed: Dopamine Button now has a thicker glowing outline
+- Changed: Slightly Increased chance of Game modes starting
+
+- Fixed: Cannibal now tells you the correct HP values in its HUD messages
+
+- Code: Refactored Game mode selection process to use the same Table system as Care Packages

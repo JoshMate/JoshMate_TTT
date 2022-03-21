@@ -509,28 +509,10 @@ end
 
 if SERVER then
 	---
-	-- Inform traitors about us
-	-- @param boolean armed
-	-- @realm server
-	function ENT:SendWarn(armed)
-		net.Start("TTT_C4Warn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-			net.WriteFloat(self:GetExplodeTime())
-			net.WriteString(self:GetOwner():GetTeam())
-		end
-
-		--net.Send(GetTeamFilter(self:GetOwner():GetTeam(), true))
-		net.Broadcast()
-	end
-
-	---
 	-- @realm server
 	function ENT:OnRemove()
-		self:SendWarn(false)
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
 	end
 
 	---
@@ -548,7 +530,8 @@ if SERVER then
 		self:SetExplodeTime(0)
 		self:SetArmed(false)
 		self:WeldToGround(false)
-		self:SendWarn(false)
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
 
 		self.DisarmCausedExplosion = false
 	end
@@ -619,8 +602,8 @@ if SERVER then
 			end
 		end
 
-		-- send indicator to traitors
-		self:SendWarn(true)
+		-- Josh Mate New Warning Icon Code
+		JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_c4",self:GetPos(),self:GetExplodeTime(),true)
 	end
 
 	---

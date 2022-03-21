@@ -117,7 +117,7 @@ function SWEP:PrimaryAttack()
          JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't eat that with Cannibal..." )
       end
       if ate == true then
-         JM_Function_PrintChat(self:GetOwner(), "Equipment","Body Eaten (+25 HP)" )
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","Body Eaten (" .. tostring(Cannibal_Eat_MaxHP) .. ")" )
       end
    end
 

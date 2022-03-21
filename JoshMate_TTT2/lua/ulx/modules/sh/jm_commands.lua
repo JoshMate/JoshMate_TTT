@@ -413,7 +413,7 @@ cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
 
 local function JM_ULX_MapNextRandom()
 
-	JM_Function_PrintChat_All("Map", "The next map will be random!")
+	JM_Function_PrintChat_All("Map", "The next map will be random! (Manual)")
 	JM_Global_MapVote_NextWillBeRandom = true
 
 end

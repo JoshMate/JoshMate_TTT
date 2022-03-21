@@ -29,7 +29,8 @@ function ENT:Initialize()
 		self:GetPhysicsObject():EnableMotion(true)
 	end
 
-	if SERVER then self:SendWarn(true) end 
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true, self:EntIndex(), "icon_warn_carepackage", self:GetPos(), 0, false)
 
 end
 
@@ -80,21 +81,8 @@ hook.Add( "PreDrawHalos", "Halos_CarePackage", function()
 end )
 
 
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_LootWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
 
-		if armed then
-			net.WriteVector(self:GetPos())
-		end
-
-		net.Broadcast()
-	end
-
-	function ENT:OnRemove()
-		self:SendWarn(false)
-	end
+function ENT:OnRemove()
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 end

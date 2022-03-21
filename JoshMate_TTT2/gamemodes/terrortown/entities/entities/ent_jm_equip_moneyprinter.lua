@@ -37,9 +37,8 @@ function ENT:Initialize()
 		JM_Function_PrintChat(self:GetOwner(), "Equipment", "Money Printing in " .. tostring(self.Print_Time_Delay) .. " Seconds")
 	end
 
-	-- UI HUD ICON
-	if SERVER then self:SendWarn(true) end 
-	-- END of 
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_money",self:GetPos(),0,false)
 end
 
 function ENT:PrintMoney()
@@ -82,7 +81,8 @@ end
 
 function ENT:OnRemove()
 
-	if SERVER then self:SendWarn(false) end
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 
 	if IsValid(self:GetOwner()) and self:GetOwner():Alive() and SERVER then
 		JM_Function_PrintChat(self:GetOwner(), "Equipment", "Your Money Printer has been destroyed!")
@@ -107,17 +107,4 @@ function ENT:Think()
 	end
 end
 
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_MoneyWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
 
-		if armed then
-			net.WriteVector(self:GetPos())
-		end
-
-		net.Broadcast()
-	end
-end

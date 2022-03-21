@@ -8,6 +8,9 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 -- #############################################
 
 function JM_GiveBuffToThisPlayer(nameOfBuff, targetPlayer, buffGiver)
+
+    -- Remove it first before giving them a new one to prevent non-stacking
+    JM_RemoveBuffFromThisPlayer(nameOfBuff, targetPlayer)
     
     local timeOfBuffCreation = CurTime()
     local locationOfBuffCreation = Vector( 0, 0, 0 )

@@ -26,9 +26,8 @@ function ENT:Initialize()
 		self:SetUseType(SIMPLE_USE)
 	end
 
-	-- UI HUD ICON
-	if SERVER then self:SendWarn(true) end 
-	-- END of 
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_objective_bomb",self:GetPos(),0,false)
 end
 
 function ENT:Use( activator, caller )
@@ -75,7 +74,8 @@ function ENT:TakesHit()
 		local listOfObjectives = ents.FindByClass( "ent_jm_objective_02_bomb_ent" )
 		local numberOfFilesLeft = (#listOfObjectives - 1)
 		JM_Function_PrintChat_All("Defuse The Bombs", "A Bomb has been defused! (" .. tostring(numberOfFilesLeft) .. " Left!)")
-		self:SendWarn(false) 
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
 
 		if numberOfFilesLeft <= 0 then
 
@@ -88,23 +88,9 @@ end
 
 function ENT:OnRemove()
 
-	if SERVER then self:SendWarn(false) end
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 
-end
-
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_ObjectiveWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-		end
-
-		net.Broadcast()
-	end
 end
 
 

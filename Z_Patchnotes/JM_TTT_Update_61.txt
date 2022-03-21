@@ -1,0 +1,22 @@
+###################################
+Josh Mate TTT Update 60 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+// TODO Paranoia (Fake Sound effects)
+// TODO Fix Print Chats that aren't updated to new JM
+
+[Map Voting]
+- Random
+
+###################################
+#### Changes
+###################################
+
+
+###################################
+##### Small Changes - Fixes - Code 
+###################################
+
+

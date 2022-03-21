@@ -43,8 +43,8 @@ function ENT:Initialize()
 	self:SetColor(JM_Soap_Colour_Active) 
 	self:DrawShadow(false)
 
-	-- Warning
-	if SERVER then self:SendWarn(true) end
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_soap",self:GetPos(),0,true)
 
 end
 
@@ -57,7 +57,8 @@ function ENT:Use( activator, caller )
 		if activator:IsTerror() then
 			JM_Function_PrintChat(self.Owner, "Equipment","Your Soap has been destroyed!")
             self:Effect_Sparks()
-            self:SendWarn(false)
+            -- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+			JM_Function_SendHUDWarning(false,self:EntIndex())
 			self:Remove()
 		end
 		
@@ -113,7 +114,8 @@ function ENT:Touch(toucher)
 
         toucher:EmitSound(JM_Soap_Sound_HitPlayer);
         self:Effect_Sparks()
-        self:SendWarn(false)
+        -- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
         self:Remove()
 	
 	end
@@ -136,22 +138,7 @@ function ENT:Effect_Sparks()
 
 end
 
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_HazardWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-			net.WriteString(TEAM_TRAITOR)
-		end
-
-		net.Broadcast()
-	end
-
-	function ENT:OnRemove()
-		self:SendWarn(false)
-	end
+function ENT:OnRemove()
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 end

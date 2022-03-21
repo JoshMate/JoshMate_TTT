@@ -18,8 +18,21 @@ end)
 
 JM_Global_MapVote_NextWillBeRandom = false
 
+local randomMapCountCurrent     = 0
+local randomMapCountMax         = 1
+
+
 function MapVote:Start(voteTime)
     if self.runs then return end
+
+    -- Handle Random Map Selection
+    if randomMapCountCurrent >= randomMapCountMax then
+        JM_Global_MapVote_NextWillBeRandom = true
+        randomMapCountCurrent = 0
+    else
+        JM_Global_MapVote_NextWillBeRandom = false
+        randomMapCountCurrent = randomMapCountCurrent + 1
+    end
 
     self:Init() -- init server MapVote
 

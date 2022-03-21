@@ -110,8 +110,3 @@ end
 function ENT:Touch(toucher)
 
 end
-
---- Josh Mate Hud Warning
-if SERVER then
-
-end

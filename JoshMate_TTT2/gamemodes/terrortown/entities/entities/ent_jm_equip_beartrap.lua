@@ -45,7 +45,9 @@ function ENT:Initialize()
 	-- JoshMate Changed
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
 	self:SetColor( Color( 255, 255, 255, 40 ) ) 
-	self:SendWarn(true)
+	
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_beartrap",self:GetPos(),0,true)
 end
 
 local function DoBleed(ent)
@@ -186,28 +188,14 @@ function ENT:Use(act)
 
 	self:EmitSound("0_main_click.wav")
 	self:HitEffectsInit(self)
-	self:SendWarn(false)
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 	self:Remove()
 
 end
 
---- Josh Mate Hud Warning
-if SERVER then
-	function ENT:SendWarn(armed)
-		net.Start("TTT_HazardWarn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-			net.WriteString(TEAM_TRAITOR)
-		end
-
-		net.Broadcast()
-	end
-
-	function ENT:OnRemove()
-		self:SendWarn(false)
-	end
+function ENT:OnRemove()
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 end
 

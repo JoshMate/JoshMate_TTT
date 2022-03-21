@@ -5,9 +5,10 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 if CLIENT then return end
 
-local iRandomChance_Max = 5
+local iRandomChance_Max = 7
 local iRandomChance_Current = iRandomChance_Max
-local iRandomChance_inc = 1
+local iRandomChance_inc = 2
+
 
 function JM_GameMode_Function_Main()
 
@@ -16,11 +17,15 @@ function JM_GameMode_Function_Main()
     
     if iRandomChance == 1 then
 
-        local tableOfGamemodes = {}
-        table.insert(tableOfGamemodes, "ProtectTheFiles")
-        table.insert(tableOfGamemodes, "DefuseTheBombs")
-        table.insert(tableOfGamemodes, "DefuseTheBombs")
-        table.insert(tableOfGamemodes, "BountyHunter")
+        -- Table of Possible Game Modes
+        local tableOfGamemodes = {
+
+            JM_GameMode_ProtectTheFiles_Init,
+            JM_GameMode_BountyHunter_Init,
+            JM_GameMode_DefuseTheBombs_Init,
+            JM_GameMode_DefuseTheBombs_Init
+        }
+
 
         if SERVER then print("[GameModes] Gamemode: Yes! Chance: " .. tostring(iRandomChance_Current)) end
 
@@ -28,18 +33,10 @@ function JM_GameMode_Function_Main()
         iRandomChance_Current = iRandomChance_Max
     
         -- Randomly select from the table of gamemodes
-        selectedGameMode = tableOfGamemodes[math.random( #tableOfGamemodes )]
 
-        -- Protect the Files
-        if selectedGameMode == "ProtectTheFiles" then JM_GameMode_ProtectTheFiles_Init() end
+        local iRandomRoll = math.random(1, table.getn(tableOfGamemodes))
 
-        -- Defuse the Bomb
-        if selectedGameMode == "DefuseTheBombs" then JM_GameMode_DefuseTheBombs_Init() end
-
-        -- Bounty Hunter
-        if selectedGameMode == "BountyHunter" then JM_GameMode_BountyHunter_Init() end
-
-        
+        tableOfGamemodes[iRandomRoll]()        
 
     else
 
@@ -81,7 +78,7 @@ end
 function JM_GameMode_BountyHunter_Init()
 
     -- Debug
-    if SERVER then print("[GameModes] Gamemode: Bount Hunter") end
+    if SERVER then print("[GameModes] Gamemode: Bounty Hunter") end
 
     -- Spawn the Gamemode Handler Object
     local GameModeHandlerObject = ents.Create("ent_jm_objective_03_bounty_base")

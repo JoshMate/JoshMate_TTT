@@ -97,7 +97,7 @@ hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
 
         -- Set Player model and Colour
 
-        ply:SetColor(Color( 200, 200, 200 ))
+        ply:SetColor(Color( 235, 235, 235 ))
 
         if(ply:IsDetective()) then
             ply:SetModel( "models/player/police.mdl" )

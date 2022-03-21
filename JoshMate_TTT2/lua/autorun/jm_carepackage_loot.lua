@@ -22,14 +22,11 @@ local lootTable = {
         JM_CarePackage_Loot_Become_Detective,
         JM_CarePackage_Loot_Become_Traitor,
         JM_CarePackage_Loot_Pigeon,
-        JM_CarePackage_Loot_Gus_Radio,
         JM_CarePackage_Loot_Rooty_Tooty,
         JM_CarePackage_Loot_Mega_Tag,
         JM_CarePackage_Loot_Mega_Glue,
         JM_CarePackage_Loot_Mega_Jump,
         JM_CarePackage_Loot_Vampire_Pistols,
-        JM_CarePackage_Loot_Built_Differently_Radio,
-        JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
         JM_CarePackage_Loot_Glue_Gun
     },
     rare = {
@@ -55,7 +52,11 @@ local lootTable = {
         JM_CarePackage_Loot_Man_Hack_Apocalypse,
         JM_CarePackage_Loot_Mass_Teleport,
         JM_CarePackage_Loot_Dopamine_Button,
-        JM_CarePackage_Loot_Get_Glued
+        JM_CarePackage_Loot_Gus_Radio,
+        JM_CarePackage_Loot_Built_Differently_Radio,
+        JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
+        JM_CarePackage_Loot_Glue,
+        JM_CarePackage_Loot_Mass_Glue
     }
 }
 
@@ -637,16 +638,45 @@ function JM_CarePackage_Loot_Dopamine_Button( activator, caller )
     Loot_SpawnThis(caller,"ent_jm_zloot_dopamine_button")
 end
 
-function JM_CarePackage_Loot_Get_Glued( activator, caller )
+function JM_CarePackage_Loot_Glue( activator, caller )
 
-    JM_Function_PrintChat(activator, "Care Package","Get Glued Fam")
-    JM_Function_Announcement("[Care Package] You're all bad, Get Glued!")
+    JM_Function_PrintChat(activator, "Care Package","Glue")
+    if SERVER then activator:EmitSound(Sound("effect_getglued.wav")) end
 
+    if (activator:IsValid() and activator:IsTerror() and activator:Alive()) then
+
+        -- Add the Buff
+        JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",activator,caller)
+
+        -- Do the Glue Effects
+        local effect = EffectData()
+        local ePos = activator:GetPos()
+        if activator:IsPlayer() then ePos:Add(Vector(0,0,40))end
+        effect:SetStart(ePos)
+        effect:SetOrigin(ePos)
+        util.Effect("AntlionGib", effect, true, true)
+    end
+end
+
+function JM_CarePackage_Loot_Mass_Glue( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Mass Glue")
+    JM_Function_Announcement("[Care Package] Mass Glue")
     JM_Function_PlaySound("effect_getglued.wav") 
 
     for _, ply in ipairs( player.GetAll() ) do
         if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
+
+            -- Add the Buff
             JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",ply,caller)
+
+            -- Do the Glue Effects
+            local effect = EffectData()
+            local ePos = ply:GetPos()
+            if ply:IsPlayer() then ePos:Add(Vector(0,0,40))end
+            effect:SetStart(ePos)
+            effect:SetOrigin(ePos)
+            util.Effect("AntlionGib", effect, true, true)
         end
     end
 end

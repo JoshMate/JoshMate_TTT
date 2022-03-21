@@ -169,3 +169,43 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
     end
 
 end
+
+-- ##############################################
+-- Josh Mate New Warning Icon Code
+-- ##############################################
+
+function JM_Function_SendHUDWarning(isEnabled, entIndex, strIconPath, vecEntPos, timeExpire, canOnlyTraitorsSee)
+	if SERVER then
+		-- Start the Network Message Process
+		net.Start("JM_NET_CustomHudWarning") 
+
+		-- Send the current status of this ent
+		net.WriteBool(isEnabled)
+
+		-- Send this ents ID
+		net.WriteUInt(entIndex, 16)
+
+		print("Send - canOnlyTraitorsSee = " ..  tostring(canOnlyTraitorsSee))
+
+		-- If disabled, don't bother sending all this too
+		if isEnabled then
+
+			print("Send 2 - canOnlyTraitorsSee = " ..  tostring(canOnlyTraitorsSee))
+			-- send the string path of the icon to use
+			net.WriteString(strIconPath)
+			-- send the vector to use for distance calcs
+			net.WriteVector(vecEntPos)
+			-- Send a timestamp in which the Icon will count down to (C4 Timer etc..) (0 for no timer)
+			net.WriteFloat(timeExpire)
+			-- send the string to display next to icon
+			net.WriteBool(canOnlyTraitorsSee)
+
+			print("Send 3 - canOnlyTraitorsSee = " ..  tostring(canOnlyTraitorsSee))
+			
+		end
+
+		-- Finalise and send the message
+		net.Broadcast()
+		
+	end
+end
