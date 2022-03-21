@@ -19,7 +19,6 @@ function JM_GameMode_Function_Main()
 
         -- Table of Possible Game Modes
         local tableOfGamemodes = {
-
             JM_GameMode_ProtectTheFiles_Init,
             JM_GameMode_BountyHunter_Init,
             JM_GameMode_DefuseTheBombs_Init,
