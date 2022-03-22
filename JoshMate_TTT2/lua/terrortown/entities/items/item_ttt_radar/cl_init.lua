@@ -145,7 +145,7 @@ local function DrawTargetJmVersion(tgt, size, offset, no_shrink)
 	if IsOffScreen(scrpos) then return end
 
 	surface.SetTextColor(255, 255, 255, 255)
-	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetDrawColor(255, 255, 255, 135)
 	local strTexturePathStart = "vgui/ttt/joshmate/warningicons/"
 	local strTexturePathFull = strTexturePathStart .. tgt.strIcon
 	surface.SetTexture(surface.GetTextureID(strTexturePathFull))
@@ -187,7 +187,6 @@ function RADAR:Draw(client)
 	-- JM Custom HUD Warnings
 	if self.jmHudWarnings_count ~= 0 then
 		for _, jmHudWarning in pairs(self.jmHudWarnings) do
-			print("jmHudWarning = " ..  table.ToString( jmHudWarning, "jmHudWarning", 1 )) 
 			if  
 				client:GetTeam() == TEAM_SPEC or not client:Alive() or jmHudWarning.isTraitor == false			
 				or jmHudWarning.isTraitor == true and client:GetTeam() == TEAM_TRAITOR

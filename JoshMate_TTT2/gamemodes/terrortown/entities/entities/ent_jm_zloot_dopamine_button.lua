@@ -31,7 +31,7 @@ function ENT:Initialize()
 	end
 
 	-- Josh Mate New Warning Icon Code
-	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_button",self:GetPos(),0,true)
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_button",self:GetPos(),0,false)
 
 end
 

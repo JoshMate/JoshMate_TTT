@@ -690,7 +690,7 @@ function CheckIdle()
 			idle.pos = client:GetPos()
 			idle.t = CurTime()
 		elseif CurTime() > idle.t + idle_limit then
-			RunConsoleCommand("say", TryT("automoved_to_spec"))
+			RunConsoleCommand("say", "!!-- I have been moved to AFK automatically --!!")
 
 			timer.Simple(0, function() -- move client into the spectator team in the next frame
 				RunConsoleCommand("ttt_spectator_mode", 1)

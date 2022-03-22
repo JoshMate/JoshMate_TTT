@@ -6,6 +6,11 @@ Josh Mate TTT Update 60 - Patch Notes
 
 // TODO Paranoia (Fake Sound effects)
 // TODO Fix Print Chats that aren't updated to new JM
+// TODO Fix Right CLick Damage Attribution
+// TODO More Karma Colour Gradients
+// TODO Fix Heal Grenade UI Prompts
+// TODO FIx C4 + Time BOmb Damge > 130
+// TODO Beartraps that are used but to show no Warning ICon
 
 [Map Voting]
 - Random
@@ -18,5 +23,7 @@ Josh Mate TTT Update 60 - Patch Notes
 ###################################
 ##### Small Changes - Fixes - Code 
 ###################################
+
+- Fixed: Changed Jakes Name: India -> Jake
 
 
