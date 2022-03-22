@@ -1,7 +1,7 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "pistol"
+SWEP.HoldType              = "ar2"
 
 if CLIENT then
    SWEP.PrintName          = "Glue Gun"
@@ -25,13 +25,13 @@ SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 75
+SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {} -- only traitors can buy
+SWEP.CanBuy                = {} 
 SWEP.WeaponID              = AMMO_GLUEGUN
 SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_famas.mdl")
@@ -48,9 +48,8 @@ function SWEP:HitEffectsInit(ent)
    if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
-   
-   
    util.Effect("AntlionGib", effect, true, true)
+   
 end
 
 function SWEP:ApplyEffect(ent, weaponOwner)
@@ -60,6 +59,8 @@ function SWEP:ApplyEffect(ent, weaponOwner)
    self:HitEffectsInit(ent)
    
    if SERVER then
+
+      ent:EmitSound(Sound("grenade_glue.wav"));
       
       -- JM Changes Extra Hit Marker
       local hitMarkerOwner = self:GetOwner()
