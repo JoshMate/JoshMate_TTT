@@ -1,7 +1,7 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "pistol"
+SWEP.HoldType              = "ar2"
 
 if CLIENT then
    SWEP.PrintName          = "Glue Gun"
@@ -25,7 +25,7 @@ SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 2
-SWEP.Primary.SoundLevel    = 40
+SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
