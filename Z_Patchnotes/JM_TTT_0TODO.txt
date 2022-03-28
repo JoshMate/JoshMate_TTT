@@ -1,0 +1,13 @@
+// TODO Paranoia (Fake Sound effects that play randomly for a player)
+// TODO Max Paranoia (Fake Sound effects that play randomly for EVERYONE)
+// TODO Fix Print Chats that aren't updated to new JM
+// TODO Fix Right CLick Damage Attribution (no more running off after being clicked)
+// TODO More Karma Colour Gradients and change the bright green at 1000
+// TODO Fix Heal Grenade UI Prompts
+// TODO Buff C4 + Time Bomb Damage to > 130
+// TODO Beartraps that are "Activated but hold noone" should not show their warning Icon
+// TODO Grappling Hook (This is a grand project, and quite complicated)
+// TODO Care Package item that jumples display names
+// TODO Care Package Mass Silencer (Disables Voice Chat)
+// TODO Care Package Silencer (Gun that Disables Voice Chat)
+// TODO Care Package Silence user (Disables Voice Chat on getting the care package)

@@ -1,19 +1,14 @@
 ###################################
-Josh Mate TTT Update 60 - Patch Notes
+Josh Mate TTT Update 61 - Patch Notes
 ###################################
 #### New Stuff
 ###################################
 
-// TODO Paranoia (Fake Sound effects)
-// TODO Fix Print Chats that aren't updated to new JM
-// TODO Fix Right CLick Damage Attribution
-// TODO More Karma Colour Gradients
-// TODO Fix Heal Grenade UI Prompts
-// TODO FIx C4 + Time BOmb Damge > 130
-// TODO Beartraps that are used but to show no Warning ICon
-
-[Map Voting]
-- Random
+[TTT Grave Town]
+- New Map with PvM mechanics
+- A map set in a dark run down town infested by zombies.
+- Innocents must work together to raid the crypt and defeat the zombie boss and retrieve the key that unlocks the Traitor Tester
+- Traitors must team up with the zombies to defeat the players without arousing suspicion 
 
 ###################################
 #### Changes
