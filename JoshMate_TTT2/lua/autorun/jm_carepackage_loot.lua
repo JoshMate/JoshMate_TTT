@@ -2,7 +2,7 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 local lootTable = {
     normal = {
-        JM_CarePackage_Loot_Advnced_Pistol,
+        JM_CarePackage_Loot_Advanced_Pistol,
         JM_CarePackage_Loot_Advanced_Smg,
         JM_CarePackage_Loot_Advanced_Shotgun,
         JM_CarePackage_Loot_Advanced_Rifle,
@@ -94,7 +94,7 @@ end
 -- Table of Normal Loots
 -------------------------------------------------
 
-function JM_CarePackage_Loot_Advnced_Pistol( activator, caller )
+function JM_CarePackage_Loot_Advanced_Pistol( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Advanced Pistol")
     Loot_SpawnThis(caller,"weapon_jm_zloot_advanced_pistol")
 end
