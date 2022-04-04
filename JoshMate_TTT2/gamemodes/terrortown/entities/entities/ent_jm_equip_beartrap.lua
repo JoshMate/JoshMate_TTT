@@ -130,7 +130,7 @@ function ENT:Touch(toucher)
 				toucher:Freeze(false)
 				JM_Function_PrintChat(toucher, "Equipment", "You break free from the Bear Trap!")
 				STATUS:RemoveStatus(toucher, JM_Global_Buff_BearTrap_IconName)
-
+				JM_Function_SendHUDWarning(false,self:EntIndex())
 				return
 			end
 

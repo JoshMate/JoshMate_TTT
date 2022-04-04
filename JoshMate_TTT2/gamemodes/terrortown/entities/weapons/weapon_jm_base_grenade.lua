@@ -149,11 +149,3 @@ end
 function SWEP:Reload()
    return false
 end
-
--- Hud Help Text
-if CLIENT then
-   function SWEP:Initialize()
-      self:AddTTT2HUDHelp("Full Throw", "Half Throw", true)
-   end
-end
--- 

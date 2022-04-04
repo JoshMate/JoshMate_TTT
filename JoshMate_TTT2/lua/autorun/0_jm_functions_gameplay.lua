@@ -80,7 +80,7 @@ if CLIENT then
 		end
 
 		if plyDiscoveredRole == "detective" then
-			textBodyColour =  Color( 0, 0, 255)
+			textBodyColour =  Color( 0, 150, 255)
 			textFinalRoleName = "Detective"
 		end
 

@@ -158,7 +158,7 @@ function ENT:Initialize()
 	end
 
 	if not self:GetDmg() then
-		self:SetDmg(175)
+		self:SetDmg(200)
 	end
 end
 

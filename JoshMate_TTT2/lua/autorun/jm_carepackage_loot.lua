@@ -57,7 +57,8 @@ local lootTable = {
         JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
         JM_CarePackage_Loot_Glue,
         JM_CarePackage_Loot_Mass_Glue,
-        JM_CarePackage_Loot_Manual_Breathing
+        JM_CarePackage_Loot_Manual_Breathing,
+        JM_CarePackage_Loot_Rob_From_TTT
     }
 }
 
@@ -686,6 +687,18 @@ function JM_CarePackage_Loot_Manual_Breathing( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Manual Breathing Mode")
     JM_Function_Announcement("[Care Package] You are all now in Manual Breathing Mode!")
     JM_Function_PlaySound("radio_kingdomlaugh.wav") 
+end
+
+function JM_CarePackage_Loot_Rob_From_TTT( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Rob from TTT")
+    local thingToSpawn = "npc_zombie"
+    local ent = ents.Create(thingToSpawn)
+	ent:SetPos(carepackage:GetPos())
+    ent:AddRelationship("player D_LK 99")
+    ent:SetColor(Color(200, 255, 200, 255 )) 
+    ent:SetMaxHealth(1000)
+    ent:SetHealth(1000)
+    ent:Spawn()
 end
 
 -------------------------------------------------

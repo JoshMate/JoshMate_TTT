@@ -497,13 +497,17 @@ if CLIENT then
 	end
 
 	local karmacolors = {
-		top         = Color(   90, 255,    255),
-		vgood       = Color(   60, 255,    255),
-		good        = Color(   80, 255,    100),
-		bad         = Color(   255, 255,    80),
-		terrible    = Color(   255, 150,    80), 
-		bottom      = Color(   150,   0,      0),
-		default     = Color(   255, 255,    255),
+		K_Max     	 	= Color(0, 255, 255),
+		K_1200      	= Color(0, 250, 150),
+		K_1100       	= Color(0, 220, 130),
+		K_1001       	= Color(0, 200, 120),
+		K_1000       	= Color(0, 180, 100),
+		K_900         	= Color(200, 200, 0),
+		K_700    		= Color(255, 255, 0), 
+		K_500    		= Color(255, 150, 0), 
+		K_Zero      	= Color(200, 0, 0),
+		K_Neg     		= Color(255, 30, 255),
+		K_Default     	= Color(255, 255, 255),
 	};
 
 	---
@@ -513,33 +517,39 @@ if CLIENT then
 	-- @realm client
 	function util.KarmaToString(karma)
 
-		local color = karmacolors.bottom
-		local text = "Evil"
+		local color = karmacolors.K_Default
+		local text = "Neutral"
 
 		if karma >= 1300 then
-			color = karmacolors.top
+			color = karmacolors.K_Max
 			text = "Godly"
 		elseif karma >= 1200 then
-			color = karmacolors.vgood
+			color = karmacolors.K_1200
 			text = "Pure"
 		elseif karma >= 1100 then
-			color = karmacolors.good
+			color = karmacolors.K_1100
 			text = "Very Good"
-		elseif karma >= 1000 then
-			color = karmacolors.good
+		elseif karma >= 1001 then
+			color = karmacolors.K_1001
 			text = "Good"
-		elseif karma >= 800 then
-			color = karmacolors.bad
+		elseif karma >= 1000 then
+			color = karmacolors.K_1000
+			text = "Balanced"
+		elseif karma >= 900 then
+			color = karmacolors.K_900
 			text = "Questionable"
-		elseif karma >= 600 then
-			color = karmacolors.bad
-			text = "Dodgy"
-		elseif karma >= 400 then
-			color = karmacolors.terrible
+		elseif karma >= 700 then
+			color = karmacolors.K_700
+			text = "Dodgey"
+		elseif karma >= 500 then
+			color = karmacolors.K_500
 			text = "Bad"
-		elseif karma >= 200 then
-			color = karmacolors.terrible
+		elseif karma >= 0 then
+			color = karmacolors.K_Zero
 			text = "Very Bad"
+		elseif karma < 0 then
+			color = karmacolors.K_Neg
+			text = "Evil"
 		end
 
 		return text, color
