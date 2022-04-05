@@ -31,7 +31,28 @@ ENT.BuffIconName                = JM_BuffIconName
 
 if CLIENT then
 
+    -- Set up screen effect table
+    local effectTable_PoisonDart = {
 
+        ["$pp_colour_addr"] = 0.33,
+        ["$pp_colour_addg"] = 0.33,
+        ["$pp_colour_addb"] = 0,
+        ["$pp_colour_brightness"] = 0,
+        ["$pp_colour_contrast"] = 1,
+        ["$pp_colour_colour"] = 1,
+        ["$pp_colour_mulr"] = 0,
+        ["$pp_colour_mulg"] = 0,
+        ["$pp_colour_mulb"] = 0
+    }
+
+    -- Render Any Screen Effects
+    hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
+
+        if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
+            DrawColorModify( effectTable_PoisonDart)
+        end 
+    
+    end)
     
 end
 
@@ -52,9 +73,19 @@ end
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
     end 
 end)
+
+-- Scale Damage
+if SERVER then
+    hook.Add("EntityTakeDamage", ("JM_BuffDamageEffects_".. tostring(JM_PrintName)), function(target, dmginfo)
+		if not IsValid(target) or not target:IsPlayer() or not target:IsTerror() then return end
+        if target:GetNWBool(JM_BuffNWBool) == true then 
+            dmginfo:ScaleDamage(1.50)
+        end
+	end)
+end
 
 
 

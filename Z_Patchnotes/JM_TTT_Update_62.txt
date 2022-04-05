@@ -4,25 +4,38 @@ Josh Mate TTT Update 62 - Patch Notes
 #### New Stuff
 ###################################
 
-
-
 ###################################
 #### Changes
 ###################################
 
+[Glue Rework]
+- Players affected by glue now take +50% more damage from all sources
+- Being Glued now affects your vision too
+- Reduced Glue Slow amount: 70% -> 50% 
+- New buff icon for being glued
+
+[Heal Grenade]
+- Buffed Healing Duration: 12 -> 15
+
 [TTT Grave Town]
+- A Huge rework, below are some of the major changes
 - Made the Traitor test infinite uses from 1 key
 - Added new Bunker section of the map which now contains the tester
 - Added a factory building
+- Added a release the crabs traitor button
 - Moved the crypt back to the end of the forest
 - Redesigned the forest area to be more open and have paths
 - Redesigned the graveyards to be more open and integrated with the map
 - Reworked all zombie spawns so there are less of them but in better places
 - Added Clipping to the statues to prevent safe spotting the zombies
+- Weapon spawns have been completely reworked
+
+[Map Voting]
+- Added Elevator (Back due to popular demand)
+- Removed Devil Town (Until the rework is complete)
 
 ###################################
 ##### Small Changes - Fixes - Code 
 ###################################
 
 - Fixed: Changed Body discovered text colour to match the Detective Blue colour
-

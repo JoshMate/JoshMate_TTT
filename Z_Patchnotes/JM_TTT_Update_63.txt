@@ -1,0 +1,27 @@
+###################################
+Josh Mate TTT Update 63 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+###################################
+#### Changes
+###################################
+
+[Glue ]
+- Players affected by glue now take +50% more damage from all sources
+- Being Glued now affects your vision too
+- Reduced Glue Slow amount: 70% -> 50% 
+- New buff icon for being glued
+
+[TTT Grave Town]
+
+
+[Map Voting]
+
+
+###################################
+##### Small Changes - Fixes - Code 
+###################################
+
+- Fixed: 

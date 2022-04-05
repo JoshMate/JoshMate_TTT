@@ -1,7 +1,8 @@
 
 // TODO 
-// TODO 
 
+// TODO make RTV chat message new JM prin t
+// TODO "Has reached max karma" good boy message and sound
 // TODO Paranoia (Fake Sound effects that play randomly for a player)
 // TODO Max Paranoia (Fake Sound effects that play randomly for EVERYONE)
 // TODO Fix Print Chats that aren't updated to new JM

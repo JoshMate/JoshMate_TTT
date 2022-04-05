@@ -185,12 +185,9 @@ function JM_Function_SendHUDWarning(isEnabled, entIndex, strIconPath, vecEntPos,
 		-- Send this ents ID
 		net.WriteUInt(entIndex, 16)
 
-		print("Send - canOnlyTraitorsSee = " ..  tostring(canOnlyTraitorsSee))
-
 		-- If disabled, don't bother sending all this too
 		if isEnabled then
 
-			print("Send 2 - canOnlyTraitorsSee = " ..  tostring(canOnlyTraitorsSee))
 			-- send the string path of the icon to use
 			net.WriteString(strIconPath)
 			-- send the vector to use for distance calcs
@@ -199,8 +196,6 @@ function JM_Function_SendHUDWarning(isEnabled, entIndex, strIconPath, vecEntPos,
 			net.WriteFloat(timeExpire)
 			-- send the string to display next to icon
 			net.WriteBool(canOnlyTraitorsSee)
-
-			print("Send 3 - canOnlyTraitorsSee = " ..  tostring(canOnlyTraitorsSee))
 			
 		end
 
