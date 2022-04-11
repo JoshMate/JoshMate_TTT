@@ -2,12 +2,12 @@ AddCSLuaFile()
 
 SWEP.PrintName				= "Carepackage Swep"
 SWEP.Author			    	= "Seb Mate"
-SWEP.Instructions			= "Places 2 Carepackages"
+SWEP.Instructions			= "Places a Carepackage"
 SWEP.EquipMenuData = {
 	type = "item_weapon",
 	desc = [[A Utility Item
 
-Place down up to 2 Carepackages
+Place down a Carepackage
 ]]
 };
 
@@ -21,8 +21,8 @@ end
 
 
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 2
-SWEP.Primary.DefaultClip	= 2
+SWEP.Primary.ClipSize		= 1
+SWEP.Primary.DefaultClip	= 1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5

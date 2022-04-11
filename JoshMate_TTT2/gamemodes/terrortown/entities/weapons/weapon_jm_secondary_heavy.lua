@@ -33,7 +33,7 @@ SWEP.Primary.ClipMax       = 10
 SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2.5
-SWEP.DeploySpeed           = 3
+SWEP.DeploySpeed           = 1
 SWEP.BulletForce           = 30
 SWEP.Primary.Automatic     = false
 

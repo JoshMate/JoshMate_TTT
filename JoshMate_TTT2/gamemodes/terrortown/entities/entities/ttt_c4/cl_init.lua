@@ -136,7 +136,7 @@ function ShowC4Config(bomb)
                       if not LocalPlayer() or not LocalPlayer():Alive() then return end
 
                       if LocalPlayer():GetTeam() == TEAM_INNOCENT then 
-                        LocalPlayer():ChatPrint("[C4]: Innocents can't arm C4...")
+                        JM_Function_PrintChat(LocalPlayer(), "Equipment", "Innocents can't arm C4")
                      else
                         local t = dtime:GetValue()
                         if t and tonumber(t) then

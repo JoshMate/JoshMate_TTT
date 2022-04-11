@@ -139,7 +139,7 @@ hook.Add( "PreDrawHalos", "Halos_BountyTarget", function()
 		end
 	end
 
-	halo.Add( players, JM_Server_Halo_Colour, 5, 5, 2, true, true )
+	halo.Add( players, JM_Server_Halo_Colour, 2, 2, 3, true, true )
 
 end )
 

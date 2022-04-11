@@ -107,7 +107,14 @@ local function PushRadius(pos, pusher, newtonLauncher)
 
          target:SetVelocity(vel*1)
 
-         target.was_pushed = {att=pusher, t=CurTime(), wep="weapon_jm_equip_newtonlauncher"}
+         -- JM New Was Pushed Attribution System
+         newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
+         newWasPushedContract.pusher = pusher
+         newWasPushedContract.target = target
+         newWasPushedContract.weapon = self:GetClass()
+         newWasPushedContract:Spawn()
+         target.was_pushed = newWasPushedContract
+         --
 
       end
    end
@@ -144,7 +151,14 @@ local function PullRadius(pos, pusher, newtonLauncher)
 
          target:SetVelocity(vel*-1)
 
-         target.was_pushed = {att=pusher, t=CurTime(), wep="weapon_jm_equip_newtonlauncher"}
+         -- JM New Was Pushed Attribution System
+         newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
+         newWasPushedContract.pusher = pusher
+         newWasPushedContract.target = target
+         newWasPushedContract.weapon = self:GetClass()
+         newWasPushedContract:Spawn()
+         target.was_pushed = newWasPushedContract
+         --
 
       end
    end

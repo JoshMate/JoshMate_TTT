@@ -35,9 +35,9 @@ if CLIENT then
 	
 Left click to place a hard to see soap trap on the floor
 
-Any player who walks over the soap will be launched into the air
+Players can slip on soap, dropping their weapon and getting flung
 
-It has 3 uses
+It has 2 uses
 ]]
 	}
 	

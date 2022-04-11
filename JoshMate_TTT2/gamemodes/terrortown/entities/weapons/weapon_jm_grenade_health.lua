@@ -58,7 +58,6 @@ function SWEP:HealingGreande_HealTarget(target)
          -- End of Effects
          
          -- Set Status and print Message
-         JM_RemoveBuffFromThisPlayer("jm_buff_healthgrenade",target)
          JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",target,self:GetOwner())
          -- End Of
 

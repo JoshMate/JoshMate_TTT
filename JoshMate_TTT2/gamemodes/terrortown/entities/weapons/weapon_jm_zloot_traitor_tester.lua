@@ -84,8 +84,9 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- Set Status and print Message
       self.ScanTarget = ent
       self.ScanOwner = weaponOwner 
-      self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (6 seconds)")
-      self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " is revealing your role in (6 seconds)")
+
+      JM_Function_PrintChat(self.ScanOwner, "Equipment", "Scanning " .. tostring(self.ScanTarget:Nick()) .. " (6 seconds)")
+      JM_Function_PrintChat(self.ScanTarget, "Equipment", tostring(self.ScanOwner:Nick()) .. " is revealing your role in (6 seconds)")
       self.ScanTarget:EmitSound("shoot_portable_tester_scan.wav")
       self.ScanTime = CurTime()
 
@@ -103,8 +104,8 @@ function SWEP:Think()
 
       if SERVER then
          if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
-            self.ScanOwner:ChatPrint("[Portable Tester]: Scanning " .. tostring(self.ScanTarget:Nick()) .. " (3 seconds)")
-            self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " is revealing your role in (3 seconds)")
+            JM_Function_PrintChat(self.ScanOwner, "Equipment", "Scanning " .. tostring(self.ScanTarget:Nick()) .. " (3 seconds)")
+            JM_Function_PrintChat(self.ScanTarget, "Equipment", tostring(self.ScanOwner:Nick()) .. " is revealing your role in (3 seconds)")
          end  
       end
       self.ScanPhase = 2
@@ -116,8 +117,8 @@ function SWEP:Think()
          if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
             self:HitEffectsInit(self.ScanTarget)
             self.ScanOwner:EmitSound("shoot_portable_tester_done.wav")
-            self.ScanOwner:ChatPrint("[Portable Tester]: " .. tostring(self.ScanTarget:Nick()) .. " is a " .. tostring(self.ScanTarget:GetRoleStringRaw()))
-            self.ScanTarget:ChatPrint("[Portable Tester]: " .. tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
+            JM_Function_PrintChat(self.ScanOwner, "Equipment", tostring(self.ScanTarget:Nick()) .. " is a " .. tostring(self.ScanTarget:GetRoleStringRaw()))
+            JM_Function_PrintChat(self.ScanTarget, "Equipment", tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
             self.ScanTarget:EmitSound("shoot_portable_tester_done.wav")
          end  
 
@@ -165,10 +166,14 @@ function SWEP:PrimaryAttack()
          self:ApplyEffect(tr.Entity, owner)
          self:TakePrimaryAmmo( 1 )
       else
-         if SERVER then owner:ChatPrint("[Portable Tester]: No testable target in range...") end
+         if SERVER then 
+            JM_Function_PrintChat(owner, "Equipment", "No testable target in range...")
+         end
       end
    else
-      if SERVER then owner:ChatPrint("[Portable Tester]: You are already testing someone...") end
+      if SERVER then 
+         JM_Function_PrintChat(owner, "Equipment", "No already testing someone...")
+      end
    end
 
    owner:LagCompensation(false)

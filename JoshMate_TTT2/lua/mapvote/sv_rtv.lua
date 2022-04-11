@@ -21,8 +21,8 @@ concommand.Add("rtv", function(ply, cmd, args)
         RTV:AddVote(ply)
         local amount = RTV:GetNecessaryVoteAmount()
         local voteCounts = RTV:CountVotes()
-        msg = string.format("[RTV] - (%i/%i) %s",  voteCounts, amount, ply:Nick())
-        PrintMessage(HUD_PRINTTALK, msg)        
+        msg = string.format("[RTV] (%i/%i) %s",  voteCounts, amount, ply:Nick())
+        JM_Function_PrintChat_All("Admin", msg)        
     end
 
     RTV:StartMapvoteIfNeeded()
@@ -70,7 +70,7 @@ end
 function RTV:StartMapvoteIfNeeded()
     if self:CountVotes() >= self:GetNecessaryVoteAmount() then
         if GetRoundState() == ROUND_ACTIVE then
-            PrintMessage(HUD_PRINTTALK, "[RTV] - !! PASSED !!")
+            JM_Function_PrintChat_All("Admin", "[RTV] The RTV has passed")
             hook.Add("TTTEndRound", "RTVDelay", function()
                 hook.Remove("TTTEndRound", "RTVDelay")
                 MapVote:Start()

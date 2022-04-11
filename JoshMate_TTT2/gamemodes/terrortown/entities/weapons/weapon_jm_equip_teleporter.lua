@@ -242,7 +242,7 @@ local function DoTeleport(ply, teleport, weapon)
       if block_world then
          -- if blocked by prop/world, always fail
          fail = true
-         ply:ChatPrint("[Teleporter]: Teleport Failed... (A Solid is Blocking You)")
+         JM_Function_PrintChat(ply, "Equipment", "Teleport Failed... (A solid is blocking you)")
       elseif block_plys and #block_plys > 0 then
          -- if blocked by player, maybe telefrag
          if weapon.ttt_telefrags then
@@ -251,7 +251,7 @@ local function DoTeleport(ply, teleport, weapon)
             end
          else
             fail = true
-            ply:ChatPrint("[Teleporter]: Teleport Failed... (A Player is Blocking You)")
+            JM_Function_PrintChat(ply, "Equipment", "Teleport Failed... (A player is blocking you)")
          end
       end
 
@@ -287,7 +287,7 @@ function SWEP:TeleportRecall()
 
          StartTeleport(ply, mark, self) 
       else
-         ply:ChatPrint("[Teleporter]: You must mark a location first...")
+         JM_Function_PrintChat(ply, "Equipment", "Teleport Failed... (You must mark a location first)")
       end
    end
 end
@@ -307,13 +307,12 @@ function SWEP:TeleportStore()
 
       local allow, msg = CanStoreTeleportPos(ply, self:GetPos())
       if not allow then
-         ply:ChatPrint("[Teleporter]: You can't mark while crouching...")
+         JM_Function_PrintChat(ply, "Equipment", "Mark Failed... (You can't mark while crouching)")
          return
       end
 
       self:SetTeleportMark(ply:GetPos(), ply:EyeAngles())
-
-      ply:ChatPrint("[Teleporter]: Position Marked!")
+      JM_Function_PrintChat(ply, "Equipment", "Teleport Location Marked!")
    end
 end
 

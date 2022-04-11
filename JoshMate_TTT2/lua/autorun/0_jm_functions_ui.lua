@@ -36,7 +36,6 @@ end
 --  Print Chat Function (Send message to a player)
 -----------------------------------------------
 
-
 function JM_Function_PrintChat(player, prefixMessageString, chatMessageString)
 
 	if CLIENT then return end

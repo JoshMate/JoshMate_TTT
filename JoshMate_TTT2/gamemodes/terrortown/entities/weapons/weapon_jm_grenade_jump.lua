@@ -29,6 +29,9 @@ SWEP.LimitedStock       = true
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 
+-- Fix Scorch Spam
+SWEP.GreandeHasScorched              = false
+
 -- How High should this greande push you?
 local JM_Jump_Force        = 500
 
@@ -43,16 +46,8 @@ function SWEP:HitEffectsInit(ent)
    util.Effect("cball_explode", effect, true, true)
 end
 
-function SWEP:PrimaryAttack()
-   if not self:CanPrimaryAttack() then return end
-   self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-   self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+function SWEP:JumpGrenadeEffect(isAltFire)
 
-   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't use Grenades in the Pre-Round..." )
-      return
-   end
-   
    -- Use The Grenade
 
    if (SERVER) then
@@ -68,11 +63,34 @@ function SWEP:PrimaryAttack()
          -- Effects
          self:HitEffectsInit(pl)
          -- End of Effects
-         
-         local vel = pl:GetVelocity()
-         vel.z = vel.z + JM_Jump_Force
 
-         pl:SetVelocity(vel)
+         -- Primary Fire
+         if not isAltFire then
+
+            -- Decal Effects
+            if self.GreandeHasScorched == false then 
+               self.GreandeHasScorched = true
+               util.Decal("Splash.Large", pl:GetPos(), pl:GetPos() + Vector(0,0,-64), pl)      
+            end
+
+            -- Add Jump Velcity
+            local vel = pl:GetVelocity()
+
+            if self:GetOwner():Crouching() then
+               vel.z = vel.z + (JM_Jump_Force * 0.65)
+            else
+               vel.z = vel.z + (JM_Jump_Force)
+            end
+            
+            pl:SetVelocity(vel)
+         end
+
+         -- Alt Fire
+         if isAltFire then 
+            -- Reset Velocity
+            local vel = pl:GetVelocity()
+            pl:SetVelocity(-vel)
+         end         
 
       end
 
@@ -81,7 +99,23 @@ function SWEP:PrimaryAttack()
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
          self:Remove()
       end
+
    end
+
+end
+
+function SWEP:PrimaryAttack()
+   if not self:CanPrimaryAttack() then return end
+   self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+   self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+
+   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
+      JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't use Grenades in the Pre-Round..." )
+      return
+   end
+   
+   -- Use The Grenade
+   self:JumpGrenadeEffect(false)
 
 end
 
@@ -96,34 +130,7 @@ function SWEP:SecondaryAttack()
    end
    
    -- Use The Grenade
-
-   if (SERVER) then
-      local pl = self:GetOwner()
-      pl:EmitSound(Sound("grenade_jump.wav"))
-
-      if pl:IsTerror() and pl:Alive() then
-
-         -- Give a Hit Marker to This Player
-         local hitMarkerOwner = self:GetOwner()
-         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
-
-         -- Effects
-         self:HitEffectsInit(pl)
-         -- End of Effects
-         
-         local vel = pl:GetVelocity()
-         vel.z = vel.z + math.ceil(JM_Jump_Force*0.70)
-
-         pl:SetVelocity(vel)
-
-      end
-
-      self:TakePrimaryAmmo(1)
-      if self:Clip1() <= 0 then
-         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
-         self:Remove()
-      end
-   end
+   self:JumpGrenadeEffect(true)
 
 end
 
@@ -135,7 +142,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Full power jump", "Half power jump", true)
+	   self:AddTTT2HUDHelp("Jump directly upwards", "Nullify all your velocity", true)
  
 	   return self.BaseClass.Initialize(self)
 	end

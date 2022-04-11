@@ -38,7 +38,7 @@ end
 local JM_CarePackage_Halo_Colour = Color(150,0,255,255)
 
 hook.Add( "PreDrawHalos", "Halos_dopamine_button", function()
-    halo.Add( ents.FindByClass( "ent_jm_zloot_dopamine_button*" ), JM_CarePackage_Halo_Colour, 5, 5, 3, true, true )
+    halo.Add( ents.FindByClass( "ent_jm_zloot_dopamine_button*" ), JM_CarePackage_Halo_Colour, 2, 2, 3, true, true )
  
 end )
 
@@ -76,13 +76,13 @@ function ENT:Use( activator, caller )
 
 				if SERVER then
 					JM_Function_PlaySound("radio_bruh.wav") 
-					JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " has chosen poorly")
+					JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " got bodied by the dopamine button...")
 				end
 
 			else
 				JM_Function_PlaySound("dopamine_button_live.mp3")
 				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit) & (+25 Max HP)")
-				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine")
+				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine!")
 				activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
 				activator:SetHealth(activator:Health() + 25) 
 				activator:AddCredits(1)

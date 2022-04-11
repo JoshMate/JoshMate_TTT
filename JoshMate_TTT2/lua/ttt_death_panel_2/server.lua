@@ -309,11 +309,9 @@ local function posttakedamagedeath(victim, attacker, dmginfo)
 
 	local pushwep, pushed2death
 	local push = victim.was_pushed
-	if push
-		and push.att == attacker
-		and math.max(push.t or 0, push.hurt or 0) > CurTime() - 4
-	then
-		pushwep = push.wep
+
+	if push and push.pusher == attacker then
+		pushwep = push.weapon
 	end
 
 	if not weapon then

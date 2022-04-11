@@ -94,7 +94,9 @@ function HealSphere(ent)
 		d = diff:Dot(diff)
 
 		if d >= r then continue end
-		STATUS:AddTimedStatus(ply, JM_Global_Buff_TreeOfLife_IconName, 1, 1)
+
+		-- Give the buff
+		JM_GiveBuffToThisPlayer("jm_buff_treeoflife",ply,self:GetOwner())
 
 		if(ply:Health() >= ply:GetMaxHealth()) then continue end
 
@@ -135,12 +137,9 @@ function ENT:Initialize()
 	self:SetColor(JM_Tree_Colour) 
 	self:DrawShadow(false)
 
-	-- Timer to Heal Players
-	local timerName = "timer_TreeHealSphere_" .. CurTime()
-	timer.Create( timerName, JM_Tree_Heal_Delay, JM_Tree_Duration*2, function () DetectTreeStacking(self) HealSphere(self) end )
-
-	-- Timer To Delete this Ent
-	timer.Simple(JM_Tree_Duration, function() if IsValid(self) then  self:Tree_Die() end end)
+	-- Timers
+	self.treeTimerCreated 		= CurTime()
+	self.treeTimerLastHealed	= CurTime()
 
 end
 
@@ -152,6 +151,18 @@ function ENT:Use( activator, caller )
 end
 
 function ENT:Think()
+
+	-- Heal tick
+	if CurTime() >= (self.treeTimerLastHealed + JM_Tree_Heal_Delay) then
+		DetectTreeStacking(self) 
+		HealSphere(self)
+	end
+
+	-- Delete tree after time is up
+	if CurTime() >= (self.treeTimerCreated + JM_Tree_Duration) then
+		self:Tree_Die() 
+	end
+
 end
 
 function ENT:OnRemove()

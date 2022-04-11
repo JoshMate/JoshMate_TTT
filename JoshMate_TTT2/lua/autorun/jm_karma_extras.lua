@@ -4,6 +4,10 @@ AddCSLuaFile()
 if engine.ActiveGamemode() ~= "terrortown" then return end
 if CLIENT then return end
 
+-- Max Karma Shoutout Code
+
+local JM_Karma_ListofPeopleWhoHaveHadMax = {}
+
 -- Slay players who are below certain thresholds
 local JM_Karma_Slay_Minimum             = 0
 local JM_Karma_Slay_Threshold           = 500
@@ -129,14 +133,21 @@ hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
             JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Good Boy Buff (+10% Movement Speed)")
         end
 
+        -- Announce Max Karma once per person
+        if ply:GetBaseKarma() == 1300 then 
+            if not table.HasValue(JM_Karma_ListofPeopleWhoHaveHadMax, tostring(ply:SteamID64())) then
+                JM_Function_PrintChat_All("Karma", tostring(ply:Nick()) .. " has reached MAX Karma!")
+                -- Sound Effect
+                JM_Function_PlaySound("karma_good.mp3")
+                table.insert(JM_Karma_ListofPeopleWhoHaveHadMax, tostring(ply:SteamID64()))
+            end
+        end
+
         -- Karma Slay
 
         if ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then
-
             ply:ConfirmPlayer(true)
-
             SendPlayerToEveryone(ply)
-
         end
 
     end

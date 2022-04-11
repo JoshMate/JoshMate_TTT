@@ -76,7 +76,7 @@ local JM_CarePackage_Halo_Colour = Color(150,0,255,255)
 
 hook.Add( "PreDrawHalos", "Halos_CarePackage", function()
 
-    halo.Add( ents.FindByClass( "ent_jm_carepackage*" ), JM_CarePackage_Halo_Colour, 5, 5, 2, true, true )
+    halo.Add( ents.FindByClass( "ent_jm_carepackage*" ), JM_CarePackage_Halo_Colour, 2, 2, 3, true, true )
  
 end )
 

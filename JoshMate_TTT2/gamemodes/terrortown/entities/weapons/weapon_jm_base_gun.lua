@@ -140,7 +140,7 @@ SWEP.BulletForce	= 10
 SWEP.StoredAmmo = 0
 SWEP.IsDropped = false
 
-SWEP.DeploySpeed = 1.4
+SWEP.DeploySpeed = 1
 SWEP.MoveMentMultiplier = 1.0
 
 SWEP.PrimaryAnim = ACT_VM_PRIMARYATTACK

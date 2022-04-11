@@ -19,7 +19,7 @@ ENT.GrenadeType_Fuse_Timer          = 2
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false
 
-local JM_Explosive_Blast_Damage    = 60
+local JM_Explosive_Blast_Damage    = 70
 local JM_Explosive_Blast_Radius    = 400
 
 function ENT:Explode(tr)

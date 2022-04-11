@@ -4,24 +4,82 @@ Josh Mate TTT Update 63 - Patch Notes
 #### New Stuff
 ###################################
 
+[Game Mode: Proxy Voice]
+- New game mode
+- You play the whole round with Proxy Voice turned on
+
+[Dash Grenade]
+- Gives you a huge burst of speed for 4 seconds
+- The buff only works while you keep your hands empty
+
+[Pushing Other Players]
+- Greatly Improved how karma / Kill Attribution is calculated for pushing other players
+// You will now only Get hit markers / lose karma if you push someone directly to damage / death
+// E.g. if I push Bob and bob then walks over to an edge and jumps off, it will be suicide not RDM
+
+[Pickup Stick]
+- Held Props now no longer collide with players (This is to prevent karma free prop push kills)
+// This was a SUPER grey area,  both accidents and trolls happen because of this mechanic
+// They still collide with everything else AND go back to normal when dropped or thrown
+
+[Loot: Name Jumbler]
+- A rare care package loot
+- Replaces everyone's names with "* * * * *" until the next round
+
+[Loot: Rob from TTT]
+- A rare care package loot
+- He's friendly, Koen will be sad if you kill him :(
+
 ###################################
 #### Changes
 ###################################
 
-[Glue ]
-- Players affected by glue now take +50% more damage from all sources
-- Being Glued now affects your vision too
-- Reduced Glue Slow amount: 70% -> 50% 
-- New buff icon for being glued
+[Jump Grenade]
+- Left click now jumps with a few options: (Jump first to go higher or Crouch First to go lower)
+- Right click now nullifies ALL velocity on you (Can use last second to negate fall damage)
 
-[TTT Grave Town]
+[Frag Grenade]
+- Buffed Explosive Damage: 60 -> 70
 
+[Heal Grenade]
+- Buffed the heal effect duration: 12 -> 16 Seconds
 
-[Map Voting]
+[Glue]
+- Glue now tags players (Like Tag Grenades used to)
+- Glue now slow players by 50%
+- Glue now Increase the damage they take by +50%
+- Glue now last for 5 Seconds
+- Glue yellow screen effect has been made much less intense on the eyes
 
+[Glue Gun]
+- Now a Traitor Weapon
+- Shoots glue explosions (like big boy but with glue) 
+- Glues everyone caught in radius
+- Has 3 uses and has identical stats and scope to the poison dart gun
+
+[Care Package SWEP]
+- Reduced number of uses: 2 -> 1
+
+[Loot: Advanced Pistols]
+- Now uses the dual pistol model / animations / sounds
+- Greatly buffed magazine capacity to make sense for dual pistols
+
+[Removed from the game]
+- Removed Vampire Pistols
+- Removed Tag Grenade
 
 ###################################
-##### Small Changes - Fixes - Code 
+##### Small Changes / Fixes / Code 
 ###################################
 
-- Fixed: 
+- Changed: There is now a server wide announcement when someone has reached max karma
+- Changed: Grenades can now leave their decals on walls not just floors
+- Changed: Improved visual clarity of the coloured outline you can see through walls
+- Changed: Reduced the visual impact of the tripping balls buff (Now Easier to see)
+- Changed: Improved the way RTV vote text is displayed
+
+- Fixed: Some out of time view model deploy animations
+
+- Code: Refactored jump grenade code duplication
+- Code: Refactored Tree of Life's outdated way of handling buffs
+- Code: Finished upgrading the rest of the chat prints to the new JM coloured coded methods

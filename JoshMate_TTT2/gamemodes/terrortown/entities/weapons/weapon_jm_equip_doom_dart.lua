@@ -16,7 +16,7 @@ if CLIENT then
 	
 Hitting a target marks them with Doom.
 
-Doomed players explode on death dealing large DMG to others.
+Doomed players explode on death dealing DMG to others.
 
 Mark up to 2 players, who won't be informed they are doomed.
 ]]
@@ -35,7 +35,7 @@ SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 2
 SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 3
+SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 20
 SWEP.Primary.Automatic     = false
 

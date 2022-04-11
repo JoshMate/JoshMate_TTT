@@ -89,8 +89,6 @@ end
 
 
 function SWEP:Throw()
-   self:GetOwner():SetAnimation(PLAYER_ATTACK1)
-   self:SendWeaponAnim(ACT_VM_DRAW)
 
    if SERVER then
       local ply = self:GetOwner()

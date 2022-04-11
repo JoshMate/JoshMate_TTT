@@ -75,13 +75,6 @@ JM_Global_Buff_StunGrenade_IconName                     = "JM_Buff_Icon_StunGren
 JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
-JM_Global_Buff_TagGrenade_Name                          = "Tag Grenade"
-JM_Global_Buff_TagGrenade_Duration                      = 5
-JM_Global_Buff_TagGrenade_NWBool                        = "JM_Buff_NWBool_IsTagGrenade"
-JM_Global_Buff_TagGrenade_IconName                      = "JM_Buff_Icon_TagGrenade"
-JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
-
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
 JM_Global_Buff_PoisonDart_Duration                      = 15
 JM_Global_Buff_PoisonDart_NWBool                        = "JM_Buff_NWBool_IsPoisonDart"
@@ -97,7 +90,7 @@ JM_Global_Buff_BearTrap_IconPath                        = "vgui/ttt/hud_icon_bea
 JM_Global_Buff_BearTrap_IconGoodBad                     = "bad"
 
 JM_Global_Buff_TreeOfLife_Name                          = "Tree of Life"
-JM_Global_Buff_TreeOfLife_Duration                      = 0
+JM_Global_Buff_TreeOfLife_Duration                      = 1
 JM_Global_Buff_TreeOfLife_NWBool                        = "JM_Buff_NWBool_IsTreeOfLife"
 JM_Global_Buff_TreeOfLife_IconName                      = "JM_Buff_Icon_TreeOfLife"
 JM_Global_Buff_TreeOfLife_IconPath                      = "vgui/ttt/joshmate/hud_tree.png"
@@ -146,19 +139,25 @@ JM_Global_Buff_Agent_IconPath                                   = "vgui/ttt/josh
 JM_Global_Buff_Agent_IconGoodBad                                = "good"
 
 JM_Global_Buff_HealthGrenade_Name                               = "Healing Grenade"
-JM_Global_Buff_HealthGrenade_Duration                           = 15
+JM_Global_Buff_HealthGrenade_Duration                           = 16
 JM_Global_Buff_HealthGrenade_NWBool                             = "JM_Buff_NWBool_IsHealthGrenade"
 JM_Global_Buff_HealthGrenade_IconName                           = "JM_Buff_Icon_HealthGrenade"
 JM_Global_Buff_HealthGrenade_IconPath                           = "vgui/ttt/joshmate/hud_heal.png"
 JM_Global_Buff_HealthGrenade_IconGoodBad                        = "good"
 
+JM_Global_Buff_Glue_Name                                        = "Glue"
+JM_Global_Buff_Glue_Duration                                    = 5
+JM_Global_Buff_Glue_NWBool                                      = "JM_Buff_NWBool_IsGlue"
+JM_Global_Buff_Glue_IconName                                    = "JM_Buff_Icon_Glue"
+JM_Global_Buff_Glue_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"
+JM_Global_Buff_Glue_IconGoodBad                                 = "bad"
 
-JM_Global_Buff_GlueGrenade_Name                                 = "Glue Grenade"
-JM_Global_Buff_GlueGrenade_Duration                             = 5
-JM_Global_Buff_GlueGrenade_NWBool                               = "JM_Buff_NWBool_IsGlueGrenade"
-JM_Global_Buff_GlueGrenade_IconName                             = "JM_Buff_Icon_GlueGrenade"
-JM_Global_Buff_GlueGrenade_IconPath                             = "vgui/ttt/joshmate/hud_glue_damage.png"
-JM_Global_Buff_GlueGrenade_IconGoodBad                          = "bad"
+JM_Global_Buff_Smoke_Name                                        = "Smoke"
+JM_Global_Buff_Smoke_Duration                                    = 10
+JM_Global_Buff_Smoke_NWBool                                      = "JM_Buff_NWBool_IsSmoke"
+JM_Global_Buff_Smoke_IconName                                    = "JM_Buff_Icon_Smoke"
+JM_Global_Buff_Smoke_IconPath                                    = "vgui/ttt/joshmate/hud_smoke.png"
+JM_Global_Buff_Smoke_IconGoodBad                                 = "bad"
 
 JM_Global_Buff_KarmaBuff_Name                                   = "Good Boy Buff"
 JM_Global_Buff_KarmaBuff_Duration                               = 0
@@ -173,6 +172,13 @@ JM_Global_Buff_Uav_NWBool                                       = "JM_Buff_NWBoo
 JM_Global_Buff_Uav_IconName                                     = "JM_Buff_Icon_UavBuff"
 JM_Global_Buff_Uav_IconPath                                     = "vgui/ttt/joshmate/hud_uav.png"
 JM_Global_Buff_Uav_IconGoodBad                                  = "good"
+
+JM_Global_Buff_Dash_Name                                        = "Dash"
+JM_Global_Buff_Dash_Duration                                    = 4
+JM_Global_Buff_Dash_NWBool                                      = "JM_Buff_NWBool_IsDash"
+JM_Global_Buff_Dash_IconName                                    = "JM_Buff_Icon_Dash"
+JM_Global_Buff_Dash_IconPath                                    = "vgui/ttt/joshmate/hud_dash.png"
+JM_Global_Buff_Dash_IconGoodBad                                 = "good"
 
 
 

@@ -1,6 +1,9 @@
 -- Give these files out to clients (As they contain Client Code)
 AddCSLuaFile()
 
+-- Declare Global Name Jumbler
+JM_Global_isNameJumblerEnabled = false
+
 -----------------------------------------------
 --  Register Network Strings
 -----------------------------------------------
@@ -24,6 +27,9 @@ function JM_Function_ResetAllSettings()
 	-- Slow Mo Clock
 	if timer.Exists("Timer_SloMo_Clock") then timer.Destroy("Timer_SloMo_Clock") end
 	game.SetTimeScale(1)
+
+	-- Name Jumbler
+	JM_Global_isNameJumblerEnabled = false
 
 end
 
@@ -65,7 +71,7 @@ if CLIENT then
 
 		surface.PlaySound("effect_discoverbody.mp3")
 
-		local textPrefixColour =  Color( 20, 20, 20 )
+		local textPrefixColour =  Color( 40, 40, 40 )
 		local textBodyColour =  Color( 255, 255, 255 )
 		local textFinalRoleName = "ERROR"
 

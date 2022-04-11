@@ -17,7 +17,7 @@ ENT.GrenadeType_ExplodeOn_Impact    = true
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false
 
-local JM_Tag_Radius  = 300
+local glueHitRadius  = 300
 
 
 function ENT:HitEffectsInit(ent)
@@ -44,9 +44,8 @@ function ENT:Explode(tr)
       if self.GreandeHasScorched == false then 
          self.GreandeHasScorched = true
          local spos = self:GetPos()
-         local trs = util.TraceLine({start=spos + Vector(0,0,64), endpos=spos + Vector(0,0,-128), filter=self})
-         util.Decal("BeerSplash", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)
-         util.Decal("YellowBlood", trs.HitPos + trs.HitNormal, trs.HitPos - trs.HitNormal)
+         util.Decal("BeerSplash", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal)
+         util.Decal("YellowBlood", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal)    
       end
    end
 
@@ -62,7 +61,7 @@ function ENT:Explode(tr)
          local nadePos = self:GetPos()
 
          -- Do to all players in radius
-         if nadePos:Distance(playerPos) <= JM_Tag_Radius then
+         if nadePos:Distance(playerPos) <= glueHitRadius then
             if pl:IsTerror() and pl:Alive() then
                totalPeopleTagged = totalPeopleTagged + 1
 
@@ -72,8 +71,7 @@ function ENT:Explode(tr)
 
                -- Glue Effects
                self:HitEffectsInit(pl)
-               
-               JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",pl,self:GetOwner())
+               JM_GiveBuffToThisPlayer("jm_buff_glue",pl,self:GetOwner())
                -- End Of
             end
          end

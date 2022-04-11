@@ -23,11 +23,8 @@ local lootTable = {
         JM_CarePackage_Loot_Become_Traitor,
         JM_CarePackage_Loot_Pigeon,
         JM_CarePackage_Loot_Rooty_Tooty,
-        JM_CarePackage_Loot_Mega_Tag,
         JM_CarePackage_Loot_Mega_Glue,
-        JM_CarePackage_Loot_Mega_Jump,
-        JM_CarePackage_Loot_Vampire_Pistols,
-        JM_CarePackage_Loot_Glue_Gun
+        JM_CarePackage_Loot_Mega_Jump
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -58,7 +55,8 @@ local lootTable = {
         JM_CarePackage_Loot_Glue,
         JM_CarePackage_Loot_Mass_Glue,
         JM_CarePackage_Loot_Manual_Breathing,
-        JM_CarePackage_Loot_Rob_From_TTT
+        JM_CarePackage_Loot_Rob_From_TTT,
+        JM_CarePackage_Loot_NameJumbler
     }
 }
 
@@ -225,11 +223,6 @@ function JM_CarePackage_Loot_Rooty_Tooty( activator, caller )
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_shotgun")
 end
 
-function JM_CarePackage_Loot_Mega_Tag( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Mega Tag Grenade")
-    Loot_SpawnThis(caller,"weapon_jm_zloot_mega_tag")
-end
-
 function JM_CarePackage_Loot_Mega_Glue( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Glue Grenade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_glue")
@@ -240,11 +233,6 @@ function JM_CarePackage_Loot_Mega_Jump( activator, caller )
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_jump")
 end
 
-function JM_CarePackage_Loot_Vampire_Pistols( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Vampire Pistols")
-    Loot_SpawnThis(caller,"weapon_jm_zloot_dual_pistols")
-end
-
 function JM_CarePackage_Loot_Built_Differently_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Built Differently Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_builtdifferently")
@@ -253,11 +241,6 @@ end
 function JM_CarePackage_Loot_A_Bird_Flew_In_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","A Bird Flew In Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
-end
-
-function JM_CarePackage_Loot_Glue_Gun( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Glue Gun")
-    Loot_SpawnThis(caller,"weapon_jm_zloot_gluegun")
 end
 
 -------------------------------------------------
@@ -648,7 +631,7 @@ function JM_CarePackage_Loot_Glue( activator, caller )
     if (activator:IsValid() and activator:IsTerror() and activator:Alive()) then
 
         -- Add the Buff
-        JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",activator,caller)
+        JM_GiveBuffToThisPlayer("jm_buff_glue",activator,caller)
 
         -- Do the Glue Effects
         local effect = EffectData()
@@ -670,7 +653,7 @@ function JM_CarePackage_Loot_Mass_Glue( activator, caller )
         if (ply:IsValid() and ply:IsTerror() and ply:Alive()) then
 
             -- Add the Buff
-            JM_GiveBuffToThisPlayer("jm_buff_gluegrenade",ply,caller)
+            JM_GiveBuffToThisPlayer("jm_buff_glue",ply,caller)
 
             -- Do the Glue Effects
             local effect = EffectData()
@@ -691,14 +674,16 @@ end
 
 function JM_CarePackage_Loot_Rob_From_TTT( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Rob from TTT")
-    local thingToSpawn = "npc_zombie"
-    local ent = ents.Create(thingToSpawn)
-	ent:SetPos(carepackage:GetPos())
-    ent:AddRelationship("player D_LK 99")
-    ent:SetColor(Color(200, 255, 200, 255 )) 
-    ent:SetMaxHealth(1000)
-    ent:SetHealth(1000)
-    ent:Spawn()
+    JM_Function_Announcement("[Care Package] It's Rob from TTT!")
+    JM_Function_PlaySound("npc/zombie/zombie_voice_idle1.wav") 
+    Loot_SpawnThis(caller,"ent_jm_zloot_robfromttt")
+end
+
+function JM_CarePackage_Loot_NameJumbler( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Name Jumbler")
+    JM_Function_Announcement("[Care Package] All names have been Jumbled!")
+    JM_Function_PlaySound("radio_icebarrage.wav") 
+    JM_Global_isNameJumblerEnabled = true
 end
 
 -------------------------------------------------

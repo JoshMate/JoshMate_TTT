@@ -4,7 +4,7 @@ AddCSLuaFile()
 SWEP.HoldType              = "ar2"
 
 if CLIENT then
-   SWEP.PrintName          = "Poison Dart Gun"
+   SWEP.PrintName          = "Glue Gun"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -12,17 +12,17 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Lethal Weapon
+      desc = [[A Setup Weapon
 
-Steals 75 HP from the target over 15 seconds
+Causes a glue explosion where you are aiming
 
-Targets flinch while they are poisoned
+Glue slows, tags and makes the target take extra damage
    
 Has 3 uses, silent, perfect acccuracy and long range
 ]]
    };
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_poisondart.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gluegun.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -39,23 +39,21 @@ SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = "shoot_poisondart.wav"
+SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_POISONDART
+SWEP.WeaponID              = AMMO_GLUEGUN
 SWEP.UseHands              = true
-SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_aug.mdl")
-SWEP.WorldModel            = Model("models/weapons/w_rif_aug.mdl")
-SWEP.IronSightsPos         = Vector( 5, -15, -2 )
-SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
+SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_sg552.mdl")
+SWEP.WorldModel            = Model("models/weapons/w_rif_sg552.mdl")
 
-local Poison_Duration               = 15
-local Poison_Damage_Delay           = 1
-local Poison_Damage_Amount          = 5
+-- Fix Scorch Spam
+SWEP.GreandeHasScorched              = false
+
+local glueHitRadius                 = 300
 local JM_Shoot_Range                = 10000
-
 
 
 function SWEP:HitEffectsInit(ent)
@@ -66,30 +64,66 @@ function SWEP:HitEffectsInit(ent)
    if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
-   
-   
-   
-   util.Effect("cball_explode", effect, true, true)
+   util.Effect("AntlionGib", effect, true, true)
 end
 
-function SWEP:ApplyEffect(ent,weaponOwner)
+function SWEP:ExplodeEffects(pos)
+   local effect = EffectData()
+   effect:SetStart(pos)
+   effect:SetOrigin(pos)
+   util.Effect("AntlionGib", effect, true, true)
+end
 
-   if not IsValid(ent) then return end
-   self:HitEffectsInit(ent)
-   
-   if SERVER then
-      
-      -- Give a Hit Marker to This Player
-      local hitMarkerOwner = self:GetOwner()
-      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
+function SWEP:Explode(tr)
+   -- Decal Effects
+   if (SERVER) then
+      if self.GreandeHasScorched == false then 
+         self.GreandeHasScorched = true
+         local spos = self:GetPos()
+         util.Decal("BeerSplash", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal)
+         util.Decal("YellowBlood", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal)    
+      end
+   end
 
-      -- Set Status and print Message
-      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Poisoned!" )
-      JM_RemoveBuffFromThisPlayer("jm_buff_poisondart",ent)
-      JM_GiveBuffToThisPlayer("jm_buff_poisondart",ent,self:GetOwner())
-      -- End Of
+   -- Server Side Mechanics
+   if (SERVER) then
+      sound.Play("grenade_glue.wav", tr.HitPos, 80, 100, 1)
+      self:ExplodeEffects(tr.HitPos)
+      local totalPeopleTagged = 0
+
+      for _,pl in pairs(player.GetAll()) do
+
+         local playerPos = pl:GetShootPos()
+         local nadePos = tr.HitPos
+
+         -- Do to all players in radius
+         if nadePos:Distance(playerPos) <= glueHitRadius then
+            if pl:IsTerror() and pl:Alive() then
+               totalPeopleTagged = totalPeopleTagged + 1
+
+               -- Give a Hit Marker to This Player
+		         local hitMarkerOwner = self:GetOwner()
+		         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
+
+               -- Glue Effects
+               self:HitEffectsInit(pl)
+               JM_GiveBuffToThisPlayer("jm_buff_glue",pl,self:GetOwner())
+               -- End Of
+            end
+         end
+      end
    end
 end
+
+
+
+
+
+
+
+
+
+
 
 function SWEP:PrimaryAttack()
 
@@ -114,9 +148,7 @@ function SWEP:PrimaryAttack()
    end
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
-   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-      self:ApplyEffect(tr.Entity, owner)
-   end
+   self:Explode(tr)
 
    owner:LagCompensation(false)
 
@@ -133,8 +165,7 @@ function SWEP:PrimaryAttack()
 end
 
 
-
-
+-- ZOOOOOOOOOOOM
 function SWEP:SetZoom(state)
    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
       if state then
@@ -246,7 +277,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Poison a player at range", nil, true)
+	   self:AddTTT2HUDHelp("Glue explosion at range", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

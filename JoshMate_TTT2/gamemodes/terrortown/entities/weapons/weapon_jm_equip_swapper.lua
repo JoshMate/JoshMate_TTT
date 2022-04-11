@@ -77,12 +77,12 @@ function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
          self.Swapper_TempHP_Theirs_Cur      = ent:Health()
 
          if self.Swapper_TempHP_Theirs_Cur > self.Swapper_TempHP_Yours_Cur then
-            weaponOwner:ChatPrint("[Swapper]: Good Trade! (" .. ent:Nick() .. ") [" .. tostring(self.Swapper_TempHP_Theirs_Cur) .. " for your " .. tostring(self.Swapper_TempHP_Yours_Cur) .. "]")
+            JM_Function_PrintChat(weaponOwner, "Equipment", "Good Trade! (" .. ent:Nick() .. ") [" .. tostring(self.Swapper_TempHP_Theirs_Cur) .. " for your " .. tostring(self.Swapper_TempHP_Yours_Cur) .. "]")
          else
-            weaponOwner:ChatPrint("[Swapper]: Bad Trade! (" .. ent:Nick() .. ") [" .. tostring(self.Swapper_TempHP_Theirs_Cur) .. " for your " .. tostring(self.Swapper_TempHP_Yours_Cur) .. "]")
+            JM_Function_PrintChat(weaponOwner, "Equipment", "Bad Trade! (" .. ent:Nick() .. ") [" .. tostring(self.Swapper_TempHP_Theirs_Cur) .. " for your " .. tostring(self.Swapper_TempHP_Yours_Cur) .. "]")
          end
          
-         ent:ChatPrint("[Swapper] - Someone has swapped HP with you!")
+         JM_Function_PrintChat(ent, "Equipment", "Someone has swapped HP with you")
 
          ent:SetHealth(self.Swapper_TempHP_Yours_Cur)
          self:GetOwner():SetHealth(self.Swapper_TempHP_Theirs_Cur)
@@ -100,8 +100,8 @@ function SWEP:ApplyEffect(ent,weaponOwner,secondaryAttack)
 			activator:SetPos(PosVictim)
 			Victim:SetPos(PosActivator)
 			if SERVER then Victim:EmitSound(Sound("effect_swapping_places.mp3")) end
-			Victim:ChatPrint("[Swapper] - Someone has swapped Places with you!")
-         activator:ChatPrint("[Swapper] - You have swapped places with: " .. tostring(Victim:Nick()))
+         JM_Function_PrintChat(Victim, "Equipment", "Someone has swapped places with you")
+         JM_Function_PrintChat(activator, "Equipment", "You have swapped places with: " .. tostring(Victim:Nick()))
 
       end
       -- End of
@@ -118,7 +118,9 @@ function SWEP:PrimaryAttack()
       self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
       if not self:CanPrimaryAttack() then return end
 
-      if SERVER then  self:GetOwner():ChatPrint("[Swapper] - You have already swapped HP the maximum amount of times") end
+      if SERVER then  
+         JM_Function_PrintChat(self:GetOwner(), "Equipment", "You have already swapped HP the maximum amount of times")
+      end
       return
    end
    -- #########
@@ -171,7 +173,9 @@ function SWEP:SecondaryAttack()
       self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
       if not self:CanSecondaryAttack() then return end
 
-      self:GetOwner():ChatPrint("[Swapper] - You have already swapped Places the maximum amount of times")
+      if SERVER then  
+         JM_Function_PrintChat(self:GetOwner(), "Equipment", "You have already swapped Places the maximum amount of times")
+      end
       return
    end
    
@@ -184,7 +188,9 @@ function SWEP:SecondaryAttack()
       self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
       if not self:CanSecondaryAttack() then return end
 
-      if SERVER then self:GetOwner():ChatPrint("[Swapper] - You can't swap places with someone while you are crouching!") end
+      if SERVER then 
+         JM_Function_PrintChat(self:GetOwner(), "Equipment", "You can't swap places while YOU are Crouched")
+      end
 
       return
    end

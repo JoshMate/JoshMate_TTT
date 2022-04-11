@@ -25,6 +25,11 @@ local ListOfKnownSteamID64s = {
 meta = FindMetaTable( "Player" )
 function meta:Nick()
 
+    -- Name Jumbler Care Package
+    if JM_Global_isNameJumblerEnabled == true then
+        return "* * * * *"
+    end
+
 
     -- If your Steam ID exists in the known table use your "Forced Name"
     if ListOfKnownSteamID64s[self:SteamID64()] ~= nil then return ListOfKnownSteamID64s[self:SteamID64()] end

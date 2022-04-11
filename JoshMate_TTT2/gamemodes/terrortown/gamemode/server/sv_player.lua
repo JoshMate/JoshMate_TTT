@@ -303,6 +303,7 @@ function GM:PlayerSwitchFlashlight(ply, on)
 
 	ply:EmitSound("flashlight.wav", 60, 100, 0.35, CHAN_AUTO)
 	
+	
 	return false
 end
 
@@ -1121,9 +1122,8 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 			-- if the faller was pushed, that person should get attrib
 			local push = ply.was_pushed
 
-			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - JM_WasPushed_Linger_Goomba then
-				-- TODO: move push time checking stuff into fn?
-				att = push.att
+			if push and push.target:IsValid() and push.pusher:IsValid() then
+				att = push.pusher
 			end
 
 			local dmg = DamageInfo()
@@ -1261,57 +1261,14 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 			owner = hurter:GetDriver()
 		end
 
-		-- if we were hurt by a trap OR by a non-ply ent, and we were pushed
-		-- recently, then our pusher is the attacker
-		if owner_time or not IsValid(att) or not att:IsPlayer() then
+
+		if not IsValid(att) or not att:IsPlayer() then
 			local push = ent.was_pushed
-
-			if push and IsValid(push.att) and push.t then
-				-- push must be within the last 5 seconds, and must be done
-				-- after the trap was enabled (if any)
-				owner_time = owner_time or 0
-
-				local t = math.max(push.t or 0, push.hurt or 0)
-
-				if t > owner_time and t > CurTime() - JM_WasPushed_Linger then
-					owner = push.att
-
-					-- pushed by a trap?
-					if IsValid(push.infl) then
-						dmginfo:SetInflictor(push.infl)
-					end
-
+			if push and push.target:IsValid() and push.pusher:IsValid() then
+				att = push.pusher
+				if IsValid(push.weapon) then
+					dmginfo:SetInflictor(push.weapon)
 				end
-			end
-		end
-
-		-- if we are being hurt by a physics object, we will take damage from
-		-- the world entity as well, which screws with damage attribution so we
-		-- need to detect and work around that
-		if IsValid(owner) and dmginfo:IsDamageType(DMG_CRUSH) then
-			-- we should be able to use the push system for this, as the cases are
-			-- similar: event causes future damage but should still be attributed
-			-- physics traps can also push you to your death, for example
-			local push = ent.was_pushed or {}
-
-			-- if we already blamed this on a pusher, no need to do more
-			-- else we override whatever was in was_pushed with info pointing
-			-- at our damage owner
-			if push.att ~= owner then
-				owner_time = owner_time or CurTime()
-
-				push.att = owner
-				push.t = owner_time
-				push.hurt = CurTime()
-
-				-- store the current inflictor so that we can attribute it as the
-				-- trap used by the player in the event
-				if IsValid(infl) then
-					push.infl = infl
-				end
-
-				-- make sure this is set, for if we created a new table
-				ent.was_pushed = push
 			end
 		end
 
@@ -1345,22 +1302,6 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 				dmginfo:SetAttacker(ignite.att)
 				dmginfo:SetInflictor(ignite.infl)
 			end
-		end
-	end
-
-	-- try to work out if this was push-induced leech-water damage (common on
-	-- some popular maps like dm_island17)
-	if ent.was_pushed
-	and ent == att
-	and dmginfo:GetDamageType() == DMG_GENERIC
-	and util.BitSet(util.PointContents(dmginfo:GetDamagePosition()), CONTENTS_WATER)
-	then
-		local t = math.max(ent.was_pushed.t or 0, ent.was_pushed.hurt or 0)
-
-		if t > CurTime() - 3 then
-			dmginfo:SetAttacker(ent.was_pushed.att)
-
-			ent.was_pushed.hurt = CurTime()
 		end
 	end
 

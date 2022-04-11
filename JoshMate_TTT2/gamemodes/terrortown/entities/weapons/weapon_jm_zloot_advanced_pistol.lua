@@ -23,17 +23,17 @@ SWEP.WeaponID              = AMMO_ADVANCED_PISTOL
 
 SWEP.Primary.Damage        = 40
 SWEP.Primary.NumShots      = 1
-SWEP.Primary.Delay         = 0.10
+SWEP.Primary.Delay         = 0.11
 SWEP.Primary.Cone          = 0.008
 SWEP.Primary.Recoil        = 1
-SWEP.Primary.Range         = 600
-SWEP.Primary.ClipSize      = 18
-SWEP.Primary.DefaultClip   = 18
+SWEP.Primary.Range         = 700
+SWEP.Primary.ClipSize      = 20
+SWEP.Primary.DefaultClip   = 20
 SWEP.Primary.ClipMax       = 60
 SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2
-SWEP.DeploySpeed           = 3
+SWEP.DeploySpeed           = 1
 SWEP.BulletForce           = 10
 SWEP.Primary.Automatic     = false
 

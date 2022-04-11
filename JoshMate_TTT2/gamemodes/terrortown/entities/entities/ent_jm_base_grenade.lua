@@ -53,7 +53,7 @@ function ENT:PhysicsCollide(data,phys)
 	phys:ApplyForceCenter(lollol)
 
    if self.GrenadeType_ExplodeOn_Impact == true then
-      self:Explode(tr)
+      self:Explode(data)
    end
 end
 

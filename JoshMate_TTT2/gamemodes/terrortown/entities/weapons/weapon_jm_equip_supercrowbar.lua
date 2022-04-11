@@ -99,12 +99,14 @@ function SWEP:Push()
 			 local hitMarkerOwner = self:GetOwner()
 			 JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
-			ply.was_pushed = {
-				att = owner,
-				t = CurTime(),
-				wep = self:GetClass(),
-				-- infl = self
-			}
+			 -- JM New Was Pushed Attribution System
+			 newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
+			 newWasPushedContract.pusher = owner
+			 newWasPushedContract.target = ply
+			 newWasPushedContract.weapon = self:GetClass()
+			 newWasPushedContract:Spawn()
+			 ply.was_pushed = newWasPushedContract
+			 --
 		end
 
 		self:TakePrimaryAmmo( 1 )
