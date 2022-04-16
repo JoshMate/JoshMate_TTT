@@ -53,7 +53,7 @@ SWEP.LimitedStock = true -- only buyable once
 SWEP.WeaponID = AMMO_KNIFE
 
 SWEP.IsSilent 			= true
-SWEP.DeploySpeed         = 6
+SWEP.DeploySpeed         = 4
 
 -- JM Changes, Movement Speed
 SWEP.MoveMentMultiplier = 1.2

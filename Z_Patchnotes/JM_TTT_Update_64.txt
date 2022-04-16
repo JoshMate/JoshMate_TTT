@@ -1,0 +1,24 @@
+###################################
+Josh Mate TTT Update 64 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+
+###################################
+#### Changes
+###################################
+
+[Glue]
+- Buffed glue duration: 5 -> 7 Seconds
+- Glue Gun is now a detective weapon
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+
+- Reverted: Pickup Stick Collision Changes
+
+- Fixed: Slow Deploy Animations on weapons
+- Fixed: Tree of Life not healing and producing errors

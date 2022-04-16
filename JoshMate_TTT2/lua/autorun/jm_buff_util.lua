@@ -146,7 +146,7 @@ JM_Global_Buff_HealthGrenade_IconPath                           = "vgui/ttt/josh
 JM_Global_Buff_HealthGrenade_IconGoodBad                        = "good"
 
 JM_Global_Buff_Glue_Name                                        = "Glue"
-JM_Global_Buff_Glue_Duration                                    = 5
+JM_Global_Buff_Glue_Duration                                    = 7
 JM_Global_Buff_Glue_NWBool                                      = "JM_Buff_NWBool_IsGlue"
 JM_Global_Buff_Glue_IconName                                    = "JM_Buff_Icon_Glue"
 JM_Global_Buff_Glue_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"

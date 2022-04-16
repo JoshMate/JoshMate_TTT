@@ -180,8 +180,6 @@ function SWEP:Reset(keep_velocity)
 			phys:EnableMotion(true)
 		end
 
-		-- JM Collision give it back
-		self.EntHolding:SetCollisionGroup(self.JMHeldPropsRealCollisionGroup)
 
 		if not keep_velocity and (GetGlobalBool("ttt_no_prop_throwing") or self.EntHolding:GetClass() == "prop_ragdoll") then
 			KillVelocity(self.EntHolding)
@@ -429,10 +427,7 @@ function SWEP:Pickup()
 
 	if IsValid(ent) and IsValid(entphys) then
 		local carryHack = ents.Create("prop_physics")
-
-		-- Josh mate disable Pickup Collision
-		self.JMHeldPropsRealCollisionGroup = ent:GetCollisionGroup()
-		ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)		
+	
 		ent:SetPhysicsAttacker(self:GetOwner())
 
 		if IsValid(carryHack) then
@@ -541,8 +536,6 @@ function SWEP:Drop()
 		if GetGlobalBool("ttt_no_prop_throwing") or ent:GetClass() == "prop_ragdoll" then
 			KillVelocity(ent)
 		end
-
-		ent:SetCollisionGroup(self.JMHeldPropsRealCollisionGroup)
 
 		ent:SetPhysicsAttacker(self:GetOwner())
 	end

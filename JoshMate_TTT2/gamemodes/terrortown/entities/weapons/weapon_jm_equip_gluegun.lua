@@ -35,14 +35,13 @@ SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 3
 SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
+SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_GLUEGUN
 SWEP.UseHands              = true

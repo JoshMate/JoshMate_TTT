@@ -96,7 +96,7 @@ function HealSphere(ent)
 		if d >= r then continue end
 
 		-- Give the buff
-		JM_GiveBuffToThisPlayer("jm_buff_treeoflife",ply,self:GetOwner())
+		JM_GiveBuffToThisPlayer("jm_buff_treeoflife",ply,ent.owner)
 
 		if(ply:Health() >= ply:GetMaxHealth()) then continue end
 

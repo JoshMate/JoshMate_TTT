@@ -35,7 +35,6 @@ SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 1
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
 
