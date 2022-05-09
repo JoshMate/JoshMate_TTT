@@ -96,7 +96,7 @@ function HealSphere(ent)
 		if d >= r then continue end
 
 		-- Give the buff
-		JM_GiveBuffToThisPlayer("jm_buff_treeoflife",ply,ent.owner)
+		if SERVER then JM_GiveBuffToThisPlayer("jm_buff_treeoflife",ply,ent.owner) end
 
 		if(ply:Health() >= ply:GetMaxHealth()) then continue end
 
@@ -156,6 +156,7 @@ function ENT:Think()
 	if CurTime() >= (self.treeTimerLastHealed + JM_Tree_Heal_Delay) then
 		DetectTreeStacking(self) 
 		HealSphere(self)
+		self.treeTimerLastHealed	= CurTime()
 	end
 
 	-- Delete tree after time is up

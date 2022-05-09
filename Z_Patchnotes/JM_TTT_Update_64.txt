@@ -4,10 +4,17 @@ Josh Mate TTT Update 64 - Patch Notes
 #### New Stuff
 ###################################
 
+[Vague Waters]
+- A brand new map!
+- A fishing village made up of small buildings on the ocean water
+- Use a boat to get between them and don't fall in!
 
 ###################################
 #### Changes
 ###################################
+
+[Map Voting]
+- Reduced rounds per Map: 6 -> 5 rounds
 
 [Glue]
 - Buffed glue duration: 5 -> 7 Seconds
@@ -16,7 +23,6 @@ Josh Mate TTT Update 64 - Patch Notes
 ###################################
 ##### Small Changes / Fixes / Code 
 ###################################
-
 
 - Reverted: Pickup Stick Collision Changes
 

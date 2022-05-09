@@ -110,7 +110,7 @@ local function PushRadius(pos, pusher, newtonLauncher)
          newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
          newWasPushedContract.pusher = pusher
          newWasPushedContract.target = target
-         newWasPushedContract.weapon = self:GetClass()
+         newWasPushedContract.weapon = newtonLauncher:GetClass()
          newWasPushedContract:Spawn()
          target.was_pushed = newWasPushedContract
          --

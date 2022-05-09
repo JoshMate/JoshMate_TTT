@@ -1,0 +1,47 @@
+###################################
+Josh Mate TTT Update 65 - Patch Notes
+###################################
+#### New Stuff
+###################################
+ 
+
+
+###################################
+#### Changes
+###################################
+
+[Vague Waters]
+- Greatly sped up the boat and made it stop for 3 seconds at both ends
+- Added some more platforms and on-foot navigation routes
+- Added a faint marker in the sky to show where the boat is in real time
+// Uploaded to workshop and Re-Arm Complete and Uploaded
+
+[Desert]
+- Overhauled he Construction site to be more useful and interesting
+- Overhauled the pool area to be more interesting than just a hole with water in it
+- Extended the underground to join up with the swimming pool
+- Improved the entrances to sand castle and prop placement inside of it
+- Improved the cover, player navigation and prop placement in ruins
+- Redid all player spawns to be more spread out around the map
+- Redid all weapon placements to bring them up to date with modern balance standards
+- Upgraded the map to have more modern Lighting and performance
+- Added clipping to various hidden parkour routes so they are easier to jump on
+- Upgraded the turtles to the new stronger turtles 2.0
+- The burning damage on the outside of the map has been slightly increased
+- Made the ambient wind much quieter (IT WAS REALLY LOUD)
+- Raised the height of the skybox to allow for more vertical plays
+- And much more various minor tweaks and improvements
+// Uploaded to workshop and Re-Arm Complete and Uploaded
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+// TODO: Check Newton Launcher removes on use
+// TODO: Tree of life new one stays on duplicate touching
+// TODO: Make the Dash Grenade Bare hands check have validation (Gets errors if I died during it)
+// TODO: Fix Money Printer Double Sound Effect
+// TODO: Poison Grenade?
+// TODO Loud Awp
+// TODO Throwing Knives
+// TODO Check if Base Grenade show hands is causing grenade hand bug

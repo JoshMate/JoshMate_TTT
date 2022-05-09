@@ -1,46 +1,122 @@
-1. No RDM (Random Death Match)
+:tss: :ttt_logo: 📏 
+
+--------------------------------
+TTT Rules
+--------------------------------
+
+In order to keep a single set of up to date rules all in one place, the Rules have moved from !motd to here:
+
+❇️ The Karma System
+
+The automated Karma system will punish you in 90% of cases 
+But when it does not I will be handing out Karma Penalties without impunity
+It's nothing personal, but there will be no grey areas or personal circumstances
+This is to prevent arguments, so just take your penalty and move on.
+
+- (Major Penalty) RDM : 650 Karma
+- (Minor Penalty) Rule Break: 250 Karma
+
+Karma Refunds
+You will have you Karma refunded (with compensation if you sit out) if someone breaks a rule which results in you losing karma.
+(For example, Someone RDMs a innocent in front of you, and you kill the RDMer meaning you both lose karma for their mistake)
+
+
+1️⃣ No RDM (Random Death Match)
 
 As an INO or a DET killing / injuring another INO or DET
 As a TRA killing or injuring another TRA without their consent
 
+Only attack someone if you are absolutely sure with evidence and beyond a doubt, they are a traitor (or a rule breaking acting like a traitor)
+
 Killing or Injuring is classed as directly or passively setting something in motion that will cause damage to another player.
-(For example Shooting someone in the head)
 (For example tasing someone underwater so they drown)
 (For example standing between someone and the train (Body Blocking) causing them to get crushed)
 (For example using or moving or breaking a prop so they fall / get prop damaged)
+(For example prop pushing someone into something that damages them)
 
-This does NOT include setting something in motion that then requires another player to have to do something after you to RDM
+This does NOT include setting something in motion that then requires another player to have to do something for it to kill
 As the second person in the chain of events will be the Killer / RDMer not you
 (For example if you tase a innocent and then the traitor knifes them)
 
-2. No Griefing
+2️⃣ No Griefing
 
-Do something to another player which annoying or doesn't make any progress towards your Role's goal for the sole purpose of harassment
+Do something to another player which is annoying or doesn't make any progress towards your Role's goal or is for the sole purpose of harassment
 (For example body blocking to prevent someone from passing a ladder or doorway)
 (For example crowbar pushing someone unless you are trying to kill them)
 (Detective non-lethal weapons are not included in this as that is what they are there for but just don't be a dick with them)
 
-3. No Traitor Baiting
+3️⃣ Failing to Communicate
+
+As an innocent, failing to communicate important information that would prevent a death or an RDM
+(For example, holding out a traitor weapon without announcing where you found it)
+(For example, Start shooting someone you think is the traitor without first announcing it)
+
+If you are a traitor, you are allowed to mislead / lie and keep quiet all you want, but it will probably get you killed.
+
+4️⃣ No Traitor Baiting
 
 As an innocent, do not act like a traitor
 (For example, shooting near people)
-(For example, tricking people into attacking you by pretending to do traitorous activities)
+(For example, trolling by pretending to do traitorous activities)
 
-4. No Rule Baiting 
-
-Trying to get others to break the rules or forcing/tricking someone into breaking the rules
-(For example standing near or under a avoidable damage source to deal karma damage to someone or make them RDM you)
-
-5. No Cheating
+5️⃣ No Cheating
 
 No Cheats, Hacks, Scripts, External Programs, Ghosting, Meta Gaming or anything that doesn't fit the honourable nature of TTT
 
-Karma Punishments
+6️⃣ Barriers
 
-If you aren't caught by the automated karma system.
-If the victim presses charges
-if the admin deems you as a rule breaker
+You are only allowed to damaged Detective Barriers if you are a traitor or they are blocking you off from more than 75% of the map or you are stuck inside one
 
-- RDM (Kill) Penalty: 500 Karma
-- Breaking a Rule Penalty: 250 Karma
+7️⃣ Detectives
 
+Detectives are proven innocent, so therefore should NEVER be acting suspect or doing anything dodgy.
+They can't give you commands and kill you for not cooperating.
+But not listening to a proven innocent who is trying to help you is pretty sus. 
+Agents have no more authority than a regular innocent. So treat them as such.
+
+8️⃣  Unreasonable KOS
+
+Seeing someone stood next to a C4 or trap, etc.. is NOT a reason to KOS unless you saw them deploy it
+Seeing someone walk past a dead body is not a reason to KOS, but it is VERY SUS
+"Because they told me too" is not a reason to kill someone 
+
+--------------------------------
+
+:tss: :ttt_logo: 📏 
+
+--------------------------------
+TTT Reasons to Kill Someone
+--------------------------------
+
+100% Fair KOS reasons:
+
+They attacked you first (Dealt damage or tried too) (This includes shooting at you but missing or throwing a frag at you)
+
+They attacked an innocent first (Dealt damage or tried too) (Without telling you why they are doing it)
+
+They are actively trying to damage you in some obscure way (Body Blocking you in harms way, pushing you near an edge or hazard like fire)
+
+You saw them doing something actively traitorous like arming a C4, eating a corpse or holding an unannounced Knife
+
+Using meta information (Like players left alive) that objectively proves they are a traitor
+
+You are a Traitor and they are an Innocent or a consenting fellow Traitor
+
+You do a very clear, live check and they don't respond after 2 attempts at getting them to speak.
+
+You see them doing a traitorous objective (Destroying a File)
+
+You see them in a traitor room (without announcing they are an innocent that got trapped)
+
+Accidents:
+
+"I didn't mean to shoot you / near you" or "I accidently right clicked" are considered COPEs for a failed execution attempt and are KOSable 
+(You may reactively fight back but after a couple seconds and loads of apologies it's probably a dick move to still attack them) 
+
+Risky KOS reasons:
+
+If you are pretty sure they are a traitor through lots of small sus things, or one too many coincidences and you are comfortable taking the risk. 
+(You are able to back up your reasoning and you have announced it to the group that you think someone is a traitor and why)
+
+--------------------------------
+:tss: :ttt_logo: 📏 
