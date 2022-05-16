@@ -89,9 +89,9 @@ function SWEP:PlaceThing()
 	local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.JM_Trap_PlaceRange, filter = self:GetOwner()})
 	if (tr.Hit) then
 
-		self:GetOwner():EmitSound("shoot_barrel.mp3")
-
 		if CLIENT then return end
+
+		self:GetOwner():EmitSound("shoot_barrel.mp3")
 		
 		local dot = vector_up:Dot(tr.HitNormal)
 		local ent = ents.Create(self.JM_Trap_Entity_Class)

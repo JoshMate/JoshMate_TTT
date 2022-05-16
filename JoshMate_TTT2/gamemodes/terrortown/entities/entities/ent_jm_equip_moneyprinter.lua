@@ -91,7 +91,7 @@ function ENT:OnRemove()
 	local effect = EffectData()
 	effect:SetOrigin(self:GetPos())
 	util.Effect("cball_explode", effect)
-	sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos())
+	if SERVER then sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos()) end
 
 end
 

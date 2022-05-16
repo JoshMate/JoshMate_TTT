@@ -9,16 +9,16 @@ if CLIENT then
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_awp"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_awp_explosive.png"
    SWEP.IconLetter         = "n"
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A silent long range weapon
+      desc = [[A loud long range weapon
 	
 Perfect accuracy and is 1 hit kill
       
-Targets will not scream when killed
+Bullets explode on impact dealing splash damage
       
 Only has one shot
 ]]
@@ -43,23 +43,27 @@ SWEP.Primary.Range         = 10000
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
-SWEP.Primary.SoundLevel    = 30
+SWEP.Primary.SoundLevel    = 90
 
-SWEP.HeadshotMultiplier    = 2
+SWEP.HeadshotMultiplier    = 1
 SWEP.BulletForce           = 100
 SWEP.Primary.Automatic     = false
 
 -- // End of Gun Stats
 
 SWEP.Secondary.IsDelayedByPrimary = 0
-SWEP.IsSilent 			      = true
+SWEP.IsSilent 			      = false
 
 local JM_Cone_NoScope      = 0.1
 local JM_Cone_Scope        = 0
+local JM_Shoot_Range       = 10000
 
-SWEP.Primary.Sound         = "shoot_awp.wav"
+local JM_AWP_Blast_Radius  = 350
+local JM_AWP_Blast_Damage  = 30
+
+SWEP.Primary.Sound         = "shoot_awp_loud.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
-SWEP.Tracer                = "None"
+SWEP.Tracer                = "AR2Tracer"
 SWEP.AutoSpawnable         = false
 SWEP.Spawnable             = false
 SWEP.UseHands              = true
@@ -80,13 +84,59 @@ function SWEP:SetZoom(state)
    end
 end
 
-function SWEP:PrimaryAttack( worldsnd )
-   self.BaseClass.PrimaryAttack( self.Weapon, worldsnd )
+function SWEP:PrimaryAttack()
+
+   -- Weapon Animation, Sound and Cycle data
+   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+   if not self:CanPrimaryAttack() then return end
+   self:EmitSound( self.Primary.Sound )
+   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+   self:TakePrimaryAmmo( 1 )
+   if IsValid(self:GetOwner()) then
+      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
+   end
+   -- #########
+
+   -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
+   
+   local owner = self:GetOwner()
+   if not IsValid(owner) then return end
+
+   -- Hit Direct
+   self:ShootBullet(self.Primary.Damage, self.Primary.Recoil, self.Primary.NumShots, self:GetPrimaryCone())
+
+   -- Explosion
+   owner:LagCompensation(true)
+
+   local tr    = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
+   local pos   = tr.HitPos
+   local spos  = tr.HitPos
+
+   if SERVER then
+      local effect = EffectData()
+      effect:SetStart(pos)
+      effect:SetOrigin(pos)
+      util.Effect("Explosion", effect, true, true)
+      util.Effect("HelicopterMegaBomb", effect, true, true)
+
+      -- Blast
+      util.BlastDamage(self, self:GetOwner(), pos, JM_AWP_Blast_Radius, JM_AWP_Blast_Damage)
+
+   else
+      util.Decal("Scorch", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal)      
+   end
+
+   owner:LagCompensation(false)
+
+   -- Remove Ammo
+
    if SERVER then
       if self:Clip1() <= 0 then
          self:Remove()
       end
    end
+
+   -- #########
 end
 
 -- Add some zoom to ironsights for this gun

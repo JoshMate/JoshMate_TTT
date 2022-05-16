@@ -48,9 +48,9 @@ if CLIENT then
     -- Render Any Screen Effects
     hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
 
-        if LocalPlayer():GetNWBool(JM_BuffNWBool) == true and LocalPlayer():GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-            DrawColorModify( effectTable_Dash)
-        end 
+            if LocalPlayer():GetNWBool(JM_BuffNWBool) == true and LocalPlayer():GetActiveWeapon() and  LocalPlayer():GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+                DrawColorModify( effectTable_Dash)
+            end 
     
     end)
 
@@ -73,8 +73,8 @@ end
 
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
-    if ply:GetNWBool(JM_BuffNWBool) == true and ply:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 2
+    if ply:GetNWBool(JM_BuffNWBool) == true and ply:GetActiveWeapon() and ply:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+        speedMultiplierModifier[1] = speedMultiplierModifier[1] * 2
     end 
 end)
 

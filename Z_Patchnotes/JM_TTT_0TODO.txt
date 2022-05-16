@@ -1,9 +1,13 @@
 
 
-
+// TODO Fix Cannibal text prints
+// TODO Add Score Rating system to C4 (Like Throwing Knives)
 // TODO Paranoia (Fake Sound effects that play randomly for a player)
 // TODO Max Paranoia (Fake Sound effects that play randomly for EVERYONE)
 // TODO Grappling Hook (This is a grand project, and quite complicated)
 // TODO Care Package Mass Silencer (Disables Voice Chat)
 // TODO Care Package Silencer (Gun that Disables Voice Chat)
 // TODO Care Package Silence user (Disables Voice Chat on getting the care package)
+// TODO Poison Grenade?
+// TODO Grenade that invert controls
+// TODO Traitor Buttons broken are stuck on "Resuable after 2 seconds red text" 

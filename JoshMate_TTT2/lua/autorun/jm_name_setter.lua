@@ -19,17 +19,13 @@ local ListOfKnownSteamID64s = {
     ["76561198086960314"] = "Vinny",
     ["76561198134267973"] = "Joel",
     ["76561198354732703"] = "Alex",
-    ["76561198044695827"] = "Adam"
+    ["76561198044695827"] = "Adam",
+    ["76561198045502826"] = "Mike",
+    ["76561198047384880"] = "Yoel"
 } 
 
 meta = FindMetaTable( "Player" )
 function meta:Nick()
-
-    -- Name Jumbler Care Package
-    if JM_Global_isNameJumblerEnabled == true then
-        return "* * * * *"
-    end
-
 
     -- If your Steam ID exists in the known table use your "Forced Name"
     if ListOfKnownSteamID64s[self:SteamID64()] ~= nil then return ListOfKnownSteamID64s[self:SteamID64()] end

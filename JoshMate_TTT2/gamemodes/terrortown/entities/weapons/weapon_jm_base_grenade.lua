@@ -23,7 +23,7 @@ end
 
 SWEP.Base                  = "weapon_jm_base_gun"
 
-SWEP.UseHands           = true
+SWEP.UseHands              = false
 SWEP.ViewModel             = "models/weapons/v_eq_flashbang.mdl"
 SWEP.WorldModel            = "models/weapons/w_eq_flashbang.mdl"
 

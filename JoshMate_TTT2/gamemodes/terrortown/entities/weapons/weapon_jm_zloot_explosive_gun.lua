@@ -53,23 +53,6 @@ local ExplosiveGun_Boom_Radius               = 300
 
 local JM_Shoot_Range                         = 10000
 
-
-
-function SWEP:HitEffectsInit(ent)
-   if not IsValid(ent) then return end
-
-   local effect = EffectData()
-   local ePos = ent:GetPos()
-   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
-   effect:SetStart(ePos)
-   effect:SetOrigin(ePos)
-   
-   
-   
-   util.Effect("cball_explode", effect, true, true)
-end
-
-
 function SWEP:PrimaryAttack()
 
    -- Weapon Animation, Sound and Cycle data

@@ -1,9 +1,6 @@
 -- Give these files out to clients (As they contain Client Code)
 AddCSLuaFile()
 
--- Declare Global Name Jumbler
-JM_Global_isNameJumblerEnabled = false
-
 -----------------------------------------------
 --  Register Network Strings
 -----------------------------------------------
@@ -27,9 +24,6 @@ function JM_Function_ResetAllSettings()
 	-- Slow Mo Clock
 	if timer.Exists("Timer_SloMo_Clock") then timer.Destroy("Timer_SloMo_Clock") end
 	game.SetTimeScale(1)
-
-	-- Name Jumbler
-	JM_Global_isNameJumblerEnabled = false
 
 end
 

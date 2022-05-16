@@ -1,0 +1,29 @@
+###################################
+Josh Mate TTT Update 66 - Patch Notes
+###################################
+#### New Stuff
+###################################
+ 
+[]
+-
+
+###################################
+#### Changes
+###################################
+
+[Throwing Knife]
+- Buffed Minimum Damage: 30 -> 40
+- Buffed Scaled Damage (Does more damage, sooner) : 250 Base -> 330 Base
+
+[Glue Gun]
+- Nerfed Damage: 15 -> 10
+- Nerfed Splash Damage radius: 250 -> 150 units
+
+[Heavy Pistol]
+- Buffed Head Shot Damage: 2.5x -> 3.0x (112 -> 135 DMG) 
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+- Removed the broken name jumbler care package
