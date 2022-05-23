@@ -70,7 +70,7 @@ function ENT:HitPlayer(other, tr)
    local damageTimeDifference = CurTime() - self.KnifeCreationTime
    if damageTimeDifference <= 0 then damageTimeDifference = 0 end
    
-   local damageBase = 330
+   local damageBase = 350
 
    damageFinal = damageBase * damageTimeDifference
 
@@ -83,19 +83,21 @@ function ENT:HitPlayer(other, tr)
    if damageFinal >= 70 then damageRating =     "[3] Decent" end
    if damageFinal >= 80 then damageRating =     "[4] Nice" end
    if damageFinal >= 100 then damageRating =    "[5] Good" end
-   if damageFinal >= 115 then damageRating =    "[6] Great" end
-   if damageFinal >= 130 then damageRating =    "[7] Impressive" end
-   if damageFinal >= 150 then damageRating =    "[8] Excellent" end
-   if damageFinal >= 200 then damageRating =    "[9] Brilliant" end
-   if damageFinal >= 250 then damageRating =    "[10] Fantastic" end
-   if damageFinal >= 300 then damageRating =    "[11] Insane" end
-   if damageFinal >= 350 then damageRating =    "[12] Awe Inspiring" end
-   if damageFinal >= 400 then damageRating =    "[13] Godlike" end
-   if damageFinal >= 500 then damageRating =    "[14] Oh! Cross Map" end
-   if damageFinal >= 550 then damageRating =    "[15] Faze wants to know your location" end
-   if damageFinal >= 600 then damageRating =    "[16] Mum, Get the FUCKING CAMERA! MUMMY!" end
+   if damageFinal >= 125 then damageRating =    "[6] Great" end
+   if damageFinal >= 150 then damageRating =    "[7] Impressive" end
+   if damageFinal >= 200 then damageRating =    "[8] Excellent" end
+   if damageFinal >= 250 then damageRating =    "[9] Brilliant" end
+   if damageFinal >= 300 then damageRating =    "[10] Fantastic" end
+   if damageFinal >= 350 then damageRating =    "[11] Insane" end
+   if damageFinal >= 400 then damageRating =    "[12] Awe Inspiring" end
+   if damageFinal >= 500 then damageRating =    "[13] Godlike" end
+   if damageFinal >= 600 then damageRating =    "[14] Oh! Cross Map" end
+   if damageFinal >= 700 then damageRating =    "[15] Faze wants to know your location" end
+   if damageFinal >= 800 then damageRating =    "[16] Mum, Get the FUCKING CAMERA! MUMMY!" end
 
-   JM_Function_PrintChat(self:GetOwner(), "Equipment", "Throwing Knife Score: " .. tostring(damageFinal) .. " ".. tostring(damageRating))
+   if SERVER then 
+      JM_Function_PrintChat(self:GetOwner(), "Equipment", "Throwing Knife Score: " .. tostring(damageFinal) .. " - ".. tostring(damageRating))
+   end
    
    local dmg = DamageInfo()
    dmg:SetDamage(damageFinal)

@@ -1,6 +1,11 @@
 
+// TODO Make throwing knife dissapear on first impact
+// TODO Explosive Damage does x4 damge to Barriers
+// TODO Super Crowbar Insta Kills Barriers++
+// TODO Reduce throwing knives to 2 uses
+// TODO Power up Game mode
+// TODO Make Barrier HP slowly decay
 
-// TODO Fix Cannibal text prints
 // TODO Add Score Rating system to C4 (Like Throwing Knives)
 // TODO Paranoia (Fake Sound effects that play randomly for a player)
 // TODO Max Paranoia (Fake Sound effects that play randomly for EVERYONE)
@@ -10,4 +15,3 @@
 // TODO Care Package Silence user (Disables Voice Chat on getting the care package)
 // TODO Poison Grenade?
 // TODO Grenade that invert controls
-// TODO Traitor Buttons broken are stuck on "Resuable after 2 seconds red text" 

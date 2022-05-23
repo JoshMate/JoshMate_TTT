@@ -49,6 +49,7 @@ end
 -- @return boolean
 -- @realm shared
 function ENT:IsUsable()
+	-- Josh Mate, to fix traitor buttons this is no longer called
 	return not self:GetLocked() and self:GetNextUseTime() < CurTime()
 end
 

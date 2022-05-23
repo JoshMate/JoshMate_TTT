@@ -4,8 +4,7 @@ Josh Mate TTT Update 66 - Patch Notes
 #### New Stuff
 ###################################
  
-[]
--
+ - Nothing
 
 ###################################
 #### Changes
@@ -13,17 +12,31 @@ Josh Mate TTT Update 66 - Patch Notes
 
 [Throwing Knife]
 - Buffed Minimum Damage: 30 -> 40
-- Buffed Scaled Damage (Does more damage, sooner) : 250 Base -> 330 Base
+- Buffed Scaled Damage: 250 Base -> 330 Base
+// Should now kill at a much closer range by doing more damage sooner
 
 [Glue Gun]
-- Nerfed Damage: 15 -> 10
-- Nerfed Splash Damage radius: 250 -> 150 units
+- Now a care package item (Again)
+// It was REALLY OP as a detective weapon but balancing it would make it boring
 
 [Heavy Pistol]
 - Buffed Head Shot Damage: 2.5x -> 3.0x (112 -> 135 DMG) 
+// This is at point blank range. (There is still Ranged Damage fall off)
+
+[C4]
+- Added a score / rating system that tells you how SICK your C4 was.
+// On a scale of 1 to 16 like with the throwing knife scores
+
+[Cannibal]
+- When eating a body a message now tells you how much HP you gained
+- You can now eat live pigeons, crows and seagulls too
+- Cannibal now grants more health but with diminishing returns 
+- Will always heal you for 100 HP but also grant (+50, +40, +30, +20, +10) Max HP
+// This is a buff to your first couple bodies but stops a HP snowball
 
 ###################################
 ##### Small Changes / Fixes / Code 
 ###################################
 
-- Removed the broken name jumbler care package
+- Attempted to fix the notorious Traitor buttons not being usable when you are traitor bug.
+- Removed the broken name jumbler care package loot

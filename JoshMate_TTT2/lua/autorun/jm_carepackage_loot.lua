@@ -24,7 +24,8 @@ local lootTable = {
         JM_CarePackage_Loot_Pigeon,
         JM_CarePackage_Loot_Rooty_Tooty,
         JM_CarePackage_Loot_Mega_Glue,
-        JM_CarePackage_Loot_Mega_Jump
+        JM_CarePackage_Loot_Mega_Jump,
+        JM_CarePackage_Loot_GlueGun
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -240,6 +241,11 @@ end
 function JM_CarePackage_Loot_A_Bird_Flew_In_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","A Bird Flew In Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
+end
+
+function JM_CarePackage_Loot_GlueGun( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Glue Gun")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_gluegun")
 end
 
 -------------------------------------------------

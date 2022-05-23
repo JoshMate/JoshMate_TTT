@@ -28,7 +28,7 @@ end
 SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Recoil        = 0
-SWEP.Primary.Damage        = 10
+SWEP.Primary.Damage        = 20
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.18
 SWEP.Primary.Cone          = 0.012
@@ -42,14 +42,14 @@ SWEP.Primary.Ammo          = "pistol"
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
 SWEP.Kind                  = WEAPON_HEAVY
-SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
+SWEP.CanBuy                = {} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_GLUEGUN
 SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_sg552.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_rif_sg552.mdl")
 
-local glueHitRadius                 = 150
+local glueHitRadius                 = 200
 local JM_Shoot_Range                = 10000
 
 

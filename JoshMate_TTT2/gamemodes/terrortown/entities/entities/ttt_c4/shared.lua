@@ -274,6 +274,9 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 	local plys = player.GetAll()
 	local playersCaughtInBlase = 0
 
+	-- Damage for Score Calc
+	local damageFinal = 0
+
 	for i = 1, #plys do
 		local ply = plys[i]
 
@@ -294,6 +297,7 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 		if ply:Health() <= dmg then dmg = ply:Health() end
 
 		playersCaughtInBlase = playersCaughtInBlase + 1
+		damageFinal = damageFinal + dmg
 
 		local dmginfo = DamageInfo()
 		dmginfo:SetDamage(dmg)
@@ -305,10 +309,32 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 
 		ply:TakeDamageInfo(dmginfo)
 	end
+ 
+	damageFinal = math.Round(damageFinal, 0)
+
+	local damageRating = "[0] Terrible"
+	if damageFinal >= 100 then damageRating =    "[1] Bad" end
+	if damageFinal >= 150 then damageRating =    "[2] Okay" end
+	if damageFinal >= 200 then damageRating =    "[3] Decent" end
+	if damageFinal >= 250 then damageRating =    "[4] Nice" end
+	if damageFinal >= 300 then damageRating =    "[5] Good" end
+	if damageFinal >= 350 then damageRating =    "[6] Great" end
+	if damageFinal >= 400 then damageRating =    "[7] Impressive" end
+	if damageFinal >= 450 then damageRating =    "[8] Excellent" end
+	if damageFinal >= 500 then damageRating =    "[9] Brilliant" end
+	if damageFinal >= 600 then damageRating =    "[10] Fantastic" end
+	if damageFinal >= 800 then damageRating =    "[11] Insane" end
+	if damageFinal >= 1000 then damageRating =   "[12] Awe Inspiring" end
+	if damageFinal >= 1400 then damageRating =   "[13] Godlike" end
+	if damageFinal >= 1600 then damageRating =   "[14] Oh! Cross Map" end
+	if damageFinal >= 1800 then damageRating =   "[15] Faze wants to know your location" end
+	if damageFinal >= 2000 then damageRating =   "[16] Mum, Get the FUCKING CAMERA! MUMMY!" end
+ 
+	
 
 	-- Send Breakdown of damage to Traitor
 	if SERVER then
-		JM_Function_PrintChat(dmgowner, "C4", tostring(playersCaughtInBlase) .. " Players got caught in your C4's Blast!")
+		JM_Function_PrintChat(dmgowner, "Equipment", "C4 Score: " .. tostring(damageFinal) .. " - ".. tostring(damageRating) .. " - " .. tostring(playersCaughtInBlase) .. " Man")
 	end
 
 end

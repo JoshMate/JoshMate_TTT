@@ -14,9 +14,9 @@ if CLIENT then
 	
 Left Click: Consume a Body
    
-Consuming a Body grants +25 Max HP and heals 75
+Consuming a body heals the user and increases their Maximum HP
    
-Only has 6 uses
+Only has 5 uses and makes a sound
 ]]
    };
 
@@ -30,10 +30,10 @@ SWEP.HoldType              = "normal"
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 0.45
+SWEP.Primary.Delay         = 0.40
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 6
-SWEP.Primary.DefaultClip   = 6
+SWEP.Primary.ClipSize      = 5
+SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 4
 SWEP.Primary.SoundLevel    = 50
@@ -49,8 +49,10 @@ SWEP.IsSilent              = true
 SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
-local Cannibal_Eat_MaxHP      = 30
+local Cannibal_Eat_MaxHP      = 10
+local Cannibal_Eat_Heal       = 100
 local Cannibal_Eat_Range      = 150
+
 
 if TTT2 and CLIENT then
 	hook.Add("Initialize", "jm_cannibalInit", function() 
@@ -78,12 +80,14 @@ function SWEP:PrimaryAttack()
       local target = tr.Entity
 
       if IsValid(target) then
-         if target:GetClass() == "prop_ragdoll" then
+         if target:GetClass() == "prop_ragdoll" or target:GetClass() == "npc_pigeon" or target:GetClass() == "npc_crow" or target:GetClass() == "npc_seagull" then
 
             local own = self:GetOwner()
 
-            own:SetMaxHealth(own:GetMaxHealth() + Cannibal_Eat_MaxHP)
-            own:SetHealth(own:Health() + (Cannibal_Eat_MaxHP * 3))
+
+            self.CannibalMaxHPGained = (Cannibal_Eat_MaxHP * self:Clip1())
+            own:SetMaxHealth(own:GetMaxHealth() + self.CannibalMaxHPGained)
+            own:SetHealth(own:Health() + (Cannibal_Eat_Heal))
 
             own:SetHealth(math.Clamp(own:Health(), 0, own:GetMaxHealth()))
             
@@ -117,7 +121,7 @@ function SWEP:PrimaryAttack()
          JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't eat that with Cannibal..." )
       end
       if ate == true then
-         JM_Function_PrintChat(self:GetOwner(), "Equipment","Body Eaten (" .. tostring(Cannibal_Eat_MaxHP) .. ")" )
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","Body Eaten (+" .. tostring(self.CannibalMaxHPGained) .. " Max HP)" )
       end
    end
 
