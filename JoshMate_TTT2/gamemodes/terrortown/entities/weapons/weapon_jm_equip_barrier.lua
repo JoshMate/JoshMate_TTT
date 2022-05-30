@@ -12,8 +12,8 @@ SWEP.Instructions			= "Leftclick to place a barrier"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 3
-SWEP.Primary.DefaultClip	= 3
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -40,11 +40,9 @@ if CLIENT then
 	   name = "Barrier",
 	   desc = [[Place down a defensive barrier
 	
-Left click to place a destrucible barrier in front of you
+Left click to place a projectile blocking barrier
 
-After 3s the barrier will arm blocking passage and projectiles
-
-It has 3 uses
+It has 2 uses
 ]]
 	}
 

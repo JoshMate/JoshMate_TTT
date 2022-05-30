@@ -15,9 +15,10 @@ ENT.Model = Model("models/weapons/w_knife_t.mdl")
 ENT.Projectile = true
 
 ENT.HasHit = false
+ENT.KnifeCollideTime = 0
 ENT.IsSilent = true
 
-ENT.KnifeTimeOutDelay = 2
+ENT.KnifeTimeOutDelay = 1
 
 ENT.WeaponID = AMMO_THROWINGKNIFEPROJ
 
@@ -58,6 +59,16 @@ function ENT:Initialize()
       self.StartPos = self:GetPos()
 
       self:NextThink(CurTime())
+   end
+
+end
+
+function ENT:Think()
+
+   if self.KnifeCollideTime == 0 then return end
+
+   if CurTime() >= (self.KnifeCollideTime + self.KnifeTimeOutDelay ) then
+      self:Remove()
    end
 
 end
@@ -114,32 +125,13 @@ function ENT:HitPlayer(other, tr)
 
 end
 
-if SERVER then
-  function ENT:Think()
-
-      if self.KnifeBounces >= 1 then 
-
-         if (self.KnifeBounceTime + self.KnifeTimeOutDelay) <= CurTime() then
-            self.HasHit = true
-            self:Remove()
-         end
-
-      end
-
-  end
-end
-
 -- When this entity touches anything that is not a player, it should turn into a
 -- weapon ent again. If it touches a player it sticks in it.
 if SERVER then
 
    function ENT:PhysicsCollide(data, phys)
 
-      if self.KnifeBounces < 1 then 
-         self.KnifeBounceTime = CurTime()
-      end
-
-      self.KnifeBounces = self.KnifeBounces + 1
+      if self.HasHit == true then return end
 
       local other = data.HitEntity
       if not IsValid(other) and not other:IsWorld() then return end
@@ -149,10 +141,11 @@ if SERVER then
          if tr.Hit and tr.Entity == other then
             self:HitPlayer(other, tr)
          end
-
-         return true
       end
 
-   end
+      self.KnifeCollideTime = CurTime()
+      self.HasHit = true
 
+      return true
+   end
 end

@@ -17,7 +17,7 @@ Targets are slowed by 70% for 5 seconds
 	 
 Targets also have their vision distorted
 
-Has 3 Uses
+Has 2 Uses
 ]]
 };
 
@@ -42,8 +42,8 @@ SWEP.Spawnable          = false
 SWEP.CanBuy = {ROLE_DETECTIVE}
 SWEP.LimitedStock = true
 
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_stun_proj"

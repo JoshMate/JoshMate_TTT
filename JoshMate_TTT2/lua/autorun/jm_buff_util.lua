@@ -69,7 +69,7 @@ JM_Global_Buff_SilencedPistol_IconPath                  = "vgui/ttt/joshmate/hud
 JM_Global_Buff_SilencedPistol_IconGoodBad               = "bad"
 
 JM_Global_Buff_StunGrenade_Name                         = "Stun Grenade"
-JM_Global_Buff_StunGrenade_Duration                     = 7
+JM_Global_Buff_StunGrenade_Duration                     = 10
 JM_Global_Buff_StunGrenade_NWBool                       = "JM_Buff_NWBool_IsStunGrenade"
 JM_Global_Buff_StunGrenade_IconName                     = "JM_Buff_Icon_StunGrenade"
 JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
@@ -111,7 +111,7 @@ JM_Global_Buff_Chameleon_IconPath                       = "vgui/ttt/joshmate/hud
 JM_Global_Buff_Chameleon_IconGoodBad                    = "good"
 
 JM_Global_Buff_NewtonLauncher_Name                         = "Newton Launcher"
-JM_Global_Buff_NewtonLauncher_Duration                     = 7
+JM_Global_Buff_NewtonLauncher_Duration                     = 3
 JM_Global_Buff_NewtonLauncher_NWBool                       = "JM_Buff_NWBool_IsNewtonLauncher"
 JM_Global_Buff_NewtonLauncher_IconName                     = "JM_Buff_Icon_NewtonLauncher"
 JM_Global_Buff_NewtonLauncher_IconPath                     = "vgui/ttt/joshmate/hud_newtonlauncher.png"
@@ -180,6 +180,12 @@ JM_Global_Buff_Dash_IconName                                    = "JM_Buff_Icon_
 JM_Global_Buff_Dash_IconPath                                    = "vgui/ttt/joshmate/hud_dash.png"
 JM_Global_Buff_Dash_IconGoodBad                                 = "good"
 
+JM_Global_Buff_BarrierSlow_Name                                 = "Barrier Slow"
+JM_Global_Buff_BarrierSlow_Duration                             = 3
+JM_Global_Buff_BarrierSlow_NWBool                               = "JM_Buff_NWBool_IsBarrierSlow"
+JM_Global_Buff_BarrierSlow_IconName                             = "JM_Buff_Icon_BarrierSlow"
+JM_Global_Buff_BarrierSlow_IconPath                             = "vgui/ttt/joshmate/hud_slow.png"
+JM_Global_Buff_BarrierSlow_IconGoodBad                          = "bad"
 
 
 

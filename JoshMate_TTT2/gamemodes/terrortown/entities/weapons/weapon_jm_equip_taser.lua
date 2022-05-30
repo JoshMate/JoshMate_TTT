@@ -18,7 +18,7 @@ Prevents the target from moving for 12 seconds
    
 The target will drop their currently held weapon
    
-Has 3 uses, perfect acccuracy and long range
+Has 2 uses, perfect acccuracy and long range
 ]]
    };
 
@@ -32,8 +32,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false

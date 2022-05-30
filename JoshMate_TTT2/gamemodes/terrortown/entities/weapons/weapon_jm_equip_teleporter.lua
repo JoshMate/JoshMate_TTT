@@ -129,6 +129,22 @@ function SWEP:SecondaryAttack()
       surface.PlaySound("teleport_mark.wav")
    end
 
+   if SERVER  and self:GetOwner():IsDetective() then
+
+      for _, v in ipairs(ents.FindByClass("ent_jm_equip_cctv")) do
+          if v:GetNWEntity("JM_Camera_PlayerOwner")  == self:GetOwner() then
+              v:Remove() -- if the player already has a camera, remove it
+          end
+      end
+
+      local camera = ents.Create("ent_jm_equip_cctv")
+      camera:SetPos(self:GetOwner():EyePos())
+      camera:SetAngles(self:GetOwner():EyeAngles())
+      camera:Spawn()
+      camera:Activate()
+      camera:SetNetworkedEntity("JM_Camera_PlayerOwner", self:GetOwner())
+  end
+
    
 end
 
@@ -351,6 +367,14 @@ if SERVER then
    function SWEP:OnRemove()
       if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+         if self:GetOwner():IsDetective() then
+
+            for _, v in ipairs(ents.FindByClass("ent_jm_equip_cctv")) do
+                if v:GetNWEntity("JM_Camera_PlayerOwner")  == self:GetOwner() then
+                    v:Remove() -- if the player already has a camera, remove it
+                end
+            end
+         end
       end
    end
 end

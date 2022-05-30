@@ -29,21 +29,13 @@ end
 
 SWEP.Base                  = "weapon_jm_base_gun"
 
-SWEP.Primary.Damage        = 10
-SWEP.Primary.Delay         = 0.30
+SWEP.Primary.Damage        = 0
+SWEP.Primary.Delay         = 0.50
 SWEP.Primary.Cone          = 0
 SWEP.Primary.Recoil        = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
-
-SWEP.Secondary.Damage        = 10
-SWEP.Secondary.Delay         = 0.30
-SWEP.Secondary.Cone          = 0
-SWEP.Secondary.Recoil        = 0
-SWEP.Secondary.ClipSize      = 1
-SWEP.Secondary.DefaultClip   = 1
-SWEP.Secondary.ClipMax       = 0
 
 SWEP.HeadshotMultiplier    = 2
 SWEP.Primary.SoundLevel    = 50
@@ -76,8 +68,8 @@ end
 
 
 local function PushRadius(pos, pusher, newtonLauncher)
-   local radius = 500
-   local push_force = 500
+   local radius = 128
+   local push_force = 550
 
    -- push players
    for k, target in ipairs(ents.FindInSphere(pos, radius)) do
@@ -90,7 +82,6 @@ local function PushRadius(pos, pusher, newtonLauncher)
          JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Set Status and print Message
-         JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
          JM_GiveBuffToThisPlayer("jm_buff_newtonlauncher",target,pusher)
          -- End Of
 
@@ -118,52 +109,6 @@ local function PushRadius(pos, pusher, newtonLauncher)
       end
    end
 end
-
-local function PullRadius(pos, pusher, newtonLauncher)
-   local radius = 500
-   local push_force = 500
-
-   -- push players
-   for k, target in ipairs(ents.FindInSphere(pos, radius)) do
-      if target:IsValid() and target:IsPlayer() and target:Alive() and target:IsTerror() then
-         local tpos = target:LocalToWorld(target:OBBCenter())
-         local dir = (tpos - pos):GetNormal()
-            
-         -- Give a Hit Marker to This Player
-         local hitMarkerOwner = pusher
-         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
-
-         -- Set Status and print Message
-         JM_RemoveBuffFromThisPlayer("jm_buff_newtonlauncher",ent)
-         JM_GiveBuffToThisPlayer("jm_buff_newtonlauncher",target,pusher)
-         -- End Of
-
-         -- always need an upwards push to prevent the ground's friction from
-         -- stopping nearly all movement
-         dir.z = math.abs(dir.z) - 0.8
-
-         local push = dir * push_force
-
-         -- try to prevent excessive upwards force
-         local vel = target:GetVelocity() + push
-         vel.z = math.min(vel.z, push_force)
-
-         target:SetVelocity(vel*-1)
-
-         -- JM New Was Pushed Attribution System
-         newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
-         newWasPushedContract.pusher = pusher
-         newWasPushedContract.target = target
-         newWasPushedContract.weapon = self:GetClass()
-         newWasPushedContract:Spawn()
-         target.was_pushed = newWasPushedContract
-         --
-
-      end
-   end
-end
-
-
 
 function SWEP:PrimaryAttack()
    
@@ -215,69 +160,21 @@ function SWEP:PrimaryAttack()
       PushRadius(tr.HitPos, owner, self)
    end
 
+   -- Remove Ammo
+
    if SERVER then
-      self:Remove()
+      if self:Clip1() <= 0 then
+         self:Remove()
+      end
    end
+
+   -- #########
 
 end
 
 function SWEP:SecondaryAttack()
-   
-   if self.Secondary.IsDelayedByPrimary == 1 then self:SetNextSecondaryFire(CurTime() + self.Primary.Delay) end 
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-
-	if not self:CanPrimaryAttack() then return end
-
-	if not worldsnd then
-		self:EmitSound(self.Primary.Sound, self.Primary.SoundLevel)
-	elseif SERVER then
-		sound.Play(self.Primary.Sound, self:GetPos(), self.Primary.SoundLevel)
-	end
-
-   local cone = self.Primary.Cone
-   local num = 1
-
-   local bullet = {}
-   bullet.Num    = num
-   bullet.Src    = self:GetOwner():GetShootPos()
-   bullet.Dir    = self:GetOwner():GetAimVector()
-   bullet.Spread = Vector( cone, cone, 0 )
-   bullet.Tracer = 1
-   bullet.Force  = 1
-   bullet.Damage = self.Primary.Damage
-   bullet.TracerName = "AirboatGunHeavyTracer"
-
-   self:GetOwner():FireBullets( bullet )
-   self:TakePrimaryAmmo(1)
-
-   local owner = self:GetOwner()
-
-	if not IsValid(owner) or owner:IsNPC() or not owner.ViewPunch then return end
-
-	owner:ViewPunch(Angle(util.SharedRandom(self:GetClass(), -0.2, -0.1, 0) * self.Primary.Recoil, util.SharedRandom(self:GetClass(), -0.1, 0.1, 1) * self.Primary.Recoil, 0))
-
-   if SERVER then
-      local maxShootRange = 5000
-      local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * maxShootRange, filter = self.Owner})
-      local effect = EffectData()
-      effect:SetStart(tr.HitPos)
-      effect:SetOrigin(tr.HitPos)
-      
-      
-      
-      util.Effect("cball_explode", effect, true, true)
-      sound.Play(Sound("npc/assassin/ball_zap1.wav"), tr.HitPos, 100, 100)
-
-      PullRadius(tr.HitPos, owner, self)
-   end
-
-   if SERVER then
-      self:Remove()
-   end
-
+   return
 end
-
-
 
 -- ##############################################
 -- Josh Mate Various SWEP Quirks
@@ -286,7 +183,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Push players away from your cursor", "Pull players in to your cursor", true)
+	   self:AddTTT2HUDHelp("Push players away from your cursor", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

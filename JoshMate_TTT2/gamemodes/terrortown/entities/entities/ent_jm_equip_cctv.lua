@@ -8,6 +8,8 @@ ENT.Instructions        = "Camera"
 ENT.Spawnable           = false
 ENT.AdminSpawnable      = false
 
+JM_CCTV_Colour 			= Color( 0, 150, 255, 255 )
+
 local NOISE = Material("tttcamera/cameranoise")
 
 function ENT:Initialize()
@@ -18,6 +20,7 @@ function ENT:Initialize()
     self:DrawShadow(false)
     self:SetModelScale(0.35, 0)
     self.OriginalY = self:GetAngles().y
+	self:SetColor(JM_CCTV_Colour)
 end
 
 function ENT:Think()

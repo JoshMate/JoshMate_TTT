@@ -9,7 +9,7 @@ SWEP.Kind = WEAPON_EQUIP2
 SWEP.AutoSpawnable = false
 SWEP.UseHands              = false
 
-SWEP.CanBuy = {ROLE_DETECTIVE}
+SWEP.CanBuy = {}
 
 SWEP.LimitedStock = true
 SWEP.AllowDrop = true

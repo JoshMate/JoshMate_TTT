@@ -5,9 +5,9 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 if CLIENT then return end
 
-local iRandomChance_Max = 7
+local iRandomChance_Max = 12
 local iRandomChance_Current = iRandomChance_Max
-local iRandomChance_inc = 2
+local iRandomChance_inc = 5
 
 
 function JM_GameMode_Function_Main()
@@ -21,8 +21,12 @@ function JM_GameMode_Function_Main()
         local tableOfGamemodes = {
             JM_GameMode_ProtectTheFiles_Init,
             JM_GameMode_BountyHunter_Init,
+            JM_GameMode_Powerup_Init,
+            JM_GameMode_Powerup_Init,
+            JM_GameMode_DefuseTheBombs_Init,
             JM_GameMode_DefuseTheBombs_Init,
             JM_GameMode_DefuseTheBombs_Init
+            
         }
 
 
@@ -35,7 +39,7 @@ function JM_GameMode_Function_Main()
 
         local iRandomRoll = math.random(1, table.getn(tableOfGamemodes))
 
-        tableOfGamemodes[iRandomRoll]()        
+        tableOfGamemodes[iRandomRoll]()      
 
     else
 
@@ -81,6 +85,17 @@ function JM_GameMode_BountyHunter_Init()
 
     -- Spawn the Gamemode Handler Object
     local GameModeHandlerObject = ents.Create("ent_jm_objective_03_bounty_base")
+    GameModeHandlerObject:Spawn()
+
+end
+
+function JM_GameMode_Powerup_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Powerup") end
+
+    -- Spawn the Gamemode Handler Object
+    local GameModeHandlerObject = ents.Create("ent_jm_objective_04_power_base")
     GameModeHandlerObject:Spawn()
 
 end
