@@ -1,62 +1,37 @@
 ###################################
-Josh Mate TTT Update 67 - Patch Notes
+Josh Mate TTT Update 68 - Patch Notes
 ###################################
 #### New Stuff
 ###################################
  
-[Gamemode: Power Up]
-- Innocents must capture all the batteries to win!
-- Batteries spawns 1 at a time, Press E to capture them
-- There is a 20 second delay between batteries spawning and becoming usable
-- Once 6 batteries have been captured by Innocents, they win!
-
-[Gamemodes]
-- New algorithm for selecting Gamemodes, less back to back, more consistency
-- Innocent Objective Gamemodes like Defuse the bombs and Powerup are more common
+[Floor Bomb]
+- A new traitor weapon
+- Lay down a pressure plate trap that is triggered when stepped on
+- The trap deals High damage to the person that stepped on it
+- It also deals a small amount of splash damage all near it
+- The bomb is easy to see but can only be destroyed or defused if you have Bomb Squad
+- There is a 0.7 second delay between stepping on it and it exploding, (Do with this information what you will)
+- You only get 1
 
 ###################################
 #### Changes
 ###################################
 
 [Barrier]
-- Barrier Arm Time is now INSTANT
-- Barriers now block everything apart from players
-- Barriers are now immune to ALL damage
-- Walking into a barrier slows the player for a short duration and plays a sound
-- This slow / sound effect can only trigger once every 5 seconds per barrier
-- HP now naturally decays to 0 over the course of about 120 seconds
-- Traitors and Detectives can mash E to loudly break them faster
-- Rewrote the code to bring it up to modern stability / performance standards
-- You now only get 2 of them
+- Increased slow magnitude: 30% -> 20% Move Speed
 
-[CCTV Camera]
-- Removed from the game, Effects merged into Teleporter
-
-[Teleporter]
-- These new Camera features only happen if you are a Detective!
-- When marking a new location, you also place a CCTV Camera there
-- Works exactly like the old one, and has as many uses as the teleporter
-- When your teleporter runs out of charges, you Camera is removed
-
-[Throwing Knife]
-- Reduced ammo: 3 -> 2 Knives
-- Knives de-spawn much quicker now (No more getting insta-killed by floor knives)
-
-[Newton Launcher]
-- Increased push force: 500 -> 550 Units
-- Increased number of uses: 1 -> 2 Uses
-- Reduced push effect radius: 500 -> 128 Units
-- Reduced Visual effect duration: 7 -> 3 Seconds
-
-[Taser]
-- Reduced number of uses: 3 -> 2 Uses
-
-[Stun Grenades]
-- Reduced number of uses: 3 -> 2 Uses
-- Increased duration of stun: 7 -> 10 Seconds
+[Hands Free]
+- Soap, Beartrap, money printer and Floor Bomb all need your hands free to disarm
 
 ###################################
 ##### Small Changes / Fixes / Code 
 ###################################
 
-- 
+[Small Changes] 
+- All sniper scopes red dots are now centred on the screen
+
+[Fixes] 
+- The Power up game mode could get soft locked due to a referencing error
+
+[Code]
+- The widely used "SpawnThisThingRandomly" function now returns a list of everything it spawned

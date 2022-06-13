@@ -29,6 +29,7 @@ function ENT:Initialize()
 	if SERVER then JM_GiveBuffToThisPlayer("jm_buff_moneyprinter",self:GetOwner(),self:GetOwner()) end
 	-- End Of
 
+	-- Simple Use
 	if SERVER then
 		self:SetUseType(SIMPLE_USE)
 	end
@@ -68,13 +69,20 @@ function ENT:Use( activator, caller )
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() then
 
 		if IsValid(activator) and activator:Alive() and SERVER then
-			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+25 Max HP)")
-			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+1 Credit)")
-			activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
-			activator:SetHealth(activator:Health() + 25) 
-			activator:AddCredits(1)
+
+			if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+				JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+25 Max HP)")
+				JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+1 Credit)")
+				activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
+				activator:SetHealth(activator:Health() + 25) 
+				activator:AddCredits(1)
+				self:Remove()
+			else
+				JM_Function_PrintChat(activator, "Equipment", "You need your hands free to do that...")
+			end
+
 		end	
-		self:Remove()
+		
 	end
 end
 

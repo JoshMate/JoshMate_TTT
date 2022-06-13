@@ -38,6 +38,11 @@ function ENT:Initialize()
 		self:GetPhysicsObject():EnableMotion(false)
 	end
 
+	-- Simple Use
+	if SERVER then
+		self:SetUseType(SIMPLE_USE)
+	end
+
 	-- JoshMate Changed
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
 	self:SetColor(JM_Soap_Colour_Active) 
@@ -55,11 +60,17 @@ function ENT:Use( activator, caller )
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) then
 
 		if activator:IsTerror() then
-			JM_Function_PrintChat(self.Owner, "Equipment","Your Soap has been destroyed!")
-            self:Effect_Sparks()
-            -- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-			JM_Function_SendHUDWarning(false,self:EntIndex())
-			self:Remove()
+
+			if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+				JM_Function_PrintChat(self.Owner, "Equipment","Your Soap has been destroyed!")
+				self:Effect_Sparks()
+				-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+				JM_Function_SendHUDWarning(false,self:EntIndex())
+				self:Remove()
+			else
+				JM_Function_PrintChat(activator, "Equipment", "You need your hands free to do that...")
+			end
+
 		end
 		
 	end

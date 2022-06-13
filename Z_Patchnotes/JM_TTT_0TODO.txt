@@ -1,6 +1,6 @@
-// TODO Fix Battery (Next Battery Accessing array of base ents, picture in TTT Discusssion)
-// TODO Centre scope dot
-// TODO Saw blade tratior trap that is explosive but easy to see
+// TODO make the traitor VC labels appear red for spectators
+// TODO Make Floor bomb landmine, give 2 of em
+// TODO diverisfy Dopamine button
 
 // TODO Paranoia (Fake Sound effects that play randomly for a player)
 // TODO Max Paranoia (Fake Sound effects that play randomly for EVERYONE)

@@ -66,10 +66,7 @@ function ENT:BatteryUse()
 	if CLIENT then return end
 	JM_Function_SendHUDWarning(false,self:EntIndex())
 
-	-- Spawn the Next one
-	local batteryMasterEnt = ents.FindByClass( "ent_jm_objective_04_power_base" )
-	batteryMasterEnt[1]:SpawnNextBattery()
-
+	self.batteryMaster:SpawnNextBattery()
 
 	self:Remove()
 end

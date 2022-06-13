@@ -12,14 +12,7 @@ ENT.BatteryNumberLeft	= 6
 
 if CLIENT then return end
 
-function ENT:Initialize()
-
-	JM_GameMode_ProtectTheFiles_Start()
-
-end
-
-
-function JM_GameMode_ProtectTheFiles_Start()
+function ENT:JM_GameMode_ProtectTheFiles_Start()
 
 	-- Validation Checks
 	if CLIENT then return end
@@ -35,8 +28,15 @@ function JM_GameMode_ProtectTheFiles_Start()
     JM_Function_PlaySound("gamemode/power_start.mp3")
 
 	-- Spawn the Objective Ents
-    JM_Function_SpawnThisThingInRandomPlaces("ent_jm_objective_04_power_ent", NumberOfThingsToSpawn)
+    local newBatteryList =  JM_Function_SpawnThisThingInRandomPlaces("ent_jm_objective_04_power_ent", NumberOfThingsToSpawn)
+	newBatteryList[1].batteryMaster = self
 
+
+end
+
+function ENT:Initialize()
+
+	self:JM_GameMode_ProtectTheFiles_Start()
 
 end
 
@@ -53,7 +53,9 @@ function ENT:SpawnNextBattery()
 	else
 		JM_Function_PlaySound("gamemode/power_activate.mp3")
 		JM_Function_PrintChat_All("Powerup", "A Battery has been Captured! (" .. tostring(self.BatteryNumberLeft) .. " Left!)")
-		JM_Function_SpawnThisThingInRandomPlaces("ent_jm_objective_04_power_ent", 1)
+		-- Spawn the Objective Ents
+		local newBatteryList =  JM_Function_SpawnThisThingInRandomPlaces("ent_jm_objective_04_power_ent", 1)
+		newBatteryList[1].batteryMaster = self
 	end
 	
 

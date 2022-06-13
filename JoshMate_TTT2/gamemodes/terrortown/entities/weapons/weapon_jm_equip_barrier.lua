@@ -42,6 +42,8 @@ if CLIENT then
 	
 Left click to place a projectile blocking barrier
 
+It also makes a sound and slows when touched
+
 It has 2 uses
 ]]
 	}

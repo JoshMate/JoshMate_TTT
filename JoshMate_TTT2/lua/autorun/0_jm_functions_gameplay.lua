@@ -117,6 +117,7 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
     local NumberToSpawn = numberOfTimes
     local possibleSpawns = ents.FindByClass( "ent_jm_carepackage_spawn" )
     local possibleSpawnsPlayer = ents.FindByClass( "info_player_start" )
+	local listOfAllSpawnedItems = {}
     
     for i=1,NumberToSpawn do 
 
@@ -134,6 +135,7 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
                 ent:SetPos(spawn:GetPos() + Vector(0, 0, 14))
                 ent:Spawn()  
                 ent.gmEntIndex = i
+				table.insert( listOfAllSpawnedItems, ent)
             else
 
                 if #possibleSpawnsPlayer > 0 then
@@ -145,6 +147,7 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
                     ent:SetPos(spawn:GetPos() + Vector(0, 0, 6))
                     ent:Spawn()  
                     ent.gmEntIndex = i
+					table.insert( listOfAllSpawnedItems, ent)
                 end
 
             end
@@ -160,13 +163,14 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
                 ent:SetPos(spawn:GetPos() + Vector(0, 0, 6))
                 ent:Spawn()  
                 ent.gmEntIndex = i
+				table.insert( listOfAllSpawnedItems, ent)
             end
 
         end
-
         
-
     end
+
+	return listOfAllSpawnedItems
 
 end
 

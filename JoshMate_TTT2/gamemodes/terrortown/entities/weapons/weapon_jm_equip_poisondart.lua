@@ -219,8 +219,12 @@ if CLIENT then
          surface.DrawLine( 0, 0, scrW, 0 )
          surface.DrawLine( 0, scrH - 1, scrW, scrH - 1 )
 
-         surface.SetDrawColor(0, 255, 0, 255)
-         surface.DrawLine(x, y, x + 1, y + 1)
+         -- Draw Coloured dot in the middle
+         surface.SetDrawColor(255, 0, 0, 255)
+         surface.DrawLine(x, y, x + 1, y + 0)
+         surface.DrawLine(x, y, x + 0, y + 1)
+         surface.DrawLine(x, y, x - 1, y - 0)
+         surface.DrawLine(x, y, x - 0, y - 1)
 
          -- scope
          surface.SetTexture(scope)

@@ -1,6 +1,6 @@
 if CLIENT then return end
 
-AddCSLuaFile( "autorun/hitmarkers_cl.lua" )
+AddCSLuaFile( "autorun/jm_hitmarkers_cl.lua" )
 resource.AddFile( "sound/hitmarkers/hitmarker.ogg" )
 resource.AddFile( "materials/hitmarkers/hitmarker.png" )
 
