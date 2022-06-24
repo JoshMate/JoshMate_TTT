@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Type                = "anim"
-ENT.PrintName           = "Floor Bomb"
+ENT.PrintName           = "Land Mine"
 ENT.Author              = "Josh Mate"
 ENT.Purpose             = "Trap"
 ENT.Instructions        = "Trap"
@@ -11,13 +11,15 @@ ENT.AdminSpawnable      = false
 
 local JM_FloorBomb_Model            = "models/maxofs2d/button_02.mdl"
 local JM_FloorBomb_Colour			= Color( 255, 0, 0, 255 )
+local JM_FloorBomb_Colour_Dormant	= Color( 0, 0, 0, 0 )
 local JM_FloorBomb_Sound_Triggered	= "floorbomb_triggered.mp3"
 local JM_FloorBomb_Sound_Destroyed	= "0_main_click.wav"
       
+local JM_FloorBomb_ActivateDelay    = 5
 local JM_FloorBomb_TriggerDelay     = 0.7
 local JM_FloorBomb_DMG_Direct     	= 100
-local JM_FloorBomb_DMG_Splash		= 25
-local JM_FloorBomb_DMG_Radius		= 200
+local JM_FloorBomb_DMG_Splash		= 40
+local JM_FloorBomb_DMG_Radius		= 250
 
 if CLIENT then
     function ENT:Draw()
@@ -30,6 +32,7 @@ function ENT:Initialize()
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetMoveType( MOVETYPE_VPHYSICS ) 
 	self:SetSolid( SOLID_VPHYSICS )
+	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
     local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
@@ -43,11 +46,15 @@ function ENT:Initialize()
 
 	-- JoshMate Changed
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor(JM_FloorBomb_Colour) 
+	self:SetColor(JM_FloorBomb_Colour_Dormant) 
 	self:DrawShadow(false)
 
 	-- Josh Mate New Warning Icon Code
 	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_floorbomb",self:GetPos(),0,true)
+
+	-- Setup Dormance
+	self.floorbomb_isActive_status	= false
+	self.floorbomb_isActive_time	= CurTime() + JM_FloorBomb_ActivateDelay
 
 	-- Setup Trigger
 	self.floorBombHasBeenTriggered 	= false
@@ -56,9 +63,20 @@ function ENT:Initialize()
 
 end
 
+function ENT:floorbombActive()
+
+	self.floorbomb_isActive_status = true
+	self:SetCollisionGroup(COLLISION_GROUP_NONE)
+	self:SetColor(JM_FloorBomb_Colour) 
+
+
+end
+
 function ENT:Use( activator, caller )
 
 	if CLIENT then return end
+
+	if self.floorbomb_isActive_status == false then return end
 
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) then
 
@@ -81,7 +99,11 @@ function ENT:Think()
 
 	if CLIENT then return end
 
-	if self.floorBombHasBeenTriggered == true then
+	if self.floorbomb_isActive_status == false and CurTime() >= self.floorbomb_isActive_time then
+		self:floorbombActive()
+	end
+
+	if self.floorbomb_isActive_status == true and self.floorBombHasBeenTriggered == true then
 
 		if CurTime() >= self.floorBombTriggeredTime + JM_FloorBomb_TriggerDelay then
 

@@ -4,7 +4,7 @@ RTV = {}
 
 RTV.rtv_votes = {}
 
-hook.Add("PlayerSay", "JM_RTV_ChatCommand", function(ply, text, public)
+hook.Add("PlayerSay", "JM_chat_rtv", function(ply, text, public)
 	text = string.lower(text)
     text = string.Trim(text)
 
@@ -17,25 +17,56 @@ end)
 concommand.Add("rtv", function(ply, cmd, args)
     if !IsValid(ply) then return end
     
-    if not RTV:ExistsInTable(ply) then
-        RTV:AddVote(ply)
-        local amount = RTV:GetNecessaryVoteAmount()
-        local voteCounts = RTV:CountVotes()
-        msg = string.format("[RTV] (%i/%i) %s",  voteCounts, amount, ply:Nick())
-        JM_Function_PrintChat_All("Admin", msg)        
-    end
-
-    RTV:StartMapvoteIfNeeded()
+    JM_Function_PrintChat(ply, "Admin", "Use: !skip or !extend")
 end)
 
-function RTV:GetNecessaryVoteAmount()
-    local playerCount = #player.GetAll()
-    local percentage  = 0.55
+hook.Add("PlayerSay", "JM_chat_skip", function(ply, text, public)
+	text = string.lower(text)
+    text = string.Trim(text)
 
-    local amount = math.ceil(playerCount * percentage)
+	if text == "!skip" then
+		ply:ConCommand("skip")
+	end
+    
+end)
 
-    return amount
-end
+concommand.Add("skip", function(ply, cmd, args)
+    if !IsValid(ply) then return end
+    
+    if not RTV:ExistsInTable(ply) then
+        RTV:AddVote(ply)
+        JM_Function_RemoveRounds(1) 
+        local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
+        msg = "[Skip] " .. tostring(ply:Nick()) .. " (" .. tostring(roundsLeft) .. " Rounds Left)"
+        JM_Function_PrintChat_All("Admin", msg)        
+    else
+        JM_Function_PrintChat(ply, "Admin", "You have already voted during this map...")
+    end
+end)
+
+hook.Add("PlayerSay", "JM_chat_extend", function(ply, text, public)
+	text = string.lower(text)
+    text = string.Trim(text)
+
+	if text == "!extend" then
+		ply:ConCommand("extend")
+	end
+    
+end)
+
+concommand.Add("extend", function(ply, cmd, args)
+    if !IsValid(ply) then return end
+    
+    if not RTV:ExistsInTable(ply) then
+        RTV:AddVote(ply)
+        JM_Function_AddRounds(1) 
+        local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
+        msg = "[Extend] " .. tostring(ply:Nick()) .. " (" .. tostring(roundsLeft) .. " Rounds Left)"
+        JM_Function_PrintChat_All("Admin", msg)        
+    else
+        JM_Function_PrintChat(ply, "Admin", "You have already voted during this map...")
+    end
+end)
 
 function RTV:ExistsInTable(ply)
     if !IsValid(ply) then return end
@@ -65,20 +96,6 @@ function RTV:CountVotes()
     end
 
     return c
-end
-
-function RTV:StartMapvoteIfNeeded()
-    if self:CountVotes() >= self:GetNecessaryVoteAmount() then
-        if GetRoundState() == ROUND_ACTIVE then
-            JM_Function_PrintChat_All("Admin", "[RTV] The RTV has passed")
-            hook.Add("TTTEndRound", "RTVDelay", function()
-                hook.Remove("TTTEndRound", "RTVDelay")
-                MapVote:Start()
-            end)
-        else
-            MapVote:Start()
-        end
-    end
 end
 
 function RTV:Reset()

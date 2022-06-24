@@ -56,7 +56,10 @@ local lootTable = {
         JM_CarePackage_Loot_Glue,
         JM_CarePackage_Loot_Mass_Glue,
         JM_CarePackage_Loot_Manual_Breathing,
-        JM_CarePackage_Loot_Rob_From_TTT
+        JM_CarePackage_Loot_Rob_From_TTT,
+        JM_CarePackage_Loot_RandomMap,
+        JM_CarePackage_Loot_Combine_Apocalypse,
+        JM_CarePackage_Loot_Soap_Apocalypse
     }
 }
 
@@ -515,6 +518,11 @@ function JM_CarePackage_Loot_What_The_Dog_Doin( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","What the dog doin?")
     JM_Function_Announcement("[Care Package] What the dog doin?") 
 
+    -- Spawn this thing randomly across the map
+    local ThingToSpawn = "npc_antlionguard"
+    local NumberToSpawn = 1
+    JM_Function_SpawnThisThingInRandomPlaces(ThingToSpawn, NumberToSpawn)
+
     JM_Function_PlaySound("whatthedogdoing.mp3") 
 end
 
@@ -682,6 +690,66 @@ function JM_CarePackage_Loot_Rob_From_TTT( activator, caller )
     JM_Function_Announcement("[Care Package] It's Rob from TTT!")
     JM_Function_PlaySound("npc/zombie/zombie_voice_idle1.wav") 
     Loot_SpawnThis(caller,"ent_jm_zloot_robfromttt")
+end
+
+function JM_CarePackage_Loot_RandomMap( activator, caller )
+    JM_Function_Announcement("[Care Package] The next map will be random!")
+	JM_Global_MapVote_NextWillBeRandom = true
+end
+
+function JM_CarePackage_Loot_Combine_Apocalypse( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Combine Apocalypse")
+    JM_Function_Announcement("[Care Package] Combine Apocalypse!")  
+
+    local NumberToSpawn = 15
+    local possibleSpawns = ents.FindByClass( "info_player_start" )
+    table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
+    
+    for i=1,NumberToSpawn do 
+
+        if #possibleSpawns > 0 then
+            local randomChoice = math.random(1, #possibleSpawns)
+            local spawn = possibleSpawns[randomChoice]
+            table.remove( possibleSpawns, randomChoice )
+
+            local ent = ents.Create("npc_combine_s")
+            ent:Give("weapon_smg1")
+            ent:SetMaxHealth(100)
+            ent:SetHealth(100)
+            ent:SetKeyValue( "spawnflags", bit.bor( SF_NPC_NO_WEAPON_DROP, SF_NPC_DROP_HEALTHKIT ) )
+            ent:SetPos(spawn:GetPos())
+            ent:Spawn()  
+        end
+
+    end
+end
+
+function JM_CarePackage_Loot_Soap_Apocalypse( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Soap Apocalypse")
+    JM_Function_Announcement("[Care Package] Soap Apocalypse!")
+
+    local NumberToSpawn = 15
+    local possibleSpawns = ents.FindByClass( "info_player_start" )
+    table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
+    
+    for i=1,NumberToSpawn do 
+
+        if #possibleSpawns > 0 then
+            local randomChoice = math.random(1, #possibleSpawns)
+            local spawn = possibleSpawns[randomChoice]
+            table.remove( possibleSpawns, randomChoice )
+
+            local ent = ents.Create("ent_jm_equip_soap")
+            ent.Owner = nil
+	        ent.fingerprints = {}
+            ent:SetPos(spawn:GetPos())
+            ent:Spawn()  
+        end
+
+    end
+    
 end
 
 -------------------------------------------------

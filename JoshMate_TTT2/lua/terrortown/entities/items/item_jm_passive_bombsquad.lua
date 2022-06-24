@@ -12,6 +12,7 @@ ITEM.EquipMenuData = {
 		+ 50% Immunity to Fire Damage
 		+ 50% Immunity to Explosive Damage
 		+ 50% Immunity to Beartrap and Soap
+		+ Can now defuse Land Mines
 ]]
 }
 ITEM.CanBuy = {ROLE_DETECTIVE}

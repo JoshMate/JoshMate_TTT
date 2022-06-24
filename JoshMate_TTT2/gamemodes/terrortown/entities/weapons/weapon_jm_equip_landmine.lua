@@ -5,9 +5,9 @@ SWEP.Author			    	= "Josh Mate"
 SWEP.Instructions			= "Leftclick to place Floor Bomb"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
-SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 1
-SWEP.Primary.DefaultClip	= 1
+SWEP.Primary.Delay 			= 0.5
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -30,14 +30,14 @@ if CLIENT then
  
 	SWEP.EquipMenuData = {
 	   type = "item_weapon",
-	   name = "Floor Bomb",
+	   name = "Land Mine",
 	   desc = [[Trap Weapon
 	
-Left click to place an easy to see but deadly explosive trap
+Left click to place an easy to see but indestructible
 
 Players who step on the trap will be blown up
 
-It has 1 use
+It has 2 use and takes 5 seconds to appear
 ]]
 	}
 	
@@ -65,7 +65,7 @@ function SWEP:PlaceTrap()
 	if (tr.HitWorld or tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable"))then
 		local dot = vector_up:Dot(tr.HitNormal)
 		if dot > 0.55 and dot <= 1 then
-			local ent = ents.Create("ent_jm_equip_floorbomb")
+			local ent = ents.Create("ent_jm_equip_landmine")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), -90)

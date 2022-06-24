@@ -65,7 +65,7 @@ if CLIENT then
 
 		surface.PlaySound("effect_discoverbody.mp3")
 
-		local textPrefixColour =  Color( 40, 40, 40 )
+		local textPrefixColour =  Color( 50, 50, 50 )
 		local textBodyColour =  Color( 255, 255, 255 )
 		local textFinalRoleName = "ERROR"
 
@@ -97,6 +97,8 @@ end
 function JM_Function_GiveHitMarkerToPlayer(playerRecievingHitMarker, damageDealtToTarget, didThisDamageKillTarget)
 
 	if CLIENT then return end
+
+	if playerRecievingHitMarker == nil then return end
 
 	-- JM Changes Extra Hit Marker
 	net.Start( "JM_Net_HitMarker" )
@@ -207,4 +209,28 @@ function JM_Function_SendHUDWarning(isEnabled, entIndex, strIconPath, vecEntPos,
 		net.Broadcast()
 		
 	end
+end
+
+-- ##############################################
+-- Josh Mate Add Round
+-- ##############################################
+
+function JM_Function_AddRounds(roundsToAdd) 
+	if CLIENT then return end
+	local curRounds = GetGlobalInt("ttt_rounds_left", 6)
+	curRounds = curRounds + roundsToAdd
+	SetGlobalInt("ttt_rounds_left",curRounds)
+	GAMEMODE:SyncGlobals()
+end
+
+-- ##############################################
+-- Josh Mate Remove Round
+-- ##############################################
+
+function JM_Function_RemoveRounds(roundsToRemove) 
+	if CLIENT then return end
+	local curRounds = GetGlobalInt("ttt_rounds_left", 6)
+	curRounds = curRounds - roundsToRemove
+	SetGlobalInt("ttt_rounds_left",curRounds)
+	GAMEMODE:SyncGlobals()
 end

@@ -9,7 +9,7 @@ ITEM.EquipMenuData = {
 
 		+ 20% movement speed
 		+ 50% jump height
-		+ 50% reduction to Fall Damage
+		+ 65% reduction to Fall Damage
 ]]
 }
 
@@ -21,7 +21,7 @@ ITEM.material = "vgui/ttt/joshmate/icon_jm_agility.png"
 hook.Add("EntityTakeDamage", "AgilityDamageFall", function(target, dmginfo)
 	if not IsValid(target) or not target:IsPlayer() or not dmginfo:IsFallDamage() then return end
 	if target:Alive() and target:IsTerror() and target:HasEquipmentItem("item_jm_passive_agility") then
-		dmginfo:ScaleDamage(0.5)
+		dmginfo:ScaleDamage(0.35)
 	end
 end)
 

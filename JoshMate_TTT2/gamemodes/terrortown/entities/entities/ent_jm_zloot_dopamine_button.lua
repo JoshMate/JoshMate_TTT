@@ -62,7 +62,7 @@ function ENT:Use( activator, caller )
 
 			if killDecision then
 
-				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants (+1 Sweet Release of Death)")
+				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants (Sweet Release of Death)")
 
 				local effect = EffectData()
 				effect:SetStart(self:GetPos())
@@ -75,16 +75,16 @@ function ENT:Use( activator, caller )
 
 
 				if SERVER then
-					JM_Function_PlaySound("radio_bruh.wav") 
+					JM_Function_PlaySound("radio_whataknockmatt.mp3") 
 					JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " got bodied by the dopamine button...")
 				end
 
 			else
-				JM_Function_PlaySound("dopamine_button_live.mp3")
-				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit) & (+25 Max HP)")
+				JM_Function_PlaySound("radio_airhorn.wav")
+				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit) & (+50 Max HP)")
 				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine!")
-				activator:SetMaxHealth(activator:GetMaxHealth() + 25) 
-				activator:SetHealth(activator:Health() + 25) 
+				activator:SetMaxHealth(activator:GetMaxHealth() + 50) 
+				activator:SetHealth(activator:Health() + 50) 
 				activator:AddCredits(1)
 			end
 

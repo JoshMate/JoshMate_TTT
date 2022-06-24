@@ -1,0 +1,56 @@
+###################################
+Josh Mate TTT Update 69 - Patch Notes
+###################################
+#### New Stuff
+###################################
+ 
+[Map Voting]
+- !skip | Takes 1 round off the current map (At 0 left it RTVs (5 Votes))
+- !extend | Adds 1 round to the current map (Up to 5 times max)
+- 1 Vote per person per map
+- !rtv | Now just tells you to use skip and extend instead
+
+[Loot: Random Map]
+- New Rare Care Package loot
+- At the next map vote screen, instead chooses a random unplayed map
+
+[Loot: Combine Apocalypse]
+- New Rare Care Package loot
+- Spawns 15 combine soldiers armed with SMGs around the map randomly
+
+[Loot: Soap Apocalypse]
+- New Rare Care Package loot
+- Spawns 15 active soaps around the map randomly
+
+###################################
+#### Changes
+###################################
+
+[Land Mine]
+- Name changed: Floor Bomb -> Land Mine
+- Now a placed landmine will be invisible and dormant for 5 seconds before appearing
+- Buffed Ammo: 1 -> 2 Mines
+- Buffed splash damage: 30 -> 60 Damage
+- Buffed blast radius: 200 -> 250 Units
+
+[Dopamine Button]
+- Added Matt's Whataknock.mp3 for death
+- Added Airhorns.mp3 for dopamine
+- Increased HP received for dopamine: +25 -> +50  HP
+
+[Passive: Agility] 
+- Buffed fall damage negation: 50% -> 65% Reduction
+
+[Loot: What the dog doin?]
+- Now spawns a doggy randomly on the map
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+[Small Changes] 
+- Increased Max Health Traitors acquire for looting a Money Printer: 25 -> 30 HP
+- Improved the text colour of the Body discovery chat text
+
+[Fixes] 
+- Added missing description text to bomb squad informing of landmine defuse ability

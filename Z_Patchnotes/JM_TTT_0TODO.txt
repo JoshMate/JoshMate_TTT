@@ -1,5 +1,4 @@
 // TODO make the traitor VC labels appear red for spectators
-// TODO Make Floor bomb landmine, give 2 of em
 // TODO diverisfy Dopamine button
 
 // TODO Paranoia (Fake Sound effects that play randomly for a player)

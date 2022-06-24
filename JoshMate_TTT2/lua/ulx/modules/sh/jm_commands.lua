@@ -378,13 +378,7 @@ cmdResetServerCvars:defaultAccess(ULib.ACCESS_ADMIN)
 -- ##################################################
 
 local function JM_ULX_Round_Add()
-
-	local curRounds = GetGlobalInt("ttt_rounds_left", 6)
-	curRounds = curRounds + 1
-	
-	SetGlobalInt("ttt_rounds_left",curRounds)
-
-	GAMEMODE:SyncGlobals()
+	JM_Function_AddRounds(roundsToAdd) 
 end
 
 local cmdRoundAdd = ulx.command(CATEGORY_NAME_JM_Maps, "jm round add", function () JM_ULX_Round_Add()  end, "!roundadd")
@@ -395,13 +389,7 @@ cmdRoundAdd:defaultAccess(ULib.ACCESS_ADMIN)
 -- ##################################################
 
 local function JM_ULX_Round_Remove()
-
-	local curRounds = GetGlobalInt("ttt_rounds_left", 6)
-	curRounds = curRounds - 1
-	
-	SetGlobalInt("ttt_rounds_left",curRounds)
-
-	GAMEMODE:SyncGlobals()
+	JM_Function_RemoveRounds(roundsToRemove) 
 end
 
 local cmdRoundRemove = ulx.command(CATEGORY_NAME_JM_Maps, "jm round remove", function () JM_ULX_Round_Remove() end, "!roundremove")
