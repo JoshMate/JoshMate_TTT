@@ -17,7 +17,7 @@ end)
 concommand.Add("rtv", function(ply, cmd, args)
     if !IsValid(ply) then return end
     
-    JM_Function_PrintChat(ply, "Admin", "Use: !skip or !extend")
+    JM_Function_PrintChat(ply, "Admin", "Use !skip instead")
 end)
 
 hook.Add("PlayerSay", "JM_chat_skip", function(ply, text, public)
@@ -35,10 +35,16 @@ concommand.Add("skip", function(ply, cmd, args)
     
     if not RTV:ExistsInTable(ply) then
         RTV:AddVote(ply)
-        JM_Function_RemoveRounds(1) 
         local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
-        msg = "[Skip] " .. tostring(ply:Nick()) .. " (" .. tostring(roundsLeft) .. " Rounds Left)"
-        JM_Function_PrintChat_All("Admin", msg)        
+        if roundsLeft > 0 then 
+            JM_Function_RemoveRounds(1) 
+            local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
+            msg = tostring(ply:Nick()) .. " has skipped. (Rounds Left: " .. tostring(roundsLeft) .. ")"
+            JM_Function_PrintChat_All("Admin", msg)   
+        else
+            JM_Function_PrintChat(ply, "Admin", "There are no more rounds left to skip...")
+        end
+            
     else
         JM_Function_PrintChat(ply, "Admin", "You have already voted during this map...")
     end
@@ -57,15 +63,7 @@ end)
 concommand.Add("extend", function(ply, cmd, args)
     if !IsValid(ply) then return end
     
-    if not RTV:ExistsInTable(ply) then
-        RTV:AddVote(ply)
-        JM_Function_AddRounds(1) 
-        local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
-        msg = "[Extend] " .. tostring(ply:Nick()) .. " (" .. tostring(roundsLeft) .. " Rounds Left)"
-        JM_Function_PrintChat_All("Admin", msg)        
-    else
-        JM_Function_PrintChat(ply, "Admin", "You have already voted during this map...")
-    end
+    JM_Function_PrintChat(ply, "Admin", "!extend has been removed. You may now only !skip")
 end)
 
 function RTV:ExistsInTable(ply)
