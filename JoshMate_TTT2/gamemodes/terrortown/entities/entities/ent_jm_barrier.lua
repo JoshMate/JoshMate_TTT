@@ -94,7 +94,7 @@ function ENT:Initialize()
 
 	-- Setup stats
 	self.HP = JM_Barrier_HP
-	self.armTime = CurTime()
+	self.armTime = CurTime() + JM_Barrier_Recharge
 	self.isArmed = false
 	self.nextDamageTick = CurTime() + 1
 
@@ -127,13 +127,17 @@ function ENT:BarrierTouch(toucher)
 	if self.isArmed == true and IsValid(toucher) and toucher:IsPlayer() and IsValid(self) and toucher:IsTerror() and toucher:Alive() then
 		if SERVER then self:EmitSound("barrier_trip.mp3") end
 		self.isArmed = false
-		self.armTime = CurTime() + JM_Barrier_Recharge
+	
 		self:CalculateColour() 
 		self:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
 
 		-- Set Status and print Message
 		JM_GiveBuffToThisPlayer("jm_buff_barrierslow",toucher,self:GetOwner())
 		-- End Of
+
+		-- Remove the barrier
+		self:Remove()
+
 	end
 end
 
@@ -166,4 +170,5 @@ end
 function ENT:Touch(toucher)
 	self:BarrierTouch(toucher)
 end
+
 

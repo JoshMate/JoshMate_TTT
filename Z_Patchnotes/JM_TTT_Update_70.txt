@@ -4,6 +4,14 @@ Josh Mate TTT Update 70 - Patch Notes
 #### New Stuff
 ###################################
  
+ [Doom Dart Rework]
+- Can now only doom players at point blank range
+- You can't miss (It won't use ammo unless you hit)
+- Players won't know you are holding it and it is silent
+- Players won't know they have been doomed
+- Can still doom NPCs and players
+- Slightly reduced the blast damage as it is now MUCH easier to land
+ 
 [Landmine Apocalypse]
 - New Rare Carepackage Loot
 - Spawns 10 landmines around the map

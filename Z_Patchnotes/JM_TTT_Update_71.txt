@@ -1,0 +1,35 @@
+###################################
+Josh Mate TTT Update 71 - Patch Notes
+###################################
+#### New Stuff
+###################################
+ 
+ [Barrier Rework]
+- Barriers now work just as they did blocking enemies and slowing people
+- However now they disappear after being triggered (Walked through)
+- The slowing effects are stronger and now have visual effects too
+- You also now get 3 of them instead of 2
+- This also has the benefit of once and for all, fixing getting stuck in barriers
+
+###################################
+#### Changes
+###################################
+
+[Soap Apocalypse]
+- 
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+[Small Changes] 
+- NOTHING
+
+[Fixes] 
+- NOTHING
+
+###################################
+##### Work in Progress
+###################################
+- TTT_Murell_Way
+- TTT_Beach_House

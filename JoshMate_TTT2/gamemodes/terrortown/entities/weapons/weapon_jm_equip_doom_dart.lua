@@ -1,7 +1,7 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "pistol"
+SWEP.HoldType              = "normal"
 
 if CLIENT then
    SWEP.PrintName          = "Doom Dart"
@@ -14,15 +14,20 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Set-Up Weapon
 	
-Hitting a target marks them with Doom.
+Doom a player or NPC to explode on death.
 
-Doomed players explode on death dealing DMG to others.
+Point blank range, others won't know you are holding this.
 
-Mark up to 2 players, who won't be informed they are doomed.
+Mark up to 2 targets, who won't be informed they are doomed.
 ]]
 };
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_silencedpistol.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_doomskull.png"
+
+   function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 25 - ang:Right() *-12 - ang:Up() * 8, ang
+	end
+
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -30,26 +35,24 @@ SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 0.30
+SWEP.Primary.Delay         = 0.50
 SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 2
 SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
-SWEP.Primary.SoundLevel    = 20
+SWEP.Primary.SoundLevel    = 0
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = Sound( "Weapon_USP.SilencedShot" )
+SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_DOOMDART
-SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/cstrike/c_pist_usp.mdl"
-SWEP.WorldModel            = "models/weapons/w_pist_usp_silencer.mdl"
+SWEP.UseHands              = false
+SWEP.ViewModel             = "models/gibs/hgibs.mdl"
+SWEP.WorldModel            = "models/gibs/hgibs.mdl"
 
-SWEP.PrimaryAnim           = ACT_VM_PRIMARYATTACK_SILENCED
-
-local JM_Shoot_Range = 10000
+local JM_Shoot_Range = 64
 local isDoomableNPC = { 
    npc_zombie = true,
    npc_fastzombie = true,
@@ -61,12 +64,6 @@ local isDoomableNPC = {
    npc_crow = true,
    npc_antlion = true
 }
-
-
-function SWEP:Deploy()
-   self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
-   return self.BaseClass.Deploy(self)
-end
 
 function SWEP:ApplyEffect(ent,weaponOwner, targetIsPlayer)
 
@@ -104,13 +101,6 @@ function SWEP:PrimaryAttack()
 
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-   if not self:CanPrimaryAttack() then return end
-   self:EmitSound( self.Primary.Sound )
-   self:SendWeaponAnim( self.PrimaryAnim )
-   self:TakePrimaryAmmo( 1 )
-   if IsValid(self:GetOwner()) then
-      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-   end
    -- #########
 
    -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
@@ -127,17 +117,24 @@ function SWEP:PrimaryAttack()
    if tr.Entity:IsValid() then
       if tr.Entity:IsNPC() and isDoomableNPC[tr.Entity:GetClass()] == true then
          self:ApplyEffect(tr.Entity, owner, false)
+         self:TakePrimaryAmmo( 1 )
+         if CLIENT then surface.PlaySound("doomdart_marked.mp3") end
       end
  
       if tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive()then
          self:ApplyEffect(tr.Entity, owner, true)
+         self:TakePrimaryAmmo( 1 )
+         if CLIENT then surface.PlaySound("doomdart_marked.mp3") end
+         
       end
+   else
+      JM_Function_PrintChat(owner, "Equipment", "Doom dart can only be used point blank on a player..." )
+      if CLIENT then surface.PlaySound("proplauncher_fail.wav") end
    end
 
    owner:LagCompensation(false)
 
    -- #########
-
    -- Remove Weapon When out of Ammo
    if SERVER then
       if self:Clip1() <= 0 then
@@ -145,6 +142,7 @@ function SWEP:PrimaryAttack()
       end
    end
    -- #########
+
 
 end
 
@@ -161,7 +159,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Doom a player to explode on death", nil, true)
+	   self:AddTTT2HUDHelp("Doom Dart a player", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
@@ -173,6 +171,16 @@ if SERVER then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
+end
+
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
 end
 -- Delete on Drop
 function SWEP:OnDrop() 
