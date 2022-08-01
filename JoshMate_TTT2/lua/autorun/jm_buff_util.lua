@@ -181,7 +181,7 @@ JM_Global_Buff_Dash_IconPath                                    = "vgui/ttt/josh
 JM_Global_Buff_Dash_IconGoodBad                                 = "good"
 
 JM_Global_Buff_BarrierSlow_Name                                 = "Barrier Slow"
-JM_Global_Buff_BarrierSlow_Duration                             = 3
+JM_Global_Buff_BarrierSlow_Duration                             = 6
 JM_Global_Buff_BarrierSlow_NWBool                               = "JM_Buff_NWBool_IsBarrierSlow"
 JM_Global_Buff_BarrierSlow_IconName                             = "JM_Buff_Icon_BarrierSlow"
 JM_Global_Buff_BarrierSlow_IconPath                             = "vgui/ttt/joshmate/hud_slow.png"

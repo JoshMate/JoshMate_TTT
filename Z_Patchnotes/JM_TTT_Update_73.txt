@@ -1,0 +1,38 @@
+###################################
+Josh Mate TTT Update 71 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+// TODO Increase Battery time to 15 seconds
+// TODO Make Bounty hunter less restrictive
+// TODO Make slippery floor and Low Grav a game mode
+// TODO Make King of the hill or joint nuke launch codes standing 
+ 
+[Gas Canister] 
+ - New Traitor Weapon
+ - Left click to Place a visible gas canister in the level (like you would C4)
+ - Left click again to trigger the gas to be released
+ - A cloud around canister damages all players inside over time
+ - Gas is visible and the canister can be disarmed by anyone by pressing E on it
+
+
+###################################
+#### Changes
+###################################
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+[Small Changes] 
+- NOTHING
+
+[Fixes] 
+- NOTHING
+
+###################################
+##### Work in Progress
+###################################
+- TTT_Murrell_Way
+- TTT_Beach_House

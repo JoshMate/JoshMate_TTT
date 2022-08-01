@@ -169,8 +169,8 @@ function ENT:Touch(toucher)
 		JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
         -- HUD Message
-		JM_Function_PrintChat(toucher, "Equipment","You have triggered a Floor Bomb!")
-		JM_Function_PrintChat(self.Owner, "Equipment",toucher:Nick() .. " has triggered your Floor Bomb!" )
+		JM_Function_PrintChat(toucher, "Equipment","You have triggered a Land Mine!")
+		JM_Function_PrintChat(self.Owner, "Equipment",toucher:Nick() .. " has triggered your Land Mine!" )
         -- End Of
         
 	end

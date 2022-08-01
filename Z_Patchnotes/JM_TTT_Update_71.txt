@@ -4,19 +4,75 @@ Josh Mate TTT Update 71 - Patch Notes
 #### New Stuff
 ###################################
  
- [Barrier Rework]
-- Barriers now work just as they did blocking enemies and slowing people
-- However now they disappear after being triggered (Walked through)
+[Gas Canister] 
+ - New Traitor Weapon
+ - Left click to Place a visible gas canister in the level (like you would C4)
+ - Left click again to trigger the gas to be released
+ - A cloud around canister damages all players inside over time
+ - Gas is visible and the canister can be disarmed by anyone by pressing E on it
+ 
+[Barrier Rework]
+- Barriers now work just as they did blocking projectiles and slowing people
+- However now they don't recharge and are destroyed after being triggered
 - The slowing effects are stronger and now have visual effects too
+- The Detective is now informed when someone breaks his barrier
 - You also now get 3 of them instead of 2
 - This also has the benefit of once and for all, fixing getting stuck in barriers
+- The arm time is now MUCH faster
+
+[Unstable Teleporter] 
+ - New Carepackage Common Loot
+ - Left click will teleport you instantly to a random point on the map.
+ - I hold no responsibility for players getting stuck / damaged / killed while using said teleporter
+ 
+[Game Mode: Infection]
+ - New Game Mode
+ - Every 20 Seconds all dead players will re spawn as low health, melee only zombie traitors
+ 
+[Game Mode: Stash]
+ - New Game Mode
+ - A single stash will appear on the map in random location (Visible to NO ONE)
+ - Traitors can capture them (With E) Gaining +50 Max HP and 1 Credit
+ - When a stash is captured all innocents and detectives will lose 50% of their Max HP
+ - Locate the stash quickly and either defend it or capture it!
+ 
+ [Game Mode: Power Hour]
+ - New Game Mode
+ - Everyone starts with a random care package item in their inventory
+ 
+[Game Mode: Crowbar Man Mode]
+ - New Game Mode
+ - All weapons on the map (Besides Care package / shop items) will be removed!
+ 
+[Game Mode: Low Ammo]
+ - New Game Mode
+ - All players will only receive a single mag for every gun
+ 
+[Game Mode: Pistol Round]
+ - New Game Mode
+ - All non pistols on the map (Besides Care package / shop items) will be removed!
+ 
+[Game Mode System]
+- We now have enough game modes for them to not be repetitive
+- So you will now be seeing them ALOT more often as they mix things up
+- They will happen every other round and here is there chances:
+- HIGH: Defuse The Bombs
+- HIGH: Power Up
+- HIGH: Stash
+- MED: Bounty Hunter
+- MED: Protect the Files
+- MED: Infection
+- LOW: Low Ammo Mode
+- LOW: Pistol Round
+- RARE: Power Hour
+- RARE: Crowbar Man Mode
 
 ###################################
 #### Changes
 ###################################
 
-[Soap Apocalypse]
-- 
+[Game Mode: Powerup]
+- Reduced time delay before batteries can be captured: 20 -> 15 Seconds
 
 ###################################
 ##### Small Changes / Fixes / Code 
@@ -31,5 +87,5 @@ Josh Mate TTT Update 71 - Patch Notes
 ###################################
 ##### Work in Progress
 ###################################
-- TTT_Murell_Way
+- TTT_Murrell_Way
 - TTT_Beach_House

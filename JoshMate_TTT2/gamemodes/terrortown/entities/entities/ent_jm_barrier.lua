@@ -15,9 +15,9 @@ if CLIENT then
 end
 
 local JM_Barrier_LifeTime			= 120
-local JM_Barrier_Recharge			= 5
+local JM_Barrier_Recharge			= 1.5
 local JM_Barrier_HP					= 1000
-local JM_Barrier_HP_PerPress		= 30
+local JM_Barrier_HP_PerPress		= 50
 
 local JM_Barrier_Colour_PreArm		= Color( 255, 255, 255, 100 )
 
@@ -79,7 +79,7 @@ function ENT:Initialize()
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetMoveType( MOVETYPE_VPHYSICS ) 
 	self:SetSolid( SOLID_VPHYSICS )
-	self:SetCollisionGroup(COLLISION_GROUP_NONE)
+	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
 	local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
@@ -121,6 +121,7 @@ function ENT:BarrierDecay()
 	self.nextDamageTick = CurTime() + 1
 	self.HP = self.HP - math.Round((JM_Barrier_HP / JM_Barrier_LifeTime))
 	self:CalculateColour() 
+	JM_Function_PrintChat(self.Owner, "Equipment", "Your Barrier has timed out...")
 end
 
 function ENT:BarrierTouch(toucher)
@@ -129,14 +130,15 @@ function ENT:BarrierTouch(toucher)
 		self.isArmed = false
 	
 		self:CalculateColour() 
-		self:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
 
 		-- Set Status and print Message
 		JM_GiveBuffToThisPlayer("jm_buff_barrierslow",toucher,self:GetOwner())
 		-- End Of
 
+		JM_Function_PrintChat(self.Owner, "Equipment", "Your Barrier has been triggered!")
+
 		-- Remove the barrier
-		self:Remove()
+		self:Barrier_Die()
 
 	end
 end
@@ -162,6 +164,7 @@ function ENT:Think()
 	end
 	
 	if self.HP <= 0 then
+		JM_Function_PrintChat(self.Owner, "Equipment", "Your Barrier has benn destroyed.")
         self:Barrier_Die()
     end
 

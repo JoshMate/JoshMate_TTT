@@ -36,11 +36,11 @@ SWEP.UseHands = true
 SWEP.ViewModel = "models/weapons/cstrike/c_knife_t.mdl"
 SWEP.WorldModel = "models/weapons/w_knife_t.mdl"
 
-SWEP.Primary.Damage = 40
+SWEP.Primary.Damage = 35
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
-SWEP.Primary.Delay = 0.50
+SWEP.Primary.Delay = 0.40
 SWEP.Primary.Ammo = "none"
 
 SWEP.Secondary.ClipSize = -1
@@ -62,6 +62,10 @@ SWEP.AutoSpawnable 			= false
 SWEP.AllowDrop 				= false
 SWEP.CanBuy 				= {}
 SWEP.LimitedStock 			= true
+
+-- JM Changes, Movement Speed
+SWEP.MoveMentMultiplier = 1.2
+-- End of
 
 local sound_single = Sound("Weapon_Knife.Slash")
 

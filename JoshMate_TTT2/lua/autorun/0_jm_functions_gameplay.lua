@@ -176,6 +176,53 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
 
 end
 
+-----------------------------------------------
+-- Teleport player to a random Spot (Uses Care Package and Player Spawns)
+-----------------------------------------------
+
+function JM_Function_TeleportPlayerToARandomPlace(Player)
+
+    local possibleSpawns = ents.FindByClass( "ent_jm_carepackage_spawn" )
+    local possibleSpawnsPlayer = ents.FindByClass( "info_player_start" )
+	local listOfAllSpawnedItems = {}
+    
+	local randomChoice = math.random( 0, 100 )
+
+	-- 5% chance to use a player spawn
+	if randomChoice > 5 then
+
+		if #possibleSpawns > 0 then
+			local randomChoice = math.random(1, #possibleSpawns)
+			local spawn = possibleSpawns[randomChoice]
+			table.remove( possibleSpawns, randomChoice )
+			Player:SetPos(spawn:GetPos() + Vector(0, 0, 8))
+			return spawn:GetPos()
+		else
+
+			if #possibleSpawnsPlayer > 0 then
+				local randomChoice = math.random(1, #possibleSpawnsPlayer)
+				local spawn = possibleSpawnsPlayer[randomChoice]
+				Player:SetPos(spawn:GetPos() + Vector(0, 0, 8))
+				return spawn:GetPos()
+			end
+
+		end
+
+	else
+
+		if #possibleSpawnsPlayer > 0 then
+			local randomChoice = math.random(1, #possibleSpawnsPlayer)
+			local spawn = possibleSpawnsPlayer[randomChoice]
+			Player:SetPos(spawn:GetPos() + Vector(0, 0, 8))
+			return spawn:GetPos()
+		end
+
+	end
+
+	
+
+end
+
 -- ##############################################
 -- Josh Mate New Warning Icon Code
 -- ##############################################

@@ -19,7 +19,7 @@ function ENT:Initialize()
 	
 	-- Battery Stats
 	self.isBatteryActive = false
-	self.isBatteryActiveDelay = 20
+	self.isBatteryActiveDelay = 15
 	self.isBatteryActiveTime = CurTime() + self.isBatteryActiveDelay
 
 	if SERVER then

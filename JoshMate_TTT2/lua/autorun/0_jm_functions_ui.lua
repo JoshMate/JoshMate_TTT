@@ -30,6 +30,12 @@ function JM_Function_MessageColourCalculator(prefixMessage)
 	if prefixMessage == "Defuse The Bombs" then textPrefixColour = Color(0,255,0) end
 	if prefixMessage == "Bounty Hunter" then textPrefixColour = Color(0,255,0) end
 	if prefixMessage == "Powerup" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Stash" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Infection" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Power Hour" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Low Ammo" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Pistol Round" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Crowbar Man Mode" then textPrefixColour = Color(0,255,0) end
 	return textPrefixColour
 
 end

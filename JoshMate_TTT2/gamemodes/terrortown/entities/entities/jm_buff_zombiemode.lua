@@ -29,23 +29,37 @@ ENT.BuffIconName                = JM_BuffIconName
 -- Client Side Visual Effects
 -- #############################################
 
+if CLIENT then
+
+    
+    -- Set up screen effect table
+    local effectTable_ZombieMode = {
+
+        ["$pp_colour_addr"] = 0.10,
+        ["$pp_colour_addg"] = 0,
+        ["$pp_colour_addb"] = 0,
+        ["$pp_colour_brightness"] = 0,
+        ["$pp_colour_contrast"] = 1,
+        ["$pp_colour_colour"] = 1,
+        ["$pp_colour_mulr"] = 0,
+        ["$pp_colour_mulg"] = 0,
+        ["$pp_colour_mulb"] = 0
+    }
+
+    -- Render Any Screen Effects
+    hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
+
+        if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
+            DrawColorModify( effectTable_ZombieMode)
+        end 
+    
+    end)
+
+end
+
 -- #############################################
 -- The Actual Effects of this buff
 -- #############################################
-
-function ENT:BuffTickEffect()
-
-    -- Handle Buff Effect Ticking
-    if(not self:IsValid()) then return end
-
-    if  not self.targetPlayer:IsValid() or not self.targetPlayer:Alive() then return end
-
-    if(CurTime() >= self.buffTickNext) then
-        self.buffTickNext = CurTime() + self.buffTickDelay
-        self:BuffTickEffect()
-    end
-    
-end
 
 function ZombieFormEffects(ent)
 	if not IsValid(ent) then return end
@@ -54,8 +68,6 @@ function ZombieFormEffects(ent)
 	local ePos = ent:GetPos()
 	effect:SetStart(ePos)
 	effect:SetOrigin(ePos)
-	
-	
 	
 	util.Effect("cball_explode", effect, true, true)
 end
@@ -69,18 +81,14 @@ function ENT:Initialize()
     local target = self.targetPlayer
 
     -- Handle Sound Ticking
-    self.SoundbuffTickDelay_Min     = 4
-    self.SoundbuffTickDelay_Max     = 12
+    self.SoundbuffTickDelay_Min     = 5
+    self.SoundbuffTickDelay_Max     = 18
     self.SoundbuffTickNext          = CurTime() + math.random(self.SoundbuffTickDelay_Min, self.SoundbuffTickDelay_Max)
-
-    -- Zombie HP
-    target:SetMaxHealth(target:GetMaxHealth() + 100)
-    target:SetHealth(target:Health() + 100)
 
     -- Zombie Form
 
 	target:SetModel("models/player/zombie_fast.mdl")
-    target:SetPlayerColor( Vector( 1, 0, 0 ) )
+    target:SetPlayerColor( Vector(1,0,0) )
 
     ZombieFormEffects(target)
     sound.Play("npc/fast_zombie/fz_scream1.wav", target:GetPos(), 150, 100)
@@ -92,6 +100,10 @@ function ENT:Think()
 
     -- Handle Buff Effect Ticking
     if(not self:IsValid()) then return end
+
+    -- Handle Credit deletion and weapon locking
+    self.targetPlayer:SetCredits(0)
+    
 
     -- Play Zombie Sounds
     if(CurTime() >= self.SoundbuffTickNext) then
