@@ -15,11 +15,12 @@ local JM_FloorBomb_Colour_Dormant	= Color( 0, 0, 0, 0 )
 local JM_FloorBomb_Sound_Triggered	= "floorbomb_triggered.mp3"
 local JM_FloorBomb_Sound_Destroyed	= "0_main_click.wav"
       
-local JM_FloorBomb_ActivateDelay    = 5
-local JM_FloorBomb_TriggerDelay     = 0.7
-local JM_FloorBomb_DMG_Direct     	= 100
-local JM_FloorBomb_DMG_Splash		= 40
-local JM_FloorBomb_DMG_Radius		= 250
+local JM_FloorBomb_ActivateDelay    		= 5
+local JM_FloorBomb_TriggerDelay     		= 0.7
+local JM_FloorBomb_DMG_Direct     			= 100
+local JM_FloorBomb_DMG_Splash				= 40
+local JM_FloorBomb_DMG_Radius				= 250
+local JM_FloorBomb_TriggerClose_Radius		= 64
 
 if CLIENT then
     function ENT:Draw()
@@ -72,6 +73,40 @@ function ENT:floorbombActive()
 
 end
 
+function ENT:floorbombExplode()
+
+	if not self:IsValid() or not self.floorBombTriggeredTarget:IsValid() then return end
+
+	-- Deal direct damage to toucher
+	if self.floorBombTriggeredTarget:GetPos():Distance(self:GetPos()) <= JM_FloorBomb_DMG_Radius then
+		local dmg = DamageInfo()
+		dmg:SetDamage(JM_FloorBomb_DMG_Direct)
+		dmg:SetAttacker(self.Owner)
+		dmg:SetInflictor(self)
+		dmg:SetDamageForce(Vector(0, 0, 1))
+		dmg:SetDamagePosition(self:GetPos())
+		dmg:SetDamageType(DMG_BLAST)   
+
+		self.floorBombTriggeredTarget:TakeDamageInfo(dmg)
+	end
+
+	-- Create splash damage explosion
+	local effect = EffectData()
+	effect:SetStart(self:GetPos())
+	effect:SetOrigin(self:GetPos())
+	util.Effect("Explosion", effect, true, true)
+	util.Effect("HelicopterMegaBomb", effect, true, true)
+
+	-- Blast
+	util.BlastDamage(self, self.Owner, self:GetPos(), JM_FloorBomb_DMG_Radius, JM_FloorBomb_DMG_Splash)
+	
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
+	self:Remove()
+
+
+end
+
 function ENT:Use( activator, caller )
 
 	if CLIENT then return end
@@ -95,6 +130,36 @@ function ENT:Use( activator, caller )
 
 end
 
+function ENT:FloorBombCheckIfPlayersAreClose()
+
+	if not self:IsValid() then return end
+
+	local r = JM_FloorBomb_TriggerClose_Radius * JM_FloorBomb_TriggerClose_Radius -- square so we can compare with dot product directly
+	local center = self:GetPos()
+
+	-- Find players in radius
+	d = 0.0
+	diff = nil
+	local plys = player.GetAll()
+
+	for i = 1, #plys do
+		local ply = plys[i]
+		
+		if not ply:Team() == TEAM_TERROR  or not ply:Alive() then continue end
+
+		-- dot of the difference with itself is distance squared
+		diff = center - ply:GetPos()
+		d = diff:Dot(diff)
+
+		if d >= r then continue end
+
+		-- Trigger the Land Mine
+		self:Touch(ply)
+
+	end
+
+end
+
 function ENT:Think()
 
 	if CLIENT then return end
@@ -103,40 +168,14 @@ function ENT:Think()
 		self:floorbombActive()
 	end
 
+	if self.floorbomb_isActive_status == true then
+		self:FloorBombCheckIfPlayersAreClose()
+	end
+
 	if self.floorbomb_isActive_status == true and self.floorBombHasBeenTriggered == true then
 
 		if CurTime() >= self.floorBombTriggeredTime + JM_FloorBomb_TriggerDelay then
-
-
-			if not self:IsValid() or not self.floorBombTriggeredTarget:IsValid() then return end
-
-			-- Deal direct damage to toucher
-			if self.floorBombTriggeredTarget:GetPos():Distance(self:GetPos()) <= JM_FloorBomb_DMG_Radius then
-				local dmg = DamageInfo()
-				dmg:SetDamage(JM_FloorBomb_DMG_Direct)
-				dmg:SetAttacker(self.Owner)
-				dmg:SetInflictor(self)
-				dmg:SetDamageForce(Vector(0, 0, 1))
-				dmg:SetDamagePosition(self:GetPos())
-				dmg:SetDamageType(DMG_BLAST)   
-
-				self.floorBombTriggeredTarget:TakeDamageInfo(dmg)
-			end
-
-			-- Create splash damage explosion
-			local effect = EffectData()
-			effect:SetStart(self:GetPos())
-			effect:SetOrigin(self:GetPos())
-			util.Effect("Explosion", effect, true, true)
-			util.Effect("HelicopterMegaBomb", effect, true, true)
-
-			-- Blast
-			util.BlastDamage(self, self.Owner, self:GetPos(), JM_FloorBomb_DMG_Radius, JM_FloorBomb_DMG_Splash)
-			
-			-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-			JM_Function_SendHUDWarning(false,self:EntIndex())
-			self:Remove()
-
+			self:floorbombExplode()
 		end
 
 	end

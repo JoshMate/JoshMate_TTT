@@ -28,7 +28,7 @@ function JM_GameMode_Stash_Start()
 	local NumberOfThingsToSpawn = 1
 
 	-- Announce the Goal
-	JM_Function_Announcement("[Stash] Innocents must locate and protect the stash from traitors who must capture it!", 0)
+	JM_Function_Announcement("[Stash] Traitors must locate and capture the Stash!", 0)
 
 	-- Play the Sound
     JM_Function_PlaySound("gamemode/stash_start.mp3")

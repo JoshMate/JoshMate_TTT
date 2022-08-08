@@ -5,79 +5,82 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 if CLIENT then return end
 
--- ### The old Random Chance System
--- local iRandomChance_Max = 2
--- local iRandomChance_Current = iRandomChance_Max
--- local iRandomChance_inc = 1
--- Game Modes have a 1 in X Chance of Happening but increaing each round until reset
--- local iRandomChance = math.random(1,iRandomChance_Current)
--- if iRandomChance == 1 then
--- Increase the odds of a gamemode as it didn't happen this time
---iRandomChance_Current = iRandomChance_Current - iRandomChance_inc
---iRandomChance_Current = math.Clamp(iRandomChance_Current, 1, iRandomChance_Max)
-
 local gamemodeNextGameModeCurrentCounter        = 0
+local gamemodeChanceOfInnocentDriven            = 30
+local gamemodeChanceOfAny                       = 100
 
 function JM_GameMode_Function_Main()
 
-    if gamemodeNextGameModeCurrentCounter == 1 then
+    -- Table of Possible Game Modes
+    local tableOfGamemodes_Innocent = {
 
-        -- Table of Possible Game Modes
-        local tableOfGamemodes = {
+        JM_GameMode_DefuseTheBombs_Init,
+        JM_GameMode_DefuseTheBombs_Init,
+        JM_GameMode_Powerup_Init,
+        JM_GameMode_Powerup_Init,
+        JM_GameMode_Stash_Init,
+        JM_GameMode_TraitorTester_Init    
 
-            JM_GameMode_DefuseTheBombs_Init,
-            JM_GameMode_DefuseTheBombs_Init,
-            JM_GameMode_DefuseTheBombs_Init,
-            JM_GameMode_DefuseTheBombs_Init,
+    }
 
-            JM_GameMode_Powerup_Init,
-            JM_GameMode_Powerup_Init,
-            JM_GameMode_Powerup_Init,
-            JM_GameMode_Powerup_Init,
-            
-            JM_GameMode_Stash_Init,
-            JM_GameMode_Stash_Init,
-            JM_GameMode_Stash_Init,
-            JM_GameMode_Stash_Init,
+    -- Table of Possible Game Modes
+    local tableOfGamemodes_All = {
 
-            JM_GameMode_ProtectTheFiles_Init,
-            JM_GameMode_ProtectTheFiles_Init,
-            JM_GameMode_ProtectTheFiles_Init,
+        JM_GameMode_DefuseTheBombs_Init,
+        JM_GameMode_Powerup_Init,
+        JM_GameMode_Stash_Init,
+        JM_GameMode_ProtectTheFiles_Init,
+        JM_GameMode_BountyHunter_Init,
+        JM_GameMode_Infection_Init,
+        JM_GameMode_LowAmmoMode_Init,
+        JM_GameMode_PistolRound_Init,
+        JM_GameMode_TraitorTester_Init,
+        JM_GameMode_PowerHour_Init,
+        JM_GameMode_LowGravity_Init,
+        JM_GameMode_SlipperyFloors_Init,
+        JM_GameMode_CrowbarManMode_Init
 
-            JM_GameMode_BountyHunter_Init,
-            JM_GameMode_BountyHunter_Init,
-            JM_GameMode_BountyHunter_Init,
+    }
 
-            JM_GameMode_Infection_Init,
-            JM_GameMode_Infection_Init,
-            JM_GameMode_Infection_Init,
-            
-            JM_GameMode_LowAmmoMode_Init,
-            JM_GameMode_LowAmmoMode_Init,
+    if gamemodeNextGameModeCurrentCounter == 0 then
 
-            JM_GameMode_PistolRound_Init,
-            JM_GameMode_PistolRound_Init,
+        local iRandomRoll = math.random(1, 100)
 
-            JM_GameMode_PowerHour_Init,
+        if iRandomRoll <= gamemodeChanceOfInnocentDriven then
 
-            JM_GameMode_CrowbarManMode_Init
-            
-        }
+            -- Log the outcome
+            if SERVER then print("[GameModes] There will be an Innocent Driven Game Mode") end
 
-        if SERVER then print("[GameModes] There will be a gamemode!") end
+            -- Add to or Reset the Counter
+            gamemodeNextGameModeCurrentCounter = gamemodeNextGameModeCurrentCounter + 1
 
-        -- Reset the Chance Counter
-        gamemodeNextGameModeCurrentCounter = 0
-    
-        -- Randomly select from the table of gamemodes
-
-        local iRandomRoll = math.random(1, table.getn(tableOfGamemodes))
-
-        tableOfGamemodes[iRandomRoll]()      
+            -- Randomly select from the table of gamemodes
+            local iRandomRoll = math.random(1, table.getn(tableOfGamemodes_Innocent))
+            tableOfGamemodes_Innocent[iRandomRoll]()  
+        else
+            -- Add to or Reset the Counter
+            gamemodeNextGameModeCurrentCounter = gamemodeNextGameModeCurrentCounter + 1
+            if SERVER then print("[GameModes] There was not an Innocent Driven Game Mode") end
+        end    
 
     else
-        if SERVER then print("[GameModes] No gamemode this time...") end
-        gamemodeNextGameModeCurrentCounter = gamemodeNextGameModeCurrentCounter + 1
+
+        local iRandomRoll = math.random(1, 100)
+
+        if iRandomRoll <= gamemodeChanceOfAny then
+
+            -- Log the outcome
+            if SERVER then print("[GameModes] There will be ANY Game Mode") end
+
+            -- Add to or Reset the Counter
+            gamemodeNextGameModeCurrentCounter = 0
+
+            -- Randomly select from the table of gamemodes
+            local iRandomRoll = math.random(1, table.getn(tableOfGamemodes_All))
+            tableOfGamemodes_All[iRandomRoll]()  
+        else
+            if SERVER then print("[GameModes] There was not ANY Game Mode") end
+        end    
     end
 
 
@@ -260,6 +263,56 @@ function JM_GameMode_PowerHour_Init()
 		end
 	end
     
+
+end
+
+function JM_GameMode_LowGravity_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Low Gravity") end
+
+    -- Announce the Goal
+	JM_Function_Announcement("[Low Gravity] Gravity has been reduced!", 0)
+
+	-- Play the Sound
+    JM_Function_PlaySound("effect_low_gravity.mp3")
+
+    -- Do the Round Logic
+    RunConsoleCommand("sv_gravity", 100)
+    RunConsoleCommand("sv_airaccelerate", 12)
+
+end
+
+function JM_GameMode_SlipperyFloors_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Slippery Floors") end
+
+    -- Announce the Goal
+	JM_Function_Announcement("[Slippery Floors] The floors are now made of ice!", 0)
+
+	-- Play the Sound
+    JM_Function_PlaySound("effect_slippery_floors.mp3")
+
+    -- Do the Round Logic
+    RunConsoleCommand("sv_friction", 0)
+    RunConsoleCommand("sv_accelerate", 5)
+
+end
+
+function JM_GameMode_TraitorTester_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Traitor Tester") end
+
+    -- Announce the Goal
+	JM_Function_Announcement("[Traitor Tester] A portable traitor tester has spawned somewhere on the map!", 0)
+
+	-- Play the Sound
+    JM_Function_PlaySound("shoot_portable_tester_scan.wav")
+
+    -- Do the Round Logic
+    JM_Function_SpawnThisThingInRandomPlaces("weapon_jm_zloot_traitor_tester", 1)
 
 end
 

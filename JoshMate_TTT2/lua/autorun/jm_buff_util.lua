@@ -187,6 +187,19 @@ JM_Global_Buff_BarrierSlow_IconName                             = "JM_Buff_Icon_
 JM_Global_Buff_BarrierSlow_IconPath                             = "vgui/ttt/joshmate/hud_slow.png"
 JM_Global_Buff_BarrierSlow_IconGoodBad                          = "bad"
 
+JM_Global_Buff_CannibalHeal_Name                                = "Cannibal Heal"
+JM_Global_Buff_CannibalHeal_Duration                            = 12
+JM_Global_Buff_CannibalHeal_NWBool                              = "JM_Buff_NWBool_IsCannibalHeal"
+JM_Global_Buff_CannibalHeal_IconName                            = "JM_Buff_Icon_CannibalHeal"
+JM_Global_Buff_CannibalHeal_IconPath                            = "vgui/ttt/joshmate/hud_heal.png"
+JM_Global_Buff_CannibalHeal_IconGoodBad                         = "good"
+
+JM_Global_Buff_BarrierDamage_Name                                 = "Barrier Damage Increase"
+JM_Global_Buff_BarrierDamage_Duration                             = 30
+JM_Global_Buff_BarrierDamage_NWBool                               = "JM_Buff_NWBool_IsBarrierDamage"
+JM_Global_Buff_BarrierDamage_IconName                             = "JM_Buff_Icon_BarrierDamage"
+JM_Global_Buff_BarrierDamage_IconPath                             = "vgui/ttt/joshmate/hud_damagemultbad.png"
+JM_Global_Buff_BarrierDamage_IconGoodBad                          = "bad"
 
 
 -- Care Package Buffs

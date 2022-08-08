@@ -15,13 +15,15 @@ if CLIENT then
 end
 
 
-local JM_GasCanister_Colour_Dormant			= Color( 255, 255, 255, 40 )
+local JM_GasCanister_Colour_Dormant			= Color( 255, 255, 255, 10 )
 local JM_GasCanister_Colour_Armed			= Color( 60, 255, 60, 255 )
 
-local JM_GasCanister_Damage_Radius			= 1000
-local JM_GasCanister_Damage_Delay			= 0.5
-local JM_GasCanister_Damage_Amount			= 4
+local JM_GasCanister_Damage_Radius			= 600
+local JM_GasCanister_Damage_Delay			= 1
+local JM_GasCanister_Damage_Amount			= 6
 local JM_GasCanister_Damage_LifeTime		= 30
+
+local JM_GasCanister_Arm_Delay				= 5
 
 local JM_GasCanister_Sound_Armed		= "weapons/ar2/ar2_reload_push.wav"
 local JM_GasCanister_Sound_Destroyed	= "weapons/ar2/npc_ar2_altfire.wav"
@@ -39,11 +41,16 @@ end
 function ENT:GasCanister_Arm()
 	if SERVER then
 		if IsValid(self) then 
+
+			-- Effects
+			self:GasCanister_Effects_Sparks()
 			if SERVER then self:EmitSound(JM_GasCanister_Sound_Armed); end
+			
 			self.isArmed = true
 			self:SetColor(JM_GasCanister_Colour_Armed) 
 			self.selfDestructTime = CurTime() + JM_GasCanister_Damage_LifeTime
 			self.nextGasEmitTime = CurTime() + JM_GasCanister_Damage_Delay
+
 		end 
 	end
 end
@@ -52,7 +59,7 @@ function ENT:GasCanister_Die()
 	if SERVER then
 		if IsValid(self) then 
 			self:GasCanister_Effects_Sparks()
-			if SERVER then self:EmitSound(JM_Barrier_Sound_Destroyed); end
+			if SERVER then self:EmitSound(JM_GasCanister_Sound_Destroyed); end
 			self:Remove()
 		end 
 	end
@@ -74,11 +81,13 @@ function ENT:Initialize()
 
 	-- Visuals
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor(JM_Barrier_Colour_PreArm) 
+	self:SetColor(JM_GasCanister_Colour_Dormant) 
 	self:DrawShadow(false)
 
 	-- Setup stats
 	self.isArmed = false
+	self.armTime = CurTime() + JM_GasCanister_Arm_Delay 
+	self.selfDestructTime = CurTime() + JM_GasCanister_Damage_LifeTime
 
 	--Prevent holding E
 	if SERVER then
@@ -99,77 +108,72 @@ end
 
 function ENT:GasCanister_EmitGas()
 
-	-- Handle Smoke
+	local center = self:GetPos()
 
-	local em = ParticleEmitter(self:GetPos())
-
-	local r = self:GetRadius()
-	for i=1, 20 do
-	   local prpos = VectorRand() * r
-	   prpos.z = prpos.z + 32
-	   local p = em:Add(table.Random(smokeparticles), center + prpos)
-	   if p then
-		  p:SetColor(0, 255, 70)
-		  p:SetStartAlpha(150)
-		  p:SetEndAlpha(200)
-		  p:SetVelocity(VectorRand() * math.Rand(100, 500))
-		  p:SetLifeTime(0)
-		  
-		  p:SetDieTime(math.Rand(0.5, 1))
-
-		  p:SetStartSize(math.random(64, 96))
-		  p:SetEndSize(math.random(640, 960))
-		  p:SetRoll(math.random(-180, 180))
-		  p:SetRollDelta(math.Rand(-0.1, 0.1))
-		  p:SetAirResistance(600)
-
-		  p:SetCollide(true)
-		  p:SetBounce(0.4)
-
-		  p:SetLighting(false)
-	   end
+	if CLIENT then
+		-- Handle Smoke
+		local pos = self:GetPos() -- The origin position of the effect
+		
+		local emitter = ParticleEmitter( pos ) -- Particle emitter in this position
+		
+		for i = 0, 100 do -- Do 100 particles
+			local part = emitter:Add( "effects/spark", pos ) -- Create a new particle at pos
+			if ( part ) then
+				part:SetDieTime( 1 ) -- How long the particle should "live"
+		
+				part:SetStartAlpha( 255 ) -- Starting alpha of the particle
+				part:SetEndAlpha( 0 ) -- Particle size at the end if its lifetime
+		
+				part:SetStartSize( 5 ) -- Starting size
+				part:SetEndSize( 0 ) -- Size when removed
+		
+				part:SetGravity( Vector( 0, 0, -250 ) ) -- Gravity of the particle
+				part:SetVelocity( VectorRand() * 50 ) -- Initial velocity of the particle
+			end
+		end
+		
+		emitter:Finish()
 	end
 
-	em:Finish()
+	if SERVER then
+		-- Handle Damage
+		local r = JM_GasCanister_Damage_Radius * JM_GasCanister_Damage_Radius -- square so we can compare with dot product directly
 
-	-- Handle Damage
+		-- pre-declare to avoid realloc
+		local d = 0.0
+		local diff = nil
+		local dmg = 0
+		local plys = player.GetAll()
 
-	local r = JM_GasCanister_Damage_Radius * JM_GasCanister_Damage_Radius -- square so we can compare with dot product directly
+		for i = 1, #plys do
+			local ply = plys[i]
 
-	-- pre-declare to avoid realloc
-	local d = 0.0
-	local diff = nil
-	local dmg = 0
-	local plys = player.GetAll()
+			if ply:Team() ~= TEAM_TERROR then continue end
 
-	for i = 1, #plys do
-		local ply = plys[i]
+			-- dot of the difference with itself is distance squared
+			local distance = center:Distance(ply:GetPos())
+			diff = center - ply:GetPos()
+			d = diff:Dot(diff)
 
-		if ply:Team() ~= TEAM_TERROR then continue end
+			if d >= r then continue end
 
-		-- dot of the difference with itself is distance squared
-		local distance = center:Distance(ply:GetPos())
-		diff = center - ply:GetPos()
-		d = diff:Dot(diff)
+			dmg = JM_GasCanister_Damage_Amount
 
-		if d >= r then continue end
+			-- Only hurt what they have, more accurate Hit Markers
+			if ply:Health() <= dmg then dmg = ply:Health() end
 
-		dmg = JM_GasCanister_Damage_Amount
+			if ply:HasEquipmentItem("item_jm_passive_bombsquad") then dmg = dmg / 2 end
 
-		-- Only hurt what they have, more accurate Hit Markers
-		if ply:Health() <= dmg then dmg = ply:Health() end
+			local dmginfo = DamageInfo()
+			dmginfo:SetDamage(dmg)
+			dmginfo:SetAttacker(self.Owner)
+			dmginfo:SetInflictor(self)
+			dmginfo:SetDamageType(DMG_GENERIC)
+			dmginfo:SetDamageForce(center - ply:GetPos())
+			dmginfo:SetDamagePosition(ply:GetPos())
 
-		if ply:HasEquipmentItem("item_jm_passive_bombsquad") then dmg = dmg / 2 end
-
-		local dmginfo = DamageInfo()
-		dmginfo:SetDamage(dmg)
-		dmginfo:SetAttacker(self.Owner)
-		dmginfo:SetInflictor(self)
-		dmginfo:SetDamageType(DMG_GENERIC)
-		dmginfo:SetDamageForce(center - ply:GetPos())
-		dmginfo:SetDamagePosition(ply:GetPos())
-
-		ply:TakeDamageInfo(dmginfo)
+			ply:TakeDamageInfo(dmginfo)
+		end
 	end
 
 end
@@ -182,9 +186,10 @@ function ENT:Think()
 
 	if self.isArmed == true and CurTime() >= self.nextGasEmitTime then
 		self:GasCanister_EmitGas()
+		self.nextGasEmitTime = CurTime() + JM_GasCanister_Damage_Delay
 	end
 	
-	if CurTime() >= self.selfDestructTime then
+	if self.isArmed == true and CurTime() >= self.selfDestructTime then
         self:GasCanister_Die()
     end
 

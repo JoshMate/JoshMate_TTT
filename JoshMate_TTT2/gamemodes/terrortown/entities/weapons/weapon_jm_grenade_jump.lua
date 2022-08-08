@@ -28,6 +28,7 @@ SWEP.LimitedStock       = true
 
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.Delay         = 0.2
 
 -- Fix Scorch Spam
 SWEP.GreandeHasScorched              = false

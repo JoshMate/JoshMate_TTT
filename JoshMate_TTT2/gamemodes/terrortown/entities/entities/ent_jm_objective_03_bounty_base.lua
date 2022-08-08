@@ -65,6 +65,9 @@ function ENT:BountyHunter_Select_NewTarget()
 
 				if SERVER then 
 					JM_Function_PrintChat(pl, "Bounty Hunter", "Your Target is: " .. tostring(self.bountyHunter_CurrentTarget:Nick())) 
+					JM_Function_PrintChat(pl, "Bounty Hunter", "Traitors Gain +10 Max HP") 
+					pl:SetMaxHealth(pl:GetMaxHealth() + 10)
+					pl:SetHealth(pl:Health() + 10)
 				end
 
 			end
@@ -110,11 +113,9 @@ hook.Add("EntityTakeDamage", "BountyHunter_TargetDamage", function(target, dmgin
 	if not dmginfo:GetAttacker():IsTerror() or not dmginfo:GetAttacker():IsTraitor() then return end
 
 	if target:GetNWBool("BountyHunterIsTarget") == true then
-		dmginfo:SetDamage(dmginfo:GetDamage() * 1.3)
+		dmginfo:SetDamage(dmginfo:GetDamage() * 2)
 	else
-		local unkillingDamage = math.Clamp(dmginfo:GetDamage(), 0, target:Health() - 1)
-
-		dmginfo:SetDamage(unkillingDamage)
+		dmginfo:SetDamage(dmginfo:GetDamage())
 	end
 
 end)

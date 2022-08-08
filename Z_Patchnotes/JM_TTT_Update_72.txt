@@ -1,38 +1,77 @@
 ###################################
-Josh Mate TTT Update 71 - Patch Notes
+Josh Mate TTT Update 72 - Patch Notes
 ###################################
 #### New Stuff
 ###################################
 
-// TODO Increase Battery time to 15 seconds
-// TODO Make Bounty hunter less restrictive
-// TODO Make slippery floor and Low Grav a game mode
-// TODO Make King of the hill or joint nuke launch codes standing 
- 
-[Gas Canister] 
- - New Traitor Weapon
- - Left click to Place a visible gas canister in the level (like you would C4)
- - Left click again to trigger the gas to be released
- - A cloud around canister damages all players inside over time
- - Gas is visible and the canister can be disarmed by anyone by pressing E on it
+[Game Mode: Traitor Tester]
+- New Game Mode
+- Randomly spawns an unmarked Portable Traitor Tester weapon someone on the map
+
+[Game Mode: Slippery Floors]
+- New Game Mode
+- Is no longer a care package loot, but instead it's own game mode
+
+[Game Mode: Low Gravity]
+- New Game Mode
+- Is no longer a care package loot, but instead it's own game mode
 
 
 ###################################
 #### Changes
 ###################################
 
-###################################
-##### Small Changes / Fixes / Code 
-###################################
+[Game Mode System]
+- Game modes are now split up into 2 groups (Innocent driven and All Game Modes)
+- The first round will have a 30% chance of being an Innocent driven Game Mode (or no mode)
+- The Second round will have a 100% chance of being ANY Game Mode
+- This pattern then repeats throughout the evening
+(This means the innocents will on average have more things to do in the evening)
+(While keeping the meme / crazy Game Modes still rare)
 
-[Small Changes] 
-- NOTHING
+[Game Mode: Power Up]
+- Increased number of batteries required to win from: 6 -> 7
 
-[Fixes] 
-- NOTHING
+[Game Mode: Bounty Hunter]
+- Is now no longer enforced on you but:
+- The bounty target now takes 2x (Double) damage from traitors
+- Killing your bounty target now gives all traitors +10 Max HP
+
+[Game Mode: Infection]
+- Reduced Zombie HP from: 60 -> 40 HP
+- Zombies can no longer harm traitors
+- Zombie Knife now swings a bit faster (Higher DPS)
+
+[Chameleon] 
+- Now rather than making you completely invisible, it just makes you EXTREMELY hard to see
+(The idea is that risky get out of jail frees will be less viable as people will know to look for your feint outline)
+
+[Cannibal]
+- No longer heals you instantly for 100 HP when eating
+- Instead heals you 50 HP over 12 seconds similar to heal grenade
+- This effect wouldn't stack with other cannibal eats (but would stack other heals)
+- You now gain a flat 15 Max HP buff per body rather than a diminishing 50/40/30/20/10
+
+[Radar] 
+- Detectives no longer have access to the Radar passive.
+(For a more powerful but temporary effect, use UAV instead)
+
+[Land Mine]
+- It will now go off if you are very close to it as well as just touching it
+- This will prevent getting stuck in it, and make it more dangerous
+- This also prevents you just jumping over it, actually blocking off the map now
+
+[Barrier]
+- Players affected by the barrier now take 50% increased damage for 30 seconds after
+- This effect now has a separate timer to the slow and and has a unique icon
 
 ###################################
 ##### Work in Progress
 ###################################
-- TTT_Murrell_Way
-- TTT_Beach_House
+- Map: TTT_Murrell_Way
+- Map: TTT_Beach_House
+- Game Mode: Tag
+- Game Mode: Defcon 
+- Game Mode: Find and Retrieve
+- Game Mode: King of the hill
+- Traitor Item: Gas Canister

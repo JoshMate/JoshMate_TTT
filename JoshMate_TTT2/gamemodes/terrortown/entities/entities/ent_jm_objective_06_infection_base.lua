@@ -9,7 +9,7 @@ ENT.Spawnable           = false
 ENT.AdminSpawnable      = false
 
 local GameMode_Infection_Zombie_Spawn_Delay			= 20
-local GameMode_Infection_Zombie_StartingHealth		= 60
+local GameMode_Infection_Zombie_StartingHealth		= 40
 
 function ENT:Initialize()
 

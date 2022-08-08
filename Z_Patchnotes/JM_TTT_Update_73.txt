@@ -1,38 +1,37 @@
 ###################################
-Josh Mate TTT Update 71 - Patch Notes
+Josh Mate TTT Update 73 - Patch Notes
 ###################################
 #### New Stuff
 ###################################
 
-// TODO Increase Battery time to 15 seconds
-// TODO Make Bounty hunter less restrictive
-// TODO Make slippery floor and Low Grav a game mode
-// TODO Make King of the hill or joint nuke launch codes standing 
- 
-[Gas Canister] 
- - New Traitor Weapon
- - Left click to Place a visible gas canister in the level (like you would C4)
- - Left click again to trigger the gas to be released
- - A cloud around canister damages all players inside over time
- - Gas is visible and the canister can be disarmed by anyone by pressing E on it
+[Map: TTT Beach House]
+- New Map
+- A cliff residence above the beach with an ocean and a boat
+- A Large Map with long range encounters
 
+[Map: TTT Pirate Jet]
+- New Map
+- An array of floating islands and a small aircraft
+- A Small Map for chaos and quick rounds
+
+[Game Mode: Traitor Tester]
+- New Game Mode
+- Randomly spawns an unmarked Portable Traitor Tester weapon someone on the map
 
 ###################################
 #### Changes
 ###################################
 
-###################################
-##### Small Changes / Fixes / Code 
-###################################
-
-[Small Changes] 
-- NOTHING
-
-[Fixes] 
-- NOTHING
+[Game Mode System]
+- 
 
 ###################################
 ##### Work in Progress
 ###################################
-- TTT_Murrell_Way
-- TTT_Beach_House
+- Map: TTT_Murrell_Way
+- Map: TTT_Beach_House
+- Game Mode: Tag
+- Game Mode: Defcon 
+- Game Mode: Find and Retrieve
+- Game Mode: King of the hill
+- Traitor Item: Gas Canister

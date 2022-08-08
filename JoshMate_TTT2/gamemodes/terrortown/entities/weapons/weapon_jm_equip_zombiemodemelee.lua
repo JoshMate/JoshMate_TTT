@@ -154,7 +154,11 @@ function SWEP:PrimaryAttack()
 		if IsValid(hitEnt) then
 
 			local dmg = DamageInfo()
-			dmg:SetDamage(self.Primary.Damage)
+			if hitEnt:IsTerror() and hitEnt:IsTraitor() then
+				dmg:SetDamage(0)
+			else
+				dmg:SetDamage(self.Primary.Damage)
+			end
 			dmg:SetAttacker(owner)
 			dmg:SetInflictor(self)
 			dmg:SetDamageForce(owner:GetAimVector() * 1)

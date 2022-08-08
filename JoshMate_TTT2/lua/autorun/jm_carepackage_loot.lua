@@ -32,8 +32,6 @@ local lootTable = {
         JM_CarePackage_Loot_Mega_Tracker,
         JM_CarePackage_Loot_Godzilla,
         JM_CarePackage_Loot_Tripping_Balls,
-        JM_CarePackage_Loot_Low_Gravity,
-        JM_CarePackage_Loot_Slippery_Floors,
         JM_CarePackage_Loot_Swap,
         JM_CarePackage_Loot_Time_Bomb,
         JM_CarePackage_Loot_1_HP,
@@ -299,29 +297,6 @@ end
 function JM_CarePackage_Loot_Tripping_Balls( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Tripping Balls")
     JM_GiveBuffToThisPlayer("jm_buff_trippingballs", activator, caller)
-end
-
-function JM_CarePackage_Loot_Low_Gravity( activator, caller )
-
-    JM_Function_PrintChat(activator, "Care Package","Low Gravity")
-    JM_Function_Announcement("[Care Package] Gravity is now much weaker!")
-    
-    RunConsoleCommand("sv_gravity", 100)
-    RunConsoleCommand("sv_airaccelerate", 12)
-
-    JM_Function_PlaySound("effect_low_gravity.mp3")
-
-end
-
-function JM_CarePackage_Loot_Slippery_Floors( activator, caller )
-
-    JM_Function_PrintChat(activator, "Care Package","Slippery Floors")
-    JM_Function_Announcement("[Care Package] The floors are now slippery!")
-
-    RunConsoleCommand("sv_friction", 0)
-    RunConsoleCommand("sv_accelerate", 5)
-
-    JM_Function_PlaySound("effect_slippery_floors.mp3")
 end
 
 function JM_CarePackage_Loot_Swap( activator, caller )

@@ -133,6 +133,7 @@ function ENT:BarrierTouch(toucher)
 
 		-- Set Status and print Message
 		JM_GiveBuffToThisPlayer("jm_buff_barrierslow",toucher,self:GetOwner())
+		JM_GiveBuffToThisPlayer("jm_buff_barrierdamage",toucher,self:GetOwner())
 		-- End Of
 
 		JM_Function_PrintChat(self.Owner, "Equipment", "Your Barrier has been triggered!")

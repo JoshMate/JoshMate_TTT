@@ -49,7 +49,7 @@ SWEP.IsSilent              = true
 SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
-local Cannibal_Eat_MaxHP      = 10
+local Cannibal_Eat_MaxHP      = 15
 local Cannibal_Eat_Heal       = 100
 local Cannibal_Eat_Range      = 150
 
@@ -85,11 +85,12 @@ function SWEP:PrimaryAttack()
             local own = self:GetOwner()
 
 
-            self.CannibalMaxHPGained = (Cannibal_Eat_MaxHP * self:Clip1())
+            self.CannibalMaxHPGained = (Cannibal_Eat_MaxHP)
             own:SetMaxHealth(own:GetMaxHealth() + self.CannibalMaxHPGained)
-            own:SetHealth(own:Health() + (Cannibal_Eat_Heal))
 
-            own:SetHealth(math.Clamp(own:Health(), 0, own:GetMaxHealth()))
+            -- Set Status and print Message
+            JM_GiveBuffToThisPlayer("jm_buff_cannibalheal",own,own)
+            -- End Of
             
             targetPos = target:GetPos()
 
