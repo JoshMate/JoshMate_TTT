@@ -81,11 +81,6 @@ function SWEP:PrimaryAttack()
    self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
-   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-
-      JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't use Grenades in the Pre-Round..." )
-      return
-   end
    
    -- Use The Grenade
    self:HealingGreande_HealTarget(self:GetOwner())
