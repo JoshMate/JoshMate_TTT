@@ -189,7 +189,7 @@ function JM_GameMode_LowAmmoMode_Init()
     JM_Function_PlaySound("gamemode/weapon_start.mp3")
 
     -- Do the Round Logic
-    local plys = player.GetAll() 
+    local plys = player:GetAll() 
     for i = 1, #plys do
 
         local ply = plys[i]
@@ -255,7 +255,7 @@ function JM_GameMode_PowerHour_Init()
     }
 
     -- Hand out items
-	for _,pl in pairs(player.GetAll()) do
+	for _,pl in pairs(player:GetAll()) do
 		if pl:IsValid() and pl:Alive() and pl:IsTerror() then 
             local iRandomRoll = math.random(1, table.getn(tableOfPossibleItems))
 			pl:Give(tableOfPossibleItems[iRandomRoll])
@@ -305,14 +305,23 @@ function JM_GameMode_TraitorTester_Init()
     -- Debug
     if SERVER then print("[GameModes] Gamemode: Traitor Tester") end
 
+    -- Work out who gets it
+    
+    local listOfPlayers = player:GetAll()
+    local iRandomRoll = math.random(1, #listOfPlayers)
+    local chosenPlayer = listOfPlayers[iRandomRoll]
+    local chosenPlayerName = "ERROR"
+
+    if chosenPlayer:IsValid() and chosenPlayer:IsTerror() then
+        chosenPlayer:Give("weapon_jm_zloot_traitor_tester")
+        chosenPlayerName = chosenPlayer:Nick()
+    end
+    
     -- Announce the Goal
-	JM_Function_Announcement("[Traitor Tester] A portable traitor tester has spawned somewhere on the map!", 0)
+	JM_Function_Announcement("[Traitor Tester] " .. tostring(chosenPlayerName) .. " has recieved the tester!", 0)
 
 	-- Play the Sound
     JM_Function_PlaySound("shoot_portable_tester_scan.wav")
-
-    -- Do the Round Logic
-    JM_Function_SpawnThisThingInRandomPlaces("weapon_jm_zloot_traitor_tester", 1)
 
 end
 

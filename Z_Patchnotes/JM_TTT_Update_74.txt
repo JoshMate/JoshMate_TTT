@@ -1,0 +1,33 @@
+###################################
+Josh Mate TTT Update 73 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+// TODO Buff doom explosion
+// TODO Buff Combine and Ant Lion Guard Damage / Health
+// TODO Free the Goomba
+// TODO Unrestrict the Pre Round
+// TODO Jump Pad / thruster Item?
+// TODO Buff Deagle Headshot Damage
+
+
+[]
+- 
+
+###################################
+#### Changes
+###################################
+
+[]
+- 
+
+###################################
+##### Work in Progress
+###################################
+- Map: TTT_Murrell_Way
+- Game Mode: Tag
+- Game Mode: Defcon 
+- Game Mode: Find and Retrieve
+- Game Mode: King of the hill
+- Traitor Item: Gas Canister

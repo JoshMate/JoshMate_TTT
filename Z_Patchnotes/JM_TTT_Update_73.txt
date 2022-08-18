@@ -14,16 +14,20 @@ Josh Mate TTT Update 73 - Patch Notes
 - An array of floating islands and a small aircraft
 - A Small Map for chaos and quick rounds
 
-[Game Mode: Traitor Tester]
-- New Game Mode
-- Randomly spawns an unmarked Portable Traitor Tester weapon someone on the map
-
 ###################################
 #### Changes
 ###################################
 
-[Game Mode System]
-- 
+[Throwing Knives]
+- Buffed damage gained through distance: 350 -> 400
+- Buffed minimum damage: 40 -> 50
+- Changed icon to only have 2 knives (just like in game) 
+
+[Game Mode: Traitor Tester]
+- Now rather than spawning randomly on the map, it is given to a random player
+
+[Bug Fixes]
+- Fixed bounty hunter text message reflect last weeks changes
 
 ###################################
 ##### Work in Progress

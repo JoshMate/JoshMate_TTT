@@ -378,7 +378,7 @@ cmdResetServerCvars:defaultAccess(ULib.ACCESS_ADMIN)
 -- ##################################################
 
 local function JM_ULX_Round_Add()
-	JM_Function_AddRounds(roundsToAdd) 
+	JM_Function_AddRounds(1) 
 end
 
 local cmdRoundAdd = ulx.command(CATEGORY_NAME_JM_Maps, "jm round add", function () JM_ULX_Round_Add()  end, "!roundadd")
@@ -389,7 +389,7 @@ cmdRoundAdd:defaultAccess(ULib.ACCESS_ADMIN)
 -- ##################################################
 
 local function JM_ULX_Round_Remove()
-	JM_Function_RemoveRounds(roundsToRemove) 
+	JM_Function_RemoveRounds(1) 
 end
 
 local cmdRoundRemove = ulx.command(CATEGORY_NAME_JM_Maps, "jm round remove", function () JM_ULX_Round_Remove() end, "!roundremove")

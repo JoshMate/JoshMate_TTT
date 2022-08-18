@@ -91,7 +91,7 @@ function JM_GameMode_BountyHunter_Start()
 	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 
 	-- Announce the Goal
-	JM_Function_Announcement("[Bounty Hunter] Traitors can only harm their target!", 0)
+	JM_Function_Announcement("[Bounty Hunter] Traitors deal x2 damage to their targets!", 0)
 
 	-- Play the Sound
 	JM_Function_PlaySound("gamemode/bounty_start.mp3")
