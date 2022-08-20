@@ -18,10 +18,10 @@ SWEP.CanBuy                = {}
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 20
+SWEP.Primary.Damage        = 25
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.080
-SWEP.Primary.Cone          = 0.040
+SWEP.Primary.Cone          = 0.050
 SWEP.Primary.Recoil        = 0.5
 SWEP.Primary.Range         = 400
 SWEP.Primary.ClipSize      = 20

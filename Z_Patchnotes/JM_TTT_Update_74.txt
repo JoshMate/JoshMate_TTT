@@ -4,12 +4,8 @@ Josh Mate TTT Update 73 - Patch Notes
 #### New Stuff
 ###################################
 
-// TODO Buff doom explosion
-// TODO Buff Combine and Ant Lion Guard Damage / Health
 // TODO Free the Goomba
-// TODO Unrestrict the Pre Round
 // TODO Jump Pad / thruster Item?
-// TODO Buff Deagle Headshot Damage
 
 
 []
@@ -19,12 +15,52 @@ Josh Mate TTT Update 73 - Patch Notes
 #### Changes
 ###################################
 
-[]
-- 
+[Pre Round Restrictions]
+- You can now use grenades before round start
+- You can now pickup stick items before round start
+(Thanks to Simon for this change)
+
+[Doom Dart]
+- Buffed Doom Dart Explosion Damage Base: 70 -> 100 (140 -> 200) Damage
+- Buffed Doom Dart Explosion Radius: 700 -> 800 Units
+
+[Sniper]
+- Buffed Head shot damage of Sniper: 2x (170) -> 3x (255) Damage
+(A well place sniper headshot should always kill even buffed players)
+
+[SMG]
+- Buffed Damage of SMG: 35 -> 40 Damage
+- Nerfed Spread of SMG: 0.45 -> 0.50 Spread Size
+(SMG is more deadly, but also more restricted to close range)
+
+[Rifle]
+- Nerfed Firerate of Rifle: 0.130 -> 0.140 Delay
+(The Rifle was a flat upgrade to SMG even at close range)
+(The changes to the two weapons will force you to capitalise on the Rifles Strengths)
+(The Rifle is good at mid - long range accuracy and damge, smg is close range spray down)
+
+[Shotgun]
+- Buffed Shotgun Per pellet Damage: 15 -> 16 
+- Buffed Shotgun Pellet count: 12 -> 16
+- Nefed Shotgun Range: 400 -> 350 Units
+(Old Damage: 15 * 12 = 180 New Damage: 16 * 16 = 256)
+
+[Auto Pistol]
+- Buffed Damage of Auto Pistol: 20 -> 25
+- Nerfed Spread of Auto Pistol: 0.40 -> 0.50 Spread Size
+(Auto Pistol is more deadly, but also more restricted to close range)
+
+[NPCs]
+- "The Dog" (Antlion Guard) is now MUCH more deadly
+- Increased the damage and health of combine soldiers
+
 
 ###################################
 ##### Work in Progress
 ###################################
+- Map: TTT_Ice_Camp
+- Map: TTT_Shark_Tank
+- Map: TTT_Coach House
 - Map: TTT_Murrell_Way
 - Game Mode: Tag
 - Game Mode: Defcon 
