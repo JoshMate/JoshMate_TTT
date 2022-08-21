@@ -1,5 +1,5 @@
 ###################################
-Josh Mate TTT Update 73 - Patch Notes
+Josh Mate TTT Update 74 - Patch Notes
 ###################################
 #### New Stuff
 ###################################
@@ -24,6 +24,13 @@ Josh Mate TTT Update 73 - Patch Notes
 - Buffed Doom Dart Explosion Damage Base: 70 -> 100 (140 -> 200) Damage
 - Buffed Doom Dart Explosion Radius: 700 -> 800 Units
 
+[Bear Trap]
+- Rewrote all the code to be more stable and robust
+- Now better informs you about various outcomes of your beartrap
+- Now deals 150 damage over a maximum hold time of 25 seconds
+(This is to prevent stalemates / soft locks)
+(Only super buff / players with bomb squad will survive the 25s)
+
 [Sniper]
 - Buffed Head shot damage of Sniper: 2x (170) -> 3x (255) Damage
 (A well place sniper headshot should always kill even buffed players)
@@ -44,6 +51,7 @@ Josh Mate TTT Update 73 - Patch Notes
 - Buffed Shotgun Pellet count: 12 -> 16
 - Nefed Shotgun Range: 400 -> 350 Units
 (Old Damage: 15 * 12 = 180 New Damage: 16 * 16 = 256)
+(Is now almost gaurenteed to 1 shot up close, but less effective at range)
 
 [Auto Pistol]
 - Buffed Damage of Auto Pistol: 20 -> 25
