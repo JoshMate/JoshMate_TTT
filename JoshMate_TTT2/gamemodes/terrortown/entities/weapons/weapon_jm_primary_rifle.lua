@@ -22,7 +22,7 @@ SWEP.WeaponID              = AMMO_M16
 
 SWEP.Primary.Damage        = 45
 SWEP.Primary.NumShots      = 1
-SWEP.Primary.Delay         = 0.140
+SWEP.Primary.Delay         = 0.150
 SWEP.Primary.Cone          = 0.005
 SWEP.Primary.Recoil        = 2.0
 SWEP.Primary.Range         = 1500

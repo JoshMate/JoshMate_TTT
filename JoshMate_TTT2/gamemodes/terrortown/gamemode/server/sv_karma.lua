@@ -176,15 +176,26 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 		penalty = penalty * KarmaPerHPDMGMult
 		penalty = math.ceil( penalty )
 
+		-- Josh Mate FREE THE GOOMBA Code IT'S FREE BABY
+		if dmginfo:IsDamageType(DMG_PHYSGUN) then
+			penalty = 0
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [FREE GOOMBA] " ..Format("%s Lost %i Karma (FREE GOOMBA) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			JM_Function_PrintChat(attacker, "Goomba", "It's Free Baby!")
+			return
+		end
+		-- END OF FREE GOOMBA CODE
+
 
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
 			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			return
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
 			print("[" .. (GAMEMODE.roundCount-1) .. "] [!RDM!] " ..Format("%s Lost %i Karma [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			return
 		end
 		
 	end
@@ -202,6 +213,14 @@ function KARMA.Killed(attacker, victim, dmginfo)
 	if attacker:IsInTeam(victim) then
 
 		local penalty = KARMA.GetKillPenalty(victim:GetLiveKarma())
+
+		-- Josh Mate FREE THE GOOMBA Code IT'S FREE BABY
+		if dmginfo:IsDamageType(DMG_PHYSGUN) then
+			penalty = 0
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [FREE GOOMBA] " ..Format("%s Lost %i Karma (FREE GOOMBA) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			return
+		end
+		-- END OF FREE GOOMBA CODE
 
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then

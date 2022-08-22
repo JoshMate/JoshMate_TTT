@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 SWEP.PrintName				= "Unstable Teleporter"
 SWEP.Author			    	= "Josh Mate"
-SWEP.Instructions			= "Teleprot someplace random"
+SWEP.Instructions			= "Teleport someplace random"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
@@ -55,7 +55,8 @@ function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 	self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
-	
+
+	if CLIENT then return end
 	-- Teleport
 	JMTeleportEffectsInit(self:GetOwner())
 	JM_Function_TeleportPlayerToARandomPlace(self:GetOwner())
