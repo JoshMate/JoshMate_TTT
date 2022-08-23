@@ -39,8 +39,8 @@ if CLIENT then
         ["$pp_colour_addg"] = 0,
         ["$pp_colour_addb"] = 0,
         ["$pp_colour_brightness"] = 0,
-        ["$pp_colour_contrast"] = 2,
-        ["$pp_colour_colour"] = 4,
+        ["$pp_colour_contrast"] = 1,
+        ["$pp_colour_colour"] = 7,
         ["$pp_colour_mulr"] = 0,
         ["$pp_colour_mulg"] = 0,
         ["$pp_colour_mulb"] = 0
@@ -51,10 +51,8 @@ if CLIENT then
 
         if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
             DrawColorModify( effectTable_TrippingBalls )
-            DrawSobel( 1 )
-            DrawBloom( 0.65, 2, 9, 9, 1, 1, 1, 1, 1 )
-            DrawToyTown(2, ScrH() / 2)
-            DrawMotionBlur( 0.1, 0.8, 0.01 )
+            DrawSobel( 0.01 )
+            DrawMotionBlur( 0.03, 1, 0 )
         end 
     
     end)
@@ -74,6 +72,13 @@ function ENT:Think()
     self.BaseClass.Think(self)
 
 end
+
+-- Hooks
+hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
+    if ply:GetNWBool(JM_BuffNWBool) == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 3
+    end 
+end)
 
 -- #############################################
 -- AUTOMATICALLY GENERATED STUFF

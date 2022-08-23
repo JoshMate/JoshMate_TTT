@@ -14,7 +14,7 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Lethal Weapon
 
-Steals 60 HP from the target over 15 seconds
+Steals 75 HP from the target over 15 seconds
 
 Targets flinch while they are poisoned
    
@@ -25,7 +25,7 @@ Has 3 uses, silent, perfect acccuracy and long range
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_poisondart.png"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
@@ -35,7 +35,6 @@ SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 3
 SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
@@ -67,8 +66,8 @@ function SWEP:HitEffectsInit(ent)
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
    
-   util.Effect("TeslaZap", effect, true, true)
-   util.Effect("TeslaHitboxes", effect, true, true)
+   
+   
    util.Effect("cball_explode", effect, true, true)
 end
 
@@ -79,14 +78,12 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
       
-      -- JM Changes Extra Hit Marker
-      net.Start( "hitmarker" )
-      net.WriteFloat(0)
-      net.Send(weaponOwner)
-      -- End Of
+      -- Give a Hit Marker to This Player
+      local hitMarkerOwner = self:GetOwner()
+      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Poison Dart]: You hit someone!")
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Poisoned!" )
       JM_RemoveBuffFromThisPlayer("jm_buff_poisondart",ent)
       JM_GiveBuffToThisPlayer("jm_buff_poisondart",ent,self:GetOwner())
       -- End Of
@@ -222,8 +219,12 @@ if CLIENT then
          surface.DrawLine( 0, 0, scrW, 0 )
          surface.DrawLine( 0, scrH - 1, scrW, scrH - 1 )
 
-         surface.SetDrawColor(0, 255, 0, 255)
-         surface.DrawLine(x, y, x + 1, y + 1)
+         -- Draw Coloured dot in the middle
+         surface.SetDrawColor(255, 0, 0, 255)
+         surface.DrawLine(x, y, x + 1, y + 0)
+         surface.DrawLine(x, y, x + 0, y + 1)
+         surface.DrawLine(x, y, x - 1, y - 0)
+         surface.DrawLine(x, y, x - 0, y - 1)
 
          -- scope
          surface.SetTexture(scope)
@@ -241,20 +242,31 @@ if CLIENT then
 end
 
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Poison an enemy", nil, true)
+	   self:AddTTT2HUDHelp("Poison a player at range", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      self:PreDrop()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
--- 
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

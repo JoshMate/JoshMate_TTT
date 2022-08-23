@@ -1,0 +1,105 @@
+-- ################################
+-- ### Server
+-- ################################
+
+[Care Package System]
+- New Spawn type "Emergency Airdrop" a rare event that spawns 3 care pacakges at once (10% Chance)
+- Care Package Minimum Spawn Time: 20 -> 10 Seconds
+
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Big Boy]
+- A [Good] Care package loot item
+// An extremely powerful revolver that shoots explosive rounds
+// Perfect range and accuracy, this thing will deal 100 damage on a direct hit
+// And deal lessor explosive splash damage to those who are close where you hit
+// The damage type is explosive, so bomb squad will block half of it
+// Comes with 1 bullet and must be reloaded after each shot
+// Consumes Heavy Ammo
+
+[Shredder]
+- A [Good] Care package loot item
+// An extremely powerful machine gun
+// It fires its entire 500 round magazine very quickly with a single mouse click (500 Round Burst lmao)
+// It takes a bout 5 seconds to spin up, and people will know you're spinning up
+// It is very hard to control, but once it spins up, it is unstoppable
+// Can only be used once as it litterally explodes in your hands after it has emptied it's mag
+// Once it has begun spinning up, it cannot be swapped out
+
+[C4]
+- Innocents can no longer Plant / Arm C4
+- They can still defuse / destroy the C4
+// This is because apart from for trolling why would they ever want to?
+// Other innos can just stand in it / attempt to defuse it and nuke the planters Karma
+// (This happened to me and it was defused and sent me straight to 0)
+// (And both parties were innocents, so it just seems like a system asking for trouble)
+// It also fixes a Traitor revealing exploit to do with who can and can't see C4 HUD Icons
+
+[Portable Tester]
+- Fire Rate Delay: 2.0 -> 1.0 Seconds
+
+[Bear Trap]
+- Number of Beartraps: 1 -> 2
+- Now tells you who freed you so you can thank them
+- The traps can now be shot / destroyed more consistently in a single shot
+- Added some spark effects to destroying / removing / trapping
+- You can no longer pickup and re-use bear traps
+// This is to prevent the infinite trap exploit that soap/traps used to have
+// But the more I think about it, it helps balance out the new 2 use Bear Trap
+
+[LMG]
+- Fire Rate Delay : 0.115 -> 0.090
+- Damage: 30 -> 20 HP
+- Spread Accuracy: 0.015 -> 0.020
+
+[SMG]
+- Spread Accuracy Size: 0.35 -> 0.40
+
+[Shogtun]
+- Range: 250 -> 300 Units
+
+[Advanced Shogtun]
+- Range: 200 -> 300 Units
+- Fire Mode: Semi-Auto -> Full-Auto
+// The fire rate is unchanged, you just hold instead of tapping now
+
+[Auto Pistol]
+- Spread Accuracy Size: 0.30 -> 0.40
+- Range: 350 -> 300 Units
+
+[Light Pistol]
+- Range: 350 -> 400 Units
+
+[Heavy Pistol]
+- Range: 350 -> 650 Units
+
+[Advanced Pistol]
+- Range: 300 -> 450 Units
+
+
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed a bug where the advanced rifle had a right click zoom
+- Fixed aload of bugs with the new spectator HUD icons for Care pacakges etc...
+- Fixed a bug where attempting to use a grenade during prep time would print the incorrect chat messages
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[Circuit]
+- New Map!
+- A circuit of stations connected via a train that travels between them
+
+[Cathedral]
+- Made the see through metal fences amd netting "Wall-bang-able" so you can shoot through them
+- Removed the care package spawns from the car tunnel
+- Added some more loot to the graves
+#### Uploaded to Workshop
+

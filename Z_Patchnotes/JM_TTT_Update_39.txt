@@ -1,0 +1,41 @@
+-- ################################
+-- ### Server
+-- ################################
+
+- Max Rounds per map: 10 -> 7
+// This should help to keep things fresh and let us get through more maps
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Super Crowbar]
+- Increased Righ Click push force: 1500 -> 1750
+- Increased Left Click Damage: 40 -> 45
+- Increased Melee Range for both Left/Right Click: 100 -> 130
+
+[Gus Raido]
+- No Longer Explodes
+// Just chill vibes now
+
+[Ticking Time Bomb]
+- New Care Package Bad Loot
+- Plays music that builds up to a HUGE explosion
+- Always Explodes afer 68 seconds
+- Blast radius damage equal to about 1.5x C4s
+- Karma free :smirk:
+// RUN!
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Players no longer drop their own weapon when firing their own newton launcher
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+- New Map: TTT Apartments
+// Two apartment towers face each other over a central courtyard.
+// There are multiple ways to cross between the two buildings without going through the central court yard for those who like to be sneaky.

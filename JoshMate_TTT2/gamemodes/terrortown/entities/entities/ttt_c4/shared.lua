@@ -158,7 +158,7 @@ function ENT:Initialize()
 	end
 
 	if not self:GetDmg() then
-		self:SetDmg(175)
+		self:SetDmg(200)
 	end
 end
 
@@ -272,6 +272,10 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 	local diff = nil
 	local dmg = 0
 	local plys = player.GetAll()
+	local playersCaughtInBlase = 0
+
+	-- Damage for Score Calc
+	local damageFinal = 0
 
 	for i = 1, #plys do
 		local ply = plys[i]
@@ -289,6 +293,12 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 		
 		dmg = damage * (1-( distance / radius))
 
+		-- Only hurt what they have, more accurate Hit Markers
+		if ply:Health() <= dmg then dmg = ply:Health() end
+
+		playersCaughtInBlase = playersCaughtInBlase + 1
+		damageFinal = damageFinal + dmg
+
 		local dmginfo = DamageInfo()
 		dmginfo:SetDamage(dmg)
 		dmginfo:SetAttacker(dmgowner)
@@ -299,6 +309,34 @@ function ENT:SphereDamage(dmgowner, center, radius, damage)
 
 		ply:TakeDamageInfo(dmginfo)
 	end
+ 
+	damageFinal = math.Round(damageFinal, 0)
+
+	local damageRating = "[0] Terrible"
+	if damageFinal >= 100 then damageRating =    "[1] Bad" end
+	if damageFinal >= 150 then damageRating =    "[2] Okay" end
+	if damageFinal >= 200 then damageRating =    "[3] Decent" end
+	if damageFinal >= 250 then damageRating =    "[4] Nice" end
+	if damageFinal >= 300 then damageRating =    "[5] Good" end
+	if damageFinal >= 350 then damageRating =    "[6] Great" end
+	if damageFinal >= 400 then damageRating =    "[7] Impressive" end
+	if damageFinal >= 450 then damageRating =    "[8] Excellent" end
+	if damageFinal >= 500 then damageRating =    "[9] Brilliant" end
+	if damageFinal >= 600 then damageRating =    "[10] Fantastic" end
+	if damageFinal >= 800 then damageRating =    "[11] Insane" end
+	if damageFinal >= 1000 then damageRating =   "[12] Awe Inspiring" end
+	if damageFinal >= 1400 then damageRating =   "[13] Godlike" end
+	if damageFinal >= 1600 then damageRating =   "[14] Oh! Cross Map" end
+	if damageFinal >= 1800 then damageRating =   "[15] Faze wants to know your location" end
+	if damageFinal >= 2000 then damageRating =   "[16] Mum, Get the FUCKING CAMERA! MUMMY!" end
+ 
+	
+
+	-- Send Breakdown of damage to Traitor
+	if SERVER then
+		JM_Function_PrintChat(dmgowner, "Equipment", "C4 Score: " .. tostring(damageFinal) .. " - ".. tostring(damageRating) .. " - " .. tostring(playersCaughtInBlase) .. " Man")
+	end
+
 end
 
 local c4boom = Sound("c4.explode")
@@ -497,28 +535,10 @@ end
 
 if SERVER then
 	---
-	-- Inform traitors about us
-	-- @param boolean armed
-	-- @realm server
-	function ENT:SendWarn(armed)
-		net.Start("TTT_C4Warn")
-		net.WriteUInt(self:EntIndex(), 16)
-		net.WriteBit(armed)
-
-		if armed then
-			net.WriteVector(self:GetPos())
-			net.WriteFloat(self:GetExplodeTime())
-			net.WriteString(self:GetOwner():GetTeam())
-		end
-
-		--net.Send(GetTeamFilter(self:GetOwner():GetTeam(), true))
-		net.Broadcast()
-	end
-
-	---
 	-- @realm server
 	function ENT:OnRemove()
-		self:SendWarn(false)
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
 	end
 
 	---
@@ -536,7 +556,8 @@ if SERVER then
 		self:SetExplodeTime(0)
 		self:SetArmed(false)
 		self:WeldToGround(false)
-		self:SendWarn(false)
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
 
 		self.DisarmCausedExplosion = false
 	end
@@ -607,8 +628,8 @@ if SERVER then
 			end
 		end
 
-		-- send indicator to traitors
-		self:SendWarn(true)
+		-- Josh Mate New Warning Icon Code
+		JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_c4",self:GetPos(),self:GetExplodeTime(),true)
 	end
 
 	---
@@ -706,7 +727,7 @@ if SERVER then
 				hook.Call("TTTC4Pickup", nil, bomb, ply)
 
 				-- picks up weapon, switches if possible and needed, returns weapon if successful
-				local wep = ply:SafePickupWeaponClass("weapon_ttt_c4", true)
+				local wep = ply:SafePickupWeaponClass("weapon_jm_equip_c4", true)
 
 				if not IsValid(wep) then
 					LANG.Msg(ply, "c4_no_room")

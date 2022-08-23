@@ -9,28 +9,34 @@ if CLIENT then
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_prim"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_special.png"
    SWEP.IconLetter         = "n"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_ADVANCED_SNIPER
 
+-- // Gun Stats
+
 SWEP.Primary.Damage        = 90
-SWEP.Primary.Delay         = 0.3
+SWEP.Primary.NumShots      = 1
+SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0.1
 SWEP.Primary.Recoil        = 5
+SWEP.Primary.Range         = 5000
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
-SWEP.Primary.ClipMax       = 10
+SWEP.Primary.ClipMax       = 5
+SWEP.Primary.SoundLevel    = 75
 
 SWEP.HeadshotMultiplier    = 2
-SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.BulletForce           = 30
 SWEP.Primary.Automatic     = false
+
+-- // End of Gun Stats
 
 -- Josh Mate Changes
 SWEP.Secondary.IsDelayedByPrimary = 0
@@ -41,10 +47,9 @@ local JM_Cone_Scope        = 0
 SWEP.Primary.Ammo          = "357"
 SWEP.Primary.Sound         = "shoot_advanced_sniper.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
-SWEP.Tracer                = "None"
+SWEP.Tracer                = "AR2Tracer"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_snip_sg550.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_snip_sg550.mdl")
@@ -138,8 +143,12 @@ if CLIENT then
          surface.DrawLine( 0, 0, scrW, 0 )
          surface.DrawLine( 0, scrH - 1, scrW, scrH - 1 )
 
+         -- Draw Coloured dot in the middle
          surface.SetDrawColor(255, 0, 0, 255)
-         surface.DrawLine(x, y, x + 1, y + 1)
+         surface.DrawLine(x, y, x + 1, y + 0)
+         surface.DrawLine(x, y, x + 0, y + 1)
+         surface.DrawLine(x, y, x - 1, y - 0)
+         surface.DrawLine(x, y, x - 0, y - 1)
 
          -- scope
          surface.SetTexture(scope)
@@ -155,3 +164,28 @@ if CLIENT then
       return (self:GetIronsights() and 0.2) or nil
    end
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Shoot", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

@@ -1,0 +1,155 @@
+-- Give these files out
+AddCSLuaFile()
+
+if engine.ActiveGamemode() ~= "terrortown" then return end
+if CLIENT then return end
+
+-- Max Karma Shoutout Code
+
+local JM_Karma_ListofPeopleWhoHaveHadMax = {}
+
+-- Slay players who are below certain thresholds
+local JM_Karma_Slay_Minimum             = 0
+local JM_Karma_Slay_Threshold           = 500
+local JM_Karma_Heal_Max                 = 1000
+local JM_Karma_Heal_To_Max              = 100
+local JM_Karma_Heal_Bonus               = 1300
+local JM_Karma_Heal_To_Bonus            = 10
+
+util.AddNetworkString("JM_KarmaSlayMessage")
+
+local function Effects_Slay(playerToSlay) 
+
+    if not playerToSlay:IsValid() or not playerToSlay:IsPlayer() then return end
+
+    local pos = playerToSlay:GetShootPos()
+    local effect = EffectData()
+    effect:SetStart(pos)
+    effect:SetOrigin(pos)
+    util.Effect("cball_explode", effect, true, true)
+    
+    -- Sound Effect
+    JM_Function_PlaySound("karmaslay.wav")
+
+    playerToSlay:Kill()
+    playerToSlay:SetNWBool("JM_NWBOOL_IsSittingRoundOut", true)
+    playerToSlay:SetTeam(TEAM_SPEC)
+
+end
+
+
+hook.Add("TTTPrepareRound", "JMKarmaSlayAtStartOfRound", function()
+
+    if CLIENT then return end
+    
+    local plys = player.GetAll()    
+    for i = 1, #plys do
+
+        local ply = plys[i]
+        if not ply:IsValid() then continue end
+
+
+        -- Karma Slay
+        
+        ply:SetNWBool("JM_NWBOOL_IsSittingRoundOut", false)
+
+        local JM_Karma_Current = ply:GetBaseKarma()
+        local newValue = 0
+
+        if JM_Karma_Current < JM_Karma_Slay_Minimum then
+
+            JM_Function_PrintChat_All("Karma Sit-Out", tostring(ply:Nick()) .. " is sitting out Twice")
+            ply:SetLiveKarma(JM_Karma_Slay_Minimum)
+            Effects_Slay(ply) 
+            
+
+        elseif JM_Karma_Current < JM_Karma_Slay_Threshold then
+
+            JM_Function_PrintChat_All("Karma Sit-Out", tostring(ply:Nick()) .. " is sitting out Once")
+            ply:SetLiveKarma(JM_Karma_Slay_Threshold)
+            Effects_Slay(ply) 
+
+        elseif JM_Karma_Current >= JM_Karma_Slay_Threshold  then
+
+            if JM_Karma_Current >= JM_Karma_Slay_Threshold then 
+                newValue = JM_Karma_Current + JM_Karma_Heal_To_Max
+
+                newValue = math.Clamp(newValue, JM_Karma_Slay_Threshold, JM_Karma_Heal_Max)
+            end
+
+            if JM_Karma_Current >= JM_Karma_Heal_Max then 
+                newValue = JM_Karma_Current + JM_Karma_Heal_To_Bonus
+
+                newValue = math.Clamp(newValue, JM_Karma_Heal_Max, JM_Karma_Heal_Bonus)
+            end
+                
+            ply:SetLiveKarma(newValue)
+
+        end
+    
+    end
+end)
+
+
+hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
+
+    local plys = player.GetAll()    
+    for i = 1, #plys do
+
+        local ply = plys[i]
+        if not ply:IsValid() then continue end
+
+        -- Set Player model and Colour
+
+        ply:SetColor(Color( 235, 235, 235 ))
+
+        if(ply:IsDetective()) then
+            ply:SetModel( "models/player/police.mdl" )
+            ply:SetColor(Color( 0, 50, 255 ))
+        end
+
+        -- Karma Bonus HP
+        local JM_Karma_BonusHP_Mult = 0.1
+
+        if ply:GetBaseKarma() > 1000 then 
+            local BonusHPFromKarama = math.ceil(((ply:GetBaseKarma() - 1000) * JM_Karma_BonusHP_Mult))
+            local FinalHP = 100 + BonusHPFromKarama
+            FinalHP = math.Clamp(FinalHP, 100, 130)
+            JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Bonus Health (+" .. tostring(BonusHPFromKarama) .. " HP)")
+            ply:SetMaxHealth(FinalHP)
+            ply:SetHealth(FinalHP)
+        end
+    
+        -- Karma Bonus Credit 
+        if ply:GetBaseKarma() == 1300 and (ply:IsDetective() or ply:IsTraitor()) then 
+            ply:AddCredits(1)
+            JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Bonus Credit (+1 Credit)")
+        end
+
+        -- Karma Good Boy Buff
+        if ply:GetBaseKarma() == 1300 then 
+            JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff",ply)
+            JM_GiveBuffToThisPlayer("jm_buff_karmabuff",ply,ply)
+            JM_Function_PrintChat(ply, "Karma","Good Karma Bonus: Good Boy Buff (+10% Movement Speed)")
+        end
+
+        -- Announce Max Karma once per person
+        if ply:GetBaseKarma() == 1300 then 
+            if not table.HasValue(JM_Karma_ListofPeopleWhoHaveHadMax, tostring(ply:SteamID64())) then
+                JM_Function_PrintChat_All("Karma", tostring(ply:Nick()) .. " has reached MAX Karma!")
+                -- Sound Effect
+                JM_Function_PlaySound("karma_good.mp3")
+                table.insert(JM_Karma_ListofPeopleWhoHaveHadMax, tostring(ply:SteamID64()))
+            end
+        end
+
+        -- Karma Slay
+
+        if ply:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then
+            ply:ConfirmPlayer(true)
+            SendPlayerToEveryone(ply)
+        end
+
+    end
+end)
+

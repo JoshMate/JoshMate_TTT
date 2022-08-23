@@ -4,7 +4,6 @@ if CLIENT then
 	SWEP.Slot      = 7
  
 	SWEP.ViewModelFlip		= false
-	SWEP.ViewModelFOV		= 10
  end
 
 SWEP.PrintName				= "Chameleon"
@@ -13,20 +12,20 @@ SWEP.Instructions			= "Go invisible"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 60
-SWEP.Primary.DefaultClip	= 60
+SWEP.Primary.ClipSize		= 45
+SWEP.Primary.DefaultClip	= 45
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel             = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel              = "models/Items/combine_rifle_ammo01.mdl"
+SWEP.WorldModel             = "models/Items/combine_rifle_ammo01.mdl"
 SWEP.HoldType 				= "normal" 
-SWEP.UseHands 				= true
+SWEP.UseHands               = false
 SWEP.AllowDrop 				= true
 
 -- TTT Customisation
-SWEP.Base 					= "weapon_tttbase"
+SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind                  	= WEAPON_EQUIP
 SWEP.WeaponID              	= AMMO_CHAMELEON
 SWEP.CanBuy                	= {ROLE_TRAITOR}
@@ -42,33 +41,49 @@ if CLIENT then
 	   desc = [[A Utility Item:
 	
 		+ Invisibility while holding left click
-
-		- Greatly slows the player
+		+ Your name is hidden while invisible
+		+ Your footsteps are silent while invisible
 		- Can only be invisible for a finite amount of time
-		- Entering / leaving invisibility is noisy
-		- Foot steps and your player name are still there
+		- Entering invisibility is noisy
 	]]
 }
+
+	function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 15 - ang:Right() *-11 - ang:Up() * 13, ang
+	end
+
 end
 
 
 SWEP.Chameleon_LastLeftClick		= CurTime()
+SWEP.Chameleon_DefaultPlayerColour 	= nil
+SWEP.Chameleon_NewColour			= nil
 
-function Invisibility_Remove(player) 
+function SWEP:Invisibility_Remove(player) 
+	if not player:IsValid() then return end
 	STATUS:RemoveStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, false)
 	if SERVER then
-		player:EmitSound(Sound("chameleon_activate.wav"))
-		ULib.invisible(player,false,255)
+		player:SetRenderMode( RENDERMODE_NORMAL )
+		if not self.Chameleon_DefaultPlayerColour then 
+			player:SetColor(self.Chameleon_DefaultPlayerColour)
+		end
+		
+		
 	end
 end
 
-function Invisibility_Give(player) 
+function SWEP:Invisibility_Give(player) 
+	if not player:IsValid() then return end
 	STATUS:AddStatus(player,"jm_chameleon")
 	player:SetNWBool(JM_Global_Buff_Chameleon_NWBool, true)
 	if SERVER then
-		player:EmitSound(Sound("chameleon_activate.wav")) 
-		ULib.invisible(player,true,255)
+		JM_Function_PlaySound("chameleon_activate.wav")
+		self.Chameleon_DefaultPlayerColour = player:GetColor()
+		player:SetRenderMode( RENDERMODE_TRANSCOLOR )
+		self.Chameleon_NewColour = self.Chameleon_DefaultPlayerColour
+		self.Chameleon_NewColour.a = 4
+		player:SetColor(self.Chameleon_NewColour)
 	end
 end
 
@@ -79,7 +94,7 @@ function SWEP:PrimaryAttack()
 
 	self.Chameleon_LastLeftClick = CurTime()
 	if (not self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Give(self:GetOwner()) 
+		self:Invisibility_Give(self:GetOwner()) 
 	end
 
 	self:TakePrimaryAmmo( 1 )
@@ -87,7 +102,7 @@ function SWEP:PrimaryAttack()
 	 -- Remove Weapon When out of Ammo
 	 if SERVER then
 		if self:Clip1() <= 0 then
-			Invisibility_Remove(self:GetOwner()) 
+			self:Invisibility_Remove(self:GetOwner()) 
 		   	self:Remove()
 		end
 	 end
@@ -102,7 +117,7 @@ end
 -- Remove Invisibility on changing weapons
 function SWEP:Holster( wep )
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	return self.BaseClass.Holster(self)
 end
@@ -110,7 +125,7 @@ end
 -- Remove Invisibility on dropping weapons (This prevent tase from giving INF invisibiltiy)
 function SWEP:PreDrop()
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	return self.BaseClass.PreDrop(self)
  end
@@ -118,7 +133,7 @@ function SWEP:PreDrop()
 -- Stop random Cur Time when going invisible
 function SWEP:Deploy()
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
 	return self.BaseClass.Deploy(self)
 end
@@ -133,53 +148,62 @@ function SWEP:Think()
 		if not player:Alive() then return end
 
 		if ((self.Chameleon_LastLeftClick+1) <= CurTime() and player:GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-			Invisibility_Remove(player) 
+			self:Invisibility_Remove(player) 
 		end
 
 	end
 
 end
 
+-- Quiet Footsteps
+hook.Add("PlayerFootstep", "ChameleonSilentFootsteps", function(ply)
+	if IsValid(ply) and ply:GetNWBool(JM_Global_Buff_Chameleon_NWBool, false) then
+		return true
+	end
+end)
 
 
--- Hud Help Text
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-		self:AddTTT2HUDHelp("Hold to go Invisible", nil, true)
+	   self:AddTTT2HUDHelp("Hold to go invisible", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-		if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-			Invisibility_Remove(self:GetOwner()) 
-		end
-		if self.Owner:IsValid() and self.Owner:IsTerror() then
-			self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
-		end
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
    end
 end
--- 
-
-
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
 	if(self:GetOwner():IsValid() and self:GetOwner():GetNWBool(JM_Global_Buff_Chameleon_NWBool)) then
-		Invisibility_Remove(self:GetOwner()) 
+		self:Invisibility_Remove(self:GetOwner()) 
 	end
-	self:Remove()
- end
-  
- function SWEP:DrawWorldModel()
-	return
- end
- 
- function SWEP:DrawWorldModelTranslucent()
-	return
- end
- 
--- END of Josh Mate World Model 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################
+
 
 

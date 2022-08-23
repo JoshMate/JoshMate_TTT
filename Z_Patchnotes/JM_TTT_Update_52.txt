@@ -1,0 +1,40 @@
+################################
+#### TTT Update 52 - Patch Notes
+################################
+
+[Agent Maker]
+- New Detective Utility Item
+- Use it on any other player to make them an agent
+- Agents and Detectives can always see each other through walls
+- Agents and Detectives both gain +50 Max HP and +20% Speed
+- Gives them a DNA Scanner
+- Be careful who you trust with this, as you can make traitors agents too!
+- Becoming an agent does not overwrite or reveal your current role
+
+[Care Package Loot: Rooty Tooty Point and Shooty]
+- New Care Package common loot
+- The OG is back and in all it's over powered Glory
+- Left click to FUCKING DELETE everything in front of you
+
+[Care Package Loot: Big Boy]
+- Buffed Explosion Damage: 130 -> 140
+
+################################
+##### Fixes & Extras
+################################
+
+################################
+##### Maps
+################################
+
+[TTT House Party]
+- Added 4 new shortcuts
+- Added 3 new rooms
+- Removed the camp-able Traitor vents that created slow games
+- Doors are no longer breakable
+- Doors can now be opened in both directions
+- Doors now display a UI Prompt for open / locked info
+- Greatly Improved the texture work around the map
+- Fixed the buggy black shadows on certain props
+### Still need to Re-Arm
+#### Uploaded to the workshop!

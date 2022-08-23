@@ -615,7 +615,7 @@ function plymeta:ShouldSpawn()
 	end
 
 	-- do not spawn forced specs
-	if self:IsSpec() and self:GetForceSpec() then
+	if self:GetNWBool("JM_NWBOOL_IsSittingRoundOut") or self:IsSpec() and self:GetForceSpec() then
 		return false
 	end
 
@@ -654,6 +654,7 @@ function plymeta:SpawnForRound(dead_only)
 	end
 
 	self:StripAll()
+	
 	self:SetTeam(TEAM_TERROR)
 	self:Spawn()
 
@@ -672,7 +673,7 @@ function plymeta:InitialSpawn()
 
 	-- Change some gmod defaults
 	self:SetCanZoom(false)
-	self:SetJumpPower(160)
+	self:SetJumpPower(180)
 	self:SetCrouchedWalkSpeed(0.3)
 	self:SetRunSpeed(220)
 	self:SetWalkSpeed(220)
@@ -876,7 +877,7 @@ function plymeta:Revive(delay, OnRevive, DoCheck, needsCorpse, blockRound, OnFai
 			hook.Run("PlayerLoadout", self, true)
 
 			self:SetCredits(CORPSE.GetCredits(corpse, 0))
-			self:SelectWeapon("weapon_zm_improvised")
+			self:SelectWeapon("weapon_jm_special_crowbar")
 
 			if IsValid(corpse) then
 				corpse:Remove()
@@ -1375,7 +1376,7 @@ function plymeta:SafePickupWeapon(wep, ammoOnly, forcePickup, dropBlockingWeapon
 
 		-- set to holstered if current weapon is dropped to prevent short crowbar selection
 		if isActiveWeapon then
-			self:SelectWeapon("weapon_ttt_unarmed")
+			self:SelectWeapon("weapon_jm_special_hands")
 		end
 	end
 

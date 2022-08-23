@@ -99,7 +99,7 @@ local voice_drain_normal = CreateConVar("ttt_voice_drain_normal", "0.2", {FCVAR_
 local voice_drain_admin = CreateConVar("ttt_voice_drain_admin", "0.05", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 local voice_drain_recharge = CreateConVar("ttt_voice_drain_recharge", "0.05", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
-local namechangekick = CreateConVar("ttt_namechange_kick", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+local namechangekick = CreateConVar("ttt_namechange_kick", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 local namechangebtime = CreateConVar("ttt_namechange_bantime", "10", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
 local ttt_detective = CreateConVar("ttt_sherlock_mode", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
@@ -132,7 +132,6 @@ util.AddNetworkString("TTT_GameMsgColor")
 util.AddNetworkString("TTT_RoleChat")
 util.AddNetworkString("TTT_RoleVoiceState")
 util.AddNetworkString("TTT_LastWordsMsg")
-util.AddNetworkString("TTT_RadioMsg")
 util.AddNetworkString("TTT_ReportStream")
 util.AddNetworkString("TTT_LangMsg")
 util.AddNetworkString("TTT_ServerLang")
@@ -152,9 +151,8 @@ util.AddNetworkString("TTT_RoleReset")
 util.AddNetworkString("TTT_ConfirmUseTButton")
 util.AddNetworkString("TTT_C4Config")
 util.AddNetworkString("TTT_C4DisarmResult")
-util.AddNetworkString("TTT_C4Warn")
-util.AddNetworkString("TTT_HazardWarn")
-util.AddNetworkString("TTT_LootWarn")
+-- Josh Mate General Purpose Custom HUD Warning
+util.AddNetworkString("JM_NET_CustomHudWarning")
 util.AddNetworkString("TTT_ScanResult")
 util.AddNetworkString("TTT_FlareScorch")
 util.AddNetworkString("TTT_Radar")
@@ -800,7 +798,7 @@ end
 -- @param number time_left time left before the next map switch in seconds
 -- @hook
 -- @realm server
-function GM:TTT2LoadNextMap(nextmap, rounds_left, time_left)
+function GM:TTT2LoadNxetMap(nextmap, rounds_left, time_left)
 	if rounds_left <= 0 then
 		LANG.Msg("limit_round", {mapname = nextmap})
 	elseif time_left <= 0 then
@@ -1238,6 +1236,12 @@ end
 -- @internal
 function PrintResultMessage(result)
 	ServerLog("Round ended.\n")
+
+	if result == "JM_Objective_Victory" then
+		LANG.Msg("JM_Objective_Victory")
+		ServerLog("Result: Objectives Destroyed, traitors win.\n")
+		return
+	end
 
 	if result == WIN_TIMELIMIT then
 		LANG.Msg("win_time")

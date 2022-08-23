@@ -18,7 +18,7 @@ ITEM.EquipMenuData = {
 
 ITEM.material = "vgui/ttt/joshmate/icon_jm_shield"
 ITEM.hud = Material("vgui/ttt/joshmate/hud_armour.png")
-ITEM.CanBuy = {ROLE_TRAITOR, ROLE_DETECTIVE}
+ITEM.CanBuy = {}
 ITEM.oldId = EQUIP_ARMOR or 1
 ITEM.limited = false
 ITEM.InLoadoutFor           = {ROLE_DETECTIVE}

@@ -1,0 +1,68 @@
+-- ################################
+-- #### TTT Update 46 - Patch Notes
+-- ################################
+
+[Doom Dart]
+- New Traitor Weapon
+- Mark up to 2 targets with a dart
+- Upon death, a marked player will explode damaging all around them
+- Marked players won't know they are marked
+- Uses the silenced pistol model and sounds (Now Traitorous Again)
+
+[Money Printer]
+- New Traitor Weapon
+- Place it down, while it survives it will print you 1 credit every 30 seconds (2 Max)
+- DNA / Radar Scans will point to this while it is active instead of you
+- Can be destroyed by other players
+
+[Barrel SWEP]
+- New Traitor Weapon
+- Place down explosive barrels which explode when they recieve damage
+- People can no longer see you holding it
+- Removed it from care packages
+
+[Silenced Pistol]
+- Removed from the Game
+
+[Decoy Radio]
+- Removed from the Game
+
+[Pulse Pad]
+- Removed from the Game
+
+[Zombie Mode]
+- Increased Health Regen Speed: 2 HP/s -> 3 HP/s
+- Removed Movement Speed Buff
+
+[Barrier]
+- Arm Time: 2 -> 3 Seconds
+
+[Chameleon]
+- Increased Invisibility Capacity: 30 -> 45 Ammo
+
+[Big Boy]
+- Increased Max Explosive Damage: 120 -> 140
+
+[Frag Grenade]
+- Increased Max Explosive Damage: 100 -> 120
+
+[Tag Grenade]
+- Increased Tag Duration: 2 -> 3 Seconds
+
+[Pistols]
+- Buffed all Pistols Damage Range Significantly
+
+
+
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[TTT Garden]
+- NEW MAP
+- A Medium Sized map set in the sunny garden of a strange building
+
+[TTT Lockdown]
+- NEW MAP
+- A Gimmick map that locks everyone is different rooms and lets RNG or the Traitors decide how the map is played

@@ -2,7 +2,6 @@ if CLIENT then
    SWEP.PrintName          = "Manhack Swarm"
    SWEP.Slot               = 6
 
-   SWEP.ViewModelFOV       = 10
    SWEP.ViewModelFlip      = false
 
    SWEP.EquipMenuData = {
@@ -13,17 +12,22 @@ Deploy a swarm of Manhacks where you are looking
    
 They will attack ANYONE they see (Including You)
    
-They will last for 30 seconds or until destroyed
+They will last for 35 seconds or until destroyed
 ]]
    };
 
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_swarm"
+
+   function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 25 - ang:Right() * -20 - ang:Up() * 10, ang
+	end
+
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.DeploySpeed           = 4
-SWEP.Primary.SoundLevel    = 100
+SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Ammo          = "AirboatGun"
@@ -32,14 +36,14 @@ SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR}
 SWEP.LimitedStock          = true
 SWEP.WeaponID              = AMMO_SWARM
-SWEP.UseHands              = true
-SWEP.ViewModel             = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel            = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel             = "models/manhack.mdl"
+SWEP.WorldModel            = "models/manhack.mdl"
+SWEP.UseHands              = false
 SWEP.HoldType 				   = "normal" 
 
-local deployRange = 650
-local deployAmount = 12
-local deployLifeTime = 60
+local deployRange = 9999
+local deployAmount = 9
+local deployLifeTime = 35
 
 
 function Barrier_Effects_Destroyed(ent)
@@ -50,8 +54,8 @@ function Barrier_Effects_Destroyed(ent)
 	effect:SetStart(ePos)
 	effect:SetOrigin(ePos)
 	
-	util.Effect("TeslaZap", effect, true, true)
-	util.Effect("TeslaHitboxes", effect, true, true)
+	
+	
 	util.Effect("cball_explode", effect, true, true)
 end
 
@@ -92,35 +96,40 @@ if SERVER then
    end
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Deploy a swarm of Manhacks", nil, true)
+	   self:AddTTT2HUDHelp("Deploy a swarm of Manhacks where you are looking", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
-
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
    self:Remove()
 end
- 
-function SWEP:DrawWorldModel()
-   return
-end
 
-function SWEP:DrawWorldModelTranslucent()
-   return
-end
-
--- END of Josh Mate World Model 
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

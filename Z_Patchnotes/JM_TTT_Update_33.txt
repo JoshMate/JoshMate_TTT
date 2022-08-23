@@ -1,0 +1,61 @@
+-- ################################
+-- ### Server
+-- ################################
+
+[Spectator]
+- You can now see all traps / hazards / care packages / while dead 
+- You can also still see your radar scans if you died with one.
+// This will give the spectators more information about what is going on
+
+[Karma]
+- Post 1000 Bonus Karma Gains: 25 -> 10 Per Round
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[All Weapons]
+- Rewrote the new Range system to check for range as the bullet hits not before the bullet is fired
+- This should prevent incorrect damage calculations caused by packet loss / 1 frame off issues
+- For example this will fix the shotgun sometimes hitting like a 30 at point blank range
+- It will also feel more responsive
+- Smoothed out the ranged damage curve, so your damage loss should be less sudden and jarring
+
+[Manhack Swarm]
+- Reduced number of manhacks deployed: 12 -> 8 Manhacks
+- Manhack life span: 60 -> 45 Seconds
+- Increased range of deployment: 800 -> 1500 Units
+
+[Portable Tester]
+- A [Good] loot from the care package
+- Shoot a player to reveal if they are a traitor!
+// Has only a single shot and the "scan" takes 10 seconds to complete
+// Both parties will be informed about who is scanning and for how long
+// This gives the target time to react, however the tester must be equipped to finish the scan
+
+[Care Package Loot]
+- Ninja Blade Movement speed Bonus: 20% -> 30%
+- Mega Tracker now plays Jake's Ping sound when it activates
+- Tripping balls has even worse screen effects
+
+
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed a bug were you were able to buy more than 1 beartrap per round
+    
+-- ################################
+-- ##### Maps	
+-- ################################
+
+[Cathedral]
+- Blocked off the car tunnel so players can no longer get into it
+- Greatly Reduced the size of the car hit boxes to be just the actual 3d model of the car
+- Cars should no longer hit you on the pavement (They will still clip you on the edge ofcourse)
+- Cars can now be jumped over more easily
+- Fixed the dodgey Physics interactions with cars that can crash the server
+- Made the whiteclaw easter egg easier to do (3 Cans now rather than 6)
+- Added Various bits of Graffiti to the map
+## Latest Version now on the Workshop

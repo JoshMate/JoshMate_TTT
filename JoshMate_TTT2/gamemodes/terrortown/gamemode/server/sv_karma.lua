@@ -12,7 +12,7 @@ KARMA.cv = {}
 KARMA.cv.enabled = CreateConVar("ttt_karma", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 KARMA.cv.strict = CreateConVar("ttt_karma_strict", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 KARMA.cv.starting = CreateConVar("ttt_karma_starting", "1000", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
-KARMA.cv.max = CreateConVar("ttt_karma_max", "1000", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+KARMA.cv.max = CreateConVar("ttt_karma_max", "1300", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 KARMA.cv.ratio = CreateConVar("ttt_karma_ratio", "0.001", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 KARMA.cv.killpenalty = CreateConVar("ttt_karma_kill_penalty", "15", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 KARMA.cv.roundheal = CreateConVar("ttt_karma_round_increment", "5", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
@@ -107,7 +107,7 @@ end
 -- @realm server
 function KARMA.GivePenalty(ply, penalty, victim)
 	if not hook.Call("TTTKarmaGivePenalty", nil, ply, penalty, victim) then
-		ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
+		ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, -9999))
 	end
 end
 
@@ -130,22 +130,22 @@ end
 -- @param Player ply
 -- @realm server
 function KARMA.ApplyKarma(ply)
-	local df = 1
 
-	-- any karma at 1000 or over guarantees a df of 1, only when it's lower do we
-	-- need the penalty curve
-	if ply:GetBaseKarma() < 1000 then
-		local k = ply:GetBaseKarma() - 1000
+	-- Josh Mate Changes
+	-- Punished Damage
+	local JM_Karma_Damage_Max = 1.0
+	local JM_Karma_Damage_Min = 0.5
 
-		if config.strict:GetBool() then
-			-- this penalty curve sinks more quickly, less parabolic
-			df = 1 + 0.0007 * k + -0.000002 * (k ^ 2)
-		else
-			df = 1 + -0.0000025 * (k ^ 2)
-		end
-	end
+	local JM_Karma_Damage_Mult = 1.0
+    local JM_Karma_Current = ply:GetBaseKarma()
 
-	ply:SetDamageFactor(math.Clamp(df, 0.1, 1.0))
+    JM_Karma_Damage_Mult = (JM_Karma_Current / 1000)
+
+    JM_Karma_Damage_Mult = math.Round(JM_Karma_Damage_Mult, 1)
+
+    JM_Karma_Damage_Mult = math.Clamp(JM_Karma_Damage_Mult, JM_Karma_Damage_Min, JM_Karma_Damage_Max)   
+
+	ply:SetDamageFactor(JM_Karma_Damage_Mult)
 
 	if IsDebug() then
 		print(Format("%s has karma %f and gets df %f", ply:Nick(), ply:GetBaseKarma(), df))
@@ -172,19 +172,30 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 		local penalty = KARMA.GetHurtPenalty(victim:GetLiveKarma(), hurt_amount)
 
 		-- JoshMate Changes
-		local KarmaPerHPDMGMult = 2
+		local KarmaPerHPDMGMult = 3
 		penalty = penalty * KarmaPerHPDMGMult
-		penalty = math.Round( penalty )
+		penalty = math.ceil( penalty )
+
+		-- Josh Mate FREE THE GOOMBA Code IT'S FREE BABY
+		if dmginfo:IsDamageType(DMG_PHYSGUN) then
+			penalty = 0
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [FREE GOOMBA] " ..Format("%s Lost %i Karma (FREE GOOMBA) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			JM_Function_PrintChat(attacker, "Goomba", "It's Free Baby!")
+			return
+		end
+		-- END OF FREE GOOMBA CODE
 
 
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[DMG] [KARMA] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			return
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[DMG] [KARMA] - %s Lost %i Karma", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [!RDM!] " ..Format("%s Lost %i Karma [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			return
 		end
 		
 	end
@@ -203,14 +214,22 @@ function KARMA.Killed(attacker, victim, dmginfo)
 
 		local penalty = KARMA.GetKillPenalty(victim:GetLiveKarma())
 
+		-- Josh Mate FREE THE GOOMBA Code IT'S FREE BABY
+		if dmginfo:IsDamageType(DMG_PHYSGUN) then
+			penalty = 0
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [FREE GOOMBA] " ..Format("%s Lost %i Karma (FREE GOOMBA) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
+			return
+		end
+		-- END OF FREE GOOMBA CODE
+
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
 			penalty = 0
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KILL] [KARMA] - %s Lost %i Karma (Both Traitors)", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [TonT] " ..Format("%s Lost %i Karma (Both Traitors) [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		else
 			KARMA.GivePenalty(attacker, penalty, victim)
 			attacker:SetCleanRound(false)
-			print("[Round " .. (GAMEMODE.roundCount-1) .. "] " ..Format("[KILL] [KARMA] - %s Lost %i Karma", attacker:Nick(), penalty))
+			print("[" .. (GAMEMODE.roundCount-1) .. "] [!RDM!] " ..Format("%s Lost %i Karma [Inflictor: %s]", attacker:Nick(), penalty, tostring(dmginfo:GetInflictor():GetClass())))
 		end
 	
 	end

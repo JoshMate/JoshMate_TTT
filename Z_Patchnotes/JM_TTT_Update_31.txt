@@ -1,0 +1,139 @@
+-- ################################
+-- ### Server
+-- ################################
+
+- Added [Sudden Death] A new mechanic which sometimes triggers when there is only two people left and the match isn't ending
+// Both players will become tracked and gain a small movement speed buff
+
+- Changed [Voice Chat] Dead players can now hear Traitor Voice Chat
+// Thanks Vinny for the idea
+
+- Reoworked [Rules]
+// The !MOTD has been re-written to be much clearer and shorter
+
+- Reworked [Karma] 
+// The system is now hits MUCH harder, but will let you get back to normal faster
+
+- Changed [Karma] Karma lost per HP done wrongly: 2 -> 3
+// Deal 100 -> 0 damage to a player will cost you 500 karma
+
+- Changed [Karma] Karma Punishment: Damage
+// Your damage will be linked to your karma ( The less karma, the less damage you deal)
+// Your damage can be reduced to a minimum of 50% at 500 Karma
+// With the old system it could go down all the way to 10%
+
+- Changed [Karma] Karma Punishment: Sit Out
+// If you are BELOW 500 Karma you will sit the next round out and your karma will be reset to 500
+// Sitting out players are counted as spectators when it comes to assigned roles
+// For example: 7 players - 1 sitting out = no detective that round as there are only 6 players
+
+- Changed [Karma] Karma Healing
+// While you karma is atleast 500, you will heal 100 karma per round back up to 1000
+// While you karma is atleast 1000, you will heal 50 karma per round back up to 1250
+
+- Changed [Karma] Right Clicking with crowbar now gives out karma hits if they take damage as a result of your push
+- Changed [Karma] You must have atleast 1000 Karma to be selected as the detective
+
+- Added [Admin] Added new scripts and tools to help me manage the server
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+- Buffed [Sniper] Damage: 80 -> 85
+
+- Buffed [Advanced Sniper] Damage: 80 -> 85
+
+- Buffed [Rifle] Damage: 40 -> 45
+- Nerfed [Rifle] Headshot Damage: 120 -> 90
+- Nerfed [Rifle] Fire Rate Delay: 0.120 -> 0.130
+
+- Nerfed [SMG] Range: 600 -> 500
+- Nerfed [SMG] Accuracy Spread: 0.030 -> 0.035
+
+- Buffed [LMG] Fire Rate Delay: 0.120 -> 0.115
+- Nerfed [LMG] Damage: 35 -> 30
+- Nerfed [LMG] Recoil: 0.75 -> 1
+- Nerfed [LMG] Accuracy Spread: 0.0125 -> 0.0150
+
+- Buffed [Frag Grenade] Avg Damage: 40 -> 50
+
+- Buffed [Jump Grenade] Blast Radius: 350 -> 400
+
+- Buffed [Man Hacks] Damage: 30 -> 40
+- Buffed [Man Hacks] Deploy Range: 650 -> 800
+
+- Buffed [Ninja Pro] Jump Height: 250 -> 280
+- Buffed [Ninja Pro] Crouch Speed: 0.50 -> 0.60
+- Buffed [Ninja Pro] Swimming and Holding your breath are now silent
+
+- Buffed [Gus Radio] The Explosion is now MUCH bigger
+
+- Buffed [Care Package Regen Buff] HP/s: 4 -> 5
+
+- Changed [Drowning] Damage Per Second: 15 -> 20
+
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed [Bug] Awp, Sniper and Advanced Sniper's first noscope was more accurate than your other no scopes
+- Fixed [Bug] C4 was purchasable multiple times in the same round
+- Fixed [Bug] Being Disguised with Ninja Pro would still cause you make drowning noises (Even though you're immune)
+- Fixed [Bug] Being able to get stuck in or on your own pulse pads
+    
+-- ################################
+-- ##### Maps
+-- ################################
+
+- Removed [Rising Tide] I have plans for it being reworked into another map later
+
+- New Map [Mile High Club] A claustrophobic map set on a mid-flight passenger plane
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- New Map [Lost At Seas] 4 coloured ships on an open ocean. You can swim between them or stay on your boat.
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Reworked [Dread Hollow]
+// A new map Icon
+// Added the lights from the light mode version
+// Removed the Score Objective from the map.
+// Improved the entrace to the underground from the saloon
+// Added some more props to decorate the saloon
+// Added more screens to watch the live stream from around the map
+// Added more lights to the forest
+// Added more detail, cover and props to the forest
+// Cleaned up some trees that clipped though some wall
+// Added a rare chance to spawn outside of the saloon
+// Redid the weapon + care package spawns
+// Certain weapon types now only spawn at certain land marks (You'll Learn them)
+// Added the The Josh Mate 2.0 Turtles
+// Various other little tweaks and fixes
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Sky Town] Added a new sound for when the traitor tester is unlocked
+- Changed [Sky Town] Gave Pharmacy Roof a Make Over
+- Changed [Sky Town] Added Moon Gang Easter Egg
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Rework [Block Alley] Josh Mate has gotten involved and done the following changes:
+- Changed [Block Alley] Huge optimisation effort and compiled with high quality settings
+- Changed [Block Alley] Fixed the FPS issues, it should now play at a buttery smooth 60+ fps (I get 280 fps)
+- Changed [Block Alley] Added some movable minecarts and some tracks for decoration
+- Changed [Block Alley] Made the cake heal you when you press E on it
+- Changed [Block Alley] Added a Emerald Block to the underground that gives a credit when you press E on it
+- Changed [Block Alley] Stopped the lava from creating water splashing effects
+- Changed [Block Alley] Modified the underground lava pool to be a single object and improved its shape
+- Changed [Block Alley] Added a little stone arch way to better show where the ladder down to the mine is
+- Changed [Block Alley] Added a new melon course room to allow spectators to get SPECIAL melons into the map
+- Changed [Block Alley] Added a spectator spawn to stop spectators from spawning in the void
+- Changed [Block Alley] Those weird corner lights in the underground from leeding bleeding through the walls
+- Changed [Block Alley] Fixed up the weights and lighting of the movable blocksw
+- Changed [Block Alley] Fixed Dodgey mis-aligned textures on all the double chests
+- Changed [Block Alley] Redid the weapon spawns
+- Changed [Block Alley] Greatly Reduced the size of the skybox and the out of bounds area to improve performance
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+
+

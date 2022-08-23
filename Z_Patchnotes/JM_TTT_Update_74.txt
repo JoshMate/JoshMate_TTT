@@ -1,0 +1,97 @@
+###################################
+Josh Mate TTT Update 74 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+[#FreeTheGoomba]
+- It's now free
+
+[Auto Unstuck]
+- A new experimental system that auto detects "Stuck" players
+- After a 7 second of  being "Stuck" it will attempt to teleport you to your last non-stuck position
+("Stuck" is any situation where your player model is intersecting a solid object preventing movement)
+(This is a trial and if it causes issues or is exploitable then I will remove it)
+
+[Bear Trap]
+- Every player can see trapped players on their HUD via a new icon
+
+[New Map: Ice Camp]
+- A small isolated research camp out in the frozen wastes
+- Innocents must locate the golden cube key and take it to the traitor tester to unlock it
+- Careful, spend too much time outside and you'll freeze to death! 
+- Use bonfires to warm back up again, but be careful, traitors can destroy them...
+// Needs Re-arming
+
+[New Map: Shark Tank]
+- An underground industrial water treatment plant
+- Innocents must press 4 buttons to reveal a key to the traitor tester
+- Lots of water and a large open central room
+// Needs Re-arming
+
+[New Map: Dive Hole]
+- An experimental gimmick map
+- Players are split between 5 small rooms
+- Each room is connected by dark underwater tunnels
+- Traitors can close flood gates to block navigation underwater
+// Needs Re-arming
+
+###################################
+#### Changes
+###################################
+
+[Pre Round Restrictions]
+- You can now use grenades before round start
+- You can now pickup stick items before round start
+(Thanks to Simon for this change)
+
+[Doom Dart]
+- Buffed Doom Dart Explosion Damage Base: 70 -> 100 (140 -> 200) Damage
+- Buffed Doom Dart Explosion Radius: 700 -> 800 Units
+
+[Sniper]
+- Buffed Head shot damage of Sniper: 2x (170) -> 3x (255) Damage
+(A well place sniper headshot should always kill even buffed players)
+
+[SMG]
+- Buffed Damage of SMG: 35 -> 40 Damage
+- Nerfed Spread of SMG: 0.045 -> 0.050 Spread Size
+(SMG is more deadly, but also more restricted to close range)
+
+[Rifle]
+- Nerfed Fire Rate of Rifle: 0.130 -> 0.150 Delay
+(The Rifle was a flat upgrade to SMG even at close range)
+(The changes to the two weapons will force you to capitalise on the Rifles Strengths)
+(The Rifle is good at mid - long range accuracy and damge, smg is close range spray down)
+
+[Shotgun]
+- Buffed Shotgun Per pellet Damage: 15 -> 16 
+- Buffed Shotgun Pellet count: 12 -> 16
+- Nefed Shotgun Range: 400 -> 350 Units
+(Old Damage: 15 * 12 = 180 New Damage: 16 * 16 = 256)
+(Is now almost gaurenteed to 1 shot up close, but less effective at range)
+
+[Auto Pistol]
+- Buffed Damage: 20 -> 25
+- Nerfed Spread: 0.040 -> 0.050 Spread Size
+- Nerfed Ranged: 400 -> 350 Units
+(Auto Pistol is more deadly, but also more restricted to close range)
+
+[NPCs]
+- "The Dog" (Antlion Guard) is now MUCH more deadly
+- Increased the damage and health of combine soldiers
+
+
+###################################
+##### Work in Progress
+###################################
+- Map: TTT_Molten
+- Map: TTT_Coach House
+- Map: TTT_Murrell_Way
+- Game Mode: Tag
+- Game Mode: Defcon 
+- Game Mode: Find and Retrieve
+- Game Mode: King of the hill
+- Game Mode: Mad Rush
+- Detective Item: Jump Pad
+- Carepackage Item: Fast-mo clock alt fire

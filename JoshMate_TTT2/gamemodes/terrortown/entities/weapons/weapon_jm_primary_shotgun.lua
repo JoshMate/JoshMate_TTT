@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS "weapon_tttbase"
+DEFINE_BASECLASS "weapon_jm_base_gun"
 
 SWEP.HoldType              = "shotgun"
 
@@ -15,33 +15,39 @@ if CLIENT then
    SWEP.IconLetter         = "B"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_SHOTGUN
 
 
-SWEP.Primary.Damage        = 9
-SWEP.Primary.NumShots      = 20
-SWEP.Primary.Delay         = 1
-SWEP.Primary.Cone          = 0.150  
-SWEP.Primary.Recoil        = 15
+-- // Gun Stats
+
+SWEP.Primary.Damage        = 16
+SWEP.Primary.NumShots      = 16
+SWEP.Primary.Delay         = 1.00
+SWEP.Primary.Cone          = 0.065
+SWEP.Primary.Recoil        = 10
+SWEP.Primary.Range         = 350
 SWEP.Primary.ClipSize      = 5
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
+SWEP.Primary.SoundLevel    = 75
 
-SWEP.HeadshotMultiplier    = 1
-SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.HeadshotMultiplier    = 2
+SWEP.BulletForce           = 10
 SWEP.Primary.Automatic     = false
+
+-- // End of Gun Stats
+
+-- Special
 
 
 SWEP.Primary.Ammo          = "357"
 SWEP.Primary.Sound         = Sound( "Weapon_M3.Single" )
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/cstrike/c_shot_m3super90.mdl"
 SWEP.WorldModel            = "models/weapons/w_shot_m3super90.mdl"
@@ -165,3 +171,28 @@ end
 function SWEP:SecondaryAttack()
   return
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Shoot", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

@@ -20,7 +20,9 @@ end
 -- Communication control
 local sv_voiceenable = GetConVar("sv_voiceenable")
 local cv_ttt_limit_spectator_voice = CreateConVar("ttt_limit_spectator_voice", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+-- Josh Mate Proxy Audio
 local loc_voice = CreateConVar("ttt_locational_voice", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+local loc_voice_distance = CreateConVar("ttt_locational_voice_distance", "800", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
 hook.Add("TTT2SyncGlobals", "AddVoiceGlobals", function()
 	SetGlobalBool(sv_voiceenable:GetName(), sv_voiceenable:GetBool())
@@ -84,6 +86,7 @@ end
 -- @ref https://wiki.facepunch.com/gmod/GM:PlayerCanHearPlayersVoice
 -- @local
 function GM:PlayerCanHearPlayersVoice(listener, speaker)
+
 	if speaker.blockVoice then
 		return false, false
 	end
@@ -100,13 +103,30 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		return false, false
 	end
 
-	-- custom post-settings
-	local can_hear, is_locational = hook.Run("TTT2CanHearVoiceChat", listener, speaker, not isGlobalVoice)
-
-	if can_hear ~= nil then
-		return can_hear, is_locational or false
+	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
+	if listener:IsSpec() and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
+		return true, false
 	end
 
+	-- Spectators and Traitors can hear Traitor Chat (Globally no 3D ever)
+	if listener:GetTeam() == TEAM_TRAITOR and speaker:GetTeam() == TEAM_TRAITOR and not speaker:IsSpec() then 
+		return true, false
+	end
+
+	-- Spectators can chat to other specs globally
+	if listener:IsSpec() and speaker:IsSpec() then 
+		return true, false
+	end
+
+	-- Distance Check for when Proxy Voice is turned on
+	if (loc_voice:GetBool()) then
+
+		local distance = listener:GetPos():Distance(speaker:GetPos())
+
+		if (distance > loc_voice_distance:GetFloat()) then
+			return false, false
+		end
+	end
 
 	if speaker:IsSpec() and isGlobalVoice then
 		-- Check that the speaker was not previously sending voice on the team chat

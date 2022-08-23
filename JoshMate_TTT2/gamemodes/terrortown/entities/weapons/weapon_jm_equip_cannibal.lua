@@ -14,9 +14,9 @@ if CLIENT then
 	
 Left Click: Consume a Body
    
-Consuming a Body grants +25 Max HP
+Consuming a body heals the user and increases their Maximum HP
    
-Only has 4 uses
+Only has 5 uses and makes a sound
 ]]
    };
 
@@ -24,18 +24,18 @@ Only has 4 uses
 end
 
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.HoldType              = "normal"
 
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 0.45
+SWEP.Primary.Delay         = 0.40
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 5
+SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 10
+SWEP.DeploySpeed           = 4
 SWEP.Primary.SoundLevel    = 50
 SWEP.Primary.Automatic     = false
 
@@ -49,9 +49,10 @@ SWEP.IsSilent              = true
 SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
-local Cannibal_Eat_MaxHP      = 25
-local Cannibal_Eat_MaxHP_Last = 50
-local Cannibal_Eat_Range      = 125
+local Cannibal_Eat_MaxHP      = 15
+local Cannibal_Eat_Heal       = 100
+local Cannibal_Eat_Range      = 150
+
 
 if TTT2 and CLIENT then
 	hook.Add("Initialize", "jm_cannibalInit", function() 
@@ -79,36 +80,35 @@ function SWEP:PrimaryAttack()
       local target = tr.Entity
 
       if IsValid(target) then
-         if target:GetClass() == "prop_ragdoll" then
+         if target:GetClass() == "prop_ragdoll" or target:GetClass() == "npc_pigeon" or target:GetClass() == "npc_crow" or target:GetClass() == "npc_seagull" then
 
-            if self:Clip1() == 1 then
-               self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP_Last)
-               self:GetOwner():SetHealth(self:GetOwner():GetMaxHealth())
-            else
-               self:GetOwner():SetMaxHealth(self:GetOwner():GetMaxHealth() + Cannibal_Eat_MaxHP)
-               self:GetOwner():SetHealth(self:GetOwner():Health() + Cannibal_Eat_MaxHP)
-            end
+            local own = self:GetOwner()
+
+
+            self.CannibalMaxHPGained = (Cannibal_Eat_MaxHP)
+            own:SetMaxHealth(own:GetMaxHealth() + self.CannibalMaxHPGained)
+
+            -- Set Status and print Message
+            JM_GiveBuffToThisPlayer("jm_buff_cannibalheal",own,own)
+            -- End Of
             
-
             targetPos = target:GetPos()
 
             target:EmitSound("physics/flesh/flesh_bloody_break.wav")
             target:SetNotSolid(true)
             target:Remove()
 
-            CreateProp(targetPos, "models/gibs/hgibs.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
-            CreateProp(targetPos, "models/gibs/hgibs_spine.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_scapula.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_rib.mdl")
+            self:CreateProp(targetPos, "models/gibs/hgibs_spine.mdl")
 
-            -- JM Changes Extra Hit Marker
-            net.Start( "hitmarker" )
-            net.WriteFloat(0)
-            net.Send(self:GetOwner())
-            -- End Of
+            -- Give a Hit Marker to This Player
+		         local hitMarkerOwner = self:GetOwner()
+		         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
             self:TakePrimaryAmmo( 1 )
             ate = true
@@ -119,10 +119,10 @@ function SWEP:PrimaryAttack()
 
    if SERVER then
       if ate == false then
-         self:GetOwner():ChatPrint("[Cannibal]: You can't eat that...")
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","You can't eat that with Cannibal..." )
       end
       if ate == true then
-         self:GetOwner():ChatPrint("[Cannibal]: You have eaten a Body!")
+         JM_Function_PrintChat(self:GetOwner(), "Equipment","Body Eaten (+" .. tostring(self.CannibalMaxHPGained) .. " Max HP)" )
       end
    end
 
@@ -138,57 +138,68 @@ function SWEP:SecondaryAttack()
    return
 end
 
-function CreateProp(targetPos, model)
+function SWEP:CreateProp(targetPos, model)
    local skull = ents.Create( "prop_physics" )
    skull:SetModel(model)
    -- Add a bit of jitter to spawning
    local newPos = targetPos
-   newPos.x = newPos.x + math.Rand( 0, 16 )
-   newPos.y = newPos.y + math.Rand( 0, 16 )
-   newPos.x = newPos.x - math.Rand( 0, 16 )
-   newPos.y = newPos.y - math.Rand( 0, 16 )
-   newPos.z = newPos.z + math.Rand( 0, 8 )
+   newPos.x = newPos.x + math.random( 0, 16 )
+   newPos.y = newPos.y + math.random( 0, 16 )
+   newPos.x = newPos.x - math.random( 0, 16 )
+   newPos.y = newPos.y - math.random( 0, 16 )
+   newPos.z = newPos.z + math.random( 0, 4  )
    skull:SetPos(newPos)
    skull:PhysicsInit(SOLID_VPHYSICS)
    skull:SetMoveType(MOVETYPE_VPHYSICS)
    skull:SetSolid(SOLID_VPHYSICS)
    skull:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
    skull:Spawn()
+
    local skullPhysics = skull:GetPhysicsObject()
    if skullPhysics:IsValid() then
       skullPhysics:Wake()
    end
+
+   local vel = skull:GetPhysicsObject():GetVelocity()
+   vel.z = vel.z + math.random( 150, 300 )
+   skull:GetPhysicsObject():AddVelocity( vel )
+
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Eat A corpse", nil, true)
+	   self:AddTTT2HUDHelp("Consume a dead body", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
-
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
    self:Remove()
 end
- 
-function SWEP:DrawWorldModel()
-   return
-end
 
-function SWEP:DrawWorldModelTranslucent()
-   return
-end
-
--- END of Josh Mate World Model 
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

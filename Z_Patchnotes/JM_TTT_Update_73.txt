@@ -1,0 +1,41 @@
+###################################
+Josh Mate TTT Update 73 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+[Map: TTT Beach House]
+- New Map
+- A cliff residence above the beach with an ocean and a boat
+- A Large Map with long range encounters
+
+[Map: TTT Pirate Jet]
+- New Map
+- An array of floating islands and a small aircraft
+- A Small Map for chaos and quick rounds
+
+###################################
+#### Changes
+###################################
+
+[Throwing Knives]
+- Buffed damage gained through distance: 350 -> 400
+- Buffed minimum damage: 40 -> 50
+- Changed icon to only have 2 knives (just like in game) 
+
+[Game Mode: Traitor Tester]
+- Now rather than spawning randomly on the map, it is given to a random player
+
+[Bug Fixes]
+- Fixed bounty hunter text message reflect last weeks changes
+
+###################################
+##### Work in Progress
+###################################
+- Map: TTT_Murrell_Way
+- Map: TTT_Beach_House
+- Game Mode: Tag
+- Game Mode: Defcon 
+- Game Mode: Find and Retrieve
+- Game Mode: King of the hill
+- Traitor Item: Gas Canister

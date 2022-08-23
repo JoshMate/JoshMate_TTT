@@ -18,24 +18,23 @@ Prevents the target from moving for 12 seconds
    
 The target will drop their currently held weapon
    
-Has 3 uses, perfect acccuracy and long range
+Has 2 uses, perfect acccuracy and long range
 ]]
    };
 
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_usp"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
-SWEP.DeploySpeed           = 2
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
 
@@ -60,8 +59,8 @@ function SWEP:HitEffectsInit(ent)
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
    
-   util.Effect("TeslaZap", effect, true, true)
-   util.Effect("TeslaHitboxes", effect, true, true)
+   
+   
    util.Effect("cball_explode", effect, true, true)
 end
 
@@ -72,14 +71,12 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
       
-      -- JM Changes Extra Hit Marker
-      net.Start( "hitmarker" )
-      net.WriteFloat(0)
-      net.Send(weaponOwner)
-      -- End Of
+      -- Give a Hit Marker to This Player
+      local hitMarkerOwner = self:GetOwner()
+      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
       -- Set Status and print Message
-      weaponOwner:ChatPrint("[Taser]: You hit someone!")
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Tased!" )
       JM_RemoveBuffFromThisPlayer("jm_buff_taser",ent)
       JM_GiveBuffToThisPlayer("jm_buff_taser",ent,self:GetOwner())
       -- End Of
@@ -87,11 +84,11 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- Drop currently Held Weapon
       if(ent:IsValid() and ent:IsPlayer()) then
          local curWep = ent:GetActiveWeapon()
-         ent:GetActiveWeapon():PreDrop()
+         if (ent:GetActiveWeapon():PreDrop()) then ent:GetActiveWeapon():PreDrop() end
          if (curWep.AllowDrop) then
             ent:DropWeapon()
          end
-         ent:SelectWeapon("weapon_zm_improvised")
+         ent:SelectWeapon("weapon_jm_special_crowbar")
       end
       -- End of Drop
 
@@ -149,19 +146,31 @@ end
 
 
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Tase an Player", nil, true)
+	   self:AddTTT2HUDHelp("Tase a player at range", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

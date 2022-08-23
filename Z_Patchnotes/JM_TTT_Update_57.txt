@@ -1,0 +1,29 @@
+################################
+#### TTT Update 57 - Patch Notes
+################################
+
+[Care Package Loot: New Radios]
+- Built Differently Radio
+- Bird flew into my room and died radio
+
+[HUD and UI]
+- A  new message and sound effect for when a body is discovered
+
+[Newton Launcher] (Seb)
+- Added a secondary fire that pulls rather than pushes
+
+
+################################
+##### Fixes & Extras
+################################
+
+- Fixed Slippery Floors Persisting through round
+
+################################
+##### Maps
+################################
+
+[TTT Dig Site]
+- New Map
+- An excavation of an old ruin inside of a deep ravine.
+

@@ -1,0 +1,78 @@
+###################################
+Josh Mate TTT Update 59 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+[Map: TTT Castle]
+- A New Map
+- A map taking place on the ramparts of an old stone castle with towers and keeps.
+
+[UAV]
+- New Detective item
+- Reveals all players (tracks them) for 8 seconds
+- Also gives the Detective useful intel like players left alive
+- Single use item and announces to the server it has been used
+
+[Player Names]
+- Your in-game names are now auto forced to just your first names.
+
+###################################
+#### Changes
+###################################
+
+[Player Models]
+- Player Models are no longer random colours each round
+- Innocents are now grey
+- Detectives are now blue
+- Agents are now green
+
+[Inventory Overhaul]
+- You can now carry 3 pieces of shop / care package equipment at once (in Slot 7)
+- Moved DNA scanner and Binoculars to the same slot (in Slot 8)
+- Brought a load of Inventory / Model / Display / Controls up to date for consistency
+- ALL Non-Gun weapons now look like you are bare hands to other players
+- Traitor / Detective Shop Weapons now delete instead of dropping to the ground
+- Fixed loads of bugged weapons that showed a floating object stuck in your chest
+- Updated all usage / controls instructions for every weapon (Text at bottom middle of screen)
+
+[Karma]
+- New max karma is now 1300 (Max HP bonus is still 130 HP)
+- All good boy bonuses will now be earned at 1300 (rather than 1250)
+- Added more adjectives and colours to show your karma in various menus and text
+- RDM penalty changed: 650 -> 700 Karma Lost to accommodate
+- Minor penalty changed: 250 -> 300 Karma Lost to accommodate
+
+[Doom Dart] (Simon)
+- You can now doom dart most non-robotic NPCs (Zombies, headcrabs, birds, antlions etc..)
+
+[Agent Maker]
+- Everyone gets a message and an audio cue when someone has been made an agent
+
+[AWP]
+- Removed recoil so you can better see if you hit your target
+(Since it only had 1 shot, this is more of a QoL change than a buff)
+
+[Map: TTT Cosmic]
+- Added a new ramp route that leads across the map
+- Added a some new stuff to the water cave
+- Added new weapon spawns to the attic of every house
+- Added / Moved around some props
+- Improved Cliff Textures by removing seams
+- Replaced the broken logs with better ones
+- Fixed the floating light models
+
+###################################
+##### Fixes & Small Changes
+###################################
+
+- Increased the volume of Built Differently Radio
+- Increased the volume of Bird Flew In Radio
+- Buffed prop possession control for high karma players
+- Reduced delay of AFK timer: 90 -> 45 Seconds
+
+- Fixed Bomb Defuse Message Error
+- Fixed Traitor always getting their good boy credit regardless of their Karma
+
+- (Code) Moved some more commonly appearing logic to be shared utility functions
+- (Code) Simon has fully refactored the Care Package loot table to be less bug prone / cleaner

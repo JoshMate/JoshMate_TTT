@@ -8,17 +8,17 @@ if CLIENT then
 	SWEP.ViewModelFlip = false
 	SWEP.ViewModelFOV = 72
 
-	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_mel"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_gun_special.png"
 end
 
-SWEP.Base = "weapon_tttbase"
+SWEP.Base = "weapon_jm_base_gun"
 
 SWEP.UseHands               = true
 SWEP.ViewModelFlip			= false
 SWEP.ViewModel				= "models/weapons/v_tanto_knife.mdl"	-- Weapon view model
 SWEP.WorldModel				= "models/weapons/w_tanto_knife.mdl"	-- Weapon world model
 
-SWEP.Primary.Damage = 65
+SWEP.Primary.Damage = 80
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
@@ -41,7 +41,7 @@ SWEP.Weight = 5
 SWEP.AutoSpawnable = false
 
 -- JM Changes, Movement Speed
-SWEP.MoveMentMultiplier = 1.2
+SWEP.MoveMentMultiplier = 1.3
 -- End of
 
 SWEP.Offset = {
@@ -65,7 +65,11 @@ function SWEP:Deploy()
 end
 
 function SWEP:PrimaryAttack()
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	-- Rapid Fire Changes
+	local owner = self:GetOwner()
+	if (not owner:GetNWBool(JM_Global_Buff_Care_RapidFire_NWBool)) then self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	else self:SetNextPrimaryFire(CurTime() + (self.Primary.Delay*0.70)) end
+	-- End of Rapid Fire Changes
 
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end
@@ -163,32 +167,39 @@ end
 
 function SWEP:SecondaryAttack()
 
-	self:SetNextSecondaryFire(CurTime() + 0.1)
-	
 	local owner = self:GetOwner()
 	if not IsValid(owner) then return end
 	
-	owner:SetVelocity(owner:GetAimVector()* 1000)
-
-	self:EmitSound("ninjastick_dash.wav")
+	local pushvel = owner:GetAimVector() * 1000
+	owner:SetVelocity(pushvel)
+	
+	sound.Play("ninjastick_dash.wav", self:GetPos(), 110, 100)
 	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
 
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-		self:AddTTT2HUDHelp("Melee attack", "Jump Dash", true)
+	   self:AddTTT2HUDHelp("Melee Attack", "Dash towards cursor", true)
  
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
---
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################
 

@@ -9,6 +9,8 @@
 
 - Changed [HUD] Reduced alot of the chat message spam from buffs / events / weapons
 
+- Added [Loot] New Carepackage Good Loot: Prop Launcher
+
 - Changed [Care Package] New Loot table logic: Good Item = 80%  || Bad Item = 20% Chance
 
 - Changed [Care Package] Minimum Spawn Delay: 15 -> 20 Seconds
@@ -34,16 +36,20 @@
 
 - Buffed [Barrier] HP: 500 -> 650
 
+- Buffed [Radar] Scan Delay: 15 -> 10 Seconds
+
 - Fixed [Beartrap] Fixed an error message by checking for nulls when placing a trap
 - Fixed [Soap] Rewrote the code to have better presentation / less prone to bugs
 
 [Maps]
 
 - New Map [Block Alley] Minecraft themed map, made by Seb.
-
-- Changed [Roof Party] Crack den music now controlled by a button.
+// [LATEST VERSION ON THE WORKSHOP NOW]
 
 - New Map [Speed Dating] A close quarters and intimate map to get to know your fellow Bachelor terrorists!
+// [LATEST VERSION ON THE WORKSHOP NOW]
+
+- Changed [Roof Party] Crack den music now controlled by a button.
 // [LATEST VERSION ON THE WORKSHOP NOW]
 
 - Changed [Space Station] Made it clearer what you should jump to in the space walk parkour

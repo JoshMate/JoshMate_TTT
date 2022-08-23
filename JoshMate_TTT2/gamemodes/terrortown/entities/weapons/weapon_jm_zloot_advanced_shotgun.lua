@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-DEFINE_BASECLASS "weapon_tttbase"
+DEFINE_BASECLASS "weapon_jm_base_gun"
 
 SWEP.HoldType              = "shotgun"
 
@@ -11,38 +11,43 @@ if CLIENT then
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_prim"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_special.png"
    SWEP.IconLetter         = "B"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.CanBuy                = {}
 
 SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_ADVANCED_SHOTGUN
 
 
-SWEP.Primary.Damage        = 10
-SWEP.Primary.NumShots      = 20
-SWEP.Primary.Delay         = 0.3
-SWEP.Primary.Cone          = 0.150
-SWEP.Primary.Recoil        = 15
-SWEP.Primary.ClipSize      = 5
+-- // Gun Stats
+
+SWEP.Primary.Damage        = 18
+SWEP.Primary.NumShots      = 12
+SWEP.Primary.Delay         = 0.30
+SWEP.Primary.Cone          = 0.060
+SWEP.Primary.Recoil        = 8
+SWEP.Primary.Range         = 400
+SWEP.Primary.ClipSize      = 6
 SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 10
+SWEP.Primary.SoundLevel    = 75
 
-SWEP.HeadshotMultiplier    = 1
-SWEP.DeploySpeed           = 1
-SWEP.Primary.SoundLevel    = 100
+SWEP.HeadshotMultiplier    = 2
+SWEP.BulletForce           = 10
 SWEP.Primary.Automatic     = false
+
+-- // End of Gun Stats
 
 
 SWEP.Primary.Ammo          = "357"
 SWEP.Primary.Sound         = "shoot_advanced_shotgun.wav"
 SWEP.AutoSpawnable         = true
 SWEP.Spawnable             = true
-SWEP.AmmoEnt               = "item_jm_ammo_heavy"
 SWEP.UseHands              = true
+SWEP.Tracer                = "AR2Tracer"
 SWEP.ViewModel             = "models/weapons/cstrike/c_shot_xm1014.mdl"
 SWEP.WorldModel            = "models/weapons/w_shot_xm1014.mdl"
 
@@ -165,3 +170,28 @@ end
 function SWEP:SecondaryAttack()
   return
 end
+
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
+if CLIENT then
+	function SWEP:Initialize()
+	   self:AddTTT2HUDHelp("Shoot", nil, true)
+ 
+	   return self.BaseClass.Initialize(self)
+	end
+end
+-- Equip Bare Hands on Remove
+if SERVER then
+   function SWEP:OnRemove()
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
+      end
+   end
+end
+
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

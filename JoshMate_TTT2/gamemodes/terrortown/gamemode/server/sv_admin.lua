@@ -90,7 +90,7 @@ function PrintReport(ply)
 		for _, e in pairs(SCORE.Events) do
 			if e.id == EVENT_KILL then
 				if e.att.sid64 == -1 then
-					pr("<something> killed " .. e.vic.ni .. "[" .. string.upper(e.vic.t) .. "]")
+					pr("<> killed " .. e.vic.ni .. "[" .. string.upper(e.vic.t) .. "]")
 				else
 					local as = "[" .. string.upper(e.att.t) .. "]"
 					local vs = "[" .. string.upper(e.vic.t) .. "]"
@@ -205,7 +205,7 @@ hook.Add("TTTEndRound", "ttt_damagelog_save_hook", SaveDamageLog)
 -- @realm server
 function DamageLog(txt)
 
-	txt = "[Round " .. (GAMEMODE.roundCount-1) .. "] " .. txt
+	txt = "[" .. (GAMEMODE.roundCount-1) .. "] " .. txt
 
 	print(txt)
 

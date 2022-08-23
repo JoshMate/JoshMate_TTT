@@ -2,11 +2,11 @@
 
 AddCSLuaFile()
 
-DEFINE_BASECLASS "weapon_tttbase"
+DEFINE_BASECLASS "weapon_jm_base_gun"
 
-SWEP.HoldType              = "grenade"
-SWEP.HoldReady             = "grenade"
-SWEP.HoldNormal            = "grenade"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 
 if CLIENT then
    SWEP.PrintName          = "Base grenade"
@@ -21,9 +21,9 @@ if CLIENT then
    SWEP.Icon               = "vgui/ttt/icon_nades"
 end
 
-SWEP.Base                  = "weapon_tttbase"
+SWEP.Base                  = "weapon_jm_base_gun"
 
-SWEP.UseHands           = true
+SWEP.UseHands              = false
 SWEP.ViewModel             = "models/weapons/v_eq_flashbang.mdl"
 SWEP.WorldModel            = "models/weapons/w_eq_flashbang.mdl"
 
@@ -48,7 +48,6 @@ SWEP.WeaponID              = AMMO_NADE_BASE
 SWEP.IsGrenade             = true
 
 SWEP.was_thrown            = false
-SWEP.detonate_timer        = 2
 SWEP.DeploySpeed           = 4
 
 -- JM Changes, Throwing
@@ -64,10 +63,6 @@ function SWEP:PrimaryAttack()
    if not self:CanPrimaryAttack() then return end
    self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
-
-   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      return
-   end
    
    self.JM_Throw_PowerMult = 1
    self:Throw()
@@ -78,19 +73,12 @@ function SWEP:SecondaryAttack()
    self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
 
-   if GetRoundState() == ROUND_PREP and GetConVar("ttt_no_nade_throw_during_prep"):GetBool() then
-      self:GetOwner():ChatPrint("[Grenade] - You can't use that during prep time...")
-      return
-   end
-
    self.JM_Throw_PowerMult = 0.4
    self:Throw()
 end
 
 
 function SWEP:Throw()
-   self:GetOwner():SetAnimation(PLAYER_ATTACK1)
-   self:SendWeaponAnim(ACT_VM_DRAW)
 
    if SERVER then
       local ply = self:GetOwner()
@@ -108,7 +96,7 @@ function SWEP:Throw()
       self:TakePrimaryAmmo(1)
       if self:Clip1() <= 0 then
          self:Remove()
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
@@ -128,7 +116,6 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
 
    --   gren:SetVelocity(vel)
    gren:SetOwner(ply)
-   gren:SetThrower(ply)
 
    gren:SetGravity(0.25)
    gren:SetFriction(0.30)
@@ -144,20 +131,9 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
       phys:AddAngleVelocity(angimp)
    end
 
-   -- This has to happen AFTER Spawn() calls gren's Initialize()
-   gren:SetDetonateExact(CurTime() + self.detonate_timer)
-
    return gren
 end
 
 function SWEP:Reload()
    return false
 end
-
--- Hud Help Text
-if CLIENT then
-   function SWEP:Initialize()
-      self:AddTTT2HUDHelp("Full Throw", "Half Throw", true)
-   end
-end
--- 

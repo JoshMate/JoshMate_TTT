@@ -11,10 +11,7 @@ local net = net
 local pairs = pairs
 local IsValid = IsValid
 
-local indicator = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_player")
-local c4warn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_c4")
-local hazardwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_hazard")
-local lootwarn = surface.GetTextureID("vgui/ttt/joshmate/icon_warn_loot")
+local indicator = surface.GetTextureID("vgui/ttt/joshmate/warningicons/icon_warn_player")
 local sample_scan = surface.GetTextureID("vgui/ttt/sample_scan")
 local det_beacon = surface.GetTextureID("vgui/ttt/det_beacon")
 local near_cursor_dist = 180
@@ -25,12 +22,8 @@ RADAR = RADAR or {}
 RADAR.targets = {}
 RADAR.enable = false
 RADAR.startTime = 0
-RADAR.bombs = {}
-RADAR.bombs_count = 0
-RADAR.hazards = {}
-RADAR.hazards_count = 0
-RADAR.loots = {}
-RADAR.loots_count = 0
+RADAR.jmHudWarnings = {}
+RADAR.jmHudWarnings_count = 0
 RADAR.repeating = true
 RADAR.samples = {}
 RADAR.samples_count = 0
@@ -52,9 +45,9 @@ end
 function RADAR:Clear()
 	self:EndScan()
 
-	self.bombs = {}
+	self.jmHudWarnings = {}
 	self.samples = {}
-	self.bombs_count = 0
+	self.jmHudWarnings_count = 0
 	self.samples_count = 0
 end
 
@@ -63,6 +56,7 @@ end
 -- @internal
 -- @realm client
 function RADAR.CacheEnts()
+
 	-- also do some corpse cleanup here
 	for k, corpse in pairs(RADAR.called_corpses) do
 		if corpse.called + 45 < CurTime() then
@@ -70,43 +64,17 @@ function RADAR.CacheEnts()
 		end
 	end
 
-	if RADAR.bombs_count > 0 then  
+	if RADAR.jmHudWarnings_count > 0 then  
 
-		-- Update bomb positions for those we know about
-		for idx, b in pairs(RADAR.bombs) do
-			local ent = Entity(idx)
+		-- Update jm warn positions for those we know about
+		for i, b in pairs(RADAR.jmHudWarnings) do
+			local ent = Entity(i)
 
 			if IsValid(ent) then
-				b.pos = ent:GetPos()
+				b.vecEntPos = ent:GetPos()
 			end
 		end
 
-	end
-
-	if RADAR.hazards_count > 0 then  
-
-		-- Update hazard positions for those we know about
-		for idx, b in pairs(RADAR.hazards) do
-			local ent = Entity(idx)
-	
-			if IsValid(ent) then
-				b.pos = ent:GetPos()
-			end
-		end
-	
-	end
-
-	if RADAR.loots_count > 0 then  
-
-		-- Update hazard positions for those we know about
-		for idx, b in pairs(RADAR.loots) do
-			local ent = Entity(idx)
-	
-			if IsValid(ent) then
-				b.pos = ent:GetPos()
-			end
-		end
-	
 	end
 end
 
@@ -167,6 +135,43 @@ local function DrawTarget(tgt, size, offset, no_shrink)
 	end
 end
 
+local function DrawTargetJmVersion(tgt, size, offset, no_shrink)
+	local scrpos = tgt.vecEntPos:ToScreen() -- sweet
+	local sz = (IsOffScreen(scrpos) and not no_shrink) and (size * 0.5) or size
+
+	scrpos.x = math.Clamp(scrpos.x, sz, ScrW() - sz)
+	scrpos.y = math.Clamp(scrpos.y, sz, ScrH() - sz)
+
+	if IsOffScreen(scrpos) then return end
+
+	surface.SetTextColor(255, 255, 255, 255)
+	surface.SetDrawColor(255, 255, 255, 135)
+	local strTexturePathStart = "vgui/ttt/joshmate/warningicons/"
+	local strTexturePathFull = strTexturePathStart .. tgt.strIcon
+	surface.SetTexture(surface.GetTextureID(strTexturePathFull))
+
+	surface.DrawTexturedRect(scrpos.x - sz, scrpos.y - sz, sz * 2, sz * 2)
+
+	-- Drawing full size?
+	if sz == size then
+		local text = math.ceil(LocalPlayer():GetPos():Distance(tgt.vecEntPos))
+		local w, h = surface.GetTextSize(text)
+
+		-- Show range to target
+		surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 1)
+		surface.DrawText(text)
+
+		if tgt.timeExpire > 0 then
+			-- Show time
+			text = util.SimpleTime(tgt.timeExpire - CurTime(), "%02i:%02i")
+			w, h = surface.GetTextSize(text)
+
+			surface.SetTextPos(scrpos.x - w * 0.5, scrpos.y + sz * 1.7)
+			surface.DrawText(text)
+		end
+	end
+end
+
 ---
 -- Draws the indicator on the screen
 -- @hook
@@ -179,40 +184,15 @@ function RADAR:Draw(client)
 
 	surface.SetFont("HudSelectionText")
 
-	-- C4 warnings
-	if self.bombs_count ~= 0 and client:IsActive() and not client:GetSubRoleData().unknownTeam then
-		surface.SetTexture(c4warn)
-		surface.SetTextColor(255, 255, 255, 255)
-		surface.SetDrawColor(255, 255, 255, 255)
-
-		for _, bomb in pairs(self.bombs) do
-			if bomb.team ~= nil and bomb.team == client:GetTeam() then
-				DrawTarget(bomb, 24, 0, true)
+	-- JM Custom HUD Warnings
+	if self.jmHudWarnings_count ~= 0 then
+		for _, jmHudWarning in pairs(self.jmHudWarnings) do
+			if  
+				client:GetTeam() == TEAM_SPEC or not client:Alive() or jmHudWarning.isTraitor == false			
+				or jmHudWarning.isTraitor == true and client:GetTeam() == TEAM_TRAITOR
+			then
+				DrawTargetJmVersion(jmHudWarning, 24, 0, true)
 			end
-		end
-	end
-
-	-- Hazard warnings
-	if self.hazards_count ~= 0 and client:IsActive() and not client:GetSubRoleData().unknownTeam then
-		surface.SetTexture(hazardwarn)
-		surface.SetTextColor(255, 255, 255, 255)
-		surface.SetDrawColor(255, 255, 255, 255)
-
-		for _, hazard in pairs(self.hazards) do
-			if hazard.team ~= nil and hazard.team == client:GetTeam() then
-				DrawTarget(hazard, 24, 0, true)
-			end
-		end
-	end
-
-	-- Loot Warnings
-	if self.loots_count ~= 0 then
-		surface.SetTexture(lootwarn)
-		surface.SetTextColor(255, 255, 255, 255)
-		surface.SetDrawColor(255, 255, 255, 255)
-
-		for _, loot in pairs(self.loots) do
-			DrawTarget(loot, 24, 0, true)
 		end
 	end
 
@@ -223,7 +203,7 @@ function RADAR:Draw(client)
 		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, corpse in pairs(self.called_corpses) do
-			DrawTarget(corpse, 16, 0.5)
+			DrawTarget(corpse, 24, 0.5)
 		end
 	end
 
@@ -234,11 +214,14 @@ function RADAR:Draw(client)
 		surface.SetDrawColor(255, 255, 255, 255)
 
 		for _, sample in pairs(self.samples) do
-			DrawTarget(sample, 16, 0.5, true)
+			DrawTarget(sample, 24, 0.5, true)
 		end
 	end
 
 	-- Player radar
+
+	if client:GetTeam() == TEAM_SPEC or not client:Alive() or not client:IsTerror() then return end
+
 	if not self.enable then return end
 
 	surface.SetTexture(indicator)
@@ -276,63 +259,42 @@ function RADAR:Draw(client)
 				surface.SetTextColor(255, 255, 255, 255)
 			end
 
-			DrawTarget(tgt, 24, 0)
+			DrawTarget(tgt, 16, 0)
 		end
 	end
 end
 
-local function ReceiveC4Warn()
-	local idx = net.ReadUInt(16)
-	local armed = net.ReadBit() == 1
+-- Josh Mate Custom HUD Warning Icons Recieve Message
+local function JMReceiveCustomHUDWarning()
+	
+	local isEnabled 			= net.ReadBool()
+	local entIndex 				= net.ReadUInt(16)	
 
-	if armed then
-		local pos = net.ReadVector()
-		local etime = net.ReadFloat()
-		local team = net.ReadString()
+	if isEnabled then
 
-		RADAR.bombs[idx] = {pos = pos, t = etime, team = team}
+		local strIcon 				= net.ReadString()
+		local vecEntPos 			= net.ReadVector()
+		local timeExpire 			= net.ReadFloat()
+		local isTraitor			 	= net.ReadBool()
+		
+		RADAR.jmHudWarnings[entIndex] = {
+			isTraitor 			= isTraitor, 
+			strIcon 			= strIcon,
+			vecEntPos 			= vecEntPos,
+			timeExpire 			= timeExpire
+		}
+
 	else
-		RADAR.bombs[idx] = nil
+
+		RADAR.jmHudWarnings[entIndex] = nil
+
 	end
 
-	RADAR.bombs_count = table.Count(RADAR.bombs)
+	RADAR.jmHudWarnings_count = table.Count(RADAR.jmHudWarnings)
 end
-net.Receive("TTT_C4Warn", ReceiveC4Warn)
+net.Receive("JM_NET_CustomHudWarning", JMReceiveCustomHUDWarning)
 
--- Josh Mate Changes
-local function RecieveHazardWarn()
-	local idx = net.ReadUInt(16)
-	local armed = net.ReadBit() == 1
 
-	if armed then
-		local pos = net.ReadVector()
-		local team = net.ReadString()
-
-		RADAR.hazards[idx] = {pos = pos, team = team}
-	else
-		RADAR.hazards[idx] = nil
-	end
-
-	RADAR.hazards_count = table.Count(RADAR.hazards)
-end
-net.Receive("TTT_HazardWarn", RecieveHazardWarn)
-
--- Josh Mate Changes
-local function RecieveLootWarn()
-	local idx = net.ReadUInt(16)
-	local armed = net.ReadBit() == 1
-
-	if armed then
-		local pos = net.ReadVector()
-
-		RADAR.loots[idx] = {pos = pos}
-	else
-		RADAR.loots[idx] = nil
-	end
-
-	RADAR.loots_count = table.Count(RADAR.loots)
-end
-net.Receive("TTT_LootWarn", RecieveLootWarn)
 
 local function TTT_CorpseCall()
 	local pos = net.ReadVector()

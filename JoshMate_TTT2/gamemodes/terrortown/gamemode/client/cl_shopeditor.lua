@@ -40,8 +40,8 @@ function ShopEditor.GetEquipmentForRoleAll()
 
 	local eject = {
 		weapon_fists = true,
-		weapon_ttt_unarmed = true,
-		weapon_zm_carry = true,
+		weapon_jm_special_hands = true,
+		weapon_jm_special_pickup = true,
 		bobs_blacklisted = true
 	}
 

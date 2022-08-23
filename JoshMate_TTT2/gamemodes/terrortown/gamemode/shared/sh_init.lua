@@ -16,141 +16,20 @@ ROUND_PREP = 2
 ROUND_ACTIVE = 3
 ROUND_POST = 4
 
+-- Josh Mate Changes: Cleared these lists and made it only items in them get the custom C icon in the shops
+
 -- equipment setups
 INNO_EQUIPMENT = {
-	"weapon_jm_equip_camera",
-	"weapon_jm_equip_awp",
-	"weapon_jm_equip_barrier",
-	"weapon_jm_equip_beartrap",
-	"weapon_jm_equip_cannibal",
-	"weapon_jm_equip_chameleon",
-	"weapon_jm_equip_pulsepad",
-	"weapon_jm_equip_poisondart",
-	"weapon_jm_equip_silencedpistol",
-	"weapon_jm_equip_soap",
-	"weapon_jm_equip_stungrenade",
-	"weapon_jm_equip_swarm",
-	"weapon_jm_equip_taser",
-	"weapon_jm_equip_tracker",
-	"weapon_jm_equip_tree",
-	"weapon_jm_grenade_fire",
-	"weapon_jm_grenade_push",
-	"weapon_jm_grenade_smoke",
-	"weapon_jm_primary_lmg",
-	"weapon_jm_primary_rifle",
-	"weapon_jm_primary_shotgun",
-	"weapon_jm_primary_smg",
-	"weapon_jm_primary_sniper",
-	"weapon_jm_secondary_auto",
-	"weapon_jm_secondary_heavy",
-	"weapon_jm_secondary_light",
-	"weapon_ttt_binoculars",
-	"weapon_ttt_c4",
-	"weapon_ttt_knife",
-	"weapon_ttt_push",
-	"weapon_ttt_radio",
-	"weapon_ttt_sipistol",
-	"weapon_ttt_teleport",
-	"weapon_ttt_unarmed",
-	"weapon_ttt_wtester",
-	"weapon_zm_improvised",
-	"item_jm_passive_ninjapro",
-	"item_jm_passive_bombsquad",
-	"item_jm_passive_vigor",
-	"item_ttt_armor",
-	"item_ttt_disguiser",
-	"item_ttt_radar"
 }
 
 SPECIAL_EQUIPMENT = {
-	"weapon_jm_equip_camera",
-	"weapon_jm_equip_awp",
-	"weapon_jm_equip_barrier",
-	"weapon_jm_equip_beartrap",
-	"weapon_jm_equip_cannibal",
-	"weapon_jm_equip_chameleon",
-	"weapon_jm_equip_pulsepad",
-	"weapon_jm_equip_poisondart",
-	"weapon_jm_equip_silencedpistol",
-	"weapon_jm_equip_soap",
-	"weapon_jm_equip_stungrenade",
-	"weapon_jm_equip_swarm",
-	"weapon_jm_equip_taser",
-	"weapon_jm_equip_tracker",
-	"weapon_jm_equip_tree",
-	"weapon_jm_grenade_fire",
-	"weapon_jm_grenade_push",
-	"weapon_jm_grenade_smoke",
-	"weapon_jm_primary_lmg",
-	"weapon_jm_primary_rifle",
-	"weapon_jm_primary_shotgun",
-	"weapon_jm_primary_smg",
-	"weapon_jm_primary_sniper",
-	"weapon_jm_secondary_auto",
-	"weapon_jm_secondary_heavy",
-	"weapon_jm_secondary_light",
-	"weapon_ttt_binoculars",
-	"weapon_ttt_c4",
-	"weapon_ttt_knife",
-	"weapon_ttt_push",
-	"weapon_ttt_radio",
-	"weapon_ttt_sipistol",
-	"weapon_ttt_teleport",
-	"weapon_ttt_unarmed",
-	"weapon_ttt_wtester",
-	"weapon_zm_improvised",
-	"item_jm_passive_ninjapro",
-	"item_jm_passive_bombsquad",
-	"item_jm_passive_vigor",
-	"item_ttt_armor",
-	"item_ttt_disguiser",
-	"item_ttt_radar"
+
 }
 
 TRAITOR_EQUIPMENT = {
-	"weapon_jm_equip_camera",
-	"weapon_jm_equip_awp",
-	"weapon_jm_equip_barrier",
-	"weapon_jm_equip_beartrap",
-	"weapon_jm_equip_cannibal",
-	"weapon_jm_equip_chameleon",
-	"weapon_jm_equip_pulsepad",
-	"weapon_jm_equip_poisondart",
-	"weapon_jm_equip_silencedpistol",
-	"weapon_jm_equip_soap",
-	"weapon_jm_equip_stungrenade",
-	"weapon_jm_equip_swarm",
-	"weapon_jm_equip_taser",
-	"weapon_jm_equip_tracker",
-	"weapon_jm_equip_tree",
-	"weapon_jm_grenade_fire",
-	"weapon_jm_grenade_push",
-	"weapon_jm_grenade_smoke",
-	"weapon_jm_primary_lmg",
-	"weapon_jm_primary_rifle",
-	"weapon_jm_primary_shotgun",
-	"weapon_jm_primary_smg",
-	"weapon_jm_primary_sniper",
-	"weapon_jm_secondary_auto",
-	"weapon_jm_secondary_heavy",
-	"weapon_jm_secondary_light",
-	"weapon_ttt_binoculars",
-	"weapon_ttt_c4",
-	"weapon_ttt_knife",
-	"weapon_ttt_push",
-	"weapon_ttt_radio",
-	"weapon_ttt_sipistol",
-	"weapon_ttt_teleport",
-	"weapon_ttt_unarmed",
-	"weapon_ttt_wtester",
-	"weapon_zm_improvised",
-	"item_jm_passive_ninjapro",
-	"item_jm_passive_bombsquad",
-	"item_jm_passive_vigor",
-	"item_ttt_armor",
-	"item_ttt_disguiser",
-	"item_ttt_radar"
 }
+
+-- End of Josh Mate Changes
 
 -- role teams to have an identifier
 TEAM_NONE = "noteam"
@@ -745,7 +624,7 @@ function EquipmentIsBuyable(tbl, ply)
 			local v = plys[i]
 
 			-- everyone on the forcespec team is in specmode
-			if not IsValid(v) or v:GetForceSpec() then continue end
+			if not IsValid(v) or v:GetForceSpec() or v:GetNWBool("JM_NWBOOL_IsSittingRoundOut") then continue end
 
 			choices[#choices + 1] = v
 		end

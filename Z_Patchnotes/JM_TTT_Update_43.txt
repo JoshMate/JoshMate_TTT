@@ -1,0 +1,51 @@
+-- ################################
+-- #### Changes
+-- ################################
+
+[Best Friend Apocalypse]
+- New Bad Care Package Loot
+- Spawns 12 "Best Friends" randomly across the map
+
+[Zombie Apocalypse]
+- New Bad Care Package Loot
+- Spawns 16 Zombies randomly across the map
+
+[Proplosion]
+- Removed from the care package bad loot
+// It was really laggy and caused unfair and unavoidable deaths
+
+[Super Crowbar]
+- Uses: 1 -> 2
+
+[Traitor Tester]
+- Reduced Test time from 10 seconds down to 5 Second
+- Slightly Increased its range
+
+[Goomba Stomps]
+- Added a new GRANDER sound effect for getting one
+
+[Big Boy]
+- Increased Max Damage: 100 -> 120
+
+[Zombie Mode]
+- Removed Flame effects (Fixes Flame effects lingering post round)
+- Removed AOE Fire Damage
+- Removed Self inflicted damage over time
+- Removed Immunity to fire
+- You now gain +50 HP per alive player
+- Right click is now a dash (A much weaker ninja blade)
+- Increased movement speed: 160% -> 150%
+- Increased DPS of Zombie Blade
+- Increased the amount of ambient zombie noises you make
+
+[Karma]
+- Traitors now also get a bonus starting credit if they have 1250 Karma
+- Greatly improved clarity of Karma / Kill / Damage logs
+
+
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+- None

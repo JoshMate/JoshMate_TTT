@@ -297,7 +297,7 @@ local function RoundStateChange(o, n)
 
 		-- show warning to spec mode players
 		if GetConVar("ttt_spectator_mode"):GetBool() and IsValid(LocalPlayer()) then
-			LANG.Msg("spec_mode_warning", nil, MSG_CHAT_WARN)
+			LANG.Msg("You are in Spectator Mode: Press F1 -> Gameplay -> Uncheck Spectator Mode", nil, MSG_CHAT_WARN)
 		end
 
 		-- reset cached server language in case it has changed
@@ -690,7 +690,7 @@ function CheckIdle()
 			idle.pos = client:GetPos()
 			idle.t = CurTime()
 		elseif CurTime() > idle.t + idle_limit then
-			RunConsoleCommand("say", TryT("automoved_to_spec"))
+			RunConsoleCommand("say", "!! [Is now AFK] !!")
 
 			timer.Simple(0, function() -- move client into the spectator team in the next frame
 				RunConsoleCommand("ttt_spectator_mode", 1)

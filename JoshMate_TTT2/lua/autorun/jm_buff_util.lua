@@ -8,6 +8,9 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 -- #############################################
 
 function JM_GiveBuffToThisPlayer(nameOfBuff, targetPlayer, buffGiver)
+
+    -- Remove it first before giving them a new one to prevent non-stacking
+    JM_RemoveBuffFromThisPlayer(nameOfBuff, targetPlayer)
     
     local timeOfBuffCreation = CurTime()
     local locationOfBuffCreation = Vector( 0, 0, 0 )
@@ -33,6 +36,20 @@ function JM_RemoveBuffFromThisPlayer(nameOfBuff, targetPlayer)
 
 end
 
+function JM_CheckIfPlayerHasBuff(nameOfBuff, targetPlayer)
+    
+    for k, buff in ipairs(ents.FindByClass(nameOfBuff)) do
+        
+        if (buff.targetPlayer == targetPlayer) then
+            return true
+        end
+
+    end
+
+    return false
+
+end
+
 -- #############################################
 -- All Global Buff Values
 -- #############################################
@@ -45,42 +62,21 @@ JM_Global_Buff_Taser_IconPath                           = "vgui/ttt/joshmate/hud
 JM_Global_Buff_Taser_IconGoodBad                        = "bad"
 
 JM_Global_Buff_SilencedPistol_Name                      = "Silenced Pistol"
-JM_Global_Buff_SilencedPistol_Duration                  = 5
+JM_Global_Buff_SilencedPistol_Duration                  = 7
 JM_Global_Buff_SilencedPistol_NWBool                    = "JM_Buff_NWBool_IsSilencedPistol"
 JM_Global_Buff_SilencedPistol_IconName                  = "JM_Buff_Icon_SilencedPistol"
 JM_Global_Buff_SilencedPistol_IconPath                  = "vgui/ttt/joshmate/hud_silencedpistol.png"
 JM_Global_Buff_SilencedPistol_IconGoodBad               = "bad"
 
 JM_Global_Buff_StunGrenade_Name                         = "Stun Grenade"
-JM_Global_Buff_StunGrenade_Duration                     = 7
+JM_Global_Buff_StunGrenade_Duration                     = 10
 JM_Global_Buff_StunGrenade_NWBool                       = "JM_Buff_NWBool_IsStunGrenade"
 JM_Global_Buff_StunGrenade_IconName                     = "JM_Buff_Icon_StunGrenade"
 JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
-JM_Global_Buff_TrackingDart_Name                         = "Tracking Dart"
-JM_Global_Buff_TrackingDart_Duration                     = 60
-JM_Global_Buff_TrackingDart_NWBool                       = "JM_Buff_NWBool_IsTrackingDart"
-JM_Global_Buff_TrackingDart_IconName                     = "JM_Buff_Icon_TrackingDart"
-JM_Global_Buff_TrackingDart_IconPath                     = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_TrackingDart_IconGoodBad                  = "bad"
-
-JM_Global_Buff_TagGrenade_Name                          = "Tag Grenade"
-JM_Global_Buff_TagGrenade_Duration                      = 2
-JM_Global_Buff_TagGrenade_NWBool                        = "JM_Buff_NWBool_IsTagGrenade"
-JM_Global_Buff_TagGrenade_IconName                      = "JM_Buff_Icon_TagGrenade"
-JM_Global_Buff_TagGrenade_IconPath                      = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_TagGrenade_IconGoodBad                   = "bad"
-
-JM_Global_Buff_PulsePad_Name                            = "Pulse Pad"
-JM_Global_Buff_PulsePad_Duration                        = 15
-JM_Global_Buff_PulsePad_NWBool                          = "JM_Buff_NWBool_IsPulsePad"
-JM_Global_Buff_PulsePad_IconName                        = "JM_Buff_Icon_PulsePad"
-JM_Global_Buff_PulsePad_IconPath                        = "vgui/ttt/joshmate/hud_tracker.png"
-JM_Global_Buff_PulsePad_IconGoodBad                     = "bad"
-
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
-JM_Global_Buff_PoisonDart_Duration                      = 12
+JM_Global_Buff_PoisonDart_Duration                      = 15
 JM_Global_Buff_PoisonDart_NWBool                        = "JM_Buff_NWBool_IsPoisonDart"
 JM_Global_Buff_PoisonDart_IconName                      = "JM_Buff_Icon_PoisonDart"
 JM_Global_Buff_PoisonDart_IconPath                      = "vgui/ttt/joshmate/hud_poisondart.png"
@@ -94,7 +90,7 @@ JM_Global_Buff_BearTrap_IconPath                        = "vgui/ttt/hud_icon_bea
 JM_Global_Buff_BearTrap_IconGoodBad                     = "bad"
 
 JM_Global_Buff_TreeOfLife_Name                          = "Tree of Life"
-JM_Global_Buff_TreeOfLife_Duration                      = 0
+JM_Global_Buff_TreeOfLife_Duration                      = 1
 JM_Global_Buff_TreeOfLife_NWBool                        = "JM_Buff_NWBool_IsTreeOfLife"
 JM_Global_Buff_TreeOfLife_IconName                      = "JM_Buff_Icon_TreeOfLife"
 JM_Global_Buff_TreeOfLife_IconPath                      = "vgui/ttt/joshmate/hud_tree.png"
@@ -114,6 +110,96 @@ JM_Global_Buff_Chameleon_IconName                       = "JM_Buff_Icon_Chameleo
 JM_Global_Buff_Chameleon_IconPath                       = "vgui/ttt/joshmate/hud_chameleon.png"
 JM_Global_Buff_Chameleon_IconGoodBad                    = "good"
 
+JM_Global_Buff_NewtonLauncher_Name                         = "Newton Launcher"
+JM_Global_Buff_NewtonLauncher_Duration                     = 3
+JM_Global_Buff_NewtonLauncher_NWBool                       = "JM_Buff_NWBool_IsNewtonLauncher"
+JM_Global_Buff_NewtonLauncher_IconName                     = "JM_Buff_Icon_NewtonLauncher"
+JM_Global_Buff_NewtonLauncher_IconPath                     = "vgui/ttt/joshmate/hud_newtonlauncher.png"
+JM_Global_Buff_NewtonLauncher_IconGoodBad                  = "bad"
+
+JM_Global_Buff_ZombieMode_Name                               = "Zombie Mode"
+JM_Global_Buff_ZombieMode_Duration                           = 0
+JM_Global_Buff_ZombieMode_NWBool                             = "JM_Buff_NWBool_IsZombieMode"
+JM_Global_Buff_ZombieMode_IconName                           = "JM_Buff_Icon_ZombieMode"
+JM_Global_Buff_ZombieMode_IconPath                           = "vgui/ttt/joshmate/hud_zombiemode.png"
+JM_Global_Buff_ZombieMode_IconGoodBad                        = "good"
+
+JM_Global_Buff_MoneyPrinter_Name                               = "Money Printer"
+JM_Global_Buff_MoneyPrinter_Duration                           = 30
+JM_Global_Buff_MoneyPrinter_NWBool                             = "JM_Buff_NWBool_IsMoneyPrinter"
+JM_Global_Buff_MoneyPrinter_IconName                           = "JM_Buff_Icon_MoneyPrinter"
+JM_Global_Buff_MoneyPrinter_IconPath                           = "vgui/ttt/joshmate/hud_moneyprinter.png"
+JM_Global_Buff_MoneyPrinter_IconGoodBad                        = "good"
+
+JM_Global_Buff_Agent_Name                                       = "Agent"
+JM_Global_Buff_Agent_Duration                                   = 0
+JM_Global_Buff_Agent_NWBool                                     = "JM_Buff_NWBool_IsAgent"
+JM_Global_Buff_Agent_IconName                                   = "JM_Buff_Icon_Agent"
+JM_Global_Buff_Agent_IconPath                                   = "vgui/ttt/joshmate/hud_agent.png"
+JM_Global_Buff_Agent_IconGoodBad                                = "good"
+
+JM_Global_Buff_HealthGrenade_Name                               = "Healing Grenade"
+JM_Global_Buff_HealthGrenade_Duration                           = 16
+JM_Global_Buff_HealthGrenade_NWBool                             = "JM_Buff_NWBool_IsHealthGrenade"
+JM_Global_Buff_HealthGrenade_IconName                           = "JM_Buff_Icon_HealthGrenade"
+JM_Global_Buff_HealthGrenade_IconPath                           = "vgui/ttt/joshmate/hud_heal.png"
+JM_Global_Buff_HealthGrenade_IconGoodBad                        = "good"
+
+JM_Global_Buff_Glue_Name                                        = "Glue"
+JM_Global_Buff_Glue_Duration                                    = 7
+JM_Global_Buff_Glue_NWBool                                      = "JM_Buff_NWBool_IsGlue"
+JM_Global_Buff_Glue_IconName                                    = "JM_Buff_Icon_Glue"
+JM_Global_Buff_Glue_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"
+JM_Global_Buff_Glue_IconGoodBad                                 = "bad"
+
+JM_Global_Buff_Smoke_Name                                        = "Smoke"
+JM_Global_Buff_Smoke_Duration                                    = 10
+JM_Global_Buff_Smoke_NWBool                                      = "JM_Buff_NWBool_IsSmoke"
+JM_Global_Buff_Smoke_IconName                                    = "JM_Buff_Icon_Smoke"
+JM_Global_Buff_Smoke_IconPath                                    = "vgui/ttt/joshmate/hud_smoke.png"
+JM_Global_Buff_Smoke_IconGoodBad                                 = "bad"
+
+JM_Global_Buff_KarmaBuff_Name                                   = "Good Boy Buff"
+JM_Global_Buff_KarmaBuff_Duration                               = 0
+JM_Global_Buff_KarmaBuff_NWBool                                 = "JM_Buff_NWBool_IsKarmaBuff"
+JM_Global_Buff_KarmaBuff_IconName                               = "JM_Buff_Icon_KarmaBuff"
+JM_Global_Buff_KarmaBuff_IconPath                               = "vgui/ttt/joshmate/hud_karma.png"
+JM_Global_Buff_KarmaBuff_IconGoodBad                            = "good"
+
+JM_Global_Buff_Uav_Name                                         = "UAV Buff"
+JM_Global_Buff_Uav_Duration                                     = 8
+JM_Global_Buff_Uav_NWBool                                       = "JM_Buff_NWBool_IsUavBuff"
+JM_Global_Buff_Uav_IconName                                     = "JM_Buff_Icon_UavBuff"
+JM_Global_Buff_Uav_IconPath                                     = "vgui/ttt/joshmate/hud_uav.png"
+JM_Global_Buff_Uav_IconGoodBad                                  = "good"
+
+JM_Global_Buff_Dash_Name                                        = "Dash"
+JM_Global_Buff_Dash_Duration                                    = 4
+JM_Global_Buff_Dash_NWBool                                      = "JM_Buff_NWBool_IsDash"
+JM_Global_Buff_Dash_IconName                                    = "JM_Buff_Icon_Dash"
+JM_Global_Buff_Dash_IconPath                                    = "vgui/ttt/joshmate/hud_dash.png"
+JM_Global_Buff_Dash_IconGoodBad                                 = "good"
+
+JM_Global_Buff_BarrierSlow_Name                                 = "Barrier Slow"
+JM_Global_Buff_BarrierSlow_Duration                             = 6
+JM_Global_Buff_BarrierSlow_NWBool                               = "JM_Buff_NWBool_IsBarrierSlow"
+JM_Global_Buff_BarrierSlow_IconName                             = "JM_Buff_Icon_BarrierSlow"
+JM_Global_Buff_BarrierSlow_IconPath                             = "vgui/ttt/joshmate/hud_slow.png"
+JM_Global_Buff_BarrierSlow_IconGoodBad                          = "bad"
+
+JM_Global_Buff_CannibalHeal_Name                                = "Cannibal Heal"
+JM_Global_Buff_CannibalHeal_Duration                            = 12
+JM_Global_Buff_CannibalHeal_NWBool                              = "JM_Buff_NWBool_IsCannibalHeal"
+JM_Global_Buff_CannibalHeal_IconName                            = "JM_Buff_Icon_CannibalHeal"
+JM_Global_Buff_CannibalHeal_IconPath                            = "vgui/ttt/joshmate/hud_heal.png"
+JM_Global_Buff_CannibalHeal_IconGoodBad                         = "good"
+
+JM_Global_Buff_BarrierDamage_Name                                 = "Barrier Damage Increase"
+JM_Global_Buff_BarrierDamage_Duration                             = 30
+JM_Global_Buff_BarrierDamage_NWBool                               = "JM_Buff_NWBool_IsBarrierDamage"
+JM_Global_Buff_BarrierDamage_IconName                             = "JM_Buff_Icon_BarrierDamage"
+JM_Global_Buff_BarrierDamage_IconPath                             = "vgui/ttt/joshmate/hud_damagemultbad.png"
+JM_Global_Buff_BarrierDamage_IconGoodBad                          = "bad"
 
 
 -- Care Package Buffs
@@ -147,8 +233,25 @@ JM_Global_Buff_Care_Regeneration_IconPath                = "vgui/ttt/joshmate/hu
 JM_Global_Buff_Care_Regeneration_IconGoodBad             = "good"
 
 JM_Global_Buff_Care_TrippingBalls_Name                   = "Tripping Balls"
-JM_Global_Buff_Care_TrippingBalls_Duration               = 30
+JM_Global_Buff_Care_TrippingBalls_Duration               = 20
 JM_Global_Buff_Care_TrippingBalls_NWBool                 = "JM_Buff_NWBool_IsTrippingBalls"
 JM_Global_Buff_Care_TrippingBalls_IconName               = "JM_Buff_Icon_TrippingBalls"
 JM_Global_Buff_Care_TrippingBalls_IconPath               = "vgui/ttt/joshmate/hud_trippingballs.png"
 JM_Global_Buff_Care_TrippingBalls_IconGoodBad            = "bad"
+
+JM_Global_Buff_Care_RapidFire_Name                      = "Rapid Fire"
+JM_Global_Buff_Care_RapidFire_Duration                  = 0
+JM_Global_Buff_Care_RapidFire_NWBool                    = "JM_Buff_NWBool_IsRapidFire"
+JM_Global_Buff_Care_RapidFire_IconName                  = "JM_Buff_Icon_RapidFire"
+JM_Global_Buff_Care_RapidFire_IconPath                  = "vgui/ttt/joshmate/hud_rapidfire.png"
+JM_Global_Buff_Care_RapidFire_IconGoodBad               = "good"
+
+
+-- Special Buffs
+
+JM_Global_Buff_SuddenDeath_Name                     = "Sudden Death"
+JM_Global_Buff_SuddenDeath_Duration                 = 0
+JM_Global_Buff_SuddenDeath_NWBool                   = "JM_Buff_NWBool_IsSuddenDeath"
+JM_Global_Buff_SuddenDeath_IconName                 = "JM_Buff_Icon_SuddenDeath"
+JM_Global_Buff_SuddenDeath_IconPath                 = "vgui/ttt/joshmate/hud_tracker.png"
+JM_Global_Buff_SuddenDeath_IconGoodBad              = "bad"

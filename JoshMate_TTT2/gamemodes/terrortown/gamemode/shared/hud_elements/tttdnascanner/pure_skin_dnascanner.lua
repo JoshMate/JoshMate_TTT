@@ -40,7 +40,7 @@ if CLIENT then
 
 	function HUDELEMENT:ShouldDraw()
 		local client = LocalPlayer()
-		local scanner = client:GetWeapon("weapon_ttt_wtester")
+		local scanner = client:GetWeapon("weapon_jm_equip_dna")
 
 		return HUDEditor.IsEditing or IsValid(scanner) and client:GetActiveWeapon() == scanner and client:Alive()
 	end
@@ -88,7 +88,7 @@ if CLIENT then
 		local size = self:GetSize()
 		local x, y = pos.x, pos.y
 		local w, h = size.w, size.h
-		local scanner = client:GetWeapon("weapon_ttt_wtester")
+		local scanner = client:GetWeapon("weapon_jm_equip_dna")
 
 		--fake scanner for HUD editing
 		if not IsValid(scanner) then

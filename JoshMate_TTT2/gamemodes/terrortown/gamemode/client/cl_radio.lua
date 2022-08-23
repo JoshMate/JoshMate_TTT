@@ -174,7 +174,7 @@ function RADIO:SendCommand(slotidx)
 	local c = self.Commands[slotidx]
 	if not c then return end
 
-	RunConsoleCommand("ttt_radio", c.cmd)
+	RunConsoleCommand("ent_jm_equip_moneyprinter", c.cmd)
 
 	self:ShowRadioCommands(false)
 end
@@ -271,19 +271,19 @@ end
 -- this way players can bind keys to them
 local function RadioCommand(ply, cmd, arg)
 	if not IsValid(ply) then
-		print("ttt_radio failed, invalid player")
+		print("ent_jm_equip_moneyprinter failed, invalid player")
 
 		return
 	end
 
 	if hook.Run("TTT2ClientRadioCommand", cmd) then
-		print("ttt_radio, execution prevented by a hook")
+		print("ent_jm_equip_moneyprinter, execution prevented by a hook")
 
 		return
 	end
 
 	if #arg ~= 1 then
-		print("ttt_radio failed, too many arguments?")
+		print("ent_jm_equip_moneyprinter failed, too many arguments?")
 
 		return
 	end
@@ -314,7 +314,7 @@ local function RadioCommand(ply, cmd, arg)
 	end
 
 	if not text then
-		print("ttt_radio failed, argument not valid radiocommand")
+		print("ent_jm_equip_moneyprinter failed, argument not valid radiocommand")
 
 		return
 	end
@@ -331,7 +331,7 @@ local function RadioCommand(ply, cmd, arg)
 	-- target is either a lang string or an entity
 	target = isstring(target) and target or tostring(target:EntIndex())
 
-	RunConsoleCommand("_ttt_radio_send", msg_name, target)
+	RunConsoleCommand("_ent_jm_equip_moneyprinter_send", msg_name, target)
 end
 
 local function RadioComplete(cmd, arg)
@@ -339,12 +339,12 @@ local function RadioComplete(cmd, arg)
 	local commands = RADIO.Commands
 
 	for i = 1, #commands do
-		c[i] = "ttt_radio " .. commands[i].cmd
+		c[i] = "ent_jm_equip_moneyprinter " .. commands[i].cmd
 	end
 
 	return c
 end
-concommand.Add("ttt_radio", RadioCommand, RadioComplete)
+concommand.Add("ent_jm_equip_moneyprinter", RadioCommand, RadioComplete)
 
 local function RadioMsgRecv()
 	local sender = net.ReadEntity()
@@ -380,7 +380,7 @@ local function RadioMsgRecv()
 		chat.AddText(sender, COLOR_WHITE, ": " .. text)
 	end
 end
-net.Receive("TTT_RadioMsg", RadioMsgRecv)
+net.Receive("ent_jm_equip_moneyprinterMsg", RadioMsgRecv)
 
 local radio_gestures = {
 	quick_yes = ACT_GMOD_GESTURE_AGREE,
@@ -392,7 +392,7 @@ local radio_gestures = {
 
 ---
 -- Performs an anim gesture based on the @{RADIO} cmd
--- @note Called by recieving the "TTT_RadioMsg" network message
+-- @note Called by recieving the "ent_jm_equip_moneyprinterMsg" network message
 -- @param Player ply
 -- @param string name name of the @{RADIO} cmd
 -- @param string target

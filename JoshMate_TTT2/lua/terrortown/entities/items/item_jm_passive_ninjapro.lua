@@ -10,15 +10,16 @@ ITEM.EquipMenuData = {
 		The Ability to Diguise your name
 
 		Whiles Disguised:
-		+ Silent Footsteps
-		+ Immunity to Fall & Drown Damage
-		+ 20% Movement Speed 
-		+ 50% Better Jump Height & Crouch Walking
+		+ 20% movement speed
+		+ 50% jump height
+		+ Silent footsteps
+		+ Immunity to fall & drown damage
+
 ]]
 }
 
 
-ITEM.CanBuy = {ROLE_TRAITOR}
+ITEM.CanBuy = {}
 ITEM.hud = Material("vgui/ttt/joshmate/hud_ninjapro.png")
 ITEM.material = "vgui/ttt/joshmate/icon_jm_ninja"
 ITEM.oldId = EQUIP_DISGUISE or 4
@@ -43,7 +44,7 @@ end)
 hook.Add("TTTPlayerSpeedModifier", "NinjaProMoveSpeed", function(ply, _, _, speedMultiplierModifier)
 	if not IsValid(ply)then return end
 	if SERVER then
-		ply:SetJumpPower(160)
+		ply:SetJumpPower(180)
 		ply:SetCrouchedWalkSpeed(0.3)
 	end
 	if not ply:HasEquipmentItem("item_jm_passive_ninjapro") then return end
@@ -52,8 +53,8 @@ hook.Add("TTTPlayerSpeedModifier", "NinjaProMoveSpeed", function(ply, _, _, spee
 	speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
 
 	if SERVER then
-		ply:SetJumpPower(250)
-		ply:SetCrouchedWalkSpeed(0.50)
+		ply:SetJumpPower(300)
+		ply:SetCrouchedWalkSpeed(0.60)
 	end
 end)
 

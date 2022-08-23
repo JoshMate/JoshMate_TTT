@@ -1,0 +1,68 @@
+-- ################################
+-- #### TTT Update 48 - Patch Notes
+-- ################################
+
+[Inferno Launcher]
+- New Traitor Weapon
+- Launches a projectile that splits on impact
+- These clusters go in random directions and explode after a delay
+- Dealing small amounts of direct explosive damage
+- They start lots of fires in the area that deals damage on contact
+- They also set props on fire  increasing the chaos / damage
+- Has 1 use and it extremely obvious that you have used it
+
+[Swapper]
+- New Traitor Weapon
+- Left click: Swaps Current HP with the target
+- Right clicks: Swaps Places with the target
+- Has 2 uses and makes a quiet noises when shot
+
+[Ninja Pro]
+- Removed from the game
+- Disguise Effect merged into Chameleon
+- Speed Effect Merged into Zombie Mode
+
+[Chameleon]
+- Now gives you silent footsteps while invisible
+- Hides your name from other players while invisible
+- Increased the volume of the going invisible sound
+- Nerfed Movement speed while invisible: 120% -> 100%
+
+[Zombie Mode]
+- Nerfed Max HP buff: 100 -> 25
+- Now gives: +20% Movement Speed
+- Now gives: +50% Jump Height
+- Now gives: +50% Less Fall Damage
+
+[Shop Icons]
+- New HD Icon for: Chameleon
+- New HD Icon for: Teleporter
+- New HD Icon for: Barrier
+- New HD Icon for: Barrel Swep
+- New HD Icon for: Tree of Life
+- New HD Icon for: Money Printer
+- New HD Icon for: CCTV
+- New HD Icon for: Silenced Pistol
+- New HD Icon for: C4
+- New HD Icon for: Knife
+
+[Goomba Stomp]
+- Increased Volume of Goomba Stomp Voice Sound
+
+[Fixes]
+- 
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[TTT Snowfield]
+- New Map
+- A cabin in the middle of a snowy forest
+- Basically snowy desert
+
+[TTT Lockdown]
+- Drastically altered the routes around the map
+- Opened up the middle
+- Removed one of the trains
+- The train is now moves faster

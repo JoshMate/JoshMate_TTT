@@ -274,7 +274,7 @@ if CLIENT then
 
 				if not v or not v.id then continue end
 
-				v.custom = not table.HasValue(DefaultEquipment[fallback], v.id) -- TODO
+				v.custom = table.HasValue(DefaultEquipment[fallback], v.id) -- TODO
 			end
 
 			Equipment[fallback] = tbl
@@ -828,7 +828,7 @@ local function InitDefaultEquipmentForRole(roleData)
 	-- mark custom items
 	for _, i in pairs(tbl) do
 		if i and i.id then
-			i.custom = not table.HasValue(DefaultEquipment[roleData.index], i.id) -- TODO
+			i.custom = table.HasValue(DefaultEquipment[roleData.index], i.id) -- TODO
 		end
 	end
 
@@ -1136,7 +1136,7 @@ else -- CLIENT
 
 		-- mark custom items
 		if toadd and toadd.id then
-			toadd.custom = not table.HasValue(DefaultEquipment[subrole], toadd.id) -- TODO
+			toadd.custom = table.HasValue(DefaultEquipment[subrole], toadd.id) -- TODO
 		end
 
 		Equipment[subrole] = Equipment[subrole] or {}

@@ -35,7 +35,7 @@ local function VoiceTryEnable()
 
 	if not VOICE.IsSpeaking() and VOICE.CanSpeak() then
 		VOICE.isTeam = false
-		RunConsoleCommand("+voicerecord")
+		permissions.EnableVoiceChat( true )
 
 		return true
 	end
@@ -45,7 +45,7 @@ end
 
 local function VoiceTryDisable()
 	if VOICE.IsSpeaking() and not VOICE.isTeam then
-		RunConsoleCommand("-voicerecord")
+		permissions.EnableVoiceChat( false )
 
 		return true
 	end
@@ -68,7 +68,7 @@ local function VoiceTeamTryEnable()
 	if not VOICE.IsSpeaking() and VOICE.CanSpeak() and client:IsActive() and tm ~= TEAM_NONE
 	and not TEAMS[tm].alone and not clientrd.unknownTeam and not clientrd.disabledTeamVoice then
 		VOICE.isTeam = true
-		RunConsoleCommand("+voicerecord")
+		permissions.EnableVoiceChat( true )
 
 		return true
 	end
@@ -78,7 +78,7 @@ end
 
 local function VoiceTeamTryDisable()
 	if VOICE.IsSpeaking() and VOICE.isTeam then
-		RunConsoleCommand("-voicerecord")
+		permissions.EnableVoiceChat( false )
 
 		return true
 	end
@@ -92,23 +92,37 @@ bind.Register("ttt2_voice", VoiceTryEnable, VoiceTryDisable, "TTT2 Bindings", "f
 -- register a binding for the team voicechat
 bind.Register("ttt2_voice_team", VoiceTeamTryEnable, VoiceTeamTryDisable, "TTT2 Bindings", "f1_bind_voice_team", input.GetKeyCode(input.LookupBinding("+speed") or KEY_LSHIFT))
 
--- 255 at 100
--- 5 at 5000
 local function VoiceNotifyThink(pnl)
 	local client = LocalPlayer()
 
-	if not IsValid(pnl) or not IsValid(client) or not IsValid(pnl.ply)
-	or not GetGlobalBool("ttt_locational_voice", false) or pnl.ply:IsSpec() or pnl.ply == client
-	or client:IsActive() and pnl.ply:IsActive() and (
+	local proxVoice = GetGlobalBool("ttt_locational_voice", 0)
+	local proxVoiceDistance = GetGlobalInt("ttt_locational_voice_distance", 850)
+
+	if not IsValid(pnl) 
+	or not IsValid(client) 
+	or not IsValid(pnl.ply)
+	or pnl.ply:IsSpec() 
+	or pnl.ply == client
+	or client:IsActive() 
+	and pnl.ply:IsActive() 
+	and (
 		client:IsInTeam(pnl.ply)
 		and not pnl.ply:GetSubRoleData().unknownTeam
 		and not pnl.ply:GetSubRoleData().disabledTeamVoice
 		and not client:GetSubRoleData().disabledTeamVoiceRecv
-	) then return end
+	) 
+	then return end
 
-	local d = client:GetPos():Distance(pnl.ply:GetPos())
+	local finalOpacity = 255
 
-	pnl:SetAlpha(math.max(-0.1 * d + 255, 15))
+	if proxVoice then
+		finalOpacity = 200
+	else
+		finalOpacity = 255
+	end
+
+	pnl:SetAlpha(finalOpacity)
+
 end
 
 local PlayerVoicePanels = {}
@@ -184,7 +198,8 @@ function GM:PlayerStartVoice(ply)
 			if not client[tm .. "_gvoice"] then
 				pnl.Color = TEAMS[tm].color
 			end
-		elseif ply:IsInTeam(client) and not (ply:GetSubRoleData().disabledTeamVoice or clrd.disabledTeamVoiceRecv) then
+
+		elseif (ply:IsInTeam(client) and not (ply:GetSubRoleData().disabledTeamVoice or clrd.disabledTeamVoiceRecv)) then
 			if not ply[tm .. "_gvoice"] then
 				pnl.Color = TEAMS[tm].color
 			end
@@ -389,7 +404,7 @@ function VOICE.Tick()
 		if not VOICE.CanSpeak() then
 			client.voice_battery = 0
 
-			RunConsoleCommand("-voicerecord")
+			permissions.EnableVoiceChat( false )
 		end
 	elseif client.voice_battery < VOICE.battery_max then
 		client.voice_battery = client.voice_battery + GetRechargeRate()

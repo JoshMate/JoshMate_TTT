@@ -1,0 +1,86 @@
+-- ################################
+-- ### Server
+-- ################################
+
+[Patch Notes]
+- New easier to read patch notes with less boiler plate
+
+[Karma]
+- While healing up to 1000, you can no longer over heal in the same round fully heal
+// Example: If you're on 999, you used to go to 1099. Now you'd just go to 1000
+// This is to make sure you only get bonus karma using the slower 25 per round karma gain
+- Karma healed per round when at over 1000 karma: 50 -> 25
+// Bonus karma takes longer to build up, but it lasts all night (until you rdm)
+
+[Hit Markers] 
+- Damage Numbers on screen now account for Karma / Damage Multipliers
+// Before, you always look like you were doing full damage even if you weren't 
+// Now your hit marker damage numbers will say the exact amount of damgae you actually did
+
+[Sudden Death] 
+- Sudden Death no longer tracks players, it just plays the music and the notification
+// I can manually track all players manually aswell if needed
+// It still only happens rarely when I deam it to be necessary
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Chameleon]
+- You no longer have a feint outline while invisible (You are now completely Invisible)
+- You now longer get blood splatters on you while invisible
+- Your shadow can be revealed by the flash light
+// Although these two effects were cool, they were inconsistent and it was frustrating to die because of them
+
+[Flash Light]
+- Makes a sound when activated
+
+[Pulse Pad]
+- Track Duration: 60 -> 120 Seconds
+- Only The detective can see players tracked by the pulse pad
+
+[Poison Dart]
+- Duration: 12 -> 15 Seconds
+- Total Damage/Healing: 62 -> 75 HP
+
+[Silenced Pistol]
+- Duration: 5 -> 7 seconds
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed Mega Tracker wasn't tracking everyone when it was meant to be
+- Fixed Players who were sitting out could still be selected as Traitors or Detectives then instantly killed
+- Fixed Sitting out players were not affecting the Traitor Percentage, making more Ts than there should have been
+- Fixed The scoreboard would show players who are sitting out as alive confusing who's actually left
+    
+-- ################################
+-- ##### Maps	
+-- ################################
+
+[Cathedral]
+// Finally it is here, the winner of the 2021 TTT Map Design Contest
+
+[Speed Dating]
+// Large Map Rework
+// The map now is split down the middle at the start of the round, and there are now only "2 Pods"
+// Before, being stuck in a pod with a traitor was basically just wait to get knifed
+// People would just constantly scream who their with and it didn't really play very well
+// The north and the south side of the map, so you will be with one half of the players at a time
+// You can explore your entire half of the map, but the barrier in the middle doesn't go until after 30 - 60 seconds
+// The map should now be less of a maze too
+// There is a new grand central room
+// The hall ways are now much better lit up with lights
+[LATEST VERSION ON THE WORKSHOP NOW]
+
+[Lost at Sea]
+// Added floating Buoys out to sea that you can stand on
+// The borders will now block props and items, not just players now
+// The border has been made a bit clearer so you know where the edges of the map are
+// The sea is now much shallower, to prevent Traitor shark from being Completely OP
+// Improved the glass texture on the boats
+// The Raft is now indestructable and heavier (To prevent wacky physics shit)
+// Added a Sea Shanty 2 as an Easet Egg (Hint: avian extermination)
+// You can no longer possess the raft (Stops spectators being able to insta kill other people)
+[LATEST VERSION ON THE WORKSHOP NOW]

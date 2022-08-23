@@ -1,0 +1,87 @@
+################################
+#### TTT Update 53 - Patch Notes
+################################
+
+[Game Mode: Protect The Files]
+- New Game Mode 
+- Has a chance of randomly starting at the start of each round (low Chance)
+- 4 Fililing cabinets will spawn around the map at random
+- Traitors must destroy them
+- Innocents and Detectives must defend them
+- If all 4 are destroyed, the Traitors win
+- (Servers can only be destroyed by mashing E / the use key on them) 
+- (This objective is optional and only gives another way to win)
+
+
+[Hit markers]
+- More accurate Hit Markers that no longer show Overkill Damage (HP they didn't have)
+- Killing a target now shows a skull icon and a satisfying sound play, these stack on multi-kills :ugh:
+- Hit marker Changes to Red if that shot killed your target
+- Hit marker Changes to green if your attack did no damage
+
+[SMG]
+- Buffed Damage: 30 -> 35
+- Nerfed Spread Accuracy: 0.040 -> 0.045
+- Nerfed Recoil: 0.5 -> 1.0
+
+[Rifle]
+- Buffed Spread Accuracy: 0.008 -> 0.005
+- Buffed Recoil: 2.5 -> 2.0
+- Buffed Effective Range: 1250 -> 1500
+
+[LMG}
+- Buffed Fire Rate Delay: 0.075 -> 0.070
+- Nerfed Sound (Louder): 75db -> 100db
+- Nerfed MoveSpeed: 100% -> 80%
+
+[C4] 
+- You now receive a nice breakdown of how many players got caught in the blast
+
+[Zombie Mode]
+- Removed from the game 
+
+[Vigor]
+- Removed from the game 
+- Effects merged into Agent Maker
+
+[Agent Maker]
+- Buffed Now gives both players the Vigor HP Regeneration Buff
+- Nerfed If used on a Traitor, it also grants the Traitor +1 Credit
+
+[Chameleon]
+- Nerfed The going invisible sound can now be heard across the whole map
+- (This should create some paranoia :josh_heh_heh:)
+
+[Goomb Stomp]
+- The Goomba Stomp Sound can now be heard across the whole map
+
+[Care Package Loot: Mass 1HP]
+- Removed from the game
+
+[Care Package Loot: Time Bomb]
+- Nerfed Maximum Damage Reduced from 200 -> 125
+- Nerfed Reduced the radius to be similar to a C4
+
+[Care Package Loot: Mass HP Buff]
+- New Care Package Rare Loot
+- Everyone gets +50 Max HP
+
+[Care Package Loot: Advanced Pistol]
+- Buffed Range: 400 -> 750 (Now same as Deagle)
+
+[Care Package Loot: Rooty Tooty Point and Shooty]
+- Buffed Fire Rate Delay: 2 -> 1 Seconds
+- Buffed Damage per shot: 20 -> 25
+- Nerfed Recoil: 5 -> 10
+
+
+################################
+##### Fixes & Extras
+################################
+
+- Fixed Inferno Launcher playing reload animation on deploy
+- You are now notified at the start of each round about your karma rewards
+
+################################
+##### Maps
+################################

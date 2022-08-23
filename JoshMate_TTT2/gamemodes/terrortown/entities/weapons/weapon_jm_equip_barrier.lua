@@ -4,7 +4,6 @@ if CLIENT then
 	SWEP.Slot      = 7
  
 	SWEP.ViewModelFlip		= false
-	SWEP.ViewModelFOV		= 10
  end
 
 SWEP.PrintName				= "Barrier"
@@ -19,14 +18,14 @@ SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel             = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel              = "models/props/cs_office/TV_plasma.mdl"
+SWEP.WorldModel             = "models/props/cs_office/TV_plasma.mdl"
 SWEP.HoldType 				= "normal" 
-SWEP.UseHands 				= true
+SWEP.UseHands               = false
 SWEP.AllowDrop 				= true
 
 -- TTT Customisation
-SWEP.Base 					= "weapon_tttbase"
+SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind                  	= WEAPON_EQUIP
 SWEP.WeaponID              	= AMMO_BARRIER
 SWEP.CanBuy                	= {ROLE_DETECTIVE}
@@ -41,13 +40,17 @@ if CLIENT then
 	   name = "Barrier",
 	   desc = [[Place down a defensive barrier
 	
-Left click to place a destrucible barrier in front of you
+Left click to place a projectile blocking barrier
 
-After 3s the barrier will arm blocking passage and projectiles
+It also makes a sound and slows when touched
 
 It has 3 uses
 ]]
 	}
+
+	function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() * 55 - ang:Right() * -25 - ang:Up() * 55, ang
+	 end
 end
 
 local JM_Barrier_PlaceRange				= 64
@@ -66,7 +69,6 @@ function SWEP:PrimaryAttack()
 	ang:RotateAroundAxis(ang:Right(), -90)
 	ent:SetAngles(ang)
 	ent:Spawn()
-	ent:SetOwner(self:GetOwner())
 	ent.fingerprints = self.fingerprints
 	self:TakePrimaryAmmo(1)
 	if SERVER then
@@ -80,7 +82,11 @@ end
 function SWEP:SecondaryAttack()
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
 	   self:AddTTT2HUDHelp("Place a Barrier", nil, true)
@@ -88,28 +94,29 @@ if CLIENT then
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
--- 
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
 
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
-	self:Remove()
- end
-  
- function SWEP:DrawWorldModel()
-	return
- end
- 
- function SWEP:DrawWorldModelTranslucent()
-	return
- end
- 
- -- END of Josh Mate World Model 
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################
 

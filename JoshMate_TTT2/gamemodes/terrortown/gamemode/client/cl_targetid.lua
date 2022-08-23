@@ -494,7 +494,7 @@ function HUDDrawTargetIDDNAScanner(tData)
 	local client = LocalPlayer()
 	local ent = tData:GetEntity()
 
-	if not IsValid(client:GetActiveWeapon()) or client:GetActiveWeapon():GetClass() ~= "weapon_ttt_wtester"
+	if not IsValid(client:GetActiveWeapon()) or client:GetActiveWeapon():GetClass() ~= "weapon_jm_equip_dna"
 		or tData:GetEntityDistance() > 400 or not IsValid(ent) then return end
 
 	-- add an empty line if there's already data in the description area
@@ -769,6 +769,7 @@ function HUDDrawTargetIDPlayers(tData)
 	if not ent:IsPlayer() then return end
 
 	local disguised = ent:GetNWBool("disguised", false)
+	local jm_is_chameleon = ent:GetNWBool(JM_Global_Buff_Chameleon_NWBool, false)
 
 	-- oof TTT, why so hacky?! Sets last seen player. Dear reader I don't like this as well, but it has to stay that way
 	-- for compatibility reasons. At least it is uncluttered now!
@@ -779,6 +780,8 @@ function HUDDrawTargetIDPlayers(tData)
 
 	-- disguised players are not shown to normal players, except: same team, unknown team or to spectators
 	if disguised and not (client:IsInTeam(ent) and not client:GetSubRoleData().unknownTeam or client:IsSpec()) then return end
+	if jm_is_chameleon and not (client:IsInTeam(ent) and not client:GetSubRoleData().unknownTeam or client:IsSpec()) then return end
+	
 
 	-- show the role of a player if it is known to the client
 	local rstate = GetRoundState()
@@ -862,7 +865,7 @@ function HUDDrawTargetIDRagdolls(tData)
 
 	local corpse_found = CORPSE.GetFound(ent, false) or not DetectiveMode()
 	local role_found = corpse_found and ent.search_result and ent.search_result.role
-	local binoculars_useable = IsValid(c_wep) and c_wep:GetClass() == "weapon_ttt_binoculars" or false
+	local binoculars_useable = IsValid(c_wep) and c_wep:GetClass() == "weapon_jm_equip_binoculars" or false
 	local role = roles.GetByIndex(role_found and ent.search_result.role or 1)
 
 	-- enable targetID rendering

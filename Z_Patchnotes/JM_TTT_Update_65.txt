@@ -1,0 +1,62 @@
+###################################
+Josh Mate TTT Update 65 - Patch Notes
+###################################
+#### New Stuff
+###################################
+ 
+[Awp]
+- AWP has received a total rework 
+- The AWP is now very loud and fires a tracer round
+- Direct hits are insta-kill and perfectly accurate
+- Bullets also explode on impact dealing an additional 60 DMG in a small radius
+- New icon
+
+[Throwing Knives]
+- Knife has received a total rework and is now Throwing Knives
+- You get 3 of them and they can only be thrown
+- The further they fly, the more damage they do (No damage cap)
+- They leave a faint trail behind them but are completely silent
+- Built in system that judges your trick shots and tells you how you did
+- New Icon
+
+[Glue Gun]
+- Glue Gun has been reworked
+- A Detective shop item
+- It's bullet explode on impact infflicting the Glue effect
+- Does fairly low DPS compared to other guns, but has splash damage
+- Goes in the primary weapon slot and uses Light Ammo
+
+###################################
+#### Changes
+###################################
+
+[Vague Waters]
+- Greatly sped up the boat and made it stop for 3 seconds at both ends
+- Added some more platforms and on-foot navigation routes
+- Added a faint marker in the sky to show where the boat is in real time
+// Uploaded to workshop and Re-Arm Complete and Uploaded
+
+[Desert]
+- Overhauled he Construction site to be more useful and interesting
+- Overhauled the pool area to be more interesting than just a hole with water in it
+- Extended the underground to join up with the swimming pool
+- Improved the entrances to sand castle and prop placement inside of it
+- Improved the cover, player navigation and prop placement in ruins
+- Redid all player spawns to be more spread out around the map
+- Redid all weapon placements to bring them up to date with modern balance standards
+- Upgraded the map to have more modern Lighting and performance
+- Added clipping to various hidden parkour routes so they are easier to jump on
+- Upgraded the turtles to the new stronger turtles 2.0
+- The burning damage on the outside of the map has been slightly increased
+- Made the ambient wind much quieter (IT WAS REALLY LOUD)
+- Raised the height of the skybox to allow for more vertical plays
+- And much more various minor tweaks and improvements
+// Uploaded to workshop and Re-Arm Complete and Uploaded
+
+###################################
+##### Small Changes / Fixes / Code 
+###################################
+
+- Fixed grenade hands flickering in and out of view in 1st person view
+- Fixed Dash grenade causing errors if you died while dashing
+- Fixed Money Printer making duplicate sound effects

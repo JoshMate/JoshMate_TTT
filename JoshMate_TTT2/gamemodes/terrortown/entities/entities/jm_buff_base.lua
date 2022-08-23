@@ -38,19 +38,16 @@ function ENT:Initialize()
 
         if not self.targetPlayer then
             ErrorNoHalt("[JM Buffs] - Error a buff was created with no target player! - Buff Was: " .. tostring(self.PrintName))
-            if Server then self:Remove() end
             return 
         end
         
         if not self.timeOfBuffCreation then
             ErrorNoHalt("[JM Buffs] - Error a buff was created with no time of creation! - Buff Was: " .. tostring(self.PrintName))
-            if Server then self:Remove() end
             return 
         end
 
         if (not self.targetPlayer:IsValid() or not self.targetPlayer:IsPlayer() or not self.targetPlayer:IsTerror() or not self.targetPlayer:Alive()) then
             ErrorNoHalt("[JM Buffs] - self.targetPlayer was not valid/player/terror/alive at time of buff creation - Buff Was: " .. tostring(self.PrintName))
-            if Server then self:Remove() end
             return 
         end
 

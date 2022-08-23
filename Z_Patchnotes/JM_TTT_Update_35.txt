@@ -1,0 +1,94 @@
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Pulse Pad]
+- The tracking effect now lasts until the end of the round
+- Now tases you for 3 seconds
+- Arm Time: 0.4 -> 0.8
+- Is now blue in colour and slightly easier to see
+- No longer tells you the name of who stepped on it
+
+[Cannibal]
+- Eat Body Range: 125 -> 150 units
+- Uses: 3 -> 6
+- Each Body now Grants: +25 Max HP
+- Each Body now Heals: 50 HP
+- Your Final body no longer fully heals you now
+
+[Newton Launcher]
+- Push Force: 400 -> 500
+- When are pushed, you also drop you held weapon too.
+- Pushed players have blurred vision for 7 seconds
+- Pushed players are slowed for 7 seconds
+- Number of Uses: 2 -> 1
+
+[Beartrap] 
+- Made slightly harder to see (By about 10%)
+- You can no longer break beartraps by shooting / exploding them
+- Big Cleanup to the edge cases of getting in and out of a beartrap / Chat messages
+
+[Soap]
+- Made Slightly harder to see (By about 10%)
+- When you slip, you also drop you held weapon too.
+
+[Chameleon]
+- Movement Speed: 0.5x -> 1.2x
+- Now hides your name even without being disguised
+- Invisibility Time Ammo/Charge: 60 -> 30
+
+[Bomb Squad]
+- Halves the damage taken from beartraps
+- Halves the distance and force from the soap push
+
+[Vigor]
+- Max HP: 30 -> 50
+
+
+
+
+
+[Silenced Pistol]
+- Removed from the Traitor shop
+- Is now a care package item instead
+
+[LMG]
+- Buffed Fire Rate Delay: 0.90 -> 0.75
+- Buffed Recoil: 1 -> 0.50
+- Buffed Range: 900 -> 1250
+- Buffed Deploy Animation Speed: 0.75x -> 1.00x
+- Nerfed Accuracy Spread: 0.020 -> 0.035
+
+[Shotgun] 
+- Buffed Range: 300 -> 350
+
+[Gus Radio]
+- Blast Damage: 80 -> 120
+- Blast Radius: 2500 -> 3000
+- Now randomly explodes at ANY point in the song!!!
+
+-- ################################
+-- #### Bug Fixes
+-- ################################
+
+- Fixed a bug that prevented beartraps from being removed after releasing someone from them
+- Fixed a bug where spectators could have their flashlights turned on
+
+-- ################################
+-- ##### Maps
+-- ################################
+ 
+[The Thing]
+- New Map
+- A research base out in the snowy, foggy Artic
+- Innocents must keep the generator topped up on fuel or lose power to the base
+- Traitors must systematically pick off Innocents using secret tunnels and traps
+- This will create a sense of paranoia and fear when someone doesn't come back from their fuel run
+
+[Circuit]
+- Complete overhaul off all props and cover and platforms
+- There are now 4 trains (Each with their own unique features)
+- Trains are now slightly faster
+- Rebalanced the Various Traitor button cooldowns
+- Redid weapon Spawns
+// LATEST VERSION ON WORKSHOP NOW

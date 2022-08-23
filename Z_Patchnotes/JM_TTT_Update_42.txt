@@ -1,0 +1,34 @@
+-- ################################
+-- ### Server
+-- ################################
+
+- None
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[1 HP for all]
+- new Bad  Care Package Loot
+- Sets all player's current HP to 1
+
+[Pistols]
+- You can now swap to all pistols much faster (Including  taser, big boy, silenced pistol etc..)
+- "Remember, switching to your side arm is faster than reloading" - Captain price
+
+[Advanced Weapons]
+- Greatly Buffed ALL advanced weapons
+- This includes the Advanced: Pistol, SMG, Shotgun, Rifle and Sniper
+
+[Zombie Mode]
+- Renamed: Demon Form -> Zombie Mode
+- Increased Speed Buff: 40% -> 60%
+
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+[Bong Palace]
+- A new medium sized map
+- A loose recreation of the legendary "Bong Palace" in which Seb and Vinny reside

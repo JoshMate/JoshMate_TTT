@@ -132,13 +132,21 @@ function ShowC4Config(bomb)
    dconf:SetSize(bw, bh)
    dconf:SetText(T("c4_arm"))
    dconf.DoClick = function()
+                     -- Josh Mate Changes: Don't let Innocents re-arm the C4
                       if not LocalPlayer() or not LocalPlayer():Alive() then return end
-                      local t = dtime:GetValue()
-                      if t and tonumber(t) then
 
-                         RunConsoleCommand("ttt_c4_config", bomb:EntIndex(), t)
-                         dframe:Close()
-                      end
+                      if LocalPlayer():GetTeam() == TEAM_INNOCENT then 
+                        JM_Function_PrintChat(LocalPlayer(), "Equipment", "Innocents can't arm C4")
+                     else
+                        local t = dtime:GetValue()
+                        if t and tonumber(t) then
+
+                           RunConsoleCommand("ttt_c4_config", bomb:EntIndex(), t)
+                           dframe:Close()
+                        end
+                     end
+
+                      
                    end
 
    local dcancel = vgui.Create("DButton", bg)

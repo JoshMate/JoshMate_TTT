@@ -1,3 +1,4 @@
+AddCSLuaFile()
 if CLIENT then
    SWEP.Slot      = 7
 
@@ -5,7 +6,7 @@ if CLIENT then
 	SWEP.ViewModelFOV		= 54
 end
 
-SWEP.Base = "weapon_tttbase"
+SWEP.Base = "weapon_jm_base_gun"
 
 SWEP.HoldType              = "normal"
 SWEP.PrintName = "Beartrap"
@@ -15,8 +16,12 @@ SWEP.UseHands	= true
 SWEP.Kind = WEAPON_EQUIP2
 SWEP.AutoSpawnable = false
 SWEP.CanBuy = { ROLE_TRAITOR }
-SWEP.LimitedStock = false
+SWEP.LimitedStock = true
 SWEP.DeploySpeed           = 4
+
+SWEP.Primary.Delay 			= 0.3
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 
 if CLIENT then
    SWEP.Icon = "vgui/ttt/joshmate/icon_jm_beartrap.png"
@@ -41,16 +46,20 @@ if CLIENT then
 	end
 end
 
-if SERVER then
-	AddCSLuaFile()
 
+local JM_Trap_PlaceRange				= 192
 
-	function SWEP:PrimaryAttack()
-		local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 100, filter = self.Owner})
-		if (tr.HitWorld or (tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable")))then
-			local dot = vector_up:Dot(tr.HitNormal)
-			if dot > 0.55 and dot <= 1 then
-				local ent = ents.Create("ttt_bear_trap")
+function SWEP:PrimaryAttack()
+
+	if not self:CanPrimaryAttack() then return end
+	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+
+	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Trap_PlaceRange, filter = self.Owner})
+	if (tr.HitWorld or (tr.Entity:IsValid() and (tr.Entity:GetClass() == "func_breakable")))then
+		local dot = vector_up:Dot(tr.HitNormal)
+		if dot > 0.55 and dot <= 1 then
+			if SERVER then
+				local ent = ents.Create("ent_jm_equip_beartrap")
 				ent:SetPos(tr.HitPos + tr.HitNormal)
 				local ang = tr.HitNormal:Angle()
 				ang:RotateAroundAxis(ang:Right(), -90)
@@ -58,14 +67,20 @@ if SERVER then
 				ent:Spawn()
 				ent.Owner = self.Owner
 				ent.fingerprints = self.fingerprints
-				self:Remove()
+				self:TakePrimaryAmmo(1)
+				if self:Clip1() <= 0 then
+					self:Remove()
+				end
 			end
 		end
 	end
-
 end
 
--- Hud Help Text
+-- ##############################################
+-- Josh Mate Various SWEP Quirks
+-- ##############################################
+
+-- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
 	   self:AddTTT2HUDHelp("Place a Beartrap", nil, true)
@@ -73,27 +88,28 @@ if CLIENT then
 	   return self.BaseClass.Initialize(self)
 	end
 end
+-- Equip Bare Hands on Remove
 if SERVER then
    function SWEP:OnRemove()
-      if self.Owner:IsValid() and self.Owner:IsTerror() then
-         self:GetOwner():SelectWeapon("weapon_ttt_unarmed")
+      if self:GetOwner():IsValid() and self:GetOwner():IsTerror() and self:GetOwner():Alive() then
+         self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
 end
--- 
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+-- Delete on Drop
+function SWEP:OnDrop() 
+   self:Remove()
+end
 
--- Josh Mate No World Model
-
-function SWEP:OnDrop()
-	self:Remove()
- end
-  
- function SWEP:DrawWorldModel()
-	return
- end
- 
- function SWEP:DrawWorldModelTranslucent()
-	return
- end
- 
- -- END of Josh Mate World Model 
+-- ##############################################
+-- End of Josh Mate Various SWEP Quirks
+-- ##############################################

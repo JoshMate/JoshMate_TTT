@@ -1,0 +1,38 @@
+###################################
+Josh Mate TTT Update 61 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+[TTT Grave Town]
+- New Map with PvM mechanics
+- A map set in a dark run down town infested by zombies.
+- Innocents must work together to raid the crypt and defeat the zombie boss and retrieve the key that unlocks the Traitor Tester
+- Traitors must team up with the zombies to defeat the players without arousing suspicion 
+
+[Loot: Rob from TTT]
+- He is friendly and lovable!
+
+###################################
+#### Changes
+###################################
+
+[C4]
+- Buffed explosion Damage: 175 -> 200 at centre
+
+[Loot Time Bomb]
+- Buffed explosion Damage: 125 -> 135 at centre
+
+[Karma]
+- Added more Colours and Titles to describe your karma level (Leader board & HUD)
+
+###################################
+##### Small Changes - Fixes - Code 
+###################################
+
+- Fixed: Changed Jakes Name: India -> Jake
+- Fixed: Heal Grenade now has the correct instruction text
+
+- Changed: The Bear Trap HUD warning Icon now gets removed when the beartrap has been used up.
+
+

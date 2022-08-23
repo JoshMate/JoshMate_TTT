@@ -1,0 +1,74 @@
+-- ################################
+-- ### Server
+-- ################################
+
+[Round Structure]
+- Max Rounds per map: 	10 -> 6 Rounds
+- Max Time per map: 		30 -> 21 Minutes
+// This should help to keep things fresh and let us get through more maps
+
+[Karma]
+- Having exactly 1250 (Max Karma) Grants +1 Extra credit on your Detective rounds
+- Having Karma above 1000 gives you extra HP 
+// (Every 10 Karma Over gives you + 1 Max HP)
+// Up to a maximum of 125 HP Total
+// This does not give you less health if you are below 1000
+// Gives you more incentive to stay good after 1000 karma
+
+[Roles]
+- Detectives now have a different player model
+- Detectives now have different hands in 1st Person
+// Makes it easier to tell who the detective is
+// has a 0.01% Chance of being a huge breasted anime bikini babe
+
+-- ################################
+-- #### Gameplay
+-- ################################
+
+[Demon Form]
+- New Traitor Item
+- Turns you into a burning Horror
+// + Gain Large amounts of HP and Speed
+// + You deal constant AOE fire damage to nearby players
+// - Everyone will know what you have become
+// - You will slowly burn out and die
+// - You will be tormented by the burning pain
+// This is bascially Team Deathmatch mode if stealth is no longer an option and have to fight
+// Without losing or gaining any HP, you last for about 60 seconds
+
+[Care Packages]
+- Chance of bad Loot: 20% -> 25%
+- Max Time Between Spawns: 180 -> 130 Second 
+- Min Time Between Spawns: 10 -> 15 Seconds
+// Care Packages will now spawn more frequently, but your chances of getting the funny/bad loot is slightly higher
+// There are now 29 total Unique Care package Items
+
+[Ticking Time Bomb]
+- Timer Reduced from: 68 -> 30
+- Remade the song to fit the new timer
+- Added a HUGE BOOM sound effect
+
+[1 HP]
+- New Bad Care Package Loot
+- Sets the activating player's Current HP to 1
+
+[Weapon Stripper]
+- New Bad Care Package Loot
+- Strips the activating player of ALL their weapons (Found and Bought)
+- Leaving them with just theirs Bare Hands
+// If you are a T or a D it also gives you 2 credits
+
+[Mega Frag]
+- Now Has a different World & View model
+// So now you know if that frag is a mega frag or a regular frag
+
+[Hands]
+- Renamed Hands -> Bare Hands
+
+-- ################################
+-- ##### Maps
+-- ################################
+
+- New Map: TTT Pool
+// A map set inside a public swimming pool
+// With working Water Slide and Diving boards

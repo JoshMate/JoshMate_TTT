@@ -7,7 +7,6 @@ net.Receive("MapVote_Start", function()
     MapVote.voteTimeEnd = voteTime + CurTime()
 
     local maps = net.ReadTable()
-
     local gui = vgui.Create( "MapFrame" )
     gui:AddMaps(maps)
     MapVote.gui = gui
@@ -55,19 +54,9 @@ net.Receive("MapVote_UpdateToAllClient", function()
     end
 end)
 
-hook.Add("OnPlayerChat", "Show mapvote again", function(ply, text)
-	text = string.lower(text)
-    text = string.Trim(text)
-
-	if text == "!mapvoteshow" then
-        if (MapVote.gui) then MapVote.gui:SetVisible(true) end
-        return false
-	end
-end)
-
 -- ConVars (clientsided)
 local cv_spacing = 4
-local cv_max_button_row = 7
+local cv_max_button_row = 8
 local cv_button_size = 100
 local cv_avatar_size = 32
 local cv_avatar = 1

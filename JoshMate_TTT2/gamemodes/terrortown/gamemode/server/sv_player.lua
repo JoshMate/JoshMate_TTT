@@ -12,6 +12,9 @@ local hook = hook
 local ttt_bots_are_spectators = CreateConVar("ttt_bots_are_spectators", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 local ttt_dyingshot = CreateConVar("ttt_dyingshot", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
+local JM_WasPushed_Linger			= 10
+local JM_WasPushed_Linger_Goomba	= 10
+
 CreateConVar("ttt_killer_dna_range", "550", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt_killer_dna_basetime", "100", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
@@ -274,7 +277,18 @@ end
 -- @ref https://wiki.facepunch.com/gmod/GM:PlayerSwitchFlashlight
 -- @local
 function GM:PlayerSwitchFlashlight(ply, on)
-	if not IsValid(ply) then
+
+	if not IsValid(ply) then return end
+
+	ply:RemoveEffects(EF_DIMLIGHT)
+	
+	if not ply:Alive() or not ply:IsTerror() then
+		
+		return false
+	end
+
+	if (game.GetMap() == "ttt_elevator" or game.GetMap() == "ttt_industrial") then
+		ply:RemoveEffects(EF_DIMLIGHT)
 		return false
 	end
 
@@ -287,11 +301,9 @@ function GM:PlayerSwitchFlashlight(ply, on)
 		ply:RemoveEffects(EF_DIMLIGHT)
 	end
 
-	-- Josh Mate Changes (No Flashlight on This map)
-	if (game.GetMap() == "ttt_elevator" or game.GetMap() == "ttt_industrial") then
-		ply:RemoveEffects(EF_DIMLIGHT)
-	end
-
+	ply:EmitSound("flashlight.wav", 60, 100, 0.35, CHAN_AUTO)
+	
+	
 	return false
 end
 
@@ -720,9 +732,9 @@ function GM:DoPlayerDeath(ply, attacker, dmginfo)
 		if IsValid(attacker) and attacker:IsPlayer() then
 			attacker:RecordKill(ply)
 
-			DamageLog(Format("[KILL] %s [%s] killed %s [%s]", attacker:Nick(), attacker:GetRoleString(), ply:Nick(), ply:GetRoleString()))
+			DamageLog(Format("%s [%s] killed %s [%s] [Inflictor: %s]", attacker:Nick(), attacker:GetRoleString(), ply:Nick(), ply:GetRoleString(), tostring(dmginfo:GetInflictor():GetClass())))
 		else
-			DamageLog(Format("[KILL] <SOMETHING> killed %s [%s]", ply:Nick(), ply:GetRoleString()))
+			DamageLog(Format("<> killed %s [%s]", ply:Nick(), ply:GetRoleString()))
 		end
 
 		KARMA.Killed(attacker, ply, dmginfo)
@@ -1110,9 +1122,8 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 			-- if the faller was pushed, that person should get attrib
 			local push = ply.was_pushed
 
-			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - 4 then
-				-- TODO: move push time checking stuff into fn?
-				att = push.att
+			if push and push.target:IsValid() and push.pusher:IsValid() then
+				att = push.pusher
 			end
 
 			local dmg = DamageInfo()
@@ -1124,17 +1135,19 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 				-- if attributing to pusher, show more generic crush msg for now
 				dmg:SetDamageType(DMG_CRUSH)
 			end
+			
+			JM_Function_PlaySound("goombastomp_voice.mp3")
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)
 			dmg:SetDamageForce(Vector(0, 0, -1))
-			dmg:SetDamage(damage*3)
+			dmg:SetDamage(damage*4)
 
 			ground:TakeDamageInfo(dmg)
 		end
 
 		-- our own falling damage is cushioned
-		damage = damage / 5
+		damage = damage / 6
 	end
 
 	if math.floor(damage) > 0 then
@@ -1148,7 +1161,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 
 		ply:TakeDamageInfo(dmg)
 		-- play CS:S fall sound if we got somewhat significant damage
-		if damage > 5 then
+		if damage > 1 then
 			if not ply:HasEquipmentItem("item_jm_passive_ninjapro") then
 			sound.Play(fallsounds[math.random(fallsounds_count)], ply:GetShootPos(), 55 + math.Clamp(damage, 0, 50), 100)
 			end
@@ -1248,59 +1261,14 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 			owner = hurter:GetDriver()
 		end
 
-		-- if we were hurt by a trap OR by a non-ply ent, and we were pushed
-		-- recently, then our pusher is the attacker
-		if owner_time or not IsValid(att) or not att:IsPlayer() then
+
+		if not IsValid(att) or not att:IsPlayer() then
 			local push = ent.was_pushed
-
-			if push and IsValid(push.att) and push.t then
-				-- push must be within the last 5 seconds, and must be done
-				-- after the trap was enabled (if any)
-				owner_time = owner_time or 0
-
-				local t = math.max(push.t or 0, push.hurt or 0)
-
-				if t > owner_time and t > CurTime() - 4 then
-					owner = push.att
-
-					-- pushed by a trap?
-					if IsValid(push.infl) then
-						dmginfo:SetInflictor(push.infl)
-					end
-
-					-- for slow-hurting traps we do leech-like damage timing
-					push.hurt = CurTime()
+			if push and push.target:IsValid() and push.pusher:IsValid() then
+				att = push.pusher
+				if IsValid(push.weapon) then
+					dmginfo:SetInflictor(push.weapon)
 				end
-			end
-		end
-
-		-- if we are being hurt by a physics object, we will take damage from
-		-- the world entity as well, which screws with damage attribution so we
-		-- need to detect and work around that
-		if IsValid(owner) and dmginfo:IsDamageType(DMG_CRUSH) then
-			-- we should be able to use the push system for this, as the cases are
-			-- similar: event causes future damage but should still be attributed
-			-- physics traps can also push you to your death, for example
-			local push = ent.was_pushed or {}
-
-			-- if we already blamed this on a pusher, no need to do more
-			-- else we override whatever was in was_pushed with info pointing
-			-- at our damage owner
-			if push.att ~= owner then
-				owner_time = owner_time or CurTime()
-
-				push.att = owner
-				push.t = owner_time
-				push.hurt = CurTime()
-
-				-- store the current inflictor so that we can attribute it as the
-				-- trap used by the player in the event
-				if IsValid(infl) then
-					push.infl = infl
-				end
-
-				-- make sure this is set, for if we created a new table
-				ent.was_pushed = push
 			end
 		end
 
@@ -1337,22 +1305,6 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 		end
 	end
 
-	-- try to work out if this was push-induced leech-water damage (common on
-	-- some popular maps like dm_island17)
-	if ent.was_pushed
-	and ent == att
-	and dmginfo:GetDamageType() == DMG_GENERIC
-	and util.BitSet(util.PointContents(dmginfo:GetDamagePosition()), CONTENTS_WATER)
-	then
-		local t = math.max(ent.was_pushed.t or 0, ent.was_pushed.hurt or 0)
-
-		if t > CurTime() - 3 then
-			dmginfo:SetAttacker(ent.was_pushed.att)
-
-			ent.was_pushed.hurt = CurTime()
-		end
-	end
-
 	-- start painting blood decals
 	util.StartBleeding(ent, dmginfo:GetDamage(), 5)
 
@@ -1371,7 +1323,7 @@ function GM:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
 			-- process the effects of the damage on karma
 			KARMA.Hurt(att, ent, dmginfo)
 
-			DamageLog(Format("[DMG] [%i] - %s [%s] Damaged %s [%s]", math.Round(dmginfo:GetDamage()), att:Nick(), att:GetRoleString(), ent:Nick(), ent:GetRoleString()))
+			DamageLog(Format("[DMG] %s [%s] Did %i Damage to %s [%s] [Inflictor: %s]", att:Nick(), att:GetRoleString(), math.Round(dmginfo:GetDamage()), ent:Nick(), ent:GetRoleString(), tostring(dmginfo:GetInflictor():GetClass())))
 		end
 	end
 
