@@ -1,0 +1,160 @@
+###################################
+Josh Mate TTT Update 75 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+// TODO Reverse protect the files
+// TODO Remove Random map care package item
+// TODO Change gamemode chances to be less
+
+[Roller Mine]
+- A new Traitor item
+- Deploy a Roller Mine (Best Friend) where you are aiming at
+- It will roll around killing ANYONE is sees
+- After 60 seconds it is destroyed. (It can only be killed by submerging it in water)
+- It has limited placement range, so don't try and place it cross map
+
+[Traitor Barrier]
+- A new Traitor item
+- Instantly deploy a red barrier that blocks players and projectiles
+- You get 2 of them and each one lasts for 30 seconds
+(Works very much like the OG barrier when it first came out)
+
+[Disguiser]
+- A new Traitor item
+- Freely toggle a disguise on or off hiding or showing your name to others
+- Can be activated by the menu button (Slow) 
+- Can be bound to a key via the F1 menu (Fast) 
+- All traitors spawn with this item free of charge
+
+[Motion Sensor]
+- A new Detective item
+- Place up to 2 motion sensors around the map
+- Any player that walks by one will be tracked for the detectives while stood near it
+- They are hard to see and cannot be destroyed
+
+[Visualiser]
+- A new Detective item
+- A visualiser digitally reconstructs a crime scene to show you clues about how people died
+- It only works on Gunshot victims and they can't be reused
+- You get 1 of them and they every Detective starts with one free of charge
+(Thanks to Seb for reviving this piece of forgotten content)
+
+[Karma System]
+- A large rework of how karma works
+- Sit outs are now capped at 1 in a row and occur when below 0 karma
+- You no longer deal reduced damage depending on your karma
+- You no longer gain bonus HP for having high Karma
+
+[Karma Actions]
+- When performing Actions your role should be doing you gain karma
+- These values are multiplied by 10 if you have less than 1000 karma
+- Then up to 1300 Karma you will receive the following amount
+- Gain 2 Karma for revealing a dead body
+- Gain 2 Karma for Objectives in game modes
+- Gain 2 for saving someone stuck in a bear trap
+- Gain 2 Karma for the first DNA sample taken
+- Gain 2 Karma for each tree that heals someone
+- Gain 2 Karma for the first visualisation you do
+(Traitors don't receive karma from ANY actions)
+
+[Karma Rewards]
+- At 1100 Karma: "Nade Mule" +1 Grenade slot in inventory
+- At 1200 Karma: "Clean Money" +1 bonus Credit for your Traitor and Detective rounds
+- At 1300 Karma: "Angel Wings" +10% Movement Speed and 20% less Fall Damage
+
+###################################
+#### Changes
+###################################
+
+[Detective Barrier]
+- No longer in the game
+
+[Money Printer]
+- No longer in the game
+
+[Manhack Swarm]
+- No longer in the game
+
+[Inferno Launcher]
+- Removed from Traitor shop
+- Added as a care package loot
+// TODO Test if fire damages karma
+
+[Cannibal]
+- When eating a body, there is a 5 second delay where you consume it, This process is very loud.
+- You gain your regeneration and dispose of the corpse after the delay
+- You must hold out cannibal while eating, and you must stay close to the body (you can only eat 1 at a time)
+- NERF Max HP Gain per body: 15 -> 10 HP
+- NERF Eat activation Range: 150 -> 64 Units
+
+[Poison Dart Gun]
+- BUFF Visual effects for victim (Now has a slight blur too)
+- BUFF Heal over time: 75 -> 80
+- NERF Damage dealt over time: 75 -> 30
+- NERF Flinching effect by making damage ticks occur slower
+- NERF Ammo: 3 -> 2
+(Poison dart gun was frustrating to get hit by, so it's now more about the healing than the damage)
+
+[Chameleon]
+- NERF the invisibility effect making it slightly easier to see
+
+[Throwing Knives]
+- BUFF Damage build up now happens at closer range
+
+[Land Mine]
+- BUFF how hard it is to see them by making them smaller
+
+[Time Control Clock]
+- Renamed: Slo-Mo Clock -> Time Control Clock
+- Reduced duration from: 20 -> 15 Seconds
+- Left click slows down time
+- Right click speeds up time
+
+[Underwater]
+- Increased underwater hold-breath time: 8 -> 15 Seconds
+- Reduced drowning damage per second: 20 -> 10
+
+[Teleporter]
+- You can now teleport in the post round (Hurray...?)
+
+[Weapon Damage Rebalance]
+- NERF LMG Damage: 30 -> 20
+- NERF Rifle Damage: 45 -> 30 
+- NERF Shotgun Damage: 256 -> 150
+- NERF SMG Damage: 40 -> 20
+- NERF Sniper Damage: 85 -> 60 (180 to head)
+- NERF Auto Pistol Damage: 25 -> 15
+- NERF Heavy Pistol Damage: 45 -> 35 (105 to head)
+- NERF Light Pistol Damage: 30 -> 20
+(Reducing all the weapons Time To Kill will hopefully make running in and blasting a less viable tactic)
+(It will also help reduce those surprise 2-3 man spray downs at point blank range)
+(Advanced weapons remain unchanged, making them even more powerful in comparison)
+
+###################################
+#### Maps
+###################################
+
+[Defender]
+- A new Map!
+- Players are confined to a 3 story building and most protect it from invading combine
+- The combine ramp up in difficulty and have intelligent AI to sweep the house
+- Traitors must try and sabotage the defence from the inside
+
+[Ice Camp]
+- Reduce the "Closeness" of the fog Improving visibility
+- Fixed the blast doors that didn't re-open after being closed
+- Removed the Traitor button that destroys bonfires (Since the map kinda needs them)
+
+[Dive Hole]
+- Removed the underwater gimmick and redesigned the map
+- Redid the weapon and carepackage placements
+
+[Warmup]
+- Has received a complete overhaul to be a better testing map for me
+- It also now has a Spectator playable Melon Battle Arena!
+
+###################################
+End of Patch Notes
+###################################

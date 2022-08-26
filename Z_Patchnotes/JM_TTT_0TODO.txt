@@ -1,3 +1,15 @@
+###################################
+##### Work in Progress
+###################################
+- Map: TTT_Molten
+- Map: TTT_Coach House
+- Map: TTT_Murrell_Way
+- Game Mode: Tag
+- Game Mode: Defcon 
+- Game Mode: Find and Retrieve
+- Game Mode: King of the hill
+- Game Mode: Mad Rush
+
 // TODO make the traitor VC labels appear red for spectators
 // TODO diverisfy Dopamine button
 
