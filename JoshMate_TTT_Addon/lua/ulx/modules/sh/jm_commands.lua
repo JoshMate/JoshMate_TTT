@@ -6,7 +6,30 @@ local CATEGORY_NAME_JM_Karma 		= "JM Karma"
 local CATEGORY_NAME_JM_Maps 		= "JM Maps"
 local CATEGORY_NAME_JM_Fun 			= "JM Fun"
 local CATEGORY_NAME_JM_Tool 		= "JM Tools"
-local CATEGORY_NAME_JM_Event 		= "JM Events"
+local CATEGORY_NAME_JM_Gamemodes 	= "JM Gamemodes"
+
+--[Ulx Completes]------------------------------------------------------------------------------
+ulx.possibleGamemodes = {}
+function updateGamModes()
+	table.Empty( ulx.possibleGamemodes )
+    table.insert(ulx.possibleGamemodes,"Defuse The Bombs")
+    table.insert(ulx.possibleGamemodes,"Powerup")
+    table.insert(ulx.possibleGamemodes,"Stash")
+	table.insert(ulx.possibleGamemodes,"Grab The Files")
+    table.insert(ulx.possibleGamemodes,"Bounty Hunter")
+    table.insert(ulx.possibleGamemodes,"Infection")
+	table.insert(ulx.possibleGamemodes,"Low Ammo Round")
+    table.insert(ulx.possibleGamemodes,"Pistol Round")
+    table.insert(ulx.possibleGamemodes,"Traitor Tester")
+	table.insert(ulx.possibleGamemodes,"Power Hour")
+	table.insert(ulx.possibleGamemodes,"Low Gravity")
+	table.insert(ulx.possibleGamemodes,"Slippery Floors")
+	table.insert(ulx.possibleGamemodes,"Crowbar Man Mode")
+end
+hook.Add( ULib.HOOK_UCLCHANGED, "ULXupdateGamModes", updateGamModes )
+updateGamModes()
+--[End]----------------------------------------------------------------------------------------
+
 
 -- ##################################################
 -- ### Spawn Care Package
@@ -290,7 +313,7 @@ function ulx.suddendeath( calling_ply)
 
 end
 
-local suddendeath = ulx.command( CATEGORY_NAME_JM_Event, "jm suddendeath", ulx.suddendeath, "!suddendeath")
+local suddendeath = ulx.command( CATEGORY_NAME_JM_Gamemodes, "jm suddendeath", ulx.suddendeath, "!suddendeath")
 suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
 suddendeath:help( "Starts Sudden Death" )
 
@@ -314,7 +337,7 @@ function ulx.trackall( calling_ply)
 	end
 end
 
-local trackall = ulx.command( CATEGORY_NAME_JM_Event, "jm trackall", ulx.trackall, "!trackall")
+local trackall = ulx.command( CATEGORY_NAME_JM_Gamemodes, "jm trackall", ulx.trackall, "!trackall")
 trackall:defaultAccess( ULib.ACCESS_ADMIN )
 trackall:help( "Starts Sudden Death" )
 
@@ -361,7 +384,7 @@ function ulx.enableproxyvoice(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A has enabled: Proximity Voice")
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Event, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
+local karma = ulx.command(CATEGORY_NAME_JM_Gamemodes, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Enables Proxy Voice until the next map")
 
@@ -411,44 +434,28 @@ cmdRandomiseNextMap:defaultAccess(ULib.ACCESS_ADMIN)
 
 
 -- #########################
--- ##  Protect The Server ##
+-- ##  Start a Gamemode ##
 -- #########################
 
-function ulx.protectthefilesfunction( calling_ply)
+function ulx.gamemodeSelectorfunction( calling_ply, updateGamModes)
 
-	JM_GameMode_ProtectTheFiles_Init()
+	if updateGamModes == "Defuse The Bombs" then JM_GameMode_DefuseTheBombs_Init() end
+	if updateGamModes == "Powerup" then JM_GameMode_Powerup_Init() end
+	if updateGamModes == "Stash" then JM_GameMode_Stash_Init() end
+	if updateGamModes == "Grab The Files" then JM_GameMode_GrabTheFiles_Init() end
+	if updateGamModes == "Bounty Hunter" then JM_GameMode_BountyHunter_Init() end
+	if updateGamModes == "Infection" then JM_GameMode_Infection_Init() end
+	if updateGamModes == "Low Ammo Round" then JM_GameMode_LowAmmoMode_Init() end
+	if updateGamModes == "Pistol Round" then JM_GameMode_PistolRound_Init() end
+	if updateGamModes == "Traitor Tester" then JM_GameMode_TraitorTester_Init() end
+	if updateGamModes == "Power Hour" then JM_GameMode_PowerHour_Init() end
+	if updateGamModes == "Low Gravity" then JM_GameMode_LowGravity_Init() end
+	if updateGamModes == "Slippery Floors" then JM_GameMode_SlipperyFloors_Init() end
+	if updateGamModes == "Crowbar Man Mode" then JM_GameMode_CrowbarManMode_Init() end
 
 end
 
-local protectthefiles = ulx.command( CATEGORY_NAME_JM_Event, "jm protectthefiles", ulx.protectthefilesfunction, "!protectthefiles")
-protectthefiles:defaultAccess( ULib.ACCESS_ADMIN )
-protectthefiles:help( "Starts the Gamemode: Protect the Files" )
-
--- #########################
--- ##  Defuse the Bombs  ##
--- #########################
-
-function ulx.defusethebombsfunction( calling_ply)
-
-
-	JM_GameMode_DefuseTheBombs_Init()
-
-end
-
-local defusethebombs = ulx.command( CATEGORY_NAME_JM_Event, "jm defusethebombs", ulx.defusethebombsfunction, "!defusethebombs")
-defusethebombs:defaultAccess( ULib.ACCESS_ADMIN )
-defusethebombs:help( "Starts the Gamemode: Protect the Bombs" )
-
--- #########################
--- ##  Bounty Hunter      ##
--- #########################
-
-function ulx.bountyhunterfunction( calling_ply)
-
-	JM_GameMode_BountyHunter_Init()
-
-end
-
-local bountyhunter = ulx.command( CATEGORY_NAME_JM_Event, "jm bountyhunter", ulx.bountyhunterfunction, "!bountyhunter")
-bountyhunter:defaultAccess( ULib.ACCESS_ADMIN )
-bountyhunter:help( "Starts the Gamemode: Protect the Bombs" )
+local gamemodeSelector = ulx.command( CATEGORY_NAME_JM_Event, "jm gamemode", ulx.gamemodeSelectorfunction, "!gamemode")
+gamemodeSelector:addParam{ type=ULib.cmds.StringArg, completes=ulx.updateGamModes, hint="Gamemode" }
+gamemodeSelector:defaultAccess( ULib.ACCESS_ADMIN )
+gamemodeSelector:help( "Starts a Gamemode" )

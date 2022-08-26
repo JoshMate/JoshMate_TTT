@@ -16,11 +16,7 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor(Color( 255, 255, 255, 255))
-	
-	self.Objective_Server_Press_Count 	= 0
-	self.Objective_Server_Press_Max 	= 3
-	self.Objective_Server_Press_Colour	= Color( 255, 255, 255, 255)
+	self:SetColor(Color( 0, 255, 0, 255))
 
 	if SERVER then
 		self:SetUseType(SIMPLE_USE)
@@ -36,54 +32,58 @@ function ENT:Use( activator, caller )
 
 	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 
-    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() and activator:Alive() then
+    if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:Alive() then
 
 		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-			self:TakesHit() 
+			self:GrabFile(activator) 
 		else
-			JM_Function_PrintChat(activator, "Protect The Files", "You need your hands free to do that...")
+			JM_Function_PrintChat(activator, "Grab The Files", "You need your hands free to do that...")
 		end
 
 	end
 end
 
 
-function ENT:TakesHit() 
+function ENT:GrabFile() 
 
 	if CLIENT then return end
 
-	self.Objective_Server_Press_Count = self.Objective_Server_Press_Count + 1
-	self:EmitSound("gamemode/file_hit.mp3")
+	JM_Function_PlaySound("pulsepad_hit.wav")
 
-	self.Objective_Server_Press_Colour = (self.Objective_Server_Press_Count * (255 / self.Objective_Server_Press_Max))
-	self.Objective_Server_Press_Colour = Color( 255, 255 - self.Objective_Server_Press_Colour, 255 - self.Objective_Server_Press_Colour, 255)
-	self:SetColor(self.Objective_Server_Press_Colour)
+	local effect = EffectData()
+	effect:SetOrigin(self:GetPos())
+	util.Effect("cball_explode", effect)
+	sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos())
 
-	if self.Objective_Server_Press_Count >= self.Objective_Server_Press_Max then
+	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 
-		self:Remove()
+	local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file_ent" )
+	local numberOfFilesLeft = (#listOfObjectives)
+	JM_Function_PrintChat_All("Grab The Files", "A File has been grabbed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 
-		JM_Function_PlaySound("pulsepad_hit.wav")
+	if #listOfObjectives <= 0 then
 
-		local effect = EffectData()
-		effect:SetOrigin(self:GetPos())
-		util.Effect("cball_explode", effect)
-		sound.Play(Sound("npc/assassin/ball_zap1.wav"), self:GetPos())
+		-- Reveal 1 Traitor
+		local nameOfRevealedTraitor = "ERROR"
+		local nameOfPersonWhoKnows = activator:Nick()
 
-		if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
-
-		local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file_ent" )
-		local numberOfFilesLeft = (#listOfObjectives - 2)
-		JM_Function_PrintChat_All("Protect The Files", "A File has been destroyed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
-		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-		JM_Function_SendHUDWarning(false,self:EntIndex())
-
-		if #listOfObjectives <= 2 then
-			JM_Function_PrintChat_All("Protect The Files", "The Files have been Destroyed! Traitors Win...")
-			EndRound("traitors")
-			JM_Function_PlaySound("gamemode/file_end.mp3")
+		-- Build a list of possible targets
+		for _,pl in pairs(player.GetAll()) do
+			if pl:IsValid() and pl:Alive() and not pl:IsSpec() and pl:IsTerror() and pl:IsTraitor() then 
+				nameOfRevealedTraitor = pl:Nick()
+				break
+			end
 		end
+
+		JM_Function_PrintChat_All("Grab The Files", tostring(nameOfPersonWhoKnows) .. " knows who the Traitor is!")
+		JM_Function_PrintChat(activator, "Grab The Files", "The Traitor is: " .. tostring(nameOfRevealedTraitor))
+		JM_Function_PlaySound("gamemode/file_end.mp3")
 	end
+
+	self:Remove()
+
 end
 
 function ENT:OnRemove()

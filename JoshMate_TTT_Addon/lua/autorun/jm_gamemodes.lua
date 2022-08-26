@@ -5,31 +5,20 @@ if engine.ActiveGamemode() ~= "terrortown" then return end
 
 if CLIENT then return end
 
-local gamemodeNextGameModeCurrentCounter        = 0
-local gamemodeChanceOfInnocentDriven            = 30
-local gamemodeChanceOfAny                       = 100
+-- Gamemode Chooser Vars
+local gamemodeChanceCurrent                     = 0
+local gamemodeChanceIncrease                    = 20
+local gamemodeChanceMax                         = 100
 
 function JM_GameMode_Function_Main()
 
     -- Table of Possible Game Modes
-    local tableOfGamemodes_Innocent = {
-
-        JM_GameMode_DefuseTheBombs_Init,
-        JM_GameMode_DefuseTheBombs_Init,
-        JM_GameMode_Powerup_Init,
-        JM_GameMode_Powerup_Init,
-        JM_GameMode_Stash_Init,
-        JM_GameMode_TraitorTester_Init    
-
-    }
-
-    -- Table of Possible Game Modes
-    local tableOfGamemodes_All = {
+    local tableOfGamemodes = {
 
         JM_GameMode_DefuseTheBombs_Init,
         JM_GameMode_Powerup_Init,
         JM_GameMode_Stash_Init,
-        JM_GameMode_ProtectTheFiles_Init,
+        JM_GameMode_GrabTheFiles_Init,
         JM_GameMode_BountyHunter_Init,
         JM_GameMode_Infection_Init,
         JM_GameMode_LowAmmoMode_Init,
@@ -42,56 +31,34 @@ function JM_GameMode_Function_Main()
 
     }
 
-    if gamemodeNextGameModeCurrentCounter == 0 then
+    local iRandomRoll = math.random(1, gamemodeChanceMax)
 
-        local iRandomRoll = math.random(1, 100)
+    if iRandomRoll <= gamemodeChanceCurrent then
 
-        if iRandomRoll <= gamemodeChanceOfInnocentDriven then
+        -- Log the outcome
+        if SERVER then print("[GameModes] Gamemode! Chance: " .. tostring(gamemodeChanceCurrent) .. "%") end
 
-            -- Log the outcome
-            if SERVER then print("[GameModes] There will be an Innocent Driven Game Mode") end
+        -- Reset the Counter
+        gamemodeChanceCurrent = 0
 
-            -- Add to or Reset the Counter
-            gamemodeNextGameModeCurrentCounter = gamemodeNextGameModeCurrentCounter + 1
-
-            -- Randomly select from the table of gamemodes
-            local iRandomRoll = math.random(1, table.getn(tableOfGamemodes_Innocent))
-            tableOfGamemodes_Innocent[iRandomRoll]()  
-        else
-            -- Add to or Reset the Counter
-            gamemodeNextGameModeCurrentCounter = gamemodeNextGameModeCurrentCounter + 1
-            if SERVER then print("[GameModes] There was not an Innocent Driven Game Mode") end
-        end    
-
+        -- Randomly select from the table of gamemodes
+        local iRandomRoll = math.random(1, table.getn(tableOfGamemodes_Innocent))
+        tableOfGamemodes_Innocent[iRandomRoll]()  
     else
-
-        local iRandomRoll = math.random(1, 100)
-
-        if iRandomRoll <= gamemodeChanceOfAny then
-
-            -- Log the outcome
-            if SERVER then print("[GameModes] There will be ANY Game Mode") end
-
-            -- Add to or Reset the Counter
-            gamemodeNextGameModeCurrentCounter = 0
-
-            -- Randomly select from the table of gamemodes
-            local iRandomRoll = math.random(1, table.getn(tableOfGamemodes_All))
-            tableOfGamemodes_All[iRandomRoll]()  
-        else
-            if SERVER then print("[GameModes] There was not ANY Game Mode") end
-        end    
-    end
+        -- Add to or Reset the Counter
+        if SERVER then print("[GameModes] No Gamemode...  Chance: " .. tostring(gamemodeChanceCurrent) .. "%") end
+        gamemodeChanceCurrent = gamemodeChanceCurrent + gamemodeChanceIncrease
+    end  
 
 
 end
 
 -- Gamemode Start Functions
 
-function JM_GameMode_ProtectTheFiles_Init()
+function JM_GameMode_GrabTheFiles_Init()
 
     -- Debug
-    if SERVER then print("[GameModes] Gamemode: Protect The Files") end
+    if SERVER then print("[GameModes] Gamemode: Grab The Files") end
 
     -- Spawn the Gamemode Handler Object
     local GameModeHandlerObject = ents.Create("ent_jm_objective_01_file_base")

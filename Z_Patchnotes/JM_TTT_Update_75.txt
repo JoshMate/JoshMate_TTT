@@ -4,9 +4,17 @@ Josh Mate TTT Update 75 - Patch Notes
 #### New Stuff
 ###################################
 
-// TODO Reverse protect the files
-// TODO Remove Random map care package item
-// TODO Change gamemode chances to be less
+[Gamemode Selection System]
+- Game modes should happen MUCH less now
+- Guarantees non gamemode rounds
+- Averages 1 to 3 Game modes every 10 rounds
+
+[Gamemode: Grab the files]
+- A new gamemode
+- Replaced "Protect the files"
+- Innocents must gather all the files around the map
+- Once they get them all, the name of 1 remaining traitor is revealed
+- Only the person who grabs the last file gets told who the traitor is
 
 [Roller Mine]
 - A new Traitor item
@@ -68,6 +76,13 @@ Josh Mate TTT Update 75 - Patch Notes
 #### Changes
 ###################################
 
+[Round Structure]
+- Time limit per round: 4:30 -> 6:00 Minutes
+- Rounds per map: 7 -> 5
+- First prep of map time: 30 -> 10 Seconds
+- Prep time: 12 -> 10 Seconds
+- Post round time: 12 -> 15 Seconds
+
 [Detective Barrier]
 - No longer in the game
 
@@ -80,7 +95,6 @@ Josh Mate TTT Update 75 - Patch Notes
 [Inferno Launcher]
 - Removed from Traitor shop
 - Added as a care package loot
-// TODO Test if fire damages karma
 
 [Cannibal]
 - When eating a body, there is a 5 second delay where you consume it, This process is very loud.
@@ -118,6 +132,9 @@ Josh Mate TTT Update 75 - Patch Notes
 
 [Teleporter]
 - You can now teleport in the post round (Hurray...?)
+
+[Care Package: Random Map]
+- No longer in the game
 
 [Weapon Damage Rebalance]
 - NERF LMG Damage: 30 -> 20

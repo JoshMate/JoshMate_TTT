@@ -25,10 +25,10 @@ function JM_GameMode_ProtectTheFiles_Start()
 	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 	
 	-- Number of Files to Spawn
-	local NumberOfThingsToSpawn = 5
+	local NumberOfThingsToSpawn = 10
 
 	-- Announce the Goal
-	JM_Function_Announcement("[Protect The Files] Innocents must protect " .. tostring(NumberOfThingsToSpawn) .. " Files!", 0)
+	JM_Function_Announcement("[Grab The Files] Innocents must grab " .. tostring(NumberOfThingsToSpawn) .. " Files!", 0)
 
 	-- Play the Sound
     JM_Function_PlaySound("gamemode/file_start.wav")

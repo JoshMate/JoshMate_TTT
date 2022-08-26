@@ -56,7 +56,6 @@ local lootTable = {
         JM_CarePackage_Loot_Mass_Glue,
         JM_CarePackage_Loot_Manual_Breathing,
         JM_CarePackage_Loot_Rob_From_TTT,
-        JM_CarePackage_Loot_RandomMap,
         JM_CarePackage_Loot_Combine_Apocalypse,
         JM_CarePackage_Loot_Soap_Apocalypse,
         JM_CarePackage_Loot_Landmine_Apocalypse
@@ -674,11 +673,6 @@ function JM_CarePackage_Loot_Rob_From_TTT( activator, caller )
     JM_Function_Announcement("[Care Package] It's Rob from TTT!")
     JM_Function_PlaySound("npc/zombie/zombie_voice_idle1.wav") 
     Loot_SpawnThis(caller,"ent_jm_zloot_robfromttt")
-end
-
-function JM_CarePackage_Loot_RandomMap( activator, caller )
-    JM_Function_Announcement("[Care Package] The next map will be random!")
-	JM_Global_MapVote_NextWillBeRandom = true
 end
 
 function JM_CarePackage_Loot_Combine_Apocalypse( activator, caller )
