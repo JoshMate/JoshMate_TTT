@@ -20,7 +20,8 @@ Josh Mate TTT Update 75 - Patch Notes
 - A new Traitor item
 - Deploy a Roller Mine (Best Friend) where you are aiming at
 - It will roll around killing ANYONE is sees
-- After 60 seconds it is destroyed. (It can only be killed by submerging it in water)
+- After 45 seconds it is destroyed. (It can only be killed by submerging it in water)
+- Upon destruction, it explodes dealing a small amount of damage to nearby players
 - It has limited placement range, so don't try and place it cross map
 
 [Traitor Barrier]
@@ -32,8 +33,8 @@ Josh Mate TTT Update 75 - Patch Notes
 [Disguiser]
 - A new Traitor item
 - Freely toggle a disguise on or off hiding or showing your name to others
-- Can be activated by the menu button (Slow) 
-- Can be bound to a key via the F1 menu (Fast) 
+- Can be activated by the a tab in the shop menu (Slow)
+- Type "bind x ttt_toggle_disguise" to bind it to a keypress
 - All traitors spawn with this item free of charge
 
 [Motion Sensor]
@@ -60,11 +61,13 @@ Josh Mate TTT Update 75 - Patch Notes
 - These values are multiplied by 10 if you have less than 1000 karma
 - Then up to 1300 Karma you will receive the following amount
 - Gain 2 Karma for revealing a dead body
+- Gain 2 Karma for revealing a Traitor's dead body (on top)
 - Gain 2 Karma for Objectives in game modes
 - Gain 2 for saving someone stuck in a bear trap
 - Gain 2 Karma for the first DNA sample taken
 - Gain 2 Karma for each tree that heals someone
 - Gain 2 Karma for the first visualisation you do
+- Gain 2 Karma for making someone an Agent
 (Traitors don't receive karma from ANY actions)
 
 [Karma Rewards]
@@ -105,8 +108,8 @@ Josh Mate TTT Update 75 - Patch Notes
 
 [Poison Dart Gun]
 - BUFF Visual effects for victim (Now has a slight blur too)
-- BUFF Heal over time: 75 -> 80
-- NERF Damage dealt over time: 75 -> 30
+- BUFF The heal is now much more powerful (100 HP)
+- NERF The damage is now much less powerful (30  Damage)
 - NERF Flinching effect by making damage ticks occur slower
 - NERF Ammo: 3 -> 2
 (Poison dart gun was frustrating to get hit by, so it's now more about the healing than the damage)
@@ -119,6 +122,9 @@ Josh Mate TTT Update 75 - Patch Notes
 
 [Land Mine]
 - BUFF how hard it is to see them by making them smaller
+
+[Tree of Life]
+- NERFED ammo: 3 -> 2
 
 [Time Control Clock]
 - Renamed: Slo-Mo Clock -> Time Control Clock

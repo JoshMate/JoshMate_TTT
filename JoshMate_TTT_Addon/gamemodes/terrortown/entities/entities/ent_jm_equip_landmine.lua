@@ -49,6 +49,7 @@ function ENT:Initialize()
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
 	self:SetColor(JM_FloorBomb_Colour_Dormant) 
 	self:DrawShadow(false)
+	self:SetModelScale(0.5, 0.1)
 
 	-- Josh Mate New Warning Icon Code
 	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_floorbomb",self:GetPos(),0,1)
@@ -76,6 +77,10 @@ end
 function ENT:floorbombExplode()
 
 	if not self:IsValid() or not self.floorBombTriggeredTarget:IsValid() then return end
+
+	if self.Owner == nil or self.Owner:IsValid() == false then
+		self.Owner = self
+	end
 
 	-- Deal direct damage to toucher
 	if self.floorBombTriggeredTarget:GetPos():Distance(self:GetPos()) <= JM_FloorBomb_DMG_Radius then

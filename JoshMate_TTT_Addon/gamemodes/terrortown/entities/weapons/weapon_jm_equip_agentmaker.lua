@@ -86,20 +86,20 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- Make you and the target Agents
       JM_RemoveBuffFromThisPlayer("jm_buff_agent",ent)
       JM_GiveBuffToThisPlayer("jm_buff_agent",ent,self:GetOwner())
-      ent:SetMaxHealth(ent:GetMaxHealth() + 50)
+      ent:SetMaxHealth(ent:GetMaxHealth() + 25)
       ent:SetModel("models/player/leet.mdl")
       ent:SetColor(Color( 0, 255, 50 ))
 
       if ent:IsTraitor() then
          ent:AddCredits(1)
-         JM_Function_PrintChat(ent, "Equipment","As a TRAITOR you also earn +1 Credit")
+         JM_Function_PrintChat(ent, "Equipment","Agent Traitors earn +1 Credit")
       end
 
 
       local det = self:GetOwner()
       JM_RemoveBuffFromThisPlayer("jm_buff_agent",det)
       JM_GiveBuffToThisPlayer("jm_buff_agent",det,det)
-      det:SetMaxHealth(det:GetMaxHealth() + 50)
+      det:SetMaxHealth(det:GetMaxHealth() + 25)
       -- End of
 
       -- Play Sound to ALL
@@ -107,6 +107,10 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 
       -- Announce to all
       JM_Function_PrintChat_All("Equipment", self:GetOwner():Nick() .. " has made " .. ent:Nick() .. " an Agent")
+
+      -- KARMA Reward
+      JM_Function_Karma_Reward(ent, JM_KARMA_REWARD_ACTION_AGENT/2, "You got made an Agent")
+      JM_Function_Karma_Reward(det, JM_KARMA_REWARD_ACTION_AGENT, "You made an Agent")
 
       -- Effects
       self:HitEffectsInit(ent)

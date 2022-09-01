@@ -76,7 +76,7 @@ JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud
 JM_Global_Buff_StunGrenade_IconGoodBad                  = "bad"
 
 JM_Global_Buff_PoisonDart_Name                          = "Poison Dart"
-JM_Global_Buff_PoisonDart_Duration                      = 10
+JM_Global_Buff_PoisonDart_Duration                      = 15
 JM_Global_Buff_PoisonDart_NWBool                        = "JM_Buff_NWBool_IsPoisonDart"
 JM_Global_Buff_PoisonDart_IconName                      = "JM_Buff_Icon_PoisonDart"
 JM_Global_Buff_PoisonDart_IconPath                      = "vgui/ttt/joshmate/hud_poisondart.png"

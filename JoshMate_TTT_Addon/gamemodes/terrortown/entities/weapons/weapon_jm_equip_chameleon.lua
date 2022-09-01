@@ -82,7 +82,7 @@ function SWEP:Invisibility_Give(player)
 		self.Chameleon_DefaultPlayerColour = player:GetColor()
 		player:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		self.Chameleon_NewColour = self.Chameleon_DefaultPlayerColour
-		self.Chameleon_NewColour.a = 8
+		self.Chameleon_NewColour.a = 5
 		player:SetColor(self.Chameleon_NewColour)
 	end
 end

@@ -75,6 +75,8 @@ function DetectTreeStacking(ent)
 end
 
 function HealSphere(ent)
+
+	if CLIENT then return end
 	
 	if not ent:IsValid() then return end
 
@@ -103,9 +105,14 @@ function HealSphere(ent)
 		if(ply:Health() >= ply:GetMaxHealth()) then continue end
 
 		-- Josh Mate Karma Reward Code
-		if self.karmaRewardClaimed == false and not ply == self:GetOwner() then
-			self.karmaRewardClaimed = true
-			JM_Function_Karma_Reward(self:GetOwner(), JM_KARMA_REWARD_ACTION_TREEHEAL, "Tree Heal")
+		if ent.karmaRewardClaimed == false then
+			if ply:SteamID64() == ent.owner:SteamID64() then 
+				print ("DEBUG FAILED")
+			else
+				print ("DEBUG PASSED")
+				ent.karmaRewardClaimed = true
+				JM_Function_Karma_Reward(ent.owner, JM_KARMA_REWARD_ACTION_TREEHEAL, "Tree Heal")
+			end
 		end
 		-- End of Karma Reward Code
 

@@ -64,7 +64,7 @@ end
 
 function ENT:BuffTickEffect()
 
-    local poisonDartDamageTick = 3
+    local poisonDartDamageTick = 2
     local poisonDartHealTick = 8
     
     local dmginfo = DamageInfo()

@@ -44,7 +44,7 @@ function ENT:Use( activator, caller )
 end
 
 
-function ENT:GrabFile() 
+function ENT:GrabFile(activator) 
 
 	if CLIENT then return end
 
@@ -59,11 +59,14 @@ function ENT:GrabFile()
 
 	local listOfObjectives = ents.FindByClass( "ent_jm_objective_01_file_ent" )
 	local numberOfFilesLeft = (#listOfObjectives)
-	JM_Function_PrintChat_All("Grab The Files", "A File has been grabbed! (" .. tostring(numberOfFilesLeft) .. " Left!)")
+	JM_Function_PrintChat_All("Grab The Files", "A File has been grabbed! (" .. tostring(numberOfFilesLeft - 1) .. " Left!)")
 	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
 	JM_Function_SendHUDWarning(false,self:EntIndex())
 
-	if #listOfObjectives <= 0 then
+	-- Karma rewards
+	JM_Function_Karma_Reward(activator, JM_KARMA_REWARD_ACTION_OBJECTIVE_FILE, "File grabbed")
+
+	if #listOfObjectives <= 1 then
 
 		-- Reveal 1 Traitor
 		local nameOfRevealedTraitor = "ERROR"

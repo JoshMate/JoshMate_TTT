@@ -71,7 +71,6 @@ function SWEP:PlaceTrap()
 			ang:RotateAroundAxis(ang:Right(), -90)
 			ent:SetAngles(ang)
 			ent:Spawn()
-			ent:SetScale(0.5)
 			ent.Owner = self:GetOwner()
 			ent.fingerprints = self.fingerprints
 			self:TakePrimaryAmmo(1)

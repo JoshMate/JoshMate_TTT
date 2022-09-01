@@ -14,9 +14,9 @@ Left click to place and right click to weld to a surface
  };
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
-SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 5
-SWEP.Primary.DefaultClip	= 5
+SWEP.Primary.Delay 			= 1.5
+SWEP.Primary.ClipSize		= 3
+SWEP.Primary.DefaultClip	= 3
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -39,7 +39,7 @@ SWEP.LimitedStock 			= true
 
 
 -- Placer Style Swep Config
-SWEP.JM_Trap_PlaceRange					= 250
+SWEP.JM_Trap_PlaceRange					= 300
 
 SWEP.JM_Trap_Entity_Class				= "prop_physics"
 SWEP.JM_Trap_Entity_Colour				= Color( 255, 50, 50, 255)

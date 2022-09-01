@@ -16,7 +16,7 @@ end
 
 local JM_Barrier_LifeTime			= 30
 
-local JM_Barrier_Colour				= Color( 255, 0, 0, 200 )
+local JM_Barrier_Colour				= Color( 255, 0, 0, 255 )
 
 local JM_Barrier_Sound_Placed		= "shoot_barrel.mp3"
 local JM_Barrier_Sound_Destroyed	= "weapons/ar2/npc_ar2_altfire.wav"

@@ -42,8 +42,8 @@ function JM_GameMode_Function_Main()
         gamemodeChanceCurrent = 0
 
         -- Randomly select from the table of gamemodes
-        local iRandomRoll = math.random(1, table.getn(tableOfGamemodes_Innocent))
-        tableOfGamemodes_Innocent[iRandomRoll]()  
+        local iRandomRoll = math.random(1, table.getn(tableOfGamemodes))
+        tableOfGamemodes[iRandomRoll]()  
     else
         -- Add to or Reset the Counter
         if SERVER then print("[GameModes] No Gamemode...  Chance: " .. tostring(gamemodeChanceCurrent) .. "%") end

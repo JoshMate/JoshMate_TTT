@@ -15,44 +15,45 @@ local JM_Karma_Heal_Bonus               = 1300
 local JM_Karma_Heal_To_Bonus            = 10
 
 -- Karma Actions Reward Code
-local JM_Karma_Reward_Mult_To_Max       = 5.0
-local JM_Karma_Reward_Mult_To_Bonus     = 1.0
+local JM_Karma_Reward_Mult_To_Max       = 10
+local JM_Karma_Reward_Mult_To_Bonus     = 1
 
 JM_KARMA_REWARD_ACTION_FINDBODY                 = 2
+JM_KARMA_REWARD_ACTION_FINDBODYTRAITORBONUS     = 2
 JM_KARMA_REWARD_ACTION_BEARTRAP                 = 2
 JM_KARMA_REWARD_ACTION_DNASCAN                  = 2
 JM_KARMA_REWARD_ACTION_TREEHEAL                 = 2
 JM_KARMA_REWARD_ACTION_VISUALISER               = 2
+JM_KARMA_REWARD_ACTION_AGENT                    = 2
 JM_KARMA_REWARD_ACTION_OBJECTIVE_Bomb           = 2
 JM_KARMA_REWARD_ACTION_OBJECTIVE_Battery        = 2
+JM_KARMA_REWARD_ACTION_OBJECTIVE_FILE           = 2
 
 
 
 function JM_Function_Karma_Reward(player, karmaRewardAmount, karmaRewardTextMessage)
 
-    if CLIENT return end
+    if CLIENT then return end
     if not player:IsValid() then return end
     if player:IsTraitor() then return end
 
     local newKarma = 0
 
-    if player:GetBaseKarma() < JM_Karma_Heal_Max then 
+    if player:GetLiveKarma() < JM_Karma_Heal_Max then 
         -- Multiply Karma rewards when below Max
-        newKarma = ply:GetBaseKarma() + karmaRewardAmount
-        newKarma = newKarma * JM_Karma_Reward_Mult_To_Max
-        newKarma = math.Clamp(newKarma, JM_Karma_SitOut_Threshold, JM_Karma_Heal_Max)
+        newKarma = player:GetLiveKarma() + (karmaRewardAmount * JM_Karma_Reward_Mult_To_Max)
+        newKarma = math.Clamp(newKarma, -99999, JM_Karma_Heal_Max)
         player:SetLiveKarma(newKarma)
     else
         -- Multiply Karma rewards when below Bonus
-        newKarma = ply:GetBaseKarma() + karmaRewardAmount
-        newKarma = newKarma * JM_Karma_Reward_Mult_To_Bonus
-        newKarma = math.Clamp(newKarma, JM_Karma_Heal_Max, JM_Karma_Reward_Mult_To_Bonus)
+        newKarma = player:GetLiveKarma() + (karmaRewardAmount * JM_Karma_Reward_Mult_To_Bonus)
+        newKarma = math.Clamp(newKarma, JM_Karma_Heal_Max, JM_Karma_Heal_Bonus)
         player:SetLiveKarma(newKarma)
     end
 
     -- Print Chat Message to player
-    local newKarmaMessage = "+".. tostring(newKarma).. " Karma ("..tostring(karmaRewardTextMessage)..")"
-    JM_Function_PrintChat(ply, "Karma",newKarmaMessage)
+    local newKarmaMessage = "+".. tostring(karmaRewardAmount).. " Karma ("..tostring(karmaRewardTextMessage)..")"
+    JM_Function_PrintChat(player, "Karma",newKarmaMessage)
 
 end
 

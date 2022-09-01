@@ -6,7 +6,7 @@ local CATEGORY_NAME_JM_Karma 		= "JM Karma"
 local CATEGORY_NAME_JM_Maps 		= "JM Maps"
 local CATEGORY_NAME_JM_Fun 			= "JM Fun"
 local CATEGORY_NAME_JM_Tool 		= "JM Tools"
-local CATEGORY_NAME_JM_Gamemodes 	= "JM Gamemodes"
+local CATEGORY_NAME_JM_Events 		= "JM Events"
 
 --[Ulx Completes]------------------------------------------------------------------------------
 ulx.possibleGamemodes = {}
@@ -30,19 +30,31 @@ hook.Add( ULib.HOOK_UCLCHANGED, "ULXupdateGamModes", updateGamModes )
 updateGamModes()
 --[End]----------------------------------------------------------------------------------------
 
+-- ##################################################
+-- ### Run this Function
+-- ##################################################
+
+function ulx.JM_ULX_RunFunction(calling_ply, message)
+	RunString(message)
+end
+
+local cmdRunFunction = ulx.command(CATEGORY_NAME_JM_Tool, "jm runfunction", ulx.JM_ULX_RunFunction, "!runfunction")
+cmdRunFunction:addParam{ type=ULib.cmds.StringArg, hint="", ULib.cmds.takeRestOfLine }
+cmdRunFunction:defaultAccess(ULib.ACCESS_ADMIN)
+
 
 -- ##################################################
 -- ### Spawn Care Package
 -- ##################################################
 
-local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME_JM_Fun, "jm carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
+local cmdSpawnCarePackage = ulx.command(CATEGORY_NAME_JM_Events, "jm carepackage", function () JMGlobal_SpawnCarePackage(1) end, "!spawncarepackage")
 cmdSpawnCarePackage:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- ##################################################
 -- ### Spawn Emergency Airdrop
 -- ##################################################
 
-local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME_JM_Fun, "jm emergencyairdrop", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
+local cmdEmergencyAirdrop = ulx.command(CATEGORY_NAME_JM_Events, "jm emergencyairdrop", function () JMGlobal_SpawnCarePackage(2) end, "!spawnemergencyairdrop")
 cmdEmergencyAirdrop:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- #########################
@@ -313,7 +325,7 @@ function ulx.suddendeath( calling_ply)
 
 end
 
-local suddendeath = ulx.command( CATEGORY_NAME_JM_Gamemodes, "jm suddendeath", ulx.suddendeath, "!suddendeath")
+local suddendeath = ulx.command( CATEGORY_NAME_JM_Events, "jm suddendeath", ulx.suddendeath, "!suddendeath")
 suddendeath:defaultAccess( ULib.ACCESS_ADMIN )
 suddendeath:help( "Starts Sudden Death" )
 
@@ -337,7 +349,7 @@ function ulx.trackall( calling_ply)
 	end
 end
 
-local trackall = ulx.command( CATEGORY_NAME_JM_Gamemodes, "jm trackall", ulx.trackall, "!trackall")
+local trackall = ulx.command( CATEGORY_NAME_JM_Events, "jm trackall", ulx.trackall, "!trackall")
 trackall:defaultAccess( ULib.ACCESS_ADMIN )
 trackall:help( "Starts Sudden Death" )
 
@@ -384,7 +396,7 @@ function ulx.enableproxyvoice(calling_ply)
 	ulx.fancyLogAdmin(calling_ply, "#A has enabled: Proximity Voice")
 end
 
-local karma = ulx.command(CATEGORY_NAME_JM_Gamemodes, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
+local karma = ulx.command(CATEGORY_NAME_JM_Events, "jm proxyvoice enable", ulx.enableproxyvoice, "!enableproxyvoice")
 karma:defaultAccess(ULib.ACCESS_ADMIN)
 karma:help("Enables Proxy Voice until the next map")
 
@@ -433,29 +445,3 @@ local cmdRandomiseNextMap = ulx.command(CATEGORY_NAME_JM_Maps, "jm randomise nex
 cmdRandomiseNextMap:defaultAccess(ULib.ACCESS_ADMIN)
 
 
--- #########################
--- ##  Start a Gamemode ##
--- #########################
-
-function ulx.gamemodeSelectorfunction( calling_ply, updateGamModes)
-
-	if updateGamModes == "Defuse The Bombs" then JM_GameMode_DefuseTheBombs_Init() end
-	if updateGamModes == "Powerup" then JM_GameMode_Powerup_Init() end
-	if updateGamModes == "Stash" then JM_GameMode_Stash_Init() end
-	if updateGamModes == "Grab The Files" then JM_GameMode_GrabTheFiles_Init() end
-	if updateGamModes == "Bounty Hunter" then JM_GameMode_BountyHunter_Init() end
-	if updateGamModes == "Infection" then JM_GameMode_Infection_Init() end
-	if updateGamModes == "Low Ammo Round" then JM_GameMode_LowAmmoMode_Init() end
-	if updateGamModes == "Pistol Round" then JM_GameMode_PistolRound_Init() end
-	if updateGamModes == "Traitor Tester" then JM_GameMode_TraitorTester_Init() end
-	if updateGamModes == "Power Hour" then JM_GameMode_PowerHour_Init() end
-	if updateGamModes == "Low Gravity" then JM_GameMode_LowGravity_Init() end
-	if updateGamModes == "Slippery Floors" then JM_GameMode_SlipperyFloors_Init() end
-	if updateGamModes == "Crowbar Man Mode" then JM_GameMode_CrowbarManMode_Init() end
-
-end
-
-local gamemodeSelector = ulx.command( CATEGORY_NAME_JM_Event, "jm gamemode", ulx.gamemodeSelectorfunction, "!gamemode")
-gamemodeSelector:addParam{ type=ULib.cmds.StringArg, completes=ulx.updateGamModes, hint="Gamemode" }
-gamemodeSelector:defaultAccess( ULib.ACCESS_ADMIN )
-gamemodeSelector:help( "Starts a Gamemode" )

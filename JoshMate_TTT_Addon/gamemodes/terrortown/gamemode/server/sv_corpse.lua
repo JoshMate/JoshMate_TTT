@@ -120,7 +120,7 @@ local function IdentifyBody(ply, rag)
 
 			SendPlayerToEveryone(deadply)
 
-			JM_Function_BodyDiscovered(finder,deadply)
+			JM_Function_BodyDiscovered(ply, deadply)
 
 			SCORE:HandleBodyFound(ply, deadply)
 		end

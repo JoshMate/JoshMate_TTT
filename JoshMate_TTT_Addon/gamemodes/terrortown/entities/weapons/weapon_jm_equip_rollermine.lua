@@ -12,7 +12,7 @@ Deploy a a roller mine where you are looking
    
 They will attack ANYONE they see (Including You)
    
-They will last for 60 seconds
+They will last for 30 seconds then explode
 ]]
    };
 
@@ -43,8 +43,11 @@ SWEP.HoldType 				   = "normal"
 
 local deployRange = 200
 local deployAmount = 1
-local deployLifeTime = 60
+local deployLifeTime = 30
 local thingToSpawn = "npc_rollermine"
+
+local JM_Explosive_Blast_Damage    = 35
+local JM_Explosive_Blast_Radius    = 500
 
 
 function Barrier_Effects_Destroyed(ent)
@@ -78,7 +81,8 @@ if SERVER then
          npc:Spawn()
          npc:SetNWEntity("giveHitMarkersTo", self.Owner)
          npc:SetColor(Color( 255, 0, 0, 255 ))
-         npc.JM_RollerMineLifeStart = JM_RollerMineLifeStart         
+         npc.JM_RollerMineLifeStart = JM_RollerMineLifeStart   
+         npc.Owner = self:GetOwner()    
       end
 
       timer.Simple(deployLifeTime, function () 
@@ -86,6 +90,18 @@ if SERVER then
          for k, v in ipairs( ents.FindByClass(thingToSpawn) ) do
             if (v.JM_RollerMineLifeStart <= CurTime() - (deployLifeTime - 1)) then
                Barrier_Effects_Destroyed(v) 
+               local pos = v:GetPos()
+
+               local effect = EffectData()
+               effect:SetStart(pos)
+               effect:SetOrigin(pos)
+               util.Effect("Explosion", effect, true, true)
+               util.Effect("HelicopterMegaBomb", effect, true, true)
+
+               -- Blast
+               util.BlastDamage(v, v.Owner, pos, JM_Explosive_Blast_Radius, JM_Explosive_Blast_Damage)
+               
+               -- Done
                v:Remove()
             end
          end

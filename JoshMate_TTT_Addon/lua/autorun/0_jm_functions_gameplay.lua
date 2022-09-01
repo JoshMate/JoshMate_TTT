@@ -39,11 +39,11 @@ end
 -- Start of Body Discovered Code (Message on bodies found)
 -----------------------------------------------
 
-function JM_Function_BodyDiscovered(finder, plyDiscovered)
+function JM_Function_BodyDiscovered(plyFinder, plyDiscovered)
 
 	if CLIENT then return end
 
-	local A = finder
+	local A = plyFinder:Nick()
 	local B = plyDiscovered:Nick()
 	local C = plyDiscovered:GetRoleStringRaw()
 
@@ -53,7 +53,8 @@ function JM_Function_BodyDiscovered(finder, plyDiscovered)
 	net.WriteString(tostring(C))
 	net.Broadcast()
 
-	JM_Function_Karma_Reward(finder, JM_KARMA_REWARD_ACTION_FINDBODY, "Body found")
+	JM_Function_Karma_Reward(plyFinder, JM_KARMA_REWARD_ACTION_FINDBODY, "Body found")
+	if plyDiscovered:IsTraitor() then JM_Function_Karma_Reward(plyFinder, JM_KARMA_REWARD_ACTION_FINDBODYTRAITORBONUS, "Traitory Body found") end
 
 end
 

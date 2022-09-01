@@ -102,7 +102,7 @@ function ENT:ShowSceneForCorpse(corpse)
 		-- Josh Mate Karma Reward Code
 		if self.karmaRewardClaimed == false then
 			self.karmaRewardClaimed = true
-			JM_Function_Karma_Reward(self:GetOwner(), JM_KARMA_REWARD_ACTION_VISUALISER, "Visualised")
+			JM_Function_Karma_Reward(self.Owner, JM_KARMA_REWARD_ACTION_VISUALISER, "Visualised")
 		end
 		-- End of Karma Reward Code
 		
@@ -202,8 +202,8 @@ function ENT:Think()
 	end
 
 	if CurTime() >= self.visualiserNextDieTime then
-		self:Remove()
-	end
+		if SERVER then self:Remove() end
+	end 
 
 end
 

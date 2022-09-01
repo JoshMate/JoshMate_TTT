@@ -28,7 +28,7 @@ SWEP.Primary.DefaultClip	= 1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
-SWEP.Slot			    	= 7
+SWEP.Slot			    	= 9
 SWEP.ViewModel 				= "models/Items/battery.mdl"
 SWEP.WorldModel				= "models/Items/battery.mdl"
 SWEP.HoldType               = "normal"
@@ -39,11 +39,11 @@ SWEP.AllowDrop 				= true
 
 
 SWEP.Base 					= "weapon_jm_base_gun"
-SWEP.Kind                   = WEAPON_EQUIP
-SWEP.CanBuy                 = {}
-SWEP.LimitedStock           = true
-SWEP.WeaponID               = AMMO_CAREPACKAGE
+SWEP.Kind 					= WEAPON_ROLE
+SWEP.CanBuy 				= {}
+SWEP.WeaponID 				= AMMO_VISUALISER
 SWEP.InLoadoutFor           = {ROLE_DETECTIVE}
+SWEP.LimitedStock           = true
 
 
 SWEP.JM_Trap_PlaceRange					= 255
