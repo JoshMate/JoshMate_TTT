@@ -16,7 +16,7 @@ if CLIENT then
 	
 Using this on a player makes them an agent
 
-Granting you both +50 HP, +20% Speed, HP Regen and Vision of each other
+Granting you vision of each other and giving them Detective tools
 
 Does not Overwrite or Reveal their current role
 ]]
@@ -78,15 +78,9 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       local hitMarkerOwner = self:GetOwner()
       JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
-      -- Set Status and print Message
-      JM_Function_PrintChat(weaponOwner, "Equipment","You have made " .. ent:Nick() .. " an Agent")
-      JM_Function_PrintChat(ent, "Equipment","You have been made an Agent by " .. weaponOwner:Nick())
-      -- End Of
-
       -- Make you and the target Agents
       JM_RemoveBuffFromThisPlayer("jm_buff_agent",ent)
       JM_GiveBuffToThisPlayer("jm_buff_agent",ent,self:GetOwner())
-      ent:SetMaxHealth(ent:GetMaxHealth() + 25)
       ent:SetModel("models/player/leet.mdl")
       ent:SetColor(Color( 0, 255, 50 ))
 
@@ -99,7 +93,6 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       local det = self:GetOwner()
       JM_RemoveBuffFromThisPlayer("jm_buff_agent",det)
       JM_GiveBuffToThisPlayer("jm_buff_agent",det,det)
-      det:SetMaxHealth(det:GetMaxHealth() + 25)
       -- End of
 
       -- Play Sound to ALL
@@ -109,7 +102,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_Function_PrintChat_All("Equipment", self:GetOwner():Nick() .. " has made " .. ent:Nick() .. " an Agent")
 
       -- KARMA Reward
-      JM_Function_Karma_Reward(ent, JM_KARMA_REWARD_ACTION_AGENT/2, "You got made an Agent")
+      JM_Function_Karma_Reward(ent, JM_KARMA_REWARD_ACTION_AGENT, "You got made an Agent")
       JM_Function_Karma_Reward(det, JM_KARMA_REWARD_ACTION_AGENT, "You made an Agent")
 
       -- Effects
@@ -117,10 +110,13 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       -- End of 
 
       -- Gives them DNA Scanner
-      local item = ents.Create("weapon_jm_equip_dna")
-      item:SetPos(ent:GetPos())
-      item:Spawn()
+      ent:Give("weapon_jm_equip_dna")
+      ent:Give("weapon_jm_equip_binoculars")
+      ent:Give("weapon_jm_equip_placer_visualiser")
       -- End Of
+
+      -- Gives them Armour
+      ent:GiveArmor(GetConVar("ttt_item_armor_value"):GetInt())
          
 
    end

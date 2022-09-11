@@ -20,7 +20,7 @@ local JM_FloorBomb_TriggerDelay     		= 0.7
 local JM_FloorBomb_DMG_Direct     			= 100
 local JM_FloorBomb_DMG_Splash				= 40
 local JM_FloorBomb_DMG_Radius				= 250
-local JM_FloorBomb_TriggerClose_Radius		= 64
+local JM_FloorBomb_TriggerClose_Radius		= 96
 
 if CLIENT then
     function ENT:Draw()
@@ -113,26 +113,7 @@ function ENT:floorbombExplode()
 end
 
 function ENT:Use( activator, caller )
-
-	if CLIENT then return end
-
-	if self.floorbomb_isActive_status == false then return end
-
-    if IsValid(activator) and activator:IsPlayer() and IsValid(self) then
-
-		if activator:IsTerror() and activator:HasEquipmentItem("item_jm_passive_bombsquad") then
-            self:Effect_Sparks()
-            -- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-			JM_Function_SendHUDWarning(false,self:EntIndex())
-			JM_Function_PrintChat(self.Owner, "Equipment","Someone has defused your Floor Bomb...")
-			self:EmitSound(JM_FloorBomb_Sound_Destroyed);
-			self:Remove()
-		else
-			JM_Function_PrintChat(activator, "Equipment","You need Bomb Squad to be able to defuse this...")
-		end
-
-	end
-
+	return
 end
 
 function ENT:FloorBombCheckIfPlayersAreClose()

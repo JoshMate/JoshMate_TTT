@@ -4,22 +4,122 @@ Josh Mate TTT Update 76 - Patch Notes
 #### New Stuff
 ###################################
 
-[]
-- 
+[Free the Goomba]
+- Your first Goomba of the evening is completely free
+- After that you will incur Karma / RDM penalties (to discourage spamming)
+- Goombas are always free for traitors (Obviously)
+- Each player's best ever goomba is now recorded on a score board via metrics
+- How many goombas each player is getting is now recorded on a score board via metrics
+
+[Metrics]
+- A new system to let me automatically track the following stats
+- Innocent and Traitor Wins
+- What Traitors are buying in their shops
+- What Detectives are buying in their shops
+- What maps are being played the most
+- Peoples Goomba High Scores
+- Who is leeching the most care packages (I'm looking at you Koen)
+
+[New Map: TTT Mines]
+- Medium sized caverns connected via lots of tight branching mine shafts
+- The traitor tester that must be unlocked with the golden cube
+- Traitors can kill the power once a round, disabling lights and the tester
+- Innocents must locate the generator to turn the lights and test back on
 
 ###################################
-#### Changes
+#### Game Changes
 ###################################
 
-[]
-- 
+[Detective]
+- Removed Agility Passive from the shop
+- Removed Bomb Squad Passive from the shop
+- C4 beeps are slightly louder to Detectives (Taken from Bomb Squad)
+- C4 emit a small red blinking effect to Detectives (Taken from Bomb Squad)
+- C4 has a 100% defuse chance for Detectives (Taken from Bomb Squad)
+- Slightly increased the range DNA scanner has for taking samples
+
+[Swapper]
+- Now other players can't see you holding it
+- The "shot" is now silent to others
+- Missed shots don't use ammo but instead has a cool down of 1 second
+- Removed health swapping function
+- Number of uses: 2 -> 1
+
+[Agent]
+- Removed the health regeneration effect for both parties 
+- Removed the max health buff for both parties
+- Now gives the agent a visualiser / binoculars and Visualiser
+- Now gives the agent Armour like the detective has
+- Tidied up chat messages to show 1 rather than 3
+- Fixed a bug where they wouldn't always get the DNA scanner
+
+[Detective's Care Package Placer]
+- Buffed uses: 1 -> 2
+- The detective can no longer receive their own care packages
+(You can now use this tool as a reward or to herd the neets)
+
+[Dash Grenade]
+- Buffed Dash duration: 4 -> 5 Seconds
+- Removed the empty hands restriction on the dash effect
+- You now take 50% more damage while dashing
+
+[Landmine]
+- Now can't be removed by anyone
+- Slightly increased the trigger radius
+
+[AWP]
+- You now must be scoped in to fire the AWP
+- It's shot sound is now much louder can be heard from further away
+- Increased movement penalty while holding: 0% -> 20%
+
+[Barrel Placer]
+- Added a cooldown between placing barrels to prevent spam
+
+[Doom Dart]
+- Buffed the Damage of the explosion: 100 -> 150
+- Changed the successful mark sound to be more fitting and evil
+
+[Bear Trap]
+- Now only detectives and Traitors can see the "Help" HUD Icon
+
+[Visualiser]
+- Buffed duration: 10 -> 20 Seconds
+
+[Poison Dart Gun]
+- Fixed the broken visual effect, it should now blur the victims vision too
+
+[LMG]
+- Buffed Damage: 20 -> 25
+- Increased movement penalty while holding: 10% -> 20%
+
+[Gamemode: Bounty Hunter]
+- Traitors no longer receive max health for killing targets
+- Traitors now receive +1 credit for killing their target
+
+[Gamemode: Defuse the Bombs]
+- Increased number of bombs: +1 bomb at all player counts
+
+[Gamemode: Powerup]
+- Increased number of batteries: 7 -> 8
+
+[Gamemode: Grab the Files]
+- Increased number of files to grab: 10 -> 18
 
 ###################################
-#### Maps
+#### Map Changes
 ###################################
 
-[]
-- 
+[TTT Defender]
+- Added a new route from the top floor to the basement
+- Added a fire place to link the top floor with the ground floor
+- Added in some more windows throughout the house
+- Added in a new room and under stairs hidey hole
+- Added a new basement room
+- Opened up the ground floor main area
+- Made the upstairs less open with a new wall
+- Improved lighting across the whole map
+- Halved the number of combine allowed on the map at once
+- Smooth out the difficulty curve making it ramp up slower
 
 ###################################
 End of Patch Notes

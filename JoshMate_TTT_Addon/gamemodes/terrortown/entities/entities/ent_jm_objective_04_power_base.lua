@@ -8,7 +8,7 @@ ENT.Instructions        = "Manages Objectives"
 ENT.Spawnable           = false
 ENT.AdminSpawnable      = false
 
-ENT.BatteryNumberLeft	= 7
+ENT.BatteryNumberLeft	= 8
 
 if CLIENT then return end
 

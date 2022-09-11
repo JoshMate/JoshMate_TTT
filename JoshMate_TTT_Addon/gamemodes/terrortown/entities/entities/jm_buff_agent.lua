@@ -39,40 +39,12 @@ end
 -- The Actual Effects of this buff
 -- #############################################
 
-function ENT:BuffTickEffect()
-
-    if self.targetPlayer:Health() >= self.targetPlayer:GetMaxHealth() then return end
-			
-    local newHP = self.targetPlayer:Health() + 1
-    if newHP > self.targetPlayer:GetMaxHealth() then newHP = self.targetPlayer:GetMaxHealth() end
-
-    self.targetPlayer:SetHealth(newHP)
-
-
-
-end
-
-
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-
-    -- Handle Buff Effect Ticking
-    self.buffTickDelay  = 0.5
-    self.buffTickNext   = CurTime()
-
 end
 
 function ENT:Think()
     self.BaseClass.Think(self)
-
-    -- Handle Buff Effect Ticking
-    if(not self:IsValid()) then return end
-
-    if(CurTime() >= self.buffTickNext) then
-        self.buffTickNext = CurTime() + self.buffTickDelay
-        self:BuffTickEffect()
-    end
-
 end
 
 

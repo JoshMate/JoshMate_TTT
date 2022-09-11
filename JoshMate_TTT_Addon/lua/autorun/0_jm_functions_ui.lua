@@ -24,6 +24,7 @@ function JM_Function_MessageColourCalculator(prefixMessage)
 	if prefixMessage == "Admin" then textPrefixColour = Color( 255, 255, 0) end
 	if prefixMessage == "Karma" then textPrefixColour = Color( 0, 155, 255) end
 	if prefixMessage == "Karma Sit-Out" then textPrefixColour = Color(255,25,25) end
+	if prefixMessage == "Goomba Stomp" then textPrefixColour = Color(255,80,150) end
 	if prefixMessage == "Care Package" then textPrefixColour = Color(150,0,255) end
 	if prefixMessage == "Equipment" then textPrefixColour = Color( 255, 100, 0) end
 	if prefixMessage == "Grab The Files" then textPrefixColour = Color(0,255,0) end

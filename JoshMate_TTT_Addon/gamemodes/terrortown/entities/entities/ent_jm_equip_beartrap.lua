@@ -129,7 +129,8 @@ function ENT:Touch(toucher)
 
 		-- Josh Mate New Warning Icon Code
 		JM_Function_SendHUDWarning(false,self:EntIndex())
-		JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_beartrap_trapped",self:GetPos(),0,0)
+		JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_beartrap_trapped",self:GetPos(),0,1)
+		JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_beartrap_trapped",self:GetPos(),0,2)
 
 		timer.Create("beartrapdmg" .. toucher:EntIndex(), 0.5, 0, function()
 			if !IsValid(toucher) then timer.Destroy("beartrapdmg" .. toucher:EntIndex()) return end			
@@ -157,11 +158,7 @@ function ENT:Touch(toucher)
 			local inflictor = ents.Create("ent_jm_equip_beartrap")
 			dmg:SetInflictor(inflictor)
 
-			if toucher:HasEquipmentItem("item_jm_passive_bombsquad") then 
-				dmg:SetDamage(2) 
-			else
-				dmg:SetDamage(3) 
-			end
+			dmg:SetDamage(3) 
 			
 			dmg:SetDamageType(DMG_GENERIC)
 

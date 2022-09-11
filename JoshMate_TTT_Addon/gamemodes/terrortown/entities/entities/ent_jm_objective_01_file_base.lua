@@ -25,7 +25,7 @@ function JM_GameMode_ProtectTheFiles_Start()
 	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 	
 	-- Number of Files to Spawn
-	local NumberOfThingsToSpawn = 10
+	local NumberOfThingsToSpawn = 18
 
 	-- Announce the Goal
 	JM_Function_Announcement("[Grab The Files] Innocents must grab " .. tostring(NumberOfThingsToSpawn) .. " Files!", 0)

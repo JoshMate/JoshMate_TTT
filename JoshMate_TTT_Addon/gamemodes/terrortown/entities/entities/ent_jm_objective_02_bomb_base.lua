@@ -113,10 +113,10 @@ function JM_GameMode_DefuseTheBombs_Start()
 		end
 	end
 
-	local NumberOfBombsToSpawn 			= 6
-	if NumberOfPeopleAlive <= 10 then 	NumberOfBombsToSpawn = 5 end
-	if NumberOfPeopleAlive <= 7 then 	NumberOfBombsToSpawn = 4 end
-	if NumberOfPeopleAlive <= 5 then 	NumberOfBombsToSpawn = 3 end
+	local NumberOfBombsToSpawn 			= 7
+	if NumberOfPeopleAlive <= 10 then 	NumberOfBombsToSpawn = 6 end
+	if NumberOfPeopleAlive <= 7 then 	NumberOfBombsToSpawn = 5 end
+	if NumberOfPeopleAlive <= 5 then 	NumberOfBombsToSpawn = 4 end
 	if NumberOfPeopleAlive <= 3 then 	NumberOfBombsToSpawn = 2 end
 
 	-- Announce the Goal

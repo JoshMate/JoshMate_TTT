@@ -167,7 +167,7 @@ JM_Global_Buff_Uav_IconPath                                     = "vgui/ttt/josh
 JM_Global_Buff_Uav_IconGoodBad                                  = "good"
 
 JM_Global_Buff_Dash_Name                                        = "Dash"
-JM_Global_Buff_Dash_Duration                                    = 4
+JM_Global_Buff_Dash_Duration                                    = 5
 JM_Global_Buff_Dash_NWBool                                      = "JM_Buff_NWBool_IsDash"
 JM_Global_Buff_Dash_IconName                                    = "JM_Buff_Icon_Dash"
 JM_Global_Buff_Dash_IconPath                                    = "vgui/ttt/joshmate/hud_dash.png"

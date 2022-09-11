@@ -72,6 +72,10 @@ SWEP.WorldModel            = Model("models/weapons/w_snip_awp.mdl")
 SWEP.IronSightsPos         = Vector( 5, -15, -2 )
 SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
 
+-- JM Changes, Movement Speed
+SWEP.MoveMentMultiplier = 0.8
+-- End of
+
 function SWEP:SetZoom(state)
    if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() then
       if state then
@@ -89,7 +93,7 @@ function SWEP:PrimaryAttack()
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    if not self:CanPrimaryAttack() then return end
-   self:EmitSound( self.Primary.Sound )
+   self:EmitSound( self.Primary.Sound, 130, 100, 1)
    self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
    self:TakePrimaryAmmo( 1 )
    if IsValid(self:GetOwner()) then

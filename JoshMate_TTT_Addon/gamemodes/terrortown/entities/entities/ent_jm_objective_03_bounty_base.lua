@@ -12,6 +12,7 @@ function ENT:Initialize()
 
 	JM_GameMode_BountyHunter_Start()
 
+	self.bountyHunter_TargetsSelectedSoFar = 0
 	self.bountyHunter_CurrentTarget = 0
 
 end
@@ -60,18 +61,22 @@ function ENT:BountyHunter_Select_NewTarget()
 		self.bountyHunter_CurrentTarget:SetNWBool("BountyHunterIsTarget", true)
 
 		-- Inform the traitors of the new target
-		for _,pl in pairs(player.GetAll()) do
-			if pl:IsValid() and pl:IsTraitor() then 
 
-				if SERVER then 
-					JM_Function_PrintChat(pl, "Bounty Hunter", "Your Target is: " .. tostring(self.bountyHunter_CurrentTarget:Nick())) 
-					JM_Function_PrintChat(pl, "Bounty Hunter", "Traitors Gain +10 Max HP") 
-					pl:SetMaxHealth(pl:GetMaxHealth() + 10)
-					pl:SetHealth(pl:Health() + 10)
+		if self.bountyHunter_TargetsSelectedSoFar > 0 then
+			for _,pl in pairs(player.GetAll()) do
+				if pl:IsValid() and pl:IsTraitor() then 
+
+					if SERVER then 
+						JM_Function_PrintChat(pl, "Bounty Hunter", "Your Target is: " .. tostring(self.bountyHunter_CurrentTarget:Nick())) 
+						JM_Function_PrintChat(pl, "Bounty Hunter", "Traitors gain 1 Credit") 
+						pl:AddCredits(1)
+					end
+
 				end
-
 			end
 		end
+
+		self.bountyHunter_TargetsSelectedSoFar = self.bountyHunter_TargetsSelectedSoFar + 1
 
 	else
 		self.bountyHunter_CurrentTarget = -1
@@ -91,7 +96,7 @@ function JM_GameMode_BountyHunter_Start()
 	if GetRoundState() == ROUND_POST or GetRoundState() == ROUND_PREP then return end
 
 	-- Announce the Goal
-	JM_Function_Announcement("[Bounty Hunter] Traitors deal x2 damage to their targets!", 0)
+	JM_Function_Announcement("[Bounty Hunter] Traitors deal x2 damage to their targets, and recieve credits for killing them!", 0)
 
 	-- Play the Sound
 	JM_Function_PlaySound("gamemode/bounty_start.mp3")

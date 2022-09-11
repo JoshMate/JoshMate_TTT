@@ -1135,14 +1135,25 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 				-- if attributing to pusher, show more generic crush msg for now
 				dmg:SetDamageType(DMG_CRUSH)
 			end
+
 			
 			JM_Function_PlaySound("goombastomp_voice.mp3")
+			local plySteamID = tostring(att:SteamID64())
+			if tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] == nil then 
+				tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] = 0
+			end
+
+			tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] = tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] + 1
+
+			if tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] <= 1 then 
+				JM_Function_PrintChat(att, "Goomba Stomp", "That one was free... (0 Left)")
+			end
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)
 			dmg:SetDamageForce(Vector(0, 0, -1))
 			dmg:SetDamage(damage*4)
-
+			Metrics_Event_Goomba(att:Nick(), dmg:GetDamage())
 			ground:TakeDamageInfo(dmg)
 		end
 

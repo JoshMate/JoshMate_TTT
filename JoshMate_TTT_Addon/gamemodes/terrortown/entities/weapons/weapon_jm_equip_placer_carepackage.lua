@@ -1,13 +1,15 @@
 AddCSLuaFile()
 
-SWEP.PrintName				= "Carepackage Swep"
+SWEP.PrintName				= "Carepackage Placer"
 SWEP.Author			    	= "Seb Mate"
 SWEP.Instructions			= "Places a Carepackage"
 SWEP.EquipMenuData = {
 	type = "item_weapon",
 	desc = [[A Utility Item
 
-Place down a Carepackage
+Place up to 2 Detective Carepackage
+
+Only other players can take them
 ]]
 };
 
@@ -21,8 +23,8 @@ end
 
 
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 1
-SWEP.Primary.DefaultClip	= 1
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -44,7 +46,7 @@ SWEP.WeaponID              = AMMO_CAREPACKAGE
 
 
 SWEP.JM_Trap_PlaceRange					= 255
-SWEP.JM_Trap_Entity_Class				= "ent_jm_carepackage"
+SWEP.JM_Trap_Entity_Class				= "ent_jm_carepackage_detective"
 SWEP.JM_Trap_Entity_Colour				= Color( 0, 50, 255, 255)
 
 function SWEP:PrimaryAttack()

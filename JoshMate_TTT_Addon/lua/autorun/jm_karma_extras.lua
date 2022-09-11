@@ -124,7 +124,6 @@ hook.Add("TTTPrepareRound", "JMKarmaSlayAtStartOfRound", function()
     end
 end)
 
-
 hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
 
     local plys = player.GetAll()    

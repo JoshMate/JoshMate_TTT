@@ -24,7 +24,7 @@ SWEP.WeaponID              = AMMO_M249
 
 -- // Gun Stats
 
-SWEP.Primary.Damage        = 20
+SWEP.Primary.Damage        = 25
 SWEP.Primary.NumShots      = 1
 SWEP.Primary.Delay         = 0.070
 SWEP.Primary.Cone          = 0.040
@@ -51,7 +51,7 @@ SWEP.IronSightsPos         = Vector(-5.96, -5.119, 2.349)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 
 -- JM Changes, Movement Speed
-SWEP.MoveMentMultiplier = 0.9
+SWEP.MoveMentMultiplier = 0.8
 -- End of
 
 -- No Iron Sights

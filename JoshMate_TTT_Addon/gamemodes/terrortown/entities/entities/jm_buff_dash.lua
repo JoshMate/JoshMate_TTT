@@ -48,7 +48,7 @@ if CLIENT then
     -- Render Any Screen Effects
     hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
 
-            if LocalPlayer():GetNWBool(JM_BuffNWBool) == true and LocalPlayer():GetActiveWeapon() and  LocalPlayer():GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+            if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
                 DrawColorModify( effectTable_Dash)
             end 
     
@@ -68,15 +68,25 @@ end
 
 function ENT:Think()
     self.BaseClass.Think(self)
-
 end
 
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
-    if ply:GetNWBool(JM_BuffNWBool) == true and ply:GetActiveWeapon() and ply:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+
+    if ply:IsValid() and ply:IsTerror() and ply:GetNWBool(JM_BuffNWBool) == true  then 
         speedMultiplierModifier[1] = speedMultiplierModifier[1] * 2
     end 
 end)
+
+-- Scale Damage
+if SERVER then
+    hook.Add("EntityTakeDamage", ("JM_BuffDamageEffects_".. tostring(JM_PrintName)), function(target, dmginfo)
+		if not IsValid(target) or not target:IsPlayer() or not target:IsTerror() then return end
+        if target:GetNWBool(JM_BuffNWBool) == true then 
+            dmginfo:ScaleDamage(1.50)
+        end
+	end)
+end
 
 
 

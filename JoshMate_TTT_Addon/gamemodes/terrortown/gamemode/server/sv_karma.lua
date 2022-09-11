@@ -29,6 +29,9 @@ KARMA.cv.kicklevel = CreateConVar("ttt_karma_low_amount", "450", {FCVAR_NOTIFY, 
 KARMA.cv.autoban = CreateConVar("ttt_karma_low_ban", "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 KARMA.cv.bantime = CreateConVar("ttt_karma_low_ban_minutes", "60", {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
+-- Josh Mate Free The Goomba
+tableOfPlayersWhoHaveDoneTheirFreeGoomba = {}
+
 local config = KARMA.cv
 
 local IsValid = IsValid
@@ -176,6 +179,17 @@ function KARMA.Hurt(attacker, victim, dmginfo)
 		penalty = penalty * KarmaPerHPDMGMult
 		penalty = math.ceil( penalty )
 
+		-- Josh Mate Free the Goomba
+		if dmginfo:IsDamageType(DMG_PHYSGUN) then		
+			local plySteamID = tostring(attacker:SteamID64())
+			if  tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] == nil or tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] <= 1 then 
+				print("[" .. (GAMEMODE.roundCount-1) .. "] [FREE GOOMBA] " .. attacker:Nick())
+				return
+			else
+				print("[" .. (GAMEMODE.roundCount-1) .. "] [RDM GOOMBA] " .. attacker:Nick())
+			end
+		end
+
 
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then
@@ -204,6 +218,17 @@ function KARMA.Killed(attacker, victim, dmginfo)
 	if attacker:IsInTeam(victim) then
 
 		local penalty = KARMA.GetKillPenalty(victim:GetLiveKarma())
+
+		-- Josh Mate Free the Goomba
+		if dmginfo:IsDamageType(DMG_PHYSGUN) then	
+			local plySteamID = tostring(attacker:SteamID64())
+			if  tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] == nil or tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] <= 1 then
+				print("[" .. (GAMEMODE.roundCount-1) .. "] [Free GOOMBA] " .. attacker:Nick())
+				return
+			else
+				print("[" .. (GAMEMODE.roundCount-1) .. "] [RDM GOOMBA] " .. attacker:Nick())
+			end
+		end
 
 		-- JoshMate Changes No T on T Karam pen
 		if attacker:IsTraitor() and victim:IsTraitor() then

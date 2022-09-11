@@ -14,7 +14,7 @@ ITEM.EquipMenuData = {
 }
 
 
-ITEM.CanBuy = {ROLE_DETECTIVE}
+ITEM.CanBuy = {}
 ITEM.hud = Material("vgui/ttt/joshmate/hud_agility.png")
 ITEM.material = "vgui/ttt/joshmate/icon_jm_agility.png"
 

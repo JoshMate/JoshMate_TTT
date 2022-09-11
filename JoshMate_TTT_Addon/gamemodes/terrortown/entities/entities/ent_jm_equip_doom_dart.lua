@@ -8,8 +8,8 @@ ENT.Instructions        = "Contract"
 ENT.Spawnable           = false
 ENT.AdminSpawnable      = false
 
-local JM_DoomDart_Explosive_Blast_Damage    = 100
-local JM_DoomDart_Explosive_Blast_Radius    = 800
+local JM_DoomDart_Explosive_Blast_Damage    = 150
+local JM_DoomDart_Explosive_Blast_Radius    = 600
 
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false

@@ -97,14 +97,8 @@ function ENT:Touch(toucher)
 		-- End of Drop
 
 		-- Soap Launch Effect
-
-		if toucher:HasEquipmentItem("item_jm_passive_bombsquad") then 
-			self.Velocity_Soap_UP 			=  JM_Soap_Velocity_Up / 2
-			self.Velocity_Soap_Direction 	=  JM_Soap_Velocity_Direction / 2
-		else
-			self.Velocity_Soap_UP 			=  JM_Soap_Velocity_Up
-			self.Velocity_Soap_Direction 	=  JM_Soap_Velocity_Direction
-		end
+		self.Velocity_Soap_UP 			=  JM_Soap_Velocity_Up
+		self.Velocity_Soap_Direction 	=  JM_Soap_Velocity_Direction
 
 		self:EmitSound(JM_Soap_Sound_HitPlayer)
 		local directionFacing = toucher:GetAimVector()

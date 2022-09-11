@@ -118,7 +118,7 @@ AccessorFuncDT(ENT, "explode_time", "ExplodeTime")
 AccessorFuncDT(ENT, "armed", "Armed")
 
 ENT.Beep = 0
-ENT.DetectiveNearRadius = 1000
+ENT.DetectiveNearRadius = 750
 ENT.SafeWires = nil
 
 function ENT:SetupDataTables()
@@ -445,7 +445,7 @@ function ENT:IsDetectiveNear()
 	for i = 1, #plys do
 		local ply = plys[i]
 
-		if not ply:HasEquipmentItem("item_jm_passive_bombsquad") then continue end
+		if not ply:IsDetective() then continue end
 
 		-- dot of the difference with itself is distance squared
 		diff = center - ply:GetPos()
@@ -500,7 +500,7 @@ function ENT:Think()
 		local amp = 55
 
 		if self:IsDetectiveNear() then
-			amp = 70
+			amp = 72
 			local dlight = CLIENT and DynamicLight(self:EntIndex())
 			if dlight then
 				dlight.Pos = self:GetPos()
@@ -693,7 +693,7 @@ if SERVER then
 		if IsValid(bomb) and bomb:GetClass() == "ttt_c4" and not bomb.DisarmCausedExplosion and bomb:GetArmed() then
 			if bomb:GetPos():Distance(ply:GetPos()) > 256 then
 				return
-			elseif bomb.SafeWires[wire] or ply:IsTraitor() or ply == bomb:GetOwner() or ply:HasEquipmentItem("item_jm_passive_bombsquad") then
+			elseif bomb.SafeWires[wire] or ply:IsTraitor() or ply == bomb:GetOwner() or ply:IsDetective() then
 				LANG.Msg(ply, "c4_disarmed")
 
 				bomb:Disarm(ply)

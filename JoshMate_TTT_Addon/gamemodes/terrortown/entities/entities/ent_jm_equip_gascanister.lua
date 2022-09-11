@@ -162,8 +162,6 @@ function ENT:GasCanister_EmitGas()
 			-- Only hurt what they have, more accurate Hit Markers
 			if ply:Health() <= dmg then dmg = ply:Health() end
 
-			if ply:HasEquipmentItem("item_jm_passive_bombsquad") then dmg = dmg / 2 end
-
 			local dmginfo = DamageInfo()
 			dmginfo:SetDamage(dmg)
 			dmginfo:SetAttacker(self.Owner)

@@ -77,7 +77,7 @@ SWEP.InLoadoutFor = {ROLE_DETECTIVE}
 SWEP.AutoSpawnable = false
 SWEP.NoSights = true
 
-SWEP.Range = 175
+SWEP.Range = 196
 
 SWEP.ItemSamples = {}
 SWEP.CachedTargets = {}

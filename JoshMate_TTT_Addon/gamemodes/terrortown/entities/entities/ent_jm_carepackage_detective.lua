@@ -10,7 +10,7 @@ if CLIENT then
 end
 
 ENT.Type                        = "anim"
-ENT.PrintName                   = "Care Package"
+ENT.PrintName                   = "Detective Care Package"
 ENT.Author                      = "Josh Mate"
 ENT.Purpose                     = "Drops Loot"
 ENT.Instructions                = "Drops Loot"
@@ -24,18 +24,21 @@ function ENT:Initialize()
 	self:SetSolid( SOLID_VPHYSICS )
 	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
-    local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
-		self:GetPhysicsObject():EnableMotion(true)
-	end
+	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
+	self:SetColor(Color( 0, 50, 255, 255))
 
 	-- Simple Use
 	if SERVER then
 		self:SetUseType(SIMPLE_USE)
 	end
 
+    local phys = self:GetPhysicsObject()
+	if (phys:IsValid()) then
+		self:GetPhysicsObject():EnableMotion(true)
+	end
+
 	-- Josh Mate New Warning Icon Code
-	JM_Function_SendHUDWarning(true, self:EntIndex(), "icon_warn_carepackage", self:GetPos(), 0, 0)
+	JM_Function_SendHUDWarning(true, self:EntIndex(), "icon_warn_carepackage_detective", self:GetPos(), 0, 0)
 
 end
 
@@ -58,6 +61,11 @@ function ENT:Use( activator, caller )
 	if IsValid(activator) and activator:IsPlayer() and IsValid(self) then
 
 		if activator:IsTerror() and activator:Alive() then
+
+			if activator:IsDetective() then
+				JM_Function_PrintChat(activator, "Equipment", "Only Non-Detectives can take a Detective Care Package")
+				return
+			end
 			
 			-- All Care Packages
 

@@ -19,10 +19,10 @@ ENT.RenderGroup 				= RENDERGROUP_BOTH
 
 ENT.Range 						= 128
 ENT.MaxScenesPerPulse 			= 6
-ENT.SceneDuration 				= 10
-ENT.PulseDelay    				= 0.35
+ENT.SceneDuration 				= 5
+ENT.PulseDelay    				= 1
 
-ENT.visualiserLifeTime			= 15
+ENT.visualiserLifeTime			= 20
 ENT.karmaRewardClaimed 			= false
 
 function ENT:Initialize()

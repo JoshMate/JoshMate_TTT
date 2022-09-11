@@ -72,6 +72,9 @@ function JM_CarePackage_Use_LootMaster(activator, caller)
 
     if SERVER then
 
+        -- Metrics Update
+        Metrics_Event_CarePackage(activator)
+
         -- Random Roller
         local lootTypeRoll = math.random(1, 100)
         

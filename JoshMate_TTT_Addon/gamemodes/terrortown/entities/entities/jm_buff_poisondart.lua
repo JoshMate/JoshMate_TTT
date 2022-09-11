@@ -51,7 +51,7 @@ if CLIENT then
 
         if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
             DrawColorModify( effectTable_PoisonDart)
-            DrawBokehDOF( 1, 0.25, 12 )
+            DrawMotionBlur( 0.20, 0.75, 0.03 )
         end 
     
     end)

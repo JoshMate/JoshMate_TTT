@@ -1,0 +1,29 @@
+###################################
+Josh Mate TTT Update 77 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+//TODO: Fix Shredders hold pose
+//TODO: Fix detective dead C4 Beeps
+//TODO: 
+//TODO: 
+//TODO: 
+
+[Free the Goomba]
+- 
+
+###################################
+#### Game Changes
+###################################
+
+[Fixes]
+- Dead detectives no longer affect the C4 from beyong the grave
+
+###################################
+#### Map Changes
+###################################
+
+###################################
+End of Patch Notes
+###################################
