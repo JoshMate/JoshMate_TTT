@@ -21,32 +21,6 @@ function MapVote:Start(voteTime)
 
     self:Init() -- init server MapVote
 
-    -- JM Forcefully choose a random unplayed map instead of voting
-    if JM_Global_MapVote_NextWillBeRandom == true then
-
-        JM_Global_MapVote_NextWillBeRandom = false
-
-        local mapName = table.Random(MapVote.maps)
-
-        local playedMapsList = ConfigHelper:ReadPlayedMaps()
-        table.insert(playedMapsList, mapName)
-        ConfigHelper:WritePlayedMaps(playedMapsList) 
-
-        JM_Function_PrintChat_All("Map", "Randomly selecting your next map...")
-
-        timer.Simple(5, function()
-            JM_Function_PlaySound("effect_randommap.mp3")
-        end)
-        
-
-        timer.Simple(8, function()
-            RunConsoleCommand("changelevel", mapName)
-        end)
-
-        return
-
-    end
-
     MapVote.voteTime = voteTime and voteTime or self.config.voteTime
 
     net.Start("MapVote_Start")
@@ -145,8 +119,10 @@ function MapVote:GetRandomMaps()
     local maps = file.Find("maps/*.bsp", "GAME")
 
     local result = {}
+    local resultRandomTwo = {}
 
     local playedMaps = ConfigHelper:ReadPlayedMaps()
+    local addedMaps = 0
 
     for k, map in pairs(maps) do
         local mapstr = map:sub(1, -5)
@@ -155,8 +131,25 @@ function MapVote:GetRandomMaps()
         if self:HasPrefix(mapstr) and notExclude then 
             if (not self:ExistsInTable(mapstr,playedMaps)) then
                 table.insert(result, mapstr)
+                addedMaps = addedMaps + 1
             end
         end
+    end
+
+    if JM_Global_MapVote_NextWillBeRandom == true and addedMaps >= 2 then
+        JM_Global_MapVote_NextWillBeRandom = false
+
+        -- Add 1 Random Map
+        local ranomlyChosenMap = table.Random(result)
+        table.RemoveByValue(result, ranomlyChosenMap)
+        table.insert(resultRandomTwo, ranomlyChosenMap)
+
+        -- Add 1 more Random Map
+        ranomlyChosenMap = table.Random(result)
+        table.RemoveByValue(result, ranomlyChosenMap)
+        table.insert(resultRandomTwo, ranomlyChosenMap)
+
+        return resultRandomTwo
     end
 
     return result

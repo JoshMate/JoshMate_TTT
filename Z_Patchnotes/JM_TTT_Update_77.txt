@@ -4,25 +4,45 @@ Josh Mate TTT Update 77 - Patch Notes
 #### New Stuff
 ###################################
 
-//TODO: Fix Shredders hold pose
-//TODO: Fix detective dead C4 Beeps
-//TODO: 
-//TODO: 
-//TODO: 
-
-[Free the Goomba]
-- 
+[Map Voting]
+- Randomise map will now give the server 2 random unplayed maps to vote on
 
 ###################################
 #### Game Changes
 ###################################
 
-[Fixes]
-- Dead detectives no longer affect the C4 from beyong the grave
+[Detective]
+- Reduced the range in which C4s are louder and emit light when detectives are near
+- Fixed a bug that meant this could also happen with dead detectives who are spectating
+
+[Shredder]
+- Shredder hold pose should display correctly on other players
 
 ###################################
 #### Map Changes
 ###################################
+
+[TTT Mines]
+- Overhauled the textures and lighting to be kinder on the eyes
+- Added in 2 new rooms to break up the tunnels
+- Added 2 new routes which require a dangerous jump to cross
+- Added a second entrance to the Tester room
+- Improved the ambient sounds to sound more like underground tunnels
+- Revised weapons and care package placements
+
+[TTT Defender]
+- Added a new room
+- Added a new route from ground floor to top floor
+- Added a new route from basement to upstairs
+- Added some more windows
+- Added a new hidey hole in the basement
+- Greatly reduced the amount of combine
+- There is now more preparation time before they come
+- Revised weapons and care package placements
+
+[TTT Warmup]
+- Added dog boss fight
+- Improved the melon fight arena
 
 ###################################
 End of Patch Notes

@@ -17,10 +17,10 @@ local JM_FloorBomb_Sound_Destroyed	= "0_main_click.wav"
       
 local JM_FloorBomb_ActivateDelay    		= 5
 local JM_FloorBomb_TriggerDelay     		= 0.7
-local JM_FloorBomb_DMG_Direct     			= 100
+local JM_FloorBomb_DMG_Direct     			= 90
 local JM_FloorBomb_DMG_Splash				= 40
 local JM_FloorBomb_DMG_Radius				= 250
-local JM_FloorBomb_TriggerClose_Radius		= 96
+local JM_FloorBomb_TriggerClose_Radius		= 48
 
 if CLIENT then
     function ENT:Draw()

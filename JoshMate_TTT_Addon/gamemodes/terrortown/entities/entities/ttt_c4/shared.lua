@@ -118,7 +118,7 @@ AccessorFuncDT(ENT, "explode_time", "ExplodeTime")
 AccessorFuncDT(ENT, "armed", "Armed")
 
 ENT.Beep = 0
-ENT.DetectiveNearRadius = 750
+ENT.DetectiveNearRadius = 600
 ENT.SafeWires = nil
 
 function ENT:SetupDataTables()
@@ -445,7 +445,7 @@ function ENT:IsDetectiveNear()
 	for i = 1, #plys do
 		local ply = plys[i]
 
-		if not ply:IsDetective() then continue end
+		if not ply:IsDetective() or not ply:Alive() then continue end
 
 		-- dot of the difference with itself is distance squared
 		diff = center - ply:GetPos()

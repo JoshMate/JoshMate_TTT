@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-SWEP.HoldType              = "smg1"
+SWEP.HoldType            = "ar2"
 
 if CLIENT then
    SWEP.PrintName          = "Shredder"
