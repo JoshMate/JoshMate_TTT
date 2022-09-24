@@ -26,8 +26,8 @@ SWEP.Spawnable          = true
 SWEP.CanBuy             = {}
 SWEP.LimitedStock       = true
 
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.Delay         = 0.2
 
 -- Fix Scorch Spam

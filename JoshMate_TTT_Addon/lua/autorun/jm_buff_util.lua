@@ -69,7 +69,7 @@ JM_Global_Buff_SilencedPistol_IconPath                  = "vgui/ttt/joshmate/hud
 JM_Global_Buff_SilencedPistol_IconGoodBad               = "bad"
 
 JM_Global_Buff_StunGrenade_Name                         = "Stun Grenade"
-JM_Global_Buff_StunGrenade_Duration                     = 10
+JM_Global_Buff_StunGrenade_Duration                     = 5
 JM_Global_Buff_StunGrenade_NWBool                       = "JM_Buff_NWBool_IsStunGrenade"
 JM_Global_Buff_StunGrenade_IconName                     = "JM_Buff_Icon_StunGrenade"
 JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
@@ -200,6 +200,22 @@ JM_Global_Buff_MotionSensorTrack_NWBool                           = "JM_Buff_NWB
 JM_Global_Buff_MotionSensorTrack_IconName                         = "JM_Buff_Icon_MotionSensorTracking"
 JM_Global_Buff_MotionSensorTrack_IconPath                         = "vgui/ttt/joshmate/hud_motionsensortracking.png"
 JM_Global_Buff_MotionSensorTrack_IconGoodBad                      = "bad"
+
+JM_Global_Buff_Explosion_Name                                   = "Disorientated"
+JM_Global_Buff_Explosion_Duration                               = 3
+JM_Global_Buff_Explosion_NWBool                                 = "JM_Buff_NWBool_IsDisorientated"
+JM_Global_Buff_Explosion_IconName                               = "JM_Buff_Icon_Disorientated"
+JM_Global_Buff_Explosion_IconPath                               = "vgui/ttt/joshmate/hud_explosion.png"
+JM_Global_Buff_Explosion_IconGoodBad                            = "bad"
+
+JM_Global_Buff_SlowShort_Name                                   = "Short Slow"
+JM_Global_Buff_SlowShort_Duration                               = 3
+JM_Global_Buff_SlowShort_NWBool                                 = "JM_Buff_NWBool_IsShortSlow"
+JM_Global_Buff_SlowShort_IconName                               = "JM_Buff_Icon_ShortSlow"
+JM_Global_Buff_SlowShort_IconPath                               = "vgui/ttt/joshmate/hud_slow.png"
+JM_Global_Buff_SlowShort_IconGoodBad                            = "bad"
+
+
 
 -- Karma Buffs
 

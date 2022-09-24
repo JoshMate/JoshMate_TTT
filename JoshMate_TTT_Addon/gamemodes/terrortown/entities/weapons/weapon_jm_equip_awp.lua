@@ -73,7 +73,7 @@ SWEP.IronSightsPos         = Vector( 5, -15, -2 )
 SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
 
 -- JM Changes, Movement Speed
-SWEP.MoveMentMultiplier = 0.8
+SWEP.MoveMentMultiplier = 0.5
 -- End of
 
 function SWEP:SetZoom(state)
@@ -131,6 +131,19 @@ function SWEP:PrimaryAttack()
    end
 
    owner:LagCompensation(false)
+
+   -- Disorientated Debuff on Explosion
+   if (SERVER) then
+      JM_GiveBuffToThisPlayer("jm_buff_slowshort",self:GetOwner(),self:GetOwner())
+   end
+
+   -- line showing bullet trajectory
+   local e = EffectData()
+   e:SetStart(tr.StartPos)
+   e:SetOrigin(tr.HitPos)
+   e:SetMagnitude(tr.HitBox)
+   e:SetScale(5)
+   util.Effect("crimescene_shot", e)
 
    -- Remove Ammo
 

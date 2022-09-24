@@ -4,14 +4,65 @@ Josh Mate TTT Update 78 - Patch Notes
 #### New Stuff
 ###################################
 
-[Map Voting]
-- Randomise map will now give the server 2 random unplayed maps to vote on
+[The Goomba]
+- Has once again been FULLY FREED
+- (This was mainly because the code keeping it locked up was spaghetti)
+- (So have fun and please don't abuse it <3)
+
+[Disarming Grenade]
+- New Detective Item
+- Replaces "Stun Grenades"
+- Causes players to have their primary and secondary weapons deleted
+- This does not delete store bought items or carepackage items
+- Also slows and disorientates them for 5 seconds
+- Only has 1 use and is thrown like the old stun grenade 
+
+[Weapon Dropping System]
+- Made all the weapons and items have consistent drop rules
+- If the weapon is bought from a shop (T or D) then it CAN'T be dropped
+- All other weapons and items are now droppable
 
 ###################################
 #### Game Changes
 ###################################
 
+[Game Modes]
+- Removed Crowbar man mode
+- Removed Low Ammo mode
+- (Pistol round achieves a similar thing without diluting the game mode pool)
+- Power Hour now removes your current weapons first so you ALWAYS get a reward
 
+[Map Voting]
+- Map voting will now be 2 way map vote by default
+- I've also created a manual override if we ever want to do old style full voting
+
+[AWP]
+- After firing the AWP the user receives a short slow
+- A shot from the AWP now leaves behind a clear tracer showing where it came from
+- Increased the movement speed penalty for holding the AWP: 20% -> 50%
+
+[Landmine]
+- Can now be defused by anyone by pressing E with empty hands
+- The explosion will now only kill you if you stand directly on it
+- The explosion now no longer hits you through walls
+- Now slows and disorientate players caught in the blast for a short time
+
+[Bear Trap]
+- Removed collisions of the trap when someone is caught in it
+- This should prevent blocking and allow for more consistent "Frees / Disarms"
+
+[Motion Sensor]
+- Fixed spelling mistake in item name "Motion Sesnor"
+
+[Mega jump grenade]
+- Buffed number of uses: 2 -> 3 Uses
+
+[Shredder]
+- Dropping a spun up shredder will always make it explode so you can't avoid it now
+
+[Loot: Landmine Apocalypse]
+- The land mines will now be the correct size and function properly
+ 
 ###################################
 #### Map Changes
 ###################################

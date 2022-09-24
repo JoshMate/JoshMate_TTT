@@ -21,13 +21,11 @@ function JM_GameMode_Function_Main()
         JM_GameMode_GrabTheFiles_Init,
         JM_GameMode_BountyHunter_Init,
         JM_GameMode_Infection_Init,
-        JM_GameMode_LowAmmoMode_Init,
         JM_GameMode_PistolRound_Init,
         JM_GameMode_TraitorTester_Init,
         JM_GameMode_PowerHour_Init,
         JM_GameMode_LowGravity_Init,
-        JM_GameMode_SlipperyFloors_Init,
-        JM_GameMode_CrowbarManMode_Init
+        JM_GameMode_SlipperyFloors_Init
 
     }
 
@@ -121,7 +119,7 @@ function JM_GameMode_Infection_Init()
 
 end
 
-
+-- REMOVED FROM THE GAME ATM
 function JM_GameMode_CrowbarManMode_Init()
 
     -- Debug
@@ -144,6 +142,7 @@ function JM_GameMode_CrowbarManMode_Init()
 
 end
 
+-- REMOVED FROM THE GAME ATM
 function JM_GameMode_LowAmmoMode_Init()
 
     -- Debug
@@ -226,8 +225,25 @@ function JM_GameMode_PowerHour_Init()
 	for _,pl in pairs(player:GetAll()) do
 		if pl:IsValid() and pl:Alive() and pl:IsTerror() then 
             local iRandomRoll = math.random(1, table.getn(tableOfPossibleItems))
+
+            -- Remove Weapons on Player
+            pl:StripWeapon("weapon_jm_primary_lmg")
+            pl:StripWeapon("weapon_jm_primary_rifle")
+            pl:StripWeapon("weapon_jm_primary_shotgun")
+            pl:StripWeapon("weapon_jm_primary_smg")
+            pl:StripWeapon("weapon_jm_primary_sniper")
+            pl:StripWeapon("weapon_jm_primary_shotgun")
+            pl:StripWeapon("weapon_jm_primary_smg")
+            pl:StripWeapon("weapon_jm_secondary_auto")
+            pl:StripWeapon("weapon_jm_secondary_heavy")
+            pl:StripWeapon("weapon_jm_secondary_light")
+            pl:StripWeapon("weapon_jm_grenade_frag")
+            pl:StripWeapon("weapon_jm_grenade_glue")
+            pl:StripWeapon("weapon_jm_grenade_health")
+            pl:StripWeapon("weapon_jm_grenade_jump")
+            pl:StripWeapon("weapon_jm_grenade_tag")
 			pl:Give(tableOfPossibleItems[iRandomRoll])
-            JM_Function_PrintChat(pl, "Power Hour", "You recieve: " .. tostring(tableOfPossibleItems[iRandomRoll]))
+            JM_Function_PrintChat(pl, "Power Hour", "Your old weapons have replaced by: ".. tostring(tableOfPossibleItems[iRandomRoll]))
 		end
 	end
     

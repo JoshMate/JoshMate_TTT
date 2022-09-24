@@ -1,0 +1,24 @@
+###################################
+Josh Mate TTT Update 78 - Patch Notes
+###################################
+#### New Stuff
+###################################
+
+//TODO Detective protector turret
+//TODO AWP Remove pre-shot-slow
+//TODO AWP Post slow stronger
+//TODO Smoke gun, on impact pops smoke that slows nearby players
+//TODO 
+
+###################################
+#### Game Changes
+###################################
+
+ 
+###################################
+#### Map Changes
+###################################
+
+###################################
+End of Patch Notes
+###################################

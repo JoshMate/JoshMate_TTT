@@ -17,9 +17,8 @@ local JM_FloorBomb_Sound_Destroyed	= "0_main_click.wav"
       
 local JM_FloorBomb_ActivateDelay    		= 5
 local JM_FloorBomb_TriggerDelay     		= 0.7
-local JM_FloorBomb_DMG_Direct     			= 90
-local JM_FloorBomb_DMG_Splash				= 40
-local JM_FloorBomb_DMG_Radius				= 250
+local JM_FloorBomb_DMG_Splash				= 65
+local JM_FloorBomb_DMG_Radius				= 350
 local JM_FloorBomb_TriggerClose_Radius		= 48
 
 if CLIENT then
@@ -82,17 +81,12 @@ function ENT:floorbombExplode()
 		self.Owner = self
 	end
 
-	-- Deal direct damage to toucher
+	-- Giff explosion DEBUFF to player close to boom
 	if self.floorBombTriggeredTarget:GetPos():Distance(self:GetPos()) <= JM_FloorBomb_DMG_Radius then
-		local dmg = DamageInfo()
-		dmg:SetDamage(JM_FloorBomb_DMG_Direct)
-		dmg:SetAttacker(self.Owner)
-		dmg:SetInflictor(self)
-		dmg:SetDamageForce(Vector(0, 0, 1))
-		dmg:SetDamagePosition(self:GetPos())
-		dmg:SetDamageType(DMG_BLAST)   
-
-		self.floorBombTriggeredTarget:TakeDamageInfo(dmg)
+		-- Disorientated Debuff on Explosion
+		if (SERVER) then
+			JM_GiveBuffToThisPlayer("jm_buff_explosion",self.floorBombTriggeredTarget,self.Owner)
+		 end
 	end
 
 	-- Create splash damage explosion
@@ -112,8 +106,31 @@ function ENT:floorbombExplode()
 
 end
 
-function ENT:Use( activator, caller )
-	return
+function ENT:HitEffectsInit(ent)
+	if not IsValid(ent) then return end
+ 
+	local effect = EffectData()
+	local ePos = ent:GetPos()
+	if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+	effect:SetStart(ePos)
+	effect:SetOrigin(ePos)
+	util.Effect("cball_explode", effect, true, true)
+ end
+
+function ENT:Use(act)
+
+	if act:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
+	
+		self:EmitSound("0_main_click.wav")
+		self:HitEffectsInit(self)
+		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+		JM_Function_SendHUDWarning(false,self:EntIndex())
+		self:Remove()
+		
+	else
+		JM_Function_PrintChat(act, "Equipment", "You need your hands free to do that...")
+	end
+
 end
 
 function ENT:FloorBombCheckIfPlayersAreClose()

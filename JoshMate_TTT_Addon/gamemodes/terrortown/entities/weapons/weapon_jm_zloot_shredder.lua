@@ -59,6 +59,7 @@ SWEP.WorldModel            = "models/weapons/w_smg1.mdl"
 
 SWEP.Shredder_Spinup_Enabled        = false
 SWEP.Shredder_Spinup_Time           = 0
+SWEP.Shredder_HasStarted            = false
 
 function SWEP:Shredder_SelfDestruct()
    
@@ -74,7 +75,7 @@ function SWEP:Shredder_SelfDestruct()
 
       -- Blast
       local JMThrower = game.GetWorld()
-      util.BlastDamage(self, JMThrower, pos, 350, 10)
+      util.BlastDamage(self, JMThrower, pos, 500, 20)
 
       self:Remove()   
    end
@@ -88,6 +89,7 @@ function SWEP:PrimaryAttack()
       self:EmitSound("shoot_shredder_spinup.wav", 100)
       self.Shredder_Spinup_Enabled = true
       self.Shredder_Spinup_Time = CurTime()
+      self.Shredder_HasStarted = true
 
    end
 	
@@ -140,8 +142,9 @@ end
 
 
 function SWEP:OnDrop()
-   self:StopSound("shoot_shredder_spinup.wav")
-   self:Remove()
+   if self.Shredder_HasStarted then 
+      self:Shredder_SelfDestruct()
+   end
 end
 
 function SWEP:Holster()

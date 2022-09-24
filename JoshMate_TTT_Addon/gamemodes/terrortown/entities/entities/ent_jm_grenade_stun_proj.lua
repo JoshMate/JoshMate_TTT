@@ -12,11 +12,11 @@ ENT.PrintName = "Stun Grenade"
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(0,70,255,150)
 
-local JM_FlashBang_Radius        = 500
+local JM_FlashBang_Radius        = 300
 
 -- Grenade Type Setting
 ENT.GrenadeType_ExplodeOn_Impact    = false
-ENT.GrenadeType_Fuse_Timer          = 2
+ENT.GrenadeType_Fuse_Timer          = 3
 
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false
@@ -75,13 +75,30 @@ function ENT:Explode(tr)
                totalPeopleFlashed = totalPeopleFlashed + 1
 
                -- Set Status and print Message
-               JM_RemoveBuffFromThisPlayer("jm_buff_stungrenade",ent)
                JM_GiveBuffToThisPlayer("jm_buff_stungrenade",pl,self:GetOwner())
                -- End Of
 
                -- Give a Hit Marker to This Player
 		         local hitMarkerOwner = self:GetOwner()
 		         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
+
+               -- Remove Weapons on Player
+               pl:StripWeapon("weapon_jm_primary_lmg")
+               pl:StripWeapon("weapon_jm_primary_rifle")
+               pl:StripWeapon("weapon_jm_primary_shotgun")
+               pl:StripWeapon("weapon_jm_primary_smg")
+               pl:StripWeapon("weapon_jm_primary_sniper")
+               pl:StripWeapon("weapon_jm_primary_shotgun")
+               pl:StripWeapon("weapon_jm_primary_smg")
+               pl:StripWeapon("weapon_jm_secondary_auto")
+               pl:StripWeapon("weapon_jm_secondary_heavy")
+               pl:StripWeapon("weapon_jm_secondary_light")
+               pl:StripWeapon("weapon_jm_grenade_frag")
+               pl:StripWeapon("weapon_jm_grenade_glue")
+               pl:StripWeapon("weapon_jm_grenade_health")
+               pl:StripWeapon("weapon_jm_grenade_jump")
+               pl:StripWeapon("weapon_jm_grenade_tag")
+               JM_Function_PrintChat(pl, "Equipment", "Your weapons have been confiscated!")
                
 
                -- Glue Effects

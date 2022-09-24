@@ -76,9 +76,6 @@ function ENT:HitEffectsInit(ent)
 	if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
 	effect:SetStart(ePos)
 	effect:SetOrigin(ePos)
-	
-	
-	
 	util.Effect("cball_explode", effect, true, true)
  end
 
@@ -99,8 +96,7 @@ function ENT:Touch(toucher)
 		-- JoshMate Changed
 		self:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		self:SetColor( Color( 255, 0, 0, 255 ) ) 
-
-		
+		self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
 		if not toucher:IsPlayer() then
 			timer.Simple(0.1, function()

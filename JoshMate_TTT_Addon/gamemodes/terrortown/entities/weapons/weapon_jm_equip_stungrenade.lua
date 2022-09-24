@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 if (CLIENT) then
 
-	SWEP.PrintName 			= "Stun Grenade"
+	SWEP.PrintName 			= "Disarming Grenade"
 	SWEP.Slot				= 6
 	SWEP.IconLetter			= "g"
 	SWEP.Icon 				= "vgui/ttt/joshmate/icon_jm_flashbang"
@@ -17,7 +17,9 @@ Targets are slowed by 70% for 5 seconds
 	 
 Targets also have their vision distorted
 
-Has 2 Uses
+Targets also have their weapons confiscated
+
+Has 1 Use
 ]]
 };
 
@@ -42,8 +44,8 @@ SWEP.Spawnable          = false
 SWEP.CanBuy = {ROLE_DETECTIVE}
 SWEP.LimitedStock = true
 
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_stun_proj"

@@ -1138,16 +1138,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 
 			
 			JM_Function_PlaySound("goombastomp_voice.mp3")
-			local plySteamID = tostring(att:SteamID64())
-			if tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] == nil then 
-				tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] = 0
-			end
-
-			tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] = tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] + 1
-
-			if tableOfPlayersWhoHaveDoneTheirFreeGoomba[plySteamID] <= 1 then 
-				JM_Function_PrintChat(att, "Goomba Stomp", "That one was free... (0 Left)")
-			end
+			JM_Function_PrintChat(att, "Goomba Stomp", "Is now #Free")
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)

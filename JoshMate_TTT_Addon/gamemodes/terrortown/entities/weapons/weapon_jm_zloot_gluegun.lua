@@ -172,10 +172,6 @@ if SERVER then
       end
    end
 end
--- Delete on Drop
-function SWEP:OnDrop() 
-   self:Remove()
-end
 
 -- ##############################################
 -- End of Josh Mate Various SWEP Quirks

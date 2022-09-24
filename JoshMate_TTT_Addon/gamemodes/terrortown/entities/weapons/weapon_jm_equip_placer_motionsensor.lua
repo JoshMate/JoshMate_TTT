@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-SWEP.PrintName				= "Motion Sesnor"
+SWEP.PrintName				= "Motion Sensor"
 SWEP.Author			    	= "Josh Mate"
 SWEP.Instructions			= "Places a certain type of object"
 SWEP.EquipMenuData = {

@@ -4,6 +4,8 @@ util.AddNetworkString("MapVote_End")
 util.AddNetworkString("MapVote_UpdateFromClient")
 util.AddNetworkString("MapVote_UpdateToAllClient")
 
+JM_Global_MapVote_FullVote = false
+
 net.Receive("MapVote_UpdateFromClient", function(len, ply)
     if MapVote.active then
         local id = net.ReadUInt(32)
@@ -136,8 +138,7 @@ function MapVote:GetRandomMaps()
         end
     end
 
-    if JM_Global_MapVote_NextWillBeRandom == true and addedMaps >= 2 then
-        JM_Global_MapVote_NextWillBeRandom = false
+    if JM_Global_MapVote_FullVote == false and addedMaps >= 2 then
 
         -- Add 1 Random Map
         local ranomlyChosenMap = table.Random(result)
@@ -151,6 +152,8 @@ function MapVote:GetRandomMaps()
 
         return resultRandomTwo
     end
+
+    JM_Global_MapVote_FullVote = false
 
     return result
 end

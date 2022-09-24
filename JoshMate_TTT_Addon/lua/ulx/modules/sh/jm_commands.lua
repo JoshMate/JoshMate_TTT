@@ -434,14 +434,14 @@ cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
 -- ### Next Map Random
 -- ##################################################
 
-local function JM_ULX_MapNextRandom()
+local function JM_ULX_MapVoteFull()
 
-	JM_Function_PrintChat_All("Map", "The next map will be random! (Manual)")
-	JM_Global_MapVote_NextWillBeRandom = true
+	JM_Function_PrintChat_All("Map", "The next map vote will be a FULL vote (Manual)")
+	JM_Global_MapVote_FullVote = true
 
 end
 
-local cmdRandomiseNextMap = ulx.command(CATEGORY_NAME_JM_Maps, "jm randomise nextmap", function () JM_ULX_MapNextRandom() end, "!mapnextrandom")
-cmdRandomiseNextMap:defaultAccess(ULib.ACCESS_ADMIN)
+local cmdMapVoteFull = ulx.command(CATEGORY_NAME_JM_Maps, "jm enable fullmapvote", function () JM_ULX_MapVoteFull() end, "!mapfullvote")
+cmdMapVoteFull:defaultAccess(ULib.ACCESS_ADMIN)
 
 

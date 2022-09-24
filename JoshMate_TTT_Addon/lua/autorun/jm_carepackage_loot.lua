@@ -750,7 +750,7 @@ function JM_CarePackage_Loot_Landmine_Apocalypse( activator, caller )
             table.remove( possibleSpawns, randomChoice )
 
             local ent = ents.Create("ent_jm_equip_landmine")
-            ent.Owner = nil
+            ent.Owner = game.GetWorld()
 	        ent.fingerprints = {}
             ent:SetPos(spawn:GetPos())
             ent:Spawn()  
