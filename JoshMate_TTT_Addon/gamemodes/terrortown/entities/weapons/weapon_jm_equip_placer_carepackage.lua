@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-SWEP.PrintName				= "Carepackage Placer"
+SWEP.PrintName				= "Care Package Placer"
 SWEP.Author			    	= "Seb Mate"
 SWEP.Instructions			= "Places a Carepackage"
 SWEP.EquipMenuData = {
@@ -8,6 +8,8 @@ SWEP.EquipMenuData = {
 	desc = [[A Utility Item
 
 Place up to 2 Detective Carepackage
+
+There is a 20 Second delay between each place
 
 Only other players can take them
 ]]
@@ -22,7 +24,7 @@ if CLIENT then
 end
 
 
-SWEP.Primary.Delay 			= 0.5
+SWEP.Primary.Delay 			= 20
 SWEP.Primary.ClipSize		= 2
 SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
@@ -51,7 +53,10 @@ SWEP.JM_Trap_Entity_Colour				= Color( 0, 50, 255, 255)
 
 function SWEP:PrimaryAttack()
 
-	if not self:CanPrimaryAttack() then return end
+	if not self:CanPrimaryAttack() then 
+		JM_Function_PrintChat(self.Owner, "Equipment", " Your next carepackge isn't ready yet... (20s delay)" )
+		return 
+	end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 
 	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * self.JM_Trap_PlaceRange, filter = self.Owner})

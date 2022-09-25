@@ -7,7 +7,7 @@ ENT.Base = "ent_jm_base_grenade"
 ENT.Model = "models/weapons/csgonade/w_eq_flashbang_thrown.mdl"
 
 -- Name of Ent in kill messages
-ENT.PrintName = "Stun Grenade"
+ENT.PrintName = "Disarming Grenade"
 
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(0,70,255,150)
@@ -16,7 +16,7 @@ local JM_FlashBang_Radius        = 300
 
 -- Grenade Type Setting
 ENT.GrenadeType_ExplodeOn_Impact    = false
-ENT.GrenadeType_Fuse_Timer          = 3
+ENT.GrenadeType_Fuse_Timer          = 2
 
 -- Fix Scorch Spam
 ENT.GreandeHasScorched              = false

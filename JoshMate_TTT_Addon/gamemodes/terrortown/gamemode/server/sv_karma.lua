@@ -108,6 +108,7 @@ end
 function KARMA.GivePenalty(ply, penalty, victim)
 	if not hook.Call("TTTKarmaGivePenalty", nil, ply, penalty, victim) then
 		ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, -9999))
+		Metrics_Event_KarmaLost(ply:Nick(), penalty)
 	end
 end
 

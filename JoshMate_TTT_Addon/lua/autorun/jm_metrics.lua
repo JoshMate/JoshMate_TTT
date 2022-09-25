@@ -16,7 +16,9 @@ metricsTable                  = {
     goombaScores            = {},
     goombaCounts            = {},
     carePackages            = {},
-    roundWins               = {}
+    roundWins               = {},
+    karmaLost               = {},
+    roundsPlayed            = {}
 }
 
 function Metrics_Init()
@@ -53,16 +55,16 @@ function Metrics_ReadMetricsFromFile()
 end
 
 function Metrics_SortMetricsTable()
-    table.sort( metricsTable.mapRoundsPlayed, function(a, b) return a[2] > b[2] end )
-    table.sort( metricsTable.detectiveShopPurchases, function(a, b) return a[2] > b[2] end )
-    table.sort( metricsTable.traitorShopPurchases, function(a, b) return a[2] > b[2] end )
-    table.sort( metricsTable.goombaScores, function(a, b) return a[2] > b[2] end )
-    table.sort( metricsTable.goombaCounts, function(a, b) return a[2] > b[2] end )
-    table.sort( metricsTable.carePackages, function(a, b) return a[2] > b[2] end )
-    table.sort( metricsTable.roundWins, function(a, b) return a[2] > b[2] end )
+    table.sort(metricsTable)
 end
 
 function Metrics_Event_MapNewRound(nameOfCurrentMap)
+
+    -- Patch this table into existing data file
+    if  metricsTable.mapRoundsPlayed == nil then 
+        metricsTable.mapRoundsPlayed = {}
+    end
+    -- End of patch
     
     -- Check if the map name exists, then add it in if not
     if  metricsTable.mapRoundsPlayed[nameOfCurrentMap] == nil then 
@@ -78,6 +80,12 @@ end
 
 function Metrics_Event_Win_Traitor()
 
+    -- Patch this table into existing data file
+    if  metricsTable.roundWins == nil then 
+        metricsTable.roundWins = {}
+    end
+    -- End of patch
+
     -- Check if the map name exists, then add it in if not
     if  metricsTable.roundWins["Traitor"] == nil then 
         metricsTable.roundWins["Traitor"] = 0
@@ -92,6 +100,12 @@ end
 
 function Metrics_Event_Win_Innocent()
 
+    -- Patch this table into existing data file
+    if  metricsTable.roundWins == nil then 
+        metricsTable.roundWins = {}
+    end
+    -- End of patch
+
     -- Check if the map name exists, then add it in if not
     if  metricsTable.roundWins["Innocent"] == nil then 
         metricsTable.roundWins["Innocent"] = 0
@@ -105,6 +119,12 @@ function Metrics_Event_Win_Innocent()
 end
 
 function Metrics_Event_ShopPurchase_Traitor(nameOfItemPurchased)
+
+    -- Patch this table into existing data file
+    if  metricsTable.traitorShopPurchases == nil then 
+        metricsTable.traitorShopPurchases = {}
+    end
+    -- End of patch
     
     -- Check if the map name exists, then add it in if not
     if  metricsTable.traitorShopPurchases[nameOfItemPurchased] == nil then 
@@ -119,6 +139,12 @@ function Metrics_Event_ShopPurchase_Traitor(nameOfItemPurchased)
 end
 
 function Metrics_Event_ShopPurchase_Detective(nameOfItemPurchased)
+
+    -- Patch this table into existing data file
+    if  metricsTable.detectiveShopPurchases == nil then 
+        metricsTable.detectiveShopPurchases = {}
+    end
+    -- End of patch
     
     -- Check if the map name exists, then add it in if not
     if  metricsTable.detectiveShopPurchases[nameOfItemPurchased] == nil then 
@@ -134,7 +160,13 @@ end
 
 function Metrics_Event_Goomba(nameOfPlayer, amountOfDamage)
 
-    local roundedDamage = math.floor(amountOfDamage)
+    -- Patch this table into existing data file
+    if  metricsTable.goombaCounts == nil then 
+        metricsTable.goombaCounts = {}
+    end
+    -- End of patch
+
+    local roundedDamage = math.ceil(amountOfDamage)
 
     -- Add Goomba Counts
 
@@ -147,6 +179,12 @@ function Metrics_Event_Goomba(nameOfPlayer, amountOfDamage)
     metricsTable.goombaCounts[nameOfPlayer] = metricsTable.goombaCounts[nameOfPlayer] + 1
 
     -- Update Goomba Scores
+
+    -- Patch this table into existing data file
+    if  metricsTable.goombaScores == nil then 
+        metricsTable.goombaScores = {}
+    end
+    -- End of patch
 
     -- Check if the map name exists, then add it in if not
     if  metricsTable.goombaScores[nameOfPlayer] == nil then 
@@ -164,6 +202,12 @@ function Metrics_Event_Goomba(nameOfPlayer, amountOfDamage)
 end
 
 function Metrics_Event_CarePackage(Player)
+
+    -- Patch this table into existing data file
+    if  metricsTable.carePackages == nil then 
+        metricsTable.carePackages = {}
+    end
+    -- End of patch
     
     local plyNick = Player:Nick()
 
@@ -175,6 +219,54 @@ function Metrics_Event_CarePackage(Player)
     -- Add 1 played round to that map in metrics data
     metricsTable.carePackages[plyNick] = metricsTable.carePackages[plyNick] + 1
 
+    -- Write updated Metrics to file
+    Metrics_WriteMetricsToFile()
+end
+
+function Metrics_Event_KarmaLost(namePlayer, karmaLost)
+
+    -- Patch this table into existing data file
+    if  metricsTable.karmaLost == nil then 
+        metricsTable.karmaLost = {}
+    end
+    -- End of patch
+    
+    -- Check if the map name exists, then add it in if not
+    if  metricsTable.karmaLost[namePlayer] == nil then 
+        metricsTable.karmaLost[namePlayer] = 0
+    end
+
+    -- Add 1 played round to that map in metrics data
+    metricsTable.karmaLost[namePlayer] = metricsTable.karmaLost[namePlayer] + math.ceil(karmaLost) 
+
+    -- Write updated Metrics to file
+    Metrics_WriteMetricsToFile()
+end
+
+function Metrics_Event_RoundsPlayed()
+
+    -- Patch this table into existing data file
+    if  metricsTable.roundsPlayed == nil then 
+        metricsTable.roundsPlayed = {}
+    end
+    -- End of patch
+
+    local plys = player.GetAll()    
+    for i = 1, #plys do
+
+        local ply = plys[i]
+        local namePlayer = ply:Nick()
+        if namePlayer == nil then continue end
+        -- Check if the map name exists, then add it in if not
+        if  metricsTable.roundsPlayed[namePlayer] == nil then 
+            metricsTable.roundsPlayed[namePlayer] = 0
+        end
+
+        -- Add 1 played round to that map in metrics data
+        metricsTable.roundsPlayed[namePlayer] = metricsTable.roundsPlayed[namePlayer] + 1
+
+    end
+    
     -- Write updated Metrics to file
     Metrics_WriteMetricsToFile()
 end
@@ -191,6 +283,7 @@ Metrics_Init()
 hook.Add("TTTEndRound", "JM_MetricsHook_EndOfRound", function(result)
 
     Metrics_Event_MapNewRound(game.GetMap())
+    Metrics_Event_RoundsPlayed()
 
     -- Depending on who won, update metrics
     if tostring(result) == "traitors" then

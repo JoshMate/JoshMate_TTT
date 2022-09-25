@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_Smoke_Name
-local JM_BuffNWBool             = JM_Global_Buff_Smoke_NWBool
-local JM_BuffDuration           = JM_Global_Buff_Smoke_Duration
-local JM_BuffIconName           = JM_Global_Buff_Smoke_IconName
-local JM_BuffIconPath           = JM_Global_Buff_Smoke_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_Smoke_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_FireOrb_Name
+local JM_BuffNWBool             = JM_Global_Buff_FireOrb_NWBool
+local JM_BuffDuration           = JM_Global_Buff_FireOrb_Duration
+local JM_BuffIconName           = JM_Global_Buff_FireOrb_IconName
+local JM_BuffIconPath           = JM_Global_Buff_FireOrb_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_FireOrb_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -34,12 +34,12 @@ if CLIENT then
     -- Set up screen effect table
     local effectTable_Smoke = {
 
-        ["$pp_colour_addr"] = -0.35,
-        ["$pp_colour_addg"] = -0.35,
-        ["$pp_colour_addb"] = -0.35,
+        ["$pp_colour_addr"] = 0.25,
+        ["$pp_colour_addg"] = 0.10,
+        ["$pp_colour_addb"] = 0,
         ["$pp_colour_brightness"] = 0,
         ["$pp_colour_contrast"] = 1,
-        ["$pp_colour_colour"] = 1,
+        ["$pp_colour_colour"] = 1.0,
         ["$pp_colour_mulr"] = 0,
         ["$pp_colour_mulg"] = 0,
         ["$pp_colour_mulb"] = 0
@@ -62,13 +62,18 @@ end
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-
 end
 
 function ENT:Think()
     self.BaseClass.Think(self)
-
 end
+
+-- Hooks
+hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
+    if ply:GetNWBool(JM_BuffNWBool) == true then 
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+    end 
+end)
 
 
 -- #############################################

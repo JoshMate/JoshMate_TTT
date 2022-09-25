@@ -12,7 +12,7 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Set-Up Weapon
 	
-Left Click: Swap HP with another player you are aiming at
+Left Click: Swap Places with another player you are aiming at
 
 Has 1 use
 ]]
@@ -151,7 +151,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Swap Places", nil, true)
+	   self:AddTTT2HUDHelp("Swap Places with target", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

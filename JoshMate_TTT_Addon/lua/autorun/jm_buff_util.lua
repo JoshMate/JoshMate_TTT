@@ -152,12 +152,12 @@ JM_Global_Buff_Glue_IconName                                    = "JM_Buff_Icon_
 JM_Global_Buff_Glue_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"
 JM_Global_Buff_Glue_IconGoodBad                                 = "bad"
 
-JM_Global_Buff_Smoke_Name                                        = "Smoke"
-JM_Global_Buff_Smoke_Duration                                    = 10
-JM_Global_Buff_Smoke_NWBool                                      = "JM_Buff_NWBool_IsSmoke"
-JM_Global_Buff_Smoke_IconName                                    = "JM_Buff_Icon_Smoke"
-JM_Global_Buff_Smoke_IconPath                                    = "vgui/ttt/joshmate/hud_smoke.png"
-JM_Global_Buff_Smoke_IconGoodBad                                 = "bad"
+JM_Global_Buff_FireOrb_Name                                        = "Fire Orb"
+JM_Global_Buff_FireOrb_Duration                                    = 7
+JM_Global_Buff_FireOrb_NWBool                                      = "JM_Buff_NWBool_IsFireOrb"
+JM_Global_Buff_FireOrb_IconName                                    = "JM_Buff_Icon_FireOrb"
+JM_Global_Buff_FireOrb_IconPath                                    = "vgui/ttt/joshmate/hud_smoke.png"
+JM_Global_Buff_FireOrb_IconGoodBad                                 = "bad"
 
 JM_Global_Buff_Uav_Name                                         = "UAV Buff"
 JM_Global_Buff_Uav_Duration                                     = 8
@@ -202,14 +202,14 @@ JM_Global_Buff_MotionSensorTrack_IconPath                         = "vgui/ttt/jo
 JM_Global_Buff_MotionSensorTrack_IconGoodBad                      = "bad"
 
 JM_Global_Buff_Explosion_Name                                   = "Disorientated"
-JM_Global_Buff_Explosion_Duration                               = 3
+JM_Global_Buff_Explosion_Duration                               = 5
 JM_Global_Buff_Explosion_NWBool                                 = "JM_Buff_NWBool_IsDisorientated"
 JM_Global_Buff_Explosion_IconName                               = "JM_Buff_Icon_Disorientated"
 JM_Global_Buff_Explosion_IconPath                               = "vgui/ttt/joshmate/hud_explosion.png"
 JM_Global_Buff_Explosion_IconGoodBad                            = "bad"
 
 JM_Global_Buff_SlowShort_Name                                   = "Short Slow"
-JM_Global_Buff_SlowShort_Duration                               = 3
+JM_Global_Buff_SlowShort_Duration                               = 5
 JM_Global_Buff_SlowShort_NWBool                                 = "JM_Buff_NWBool_IsShortSlow"
 JM_Global_Buff_SlowShort_IconName                               = "JM_Buff_Icon_ShortSlow"
 JM_Global_Buff_SlowShort_IconPath                               = "vgui/ttt/joshmate/hud_slow.png"

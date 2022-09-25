@@ -14,11 +14,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Lethal Weapon
 
-Steals 75 HP from the target over 15 seconds
+Steals HP from the target over 15 seconds
 
-Targets flinch while they are poisoned
+Targets flinch and are disorientated while they are poisoned
    
-Has 3 uses, silent, perfect acccuracy and long range
+Has 2 uses, and is quiet with perfect acccuracy at long range
 ]]
    };
 

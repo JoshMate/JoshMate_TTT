@@ -1,23 +1,49 @@
 ###################################
-Josh Mate TTT Update 78 - Patch Notes
+Josh Mate TTT Update 79 - Patch Notes
 ###################################
 #### New Stuff
 ###################################
 
-//TODO Detective protector turret
-//TODO AWP Remove pre-shot-slow
-//TODO AWP Post slow stronger
-//TODO Smoke gun, on impact pops smoke that slows nearby players
-//TODO 
+[Fire Orb]
+- New Traitor Weapon
+- Shoot to create a fire orb that grows in size after a delay it activates
+- People stood inside the orb take fire damage and are slowed
+- You take more damage the closer to the centre you are
+- Has a single use and can be seen and heard by other players
+
+[Metrics]
+- New Metric: Karma Lost (Records how much karma people have lost)
+- New Metric: Rounds Played (Records how many rounds people have completed)
 
 ###################################
 #### Game Changes
 ###################################
 
+[AWP]
+- Reduced the movement slow while holding: 50% -> 20% Slow
+- Extended the post shot slow period: 3 -> 5 Seconds
+- Changed colour of the shot tracer: Blue -> Red
+
+[Landmine]
+- Increased duration of Disorientation effect: 3 -> 5 Seconds
+
+[Disarming Grenade]
+- Reduced the fuse timer, making it explode faster: 3 -> 2 Seconds
+
+[Care Package Placer]
+- Added a 20 second delay between placing packages
+(This should prevent spam and encourage more particular usage)
+
+[Bug Fixes]
+- Corrected Poison Dart to display correct number of uses
+- Corrected Swapper text to display correct usage instructions
+- Corrected Name of Motion Sensor (It was still called Monton Sensor, FFS)
  
 ###################################
 #### Map Changes
 ###################################
+
+- None
 
 ###################################
 End of Patch Notes

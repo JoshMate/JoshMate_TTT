@@ -1,7 +1,7 @@
 if SERVER then
 	AddCSLuaFile()
 else
-	ENT.PrintName = "Montion Sensor"
+	ENT.PrintName = "Motion Sensor"
 end
 
 ENT.Type = "anim"
