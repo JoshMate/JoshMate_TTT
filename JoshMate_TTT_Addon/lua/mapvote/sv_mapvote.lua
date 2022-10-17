@@ -138,10 +138,15 @@ function MapVote:GetRandomMaps()
         end
     end
 
-    if JM_Global_MapVote_FullVote == false and addedMaps >= 2 then
+    if JM_Global_MapVote_FullVote == false and addedMaps >= 3 then
 
         -- Add 1 Random Map
         local ranomlyChosenMap = table.Random(result)
+        table.RemoveByValue(result, ranomlyChosenMap)
+        table.insert(resultRandomTwo, ranomlyChosenMap)
+
+        -- Add 1 more Random Map
+        ranomlyChosenMap = table.Random(result)
         table.RemoveByValue(result, ranomlyChosenMap)
         table.insert(resultRandomTwo, ranomlyChosenMap)
 

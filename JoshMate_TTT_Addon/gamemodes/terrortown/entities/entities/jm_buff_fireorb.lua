@@ -75,6 +75,23 @@ hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintNa
     end 
 end)
 
+-- ESP Halo effect
+hook.Add( "PreDrawHalos", "Halos_FireOrb", function()
+
+    local players = {}
+     local count = 0
+ 
+    for _, ply in ipairs( player.GetAll() ) do
+        if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) and LocalPlayer():IsTraitor()) then
+             count = count + 1
+             players[ count ] = ply
+        end
+    end
+ 
+    halo.Add( players, Color( 255, 255, 100 ), 2, 2, 3, true, true )
+ 
+end )
+
 
 -- #############################################
 -- AUTOMATICALLY GENERATED STUFF

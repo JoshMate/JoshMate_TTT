@@ -1,0 +1,23 @@
+###################################
+Josh Mate TTT Update 81 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Map Vote]
+- Increased number of maps to vote on: 2 -> 3
+
+
+###################################
+#### Maps
+###################################
+
+[Melon Manor]
+- New Map 
+- A map based on Ali's house featuring 3 lanes of residential environments
+- Creative liberties were taken in the name of "Gameplay" so don't expect a 1 for 1 recreation
+
+
+###################################
+End of Patch Notes
+###################################

@@ -1,0 +1,51 @@
+###################################
+Josh Mate TTT Update 80 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Traitor Barrier]
+- Left clicking places an invisible barrier that does nothing
+- Right clicking activated all your invisible barriers that instantly arm 
+- The duration / Physical blocking / visuals only start when they are armed
+- There is a HUD icon that only traitors and spectators can see for invisible barriers
+- Increased Number of Barriers that can be deployed: 2 -> 3
+
+[Care Package Placer]
+- Removed the 20s delay on placing care packages
+
+[Fire Orb]
+- You can now see players caught in your Fire Orb through walls
+
+[AWP]
+- Increased duration of tracer: 5 -> 6 Seconds
+
+[Map Vote]
+- Increased Vote timer: 30 -> 45 Seconds
+(So people have more time to piss / chat about the previous game / get a drink)
+
+###################################
+#### Maps
+###################################
+
+[Lava Lake]
+- New Map
+- A map set on a lake of lava
+- Visibility is poor and the lava is deadly
+- Multiple structures can be navigated that sit on the lava's Surface
+
+[Devil Town]
+- It's back in rotation!
+- The sandstorm is no longer random and is now tied to a traitor button
+- Redesigned one side of the map to be unique and not just a copy and paste
+- General improvements to the whole map
+- Redid the weapon placement for "modern" balance
+
+[Murrel Way]
+- New Map based on Ali's house
+- SIKE! Not yet, but it's getting Much closer to completion though
+(It was meant to be in this patch but there was delays)
+
+###################################
+End of Patch Notes
+###################################

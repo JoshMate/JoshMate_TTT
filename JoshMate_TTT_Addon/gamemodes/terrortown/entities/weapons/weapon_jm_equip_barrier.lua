@@ -11,9 +11,10 @@ SWEP.Author			    	= "Josh Mate"
 SWEP.Instructions			= "Leftclick to place a barrier"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
-SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 2
-SWEP.Primary.DefaultClip	= 2
+SWEP.Primary.Delay 			= 0.5
+SWEP.Secondary.Delay 		= 0.5
+SWEP.Primary.ClipSize		= 3
+SWEP.Primary.DefaultClip	= 3
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -40,7 +41,9 @@ if CLIENT then
 	   name = "Barrier",
 	   desc = [[Place down a defensive barrier
 	
-Left click to place a barrier that blocks movement
+Left Click to place an invisible barrier
+
+Right click to activate invisible barriers
 
 It has 2 uses
 ]]
@@ -53,6 +56,8 @@ end
 
 local JM_Barrier_PlaceRange				= 64
 
+SWEP.barrierListOfPlacedBarriers = {}
+
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
@@ -63,12 +68,7 @@ function SWEP:PrimaryAttack()
 	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Barrier_PlaceRange, filter = self.Owner})
 	
 	-- Place the barrier that belongs to each class
-	local ent = nil
-	if self:GetOwner():IsTraitor() then 
-		ent = ents.Create("ent_jm_barrier_traitor")
-	else
-		ent = ents.Create("ent_jm_barrier_detective")
-	end
+	local ent = ents.Create("ent_jm_barrier_traitor")
 	
 	ent:SetPos(tr.HitPos)
 	local ang = tr.Normal:Angle()
@@ -77,15 +77,32 @@ function SWEP:PrimaryAttack()
 	ent:Spawn()
 	ent.fingerprints = {}
 	self:TakePrimaryAmmo(1)
-	if SERVER then
-		if self:Clip1() <= 0 then
-			self:Remove()
-		end
-	end
+
+	-- Add to list of placed barriers
+	table.insert(self.barrierListOfPlacedBarriers, ent)
 	
 end
 
 function SWEP:SecondaryAttack()
+
+	if not self:CanSecondaryAttack() then return end
+	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
+
+	if CLIENT then return end
+
+	local numberOfBarriersActivated = 0
+
+	for key, value in pairs( self.barrierListOfPlacedBarriers ) do
+		if value != nil then
+			if value.barrierIsActivated == false then
+				numberOfBarriersActivated = numberOfBarriersActivated + 1
+				value:BarrierActivate()
+			end
+		end
+	end
+
+	JM_Function_PrintChat(self:GetOwner(), "Equipment", tostring(numberOfBarriersActivated) .. " Barriers Activated!")
+
 end
 
 -- ##############################################
@@ -95,7 +112,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Place a Barrier", nil, true)
+	   self:AddTTT2HUDHelp("Place an invisible barrier", "Activate your invisible barriers", true)
  
 	   return self.BaseClass.Initialize(self)
 	end

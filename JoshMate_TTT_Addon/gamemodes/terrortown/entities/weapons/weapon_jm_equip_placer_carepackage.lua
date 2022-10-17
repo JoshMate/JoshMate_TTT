@@ -9,9 +9,7 @@ SWEP.EquipMenuData = {
 
 Place up to 2 Detective Carepackage
 
-There is a 20 Second delay between each place
-
-Only other players can take them
+Only non detective players can take them
 ]]
 };
 
@@ -24,7 +22,7 @@ if CLIENT then
 end
 
 
-SWEP.Primary.Delay 			= 20
+SWEP.Primary.Delay 			= 2
 SWEP.Primary.ClipSize		= 2
 SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
