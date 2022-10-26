@@ -12,6 +12,11 @@ Josh Mate TTT Update 81 - Patch Notes
 #### Maps
 ###################################
 
+[Station]
+- New Map
+- A map set in an inner city train station with platforms and back rooms
+- Watch out when crossing the tracks, trains move fast and are deadly
+
 [Melon Manor]
 - New Map 
 - A map based on Ali's house featuring 3 lanes of residential environments
