@@ -37,6 +37,7 @@ function JM_Function_MessageColourCalculator(prefixMessage)
 	if prefixMessage == "Low Ammo" then textPrefixColour = Color(0,255,0) end
 	if prefixMessage == "Pistol Round" then textPrefixColour = Color(0,255,0) end
 	if prefixMessage == "Crowbar Man Mode" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Antidote" then textPrefixColour = Color(0,255,0) end
 	return textPrefixColour
 
 end

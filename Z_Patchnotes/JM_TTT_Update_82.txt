@@ -4,6 +4,16 @@ Josh Mate TTT Update 82 - Patch Notes
 #### Gameplay
 ###################################
 
+[Game Mode: Antidote]
+- New Game Mode
+- All players receive a poison that slowly builds to becoming deadly
+- An antidote spawns randomly on the map, players must reach the antidote to remove the poison
+- (The poison takes about 30 - 50 seconds to kill, the antidote can cure all players who use it)
+- (Like with defuse the bombs, it can happen any time in the round if that is the selected Game Mode)
+
+
+[Swapper]
+- You now get hit markers / kill attribution for swapper kills as it now counts as "Pushing" them
 
 
 ###################################

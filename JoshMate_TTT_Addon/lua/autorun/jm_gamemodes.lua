@@ -25,7 +25,8 @@ function JM_GameMode_Function_Main()
         JM_GameMode_TraitorTester_Init,
         JM_GameMode_PowerHour_Init,
         JM_GameMode_LowGravity_Init,
-        JM_GameMode_SlipperyFloors_Init
+        JM_GameMode_SlipperyFloors_Init,
+        JM_GameMode_Antidote_Init
 
     }
 
@@ -306,6 +307,17 @@ function JM_GameMode_TraitorTester_Init()
 
 	-- Play the Sound
     JM_Function_PlaySound("shoot_portable_tester_scan.wav")
+
+end
+
+function JM_GameMode_Antidote_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Antidote") end
+
+    -- Spawn the Gamemode Handler Object
+    local GameModeHandlerObject = ents.Create("ent_jm_objective_07_antidote_base")
+    GameModeHandlerObject:Spawn()
 
 end
 

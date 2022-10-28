@@ -79,6 +79,15 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_Function_PrintChat(activator, "Equipment", "You have swapped places with: " .. tostring(Victim:Nick()))
       -- End of
 
+      -- JM New Was Pushed Attribution System
+      newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
+      newWasPushedContract.pusher = activator
+      newWasPushedContract.target = Victim
+      newWasPushedContract.weapon = self:GetClass()
+      newWasPushedContract:Spawn()
+      Victim.was_pushed = newWasPushedContract
+      --
+
    end
 end
 
