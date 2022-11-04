@@ -10,8 +10,8 @@ ENT.AdminSpawnable      = false
 
 if CLIENT then return end
 
-local JM_Objective_Antidote_SpawnTime_Min 			= 3
-local JM_Objective_Antidote_SpawnTime_Max 			= 6
+local JM_Objective_Antidote_SpawnTime_Min 			= 20
+local JM_Objective_Antidote_SpawnTime_Max 			= 120
 
 function ENT:Initialize()
 

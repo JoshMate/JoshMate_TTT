@@ -11,6 +11,18 @@ Josh Mate TTT Update 82 - Patch Notes
 - (The poison takes about 30 - 50 seconds to kill, the antidote can cure all players who use it)
 - (Like with defuse the bombs, it can happen any time in the round if that is the selected Game Mode)
 
+[Game Mode: Arms Deal]
+- New Game Mode
+- Trade in firearms for information on the Traitor
+- A bucket will spawn randomly marked on everyone's screen
+- Dropping Weapons and Grenades into it will earn you score
+- Upon reaching the goal score, one traitor will be randomly revealed to 1 person (Once)
+- Weapons are worth different points: Light Pistol = Low, Rifle = Medium, LMG = High
+- You can only donate default weapons not care package or shop items
+
+[Game Mode System]
+- Rebalanced the chances of whacky Vs. grounded game modes
+- This does not affect how frequently game modes happen overall
 
 [Swapper]
 - You now get hit markers / kill attribution for swapper kills as it now counts as "Pushing" them
@@ -20,6 +32,14 @@ Josh Mate TTT Update 82 - Patch Notes
 #### Maps
 ###################################
 
+[TTT Melon Manor]
+- Added a ladder to the unreachable roof section
+- Added a crate jump up to the roof from the front drive
+- Added health pickups to the swimming pool
+- The turtle in Ali's fish tank is no longer facing the wrong way
+
+[TTT Station]
+- Added some holes to allow safely dropping down from the platform roofs
 
 ###################################
 End of Patch Notes

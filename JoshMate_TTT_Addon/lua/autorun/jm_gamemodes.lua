@@ -7,7 +7,7 @@ if CLIENT then return end
 
 -- Gamemode Chooser Vars
 local gamemodeChanceCurrent                     = 0
-local gamemodeChanceIncrease                    = 20
+local gamemodeChanceIncrease                    = 25
 local gamemodeChanceMax                         = 100
 
 function JM_GameMode_Function_Main()
@@ -16,17 +16,35 @@ function JM_GameMode_Function_Main()
     local tableOfGamemodes = {
 
         JM_GameMode_DefuseTheBombs_Init,
+        JM_GameMode_DefuseTheBombs_Init,
+        JM_GameMode_DefuseTheBombs_Init,
+
+        JM_GameMode_Antidote_Init,
+        JM_GameMode_Antidote_Init,
+        JM_GameMode_Antidote_Init,
+
         JM_GameMode_Powerup_Init,
+        JM_GameMode_Powerup_Init,
+
         JM_GameMode_Stash_Init,
+        JM_GameMode_Stash_Init,
+
         JM_GameMode_GrabTheFiles_Init,
+        JM_GameMode_GrabTheFiles_Init,
+
         JM_GameMode_BountyHunter_Init,
+        JM_GameMode_BountyHunter_Init,
+
+        JM_GameMode_ArmsDeal_Init,
+        JM_GameMode_ArmsDeal_Init,
+
         JM_GameMode_Infection_Init,
         JM_GameMode_PistolRound_Init,
         JM_GameMode_TraitorTester_Init,
         JM_GameMode_PowerHour_Init,
         JM_GameMode_LowGravity_Init,
-        JM_GameMode_SlipperyFloors_Init,
-        JM_GameMode_Antidote_Init
+        JM_GameMode_SlipperyFloors_Init
+        
 
     }
 
@@ -317,6 +335,17 @@ function JM_GameMode_Antidote_Init()
 
     -- Spawn the Gamemode Handler Object
     local GameModeHandlerObject = ents.Create("ent_jm_objective_07_antidote_base")
+    GameModeHandlerObject:Spawn()
+
+end
+
+function JM_GameMode_ArmsDeal_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Arms Deal") end
+
+    -- Spawn the Gamemode Handler Object
+    local GameModeHandlerObject = ents.Create("ent_jm_objective_08_armsdeal_base")
     GameModeHandlerObject:Spawn()
 
 end

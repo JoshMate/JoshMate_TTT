@@ -1,0 +1,26 @@
+###################################
+Josh Mate TTT Update 82 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+//TODO make the doors on melon manor not perma lock
+//TODO make files give info to most helpful person
+//TODO 
+
+[Game Mode: Antidote]
+- Fixed it to actually work this time....
+
+[Game Mode: Arms Deal]
+- Reduced score needed 70 -> 60
+
+
+###################################
+#### Maps
+###################################
+
+
+
+###################################
+End of Patch Notes
+###################################

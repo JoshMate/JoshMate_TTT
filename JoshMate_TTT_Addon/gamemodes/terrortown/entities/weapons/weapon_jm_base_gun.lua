@@ -139,6 +139,7 @@ SWEP.BulletForce	= 10
 
 SWEP.StoredAmmo = 0
 SWEP.IsDropped = false
+SWEP.IsOnFloor = true
 
 SWEP.DeploySpeed = 1.5
 SWEP.MoveMentMultiplier = 1.0
@@ -675,6 +676,7 @@ end
 -- @realm server
 function SWEP:PreDrop()
 
+	self.IsOnFloor = true
 	-- Removed as part of the Big Ammo Mechanics Overhaul Update 11/02/2022
 	
 end
@@ -707,6 +709,8 @@ function SWEP:Equip(newowner)
 	if self:IsOnFire() then
 		self:Extinguish()
 	end
+
+	self.IsOnFloor = false
 
 	self.fingerprints = self.fingerprints or {}
 

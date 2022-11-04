@@ -10,8 +10,8 @@ ENT.AdminSpawnable      = false
 
 if CLIENT then return end
 
-local JM_Objective_DefuseTheBomb_SpawnTime_Min 			= 15
-local JM_Objective_DefuseTheBomb_SpawnTime_Max 			= 90
+local JM_Objective_DefuseTheBomb_SpawnTime_Min 			= 20
+local JM_Objective_DefuseTheBomb_SpawnTime_Max 			= 120
 
 function ENT:Initialize()
 
