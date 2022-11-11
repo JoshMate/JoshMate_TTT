@@ -19,7 +19,7 @@ function ENT:Initialize()
 	self:SetColor(Color( 0, 255, 0, 255))
 	
 	self.Objective_ArmsDeal_Score		= 0
-	self.Objective_ArmsDeal_Goal		= 60
+	self.Objective_ArmsDeal_Goal		= 50
 	self.Objective_ArmsDeal_Radius		= 24
 
 	if SERVER then

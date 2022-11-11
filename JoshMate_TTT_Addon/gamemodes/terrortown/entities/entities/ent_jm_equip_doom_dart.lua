@@ -51,6 +51,8 @@ function ENT:Think()
 			effect:SetOrigin(pos)
 			util.Effect("Explosion", effect, true, true)
 			util.Effect("HelicopterMegaBomb", effect, true, true)
+			
+			JM_Function_SendHUDWarning(false, self.doomedTarget:EntIndex())
 
 			-- Blast
 			local JMThrower = self.doomedBy
@@ -66,5 +68,3 @@ function ENT:Think()
 	end
 
 end
-
-

@@ -4,21 +4,37 @@ Josh Mate TTT Update 82 - Patch Notes
 #### Gameplay
 ###################################
 
-//TODO make the doors on melon manor not perma lock
-//TODO make files give info to most helpful person
-//TODO 
-
 [Game Mode: Antidote]
 - Fixed it to actually work this time....
 
 [Game Mode: Arms Deal]
-- Reduced score needed 70 -> 60
+- Reduced score needed 70 -> 50
+
+[Cannibal]
+- Decreased Eating Time: 5 -> 4 Seconds
+- Increased Health Regeneration Duration: 12 -> 20 Seconds
+
+[Glue Gun]
+- No longer deals any damage
+- Now only has 5 shots and is semi auto
+
+[Doom Dart]
+- Doomed players now have an HUD icon for traitors and spectators
+
+[Buffs]
+- Fixed a bug where receiving 2 of the same buff would make the icon not show properly
 
 
 ###################################
 #### Maps
 ###################################
 
+[TTT Melon Manor]
+- Traitors can now only lock the doors for 25 seconds rather than the whole round
+- Added another ladder up to the roof from the back gardens
+- Raised the height of the sky box so the map is less enclosed
+- Added some more player spawn points for variety
+- Fixed the dodgy lighting underneath ali's stairs
 
 
 ###################################

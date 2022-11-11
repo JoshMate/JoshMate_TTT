@@ -28,20 +28,20 @@ end
 SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Recoil        = 0
-SWEP.Primary.Damage        = 20
+SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 0.18
+SWEP.Primary.Delay         = 0.25
 SWEP.Primary.Cone          = 0.012
-SWEP.Primary.ClipSize      = 20
-SWEP.Primary.DefaultClip   = 20
+SWEP.Primary.ClipSize      = 5
+SWEP.Primary.DefaultClip   = 5
 SWEP.Primary.ClipMax       = 0
-SWEP.Primary.SoundLevel    = 60
-SWEP.Primary.Automatic     = true
+SWEP.Primary.SoundLevel    = 70
+SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Ammo          = "pistol"
+SWEP.Primary.Ammo          = "None"
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
-SWEP.Kind                  = WEAPON_HEAVY
+SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_GLUEGUN
@@ -49,7 +49,7 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = Model("models/weapons/cstrike/c_rif_sg552.mdl")
 SWEP.WorldModel            = Model("models/weapons/w_rif_sg552.mdl")
 
-local glueHitRadius                 = 200
+local glueHitRadius                 = 256
 local JM_Shoot_Range                = 10000
 
 
@@ -96,14 +96,14 @@ function SWEP:Explode(tr)
                totalPeopleTagged = totalPeopleTagged + 1
 
                -- Deal Damage
-               local dmg = DamageInfo()
-               dmg:SetDamage(self.Primary.Damage)
-               dmg:SetAttacker(self:GetOwner())
-               dmg:SetInflictor(self)
-               dmg:SetDamageForce(self:EyeAngles():Forward())
-               dmg:SetDamagePosition(self:GetPos())
-               dmg:SetDamageType(DMG_BULLET)   
-               pl:TakeDamageInfo(dmg)
+               --local dmg = DamageInfo()
+               --dmg:SetDamage(self.Primary.Damage)
+               --dmg:SetAttacker(self:GetOwner())
+               --dmg:SetInflictor(self)
+               --dmg:SetDamageForce(self:EyeAngles():Forward())
+               --dmg:SetDamagePosition(self:GetPos())
+               --dmg:SetDamageType(DMG_BULLET)   
+               --pl:TakeDamageInfo(dmg)
 
                -- Glue Effects
                if (pl:IsValid() and pl:IsPlayer() and pl:IsTerror() and pl:Alive()) then

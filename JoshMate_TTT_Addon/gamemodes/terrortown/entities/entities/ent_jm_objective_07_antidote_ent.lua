@@ -43,6 +43,7 @@ function ENT:Use( activator, caller )
 				JM_RemoveBuffFromThisPlayer("jm_buff_antidotepoison",activator)
 				activator:SetHealth(activator:GetMaxHealth())
 				table.insert(self.Objective_Antidote_PeopleWhoHaveUsed, tostring(activator:Nick()))
+				STATUS:RemoveStatus(activator, JM_Global_Buff_AntidotePoison_IconName)
 			end
 		else
 			JM_Function_PrintChat(activator, "Objective", "You need your hands free to do that...")

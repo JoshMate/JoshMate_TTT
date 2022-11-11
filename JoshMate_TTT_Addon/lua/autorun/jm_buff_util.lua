@@ -181,7 +181,7 @@ JM_Global_Buff_BarrierSlow_IconPath                             = "vgui/ttt/josh
 JM_Global_Buff_BarrierSlow_IconGoodBad                          = "bad"
 
 JM_Global_Buff_CannibalHeal_Name                                = "Cannibal Heal"
-JM_Global_Buff_CannibalHeal_Duration                            = 12
+JM_Global_Buff_CannibalHeal_Duration                            = 20
 JM_Global_Buff_CannibalHeal_NWBool                              = "JM_Buff_NWBool_IsCannibalHeal"
 JM_Global_Buff_CannibalHeal_IconName                            = "JM_Buff_Icon_CannibalHeal"
 JM_Global_Buff_CannibalHeal_IconPath                            = "vgui/ttt/joshmate/hud_heal.png"

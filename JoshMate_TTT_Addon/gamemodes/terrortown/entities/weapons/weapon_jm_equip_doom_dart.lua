@@ -82,7 +82,13 @@ function SWEP:ApplyEffect(ent,weaponOwner, targetIsPlayer)
          JM_Function_PrintChat(weaponOwner, "Equipment", string.sub(ent:GetClass(), 5) .. " has been Doom Darted!" )
          deathMessage = "Doomed " .. string.sub(ent:GetClass(), 5) ..  " has EXPLODED!"
       end
+
+      -- Give a Hit Marker to This Player
+      local hitMarkerOwner = self:GetOwner()
+      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
       
+      -- Josh Mate New Warning Icon Code
+	   JM_Function_SendHUDWarning(true,ent:EntIndex(),"icon_warn_doomdart",ent:GetPos(),0,1)
 
       -- Doom the Target
       local doomDart = ents.Create("ent_jm_equip_doom_dart")
@@ -92,7 +98,6 @@ function SWEP:ApplyEffect(ent,weaponOwner, targetIsPlayer)
       doomDart.deathMessage = deathMessage
       doomDart:Spawn()
       -- End of
-         
 
    end
 end

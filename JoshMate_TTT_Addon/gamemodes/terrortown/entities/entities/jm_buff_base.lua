@@ -96,7 +96,6 @@ end
 function ENT:OnRemove()
     if(self.targetPlayer:IsValid() and self.targetPlayer:IsPlayer()) then
 	    self.targetPlayer:SetNWBool(self.BuffNWBool, false)
-        STATUS:RemoveStatus(self.targetPlayer, self.BuffIconName)
     end
 end
 

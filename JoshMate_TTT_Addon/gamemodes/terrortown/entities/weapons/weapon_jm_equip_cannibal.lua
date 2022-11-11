@@ -50,9 +50,9 @@ SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
 local Cannibal_Eat_MaxHP      = 10
-local Cannibal_Eat_Range      = 64
-local Cannibal_Eat_Delay      = 5
-local Cannibal_Eat_StayRange  = 96
+local Cannibal_Eat_Range      = 75
+local Cannibal_Eat_Delay      = 4
+local Cannibal_Eat_StayRange  = 100
 local Cannibal_Eat_Sound      = "cannibal_eating_delay_withcough.mp3"
 
 SWEP.Cannibal_CorpseThatIsBeingEaten            = "None"
@@ -91,6 +91,9 @@ function SWEP:PrimaryAttack()
             self.Cannibal_CorpseEatenAtThisTime = CurTime() + Cannibal_Eat_Delay
             self:GetOwner():EmitSound( Cannibal_Eat_Sound, 85, 100, 1, CHAN_REPLACE )
             JM_Function_PrintChat(self:GetOwner(), "Equipment","You begin to feast... (Stay close)" )
+            -- Give a Hit Marker to This Player
+            local hitMarkerOwner = self:GetOwner()
+            JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
          end
       end
 
