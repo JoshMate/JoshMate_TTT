@@ -26,7 +26,9 @@ local lootTable = {
         JM_CarePackage_Loot_Mega_Glue,
         JM_CarePackage_Loot_Mega_Jump,
         JM_CarePackage_Loot_GlueGun,
-        JM_CarePackage_Loot_InfernoLauncher
+        JM_CarePackage_Loot_InfernoLauncher,
+        JM_CarePackage_Loot_Armour,
+        JM_CarePackage_Loot_BarrelSwep
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -195,7 +197,7 @@ function JM_CarePackage_Loot_Become_Detective( activator, caller )
         activator:SetModel( "models/player/police.mdl" )
         activator:SetColor(Color( 0, 50, 255 ))
         SendFullStateUpdate()
-        activator:AddCredits(2)
+        activator:AddCredits(1)
     end
 end
 
@@ -256,6 +258,17 @@ end
 function JM_CarePackage_Loot_InfernoLauncher( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Inferno Launcher")
     Loot_SpawnThis(caller,"weapon_jm_zloot_inferno_launcher")
+end
+
+function JM_CarePackage_Loot_Armour( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","+100 Armour")
+    -- Gives them Armour
+    activator:GiveArmor(GetConVar("ttt_item_armor_value"):GetInt())
+end
+
+function JM_CarePackage_Loot_BarrelSwep( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Barrel Swep")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_placer_barrel")
 end
 
 
@@ -738,7 +751,7 @@ function JM_CarePackage_Loot_Landmine_Apocalypse( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Landmine Apocalypse")
     JM_Function_Announcement("[Care Package] Landmine Apocalypse!")
 
-    local NumberToSpawn = 10
+    local NumberToSpawn = 16
     local possibleSpawns = ents.FindByClass( "info_player_start" )
     table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
     

@@ -27,6 +27,9 @@ function ENT:Initialize()
 		self:SetUseType(SIMPLE_USE)
 	end
 
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_objective_stash",self:GetPos(),0,2)
+
 end
 
 function ENT:Use( activator, caller )
@@ -84,5 +87,12 @@ function ENT:StashCapture()
 	JM_Function_PrintChat_All("Stash", "Innocents lose 50% of their max HP")
 	JM_Function_PrintChat_All("Stash", "Traitors gain 50 Max HP and 2 Credits")
 	self:Remove()
+
+end
+
+function ENT:OnRemove()
+
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 
 end

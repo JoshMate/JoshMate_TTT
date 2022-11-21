@@ -32,8 +32,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
@@ -101,12 +101,6 @@ function SWEP:PrimaryAttack()
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    if not self:CanPrimaryAttack() then return end
-   self:EmitSound( self.Primary.Sound )
-   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
-   self:TakePrimaryAmmo( 1 )
-   if IsValid(self:GetOwner()) then
-      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-   end
    -- #########
 
    -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
@@ -120,20 +114,35 @@ function SWEP:PrimaryAttack()
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
    if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+
+      self:EmitSound( self.Primary.Sound )
+      self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
+      self:TakePrimaryAmmo( 1 )
+      if IsValid(self:GetOwner()) then
+         self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
+      end
+
+
       self:ApplyEffect(tr.Entity, owner)
+
+      -- Remove Weapon When out of Ammo
+      if SERVER then
+         if self:Clip1() <= 0 then
+            self:Remove()
+         end
+      end
+      -- #########
+   else
+
+      if CLIENT then surface.PlaySound("proplauncher_fail.wav") end
+
    end
 
    owner:LagCompensation(false)
 
    -- #########
 
-   -- Remove Weapon When out of Ammo
-   if SERVER then
-      if self:Clip1() <= 0 then
-         self:Remove()
-      end
-   end
-   -- #########
+   
 
 end
 

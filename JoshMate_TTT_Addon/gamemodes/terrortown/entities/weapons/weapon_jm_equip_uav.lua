@@ -12,11 +12,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Set-Up Weapon
 	
-Reveals all players (tracks them) for 8 seconds
+Reveals all players (tracks them) for 5 seconds
 
 Also gives the user useful intel like players left alive
 
-Single use item and announces to the server it has been used
+2 uses and announces to the server it has been used
 ]]
 };
    SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_uav.png"
@@ -27,11 +27,11 @@ SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 0.1
+SWEP.Primary.Delay         = 0.5
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
-SWEP.Primary.ClipMax       = 0
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipMax       = 2
 SWEP.DeploySpeed           = 4
 SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
@@ -99,8 +99,13 @@ function SWEP:PrimaryAttack()
    self:ApplyEffect(self:GetOwner(), self:GetOwner())
    -- #########
 
-   -- Remove the Weapon
-   if SERVER then self:Remove() end
+   self:TakePrimaryAmmo(1)
+
+   if SERVER then
+		if self:Clip1() <= 0 then
+		   self:Remove()
+		end
+	end
 
 end
 

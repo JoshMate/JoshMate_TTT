@@ -68,7 +68,7 @@ function ENT:BountyHunter_Select_NewTarget()
 
 					if SERVER then 
 						JM_Function_PrintChat(pl, "Bounty Hunter", "Your Target is: " .. tostring(self.bountyHunter_CurrentTarget:Nick())) 
-						JM_Function_PrintChat(pl, "Bounty Hunter", "Traitors gain 1 Credit") 
+						JM_Function_PrintChat(pl, "Credits", "You recieve 1 Credit for: Eliminating your bounty target.")
 						pl:AddCredits(1)
 					end
 

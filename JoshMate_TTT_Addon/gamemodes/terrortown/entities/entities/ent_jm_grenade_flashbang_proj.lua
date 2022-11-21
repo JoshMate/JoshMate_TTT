@@ -75,38 +75,23 @@ function ENT:Explode(tr)
                totalPeopleFlashed = totalPeopleFlashed + 1
 
                -- Set Status and print Message
-               JM_GiveBuffToThisPlayer("jm_buff_stungrenade",pl,self:GetOwner())
-               -- End Of
+               JM_GiveBuffToThisPlayer("jm_buff_flashbang",pl,self:GetOwner())
+               -- End Of            
 
-               -- Give a Hit Marker to This Player
-		         local hitMarkerOwner = self:GetOwner()
-		         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
-
-               -- Remove Weapons on Player
-               pl:StripWeapon("weapon_jm_primary_lmg")
-               pl:StripWeapon("weapon_jm_primary_rifle")
-               pl:StripWeapon("weapon_jm_primary_shotgun")
-               pl:StripWeapon("weapon_jm_primary_smg")
-               pl:StripWeapon("weapon_jm_primary_sniper")
-               pl:StripWeapon("weapon_jm_primary_shotgun")
-               pl:StripWeapon("weapon_jm_primary_smg")
-               pl:StripWeapon("weapon_jm_secondary_auto")
-               pl:StripWeapon("weapon_jm_secondary_heavy")
-               pl:StripWeapon("weapon_jm_secondary_light")
-               pl:StripWeapon("weapon_jm_grenade_frag")
-               pl:StripWeapon("weapon_jm_grenade_glue")
-               pl:StripWeapon("weapon_jm_grenade_health")
-               pl:StripWeapon("weapon_jm_grenade_jump")
-               pl:StripWeapon("weapon_jm_grenade_tag")
-               JM_Function_PrintChat(pl, "Equipment", "Your weapons have been confiscated!")
-               
-
-               -- Glue Effects
+               -- Flash Effects
                self:HitEffectsInit(pl)
                       
             end
 
          end
+      end
+
+      if totalPeopleFlashed > 0 then
+         -- Give a Hit Marker to This Player
+         local hitMarkerOwner = self:GetOwner()
+         JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
+         -- Tell User Flashes
+         JM_Function_PrintChat(hitMarkerOwner, "Equipment", "You flashed: " .. tostring(totalPeopleFlashed) .. " people.")
       end
 
       self.Entity:Remove();

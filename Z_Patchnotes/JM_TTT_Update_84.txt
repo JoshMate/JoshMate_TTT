@@ -1,0 +1,85 @@
+###################################
+Josh Mate TTT Update 84 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Detective Credit System Rework]
+- Detectives Start with 1 Credit
+- Detectives receive 1 Credit every 60 Seconds (3 Times)
+- Detectives receive 1 Credit when a traitor dies
+- Detectives can loot credits from bodies that have them
+
+[Traitor Credit System Rework]
+- Traitors Start with 1 Credit
+- Traitors receive 1 Credit every 2 innocents that die (Not counting Detectives or Traitors)
+- Traitors receive 1 Credit when the detective dies
+- Traitors can loot credits from bodies that have them
+
+[Strip Search]
+- New Detective weapon
+- Strip a player of all Primary and Secondary weapons (Not special or bought weapons)
+- Can only be used at point blank range, has 2 uses
+(Weapons are deleted, not dropped)
+
+[Flash Bang Grenade]
+- New Detective weapon
+- Throw a non damaging grenade that blinds, slows and disorientates people
+- Has a large radius and lasts for 5 seconds
+- Only has 1 use
+(This replaces Disarming Grenade in the detective shop)
+
+[Loot: Armour]
+- New common Care Package Loot
+- Gives 100 Armour (The same as Detectives) that reduces in coming non-head damage
+
+[Loot: Barrel Swep]
+- New common Care Package Loot
+- Place or weld explosive barrels in front of you
+- It has had it's stats improved to be more fun
+(This replaces Barrel swep in the traitor shop)
+
+[Game Mode: Stash]
+- Detectives and Spectators now get a HUD icon showing the location
+(Traitors and innocents still don't)
+
+[Teleporter]
+- Detectives and Spectators now get a HUD icon showing the marked location
+
+[Care Package Swep]
+- Reduced number of uses: 2 -> 1
+
+[Taser]
+- Reduced number of uses: 2 -> 1
+- Now does not consume ammo when it misses
+
+[Doom Dart]
+- You can now doom targets at any range
+- You can now doom combine soldiers, man hacks and all types of headcrabs
+
+[Bear trap]
+- Reduced number uses: 2 -> 1
+
+[Landmine]
+- Reduced number uses: 2 -> 1
+
+[AWP]
+- Increased Tracer linger time: 6 -> 10 Seconds
+
+[UAV]
+- Increased number of uses: 1 -> 2
+- Reduced duration: 8 -> 5 Seconds
+
+[Swapper]
+- Made it clearer that you missed your swapper "shot"
+
+
+###################################
+#### Maps
+###################################
+
+(Nothing)
+
+###################################
+End of Patch Notes
+###################################

@@ -160,7 +160,7 @@ JM_Global_Buff_FireOrb_IconPath                                    = "vgui/ttt/j
 JM_Global_Buff_FireOrb_IconGoodBad                                 = "bad"
 
 JM_Global_Buff_Uav_Name                                         = "UAV Buff"
-JM_Global_Buff_Uav_Duration                                     = 8
+JM_Global_Buff_Uav_Duration                                     = 5
 JM_Global_Buff_Uav_NWBool                                       = "JM_Buff_NWBool_IsUavBuff"
 JM_Global_Buff_Uav_IconName                                     = "JM_Buff_Icon_UavBuff"
 JM_Global_Buff_Uav_IconPath                                     = "vgui/ttt/joshmate/hud_uav.png"

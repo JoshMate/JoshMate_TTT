@@ -4,7 +4,7 @@ AddCSLuaFile()
 SWEP.HoldType              = "normal"
 
 if CLIENT then
-   SWEP.PrintName          = "Doom Dart"
+   SWEP.PrintName          = "Strip Search"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -12,17 +12,17 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Set-Up Weapon
+      desc = [[A Utility Weapon
 	
-Doom a player or NPC to explode on death.
+Left clicking a player will strip them of their weapons
 
-Point blank range, others won't know you are holding this.
+Does not include Special or bought weapons
 
-Mark up to 2 targets, who won't be informed they are doomed.
+Has 2 uses and must be used at point blank range
 ]]
 };
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_doomskull.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_stripsearch.png"
 
    function SWEP:GetViewModelPosition(pos, ang)
 		return pos + ang:Forward() * 25 - ang:Right() *-12 - ang:Up() * 8, ang
@@ -45,61 +45,45 @@ SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
+SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_DOOMDART
+SWEP.WeaponID              = AMMO_STRIPSEARCH
 SWEP.UseHands              = false
-SWEP.ViewModel             = "models/gibs/hgibs.mdl"
-SWEP.WorldModel            = "models/gibs/hgibs.mdl"
+SWEP.ViewModel             = "models/props_lab/desklamp01.mdl"
+SWEP.WorldModel            = "models/props_lab/desklamp01.mdl"
 
-local JM_Shoot_Range = 10000
-local isDoomableNPC = { 
-   npc_zombie = true,
-   npc_fastzombie = true,
-   npc_headcrab = true,
-   npc_headcrab_fast = true,
-   npc_headcrab_black = true,
-   npc_poisonzombie = true,
-   npc_seagull = true,
-   npc_pigeon = true,
-   npc_crow = true,
-   npc_antlion = true,
-   npc_combine_s = true,
-   npc_metropolice = true,
-   npc_manhack = true
+local JM_Shoot_Range = 64
 
-}
-
-function SWEP:ApplyEffect(ent,weaponOwner, targetIsPlayer)
+function SWEP:ApplyEffect(ent,weaponOwner)
 
    if not IsValid(ent) then return end
    
    if SERVER then
 
-      local deathMessage
-      if targetIsPlayer then
-         JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been Doom Darted!" )
-         deathMessage = "Doomed " .. ent:Nick() .. " has EXPLODED!"
-      else
-         JM_Function_PrintChat(weaponOwner, "Equipment", string.sub(ent:GetClass(), 5) .. " has been Doom Darted!" )
-         deathMessage = "Doomed " .. string.sub(ent:GetClass(), 5) ..  " has EXPLODED!"
-      end
+      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been stripped of their weapons!" )
+      JM_Function_PrintChat(ent, "Equipment", weaponOwner:Nick() .. " has stripped you of your weapons!" )
 
       -- Give a Hit Marker to This Player
       local hitMarkerOwner = self:GetOwner()
       JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
-      
-      -- Josh Mate New Warning Icon Code
-	   JM_Function_SendHUDWarning(true,ent:EntIndex(),"icon_warn_doomdart",ent:GetPos(),0,1)
 
-      -- Doom the Target
-      local doomDart = ents.Create("ent_jm_equip_doom_dart")
-      doomDart.doomedTarget = ent
-      doomDart.doomedBy = self:GetOwner()
-      doomDart.targetIsPlayer = targetIsPlayer
-      doomDart.deathMessage = deathMessage
-      doomDart:Spawn()
-      -- End of
+      -- Remove Weapons on Player
+      ent:StripWeapon("weapon_jm_primary_lmg")
+      ent:StripWeapon("weapon_jm_primary_rifle")
+      ent:StripWeapon("weapon_jm_primary_shotgun")
+      ent:StripWeapon("weapon_jm_primary_smg")
+      ent:StripWeapon("weapon_jm_primary_sniper")
+      ent:StripWeapon("weapon_jm_primary_shotgun")
+      ent:StripWeapon("weapon_jm_primary_smg")
+      ent:StripWeapon("weapon_jm_secondary_auto")
+      ent:StripWeapon("weapon_jm_secondary_heavy")
+      ent:StripWeapon("weapon_jm_secondary_light")
+      ent:StripWeapon("weapon_jm_grenade_frag")
+      ent:StripWeapon("weapon_jm_grenade_glue")
+      ent:StripWeapon("weapon_jm_grenade_health")
+      ent:StripWeapon("weapon_jm_grenade_jump")
+      ent:StripWeapon("weapon_jm_grenade_tag")
+
 
    end
 end
@@ -121,21 +105,14 @@ function SWEP:PrimaryAttack()
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
 
-   if tr.Entity:IsValid() then
-      if tr.Entity:IsNPC() and isDoomableNPC[tr.Entity:GetClass()] == true then
-         self:ApplyEffect(tr.Entity, owner, false)
-         self:TakePrimaryAmmo( 1 )
-         if CLIENT then surface.PlaySound("doomdart_marked.mp3") end
-      end
- 
+   if tr.Entity:IsValid() then 
       if tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive()then
          self:ApplyEffect(tr.Entity, owner, true)
          self:TakePrimaryAmmo( 1 )
-         if CLIENT then surface.PlaySound("doomdart_marked.mp3") end
-         
+         owner:EmitSound("stripsearch.mp3")         
       end
    else
-      JM_Function_PrintChat(owner, "Equipment", "Doom dart can only be used point blank on a player..." )
+      JM_Function_PrintChat(owner, "Equipment", "No Target to strip search..." )
       if CLIENT then surface.PlaySound("proplauncher_fail.wav") end
    end
 
@@ -166,7 +143,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Doom Dart a player", nil, true)
+	   self:AddTTT2HUDHelp("Strip a player's weapons", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

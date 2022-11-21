@@ -14,9 +14,9 @@ Left click to place and right click to weld to a surface
  };
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
-SWEP.Primary.Delay 			= 1.5
-SWEP.Primary.ClipSize		= 3
-SWEP.Primary.DefaultClip	= 3
+SWEP.Primary.Delay 			= 0.3
+SWEP.Primary.ClipSize		= 6
+SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -34,12 +34,12 @@ SWEP.AllowDrop 				= true
 SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind 					= WEAPON_EQUIP1
 SWEP.AutoSpawnable			= false
-SWEP.CanBuy 				= {ROLE_TRAITOR}
+SWEP.CanBuy 				= {}
 SWEP.LimitedStock 			= true
 
 
 -- Placer Style Swep Config
-SWEP.JM_Trap_PlaceRange					= 300
+SWEP.JM_Trap_PlaceRange					= 360
 
 SWEP.JM_Trap_Entity_Class				= "prop_physics"
 SWEP.JM_Trap_Entity_Colour				= Color( 255, 50, 50, 255)
@@ -182,11 +182,6 @@ function SWEP:DrawWorldModelTranslucent()
    if IsValid(self:GetOwner()) then return end
    self:DrawModel()
 end
--- Delete on Drop
-function SWEP:OnDrop() 
-	self:Remove()
- end
-
 -- ##############################################
 -- End of Josh Mate Various SWEP Quirks
 -- ##############################################

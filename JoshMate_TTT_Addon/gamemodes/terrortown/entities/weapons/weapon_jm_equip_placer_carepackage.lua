@@ -7,7 +7,7 @@ SWEP.EquipMenuData = {
 	type = "item_weapon",
 	desc = [[A Utility Item
 
-Place up to 2 Detective Carepackage
+Place 1 Detective Carepackage
 
 Only non detective players can take them
 ]]
@@ -22,9 +22,9 @@ if CLIENT then
 end
 
 
-SWEP.Primary.Delay 			= 2
-SWEP.Primary.ClipSize		= 2
-SWEP.Primary.DefaultClip	= 2
+SWEP.Primary.Delay 			= 1
+SWEP.Primary.ClipSize		= 1
+SWEP.Primary.DefaultClip	= 1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5

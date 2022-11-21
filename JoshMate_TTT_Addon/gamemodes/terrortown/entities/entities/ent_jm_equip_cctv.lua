@@ -21,6 +21,10 @@ function ENT:Initialize()
     self:SetModelScale(0.35, 0)
     self.OriginalY = self:GetAngles().y
 	self:SetColor(JM_CCTV_Colour)
+
+	-- Josh Mate New Warning Icon Code
+	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_teleportmark",self:GetPos(),0,2)
+
 end
 
 function ENT:Think()
@@ -78,5 +82,12 @@ end
 if CLIENT then
 
 	hook.Add("ShouldDrawLocalPlayer", "TTTCamera.DrawLocalPlayer", function(ply) return IN_CAMERA end)
+
+end
+
+function ENT:OnRemove()
+
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
 
 end

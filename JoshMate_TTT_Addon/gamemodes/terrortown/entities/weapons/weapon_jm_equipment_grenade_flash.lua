@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 if (CLIENT) then
 
-	SWEP.PrintName 			= "Disarming Grenade"
+	SWEP.PrintName 			= "Flashbang Grenade"
 	SWEP.Slot				= 6
 	SWEP.IconLetter			= "g"
 	SWEP.Icon 				= "vgui/ttt/joshmate/icon_jm_flashbang"
@@ -13,13 +13,9 @@ if (CLIENT) then
 		type = "item_weapon",
 		desc = [[A Non-Lethal Grenade
 		
-Targets are slowed by 70% for 5 seconds
-	 
-Targets also have their vision distorted
+Blinds, slows and disorientates people
 
-Targets also have their weapons confiscated
-
-Has 1 Use
+Has 1 Use and deals no damage, lasts 8 seconds
 ]]
 };
 
@@ -48,7 +44,7 @@ SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 
 function SWEP:GetGrenadeName()
-   return "ent_jm_grenade_stun_proj"
+   return "ent_jm_grenade_flashbang_proj"
 end
 
 -- ##############################################

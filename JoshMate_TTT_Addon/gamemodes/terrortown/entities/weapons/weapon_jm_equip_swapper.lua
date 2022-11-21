@@ -131,7 +131,7 @@ function SWEP:PrimaryAttack()
       self:ApplyEffect(tr.Entity, owner)
       self:TakePrimaryAmmo( 1 )
    else
-      JM_Function_PrintChat(self:GetOwner(), "Equipment", "You must aim at another play to swap with them...")
+      if CLIENT then surface.PlaySound("proplauncher_fail.wav") end
    end
 
    owner:LagCompensation(false)

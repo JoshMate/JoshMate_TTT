@@ -20,8 +20,8 @@ SWEP.LimitedStock = true
 SWEP.DeploySpeed           = 4
 
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 2
-SWEP.Primary.DefaultClip	= 2
+SWEP.Primary.ClipSize		= 1
+SWEP.Primary.DefaultClip	= 1
 
 if CLIENT then
    SWEP.Icon = "vgui/ttt/joshmate/icon_jm_beartrap.png"

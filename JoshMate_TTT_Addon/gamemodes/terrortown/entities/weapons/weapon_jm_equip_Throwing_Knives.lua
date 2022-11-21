@@ -104,7 +104,7 @@ function SWEP:PrimaryAttack()
 		if self:Clip1() <= 0 then
 		   self:Remove()
 		end
-	 end
+	end
   
 	 -- #########
 end

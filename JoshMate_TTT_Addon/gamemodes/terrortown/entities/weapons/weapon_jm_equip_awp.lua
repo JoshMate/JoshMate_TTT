@@ -142,7 +142,7 @@ function SWEP:PrimaryAttack()
    e:SetStart(tr.StartPos)
    e:SetOrigin(tr.HitPos)
    e:SetMagnitude(tr.HitBox)
-   e:SetScale(6) 
+   e:SetScale(10) 
    util.Effect("traitor_shot_tracer", e)
 
    -- Remove Ammo

@@ -6,8 +6,8 @@ SWEP.Instructions			= "Leftclick to place Floor Bomb"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 2
-SWEP.Primary.DefaultClip	= 2
+SWEP.Primary.ClipSize		= 1
+SWEP.Primary.DefaultClip	= 1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -37,7 +37,7 @@ Left click to place an easy to see but indestructible
 
 Players who step on the trap will be blown up
 
-It has 2 use and takes 5 seconds to appear
+It has 1 use and takes 5 seconds to appear
 ]]
 	}
 	

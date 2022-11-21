@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "vgui/ttt/joshmate/warningicons/icon_warn_objective_stash"
+	"$translucent" 1
+	"$vertexalpha" 1
+	"$vertexcolor" 1
+}
