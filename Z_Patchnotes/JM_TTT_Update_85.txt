@@ -1,0 +1,22 @@
+###################################
+Josh Mate TTT Update 85 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Strip Search]
+- Increased Range: 64 -> 196
+
+###################################
+#### Maps
+###################################
+
+[TTT Crypt]
+- New map
+- A map taking place inside the dark corners of an underground crypt.
+- It's work in progress, but fully playable
+
+###################################
+End of Patch Notes
+###################################
+

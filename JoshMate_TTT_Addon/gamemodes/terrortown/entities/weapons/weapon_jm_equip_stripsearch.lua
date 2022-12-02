@@ -52,7 +52,7 @@ SWEP.UseHands              = false
 SWEP.ViewModel             = "models/props_lab/desklamp01.mdl"
 SWEP.WorldModel            = "models/props_lab/desklamp01.mdl"
 
-local JM_Shoot_Range = 64
+local JM_Shoot_Range = 196
 
 function SWEP:ApplyEffect(ent,weaponOwner)
 
