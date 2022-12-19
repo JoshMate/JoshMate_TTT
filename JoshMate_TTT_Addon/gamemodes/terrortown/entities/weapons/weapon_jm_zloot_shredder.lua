@@ -4,7 +4,7 @@ SWEP.HoldType            = "ar2"
 
 if CLIENT then
    SWEP.PrintName          = "Shredder"
-   SWEP.Slot               = 6
+   SWEP.Slot               = 2
 
    SWEP.ViewModelFOV       = 54
    SWEP.ViewModelFlip      = false
@@ -28,7 +28,7 @@ SWEP.CanBuy                = {}
 SWEP.Spawnable             = true
 SWEP.AutoSpawnable         = true
 
-SWEP.Kind                  = WEAPON_EQUIP
+SWEP.Kind                  = WEAPON_HEAVY
 SWEP.WeaponID              = AMMO_SHREDDER
 
 -- // Gun Stats

@@ -1,0 +1,55 @@
+###################################
+Josh Mate TTT Update 87 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Prop Bomb]
+- New Traitor Weapon
+-
+-
+-
+
+[NPC Rebalance]
+- Reduced Combine Soldier Health: 80 -> 30 HP
+- Increased Combine Soldiers Damage: 100% -> 125% Damage
+- Reduced Zombie Health: 60 -> 50 HP
+- Increased Zombie Damage: 100% -> 150% Damage
+- Reduced Antlion Health: 50 -> 30 HP
+- Increased Antlion Damage: 100% -> 125% Damage
+- Increased Antilion Guard (The Dog) Health: 500 -> 750 HP
+- All Antilion Guard (The Dog) attacks are now 1 hit kills on you
+
+[Prop Possesion]
+- Decreased Charge Recharge Delay: 0.6 -> 0.5 Seconds
+- Increased Max Charges: 12 -> 18 Charges
+- Increased Base Charges: 4 -> 5 Charges
+- Increased Prop Move Power: 110 -> 120 Velocity
+
+###################################
+#### Maps
+###################################
+
+[TTT Desert]
+- Remaster of the map with new features
+- "Construction Site" Replaced by new building: Lab
+- "Sniper Tower" has been completely rebuilt from scratch
+- New routes / buildings / cover / Improvements across the whole map
+- Improvements to textures / prop placement / lighting / weapon spawns
+- Added some Josh Mate Canisters
+- Recompiled Using High Quality Final render settings
+- Added a Navigation Mesh so NPCs can move / fight properly
+
+[TTT Toilet]
+- Huge expansion to the map
+- New routes around the map via new breakable walls/vents
+- Improvements to textures / prop placement / lighting / weapon spawns
+- Reduced the health of the breakable wooden doors: 500 -> 300 HP
+- Added some Josh Mate Canisters
+- Recompiled Using High Quality Final render settings
+- Added a Navigation Mesh so NPCs can move / fight properly
+
+###################################
+End of Patch Notes
+###################################
+

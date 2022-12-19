@@ -16,9 +16,9 @@ if CLIENT then
 	
 Prevents the target from moving for 12 seconds
    
-The target will drop their currently held weapon
+The target will be stripped of all non-special weapons
    
-Has 2 uses, perfect acccuracy and long range
+Has 1 use, perfect acccuracy and long range
 ]]
    };
 
@@ -80,17 +80,34 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       JM_RemoveBuffFromThisPlayer("jm_buff_taser",ent)
       JM_GiveBuffToThisPlayer("jm_buff_taser",ent,self:GetOwner())
       -- End Of
+
+      -- JM New Was Pushed Attribution System
+      newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
+      newWasPushedContract.pusher = weaponOwner
+      newWasPushedContract.target = ent
+      newWasPushedContract.weapon = self:GetClass()
+      newWasPushedContract:Spawn()
+      ent.was_pushed = newWasPushedContract
+      --
+
+      -- Remove Weapons on Player
+      ent:StripWeapon("weapon_jm_primary_lmg")
+      ent:StripWeapon("weapon_jm_primary_rifle")
+      ent:StripWeapon("weapon_jm_primary_shotgun")
+      ent:StripWeapon("weapon_jm_primary_smg")
+      ent:StripWeapon("weapon_jm_primary_sniper")
+      ent:StripWeapon("weapon_jm_primary_shotgun")
+      ent:StripWeapon("weapon_jm_primary_smg")
+      ent:StripWeapon("weapon_jm_secondary_auto")
+      ent:StripWeapon("weapon_jm_secondary_heavy")
+      ent:StripWeapon("weapon_jm_secondary_light")
+      ent:StripWeapon("weapon_jm_grenade_frag")
+      ent:StripWeapon("weapon_jm_grenade_glue")
+      ent:StripWeapon("weapon_jm_grenade_health")
+      ent:StripWeapon("weapon_jm_grenade_jump")
+      ent:StripWeapon("weapon_jm_grenade_tag")
       
-      -- Drop currently Held Weapon
-      if(ent:IsValid() and ent:IsPlayer()) then
-         local curWep = ent:GetActiveWeapon()
-         if (ent:GetActiveWeapon():PreDrop()) then ent:GetActiveWeapon():PreDrop() end
-         if (curWep.AllowDrop) then
-            ent:DropWeapon()
-         end
-         ent:SelectWeapon("weapon_jm_special_crowbar")
-      end
-      -- End of Drop
+      ent:SelectWeapon("weapon_jm_special_crowbar")
 
       
    end

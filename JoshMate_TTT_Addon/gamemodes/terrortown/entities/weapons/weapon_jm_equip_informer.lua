@@ -1,8 +1,7 @@
-
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName          = "UAV"
+   SWEP.PrintName          = "Informer"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -10,16 +9,14 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Set-Up Weapon
+      desc = [[An Intel Weapon
 	
-Reveals all players (tracks them) for 5 seconds
+Tells the Detective important information on use
 
-Also gives the user useful intel like players left alive
-
-2 uses and announces to the server it has been used
+3 uses
 ]]
 };
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_uav.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_informer.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -29,9 +26,9 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.5
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
-SWEP.Primary.ClipMax       = 2
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipMax       = 3
 SWEP.DeploySpeed           = 4
 SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
@@ -40,10 +37,12 @@ SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_DETECTIVE}
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_UAV
+SWEP.WeaponID              = AMMO_INFORMER
 SWEP.UseHands              = false
 SWEP.ViewModel             = "models/props/cs_office/computer_mouse.mdl"
 SWEP.WorldModel            = "models/props/cs_office/computer_mouse.mdl"
+
+SWEP.informerScansPerformed = 0
 
 
 
@@ -54,36 +53,39 @@ function SWEP:ApplyEffect(ent,weaponOwner)
    
    if SERVER then
 
-      
-
-      -- Give a Hit Marker to This Player
-      local hitMarkerOwner = self:GetOwner()
-      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
+      -- Make sound
+      weaponOwner:EmitSound("informer_use.wav")
 
       -- Gather Stats
-      local uavStatAlive   = 0
-      local uavStatDead    = 0
+      local informerStatAlive   = 0
+      local informerStatDead    = 0
+      local informerStatNear    = 0
 
       for _, ply in ipairs( player.GetAll() ) do
 
          if (ply:IsValid() and not ply:IsSpec() and ply:IsTerror() and ply:Alive()) then
-            uavStatAlive = uavStatAlive + 1
+            informerStatAlive = informerStatAlive + 1
+
+            if (self:GetOwner():GetPos():Distance(ply:GetPos()) <= 800) then 
+               informerStatNear = informerStatNear +1
+            end
+
          else
-            uavStatDead = uavStatDead + 1
+            informerStatDead = informerStatDead + 1
          end
      end
 
+     -- The user is always nearby, so remove them
+     informerStatNear = informerStatNear -1
+
+     self.informerScansPerformed = self.informerScansPerformed + 1
+
       -- Set Status and print Message
-      JM_Function_PrintChat(weaponOwner, "Equipment","Your UAV shows: " .. tostring(uavStatDead) .. " Dead / Spectating")
-      JM_Function_PrintChat(weaponOwner, "Equipment","Your UAV shows: " .. tostring(uavStatAlive) .. " Alive")
+      JM_Function_PrintChat(weaponOwner, "Equipment","--- Scan: " .. tostring(self.informerScansPerformed) .. " ---")
+      JM_Function_PrintChat(weaponOwner, "Equipment","Informer: " .. tostring(informerStatDead) .. " Dead / Spectating")
+      JM_Function_PrintChat(weaponOwner, "Equipment","Informer: " .. tostring(informerStatAlive) .. " Alive")
+      JM_Function_PrintChat(weaponOwner, "Equipment","Informer: " .. tostring(informerStatNear) .. " Nearby Players")
       -- End Of
-
-      -- Make you and the target Agents
-      JM_RemoveBuffFromThisPlayer("jm_buff_uav",self:GetOwner())
-      JM_GiveBuffToThisPlayer("jm_buff_uav",self:GetOwner(),self:GetOwner())
-
-      -- Play Sound to ALL
-      JM_Function_PlaySound("shoot_uav_online.mp3") 
 
    end
 end
@@ -157,7 +159,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Use UAV", nil, true)
+	   self:AddTTT2HUDHelp("Use Informer", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

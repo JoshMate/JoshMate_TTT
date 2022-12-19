@@ -9,15 +9,15 @@ ENT.Spawnable = true
 ENT.AdminSpawnable = false
 
 local fireOrb_Duration				= 60
-local fireOrb_ArmTime				= 4
+local fireOrb_ArmTime				= 2.5
 local fireOrb_Radius_Slow			= 230
 local fireOrb_Delay_Tick			= 0.35
 local fireOrb_Damage				= 8
 
-local fireOrb_Sound_Deploy			= "firewall_destroy.wav"
-local fireOrb_Sound_Arm				= "firewall_arm.wav"
-local fireOrb_Sound_Destroy			= "firewall_place.wav"
-local fireOrb_Sound_Hit				= "firewall_hit_small.wav"
+local fireOrb_Sound_Deploy			= "orb_fire_deploy.wav"
+local fireOrb_Sound_Arm				= "orb_fire_arm.wav"
+local fireOrb_Sound_Destroy			= "orb_fire_destroy.wav"
+local fireOrb_Sound_Hit				= "orb_fire_hit.wav"
 
 local fireOrb_Colour				= Color( 150, 0, 0, 150 )
 
@@ -50,9 +50,9 @@ function ENT:fireOrbRadiusEffects()
 		if d >= r then continue end
 
 		-- Give the buff
-		if not JM_CheckIfPlayerHasBuff("jm_buff_fireorb",ply) then
-			JM_GiveBuffToThisPlayer("jm_buff_fireorb",ply,self.Owner)
-			self:EmitSound(fireOrb_Sound_Hit);
+		if not JM_CheckIfPlayerHasBuff("jm_buff_orb_fire",ply) then
+			JM_GiveBuffToThisPlayer("jm_buff_orb_fire",ply,self.Owner)
+			ply:EmitSound(fireOrb_Sound_Hit);
 		end
 		
 		-- Deal More damage the close to the centre you are
@@ -114,14 +114,14 @@ function ENT:Think()
 		self:SetMaterial("models/props_lab/Tank_Glass001")
 	end
 
-	-- Smoke Effect Tick
+	-- Orb Tick
 	if self.fireOrbIsArmed == true and CurTime() >= (self.fireOrbLastTickTime + fireOrb_Delay_Tick) then
 		self:fireOrbRadiusEffects()
 		self.fireOrbLastTickTime = CurTime()
 		
 	end
 
-	-- Delete Smoke after time is up
+	-- Delete Orb after time is up
 	if CurTime() >= (self.fireOrbTimeCreated + fireOrb_Duration) then
 		if SERVER then 
 			self:EmitSound(fireOrb_Sound_Destroy);

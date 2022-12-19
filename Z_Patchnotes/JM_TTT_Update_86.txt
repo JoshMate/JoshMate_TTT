@@ -1,0 +1,64 @@
+###################################
+Josh Mate TTT Update 86 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Goomb Stomp]
+- Now tells you your "Score" when landing a Goomba
+
+[Suppression Orb]
+- New Detective item
+- A detective only version of fire orb
+- Slows players who step in it by 80%
+- Distorts the vision of players who step in it
+- Tracks players who step in it on your HUD
+- Lingers for 60 seconds and take 2.5 seconds to grow to full size
+- Detectives are immune to the effects and can walk through freely
+- New Unique Shop Icon
+- New Unique Suppression Orb Debuff Icon
+
+[Fire Orb]
+- Reduced time taken to grow to full size: 4 -> 2.5 Seconds
+- Reduced Slow Amount: -70% -> -60% Move Speed
+- Players can no longer see you holding / using it
+- New Unique Shop Icon
+- New Unique Fire Orb Debuff Icon
+
+[Informer]
+- New Detective Item
+- Tells you how many players are currently dead or spectating
+- Tells you how many players are currently left alive
+- Tells you how many players are Nearby
+- Has 3 uses
+
+[Taser]
+- Now removes all non special weapons from their inventory too
+- Now has "Was pushed" attribution so tasing someone in a hazard loses you karma
+
+[Removed from the game]
+- Detective's: UAV shop item
+- Detective's: Strip Search shop item
+
+[Game Modes]
+- Slightly increased the chances of game modes happening
+- Removed the bias towards the newer game modes
+
+[Care Package Loot Slot Changes]
+- Big Boy now goes in the Secondary Slot (Rather than the equipment slot)
+- Glue Gun now goes in the Primary Slot (Rather than the equipment slot)
+- Rooty Tooty now goes in the Primary Slot (Rather than the equipment slot)
+- Shredder now goes in the Primary Slot (Rather than the equipment slot)
+
+###################################
+#### Maps
+###################################
+
+[TTT Toilet]
+- New Map
+- An elevator like map which takes place inside of a public toilet
+
+###################################
+End of Patch Notes
+###################################
+

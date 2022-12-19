@@ -152,12 +152,19 @@ JM_Global_Buff_Glue_IconName                                    = "JM_Buff_Icon_
 JM_Global_Buff_Glue_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"
 JM_Global_Buff_Glue_IconGoodBad                                 = "bad"
 
-JM_Global_Buff_FireOrb_Name                                        = "Fire Orb"
-JM_Global_Buff_FireOrb_Duration                                    = 7
-JM_Global_Buff_FireOrb_NWBool                                      = "JM_Buff_NWBool_IsFireOrb"
-JM_Global_Buff_FireOrb_IconName                                    = "JM_Buff_Icon_FireOrb"
-JM_Global_Buff_FireOrb_IconPath                                    = "vgui/ttt/joshmate/hud_smoke.png"
-JM_Global_Buff_FireOrb_IconGoodBad                                 = "bad"
+JM_Global_Buff_Orb_Fire_Name                                   = "Fire Orb"
+JM_Global_Buff_Orb_Fire_Duration                               = 6
+JM_Global_Buff_Orb_Fire_NWBool                                 = "JM_Buff_NWBool_IsFireOrb"
+JM_Global_Buff_Orb_Fire_IconName                               = "JM_Buff_Icon_FireOrb"
+JM_Global_Buff_Orb_Fire_IconPath                               = "vgui/ttt/joshmate/hud_orb_fire.png"
+JM_Global_Buff_Orb_Fire_IconGoodBad                            = "bad"
+
+JM_Global_Buff_Orb_Suppression_Name                            = "Suppression Orb"
+JM_Global_Buff_Orb_Suppression_Duration                        = 12
+JM_Global_Buff_Orb_Suppression_NWBool                          = "JM_Buff_NWBool_IsSuppressionOrb"
+JM_Global_Buff_Orb_Suppression_IconName                        = "JM_Buff_Icon_SuppressionOrb"
+JM_Global_Buff_Orb_Suppression_IconPath                        = "vgui/ttt/joshmate/hud_orb_suppression.png"
+JM_Global_Buff_Orb_Suppression_IconGoodBad                     = "bad"
 
 JM_Global_Buff_Uav_Name                                         = "UAV Buff"
 JM_Global_Buff_Uav_Duration                                     = 5

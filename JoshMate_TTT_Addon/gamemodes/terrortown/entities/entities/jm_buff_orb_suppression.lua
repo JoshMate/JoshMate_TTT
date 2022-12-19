@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_FireOrb_Name
-local JM_BuffNWBool             = JM_Global_Buff_FireOrb_NWBool
-local JM_BuffDuration           = JM_Global_Buff_FireOrb_Duration
-local JM_BuffIconName           = JM_Global_Buff_FireOrb_IconName
-local JM_BuffIconPath           = JM_Global_Buff_FireOrb_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_FireOrb_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_Orb_Suppression_Name
+local JM_BuffNWBool             = JM_Global_Buff_Orb_Suppression_NWBool
+local JM_BuffDuration           = JM_Global_Buff_Orb_Suppression_Duration
+local JM_BuffIconName           = JM_Global_Buff_Orb_Suppression_IconName
+local JM_BuffIconPath           = JM_Global_Buff_Orb_Suppression_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_Orb_Suppression_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -32,11 +32,11 @@ ENT.BuffIconName                = JM_BuffIconName
 if CLIENT then
 
     -- Set up screen effect table
-    local effectTable_Smoke = {
+    local effectTable_Suppression = {
 
-        ["$pp_colour_addr"] = 0.25,
+        ["$pp_colour_addr"] = 0.00,
         ["$pp_colour_addg"] = 0.10,
-        ["$pp_colour_addb"] = 0,
+        ["$pp_colour_addb"] = 0.25,
         ["$pp_colour_brightness"] = 0,
         ["$pp_colour_contrast"] = 1,
         ["$pp_colour_colour"] = 1.0,
@@ -49,7 +49,8 @@ if CLIENT then
     hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
 
         if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
-            DrawColorModify( effectTable_Smoke)
+            DrawColorModify( effectTable_Suppression)
+            DrawMaterialOverlay( "models/props_c17/fisheyelens", -0.06 )
         end 
     
     end)
@@ -71,7 +72,7 @@ end
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.2
     end 
 end)
 
@@ -82,7 +83,7 @@ hook.Add( "PreDrawHalos", "Halos_FireOrb", function()
      local count = 0
  
     for _, ply in ipairs( player.GetAll() ) do
-        if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) and LocalPlayer():IsTraitor()) then
+        if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) and LocalPlayer():IsDetective()) then
              count = count + 1
              players[ count ] = ply
         end

@@ -5,7 +5,7 @@ SWEP.HoldType              = "pistol"
 
 if CLIENT then
    SWEP.PrintName          = "Big Boy"
-   SWEP.Slot               = 6
+   SWEP.Slot               = 1
 
    SWEP.ViewModelFOV       = 54
    SWEP.ViewModelFlip      = false
@@ -40,7 +40,7 @@ SWEP.Primary.Automatic     = false
 SWEP.Primary.Ammo          = "357"
 SWEP.Primary.Sound         = "shoot_explosive_gun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
-SWEP.Kind                  = WEAPON_EQUIP
+SWEP.Kind                  = WEAPON_PISTOL
 SWEP.CanBuy                = {} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_EXPLOSIVEGUN

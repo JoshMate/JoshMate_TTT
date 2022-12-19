@@ -1,10 +1,10 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "normal"
+SWEP.HoldType              = "pistol"
 
 if CLIENT then
-   SWEP.PrintName          = "Strip Search"
+   SWEP.PrintName          = "Suppression Orb"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -12,89 +12,72 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Utility Weapon
-	
-Left clicking a player will strip them of their weapons
+      desc = [[An AOE Weapon
 
-Does not include Special or bought weapons
+Creates a large orb of suppression that slows those who stand in it
 
-Has 1 use and has longe range and perfect accuracy
+Has 1 use and lingers for 60 Seconds. Players can't see you holding this
 ]]
-};
+   };
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_stripsearch.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_orb_suppression.png"
 
    function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 25 - ang:Right() *-12 - ang:Up() * 8, ang
+		return pos + ang:Forward() *35 - ang:Right() *-15 - ang:Up() * 50, ang
 	end
 
 end
+
+
 
 SWEP.Base                  = "weapon_jm_base_gun"
 
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 0.50
+SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
-SWEP.Primary.SoundLevel    = 0
+SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = nil
+SWEP.Secondary.Sound       = nil
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {} -- only traitors can buy
+SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_STRIPSEARCH
+SWEP.WeaponID              = AMMO_ORBSUPPRESSION
 SWEP.UseHands              = false
-SWEP.ViewModel             = "models/props_lab/desklamp01.mdl"
-SWEP.WorldModel            = "models/props_lab/desklamp01.mdl"
+SWEP.ViewModel             = Model("models/props_phx/ball.mdl")
+SWEP.WorldModel            = Model("models/props_phx/ball.mdl")
 
-local JM_Shoot_Range = 196
+local JM_Shoot_Range                = 10000
 
-function SWEP:ApplyEffect(ent,weaponOwner)
-
+function SWEP:HitEffectsInit(ent)
    if not IsValid(ent) then return end
-   
-   if SERVER then
-
-      JM_Function_PrintChat(weaponOwner, "Equipment", ent:Nick() .. " has been stripped of their weapons!" )
-      JM_Function_PrintChat(ent, "Equipment", weaponOwner:Nick() .. " has stripped you of your weapons!" )
-
-      -- Give a Hit Marker to This Player
-      local hitMarkerOwner = self:GetOwner()
-      JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
-
-      -- Remove Weapons on Player
-      ent:StripWeapon("weapon_jm_primary_lmg")
-      ent:StripWeapon("weapon_jm_primary_rifle")
-      ent:StripWeapon("weapon_jm_primary_shotgun")
-      ent:StripWeapon("weapon_jm_primary_smg")
-      ent:StripWeapon("weapon_jm_primary_sniper")
-      ent:StripWeapon("weapon_jm_primary_shotgun")
-      ent:StripWeapon("weapon_jm_primary_smg")
-      ent:StripWeapon("weapon_jm_secondary_auto")
-      ent:StripWeapon("weapon_jm_secondary_heavy")
-      ent:StripWeapon("weapon_jm_secondary_light")
-      ent:StripWeapon("weapon_jm_grenade_frag")
-      ent:StripWeapon("weapon_jm_grenade_glue")
-      ent:StripWeapon("weapon_jm_grenade_health")
-      ent:StripWeapon("weapon_jm_grenade_jump")
-      ent:StripWeapon("weapon_jm_grenade_tag")
-
-
-   end
+   local effect = EffectData()
+   local ePos = ent:GetPos()
+   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+   effect:SetStart(ePos)
+   effect:SetOrigin(ePos)
+   util.Effect("cball_explode", effect, true, true)
 end
 
 function SWEP:PrimaryAttack()
 
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+   if not self:CanPrimaryAttack() then return end
+   self:TakePrimaryAmmo( 1 )
    -- #########
 
    -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
+
+   -- Give a Hit Marker to This Player
+   local hitMarkerOwner = self:GetOwner()
+   JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
    
    local owner = self:GetOwner()
    if not IsValid(owner) then return end
@@ -104,21 +87,31 @@ function SWEP:PrimaryAttack()
    end
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
+   if (tr.HitSky == false)then
+      if SERVER then 
+         local ent = ents.Create("ent_jm_equip_Orb_Suppression")
+			ent:SetPos(tr.HitPos + tr.HitNormal)
+			local ang = tr.HitNormal:Angle()
+			ang:RotateAroundAxis(ang:Right(), -90)
+			ent:SetAngles(ang)
+			ent:Spawn()
+			ent.Owner = self:GetOwner()
 
-   if tr.Entity:IsValid() then 
-      if tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive()then
-         self:ApplyEffect(tr.Entity, owner, true)
-         self:TakePrimaryAmmo( 1 )
-         owner:EmitSound("stripsearch.mp3")         
+         -- Another one but flipped
+         local ent = ents.Create("ent_jm_equip_Orb_Suppression")
+			ent:SetPos(tr.HitPos + tr.HitNormal)
+			local ang = tr.HitNormal:Angle()
+			ang:RotateAroundAxis(ang:Right(), 90)
+			ent:SetAngles(ang)
+			ent:Spawn()
+			ent.Owner = self:GetOwner()
       end
-   else
-      JM_Function_PrintChat(owner, "Equipment", "No Target to strip search..." )
-      if CLIENT then surface.PlaySound("proplauncher_fail.wav") end
    end
 
    owner:LagCompensation(false)
 
    -- #########
+
    -- Remove Weapon When out of Ammo
    if SERVER then
       if self:Clip1() <= 0 then
@@ -127,9 +120,7 @@ function SWEP:PrimaryAttack()
    end
    -- #########
 
-
 end
-
 
 function SWEP:SecondaryAttack()
    return
@@ -143,7 +134,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Strip a player's weapons", nil, true)
+	   self:AddTTT2HUDHelp("Create an Orb", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
@@ -156,7 +147,6 @@ if SERVER then
       end
    end
 end
-
 -- Hide World Model when Equipped
 function SWEP:DrawWorldModel()
    if IsValid(self:GetOwner()) then return end

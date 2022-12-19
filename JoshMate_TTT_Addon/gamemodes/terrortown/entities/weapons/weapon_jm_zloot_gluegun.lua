@@ -5,7 +5,7 @@ SWEP.HoldType              = "ar2"
 
 if CLIENT then
    SWEP.PrintName          = "Glue Gun"
-   SWEP.Slot               = 6
+   SWEP.Slot               = 2
 
    SWEP.ViewModelFOV       = 54
    SWEP.ViewModelFlip      = false
@@ -41,7 +41,7 @@ SWEP.Primary.Automatic     = false
 SWEP.Primary.Ammo          = "None"
 SWEP.Primary.Sound         = "shoot_gluegun.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")
-SWEP.Kind                  = WEAPON_EQUIP
+SWEP.Kind                  = WEAPON_HEAVY
 SWEP.CanBuy                = {} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_GLUEGUN

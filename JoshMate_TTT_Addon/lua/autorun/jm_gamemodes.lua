@@ -7,7 +7,7 @@ if CLIENT then return end
 
 -- Gamemode Chooser Vars
 local gamemodeChanceCurrent                     = 0
-local gamemodeChanceIncrease                    = 25
+local gamemodeChanceIncrease                    = 35
 local gamemodeChanceMax                         = 100
 
 function JM_GameMode_Function_Main()
@@ -19,7 +19,6 @@ function JM_GameMode_Function_Main()
         JM_GameMode_DefuseTheBombs_Init,
         JM_GameMode_DefuseTheBombs_Init,
 
-        JM_GameMode_Antidote_Init,
         JM_GameMode_Antidote_Init,
         JM_GameMode_Antidote_Init,
 

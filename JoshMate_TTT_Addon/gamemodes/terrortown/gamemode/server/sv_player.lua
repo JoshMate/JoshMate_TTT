@@ -287,7 +287,7 @@ function GM:PlayerSwitchFlashlight(ply, on)
 		return false
 	end
 
-	if (game.GetMap() == "ttt_elevator" or game.GetMap() == "ttt_industrial") then
+	if (game.GetMap() == "ttt_elevator" or game.GetMap() == "ttt_industrial" or game.GetMap() == "ttt_toilet") then
 		ply:RemoveEffects(EF_DIMLIGHT)
 		return false
 	end
@@ -1138,7 +1138,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
 
 			
 			JM_Function_PlaySound("goombastomp_voice.mp3")
-			JM_Function_PrintChat(att, "Goomba Stomp", "Is now #Free")
+			JM_Function_PrintChat(att, "Goomba Stomp", "Score: " .. tostring(math.floor((damage*4))))
 
 			dmg:SetAttacker(att)
 			dmg:SetInflictor(att)

@@ -12,15 +12,20 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = [[A Distraction Weapon
+      desc = [[An AOE Weapon
 
-Creates a large smoke screen that lingers, slowing and blinding players inside.
+Creates a large orb of fire that burns and slows those who stand in it
 
-Has 1 use and can be seen and heard while holding
+Has 1 use and lingers for 60 Seconds. Players can't see you holding this
 ]]
    };
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_silencedpistol.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_orb_fire.png"
+
+   function SWEP:GetViewModelPosition(pos, ang)
+		return pos + ang:Forward() *35 - ang:Right() *-15 - ang:Up() * 50, ang
+	end
+   
 end
 
 
@@ -38,17 +43,15 @@ SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
 
-SWEP.Primary.Sound         = "shoot_poisondart.wav"
+SWEP.Primary.Sound         = nil
 SWEP.Secondary.Sound       = nil
 SWEP.Kind                  = WEAPON_EQUIP
 SWEP.CanBuy                = {ROLE_TRAITOR} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_SMOKESCREEN
-SWEP.UseHands              = true
-SWEP.ViewModel             = Model("models/weapons/cstrike/c_pist_usp.mdl")
-SWEP.WorldModel            = Model("models/weapons/w_pist_usp_silencer.mdl")
-SWEP.IronSightsPos         = Vector( 5, -15, -2 )
-SWEP.IronSightsAng         = Vector( 2.6, 1.37, 3.5 )
+SWEP.WeaponID              = AMMO_ORBFIRE
+SWEP.UseHands              = false
+SWEP.ViewModel             = Model("models/props_phx/ball.mdl")
+SWEP.WorldModel            = Model("models/props_phx/ball.mdl")
 
 local JM_Shoot_Range                = 10000
 
@@ -62,25 +65,19 @@ function SWEP:HitEffectsInit(ent)
    util.Effect("cball_explode", effect, true, true)
 end
 
-function SWEP:Deploy()
-   self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
-   return self.BaseClass.Deploy(self)
-end
-
 function SWEP:PrimaryAttack()
 
    -- Weapon Animation, Sound and Cycle data
    self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    if not self:CanPrimaryAttack() then return end
-   self:EmitSound( self.Primary.Sound )
-   self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
    self:TakePrimaryAmmo( 1 )
-   if IsValid(self:GetOwner()) then
-      self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-   end
    -- #########
 
    -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
+
+   -- Give a Hit Marker to This Player
+   local hitMarkerOwner = self:GetOwner()
+   JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
    
    local owner = self:GetOwner()
    if not IsValid(owner) then return end
@@ -92,7 +89,7 @@ function SWEP:PrimaryAttack()
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
    if (tr.HitSky == false)then
       if SERVER then 
-         local ent = ents.Create("ent_jm_equip_Fire_Orb_Point")
+         local ent = ents.Create("ent_jm_equip_Orb_Fire")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), -90)
@@ -101,7 +98,7 @@ function SWEP:PrimaryAttack()
 			ent.Owner = self:GetOwner()
 
          -- Another one but flipped
-         local ent = ents.Create("ent_jm_equip_Fire_Orb_Point")
+         local ent = ents.Create("ent_jm_equip_Orb_Fire")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), 90)
@@ -137,8 +134,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Create a Fire Orb", nil, true)
-      self:SendWeaponAnim(ACT_VM_DRAW_SILENCED)
+	   self:AddTTT2HUDHelp("Create an Orb", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
@@ -150,6 +146,15 @@ if SERVER then
          self:GetOwner():SelectWeapon("weapon_jm_special_hands")
       end
    end
+end
+-- Hide World Model when Equipped
+function SWEP:DrawWorldModel()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
+end
+function SWEP:DrawWorldModelTranslucent()
+   if IsValid(self:GetOwner()) then return end
+   self:DrawModel()
 end
 -- Delete on Drop
 function SWEP:OnDrop() 
