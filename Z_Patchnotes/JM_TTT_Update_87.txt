@@ -6,9 +6,9 @@ Josh Mate TTT Update 87 - Patch Notes
 
 [Prop Bomb]
 - New Traitor Weapon
--
--
--
+- Use on a prop at any range, and it will turn it into a prop bomb
+- The Prop will set on fire and After a short delay, it explodes dealing damage
+- Has 2 uses and is silent and can't been seen while holding
 
 [NPC Rebalance]
 - Reduced Combine Soldier Health: 80 -> 30 HP

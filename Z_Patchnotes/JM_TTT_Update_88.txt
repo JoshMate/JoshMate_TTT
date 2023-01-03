@@ -1,0 +1,26 @@
+###################################
+Josh Mate TTT Update 88 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Item Shop]
+- An experimental test of a new shop system that will hopefully completely mix up the meta
+- Shops now consist of 2 randomly chosen items.
+- Once one of them has been purchased, both items are randomly re-rolled to new ones
+- This affects both Traitor and Detective
+- This change is an experiment and may be rolled back if it is a disaster
+
+[Prop Bomb]
+- 
+
+###################################
+#### Maps
+###################################
+
+None
+
+###################################
+End of Patch Notes
+###################################
+
