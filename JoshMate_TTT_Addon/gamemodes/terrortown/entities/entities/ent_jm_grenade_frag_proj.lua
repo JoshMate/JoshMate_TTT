@@ -42,6 +42,20 @@ function ENT:Explode(tr)
       util.Effect("Explosion", effect, true, true)
       util.Effect("HelicopterMegaBomb", effect, true, true)
 
+      -- Give a debuff to players caught in blast
+		local plys = player.GetAll()
+		for i = 1, #plys do
+			local ply = plys[i]
+         if ply:IsValid() and ply:IsTerror() and ply:Alive() then
+            if ply:GetPos():Distance(self:GetPos()) <= JM_Explosive_Blast_Radius then
+               -- Disorientated Debuff on Explosion
+               if (SERVER) then
+                  JM_GiveBuffToThisPlayer("jm_buff_explosion",ply,self:GetOwner())
+               end
+            end
+         end
+		end
+
       -- Blast
       local JMThrower = self:GetOwner()
       util.BlastDamage(self, JMThrower, pos, JM_Explosive_Blast_Radius, JM_Explosive_Blast_Damage)

@@ -64,11 +64,24 @@ end
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
+    self.taserBuffDelayEffect = 1
+    self.taserBuffNextEffect = CurTime() + self.taserBuffDelayEffect
 
 end
 
 function ENT:Think()
     self.BaseClass.Think(self)
+
+    if CurTime() >= self.taserBuffNextEffect then
+        self.taserBuffNextEffect = CurTime() + self.taserBuffDelayEffect
+        if not IsValid(self.targetPlayer) then return end
+        local effect = EffectData()
+        local ePos = self.targetPlayer:GetPos()
+        ePos:Add(Vector(0, 0, 40)) 
+        effect:SetStart(ePos)
+        effect:SetOrigin(ePos)
+        util.Effect("cball_explode", effect, true, true)
+    end
 
 end
 

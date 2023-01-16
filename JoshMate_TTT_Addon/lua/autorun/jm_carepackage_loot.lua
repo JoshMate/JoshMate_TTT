@@ -60,7 +60,11 @@ local lootTable = {
         JM_CarePackage_Loot_Rob_From_TTT,
         JM_CarePackage_Loot_Combine_Apocalypse,
         JM_CarePackage_Loot_Soap_Apocalypse,
-        JM_CarePackage_Loot_Landmine_Apocalypse
+        JM_CarePackage_Loot_Landmine_Apocalypse,
+        JM_CarePackage_Loot_Dog_Apocalypse,
+        JM_CarePackage_Loot_Size_Grow,
+        JM_CarePackage_Loot_Size_Shrink,
+        JM_CarePackage_Loot_BigStepper
     }
 }
 
@@ -771,6 +775,59 @@ function JM_CarePackage_Loot_Landmine_Apocalypse( activator, caller )
 
     end
     
+end
+
+function JM_CarePackage_Loot_Dog_Apocalypse( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Whats the dog doin' Apocalypse")
+    JM_Function_Announcement("[Care Package] Whats the dog doin' Apocalypse!")
+
+    local NumberToSpawn = 5
+    local possibleSpawns = ents.FindByClass( "info_player_start" )
+    table.Add(possibleSpawns, ents.FindByClass( "ent_jm_carepackage_spawn" ))
+    
+    for i=1,NumberToSpawn do 
+
+        if #possibleSpawns > 0 then
+            local randomChoice = math.random(1, #possibleSpawns)
+            local spawn = possibleSpawns[randomChoice]
+            table.remove( possibleSpawns, randomChoice )
+
+            local ent = ents.Create("npc_antlionguard")
+            ent:SetPos(spawn:GetPos())
+            ent:Spawn()  
+            JM_Function_PlaySound("whatthedogdoing.mp3") 
+        end
+
+    end
+end
+
+function JM_CarePackage_Loot_Size_Grow( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Mushroom: Grow")
+    JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " has grown!")
+
+    JM_Function_PlaySound("mario_mushroom_grow.mp3")
+    activator:SetScale(1.30)
+
+end
+
+function JM_CarePackage_Loot_Size_Shrink( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Mushroom: Shrink")
+    JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " has shrunk!")
+
+    JM_Function_PlaySound("mario_mushroom_shrink.mp3")
+    activator:SetScale(0.70)
+
+end
+
+function JM_CarePackage_Loot_BigStepper( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Big Stepper")
+    JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " is a big stepper!")
+    activator:SetStepSize(128)
+
 end
 
 -------------------------------------------------

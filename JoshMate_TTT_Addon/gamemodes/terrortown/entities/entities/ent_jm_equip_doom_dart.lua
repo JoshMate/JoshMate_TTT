@@ -54,6 +54,20 @@ function ENT:Think()
 			
 			JM_Function_SendHUDWarning(false, self.doomedTarget:EntIndex())
 
+			-- Give a debuff to players caught in blast
+			local plys = player.GetAll()
+			for i = 1, #plys do
+				local ply = plys[i]
+				if ply:IsValid() and ply:IsTerror() and ply:Alive() then
+					if ply:GetPos():Distance(pos) <= JM_DoomDart_Explosive_Blast_Radius then
+						-- Disorientated Debuff on Explosion
+						if (SERVER) then
+							JM_GiveBuffToThisPlayer("jm_buff_explosion",ply,self.doomedBy)
+						end
+					end
+				end
+			end
+
 			-- Blast
 			local JMThrower = self.doomedBy
 			util.BlastDamage(self, JMThrower, pos, JM_DoomDart_Explosive_Blast_Radius, JM_DoomDart_Explosive_Blast_Damage)

@@ -1,0 +1,36 @@
+###################################
+Josh Mate TTT Update 89 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Item Shop]
+- Increased Number of Item Choices: 2 -> 3
+- Increased Number of Buys before re-roll: 1 -> 2
+
+[Map Vote]
+- Increased Number of random map choices: 2 -> 3
+
+[Care Package Loot]
+- New Rare Loot: What's the dog doing apocalypse (Spawns lots of dogs)
+- New Rare Loot: Mushroom: Grow (Makes the player get bigger)
+- New Rare Loot: Mushroom: Shrink (Makes the player get Smaller)
+- New Rare Loot: Big Stepper (Drastically increases the players step height)
+
+###################################
+#### Maps
+###################################
+
+[TTT Toilet]
+- Huge expansion to the map
+- New routes around the map via new breakable walls/vents
+- Improvements to textures / prop placement / lighting / weapon spawns
+- Reduced the health of the breakable wooden doors: 500 -> 300 HP
+- Added some Josh Mate Canisters
+- Recompiled Using High Quality Final render settings
+- Added a Navigation Mesh so NPCs can move / fight properly
+
+###################################
+End of Patch Notes
+###################################
+

@@ -11,14 +11,39 @@ Josh Mate TTT Update 88 - Patch Notes
 - This affects both Traitor and Detective
 - This change is an experiment and may be rolled back if it is a disaster
 
-[Prop Bomb]
-- 
+[Explosives]
+- The blast concussion debuff from landmines now gets applied with most explosions
+- Now affects: Frag Grenades, Prop Bombs and Doom Dart Explosions
+- The effect slows players down and blurs their vision for a short period
+
+[Taser]
+- Increased Tase Duration: 12 -> 15 Seconds
+- Added a spark effect to show that a player has been tased to others
+- No longer deletes all their weapons in their inventory
+- Instead they drop the held one on the floor (Like old times)
+- The dropped weapon will now fall towards the taser owner
+
+[Flash Bang Grenade]
+- Increased Duration of Flash: 5 -> 7 Seconds
+- Increased Flash Radius: 300 -> 350 Units
+- Fixed the broken Bright white screen so it doesn't look so scuffed
+
+[Strip Search]
+- Added back into the game
+- Increased Number of Uses: 1 -> 2 Uses
 
 ###################################
 #### Maps
 ###################################
 
-None
+[TTT Toilet]
+- Huge expansion to the map
+- New routes around the map via new breakable walls/vents
+- Improvements to textures / prop placement / lighting / weapon spawns
+- Reduced the health of the breakable wooden doors: 500 -> 300 HP
+- Added some Josh Mate Canisters
+- Recompiled Using High Quality Final render settings
+- Added a Navigation Mesh so NPCs can move / fight properly
 
 ###################################
 End of Patch Notes

@@ -90,23 +90,8 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       ent.was_pushed = newWasPushedContract
       --
 
-      -- Remove Weapons on Player
-      ent:StripWeapon("weapon_jm_primary_lmg")
-      ent:StripWeapon("weapon_jm_primary_rifle")
-      ent:StripWeapon("weapon_jm_primary_shotgun")
-      ent:StripWeapon("weapon_jm_primary_smg")
-      ent:StripWeapon("weapon_jm_primary_sniper")
-      ent:StripWeapon("weapon_jm_primary_shotgun")
-      ent:StripWeapon("weapon_jm_primary_smg")
-      ent:StripWeapon("weapon_jm_secondary_auto")
-      ent:StripWeapon("weapon_jm_secondary_heavy")
-      ent:StripWeapon("weapon_jm_secondary_light")
-      ent:StripWeapon("weapon_jm_grenade_frag")
-      ent:StripWeapon("weapon_jm_grenade_glue")
-      ent:StripWeapon("weapon_jm_grenade_health")
-      ent:StripWeapon("weapon_jm_grenade_jump")
-      ent:StripWeapon("weapon_jm_grenade_tag")
-      
+      -- Drop weapon on the floor
+      ent:DropWeapon( nil, self:GetOwner():GetPos())
       ent:SelectWeapon("weapon_jm_special_crowbar")
 
       

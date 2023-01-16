@@ -18,7 +18,7 @@ Left clicking a player will strip them of their weapons
 
 Does not include Special or bought weapons
 
-Has 1 use and has longe range and perfect accuracy
+Has 2 uses and short range
 ]]
 };
 
@@ -37,15 +37,15 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.50
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 0
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {} -- only traitors can buy
+SWEP.CanBuy                = {ROLE_DETECTIVE} -- only traitors can buy
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_STRIPSEARCH
 SWEP.UseHands              = false
@@ -84,6 +84,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       ent:StripWeapon("weapon_jm_grenade_jump")
       ent:StripWeapon("weapon_jm_grenade_tag")
 
+      ent:SelectWeapon("weapon_jm_special_crowbar")
 
    end
 end

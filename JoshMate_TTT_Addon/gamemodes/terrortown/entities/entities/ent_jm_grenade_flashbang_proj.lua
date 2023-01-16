@@ -12,7 +12,7 @@ ENT.PrintName = "Disarming Grenade"
 ENT.Trail_Enabled = 1
 ENT.Trail_Colour = Color(0,70,255,150)
 
-local JM_FlashBang_Radius        = 300
+local JM_FlashBang_Radius        = 350
 
 -- Grenade Type Setting
 ENT.GrenadeType_ExplodeOn_Impact    = false

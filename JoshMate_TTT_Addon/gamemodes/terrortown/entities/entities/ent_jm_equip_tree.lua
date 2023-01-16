@@ -30,10 +30,8 @@ function ENT:Tree_Effects_Destroyed()
 	effect:SetStart(ePos)
 	effect:SetOrigin(ePos)
 	
-	
-	
 	util.Effect("cball_explode", effect, true, true)
- end
+end
 
 
 function ENT:Tree_Die()

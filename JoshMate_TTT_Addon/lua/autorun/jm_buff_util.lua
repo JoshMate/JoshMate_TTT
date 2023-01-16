@@ -55,7 +55,7 @@ end
 -- #############################################
 
 JM_Global_Buff_Taser_Name                               = "Taser"
-JM_Global_Buff_Taser_Duration                           = 12
+JM_Global_Buff_Taser_Duration                           = 15
 JM_Global_Buff_Taser_NWBool                             = "JM_Buff_NWBool_IsTaser"
 JM_Global_Buff_Taser_IconName                           = "JM_Buff_Icon_Taser"
 JM_Global_Buff_Taser_IconPath                           = "vgui/ttt/joshmate/hud_taser.png"
@@ -69,7 +69,7 @@ JM_Global_Buff_SilencedPistol_IconPath                  = "vgui/ttt/joshmate/hud
 JM_Global_Buff_SilencedPistol_IconGoodBad               = "bad"
 
 JM_Global_Buff_StunGrenade_Name                         = "Stun Grenade"
-JM_Global_Buff_StunGrenade_Duration                     = 5
+JM_Global_Buff_StunGrenade_Duration                     = 7
 JM_Global_Buff_StunGrenade_NWBool                       = "JM_Buff_NWBool_IsStunGrenade"
 JM_Global_Buff_StunGrenade_IconName                     = "JM_Buff_Icon_StunGrenade"
 JM_Global_Buff_StunGrenade_IconPath                     = "vgui/ttt/joshmate/hud_flashbang.png"
