@@ -327,47 +327,8 @@ local mumbles = {
 -- @realm server
 -- @internal
 function GM:PlayerSay(ply, text, teamOnly)
-	if not IsValid(ply) then
-		return text or ""
-	end
-
-	if GetRoundState() == ROUND_ACTIVE then
-		local team_spec = ply:Team() == TEAM_SPEC
-
-		if team_spec and not DetectiveMode() then
-			local filtered = {}
-			local parts = string.Explode(" ", text)
-
-			for i = 1, #parts do
-				-- grab word characters and whitelisted interpunction
-				-- necessary or leetspeek will be used (by trolls especially)
-				local word, interp = string.match(parts[i], "(%a*)([%.,!%?]*)")
-
-				if word ~= "" then
-					filtered[#filtered + 1] = mumbles[math.random(#mumbles)] .. interp
-				end
-			end
-
-			-- make sure we have something to say
-			if #filtered < 1 then
-				filtered[#filtered + 1] = mumbles[math.random(#mumbles)]
-			end
-
-			table.insert(filtered, 1, "[MUMBLED]")
-
-			return table.concat(filtered, " ")
-		elseif teamOnly and not team_spec and ply:IsSpecial() then
-			RoleChatMsg(ply, text)
-
-			return ""
-		elseif not teamOnly and not team_spec then
-			if ply:GetSubRoleData().disabledGeneralChat or hook.Run("TTT2AvoidGeneralChat", ply, text) == false then
-				return ""
-			end
-		end
-	end
-
-	return text or ""
+	JM_Function_PrintChat(ply, "Admin","Text Chat is currently Disabled")
+	return ""
 end
 
 local ttt_lastwords = CreateConVar("ttt_lastwords_chatprint", "0", {FCVAR_NOTIFY, FCVAR_ARCHIVE})

@@ -1,16 +1,8 @@
 ###################################
-Josh Mate TTT Update 89 - Patch Notes
+Josh Mate TTT Update 90 - Patch Notes
 ###################################
 #### Gameplay
 ###################################
-
-[Player Damage]
-- Head Damage: 200%+
-- Chest Damage: 100%
-- Stomach Damage: 85%
-- Arm Damage: 75%
-- Leg Damage: 65%
-(Arm and leg shots now do more damage. No more hitting a 3 with the deagle lol)
 
 [Jammer]
 - New Traitor item
@@ -21,11 +13,10 @@ Josh Mate TTT Update 89 - Patch Notes
 - It doesn't affect Traitors so think carefully about what that means (Accidental Self Reveal)
 
 [Item Shop]
-- Increased Number of Item Choices: 2 -> 3
-- Increased Number of Buys before re-roll: 1 -> 2
+- Reverted the Shops back to pick any item you want
 
 [Map Vote]
-- Increased Number of random map choices: 2 -> 3
+- Reverted the map vote back to pick any map you want
 
 [Care Package Loot]
 - New Rare Loot: What's the dog doing apocalypse (Spawns lots of "dogs")

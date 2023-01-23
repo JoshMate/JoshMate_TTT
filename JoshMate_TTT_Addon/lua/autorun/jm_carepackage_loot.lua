@@ -28,7 +28,8 @@ local lootTable = {
         JM_CarePackage_Loot_GlueGun,
         JM_CarePackage_Loot_InfernoLauncher,
         JM_CarePackage_Loot_Armour,
-        JM_CarePackage_Loot_BarrelSwep
+        JM_CarePackage_Loot_BarrelSwep,
+        JM_CarePackage_Loot_HighJump
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -63,8 +64,7 @@ local lootTable = {
         JM_CarePackage_Loot_Landmine_Apocalypse,
         JM_CarePackage_Loot_Dog_Apocalypse,
         JM_CarePackage_Loot_Size_Grow,
-        JM_CarePackage_Loot_Size_Shrink,
-        JM_CarePackage_Loot_BigStepper
+        JM_CarePackage_Loot_Size_Shrink
     }
 }
 
@@ -273,6 +273,11 @@ end
 function JM_CarePackage_Loot_BarrelSwep( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Barrel Swep")
     Loot_SpawnThis(caller,"weapon_jm_zloot_placer_barrel")
+end
+
+function JM_CarePackage_Loot_HighJump( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","High Jump (You can now jump higher)")
+    activator:SetJumpPower(350)
 end
 
 
@@ -808,7 +813,7 @@ function JM_CarePackage_Loot_Size_Grow( activator, caller )
     JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " has grown!")
 
     JM_Function_PlaySound("mario_mushroom_grow.mp3")
-    activator:SetScale(1.30)
+    activator:SetModelScale( activator:GetModelScale() * 1.3, 3)
 
 end
 
@@ -818,15 +823,7 @@ function JM_CarePackage_Loot_Size_Shrink( activator, caller )
     JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " has shrunk!")
 
     JM_Function_PlaySound("mario_mushroom_shrink.mp3")
-    activator:SetScale(0.70)
-
-end
-
-function JM_CarePackage_Loot_BigStepper( activator, caller )
-
-    JM_Function_PrintChat(activator, "Care Package","Big Stepper")
-    JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " is a big stepper!")
-    activator:SetStepSize(128)
+    activator:SetModelScale( activator:GetModelScale() * 0.7, 3)
 
 end
 

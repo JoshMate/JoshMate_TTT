@@ -1046,13 +1046,18 @@ function GM:ScalePlayerDamage(ply, hitgroup, dmginfo)
 
 			dmginfo:ScaleDamage(s)
 		end
-	elseif hitgroup == HITGROUP_LEFTARM
-	or hitgroup == HITGROUP_RIGHTARM
-	or hitgroup == HITGROUP_LEFTLEG
-	or hitgroup == HITGROUP_RIGHTLEG
-	or hitgroup == HITGROUP_GEAR
+	elseif hitgroup == HITGROUP_CHEST
 	then
-		dmginfo:ScaleDamage(0.55)
+		dmginfo:ScaleDamage(1)
+	elseif hitgroup == HITGROUP_STOMACH
+	then
+		dmginfo:ScaleDamage(0.85)
+	elseif hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTARM
+	then
+		dmginfo:ScaleDamage(0.75)
+	elseif hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_GEAR	
+	then
+		dmginfo:ScaleDamage(0.65)
 	end
 
 	-- Keep ignite-burn damage etc on old levels

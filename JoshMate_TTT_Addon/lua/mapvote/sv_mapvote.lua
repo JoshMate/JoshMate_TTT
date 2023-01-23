@@ -149,6 +149,11 @@ function MapVote:GetRandomMaps()
         ranomlyChosenMap = table.Random(result)
         table.RemoveByValue(result, ranomlyChosenMap)
         table.insert(resultRandomTwo, ranomlyChosenMap)
+        
+        -- Add 1 more Random Map
+        ranomlyChosenMap = table.Random(result)
+        table.RemoveByValue(result, ranomlyChosenMap)
+        table.insert(resultRandomTwo, ranomlyChosenMap)
 
         return resultRandomTwo
     end

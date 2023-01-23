@@ -95,6 +95,10 @@ function GM:PlayerCanHearPlayersVoice(listener, speaker)
 		return false, false
 	end
 
+	if speaker:GetNWBool(JM_Global_Buff_Jammer_NWBool, false) or listener:GetNWBool(JM_Global_Buff_Jammer_NWBool, false) then
+		return false, false
+	end
+
 	local speakerTeam = speaker:GetTeam()
 	local roundState = GetRoundState()
 	local isGlobalVoice = speaker[speakerTeam .. "_gvoice"]

@@ -229,6 +229,13 @@ JM_Global_Buff_AntidotePoison_IconName                          = "JM_Buff_Icon_
 JM_Global_Buff_AntidotePoison_IconPath                          = "vgui/ttt/joshmate/hud_poisondart.png"
 JM_Global_Buff_AntidotePoison_IconGoodBad                       = "bad"
 
+JM_Global_Buff_Jammer_Name                                      = "Jammer"
+JM_Global_Buff_Jammer_Duration                                  = 15
+JM_Global_Buff_Jammer_NWBool                                    = "JM_Buff_NWBool_IsJammer"
+JM_Global_Buff_Jammer_IconName                                  = "JM_Buff_Icon_Jammer"
+JM_Global_Buff_Jammer_IconPath                                  = "vgui/ttt/joshmate/hud_jammer.png"
+JM_Global_Buff_Jammer_IconGoodBad                               = "bad"
+
 
 
 -- Karma Buffs
