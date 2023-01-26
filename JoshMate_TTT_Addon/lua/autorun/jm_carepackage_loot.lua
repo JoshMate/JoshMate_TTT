@@ -277,7 +277,7 @@ end
 
 function JM_CarePackage_Loot_HighJump( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","High Jump (You can now jump higher)")
-    activator:SetJumpPower(350)
+    JM_GiveBuffToThisPlayer("jm_buff_highjump",activator,caller)
 end
 
 
@@ -811,9 +811,8 @@ function JM_CarePackage_Loot_Size_Grow( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Mushroom: Grow")
     JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " has grown!")
-
     JM_Function_PlaySound("mario_mushroom_grow.mp3")
-    activator:SetModelScale( activator:GetModelScale() * 1.3, 3)
+    JM_GiveBuffToThisPlayer("jm_buff_size_grow",activator,caller)
 
 end
 
@@ -821,10 +820,9 @@ function JM_CarePackage_Loot_Size_Shrink( activator, caller )
 
     JM_Function_PrintChat(activator, "Care Package","Mushroom: Shrink")
     JM_Function_Announcement("[Care Package]" .. tostring(activator:Nick()) ..  " has shrunk!")
-
     JM_Function_PlaySound("mario_mushroom_shrink.mp3")
-    activator:SetModelScale( activator:GetModelScale() * 0.7, 3)
-
+    JM_GiveBuffToThisPlayer("jm_buff_size_shrink",activator,caller)
+    
 end
 
 -------------------------------------------------

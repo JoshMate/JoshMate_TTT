@@ -434,14 +434,14 @@ cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
 -- ### Next Map Random
 -- ##################################################
 
-local function JM_ULX_MapVoteFull()
+local function JM_ULX_MapVote3Way()
 
-	JM_Function_PrintChat_All("Map", "The next map vote will be a FULL vote (Manual)")
-	JM_Global_MapVote_FullVote = true
+	JM_Function_PrintChat_All("Map", "The next map vote will be a 3 way vote (Manual)")
+	JM_Global_MapVote_FullVote = false
 
 end
 
-local cmdMapVoteFull = ulx.command(CATEGORY_NAME_JM_Maps, "jm enable fullmapvote", function () JM_ULX_MapVoteFull() end, "!mapfullvote")
+local cmdMapVoteFull = ulx.command(CATEGORY_NAME_JM_Maps, "jm enable votemethod3Way", function () JM_ULX_MapVote3Way() end, "!votemethod3Way")
 cmdMapVoteFull:defaultAccess(ULib.ACCESS_ADMIN)
 
 

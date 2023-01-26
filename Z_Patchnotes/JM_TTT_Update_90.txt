@@ -4,32 +4,34 @@ Josh Mate TTT Update 90 - Patch Notes
 #### Gameplay
 ###################################
 
-[Jammer]
-- New Traitor item
-- When used it blocks sending and receiving voice chat for nearby players
-- They receive a de-buff and a message for the duration so they know it's blocked
-- 1 Use and has roughly the same radius as proxy voice does
-- Jammed players are also tracked on your HUD so you know who is affected
-- It doesn't affect Traitors so think carefully about what that means (Accidental Self Reveal)
-
 [Item Shop]
 - Reverted the Shops back to pick any item you want
 
 [Map Vote]
 - Reverted the map vote back to pick any map you want
 
-[Care Package Loot]
-- New Rare Loot: What's the dog doing apocalypse (Spawns lots of "dogs")
-- New Rare Loot: Mushroom: Grow (Makes you bigger)
-- New Rare Loot: Mushroom: Shrink (Makes you Smaller)
-- New Rare Loot: High Jump (Increases your jump height)
+[Loot: Mushroom Shrink]
+- Reduces Size by 40%
+- Increases Movement speed by: 20%
+- Halves Health
+- Added unique buff and icon
 
-[Game mode: Infection]
-- Reduced Zombie re spawn time: 20 -> 15 Seconds
+[Loot: Mushroom Grow]
+- Increases Size by 40%
+- Reduces Movement speed by: 20%
+- Doubles Health
+- Added unique buff and icon
+
+[Loot: High Jump]
+- Fixed a bug where you would keep your high jump across rounds
+- Added a +10% movement speed boost too
+- Added unique buff and icon
 
 ###################################
 #### Maps
 ###################################
+
+- Nothing
 
 ###################################
 End of Patch Notes

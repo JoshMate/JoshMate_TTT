@@ -4,7 +4,7 @@ util.AddNetworkString("MapVote_End")
 util.AddNetworkString("MapVote_UpdateFromClient")
 util.AddNetworkString("MapVote_UpdateToAllClient")
 
-JM_Global_MapVote_FullVote = false
+JM_Global_MapVote_FullVote = True
 
 net.Receive("MapVote_UpdateFromClient", function(len, ply)
     if MapVote.active then
@@ -158,7 +158,7 @@ function MapVote:GetRandomMaps()
         return resultRandomTwo
     end
 
-    JM_Global_MapVote_FullVote = false
+    JM_Global_MapVote_FullVote = True
 
     return result
 end

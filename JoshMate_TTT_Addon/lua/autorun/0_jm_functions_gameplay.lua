@@ -25,6 +25,20 @@ function JM_Function_ResetAllSettings()
 	if timer.Exists("Timer_SloMo_Clock") then timer.Destroy("Timer_SloMo_Clock") end
 	game.SetTimeScale(1)
 
+	-- -- Set all players Vars
+	-- for _, ply in ipairs( player.GetAll() ) do
+    --     if (ply:IsValid()) then
+    --         -- Change some gmod defaults
+	-- 		ply:SetCanZoom(false)
+	-- 		ply:SetJumpPower(180)
+	-- 		ply:SetCrouchedWalkSpeed(0.3)
+	-- 		ply:SetRunSpeed(220)
+	-- 		ply:SetWalkSpeed(220)
+	-- 		ply:SetMaxSpeed(220)
+    --     end
+    -- end
+	
+
 end
 
 if SERVER then

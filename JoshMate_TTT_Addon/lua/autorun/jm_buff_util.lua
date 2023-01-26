@@ -306,6 +306,29 @@ JM_Global_Buff_Care_RapidFire_IconName                  = "JM_Buff_Icon_RapidFir
 JM_Global_Buff_Care_RapidFire_IconPath                  = "vgui/ttt/joshmate/hud_rapidfire.png"
 JM_Global_Buff_Care_RapidFire_IconGoodBad               = "good"
 
+JM_Global_Buff_Care_HighJump_Name                       = "High Jump"
+JM_Global_Buff_Care_HighJump_Duration                   = 0
+JM_Global_Buff_Care_HighJump_NWBool                     = "JM_Buff_NWBool_IsHighJump"
+JM_Global_Buff_Care_HighJump_IconName                   = "JM_Buff_Icon_HighJump"
+JM_Global_Buff_Care_HighJump_IconPath                   = "vgui/ttt/joshmate/hud_agility.png"
+JM_Global_Buff_Care_HighJump_IconGoodBad                = "good"
+
+JM_Global_Buff_Care_Shrink_Name                         = "Shrink"
+JM_Global_Buff_Care_Shrink_Duration                     = 0
+JM_Global_Buff_Care_Shrink_NWBool                       = "JM_Buff_NWBool_IsShrink"
+JM_Global_Buff_Care_Shrink_IconName                     = "JM_Buff_Icon_Shrink"
+JM_Global_Buff_Care_Shrink_IconPath                     = "vgui/ttt/joshmate/hud_size_shrink.png"
+JM_Global_Buff_Care_Shrink_IconGoodBad                  = "good"
+
+JM_Global_Buff_Care_Grow_Name                           = "Grow"
+JM_Global_Buff_Care_Grow_Duration                       = 0
+JM_Global_Buff_Care_Grow_NWBool                         = "JM_Buff_NWBool_IsGrow"
+JM_Global_Buff_Care_Grow_IconName                       = "JM_Buff_Icon_Grow"
+JM_Global_Buff_Care_Grow_IconPath                       = "vgui/ttt/joshmate/hud_size_grow.png"
+JM_Global_Buff_Care_Grow_IconGoodBad                    = "good"
+
+
+
 
 -- Special Buffs
 
