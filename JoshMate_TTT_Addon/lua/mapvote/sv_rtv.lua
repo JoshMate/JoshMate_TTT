@@ -36,13 +36,13 @@ concommand.Add("skip", function(ply, cmd, args)
     if not RTV:ExistsInTable(ply) then
         RTV:AddVote(ply)
         local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
-        if roundsLeft > 0 then 
+        if roundsLeft > 2 then 
             JM_Function_RemoveRounds(1) 
             local roundsLeft = GetGlobalInt("ttt_rounds_left", 6)
             msg = tostring(ply:Nick()) .. " has skipped. (Rounds Left: " .. tostring(roundsLeft) .. ")"
             JM_Function_PrintChat_All("Admin", msg)   
         else
-            JM_Function_PrintChat(ply, "Admin", "There are no more rounds left to skip...")
+            JM_Function_PrintChat(ply, "Admin", "You can't skip when there are only " .. tostring(roundsLeft) .. " rounds left...")
         end
             
     else

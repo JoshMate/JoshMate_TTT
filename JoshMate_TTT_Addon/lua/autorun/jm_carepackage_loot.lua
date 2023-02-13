@@ -64,7 +64,8 @@ local lootTable = {
         JM_CarePackage_Loot_Landmine_Apocalypse,
         JM_CarePackage_Loot_Dog_Apocalypse,
         JM_CarePackage_Loot_Size_Grow,
-        JM_CarePackage_Loot_Size_Shrink
+        JM_CarePackage_Loot_Size_Shrink,
+        JM_CarePackage_Loot_Trouble_in_This_Town_Radio
     }
 }
 
@@ -824,6 +825,13 @@ function JM_CarePackage_Loot_Size_Shrink( activator, caller )
     JM_GiveBuffToThisPlayer("jm_buff_size_shrink",activator,caller)
     
 end
+
+function JM_CarePackage_Loot_Trouble_in_This_Town_Radio( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Trouble in This Town Radio")
+    Loot_SpawnThis(caller,"ent_jm_zloot_radio_troubleinthistown")
+end
+
+
 
 -------------------------------------------------
 -- End of Table of Rare Loots

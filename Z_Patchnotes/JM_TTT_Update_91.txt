@@ -1,0 +1,42 @@
+###################################
+Josh Mate TTT Update 91 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Burger Swep]
+- New Detective Item
+- Place an edible burger that heals for 50 HP and boosts max HP by 10
+- You get 5 of them and detectives get reduced effects and no Max HP
+
+[Loot: Trouble in This Town Radio]
+- A new rare carepackage loot
+- A radio that plays the rap song from the Trouble in This Town album
+
+[Credit System]
+- Increased Traitor Starting Credits: 1 -> 2 Credits
+
+[Round System] 
+- Increased number of rounds per map: 5 -> 6
+- You can no longer !skip a map if there 2 or less rounds left
+
+[Map Vote]
+- Reverted the map vote system back to 3 Way random voting
+
+[Soap]
+- Reduced Uses: 2 -> 1 Soaps
+
+[Fixes and Bugs]
+- The Barrel Swep's world model is no longer just a regular explosive barrel
+
+###################################
+#### Maps
+###################################
+
+[TTT Warmup]
+- Reworked and expanded with new activities and better layout
+
+###################################
+End of Patch Notes
+###################################
+

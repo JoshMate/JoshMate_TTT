@@ -1,28 +1,28 @@
 AddCSLuaFile()
 
-SWEP.PrintName				= "Barrel Swep"
+SWEP.PrintName				= "Burger Swep"
 SWEP.Author			    	= "Josh Mate"
 SWEP.Instructions			= "Places a certain type of object"
 SWEP.EquipMenuData = {
 	type = "item_weapon",
 	desc = [[A Utility Item
 
-Place explosive barrels which explode upon taking damage
+Place an edible burger that heals for 50 HP and boosts max HP by 10
  
-Left click to place and right click to weld to a surface
+You get 5 of them and detectives get reduced effects and no Max HP
 ]]
  };
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 6
-SWEP.Primary.DefaultClip	= 6
+SWEP.Primary.ClipSize		= 5
+SWEP.Primary.DefaultClip	= 5
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
 SWEP.Slot			    	= 7
-SWEP.ViewModel 				= "models/props_c17/oildrum001_explosive.mdl"
-SWEP.WorldModel				= "models/mechanics/robotics/a1.mdl"
+SWEP.ViewModel 				= "models/food/burger.mdl"
+SWEP.WorldModel				= "models/food/burger.mdl"
 SWEP.HoldType              = "normal"
 SWEP.HoldReady             = "normal"
 SWEP.HoldNormal            = "normal"
@@ -34,25 +34,22 @@ SWEP.AllowDrop 				= true
 SWEP.Base 					= "weapon_jm_base_gun"
 SWEP.Kind 					= WEAPON_EQUIP1
 SWEP.AutoSpawnable			= false
-SWEP.CanBuy 				= {}
+SWEP.CanBuy 				= {ROLE_DETECTIVE}
 SWEP.LimitedStock 			= true
 
 
 -- Placer Style Swep Config
-SWEP.JM_Trap_PlaceRange					= 360
+SWEP.JM_Trap_PlaceRange					= 150
 
-SWEP.JM_Trap_Entity_Class				= "prop_physics"
-SWEP.JM_Trap_Entity_Colour				= Color( 255, 50, 50, 255)
-
-SWEP.JM_Trap_Prop_True					= true
-SWEP.JM_Trap_Prop_Model					= "models/props_c17/oildrum001_explosive.mdl"
+SWEP.JM_Trap_Entity_Class				= "ent_jm_equip_burger"
+SWEP.JM_Trap_Entity_Colour				= Color( 255, 255, 255, 255)
 
 
 if CLIENT then
-	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_barrelswep.png"
+	SWEP.Icon = "vgui/ttt/joshmate/icon_jm_burger.png"
 	
 	function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 55 - ang:Right() * -25 - ang:Up() * 55, ang
+		return pos + ang:Forward() * 20 - ang:Right() * 15 - ang:Up() * 23, ang
 	end
 end
 
@@ -87,39 +84,29 @@ local function TryFixPropPosition( ply, ent, hitpos )
 end
 -- End of Fix Spawning
 
-function SWEP:PlaceThing(isWelded)
+function SWEP:PlaceThing()
 
 	local tr = util.TraceLine({start = self:GetOwner():GetShootPos(), endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.JM_Trap_PlaceRange, filter = self:GetOwner()})
 	if (tr.Hit) then
 
-		self:GetOwner():EmitSound("shoot_barrel.mp3")
-
 		if CLIENT then return end
+
+		self:GetOwner():EmitSound("shoot_barrel.mp3")
 		
 		local dot = vector_up:Dot(tr.HitNormal)
 		local ent = ents.Create(self.JM_Trap_Entity_Class)
-
-		-- If its a prop then set it's model
-		if self.JM_Trap_Prop_True == true then ent:SetModel(self.JM_Trap_Prop_Model) end
 		
 		ent:SetPos(tr.HitPos + tr.HitNormal)
 		local ang = tr.HitNormal:Angle()
 		ang:RotateAroundAxis(ang:Right(), -90)
 		ent:SetAngles(ang)
-		
-		ent:PhysicsInit(SOLID_VPHYSICS)
-		ent:SetMoveType(MOVETYPE_VPHYSICS)
-		ent:SetSolid(SOLID_VPHYSICS)
-		ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+		ent:SetOwner(self:GetOwner())
+		ent.owner = self:GetOwner()
 
 		ent:Spawn()
 
 		ent:SetRenderMode( RENDERMODE_TRANSCOLOR )
 		ent:SetColor(self.JM_Trap_Entity_Colour)
-
-		-- Weld or Place
-		if isWelded == true then ent:GetPhysicsObject():EnableMotion( false ) end
-		if isWelded == false then ent:GetPhysicsObject():EnableMotion( true ) end
 
 		-- Fix In Wall props
 		TryFixPropPosition( self:GetOwner(), ent, tr.HitPos )
@@ -142,15 +129,12 @@ function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
 	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 	self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
-	self:PlaceThing(false)
+	self:PlaceThing()
 	
 end
 
 function SWEP:SecondaryAttack()
-	if not self:CanPrimaryAttack() then return end
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
-	self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
-	self:PlaceThing(true)
+	return
 end
 
 -- ##############################################
@@ -160,7 +144,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Place in front of you", "Weld to a surface", true)
+	   self:AddTTT2HUDHelp("Weld to a surface", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end
@@ -182,6 +166,11 @@ function SWEP:DrawWorldModelTranslucent()
    if IsValid(self:GetOwner()) then return end
    self:DrawModel()
 end
+-- Delete on Drop
+function SWEP:OnDrop() 
+	self:Remove()
+ end
+
 -- ##############################################
 -- End of Josh Mate Various SWEP Quirks
 -- ##############################################

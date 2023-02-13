@@ -436,8 +436,8 @@ cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
 
 local function JM_ULX_MapVote3Way()
 
-	JM_Function_PrintChat_All("Map", "The next map vote will be a 3 way vote (Manual)")
-	JM_Global_MapVote_FullVote = false
+	JM_Function_PrintChat_All("Map", "The next map vote will be a full vote (Manual)")
+	JM_Global_MapVote_FullVote = true
 
 end
 
