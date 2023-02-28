@@ -8,9 +8,9 @@ ENT.Instructions= "Blinder"
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 
-local suppressionOrb_Duration				= 60
+local suppressionOrb_Duration				= 20
 local suppressionOrb_ArmTime				= 2.5
-local suppressionOrb_Radius_Slow			= 230
+local suppressionOrb_Radius_Slow			= 220
 local suppressionOrb_Delay_Tick				= 0.35
 local suppressionOrb_Damage					= 8
 

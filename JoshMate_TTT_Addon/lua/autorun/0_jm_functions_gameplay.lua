@@ -25,27 +25,33 @@ function JM_Function_ResetAllSettings()
 	if timer.Exists("Timer_SloMo_Clock") then timer.Destroy("Timer_SloMo_Clock") end
 	game.SetTimeScale(1)
 
-	-- -- Set all players Vars
-	-- for _, ply in ipairs( player.GetAll() ) do
-    --     if (ply:IsValid()) then
-    --         -- Change some gmod defaults
-	-- 		ply:SetCanZoom(false)
-	-- 		ply:SetJumpPower(180)
-	-- 		ply:SetCrouchedWalkSpeed(0.3)
-	-- 		ply:SetRunSpeed(220)
-	-- 		ply:SetWalkSpeed(220)
-	-- 		ply:SetMaxSpeed(220)
-    --     end
-    -- end
-	
+	JM_Function_ResetPlayerSettings()
 
 end
 
-if SERVER then
+function JM_Function_ResetPlayerSettings()
+	-- Set all players Vars
+	local plys = player.GetAll()
+	for i = 1, #plys do
+		local ply = plys[i]
+		if (ply:IsValid()) then
+			ply:SetCanZoom(false)
+			ply:SetJumpPower(180)
+			ply:SetCrouchedWalkSpeed(0.3)
+			ply:SetRunSpeed(220)
+			ply:SetWalkSpeed(220)
+			ply:SetMaxSpeed(220)
+		    ply:SetModelScale(1, 1)
+			ply:SetViewOffset(Vector(0, 0, 64 * 1 ))
+			ply:SetViewOffsetDucked(Vector(0, 0, 64 * 1  / 2))
+		end
+	end	
+end
 
+if SERVER then
 	hook.Add("TTTEndRound", "JM_End_Reset_CVars", function() JM_Function_ResetAllSettings() end)
 	hook.Add("TTTPrepareRound", "JM_Prep_Reset_CVars", function() JM_Function_ResetAllSettings() end)
-
+	hook.Add("TTTBeginRound", "JM_Begin_Reset_CVars", function() JM_Function_ResetPlayerSettings() end)
 end
 
 
@@ -115,7 +121,7 @@ function JM_Function_GiveHitMarkerToPlayer(playerRecievingHitMarker, damageDealt
 
 	if CLIENT then return end
 
-	if playerRecievingHitMarker == nil then return end
+	if playerRecievingHitMarker == nil or not playerRecievingHitMarker:IsPlayer() then return end
 
 	-- JM Changes Extra Hit Marker
 	net.Start( "JM_Net_HitMarker" )

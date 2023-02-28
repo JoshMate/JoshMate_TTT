@@ -37,7 +37,7 @@ function ENT:Initialize()
    if SERVER then
       if self.Trail_Enabled then
          if IsValid(self) then 
-            util.SpriteTrail( self, 0, self.Trail_Colour, true, self.Trail_StartWidth, self.Trail_EndWidth, 0.5, (1 / ( self.Trail_StartWidth + self.Trail_EndWidth ) * 0.5), "sprites/laserbeam" )
+            util.SpriteTrail( self, 0, self.Trail_Colour, true, self.Trail_StartWidth, self.Trail_EndWidth, 1, (1 / ( self.Trail_StartWidth + self.Trail_EndWidth ) * 0.5), "sprites/laserbeam" )
          end
       end
    end

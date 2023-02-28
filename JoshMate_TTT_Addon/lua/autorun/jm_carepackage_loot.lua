@@ -29,7 +29,8 @@ local lootTable = {
         JM_CarePackage_Loot_InfernoLauncher,
         JM_CarePackage_Loot_Armour,
         JM_CarePackage_Loot_BarrelSwep,
-        JM_CarePackage_Loot_HighJump
+        JM_CarePackage_Loot_HighJump,
+        JM_CarePackage_Loot_UnstableTeleporter
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -52,9 +53,6 @@ local lootTable = {
         JM_CarePackage_Loot_Man_Hack_Apocalypse,
         JM_CarePackage_Loot_Mass_Teleport,
         JM_CarePackage_Loot_Dopamine_Button,
-        JM_CarePackage_Loot_Gus_Radio,
-        JM_CarePackage_Loot_Built_Differently_Radio,
-        JM_CarePackage_Loot_A_Bird_Flew_In_Radio,
         JM_CarePackage_Loot_Glue,
         JM_CarePackage_Loot_Mass_Glue,
         JM_CarePackage_Loot_Manual_Breathing,
@@ -65,7 +63,7 @@ local lootTable = {
         JM_CarePackage_Loot_Dog_Apocalypse,
         JM_CarePackage_Loot_Size_Grow,
         JM_CarePackage_Loot_Size_Shrink,
-        JM_CarePackage_Loot_Trouble_in_This_Town_Radio
+        JM_CarePackage_Loot_Music_Radio
     }
 }
 
@@ -225,11 +223,6 @@ function JM_CarePackage_Loot_Pigeon( activator, caller )
     activator:AddCredits(1)
 end
 
-function JM_CarePackage_Loot_Gus_Radio( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Gus Radio")
-    Loot_SpawnThis(caller,"ent_jm_zloot_radio_gus")
-end
-
 function JM_CarePackage_Loot_Rooty_Tooty( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Rooty Tooty Point and Shooty")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_shotgun")
@@ -243,16 +236,6 @@ end
 function JM_CarePackage_Loot_Mega_Jump( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Mega Jump Grenade")
     Loot_SpawnThis(caller,"weapon_jm_zloot_mega_jump")
-end
-
-function JM_CarePackage_Loot_Built_Differently_Radio( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Built Differently Radio")
-    Loot_SpawnThis(caller,"ent_jm_zloot_radio_builtdifferently")
-end
-
-function JM_CarePackage_Loot_A_Bird_Flew_In_Radio( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","A Bird Flew In Radio")
-    Loot_SpawnThis(caller,"ent_jm_zloot_radio_birdflewin")
 end
 
 function JM_CarePackage_Loot_GlueGun( activator, caller )
@@ -279,6 +262,11 @@ end
 function JM_CarePackage_Loot_HighJump( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","High Jump (You can now jump higher)")
     JM_GiveBuffToThisPlayer("jm_buff_highjump",activator,caller)
+end
+
+function JM_CarePackage_Loot_UnstableTeleporter( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Unstable Teleporter")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_teleporterunstable")
 end
 
 
@@ -826,9 +814,9 @@ function JM_CarePackage_Loot_Size_Shrink( activator, caller )
     
 end
 
-function JM_CarePackage_Loot_Trouble_in_This_Town_Radio( activator, caller )
-    JM_Function_PrintChat(activator, "Care Package","Trouble in This Town Radio")
-    Loot_SpawnThis(caller,"ent_jm_zloot_radio_troubleinthistown")
+function JM_CarePackage_Loot_Music_Radio( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Music Radio")
+    Loot_SpawnThis(caller,"ent_jm_zloot_radio_music")
 end
 
 

@@ -6,8 +6,8 @@ SWEP.Instructions			= "Leftclick to place soap"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 1
-SWEP.Primary.DefaultClip	= 1
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -37,7 +37,7 @@ Left click to place a hard to see soap trap on the floor
 
 Players can slip on soap, dropping their weapon and getting flung
 
-It has 1 uses
+It has 2 uses
 ]]
 	}
 	

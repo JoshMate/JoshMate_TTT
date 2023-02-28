@@ -42,8 +42,10 @@ hook.Add("TTTBeginRound", "JM_Credits_ForSurvival", function()
 
     creditScoreTraitorKills = 0
 
-    timer.Create( "JM_Timer_Detective_Credits", 60, 3, function() JM_CreditsGiveAllDetectivesCredit("Surviving.") end )
-    timer.Create( "JM_Timer_Traitor_Credits", 60, 2, function() JM_CreditsGiveAllTraitorsCredit("Surviving.") end )
+    timer.Destroy("JM_Timer_Detective_Credits")
+    timer.Destroy("JM_Timer_Traitor_Credits")
+    timer.Create( "JM_Timer_Detective_Credits", 45, 4, function() JM_CreditsGiveAllDetectivesCredit("Surviving.") end )
+    timer.Create( "JM_Timer_Traitor_Credits", 45, 4, function() JM_CreditsGiveAllTraitorsCredit("Surviving.") end )
 
 end)
 
@@ -52,13 +54,13 @@ hook.Add( "PlayerDeath", "JM_Credits_ForDeaths", function( victim, inflictor, at
     if victim:IsDetective() then JM_CreditsGiveAllTraitorsCredit("Killing a Detective.") end
     if victim:IsTraitor() then JM_CreditsGiveAllDetectivesCredit("Killing a Traitor.") end
 
-    if not victim:IsTraitor() and not victim:IsDetective() then
+    if not victim:IsTraitor() then
         creditScoreTraitorKills = creditScoreTraitorKills + 1
     end
 
-    if creditScoreTraitorKills >= 2 then
+    if creditScoreTraitorKills >= 1 then
         creditScoreTraitorKills = 0
-        JM_CreditsGiveAllTraitorsCredit("Killing 2 more Innocents.")
+        JM_CreditsGiveAllTraitorsCredit("Killing an Innocent.")
     end
 
     

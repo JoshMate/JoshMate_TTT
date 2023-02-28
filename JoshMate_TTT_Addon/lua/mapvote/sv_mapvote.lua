@@ -138,22 +138,18 @@ function MapVote:GetRandomMaps()
         end
     end
 
-    if JM_Global_MapVote_FullVote == false and addedMaps >= 2 then
+    if JM_Global_MapVote_FullVote == false and addedMaps >= 5 then
 
-        -- Add 1 Random Map
-        local ranomlyChosenMap = table.Random(result)
-        table.RemoveByValue(result, ranomlyChosenMap)
-        table.insert(resultRandomTwo, ranomlyChosenMap)
+        local randomMapMin = 2
+        local randomMapMax = 5
 
-        -- Add 1 more Random Map
-        ranomlyChosenMap = table.Random(result)
-        table.RemoveByValue(result, ranomlyChosenMap)
-        table.insert(resultRandomTwo, ranomlyChosenMap)
-        
-        -- Add 1 more Random Map
-        ranomlyChosenMap = table.Random(result)
-        table.RemoveByValue(result, ranomlyChosenMap)
-        table.insert(resultRandomTwo, ranomlyChosenMap)
+        local randomMapChosen = math.random(randomMapMin, randomMapMax)
+
+        for i=1,randomMapChosen do 
+            local ranomlyChosenMap = table.Random(result)
+            table.RemoveByValue(result, ranomlyChosenMap)
+            table.insert(resultRandomTwo, ranomlyChosenMap) 
+        end 
 
         return resultRandomTwo
     end

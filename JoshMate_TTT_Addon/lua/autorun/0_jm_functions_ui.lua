@@ -52,11 +52,12 @@ end
 function JM_Function_PrintChat(player, prefixMessageString, chatMessageString)
 
 	if CLIENT then return end
-
-	net.Start("JM_Net_PrintChat")
-	net.WriteString(tostring(prefixMessageString))
-	net.WriteString(tostring(chatMessageString))
-	net.Send(player)
+	if player:IsPlayer() then
+		net.Start("JM_Net_PrintChat")
+		net.WriteString(tostring(prefixMessageString))
+		net.WriteString(tostring(chatMessageString))
+		net.Send(player)
+	end
 
 end
 

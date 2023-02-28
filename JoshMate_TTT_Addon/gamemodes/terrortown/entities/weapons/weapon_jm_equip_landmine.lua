@@ -1,13 +1,13 @@
 AddCSLuaFile()
 
-SWEP.PrintName				= "Floor Bomb"
+SWEP.PrintName				= "Landmine"
 SWEP.Author			    	= "Josh Mate"
-SWEP.Instructions			= "Leftclick to place Floor Bomb"
+SWEP.Instructions			= "Leftclick to place Landmine"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Primary.ClipSize		= 1
-SWEP.Primary.DefaultClip	= 1
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -37,7 +37,7 @@ Left click to place an easy to see but indestructible
 
 Players who step on the trap will be blown up
 
-It has 1 use and takes 5 seconds to appear
+It has 2 uses and takes 5 seconds to appear
 ]]
 	}
 	

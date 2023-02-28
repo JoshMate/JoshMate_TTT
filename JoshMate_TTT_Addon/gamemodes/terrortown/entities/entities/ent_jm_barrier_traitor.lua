@@ -14,7 +14,7 @@ if CLIENT then
     end
 end
 
-local JM_Barrier_LifeTime			= 30
+local JM_Barrier_LifeTime			= 20
 
 local JM_Barrier_Colour				= Color( 255, 0, 0, 255 )
 local JM_Barrier_Colour_Dormant		= Color( 0, 0, 0, 0 )

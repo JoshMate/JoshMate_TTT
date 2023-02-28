@@ -8,9 +8,9 @@ ENT.Instructions= "Blinder"
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 
-local fireOrb_Duration				= 60
+local fireOrb_Duration				= 20
 local fireOrb_ArmTime				= 2.5
-local fireOrb_Radius_Slow			= 230
+local fireOrb_Radius_Slow			= 220
 local fireOrb_Delay_Tick			= 0.35
 local fireOrb_Damage				= 8
 

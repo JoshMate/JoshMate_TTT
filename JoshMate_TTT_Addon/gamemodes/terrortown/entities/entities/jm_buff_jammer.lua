@@ -31,7 +31,28 @@ ENT.BuffIconName                = JM_BuffIconName
 
 if CLIENT then
 
+    -- Set up screen effect table
+    local effectTable_Jammer = {
 
+        ["$pp_colour_addr"] = 0,
+        ["$pp_colour_addg"] = 0,
+        ["$pp_colour_addb"] = 0,
+        ["$pp_colour_brightness"] = -0.25,
+        ["$pp_colour_contrast"] = 1,
+        ["$pp_colour_colour"] = 0,
+        ["$pp_colour_mulr"] = 0,
+        ["$pp_colour_mulg"] = 0,
+        ["$pp_colour_mulb"] = 0
+    }
+
+    -- Render Any Screen Effects
+    hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
+
+        if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
+            DrawColorModify( effectTable_Jammer )
+        end 
+
+    end)
     
 end
 

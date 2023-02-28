@@ -39,9 +39,13 @@ end
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-    self.targetPlayer:SetModelScale( self.targetPlayer:GetModelScale() * 1.4, 3)
-    self.targetPlayer:SetMaxHealth(self.targetPlayer:GetMaxHealth() * 2) 
-    self.targetPlayer:SetHealth(self.targetPlayer:GetMaxHealth()) 
+    self.SizenewScaleMult = self.targetPlayer:GetModelScale() * 1.6
+    self.SizenewHealthMult = 3
+    self.targetPlayer:SetModelScale(self.SizenewScaleMult, 3)
+    self.targetPlayer:SetMaxHealth(self.targetPlayer:GetMaxHealth() * self.SizenewHealthMult) 
+    self.targetPlayer:SetHealth(self.targetPlayer:GetMaxHealth())
+    self.targetPlayer:SetViewOffset(Vector(0, 0, 64 * self.SizenewScaleMult ))
+    self.targetPlayer:SetViewOffsetDucked(Vector(0, 0, 64 * self.SizenewScaleMult  / 2))
 
 end
 
@@ -53,7 +57,7 @@ end
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.8
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.6
     end 
 end)
 

@@ -20,8 +20,8 @@ SWEP.LimitedStock = true
 SWEP.DeploySpeed           = 4
 
 SWEP.Primary.Delay 			= 0.3
-SWEP.Primary.ClipSize		= 1
-SWEP.Primary.DefaultClip	= 1
+SWEP.Primary.ClipSize		= 2
+SWEP.Primary.DefaultClip	= 2
 
 if CLIENT then
    SWEP.Icon = "vgui/ttt/joshmate/icon_jm_beartrap.png"
@@ -33,11 +33,11 @@ if CLIENT then
 	
 	It will immobilize and kill anyone who is caught in it.
 
-	Another player can release you if they are quick.
-
-	You will be informed via chat about how your trap is doing.
+	Another player can release them if they are quick.
 
 	Your traps will show up to other Traitors
+
+	Has 2 uses and are quite hard to see
 	]]
    }
 

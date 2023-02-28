@@ -39,9 +39,13 @@ end
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-    self.targetPlayer:SetModelScale( self.targetPlayer:GetModelScale() * 0.4, 3)
-    self.targetPlayer:SetMaxHealth(self.targetPlayer:GetMaxHealth() / 2) 
-    self.targetPlayer:SetHealth(self.targetPlayer:GetMaxHealth()) 
+    self.SizenewScaleMult = self.targetPlayer:GetModelScale() * 0.4
+    self.SizenewHealthMult = 0.25
+    self.targetPlayer:SetModelScale(self.SizenewScaleMult, 3)
+    self.targetPlayer:SetMaxHealth(self.targetPlayer:GetMaxHealth() * self.SizenewHealthMult) 
+    self.targetPlayer:SetHealth(self.targetPlayer:GetMaxHealth())
+    self.targetPlayer:SetViewOffset(Vector(0, 0, 64 * self.SizenewScaleMult ))
+    self.targetPlayer:SetViewOffsetDucked(Vector(0, 0, 64 * self.SizenewScaleMult  / 2))
 
 end
 

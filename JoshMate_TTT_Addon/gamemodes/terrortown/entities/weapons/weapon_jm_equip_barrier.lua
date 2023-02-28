@@ -12,7 +12,7 @@ SWEP.Instructions			= "Leftclick to place a barrier"
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
-SWEP.Secondary.Delay 		= 0.5
+SWEP.Secondary.Delay 		= 0.25
 SWEP.Primary.ClipSize		= 3
 SWEP.Primary.DefaultClip	= 3
 SWEP.Primary.Automatic		= false
@@ -45,7 +45,7 @@ Left Click to place an invisible barrier
 
 Right click to activate invisible barriers
 
-It has 2 uses
+It has 4 uses
 ]]
 	}
 
@@ -102,6 +102,13 @@ function SWEP:SecondaryAttack()
 	end
 
 	JM_Function_PrintChat(self:GetOwner(), "Equipment", tostring(numberOfBarriersActivated) .. " Barriers Activated!")
+
+	if SERVER then
+		if self:Clip1() <= 0 then
+		   self:Remove()
+		end
+	 end
+  
 
 end
 

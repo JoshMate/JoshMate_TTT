@@ -59,7 +59,7 @@ local JM_Cone_Scope        = 0
 local JM_Shoot_Range       = 10000
 
 local JM_AWP_Blast_Radius  = 350
-local JM_AWP_Blast_Damage  = 30
+local JM_AWP_Blast_Damage  = 35
 
 SWEP.Primary.Sound         = "shoot_awp_loud.wav"
 SWEP.Secondary.Sound       = Sound("Default.Zoom")

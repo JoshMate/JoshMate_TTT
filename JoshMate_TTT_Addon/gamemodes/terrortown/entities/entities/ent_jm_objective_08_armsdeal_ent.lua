@@ -19,8 +19,8 @@ function ENT:Initialize()
 	self:SetColor(Color( 0, 255, 0, 255))
 	
 	self.Objective_ArmsDeal_Score		= 0
-	self.Objective_ArmsDeal_Goal		= 50
-	self.Objective_ArmsDeal_Radius		= 24
+	self.Objective_ArmsDeal_Goal		= 100
+	self.Objective_ArmsDeal_Radius		= 32
 
 	if SERVER then
 		self:SetUseType(SIMPLE_USE)
@@ -82,24 +82,24 @@ function ENT:ArmsDealDetectWeapon()
 		-- Process the weapon as it is in range
 		local scoreGiven = 0
 
-		if weapon:GetClass() == "weapon_jm_primary_lmg" then scoreGiven = 8 end
-		if weapon:GetClass() == "weapon_jm_primary_sniper" then scoreGiven = 5 end
-		if weapon:GetClass() == "weapon_jm_primary_rifle" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_primary_smg" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_primary_shotgun" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_secondary_heavy" then scoreGiven = 3 end
-		if weapon:GetClass() == "weapon_jm_secondary_auto" then scoreGiven = 3 end
-		if weapon:GetClass() == "weapon_jm_secondary_light" then scoreGiven = 2 end
-		if weapon:GetClass() == "weapon_jm_grenade_frag" then scoreGiven = 3 end
-		if weapon:GetClass() == "weapon_jm_grenade_glue" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_grenade_health" then scoreGiven = 3 end
-		if weapon:GetClass() == "weapon_jm_grenade_jump" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_grenade_tag" then scoreGiven = 2 end
+		if weapon:GetClass() == "weapon_jm_primary_lmg" then scoreGiven = 15 end
+		if weapon:GetClass() == "weapon_jm_primary_sniper" then scoreGiven = 10 end
+		if weapon:GetClass() == "weapon_jm_primary_rifle" then scoreGiven = 8 end
+		if weapon:GetClass() == "weapon_jm_primary_smg" then scoreGiven = 8 end
+		if weapon:GetClass() == "weapon_jm_primary_shotgun" then scoreGiven = 8 end
+		if weapon:GetClass() == "weapon_jm_secondary_heavy" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_secondary_auto" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_secondary_light" then scoreGiven = 4 end
+		if weapon:GetClass() == "weapon_jm_grenade_frag" then scoreGiven = 4 end
+		if weapon:GetClass() == "weapon_jm_grenade_glue" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_grenade_health" then scoreGiven = 4 end
+		if weapon:GetClass() == "weapon_jm_grenade_jump" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_grenade_tag" then scoreGiven = 3 end
 
 		if scoreGiven == 0 then continue end
 
 		self.Objective_ArmsDeal_Score = self.Objective_ArmsDeal_Score + scoreGiven
-		JM_Function_PrintChat_All("Arms Deal", "Weapon Given, New Score: " .. tostring(self.Objective_ArmsDeal_Score) .. "/" .. tostring(self.Objective_ArmsDeal_Goal))
+		JM_Function_PrintChat_All("Arms Deal", "Progress: " .. tostring(self.Objective_ArmsDeal_Score) .. "%")
 
 		self:ArmsDealRemoveEffect(weapon)
 
@@ -147,12 +147,8 @@ function ENT:ArmsDealDetectWeapon()
 
 			end
 			
-			
-			
 			JM_Function_PlaySound("gamemode/file_end.mp3")
-
 			self:Remove()
-
 			break
 		end
 			

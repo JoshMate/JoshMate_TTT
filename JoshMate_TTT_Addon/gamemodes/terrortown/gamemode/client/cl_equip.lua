@@ -91,78 +91,9 @@ local function PreqLabels(parent, x, y)
 	-- remaining credits text
 	tbl.credits.Check = function(s, sel)
 		local credits = client:GetCredits()
-		local cr = sel and sel.credits or 1
+		local cr = sel and JM_ShopCreditCosts[tostring(sel.id)] or 1
 
-		return credits >= cr, " " .. cr .. " / " .. credits, GetPTranslation("equip_cost", {num = credits})
-	end
-
-	tbl.owned = vgui.Create("DLabel", parent)
-	--tbl.owned:SetTooltip(GetTranslation("equip_help_carry"))
-	tbl.owned:CopyPos(tbl.credits)
-	tbl.owned:MoveRightOf(tbl.credits, y * 5)
-
-	-- carry icon
-	tbl.owned.img = vgui.Create("DImage", parent)
-	tbl.owned.img:SetSize(32, 32)
-	tbl.owned.img:CopyPos(tbl.owned)
-	tbl.owned.img:MoveLeftOf(tbl.owned)
-	tbl.owned.img:SetImage("vgui/ttt/equip/briefcase.png")
-
-	tbl.owned.Check = function(s, sel)
-		if ItemIsWeapon(sel) and not CanCarryWeapon(sel) then
-			return false, MakeKindValid(sel.Kind), GetPTranslation("equip_carry_slot", {slot = MakeKindValid(sel.Kind)})
-		elseif not ItemIsWeapon(sel) and sel.limited and client:HasEquipmentItem(sel.id) then
-			return false, "X", GetTranslation("equip_carry_own")
-		else
-			if ItemIsWeapon(sel) then
-				local cv_maxCount = GetConVar(ORDERED_SLOT_TABLE[MakeKindValid(sel.Kind)])
-
-				local maxCount = cv_maxCount and cv_maxCount:GetInt() or 0
-				maxCount = maxCount < 0 and "∞" or maxCount
-
-				return true, " " .. #client:GetWeaponsOnSlot(MakeKindValid(sel.Kind)) .. " / " .. maxCount, GetTranslation("equip_carry")
-			else
-				return true, "✔", GetTranslation("equip_carry")
-			end
-		end
-	end
-
-	-- TODO add global limited
-	tbl.bought = vgui.Create("DLabel", parent)
-	--tbl.bought:SetTooltip(GetTranslation("equip_help_stock"))
-	tbl.bought:CopyPos(tbl.credits)
-	tbl.bought:MoveBelow(tbl.credits, y * 2)
-
-	-- stock icon
-	tbl.bought.img = vgui.Create("DImage", parent)
-	tbl.bought.img:SetSize(32, 32)
-	tbl.bought.img:CopyPos(tbl.bought)
-	tbl.bought.img:MoveLeftOf(tbl.bought)
-	tbl.bought.img:SetImage("vgui/ttt/equip/package.png")
-
-	tbl.bought.Check = function(s, sel)
-		if sel.limited and client:HasBought(tostring(sel.id)) then
-			return false, "X", GetTranslation("equip_stock_deny")
-		else
-			return true, "✔", GetTranslation("equip_stock_ok")
-		end
-	end
-
-	-- custom info
-	tbl.info = vgui.Create("DLabel", parent)
-	--tbl.info:SetTooltip(GetTranslation("equip_help_stock"))
-	tbl.info:CopyPos(tbl.bought)
-	tbl.info:MoveRightOf(tbl.bought, y * 5)
-
-	-- stock icon
-	tbl.info.img = vgui.Create("DImage", parent)
-	tbl.info.img:SetSize(32, 32)
-	tbl.info.img:CopyPos(tbl.info)
-	tbl.info.img:MoveLeftOf(tbl.info)
-	tbl.info.img:SetImage("vgui/ttt/equip/icon_info")
-
-	tbl.info.Check = function(s, sel)
-		return EquipmentIsBuyable(sel, client)
+		return credits >= cr, " " .. credits, GetPTranslation("equip_cost", {num = credits})
 	end
 
 	for _, pnl in pairs(tbl) do
@@ -308,8 +239,9 @@ local function CreateEquipmentList(t)
 	end
 
 	-- temp table for sorting
-	local paneltablefav = {}
-	local paneltable = {}
+	local paneltable3 = {}
+	local paneltable2 = {}
+	local paneltable1 = {}
 	local steamid = ply:SteamID64()
 	local col = ply:GetRoleColor()
 
@@ -362,9 +294,15 @@ local function CreateEquipmentList(t)
 				if ItemIsWeapon(item) and showSlotVar:GetBool() then
 					local slot = vgui.Create("SimpleIconLabelled")
 					slot:SetIcon("vgui/ttt/slotcap")
-					slot:SetIconColor(col or COLOR_GREY)
+
+					-- Set Colour Based on Cost
+					creditCost = tostring(JM_ShopCreditCosts[tostring(item.id)]) or 1
+					local iconColour = Color(0, 180, 0, 255)
+					if creditCost == "2" then iconColour = Color(180, 180, 0, 255) end
+					if creditCost == "3" then iconColour = Color(180, 0, 0, 255) end
+					slot:SetIconColor(iconColour)
 					slot:SetIconSize(16)
-					slot:SetIconText(MakeKindValid(item.Kind))
+					slot:SetIconText(tostring(JM_ShopCreditCosts[tostring(item.id)] or 1))
 					slot:SetIconProperties(COLOR_WHITE,
 						"DefaultBold",
 						{opacity = 220, offset = 1},
@@ -400,15 +338,21 @@ local function CreateEquipmentList(t)
 					or not EquipmentIsBuyable(item, ply)
 					-- already bought the item before
 					or item.limited and ply:HasBought(item.id)
-				) or (item.credits or 1) > credits
+				) or (JM_ShopCreditCosts[tostring(item.id)] or 1) > credits
 			) then
 				ic:SetIconColor(color_darkened)
 			end
 
-			if ic.favorite then
-				paneltablefav[k] = ic
-			else
-				paneltable[k] = ic
+			-- Sort the table into value
+			
+			if JM_ShopCreditCosts[tostring(item.id)] == nil then
+				paneltable1[k] = ic
+			end
+			if JM_ShopCreditCosts[tostring(item.id)] == 3 then
+				paneltable3[k] = ic
+			end
+			if JM_ShopCreditCosts[tostring(item.id)] == 2 then
+				paneltable2[k] = ic
 			end
 
 			-- icon doubleclick to buy
@@ -424,13 +368,15 @@ local function CreateEquipmentList(t)
 		end
 	end
 
-	-- add favorites first
-	for _, panel in pairs(paneltablefav) do
+	for _, panel in pairs(paneltable3) do
 		dlist:AddPanel(panel)
 	end
 
-	-- non favorites second
-	for _, panel in pairs(paneltable) do
+	for _, panel in pairs(paneltable2) do
+		dlist:AddPanel(panel)
+	end
+
+	for _, panel in pairs(paneltable1) do
 		dlist:AddPanel(panel)
 	end
 end
@@ -669,7 +615,7 @@ function TraitorMenuPopup()
 
 	local _, ibgy = dinfobg:GetPos()
 
-	dinfobg:SetSize(diw - m, bpy - ibgy - 120) -- -90 to let the help panel have more size
+	dinfobg:SetSize(diw - m, bpy - ibgy - 60) -- -90 to let the help panel have more size
 
 	function dsearch:OnValueChange(text)
 		if text == "" then

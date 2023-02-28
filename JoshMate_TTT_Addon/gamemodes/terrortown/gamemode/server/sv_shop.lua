@@ -86,8 +86,9 @@ local function OrderEquipment(ply, cls)
 	-- still support old items
 	local idOrCls = (is_item and equip_table.oldId or nil) or cls
 
-	local credits = equip_table.credits or 1
-
+	-- Josh Mate Credit Price Changes
+	local credits = JM_ShopCreditCosts[tostring(equip_table.id)] or 1
+	
 	if credits > ply:GetCredits() then
 		print(ply, "tried to buy item/weapon, but didn't have enough credits")
 

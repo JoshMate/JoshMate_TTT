@@ -431,17 +431,17 @@ local cmdRoundRemove = ulx.command(CATEGORY_NAME_JM_Maps, "jm round remove", fun
 cmdRoundRemove:defaultAccess(ULib.ACCESS_ADMIN)
 
 -- ##################################################
--- ### Next Map Random
+-- ### Next Map Full
 -- ##################################################
 
-local function JM_ULX_MapVote3Way()
+local function JM_ULX_MapVoteFull()
 
 	JM_Function_PrintChat_All("Map", "The next map vote will be a full vote (Manual)")
 	JM_Global_MapVote_FullVote = true
 
 end
 
-local cmdMapVoteFull = ulx.command(CATEGORY_NAME_JM_Maps, "jm enable votemethod3Way", function () JM_ULX_MapVote3Way() end, "!votemethod3Way")
+local cmdMapVoteFull = ulx.command(CATEGORY_NAME_JM_Maps, "jm votemethodFull", function () JM_ULX_MapVoteFull() end, "!votemethodFull")
 cmdMapVoteFull:defaultAccess(ULib.ACCESS_ADMIN)
 
 

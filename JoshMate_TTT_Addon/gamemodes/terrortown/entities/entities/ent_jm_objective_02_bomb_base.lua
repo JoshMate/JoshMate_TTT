@@ -113,11 +113,11 @@ function JM_GameMode_DefuseTheBombs_Start()
 		end
 	end
 
-	local NumberOfBombsToSpawn 			= 7
-	if NumberOfPeopleAlive <= 10 then 	NumberOfBombsToSpawn = 6 end
-	if NumberOfPeopleAlive <= 7 then 	NumberOfBombsToSpawn = 5 end
-	if NumberOfPeopleAlive <= 5 then 	NumberOfBombsToSpawn = 4 end
-	if NumberOfPeopleAlive <= 3 then 	NumberOfBombsToSpawn = 2 end
+	local NumberOfBombsToSpawn 			= 8
+	if NumberOfPeopleAlive <= 10 then 	NumberOfBombsToSpawn = 7 end
+	if NumberOfPeopleAlive <= 7 then 	NumberOfBombsToSpawn = 6 end
+	if NumberOfPeopleAlive <= 5 then 	NumberOfBombsToSpawn = 5 end
+	if NumberOfPeopleAlive <= 3 then 	NumberOfBombsToSpawn = 3 end
 
 	-- Announce the Goal
 	JM_Function_Announcement("[Defuse The Bombs] Innocents have 60 seconds to defuse " .. tostring(NumberOfBombsToSpawn) .. " Bombs!", 0)

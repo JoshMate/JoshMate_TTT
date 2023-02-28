@@ -14,12 +14,12 @@ function ENT:Initialize()
 	self:SetModel(self.Model)
 	self:SetSolid(SOLID_VPHYSICS)
 	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
+	self:SetRenderMode(RENDERMODE_TRANSCOLOR)
 	self:SetColor(Color( 255, 255, 0, 30))
 	
 	-- Battery Stats
 	self.isBatteryActive = false
-	self.isBatteryActiveDelay = 15
+	self.isBatteryActiveDelay = 10
 	self.isBatteryActiveTime = CurTime() + self.isBatteryActiveDelay
 
 	if SERVER then

@@ -15,7 +15,7 @@ if (CLIENT) then
 		
 Blinds, slows and disorientates people
 
-Has 1 Use and deals no damage, lasts 8 seconds
+Has 2 Uses and deals no damage, lasts 8 seconds
 ]]
 };
 
@@ -40,8 +40,8 @@ SWEP.Spawnable          = false
 SWEP.CanBuy = {ROLE_DETECTIVE}
 SWEP.LimitedStock = true
 
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 
 function SWEP:GetGrenadeName()
    return "ent_jm_grenade_flashbang_proj"

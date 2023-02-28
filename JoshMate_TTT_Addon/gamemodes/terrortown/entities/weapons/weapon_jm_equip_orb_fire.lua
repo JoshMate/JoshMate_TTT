@@ -16,7 +16,7 @@ if CLIENT then
 
 Creates a large orb of fire that burns and slows those who stand in it
 
-Has 1 use and lingers for 60 Seconds. Players can't see you holding this
+Has 3 uses and lingers for 20 Seconds. Players can't see you holding this
 ]]
    };
 
@@ -37,8 +37,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false

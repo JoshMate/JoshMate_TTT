@@ -16,7 +16,7 @@ if CLIENT then
 
  Must be placed of flat ground away from other TOLs
 	
- 2 uses and each tree lasts for (30 seconds)
+ 3 uses and each tree lasts for (30 seconds)
  ]]
 	};
  
@@ -35,8 +35,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.45
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 SWEP.DeploySpeed           = 4
 SWEP.Primary.SoundLevel    = 75

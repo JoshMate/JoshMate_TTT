@@ -99,6 +99,11 @@ function SWEP:Push()
 			 local hitMarkerOwner = self:GetOwner()
 			 JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
+			 -- Disorientated Debuff on Explosion
+			if (SERVER) then
+				JM_GiveBuffToThisPlayer("jm_buff_explosion",ply,self:GetOwner())
+			end
+
 			 -- JM New Was Pushed Attribution System
 			 newWasPushedContract = ents.Create("ent_jm_equip_waspushed")
 			 newWasPushedContract.pusher = owner

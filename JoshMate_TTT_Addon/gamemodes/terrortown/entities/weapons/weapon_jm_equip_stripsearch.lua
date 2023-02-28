@@ -18,7 +18,7 @@ Left clicking a player will strip them of their weapons
 
 Does not include Special or bought weapons
 
-Has 2 uses and short range
+Has 3 uses and short range
 ]]
 };
 
@@ -37,8 +37,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.50
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 2
-SWEP.Primary.DefaultClip   = 2
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 0
 SWEP.Primary.Automatic     = false

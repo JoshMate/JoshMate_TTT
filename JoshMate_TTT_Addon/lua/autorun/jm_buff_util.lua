@@ -188,7 +188,7 @@ JM_Global_Buff_BarrierSlow_IconPath                             = "vgui/ttt/josh
 JM_Global_Buff_BarrierSlow_IconGoodBad                          = "bad"
 
 JM_Global_Buff_CannibalHeal_Name                                = "Cannibal Heal"
-JM_Global_Buff_CannibalHeal_Duration                            = 20
+JM_Global_Buff_CannibalHeal_Duration                            = 30
 JM_Global_Buff_CannibalHeal_NWBool                              = "JM_Buff_NWBool_IsCannibalHeal"
 JM_Global_Buff_CannibalHeal_IconName                            = "JM_Buff_Icon_CannibalHeal"
 JM_Global_Buff_CannibalHeal_IconPath                            = "vgui/ttt/joshmate/hud_heal.png"
@@ -275,7 +275,7 @@ JM_Global_Buff_Care_SpeedBoost_Name                     = "Speed Boost"
 JM_Global_Buff_Care_SpeedBoost_Duration                 = 0
 JM_Global_Buff_Care_SpeedBoost_NWBool                   = "JM_Buff_NWBool_IsSpeedBoost"
 JM_Global_Buff_Care_SpeedBoost_IconName                 = "JM_Buff_Icon_SpeedBoost"
-JM_Global_Buff_Care_SpeedBoost_IconPath                 = "vgui/ttt/joshmate/hud_carepackage.png"
+JM_Global_Buff_Care_SpeedBoost_IconPath                 = "vgui/ttt/joshmate/hud_agility.png"
 JM_Global_Buff_Care_SpeedBoost_IconGoodBad              = "good"
 
 JM_Global_Buff_Care_Health_Name                         = "Health"
@@ -310,7 +310,7 @@ JM_Global_Buff_Care_HighJump_Name                       = "High Jump"
 JM_Global_Buff_Care_HighJump_Duration                   = 0
 JM_Global_Buff_Care_HighJump_NWBool                     = "JM_Buff_NWBool_IsHighJump"
 JM_Global_Buff_Care_HighJump_IconName                   = "JM_Buff_Icon_HighJump"
-JM_Global_Buff_Care_HighJump_IconPath                   = "vgui/ttt/joshmate/hud_agility.png"
+JM_Global_Buff_Care_HighJump_IconPath                   = "vgui/ttt/joshmate/hud_jump.png"
 JM_Global_Buff_Care_HighJump_IconGoodBad                = "good"
 
 JM_Global_Buff_Care_Shrink_Name                         = "Shrink"

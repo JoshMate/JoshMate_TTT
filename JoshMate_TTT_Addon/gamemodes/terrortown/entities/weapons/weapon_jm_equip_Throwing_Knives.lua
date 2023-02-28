@@ -20,7 +20,7 @@ if CLIENT then
 	
 	They are silent but leave a faint trail
 	
-	You get 2 knives
+	You get 3 knives
 	]]
 	}
 
@@ -35,8 +35,8 @@ SWEP.ViewModel = "models/weapons/cstrike/c_knife_t.mdl"
 SWEP.WorldModel = "models/weapons/w_knife_t.mdl"
 
 SWEP.Primary.Damage = 5000
-SWEP.Primary.ClipSize = 2
-SWEP.Primary.DefaultClip = 2
+SWEP.Primary.ClipSize = 3
+SWEP.Primary.DefaultClip = 3
 SWEP.Primary.Automatic = true
 SWEP.Primary.Delay = 0.5
 SWEP.Primary.Ammo = "none"

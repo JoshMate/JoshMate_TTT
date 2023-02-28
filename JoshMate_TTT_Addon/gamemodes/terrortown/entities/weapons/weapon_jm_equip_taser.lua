@@ -14,11 +14,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[A Non-Lethal Weapon
 	
-Prevents the target from moving for 12 seconds
+Prevents the target from moving for 15 seconds
    
 The target will be stripped of all non-special weapons
    
-Has 1 use, perfect acccuracy and long range
+Has 2 uses, perfect acccuracy and long range
 ]]
    };
 
@@ -32,8 +32,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 100
 SWEP.Primary.Automatic     = false
@@ -91,7 +91,9 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       --
 
       -- Drop weapon on the floor
-      ent:DropWeapon( nil, self:GetOwner():GetPos())
+      if ent:GetActiveWeapon().AllowDrop == true then
+         ent:DropWeapon( nil, self:GetOwner():GetPos())
+      end
       ent:SelectWeapon("weapon_jm_special_crowbar")
 
       
