@@ -4,10 +4,8 @@ Josh Mate TTT Update 93 - Patch Notes
 #### Gameplay
 ###################################
 
-[Update 92]
-- Everything from this update to as it was "Unplayed" and it was huge
-
-
+[Shop System]
+- 
 
 ###################################
 #### Maps

@@ -14,7 +14,7 @@ end
 
 SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
-SWEP.WeaponID           = AMMO_NADE_FRAG
+SWEP.WeaponID           = AMMO_NADE_FRAG_MEGA
 
 SWEP.ViewModel          = "models/weapons/w_eq_fraggrenade.mdl"
 SWEP.WorldModel         = "models/weapons/w_eq_fraggrenade.mdl"

@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_Glue_Name
-local JM_BuffNWBool             = JM_Global_Buff_Glue_NWBool
-local JM_BuffDuration           = JM_Global_Buff_Glue_Duration
-local JM_BuffIconName           = JM_Global_Buff_Glue_IconName
-local JM_BuffIconPath           = JM_Global_Buff_Glue_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_Glue_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_GlueMega_Name
+local JM_BuffNWBool             = JM_Global_Buff_GlueMega_NWBool
+local JM_BuffDuration           = JM_Global_Buff_GlueMega_Duration
+local JM_BuffIconName           = JM_Global_Buff_GlueMega_IconName
+local JM_BuffIconPath           = JM_Global_Buff_GlueMega_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_GlueMega_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -34,8 +34,8 @@ if CLIENT then
     -- Set up screen effect table
     local effectTable_Glue = {
 
-        ["$pp_colour_addr"] = 0.20,
-        ["$pp_colour_addg"] = 0.20,
+        ["$pp_colour_addr"] = 0.30,
+        ["$pp_colour_addg"] = 0.30,
         ["$pp_colour_addb"] = 0,
         ["$pp_colour_brightness"] = 0,
         ["$pp_colour_contrast"] = 1,
@@ -71,7 +71,7 @@ function ENT:Think()
 end
 
 -- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Glue_Grenade", function()
+hook.Add( "PreDrawHalos", "Halos_Glue_Grenade_Mega", function()
 
     local players = {}
     local count = 0
@@ -91,7 +91,7 @@ end )
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
     if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
+	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.3
     end 
 end)
 
@@ -100,7 +100,7 @@ if SERVER then
     hook.Add("EntityTakeDamage", ("JM_BuffDamageEffects_".. tostring(JM_PrintName)), function(target, dmginfo)
 		if not IsValid(target) or not target:IsPlayer() or not target:IsTerror() then return end
         if target:GetNWBool(JM_BuffNWBool) == true then 
-            dmginfo:ScaleDamage(1.50)
+            dmginfo:ScaleDamage(2.00)
         end
 	end)
 end

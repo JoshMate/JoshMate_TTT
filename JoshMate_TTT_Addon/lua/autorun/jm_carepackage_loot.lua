@@ -30,7 +30,8 @@ local lootTable = {
         JM_CarePackage_Loot_Armour,
         JM_CarePackage_Loot_BarrelSwep,
         JM_CarePackage_Loot_HighJump,
-        JM_CarePackage_Loot_UnstableTeleporter
+        JM_CarePackage_Loot_UnstableTeleporter,
+        JM_CarePackage_Loot_MegaDashGrenade
     },
     rare = {
         JM_CarePackage_Loot_Best_Friend,
@@ -267,6 +268,11 @@ end
 function JM_CarePackage_Loot_UnstableTeleporter( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Unstable Teleporter")
     Loot_SpawnThis(caller,"weapon_jm_zloot_teleporterunstable")
+end
+
+function JM_CarePackage_Loot_MegaDashGrenade( activator, caller )
+    JM_Function_PrintChat(activator, "Care Package","Mega Dash Grenade")
+    Loot_SpawnThis(caller,"weapon_jm_zloot_mega_dash")
 end
 
 

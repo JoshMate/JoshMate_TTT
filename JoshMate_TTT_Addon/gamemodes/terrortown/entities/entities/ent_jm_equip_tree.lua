@@ -105,9 +105,7 @@ function HealSphere(ent)
 		-- Josh Mate Karma Reward Code
 		if ent.karmaRewardClaimed == false then
 			if ply:SteamID64() == ent.owner:SteamID64() then 
-				print ("DEBUG FAILED")
 			else
-				print ("DEBUG PASSED")
 				ent.karmaRewardClaimed = true
 				JM_Function_Karma_Reward(ent.owner, JM_KARMA_REWARD_ACTION_TREEHEAL, "Tree Heal")
 			end

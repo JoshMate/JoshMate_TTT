@@ -1,0 +1,134 @@
+###################################
+Josh Mate TTT Update 92 & 92 Combined - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+###################################
+[Update 93]
+###################################
+
+[Energy Drink]
+- New Detective Item
+- Costs 1 Credit
+- A can of energy drink that when drunk gives you the following bonuses for 30 seconds
+- 3 HP/s | +20% movement speed | -75% damage taken from fall damage
+- 1 Use and like heal grenade can be used on yourself or another player with right click
+
+[Mega Dash Grenade]
+- New Carepackage Loot
+- Same as dash grenade but grants you +500% speed rather than +100% speed
+- You also take 250% more damage rather than 50% more
+
+[Glue Gun]
+- Now creates a cluster of breakable glue chunks at the impact site that block you
+- Now applies a much more potent and longer lasting glue effect on hit players
+- Reduces ammo: 5 -> 3 shots
+
+[Karma]
+- Healing other players with the detectives burger now grants the detective Karma
+- Healing other players with the health grenade now grants you Karma
+- Healing other players with the Energy Drink now grants you Karma
+- Increased the karma reward you get from doing certain positive actions
+
+###################################
+[Update 92]
+###################################
+
+[Shop System]
+- Big changes to the Item Shop
+- Items can now cost more than 1 credit
+- Cleaned up the shop visuals and removed unused elements
+- Many items have had their credit cost changed to improve their balance
+
+[Credit System]
+- Credits are awarded for survival sooner: Every 60 seconds -> Every 45 seconds
+- Decreased kills required for traitors to get credits: 2 -> 1 kills
+- Increased Detective Starting Credits: 1 -> 3 credits
+- Increased Traitor Starting Credits: 2 -> 3 credits
+
+[Music Radio System]
+- Radios now glow, have a hud icon and show the name of the song
+- Radios now heal you slowly if you stand close to them
+- Radios are now rarer on the loot table
+- Added Trouble in This Town and Shoebody Bop to the radio track list
+
+[Loot: Shrink / Grow]
+- Now correctly sets your camera height to match your new size
+
+[Barrier]
+- Now removes from your inventory on final use, reducing inventory clutter
+- Decreased Barrier lifetime: 30 -> 20 seconds
+
+[Jammer]
+- Ontop of preventing sending or recieving voice chat
+- Now also darkens the screens of affected players
+
+[Fire Orb]
+- Decreased Orb Duration: 60 -> 20 seconds
+- Increased number of uses: 1 -> 3
+
+[Surpression Orb]
+- Decreased Orb Duration: 60 -> 20 seconds
+- Increased number of uses: 1 -> 3
+
+[Cannibal]
+- Increased Max HP gain from eat: 10 -> 15 hp
+- Increased Duration of Heal over time: 20 -> 30 seconds (Heals more)
+
+[Strip Search]
+- Increased number of uses: 2 -> 3
+
+[Super Crowbar]
+- Now disorientates players that have been pushed
+
+[Bear Trap]
+- Increased number of traps: 1 -> 2
+
+[Landmine]
+- Increased number of traps: 1 -> 2
+
+[Soap]
+- Increased number of traps: 1 -> 2
+
+[Throwing Knives]
+- Increased number of knives: 2 -> 3
+- Increased the visibility of the thrown knife trail
+
+[Taser]
+- Increased number of shots: 1 -> 2
+
+[Flashbang Grenade]
+- Increased number of grenades: 1 -> 2
+
+[Tree of Life]
+- Increased number of trees: 2 -> 3
+
+[AWP]
+- Increased Explosive Damage: 60 -> 70
+
+[Gamemodes]
+- Power Up Reduced battery "Delay to press" time: 15 -> 10 Seconds
+- Power Up Increased number of batteries to get in total: 8 -> 10
+- Defuse The Bombs increased average amount of bombs 
+- Arms Deal Converted the points system to % and rebalanced amounts
+
+[Map Vote System]
+- There is now randomly 2 - 5 votable maps on offer
+
+[Fixes and Bugs]
+- The Grow / Shrink CP loot no longer persists through rounds
+- The high jump CP loot no longer persists through rounds
+- Fixed admin command to toggle between random and full map voting
+- The buffs Speed boost and High jump now have a unique icon
+- Taser can no longer make people drop special items like pickup stick and bare hands
+- Fixed unstable teleporter not being in the care package loot pool
+
+###################################
+#### Maps
+###################################
+
+###################################
+End of Patch Notes
+###################################
+

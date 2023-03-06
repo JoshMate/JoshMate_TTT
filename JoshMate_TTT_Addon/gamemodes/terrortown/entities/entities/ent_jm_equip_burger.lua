@@ -39,7 +39,7 @@ function ENT:Use( activator, caller )
 		activator:SetHealth(math.Clamp((activator:Health() + (burger_HealthHealed * burger_DetectiveMult)), 0, activator:GetMaxHealth()))  
 
 	else
-
+		JM_Function_Karma_Reward(self:GetOwner(), JM_KARMA_REWARD_ACTION_BURGERHEAL, "Burger Heal")
 		JM_Function_PrintChat(activator, "Equipment", "The Burger heals you and grants you +" .. tostring(burger_HealthMaxGained) .. " max HP!")
 		activator:SetMaxHealth(activator:GetMaxHealth() + burger_HealthMaxGained) 
 		activator:SetHealth(math.Clamp((activator:Health() + burger_HealthHealed), 0, activator:GetMaxHealth())) 

@@ -1,29 +1,43 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName       = "Healing Grenade"
-   SWEP.Slot            = 3
+   SWEP.PrintName       = "Energy Drink"
+   SWEP.Slot            = 6
 
-   SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_nade"
+   SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_can.png"
    SWEP.IconLetter      = "P"
    
    function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 25 - ang:Right() * -12 - ang:Up() * 13, ang
+		return pos + ang:Forward() * 30 - ang:Right() * -15 - ang:Up() * 10, ang
 	end
+
+   SWEP.EquipMenuData = {
+      type = "item_weapon",
+      desc = [[A Healing Item
+	
+Grants the drinker Health Regen, movement speed and greatly reduced fall damage
+
+Has 1 use and lasts for 3 seconds
+
+Left click to Drink | Right Click to force feed to someone
+]]
+};
+
 end
 
 SWEP.Base               = "weapon_jm_base_grenade"
-SWEP.Kind               = WEAPON_NADE
-SWEP.WeaponID           = AMMO_NADE_HEALTH
+SWEP.Kind               = WEAPON_EQUIP
+SWEP.WeaponID           = AMMO_NADE_Can
 
-SWEP.ViewModel          = "models/healthvial.mdl"
-SWEP.WorldModel         = "models/healthvial.mdl"
+SWEP.ViewModel          = "models/props_junk/PopCan01a.mdl"
+SWEP.WorldModel         = "models/props_junk/PopCan01a.mdl"
 SWEP.UseHands 				= false
 
 SWEP.AutoSpawnable      = true
 SWEP.Spawnable          = true
 
-SWEP.CanBuy             = {}
+
+SWEP.CanBuy             = {ROLE_DETECTIVE}
 SWEP.LimitedStock       = true
 
 SWEP.Primary.ClipSize      = 1
@@ -45,7 +59,7 @@ function SWEP:HealingGreande_HealTarget(target)
 
    if (SERVER) then
 
-      target:EmitSound(Sound("grenade_health.wav"))
+      target:EmitSound(Sound("effect_can_open.mp3"))
 
       if target:IsTerror() and target:Alive() then
 
@@ -58,10 +72,10 @@ function SWEP:HealingGreande_HealTarget(target)
          -- End of Effects
          
          -- Set Status and print Message
-         JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",target,self:GetOwner())
+         JM_GiveBuffToThisPlayer("jm_buff_energydrink",target,self:GetOwner())
          -- End Of
 
-         JM_Function_PrintChat(target, "Equipment","You have been healed by: " .. tostring(self:GetOwner():Nick()))
+         JM_Function_PrintChat(target, "Equipment","You drunk an energy drink from: " .. tostring(self:GetOwner():Nick()))
 
       end
 
@@ -106,9 +120,7 @@ function SWEP:SecondaryAttack()
       if SERVER then
          -- Use The Grenade
          self:HealingGreande_HealTarget(tr.Entity)
-         if tr.Entity:Health() < tr.Entity:GetMaxHealth() then
-            JM_Function_Karma_Reward(self:GetOwner(), JM_KARMA_REWARD_ACTION_HEALTHGRENADEHEAL, "Health Grenade Heal")
-         end
+         JM_Function_Karma_Reward(self:GetOwner(), JM_KARMA_REWARD_ACTION_ENERGYDRINKHEAL, "Energy Drink Given")
       end
    end
    owner:LagCompensation(false)
@@ -124,7 +136,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Heal yourself", "Heal another player", true)
+	   self:AddTTT2HUDHelp("You drink it", "They drink it", true)
  
 	   return self.BaseClass.Initialize(self)
 	end

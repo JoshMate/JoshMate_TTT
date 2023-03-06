@@ -32,8 +32,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.25
 SWEP.Primary.Cone          = 0.012
-SWEP.Primary.ClipSize      = 5
-SWEP.Primary.DefaultClip   = 5
+SWEP.Primary.ClipSize      = 3
+SWEP.Primary.DefaultClip   = 3
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 70
 SWEP.Primary.Automatic     = false
@@ -51,6 +51,16 @@ SWEP.WorldModel            = Model("models/weapons/w_rif_sg552.mdl")
 
 local glueHitRadius                 = 256
 local JM_Shoot_Range                = 10000
+local gluePropCount                 = 20
+
+-- Placer Style Swep Config
+SWEP.JM_Trap_PlaceRange					= JM_Shoot_Range
+
+SWEP.JM_Trap_Entity_Class				= "prop_physics"
+SWEP.JM_Trap_Entity_Colour				= Color( 255, 255, 50, 255)
+
+SWEP.JM_Trap_Prop_True					= true
+SWEP.JM_Trap_Prop_Model					= "models/props_junk/wood_crate001a.mdl"
 
 
 function SWEP:HitEffectsInit(ent)
@@ -108,12 +118,20 @@ function SWEP:Explode(tr)
                -- Glue Effects
                if (pl:IsValid() and pl:IsPlayer() and pl:IsTerror() and pl:Alive()) then
                   self:HitEffectsInit(pl)
-                  JM_GiveBuffToThisPlayer("jm_buff_glue",pl,self:GetOwner())
+                  JM_GiveBuffToThisPlayer("jm_buff_megaglue",pl,self:GetOwner())
                end
                -- End Of
             end
          end
       end
+
+      -- Spawn Yellow Boxes at site
+
+      for i=1,gluePropCount do 
+         self:PlaceThing(tr.HitPos) 
+      end 
+      
+
    end
 end
 
@@ -150,6 +168,35 @@ end
 
 function SWEP:SecondaryAttack()
    return
+end
+
+function SWEP:PlaceThing(pos)
+
+	if CLIENT then return end
+		
+   local ent = ents.Create(self.JM_Trap_Entity_Class)
+
+   -- If its a prop then set it's model
+   if self.JM_Trap_Prop_True == true then ent:SetModel(self.JM_Trap_Prop_Model) end
+
+   local randomPOS = pos + VectorRand(-64, 64 )
+   local randomANG = AngleRand()
+   
+   ent:SetPos(randomPOS)
+   ent:SetAngles(randomANG)
+   
+   ent:PhysicsInit(SOLID_VPHYSICS)
+   ent:SetMoveType(MOVETYPE_VPHYSICS)
+   ent:SetSolid(SOLID_VPHYSICS)
+   ent:SetCollisionGroup(COLLISION_GROUP_NONE)
+
+   ent:Spawn()
+
+   ent:SetRenderMode( RENDERMODE_TRANSCOLOR )
+   ent:SetColor(self.JM_Trap_Entity_Colour)
+
+   ent:GetPhysicsObject():EnableMotion( false )
+
 end
 
 -- ##############################################

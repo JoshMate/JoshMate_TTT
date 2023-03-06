@@ -8,12 +8,12 @@ ENT.Base                        = "jm_buff_base"
 -- Buff Basic Info
 -- #############################################
 
-local JM_PrintName              = JM_Global_Buff_Glue_Name
-local JM_BuffNWBool             = JM_Global_Buff_Glue_NWBool
-local JM_BuffDuration           = JM_Global_Buff_Glue_Duration
-local JM_BuffIconName           = JM_Global_Buff_Glue_IconName
-local JM_BuffIconPath           = JM_Global_Buff_Glue_IconPath
-local JM_BuffIconGoodBad        = JM_Global_Buff_Glue_IconGoodBad
+local JM_PrintName              = JM_Global_Buff_EnergyDrink_Name
+local JM_BuffNWBool             = JM_Global_Buff_EnergyDrink_NWBool
+local JM_BuffDuration           = JM_Global_Buff_EnergyDrink_Duration
+local JM_BuffIconName           = JM_Global_Buff_EnergyDrink_IconName
+local JM_BuffIconPath           = JM_Global_Buff_EnergyDrink_IconPath
+local JM_BuffIconGoodBad        = JM_Global_Buff_EnergyDrinke_IconGoodBad
 
 -- #############################################
 -- Generated Values (important for instances)
@@ -29,83 +29,63 @@ ENT.BuffIconName                = JM_BuffIconName
 -- Client Side Visual Effects
 -- #############################################
 
-if CLIENT then
-
-    -- Set up screen effect table
-    local effectTable_Glue = {
-
-        ["$pp_colour_addr"] = 0.20,
-        ["$pp_colour_addg"] = 0.20,
-        ["$pp_colour_addb"] = 0,
-        ["$pp_colour_brightness"] = 0,
-        ["$pp_colour_contrast"] = 1,
-        ["$pp_colour_colour"] = 1,
-        ["$pp_colour_mulr"] = 0,
-        ["$pp_colour_mulg"] = 0,
-        ["$pp_colour_mulb"] = 0
-    }
-
-    -- Render Any Screen Effects
-    hook.Add("RenderScreenspaceEffects", ("JM_BuffScreenEffects_".. tostring(JM_PrintName)), function()
-
-        if LocalPlayer():GetNWBool(JM_BuffNWBool) == true then 
-            DrawColorModify( effectTable_Glue)
-        end 
-    
-    end)
-    
-end
-
 -- #############################################
 -- The Actual Effects of this buff
 -- #############################################
 
+function ENT:BuffTickEffect()
+
+    if self.targetPlayer:Health() >= self.targetPlayer:GetMaxHealth() then return end
+			
+    local newHP = self.targetPlayer:Health() + 1
+    if newHP > self.targetPlayer:GetMaxHealth() then newHP = self.targetPlayer:GetMaxHealth() end
+
+    self.targetPlayer:SetHealth(newHP)
+
+
+
+end
+
+
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
+
+    -- Handle Buff Effect Ticking
+    self.buffTickDelay  = 0.3
+    self.buffTickNext   = CurTime()
 
 end
 
 function ENT:Think()
     self.BaseClass.Think(self)
 
-end
+    -- Handle Buff Effect Ticking
+    if(not self:IsValid()) then return end
 
--- ESP Halo effect
-hook.Add( "PreDrawHalos", "Halos_Glue_Grenade", function()
-
-    local players = {}
-    local count = 0
- 
-    for _, ply in ipairs( player.GetAll() ) do
-         if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) ) then
-             count = count + 1
-             players[ count ] = ply
-         end
+    if(CurTime() >= self.buffTickNext) then
+        self.buffTickNext = CurTime() + self.buffTickDelay
+        self:BuffTickEffect()
     end
- 
-    halo.Add( players, Color( 255, 255, 100 ), 2, 2, 3, true, true )
- 
-end )
 
+end
 
 -- Hooks
 hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
-    if ply:GetNWBool(JM_BuffNWBool) == true then 
-	    speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.5
+
+    if ply:IsValid() and ply:IsTerror() and ply:GetNWBool(JM_BuffNWBool) == true  then 
+        speedMultiplierModifier[1] = speedMultiplierModifier[1] * 1.2
     end 
 end)
 
 -- Scale Damage
 if SERVER then
     hook.Add("EntityTakeDamage", ("JM_BuffDamageEffects_".. tostring(JM_PrintName)), function(target, dmginfo)
-		if not IsValid(target) or not target:IsPlayer() or not target:IsTerror() then return end
+		if not IsValid(target) or not target:IsPlayer() or not target:IsTerror() or not dmginfo:IsFallDamage() then return end
         if target:GetNWBool(JM_BuffNWBool) == true then 
-            dmginfo:ScaleDamage(1.50)
+            dmginfo:ScaleDamage(0.25)
         end
 	end)
 end
-
-
 
 -- #############################################
 -- AUTOMATICALLY GENERATED STUFF

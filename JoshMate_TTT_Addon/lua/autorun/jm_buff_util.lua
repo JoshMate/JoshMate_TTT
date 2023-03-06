@@ -236,6 +236,26 @@ JM_Global_Buff_Jammer_IconName                                  = "JM_Buff_Icon_
 JM_Global_Buff_Jammer_IconPath                                  = "vgui/ttt/joshmate/hud_jammer.png"
 JM_Global_Buff_Jammer_IconGoodBad                               = "bad"
 
+JM_Global_Buff_EnergyDrink_Name                                 = "Energy Drink"
+JM_Global_Buff_EnergyDrink_Duration                             = 30
+JM_Global_Buff_EnergyDrink_NWBool                               = "JM_Buff_NWBool_IsEnergyDrink"
+JM_Global_Buff_EnergyDrink_IconName                             = "JM_Buff_Icon_EnergyDrink"
+JM_Global_Buff_EnergyDrink_IconPath                             = "vgui/ttt/joshmate/hud_can.png"
+JM_Global_Buff_EnergyDrink_IconGoodBad                          = "good"
+
+JM_Global_Buff_DashMega_Name                                    = "Mega Dash"
+JM_Global_Buff_DashMega_Duration                                = 5
+JM_Global_Buff_DashMega_NWBool                                  = "JM_Buff_NWBool_IsDashMega"
+JM_Global_Buff_DashMega_IconName                                = "JM_Buff_Icon_DashMega"
+JM_Global_Buff_DashMega_IconPath                                = "vgui/ttt/joshmate/hud_dash.png"
+JM_Global_Buff_DashMega_IconGoodBad                             = "good"
+
+JM_Global_Buff_GlueMega_Name                                        = "Mega Glue"
+JM_Global_Buff_GlueMega_Duration                                    = 15
+JM_Global_Buff_GlueMega_NWBool                                      = "JM_Buff_NWBool_IsGlueMega"
+JM_Global_Buff_GlueMega_IconName                                    = "JM_Buff_Icon_GlueMega"
+JM_Global_Buff_GlueMega_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"
+JM_Global_Buff_GlueMega_IconGoodBad                                 = "bad"
 
 
 -- Karma Buffs

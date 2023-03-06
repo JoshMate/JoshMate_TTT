@@ -1,23 +1,23 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName       = "Healing Grenade"
+   SWEP.PrintName       = "Mega Dash Grenade"
    SWEP.Slot            = 3
 
-   SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_nade"
+   SWEP.Icon            = "vgui/ttt/joshmate/icon_jm_gun_special.png"
    SWEP.IconLetter      = "P"
    
    function SWEP:GetViewModelPosition(pos, ang)
-		return pos + ang:Forward() * 25 - ang:Right() * -12 - ang:Up() * 13, ang
+		return pos + ang:Forward() * 25 - ang:Right() * -10 - ang:Up() * 11, ang
 	end
 end
 
 SWEP.Base               = "weapon_jm_base_grenade"
 SWEP.Kind               = WEAPON_NADE
-SWEP.WeaponID           = AMMO_NADE_HEALTH
+SWEP.WeaponID           = AMMO_NADE_TAG_MEGA
 
-SWEP.ViewModel          = "models/healthvial.mdl"
-SWEP.WorldModel         = "models/healthvial.mdl"
+SWEP.ViewModel          = "models/weapons/w_eq_smokegrenade.mdl"
+SWEP.WorldModel         = "models/weapons/w_eq_smokegrenade.mdl"
 SWEP.UseHands 				= false
 
 SWEP.AutoSpawnable      = true
@@ -28,6 +28,11 @@ SWEP.LimitedStock       = true
 
 SWEP.Primary.ClipSize      = 1
 SWEP.Primary.DefaultClip   = 1
+
+-- Fix Scorch Spam
+SWEP.GreandeHasScorched              = false
+
+-- How High should this greande push you?
 
 function SWEP:HitEffectsInit(ent)
    if not IsValid(ent) then return end
@@ -40,28 +45,32 @@ function SWEP:HitEffectsInit(ent)
    util.Effect("cball_explode", effect, true, true)
 end
 
+function SWEP:DashGrenadeEffect()
 
-function SWEP:HealingGreande_HealTarget(target)
+   -- Use The Grenade
 
    if (SERVER) then
+      local pl = self:GetOwner()
+      pl:EmitSound(Sound("grenade_dash.mp3"))
 
-      target:EmitSound(Sound("grenade_health.wav"))
+      -- Decal Effects
+      if self.GreandeHasScorched == false then 
+         self.GreandeHasScorched = true
+         util.Decal("Splash.Large", pl:GetPos(), pl:GetPos() + Vector(0,0,-64), pl)      
+      end
 
-      if target:IsTerror() and target:Alive() then
+      if pl:IsTerror() and pl:Alive() then
 
          -- Give a Hit Marker to This Player
          local hitMarkerOwner = self:GetOwner()
          JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
          -- Effects
-         self:HitEffectsInit(target)
+         self:HitEffectsInit(pl)
          -- End of Effects
-         
-         -- Set Status and print Message
-         JM_GiveBuffToThisPlayer("jm_buff_healthgrenade",target,self:GetOwner())
-         -- End Of
 
-         JM_Function_PrintChat(target, "Equipment","You have been healed by: " .. tostring(self:GetOwner():Nick()))
+         --Give Buff
+         JM_GiveBuffToThisPlayer("jm_buff_megadash",pl,pl)
 
       end
 
@@ -75,47 +84,20 @@ function SWEP:HealingGreande_HealTarget(target)
 
 end
 
-
 function SWEP:PrimaryAttack()
    if not self:CanPrimaryAttack() then return end
    self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
    self:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
-
    
    -- Use The Grenade
-   self:HealingGreande_HealTarget(self:GetOwner())
-
+   self:DashGrenadeEffect()
 
 end
 
--- No Iron Sights
 function SWEP:SecondaryAttack()
-
-   -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
-   local JM_Shoot_Range = 150
-
-   local owner = self:GetOwner()
-   if not IsValid(owner) then return end
-
-   if isfunction(owner.LagCompensation) then -- for some reason not always true
-      owner:LagCompensation(true)
-   end
-   
-   local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
-   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-      if SERVER then
-         -- Use The Grenade
-         self:HealingGreande_HealTarget(tr.Entity)
-         if tr.Entity:Health() < tr.Entity:GetMaxHealth() then
-            JM_Function_Karma_Reward(self:GetOwner(), JM_KARMA_REWARD_ACTION_HEALTHGRENADEHEAL, "Health Grenade Heal")
-         end
-      end
-   end
-   owner:LagCompensation(false)
-
-   -- #########
-   
+   return
 end
+
 
 -- ##############################################
 -- Josh Mate Various SWEP Quirks
@@ -124,8 +106,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Heal yourself", "Heal another player", true)
- 
+	   self:AddTTT2HUDHelp("Gain a burst of speed", nil, true)
 	   return self.BaseClass.Initialize(self)
 	end
 end
