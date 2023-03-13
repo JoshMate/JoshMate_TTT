@@ -109,44 +109,10 @@ function ENT:ArmsDealDetectWeapon()
 
 		if self.Objective_ArmsDeal_Score >= self.Objective_ArmsDeal_Goal then 
 
-			-- Reveal 1 Traitor
-			local nameOfRevealedTraitor = "ERROR"
-			local nameOfPersonWhoKnows = "ERROR"
-
-			-- Build a list of possible targets
-			
-			local listOfPlayers = player.GetAll()
-			table.Shuffle(listOfPlayers)
-
-			for _,pl in pairs(listOfPlayers) do
-				if pl:IsValid() and pl:Alive() and not pl:IsSpec() and pl:IsTerror() and pl:IsTraitor() then 
-					nameOfRevealedTraitor = pl
-					break
-				end
-			end
-
-			listOfPlayers = player.GetAll()
-			table.Shuffle(listOfPlayers)
-
-			-- Build a list of possible Knowers
-			for _,pl in pairs(listOfPlayers) do
-				if pl:IsValid() and pl:Alive() and not pl:IsSpec() and pl:IsTerror() then 
-					nameOfPersonWhoKnows = pl
-					break
-				end
-			end
-
-			if nameOfPersonWhoKnows == "ERROR" or nameOfRevealedTraitor == "ERROR" then 
-
-				JM_Function_PrintChat_All("Arms Deal", "Error working out who the Traitor Is...")
-
-			else
-
-				JM_Function_PrintChat_All("Arms Deal", tostring(nameOfPersonWhoKnows:Nick()) .. " knows who the Traitor is!")
-				JM_Function_PrintChat(nameOfPersonWhoKnows, "Arms Deal", "The Traitor is: " .. tostring(nameOfRevealedTraitor:Nick()))
-
-			end
-			
+			local ent = ents.Create("weapon_jm_zloot_traitor_tester")
+			ent:SetPos(self:GetPos())
+			ent:Spawn()
+			JM_Function_PrintChat_All("Arms Deal", "A portable tester has spawned near the arms deal bucket!")
 			JM_Function_PlaySound("gamemode/file_end.mp3")
 			self:Remove()
 			break

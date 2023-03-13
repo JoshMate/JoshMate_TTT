@@ -9,6 +9,8 @@ SWEP.EquipMenuData = {
 
 Place 1 Detective Carepackage
 
+It will become lootable after a timed delay
+
 Only non detective players can take them
 ]]
 };

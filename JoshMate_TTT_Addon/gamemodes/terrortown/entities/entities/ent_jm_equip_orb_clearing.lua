@@ -8,9 +8,9 @@ ENT.Instructions= "Blinder"
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 
-local suppressionOrb_Duration				= 20
+local suppressionOrb_Duration				= 30
 local suppressionOrb_ArmTime				= 2.5
-local suppressionOrb_Radius_Slow			= 220
+local suppressionOrb_Radius_Slow			= 280
 local suppressionOrb_Delay_Tick				= 0.35
 local suppressionOrb_Damage					= 8
 
@@ -24,41 +24,66 @@ local suppressionOrb_Colour				= Color( 0, 150, 255, 255 )
 
 ENT.Model = Model("models/props_phx/construct/metal_dome360.mdl")
 
+function ENT:HitEffectsInit(ent)
+	if not IsValid(ent) then return end
+ 
+	local effect = EffectData()
+	local ePos = ent:GetPos()
+	if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
+	effect:SetStart(ePos)
+	effect:SetOrigin(ePos)
+	util.Effect("cball_explode", effect, true, true)
+ end
+
+function ENT:clearingOrbClearItem(thing)
+
+	-- Workout Radius
+	local r = suppressionOrb_Radius_Slow * suppressionOrb_Radius_Slow -- square so we can compare with dot product directly
+	local center = self:GetPos()
+	d = 0.0
+	diff = nil
+
+	-- Check Distance
+	-- dot of the difference with itself is distance squared
+	diff = center - thing:GetPos()
+	d = diff:Dot(diff)
+	if d >= r then return end
+
+	-- Check for protected props
+	if thing:GetClass() == "prop_physics" then
+		if thing:GetName() == "" then
+			thing:EmitSound(suppressionOrb_Sound_Hit);
+			self:HitEffectsInit(thing)
+			thing:Remove()
+		end
+	else
+		thing:EmitSound(suppressionOrb_Sound_Hit);
+		self:HitEffectsInit(thing)
+		thing:Remove()
+	end
+	
+	
+
+end
+
 function ENT:suppressionOrbRadiusEffects()
 
 	if CLIENT then return end
 	
 	if not self:IsValid() then return end
 
-	local r = suppressionOrb_Radius_Slow * suppressionOrb_Radius_Slow -- square so we can compare with dot product directly
-	local center = self:GetPos()
-
-	-- Heal Players in radius
-	d = 0.0
-	diff = nil
-	local plys = player.GetAll()
-
-	for i = 1, #plys do
-		local ply = plys[i]
-		
-		if not ply:Team() == TEAM_TERROR  or not ply:Alive() or ply:IsDetective() then continue end
-
-		-- dot of the difference with itself is distance squared
-		diff = center - ply:GetPos()
-		d = diff:Dot(diff)
-
-		if d >= r then continue end
-
-		-- Give the buff
-		if not JM_CheckIfPlayerHasBuff("jm_buff_orb_suppression",ply) then
-			JM_GiveBuffToThisPlayer("jm_buff_orb_suppression",ply,self.Owner)
-			ply:EmitSound(suppressionOrb_Sound_Hit);
-			-- Give a Hit Marker to This Player
-			local hitMarkerOwner = self:GetOwner()
-			JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
-		end
-
-	end
+	-- Clear Items Caught in radius
+	for k, v in ipairs( ents.FindByClass( "prop_physics" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "npc_*" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_grenade_*" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_throwing_knife" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_orb_fire" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_barrier_traitor" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_grenade_infernolaunch*" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_beartrap" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_soap" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_landmine" ) ) do self:clearingOrbClearItem(v) end
+	
 
 end
 
@@ -85,7 +110,7 @@ function ENT:Initialize()
 	self:SetColor(suppressionOrb_Colour) 
 	self:DrawShadow(false)
 	self:SetModelScale(0.1, 0)
-	self:SetModelScale(4, suppressionOrb_ArmTime)
+	self:SetModelScale(5, suppressionOrb_ArmTime)
 
 	-- Create spark effects on start	 
 	local effect = EffectData()
@@ -109,7 +134,6 @@ function ENT:Think()
 	if self.suppressionOrbIsArmed == true and CurTime() >= (self.suppressionOrbLastTickTime + suppressionOrb_Delay_Tick) then
 		self:suppressionOrbRadiusEffects()
 		self.suppressionOrbLastTickTime = CurTime()
-		
 	end
 
 	-- Delete Smoke after time is up

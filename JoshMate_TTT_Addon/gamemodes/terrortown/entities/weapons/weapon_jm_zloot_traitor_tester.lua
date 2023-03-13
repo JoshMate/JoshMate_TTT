@@ -16,11 +16,11 @@ if CLIENT then
 	
 Shoot someone to find out if they are a traitor!
    
-Has a single use and limited range
+Has 2 uses and limited range
 ]]
 };
 
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_gun_special.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_tester.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -28,10 +28,10 @@ SWEP.Base                  = "weapon_jm_base_gun"
 SWEP.Primary.Recoil        = 0
 SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
-SWEP.Primary.Delay         = 1
+SWEP.Primary.Delay         = 0.75
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
@@ -45,12 +45,6 @@ SWEP.UseHands              = true
 SWEP.ViewModel             = "models/weapons/c_irifle.mdl"
 SWEP.WorldModel            = "models/weapons/w_irifle.mdl"
 
-SWEP.ScannedRole           = "Unkown"
-SWEP.ScanTime              = 0
-SWEP.ScanPhase             = 0
-SWEP.ScanTarget            = nil
-SWEP.ScanOwner             = nil
-
 local JM_Shoot_Range                = 350
 
 
@@ -62,9 +56,7 @@ function SWEP:HitEffectsInit(ent)
    if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
    effect:SetStart(ePos)
    effect:SetOrigin(ePos)
-   
-   
-   
+
    util.Effect("cball_explode", effect, true, true)
 end
 
@@ -72,7 +64,6 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 
    if not IsValid(ent)then return end
    self:HitEffectsInit(ent)
-   self.ScanPhase = 1
    
    if SERVER then
 
@@ -80,56 +71,15 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 		local hitMarkerOwner = self:GetOwner()
 		JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
 
-      -- Set Status and print Message
-      self.ScanTarget = ent
-      self.ScanOwner = weaponOwner 
-
-      JM_Function_PrintChat(self.ScanOwner, "Equipment", "Scanning " .. tostring(self.ScanTarget:Nick()) .. " (6 seconds)")
-      JM_Function_PrintChat(self.ScanTarget, "Equipment", tostring(self.ScanOwner:Nick()) .. " is revealing your role in (6 seconds)")
-      self.ScanTarget:EmitSound("shoot_portable_tester_scan.wav")
-      self.ScanTime = CurTime()
-
-   end
-end
-
-function SWEP:Think()
-
-   self:CalcViewModel()
-
+      local sample = ents.Create("ent_jm_equipment_tester_sample")
+      local posOfSampleSpawn = ent:GetPos()
+      posOfSampleSpawn:Add(Vector(0,0,64))
+      sample:SetPos(posOfSampleSpawn)
+      sample:Spawn()
+      sample.SetOwner(self:GetOwner())
+      sample.testerSamplePlayer = ent
    
-   if self.ScanPhase == 0 then return end
-
-   if self.ScanTime <= CurTime() -3 and self.ScanPhase == 1 then
-
-      if SERVER then
-         if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
-            JM_Function_PrintChat(self.ScanOwner, "Equipment", "Scanning " .. tostring(self.ScanTarget:Nick()) .. " (3 seconds)")
-            JM_Function_PrintChat(self.ScanTarget, "Equipment", tostring(self.ScanOwner:Nick()) .. " is revealing your role in (3 seconds)")
-         end  
-      end
-      self.ScanPhase = 2
    end
-
-   if self.ScanTime <= CurTime() -6 and self.ScanPhase == 2 then
-
-      if SERVER then
-         if self.ScanOwner:IsValid() and self.ScanTarget:IsValid() then
-            self:HitEffectsInit(self.ScanTarget)
-            self.ScanOwner:EmitSound("shoot_portable_tester_done.wav")
-            JM_Function_PrintChat(self.ScanOwner, "Equipment", tostring(self.ScanTarget:Nick()) .. " is a " .. tostring(self.ScanTarget:GetRoleStringRaw()))
-            JM_Function_PrintChat(self.ScanTarget, "Equipment", tostring(self.ScanOwner:Nick()) .. " has revealed you as: " .. tostring(self.ScanTarget:GetRoleStringRaw()))
-            self.ScanTarget:EmitSound("shoot_portable_tester_done.wav")
-         end  
-
-         if self:Clip1() <= 0 then
-            self:Remove()
-         end
-      end
-
-      self.ScanPhase = 0
-      
-   end
-
 end
 
 function SWEP:PrimaryAttack()
@@ -156,24 +106,24 @@ function SWEP:PrimaryAttack()
    
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
 
-   if self.ScanPhase == 0 then
-      if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
-         self:ApplyEffect(tr.Entity, owner)
-         self:TakePrimaryAmmo( 1 )
-      else
-         if SERVER then 
-            JM_Function_PrintChat(owner, "Equipment", "No testable target in range...")
-         end
-      end
+   if (tr.Entity:IsValid() and tr.Entity:IsPlayer() and tr.Entity:IsTerror() and tr.Entity:Alive())then
+      self:ApplyEffect(tr.Entity, owner)
+      self:TakePrimaryAmmo( 1 )
    else
       if SERVER then 
-         JM_Function_PrintChat(owner, "Equipment", "No already testing someone...")
+         JM_Function_PrintChat(owner, "Equipment", "No testable target in range...")
       end
    end
 
    owner:LagCompensation(false)
 
    -- #########
+
+   if SERVER then 
+      if self:Clip1() <= 0 then
+         self:Remove()
+      end
+   end
 
 
 end
@@ -184,6 +134,12 @@ end
 function SWEP:SecondaryAttack()
 end
 
+local JM_PortableTester_Halo_Colour = Color(0,80,255,255)
+
+hook.Add( "PreDrawHalos", "Halos_portableTester", function()
+    halo.Add( ents.FindByClass( "weapon_jm_zloot_traitor_tester*" ), JM_PortableTester_Halo_Colour, 2, 2, 3, true, true )
+ 
+end )
 
 
 
@@ -194,7 +150,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Test a player (Must hold weapon out to finish)", nil, true)
+	   self:AddTTT2HUDHelp("Test a player", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

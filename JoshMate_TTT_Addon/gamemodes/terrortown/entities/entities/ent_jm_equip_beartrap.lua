@@ -172,35 +172,33 @@ end
 
 function ENT:Use(act)
 
-	if act:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-		
-		if IsValid(self.Owner) then
-			JM_Function_PrintChat(self.Owner, "Equipment", "Your Bear Trap has been Destroyed!")
-		end
-	
-		if IsValid(self.TrappedPerson) then
-			timer.Destroy("beartrapdmg" .. self.TrappedPerson:EntIndex())
-			self.TrappedPerson:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
-			self.TrappedPerson:Freeze(false)
-			JM_Function_Karma_Reward(act, JM_KARMA_REWARD_ACTION_BEARTRAP, "Bear trap save")
-			if IsValid(act) then 
-				JM_Function_PrintChat(self.TrappedPerson, "Equipment", "You have been released by: " .. tostring(act:Nick()))
-			end
-			if not IsValid(act) then 
-				JM_Function_PrintChat(self.TrappedPerson, "Equipment", "You have been released by: UNKOWN PLAYER")
-			end
-			STATUS:RemoveStatus(self.TrappedPerson, JM_Global_Buff_BearTrap_IconName)
-		end
-	
-		self:EmitSound("0_main_click.wav")
-		self:HitEffectsInit(self)
-		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-		JM_Function_SendHUDWarning(false,self:EntIndex())
-		self:Remove()
-		
-	else
-		JM_Function_PrintChat(act, "Equipment", "You need your hands free to do that...")
+	if IsValid(self.Owner) then
+		JM_Function_PrintChat(self.Owner, "Equipment", "Your Bear Trap has been Destroyed!")
 	end
+
+	if SERVER and not act:IsTraitor() then
+		JM_Function_Karma_Reward(act, JM_KARMA_REWARD_ACTION_TRAPREMOVED, "Trap Removed")
+	end
+
+	if IsValid(self.TrappedPerson) then
+		timer.Destroy("beartrapdmg" .. self.TrappedPerson:EntIndex())
+		self.TrappedPerson:SetNWBool(JM_Global_Buff_BearTrap_NWBool, false)
+		self.TrappedPerson:Freeze(false)
+		JM_Function_Karma_Reward(act, JM_KARMA_REWARD_ACTION_BEARTRAP, "Bear trap save")
+		if IsValid(act) then 
+			JM_Function_PrintChat(self.TrappedPerson, "Equipment", "You have been released by: " .. tostring(act:Nick()))
+		end
+		if not IsValid(act) then 
+			JM_Function_PrintChat(self.TrappedPerson, "Equipment", "You have been released by: UNKOWN PLAYER")
+		end
+		STATUS:RemoveStatus(self.TrappedPerson, JM_Global_Buff_BearTrap_IconName)
+	end
+
+	self:EmitSound("0_main_click.wav")
+	self:HitEffectsInit(self)
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
+	self:Remove()
 
 end
 

@@ -38,11 +38,7 @@ function ENT:Use( activator, caller )
 
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:Alive() then
 
-		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-			self:TakesHit(activator) 
-		else
-			JM_Function_PrintChat(activator, "Objective", "You need your hands free to do that...")
-		end
+		self:TakesHit(activator) 
 
 	end
 end

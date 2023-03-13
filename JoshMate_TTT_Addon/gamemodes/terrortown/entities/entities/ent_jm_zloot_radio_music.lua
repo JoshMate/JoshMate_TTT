@@ -146,8 +146,8 @@ hook.Add("PostDrawOpaqueRenderables", "drawRadioText", function()
 				angle:RotateAroundAxis( angle:Up(), -90 )
 				angle:RotateAroundAxis( angle:Forward(), 90 )
 
-				cam.Start3D2D(pos, angle, 1)
-				draw.SimpleTextOutlined(radio:GetNWString("radioSongName", "Music"), "DermaDefault", 0, -32, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, Color(0,0,0,255))
+				cam.Start3D2D(pos, angle, 0.3)
+				draw.SimpleTextOutlined(radio:GetNWString("radioSongName", "Music"), "DermaLarge", 0, -64, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, Color(0,0,0,255))
 				cam.End3D2D()
 		end
 	end	

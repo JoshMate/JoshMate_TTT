@@ -119,17 +119,14 @@ function ENT:HitEffectsInit(ent)
 
 function ENT:Use(act)
 
-	if act:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-	
-		self:EmitSound("0_main_click.wav")
-		self:HitEffectsInit(self)
-		-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-		JM_Function_SendHUDWarning(false,self:EntIndex())
-		self:Remove()
-		
-	else
-		JM_Function_PrintChat(act, "Equipment", "You need your hands free to do that...")
+	if SERVER and not act:IsTraitor() then
+		JM_Function_Karma_Reward(act, JM_KARMA_REWARD_ACTION_TRAPREMOVED, "Trap Removed")
 	end
+	self:EmitSound("0_main_click.wav")
+	self:HitEffectsInit(self)
+	-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+	JM_Function_SendHUDWarning(false,self:EntIndex())
+	self:Remove()
 
 end
 

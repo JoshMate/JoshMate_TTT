@@ -17,6 +17,8 @@ ENT.Instructions                = "Drops Loot"
 ENT.Spawnable                   = false
 ENT.AdminSpawnable              = false
 
+local detectiveCarePackageLootDelay = 30
+
 function ENT:Initialize()
 	self:SetModel("models/Items/item_item_crate.mdl") 
 	self:PhysicsInit( SOLID_VPHYSICS )
@@ -25,7 +27,7 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
 	self:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self:SetColor(Color( 0, 50, 255, 255))
+	self:SetColor(Color( 0, 50, 255, 150))
 
 	-- Simple Use
 	if SERVER then
@@ -39,6 +41,11 @@ function ENT:Initialize()
 
 	-- Josh Mate New Warning Icon Code
 	JM_Function_SendHUDWarning(true, self:EntIndex(), "icon_warn_carepackage_detective", self:GetPos(), 0, 0)
+
+	-- Timers
+	self.detectiveCarePackageTimeReady = CurTime() + detectiveCarePackageLootDelay
+	self.detectiveCarePackageIsReady = false
+	self.detectiveCarePackageText = "???"
 
 end
 
@@ -62,6 +69,11 @@ function ENT:Use( activator, caller )
 
 		if activator:IsTerror() and activator:Alive() then
 
+			if self.detectiveCarePackageIsReady == false then
+				JM_Function_PrintChat(activator, "Equipment", "This carepackage is not lootable yet...")
+				return
+			end
+
 			if activator:IsDetective() then
 				JM_Function_PrintChat(activator, "Equipment", "Only Non-Detectives can take a Detective Care Package")
 				return
@@ -81,7 +93,57 @@ function ENT:Use( activator, caller )
 end
 
 function ENT:Think()
+
+	if self.detectiveCarePackageIsReady == false then
+		self.detectiveCarePackageText = tostring(math.Round((self.detectiveCarePackageTimeReady - CurTime()), 0))
+	end
+
+
+	if self.detectiveCarePackageIsReady == false and CurTime() >=  self.detectiveCarePackageTimeReady then
+
+		self.detectiveCarePackageIsReady = true
+		self:SetColor(Color( 0, 50, 255, 255))
+		self.detectiveCarePackageText = "Ready!"
+
+	end
+
+	self:SetNWString("detectiveCarePackageNWSTRStatus", self.detectiveCarePackageText)
+
 end
+
+-- Render 3D floating Text
+hook.Add("PostDrawOpaqueRenderables", "drawDetectiveCarePackageText", function()
+
+	listofThings = ents.FindByClass( "ent_jm_carepackage_detective*" )
+
+	-- Set all players Vars
+	for i = 1, #listofThings do
+		local thing = listofThings[i]
+		if (thing:IsValid()) then
+				-- Draw Song Name above radio in 3D space
+				local pos = thing:GetPos()
+				
+				-- Get the game's camera angles
+				local angle = EyeAngles()
+
+				-- Only use the Yaw component of the angle
+				angle = Angle( 0, angle.y, 0 )
+
+				-- Correct the angle so it points at the camera
+				-- This is usually done by trial and error using Up(), Right() and Forward() axes
+				angle:RotateAroundAxis( angle:Up(), -90 )
+				angle:RotateAroundAxis( angle:Forward(), 90 )
+
+				cam.Start3D2D(pos, angle, 0.3)
+
+				-- Decide font colours
+				local thingStatusColour = Color(255,255,255,255)
+
+				draw.SimpleTextOutlined(thing:GetNWString("detectiveCarePackageNWSTRStatus", "???"), "DermaLarge", 0, -96, thingStatusColour, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, Color(0,0,0,255))
+				cam.End3D2D()
+		end
+	end	
+end)
 
 -- ESP Halo effect
 

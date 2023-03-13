@@ -56,11 +56,30 @@ function ENT:Use( activator, caller )
 		--not presed before
 		if buttonOutcome == nil then
 			
-			local roll = math.random(4)
-			local killDecision = roll == 1
-			self.neetsThatPushedTheButton[activator:Nick()] = killDecision
+			local roll = math.random(0, 100)
+			self.neetsThatPushedTheButton[activator:Nick()] = 1
 
-			if killDecision then
+			if roll == 100 then
+
+				if SERVER then
+					JM_Function_PrintChat_All("Care Package", "The Dopamine button has caused a Care Package Shower!")
+					JMGlobal_SpawnCarePackage(5)
+				end
+
+			end
+
+			if roll > 30 and roll < 100 then
+
+				JM_Function_PlaySound("radio_airhorn.wav")
+				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit) & (+50 Max HP)")
+				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine!")
+				activator:SetMaxHealth(activator:GetMaxHealth() + 50) 
+				activator:SetHealth(activator:Health() + 50) 
+				activator:AddCredits(1)
+
+			end
+
+			if roll <= 30 and roll > 7 then
 
 				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants (Sweet Release of Death)")
 
@@ -79,13 +98,18 @@ function ENT:Use( activator, caller )
 					JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " got bodied by the dopamine button...")
 				end
 
-			else
-				JM_Function_PlaySound("radio_airhorn.wav")
-				JM_Function_PrintChat(activator, "Care Package","Dopamine Button grants you (+1 Credit) & (+50 Max HP)")
-				JM_Function_PrintChat_All("Care Package", "Dopamine Button: " .. tostring(activator:Nick()) .. " recieves Dopamine!")
-				activator:SetMaxHealth(activator:GetMaxHealth() + 50) 
-				activator:SetHealth(activator:Health() + 50) 
-				activator:AddCredits(1)
+			end
+			
+			if roll <= 7 then
+				
+				if SERVER then
+					JM_Function_PlaySound("raido_mattdontfuckabout.mp3") 
+					JM_Function_PrintChat_All("Care Package", "A portable tester has spawned near the dopamine button!")
+					local ent = ents.Create("weapon_jm_zloot_traitor_tester")
+					ent:SetPos(self:GetPos())
+					ent:Spawn()
+				end
+
 			end
 
 		else

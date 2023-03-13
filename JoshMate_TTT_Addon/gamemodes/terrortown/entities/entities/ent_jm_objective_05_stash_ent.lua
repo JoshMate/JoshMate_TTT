@@ -30,6 +30,9 @@ function ENT:Initialize()
 	-- Josh Mate New Warning Icon Code
 	JM_Function_SendHUDWarning(true,self:EntIndex(),"icon_warn_objective_stash",self:GetPos(),0,2)
 
+	self.stashHasSpawned = false
+	self.stashTimeToSpawn = CurTime() + 90
+
 end
 
 function ENT:Use( activator, caller )
@@ -40,11 +43,7 @@ function ENT:Use( activator, caller )
 
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:IsTraitor() and activator:Alive() then
 
-		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-			self:StashCapture() 
-		else
-			JM_Function_PrintChat(activator, "Stash", "You need your hands free to do that...")
-		end
+		self:StashCapture() 
 
 	end
 end
@@ -87,6 +86,22 @@ function ENT:StashCapture()
 	JM_Function_PrintChat_All("Stash", "Innocents lose 50% of their max HP")
 	JM_Function_PrintChat_All("Stash", "Traitors gain 50 Max HP and 2 Credits")
 	self:Remove()
+
+end
+
+function ENT:Think()
+
+	if self.stashHasSpawned == false and CurTime() >= self.stashTimeToSpawn then
+
+		self.stashHasSpawned = true
+		if SERVER then
+			local ent = ents.Create("weapon_jm_zloot_traitor_tester")
+			ent:SetPos(self:GetPos())
+			ent:Spawn()
+			JM_Function_PrintChat_All("Stash", "A portable tester has spawned near the stash!")
+		end
+
+	end
 
 end
 

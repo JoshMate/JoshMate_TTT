@@ -1,10 +1,14 @@
 ###################################
-Josh Mate TTT Update 93 - Patch Notes
+Josh Mate TTT Update 95 - Patch Notes
 ###################################
 #### Gameplay
 ###################################
 
-[Shop System]
+//TODO make Detective care package unable to be picked up and or improve how many you can place (Drop station?)
+//TODO give rename to cleansing orb and give 2 uses
+//TODO Remove shadows from Landmine, beartrap and Soap
+
+[Object Interactions]
 - 
 
 ###################################

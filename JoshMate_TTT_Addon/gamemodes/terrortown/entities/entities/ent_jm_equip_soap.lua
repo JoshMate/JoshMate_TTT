@@ -61,15 +61,15 @@ function ENT:Use( activator, caller )
 
 		if activator:IsTerror() then
 
-			if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-				JM_Function_PrintChat(self.Owner, "Equipment","Your Soap has been destroyed!")
-				self:Effect_Sparks()
-				-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
-				JM_Function_SendHUDWarning(false,self:EntIndex())
-				self:Remove()
-			else
-				JM_Function_PrintChat(activator, "Equipment", "You need your hands free to do that...")
+			if SERVER and not activator:IsTraitor() then
+				JM_Function_Karma_Reward(activator, JM_KARMA_REWARD_ACTION_TRAPREMOVED, "Trap Removed")
 			end
+
+			JM_Function_PrintChat(self.Owner, "Equipment","Your Soap has been destroyed!")
+			self:Effect_Sparks()
+			-- When removing this ent, also remove the HUD icon, by changing isEnabled to false
+			JM_Function_SendHUDWarning(false,self:EntIndex())
+			self:Remove()
 
 		end
 		

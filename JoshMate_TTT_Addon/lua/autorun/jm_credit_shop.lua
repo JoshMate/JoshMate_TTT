@@ -18,8 +18,9 @@ JM_ShopCreditCosts = {
 
     ["weapon_jm_equip_taser"] = 3,
     ["weapon_jm_equipment_grenade_flash"] = 3,
-    ["weapon_jm_equip_orb_suppression"] = 3,
+    ["weapon_jm_zloot_traitor_tester"] = 3,
     ["weapon_jm_equip_tree"] = 2,
     ["weapon_jm_equip_agentmaker"] = 2,
-    ["weapon_jm_equip_placer_carepackage"] = 2
+    ["weapon_jm_equip_placer_carepackage"] = 2,
+    ["weapon_jm_equip_carpenter"] = 2
 }

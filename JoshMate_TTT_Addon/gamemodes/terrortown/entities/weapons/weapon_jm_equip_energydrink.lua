@@ -17,7 +17,7 @@ if CLIENT then
 	
 Grants the drinker Health Regen, movement speed and greatly reduced fall damage
 
-Has 1 use and lasts for 3 seconds
+Has 1 use and lasts for 30 seconds
 
 Left click to Drink | Right Click to force feed to someone
 ]]

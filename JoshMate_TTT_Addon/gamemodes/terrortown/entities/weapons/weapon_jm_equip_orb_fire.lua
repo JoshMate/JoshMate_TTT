@@ -1,7 +1,9 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "pistol"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 
 if CLIENT then
    SWEP.PrintName          = "Fire Orb"
@@ -55,16 +57,6 @@ SWEP.WorldModel            = Model("models/props_phx/ball.mdl")
 
 local JM_Shoot_Range                = 10000
 
-function SWEP:HitEffectsInit(ent)
-   if not IsValid(ent) then return end
-   local effect = EffectData()
-   local ePos = ent:GetPos()
-   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
-   effect:SetStart(ePos)
-   effect:SetOrigin(ePos)
-   util.Effect("cball_explode", effect, true, true)
-end
-
 function SWEP:PrimaryAttack()
 
    -- Weapon Animation, Sound and Cycle data
@@ -89,7 +81,7 @@ function SWEP:PrimaryAttack()
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
    if (tr.HitSky == false)then
       if SERVER then 
-         local ent = ents.Create("ent_jm_equip_Orb_Fire")
+         local ent = ents.Create("ent_jm_equip_orb_fire")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), -90)
@@ -98,7 +90,7 @@ function SWEP:PrimaryAttack()
 			ent.Owner = self:GetOwner()
 
          -- Another one but flipped
-         local ent = ents.Create("ent_jm_equip_Orb_Fire")
+         local ent = ents.Create("ent_jm_equip_orb_fire")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), 90)
@@ -134,7 +126,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Create an Orb", nil, true)
+	   self:AddTTT2HUDHelp("Create a Fire Orb", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

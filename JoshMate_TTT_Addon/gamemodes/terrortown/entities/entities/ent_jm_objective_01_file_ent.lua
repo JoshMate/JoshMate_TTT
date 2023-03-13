@@ -34,11 +34,7 @@ function ENT:Use( activator, caller )
 
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:Alive() then
 
-		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-			self:GrabFile(activator) 
-		else
-			JM_Function_PrintChat(activator, "Grab The Files", "You need your hands free to do that...")
-		end
+		self:GrabFile(activator)
 
 	end
 end
@@ -68,21 +64,12 @@ function ENT:GrabFile(activator)
 
 	if #listOfObjectives <= 1 then
 
-		-- Reveal 1 Traitor
-		local nameOfRevealedTraitor = "ERROR"
-		local nameOfPersonWhoKnows = activator:Nick()
-
-		-- Build a list of possible targets
-		for _,pl in pairs(player.GetAll()) do
-			if pl:IsValid() and pl:Alive() and not pl:IsSpec() and pl:IsTerror() and pl:IsTraitor() then 
-				nameOfRevealedTraitor = pl:Nick()
-				break
-			end
-		end
-
-		JM_Function_PrintChat_All("Grab The Files", tostring(nameOfPersonWhoKnows) .. " knows who the Traitor is!")
-		JM_Function_PrintChat(activator, "Grab The Files", "The Traitor is: " .. tostring(nameOfRevealedTraitor))
+		local ent = ents.Create("weapon_jm_zloot_traitor_tester")
+		ent:SetPos(self:GetPos())
+    	ent:Spawn()
+		JM_Function_PrintChat_All("Grab The Files", "A portable tester has spawned near the last file!")
 		JM_Function_PlaySound("gamemode/file_end.mp3")
+
 	end
 
 	self:Remove()

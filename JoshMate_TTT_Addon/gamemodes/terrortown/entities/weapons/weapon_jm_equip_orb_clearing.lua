@@ -1,10 +1,12 @@
 
 AddCSLuaFile()
 
-SWEP.HoldType              = "pistol"
+SWEP.HoldType              = "normal"
+SWEP.HoldReady             = "normal"
+SWEP.HoldNormal            = "normal"
 
 if CLIENT then
-   SWEP.PrintName          = "Suppression Orb"
+   SWEP.PrintName          = "Clearing Orb"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -14,9 +16,22 @@ if CLIENT then
       type = "item_weapon",
       desc = [[An AOE Weapon
 
-Creates a large orb of suppression that slows those who stand in it
+Creates a large orb that clears objects and hazards in it's radius
 
-Has 3 use and lingers for 20 Seconds. Players can't see you holding this
+Has 2 use and lingers for 15 Seconds.
+
+Clears: 
+Props 
+Fire Orbs 
+Barriers
+Grenades
+Throwing Knives
+Soaps
+Bear traps
+Landmines
+NPCs
+
+
 ]]
    };
 
@@ -37,8 +52,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false
@@ -54,16 +69,6 @@ SWEP.ViewModel             = Model("models/props_phx/ball.mdl")
 SWEP.WorldModel            = Model("models/props_phx/ball.mdl")
 
 local JM_Shoot_Range                = 10000
-
-function SWEP:HitEffectsInit(ent)
-   if not IsValid(ent) then return end
-   local effect = EffectData()
-   local ePos = ent:GetPos()
-   if ent:IsPlayer() then ePos:Add(Vector(0,0,40))end
-   effect:SetStart(ePos)
-   effect:SetOrigin(ePos)
-   util.Effect("cball_explode", effect, true, true)
-end
 
 function SWEP:PrimaryAttack()
 
@@ -89,22 +94,24 @@ function SWEP:PrimaryAttack()
    local tr = util.TraceLine({start = owner:GetShootPos(), endpos = owner:GetShootPos() + owner:GetAimVector() * JM_Shoot_Range, filter = owner})
    if (tr.HitSky == false)then
       if SERVER then 
-         local ent = ents.Create("ent_jm_equip_Orb_Suppression")
+         local ent = ents.Create("ent_jm_equip_orb_clearing")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), -90)
 			ent:SetAngles(ang)
 			ent:Spawn()
 			ent.Owner = self:GetOwner()
+         ent:SetOwner(self:GetOwner())
 
          -- Another one but flipped
-         local ent = ents.Create("ent_jm_equip_Orb_Suppression")
+         local ent = ents.Create("ent_jm_equip_orb_clearing")
 			ent:SetPos(tr.HitPos + tr.HitNormal)
 			local ang = tr.HitNormal:Angle()
 			ang:RotateAroundAxis(ang:Right(), 90)
 			ent:SetAngles(ang)
 			ent:Spawn()
 			ent.Owner = self:GetOwner()
+         ent:SetOwner(self:GetOwner())
       end
    end
 
@@ -134,7 +141,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Create an Orb", nil, true)
+	   self:AddTTT2HUDHelp("Create a Clearing Orb", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

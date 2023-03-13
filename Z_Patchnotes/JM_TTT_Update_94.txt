@@ -1,0 +1,68 @@
+###################################
+Josh Mate TTT Update 94 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Object Interactions]
+- Removed the "Requires bare hands" on all object interactions in the game
+(You can now perform all actions while holding a gun, like disarming traps or using objectives)
+
+[Portable Tester]
+- Overhaul and improvements
+- When testing a player, it drops a sample on the floor which does the testing
+- The sample displays who it's testing and it's progress (It takes time)
+- When the test is complete the sample object will display the result
+- Traitors can press E on a sample to destroy it and gain +1 Credit
+- Testers can now been seen through walls when on the floor
+- Has 1 use
+
+[Game modes]
+- Capture the files now rewards a Portable Tester on completion
+- After 90 seconds of not being captured, a portable tester spawns at the "Stash"
+- Arms deal now rewards a portable tester on completion
+
+[Dopamine Button]
+- Has a 70% chance to give dopamine (Health + credit boost)
+- Has a 22% chance to kill you
+- Now has a 7% chance to spawn a portable tester
+- Now has a 1% chance to trigger a care package shower
+
+[Detective Wall]
+- A new detective Item that costs 1 credit
+- Place down a wall in front of you that will block bullets, projectiles and props
+- Has 2 uses and each one lasts for 60 seconds
+
+[Clearing Orb]
+- A new detective Item that costs 1 credit
+- Place down an orb at any distance where you are aiming
+- Removes the following if they touch the orb
+- Props / Fire Orbs / Barriers / Grenades / Throwing Knives / Soaps / Bear traps / Landmines / NPCs
+- This can be used defensively to protect yourself, or to clear an area of blockages / hazards
+- Has 1 uses and lasts for 30 seconds
+
+[Carpenter]
+- A new detective Item that costs 2 credits
+- Place down breakable pallets that block players
+- Has 10 uses and they last until they are broken
+
+[Detective Care Package]
+- A placed care package will become "Lootable" after the displayed delay has passed
+(This will encourage people to congregate around it, improving it's intended purpose)
+
+[Bugs and Fixes]
+- Added the missing item description for Energy Drink
+- Fixed Glue not tracking players with a yellow outline
+- Fixed the blurry text on the Music Radio
+- You now receive karma for destroying unused beartraps
+- You now receive karma for destroying Soaps
+- You now receive karma for destroying Landmines
+
+###################################
+#### Maps
+###################################
+
+###################################
+End of Patch Notes
+###################################
+

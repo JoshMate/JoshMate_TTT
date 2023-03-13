@@ -38,15 +38,11 @@ function ENT:Use( activator, caller )
 
     if IsValid(activator) and activator:IsPlayer() and IsValid(self) and activator:IsTerror() and activator:Alive() then
 
-		if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-			if self.isBatteryActive == true then 
-				JM_Function_Karma_Reward(activator, JM_KARMA_REWARD_ACTION_OBJECTIVE_Battery, "Battery captured")
-				self:BatteryUse() 
-			else
-				JM_Function_PrintChat(activator, "Powerup", "This Battery will be usable in: " .. tostring(math.Round((self.isBatteryActiveTime - CurTime()))) .. " seconds" )
-			end
+		if self.isBatteryActive == true then 
+			JM_Function_Karma_Reward(activator, JM_KARMA_REWARD_ACTION_OBJECTIVE_Battery, "Battery captured")
+			self:BatteryUse() 
 		else
-			JM_Function_PrintChat(activator, "Powerup", "You need your hands free to do that...")
+			JM_Function_PrintChat(activator, "Powerup", "This Battery will be usable in: " .. tostring(math.Round((self.isBatteryActiveTime - CurTime()))) .. " seconds" )
 		end
 
 	end

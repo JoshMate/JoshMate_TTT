@@ -85,6 +85,11 @@ if SERVER then
             CP_Event = 4
         end
 
+        if Force_Spawned == 5 then
+            -- Dopamine Shower
+            CP_Event = 5
+        end
+
 
 
         if CP_Event == 1 then 
@@ -109,6 +114,16 @@ if SERVER then
             CP_CreatePackage()
             CP_CreatePackage()
             CP_CreatePackage()
+        end
+
+        if CP_Event == 5 then
+            print("[JM Care Package] - A Care Package shower was caused by Dopamine Button") 
+            CP_CreatePackage()
+            CP_CreatePackage()
+            CP_CreatePackage()
+            CP_CreatePackage()
+            CP_CreatePackage()
+
         end
         
 
@@ -143,6 +158,8 @@ if CLIENT then
         if Type == 1 or Type == 3 then surface.PlaySound("carepackage_arrive.wav") return end
 
         if Type == 2 or Type == 4 then surface.PlaySound("carepackage_arrive_group.wav") return end
+
+        if Type == 5 then surface.PlaySound("radio_icebarrage.wav") return end
 
         
     end)

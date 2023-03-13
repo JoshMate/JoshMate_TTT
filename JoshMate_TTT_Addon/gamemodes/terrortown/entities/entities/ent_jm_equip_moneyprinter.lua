@@ -70,16 +70,12 @@ function ENT:Use( activator, caller )
 
 		if IsValid(activator) and activator:Alive() and SERVER then
 
-			if activator:GetActiveWeapon():GetClass() == "weapon_jm_special_hands" then 
-				JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+30 Max HP)")
-				JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+1 Credit)")
-				activator:SetMaxHealth(activator:GetMaxHealth() + 30) 
-				activator:SetHealth(activator:Health() + 30) 
-				activator:AddCredits(1)
-				self:Remove()
-			else
-				JM_Function_PrintChat(activator, "Equipment", "You need your hands free to do that...")
-			end
+			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+30 Max HP)")
+			JM_Function_PrintChat(activator, "Equipment", "You looted a Money Printer (+1 Credit)")
+			activator:SetMaxHealth(activator:GetMaxHealth() + 30) 
+			activator:SetHealth(activator:Health() + 30) 
+			activator:AddCredits(1)
+			self:Remove()
 
 		end	
 		
