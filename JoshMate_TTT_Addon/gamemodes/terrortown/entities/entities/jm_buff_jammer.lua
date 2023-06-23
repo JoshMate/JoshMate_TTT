@@ -70,21 +70,33 @@ function ENT:Think()
 
 end
 
+-- Hooks
+hook.Add("TTTPlayerSpeedModifier", ("JM_BuffSpeedEffects_".. tostring(JM_PrintName)), function(ply, _, _, speedMultiplierModifier)
+
+    if ply:IsValid() and ply:IsTerror() and ply:GetNWBool(JM_BuffNWBool) == true  then 
+        speedMultiplierModifier[1] = speedMultiplierModifier[1] * 0.8
+    end 
+end)
+
 
 -- ESP Halo effect
 hook.Add( "PreDrawHalos", "Halos_Jammer", function()
 
-    local players = {}
-     local count = 0
- 
-     for _, ply in ipairs( player.GetAll() ) do
-         if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) ) then
-             count = count + 1
-             players[ count ] = ply
-         end
-     end
- 
-     halo.Add( players, Color( 255, 180, 100 ), 2, 2, 3, true, true )
+    if LocalPlayer():IsTraitor() then 
+
+        local players = {}
+        local count = 0
+    
+        for _, ply in ipairs( player.GetAll() ) do
+            if (ply:IsTerror() and ply:Alive() and ply:GetNWBool(JM_BuffNWBool) ) then
+                count = count + 1
+                players[ count ] = ply
+            end
+        end
+    
+        halo.Add( players, Color( 255, 180, 100 ), 2, 2, 3, true, true )
+
+    end
  
 end )
 

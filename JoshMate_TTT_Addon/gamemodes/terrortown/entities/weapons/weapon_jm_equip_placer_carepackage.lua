@@ -1,15 +1,15 @@
 AddCSLuaFile()
 
-SWEP.PrintName				= "Care Package Placer"
-SWEP.Author			    	= "Seb Mate"
+SWEP.PrintName				= "Drop Spot"
+SWEP.Author			    	= "Josh Mate"
 SWEP.Instructions			= "Places a Carepackage"
 SWEP.EquipMenuData = {
 	type = "item_weapon",
 	desc = [[A Utility Item
 
-Place 1 Detective Carepackage
+Place a drop spot, marked on everyones screen
 
-It will become lootable after a timed delay
+This spot will produce 2 carepackages after a time delay
 
 Only non detective players can take them
 ]]
@@ -48,8 +48,9 @@ SWEP.WeaponID              = AMMO_CAREPACKAGE
 
 
 SWEP.JM_Trap_PlaceRange					= 255
-SWEP.JM_Trap_Entity_Class				= "ent_jm_carepackage_detective"
-SWEP.JM_Trap_Entity_Colour				= Color( 0, 50, 255, 255)
+SWEP.JM_Trap_Entity_Class				= "ent_jm_equip_dropspot"
+
+local dropSpotDistanceOffFloor  = 60
 
 function SWEP:PrimaryAttack()
 
@@ -67,16 +68,12 @@ function SWEP:PrimaryAttack()
 
 				self:GetOwner():EmitSound("shoot_barrel.mp3")
 
-
 				local ent = ents.Create(self.JM_Trap_Entity_Class)
-				ent:SetPos(tr.HitPos + tr.HitNormal)
+				ent:SetPos((tr.HitPos + tr.HitNormal) + Vector(0, 0, 0 + dropSpotDistanceOffFloor))
 				local ang = tr.HitNormal:Angle()
 				ang:RotateAroundAxis(ang:Right(), -90)
 				ent:SetAngles(ang)
 				ent:Spawn()
-
-				ent:SetRenderMode( RENDERMODE_TRANSCOLOR )
-				ent:SetColor(self.JM_Trap_Entity_Colour)
 
 				ent.Owner = self.Owner
 				ent.fingerprints = self.fingerprints

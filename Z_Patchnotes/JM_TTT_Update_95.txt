@@ -4,12 +4,24 @@ Josh Mate TTT Update 95 - Patch Notes
 #### Gameplay
 ###################################
 
-//TODO make Detective care package unable to be picked up and or improve how many you can place (Drop station?)
-//TODO give rename to cleansing orb and give 2 uses
-//TODO Remove shadows from Landmine, beartrap and Soap
+[Drop Spot]
+- New Detective item
+- Place a drop spot, marked on everyone's screen
+- This spot will produce 2 carepackages after a time delay
+- Only non detective players can take them
+- The spot can not be moved but the crates it produces can
+- The crates are usable instantly
+- Replaces "Car Package Swep" in the detective shop
+- Costs 2 Credits
 
-[Object Interactions]
-- 
+[Cleansing Orb]
+- Renamed from Clearing Orb
+- Increased number of uses: 1 -> 2 Orbs
+- Increased duration of Orb: 15 -> 20 Seconds
+- Now cleanses fire caused by inferno launcher and Flames of Hell
+
+[Bug Fixes and Tweaks]
+- Innocents can no longer see the "Jammed" outline around jammed players revealing traitors
 
 ###################################
 #### Maps

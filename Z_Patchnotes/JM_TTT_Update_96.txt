@@ -1,0 +1,27 @@
+###################################
+Josh Mate TTT Update 96 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+//None
+
+###################################
+#### Maps
+###################################
+
+[TTT Gas Station]
+- New map
+A map set at a Gas Station out in a rural area at night.
+It features multiple different buildings and moving cars that will run you over if you stand in their way!
+
+[TTT Desert]
+- Finally fixed the stupid little ramp to that vent when you always had to jump loads to go up
+- Improvements to the little wooden tunnel that connects the house to the pool area
+- Added some more player spawn points for variety 
+- Recompiled the map using new Secret Josh Mate HD settings (Should fix black props bug and improve visuals)
+
+###################################
+End of Patch Notes
+###################################
+

@@ -1,0 +1,24 @@
+###################################
+Josh Mate TTT Update 97 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Jammer]
+- Now works like doom dart, a silent long range utility item that you can't be seen using / holding
+- Now effects all players near where you are aiming in a radius similar to the newton launcher (No obvious visuals though)
+- Jammed players are tracked, have their send / recieve voice chat blocked, screen distorted and are slowed by 20%
+
+[Newton Launcher]
+- Added lag compensation to the projectile to improve whiffing and dodgy network lag scenarios
+
+###################################
+#### Maps
+###################################
+
+// None
+
+###################################
+End of Patch Notes
+###################################
+

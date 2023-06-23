@@ -147,12 +147,17 @@ function SWEP:PrimaryAttack()
 
    if SERVER then
       local maxShootRange = 5000
+
+      if isfunction(self:GetOwner().LagCompensation) then -- for some reason not always true
+         self:GetOwner():LagCompensation(true)
+      end
+
       local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * maxShootRange, filter = self.Owner})
       local effect = EffectData()
       effect:SetStart(tr.HitPos)
       effect:SetOrigin(tr.HitPos)
       
-      
+      self:GetOwner():LagCompensation(false)
       
       util.Effect("cball_explode", effect, true, true)
       sound.Play(Sound("npc/assassin/ball_zap1.wav"), tr.HitPos, 100, 100)

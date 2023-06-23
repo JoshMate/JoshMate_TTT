@@ -11,9 +11,11 @@ if CLIENT then
       type = "item_weapon",
       desc = [[An Intel Weapon
 	
-Blocks voice chat from being sent or recieved by nearby players
+Blocks voice chat from being sent or recieved by players
 
-It also tracks those players on your hud for the 15s duration
+It also tracks those players and slows / distorts them
+
+Hits all players near where you are aiming, has infinite range and is completely undetectable
 
 Has 1 Use
 ]]
@@ -44,9 +46,9 @@ SWEP.UseHands              = false
 SWEP.ViewModel             = "models/props_rooftop/roof_dish001.mdl"
 SWEP.WorldModel            = "models/props_rooftop/roof_dish001.mdl"
 
-function SWEP:ApplyEffect(ent,weaponOwner)
+function SWEP:ApplyEffect(HitPos,weaponOwner)
 
-   if not IsValid(ent) then return end
+   if not IsValid(self) then return end
    
    if SERVER then
 
@@ -58,7 +60,7 @@ function SWEP:ApplyEffect(ent,weaponOwner)
 
       for _, ply in ipairs( player.GetAll() ) do
          if (ply:IsValid() and not ply:IsSpec() and ply:IsTerror() and ply:Alive() and not ply:IsTraitor()) then
-            if (self:GetOwner():GetPos():Distance(ply:GetPos()) <= 800) then 
+            if (HitPos:Distance(ply:GetPos()) <= 300) then 
                playersHit = playersHit +1
                JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
                JM_GiveBuffToThisPlayer("jm_buff_jammer",ply,self:GetOwner())
@@ -82,8 +84,30 @@ function SWEP:PrimaryAttack()
    -- ####
 
    -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
-   self:ApplyEffect(self:GetOwner(), self:GetOwner())
+
    -- #########
+
+   if SERVER then
+      local maxShootRange = 5000
+
+      if isfunction(self:GetOwner().LagCompensation) then -- for some reason not always true
+         self:GetOwner():LagCompensation(true)
+      end
+
+      local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * maxShootRange, filter = self.Owner})
+      local effect = EffectData()
+      effect:SetStart(tr.HitPos)
+      effect:SetOrigin(tr.HitPos)
+
+      self:GetOwner():LagCompensation(false)
+      
+      
+      
+      util.Effect("cball_explode", effect, true, true)
+      sound.Play(Sound("npc/assassin/ball_zap1.wav"), tr.HitPos, 100, 100)
+
+      self:ApplyEffect(tr.HitPos, self:GetOwner())
+   end
 
    self:TakePrimaryAmmo(1)
 
@@ -143,7 +167,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Use Jammer", nil, true)
+	   self:AddTTT2HUDHelp("Use Jammer at aiming location", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

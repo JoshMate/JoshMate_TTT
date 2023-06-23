@@ -6,7 +6,7 @@ SWEP.HoldReady             = "normal"
 SWEP.HoldNormal            = "normal"
 
 if CLIENT then
-   SWEP.PrintName          = "Clearing Orb"
+   SWEP.PrintName          = "Cleansing Orb"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -18,7 +18,7 @@ if CLIENT then
 
 Creates a large orb that clears objects and hazards in it's radius
 
-Has 2 use and lingers for 15 Seconds.
+Has 2 use and lingers for 20 Seconds.
 
 Clears: 
 Props 
@@ -30,6 +30,7 @@ Soaps
 Bear traps
 Landmines
 NPCs
+Fire
 
 
 ]]
@@ -52,8 +53,8 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.30
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 1
-SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipSize      = 2
+SWEP.Primary.DefaultClip   = 2
 SWEP.Primary.ClipMax       = 0
 SWEP.Primary.SoundLevel    = 40
 SWEP.Primary.Automatic     = false

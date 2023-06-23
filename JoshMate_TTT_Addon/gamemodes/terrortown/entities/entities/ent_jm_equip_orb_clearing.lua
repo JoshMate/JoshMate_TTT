@@ -1,14 +1,14 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.PrintName= "Suppression Orb"
+ENT.PrintName= "Cleansing Orb"
 ENT.Author= "Josh Mate"
 ENT.Purpose= "Blinder"
 ENT.Instructions= "Blinder"
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 
-local suppressionOrb_Duration				= 30
+local suppressionOrb_Duration				= 20
 local suppressionOrb_ArmTime				= 2.5
 local suppressionOrb_Radius_Slow			= 280
 local suppressionOrb_Delay_Tick				= 0.35
@@ -83,6 +83,7 @@ function ENT:suppressionOrbRadiusEffects()
 	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_beartrap" ) ) do self:clearingOrbClearItem(v) end
 	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_soap" ) ) do self:clearingOrbClearItem(v) end
 	for k, v in ipairs( ents.FindByClass( "ent_jm_equip_landmine" ) ) do self:clearingOrbClearItem(v) end
+	for k, v in ipairs( ents.FindByClass( "ent_jm_base_fire" ) ) do self:clearingOrbClearItem(v) end
 	
 
 end
