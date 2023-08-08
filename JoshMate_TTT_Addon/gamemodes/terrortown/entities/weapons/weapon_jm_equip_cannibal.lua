@@ -50,8 +50,8 @@ SWEP.ViewModel             = "models/weapons/c_bugbait.mdl"
 SWEP.WorldModel            = "models/weapons/w_bugbait.mdl"
 
 local Cannibal_Eat_MaxHP      = 15
-local Cannibal_Eat_Range      = 75
-local Cannibal_Eat_Delay      = 4
+local Cannibal_Eat_Range      = 96
+local Cannibal_Eat_Delay      = 3
 local Cannibal_Eat_StayRange  = 100
 local Cannibal_Eat_Sound      = "cannibal_eating_delay_withcough.mp3"
 

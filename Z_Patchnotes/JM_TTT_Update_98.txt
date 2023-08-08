@@ -1,0 +1,56 @@
+###################################
+Josh Mate TTT Update 98 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Hunter Sense]
+- New Traitor Weapon
+- Replaces Jammer
+- When used it reveals the location of all players in real time to the traitors
+- They have their vision distorted and they can't see other players names
+- Single use and lasts for 12 seconds
+- Costs 2 credits
+
+[Map Vote]
+- Increased number of random map choices on offer: 2-5 -> 2-8
+- There is also a 10% chance of a full map vote happening naturally featuring all maps
+
+[Arms Deal]
+- Increased the points each weapon gives you by about 20%
+
+[Portable Traitor Tester]
+- Increased number of uses: 1 -> 2
+
+[Glue Gun]
+- Increased number of uses: 3 -> 5
+
+[Carpenter]
+- Can now left click to place them upright and right click to place them flat
+- Increased number of pallets the detective can place: 10 -> 15
+- Increased the health of the pallets: 100 -> 125
+
+[Cannibal]
+- Reduced time it takes to fully eat a body: 4 -> 3 seconds
+- Increased the radius you can be from a body to eat it: 75 -> 96 Units 
+
+[Informer]
+- Improved the readability and layout of the results text
+- Informer now tells the detective how many armed and unarmed C4s there are currently
+
+[DNA Scanner]
+- Obtaining a DNA sample from a scan permanently increases the Detectives speed by 10%
+
+[Fixes]
+- Removed the stray ")" from the antidote cured text
+
+###################################
+#### Maps
+###################################
+
+// None
+
+###################################
+End of Patch Notes
+###################################
+

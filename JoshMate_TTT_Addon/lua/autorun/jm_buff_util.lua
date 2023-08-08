@@ -257,6 +257,20 @@ JM_Global_Buff_GlueMega_IconName                                    = "JM_Buff_I
 JM_Global_Buff_GlueMega_IconPath                                    = "vgui/ttt/joshmate/hud_glue.png"
 JM_Global_Buff_GlueMega_IconGoodBad                                 = "bad"
 
+JM_Global_Buff_Dna_Name                                             = "DNA boost"
+JM_Global_Buff_Dna_Duration                                         = 0
+JM_Global_Buff_Dna_NWBool                                           = "JM_Buff_NWBool_IsDna"
+JM_Global_Buff_Dna_IconName                                         = "JM_Buff_Icon_Dna"
+JM_Global_Buff_Dna_IconPath                                         = "vgui/ttt/joshmate/hud_dna.png"
+JM_Global_Buff_Dna_IconGoodBad                                      = "good"
+
+JM_Global_Buff_HunterSense_Name                                      = "Hunter Sense"
+JM_Global_Buff_HunterSense_Duration                                  = 12
+JM_Global_Buff_HunterSense_NWBool                                    = "JM_Buff_NWBool_IsHunterSense"
+JM_Global_Buff_HunterSense_IconName                                  = "JM_Buff_Icon_HunterSense"
+JM_Global_Buff_HunterSense_IconPath                                  = "vgui/ttt/joshmate/hud_huntersense.png"
+JM_Global_Buff_HunterSense_IconGoodBad                               = "bad"
+
 
 -- Karma Buffs
 

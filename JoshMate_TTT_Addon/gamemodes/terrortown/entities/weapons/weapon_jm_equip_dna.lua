@@ -199,8 +199,14 @@ function SWEP:GatherDNA(ent)
 
 	if ent:GetClass() == "prop_ragdoll" and ent.killer_sample then
 		self:GatherRagdollSample(ent)
+		if (SERVER) then
+			JM_GiveBuffToThisPlayer("jm_buff_dna",self:GetOwner(),self:GetOwner())
+		end
 	elseif ent.fingerprints and #ent.fingerprints > 0 then
 		self:GatherObjectSample(ent)
+		if (SERVER) then
+			JM_GiveBuffToThisPlayer("jm_buff_dna",self:GetOwner(),self:GetOwner())
+		end
 	else
 		self:Report(false, "dna_notfound")
 	end

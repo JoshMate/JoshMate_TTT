@@ -82,19 +82,19 @@ function ENT:ArmsDealDetectWeapon()
 		-- Process the weapon as it is in range
 		local scoreGiven = 0
 
-		if weapon:GetClass() == "weapon_jm_primary_lmg" then scoreGiven = 15 end
-		if weapon:GetClass() == "weapon_jm_primary_sniper" then scoreGiven = 10 end
-		if weapon:GetClass() == "weapon_jm_primary_rifle" then scoreGiven = 8 end
-		if weapon:GetClass() == "weapon_jm_primary_smg" then scoreGiven = 8 end
-		if weapon:GetClass() == "weapon_jm_primary_shotgun" then scoreGiven = 8 end
-		if weapon:GetClass() == "weapon_jm_secondary_heavy" then scoreGiven = 5 end
-		if weapon:GetClass() == "weapon_jm_secondary_auto" then scoreGiven = 5 end
-		if weapon:GetClass() == "weapon_jm_secondary_light" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_grenade_frag" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_grenade_glue" then scoreGiven = 5 end
-		if weapon:GetClass() == "weapon_jm_grenade_health" then scoreGiven = 4 end
-		if weapon:GetClass() == "weapon_jm_grenade_jump" then scoreGiven = 5 end
-		if weapon:GetClass() == "weapon_jm_grenade_tag" then scoreGiven = 3 end
+		if weapon:GetClass() == "weapon_jm_primary_lmg" then scoreGiven = 20 end
+		if weapon:GetClass() == "weapon_jm_primary_sniper" then scoreGiven = 15 end
+		if weapon:GetClass() == "weapon_jm_primary_rifle" then scoreGiven = 10 end
+		if weapon:GetClass() == "weapon_jm_primary_smg" then scoreGiven = 10 end
+		if weapon:GetClass() == "weapon_jm_primary_shotgun" then scoreGiven = 10 end
+		if weapon:GetClass() == "weapon_jm_secondary_heavy" then scoreGiven = 6 end
+		if weapon:GetClass() == "weapon_jm_secondary_auto" then scoreGiven = 6 end
+		if weapon:GetClass() == "weapon_jm_secondary_light" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_grenade_frag" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_grenade_glue" then scoreGiven = 6 end
+		if weapon:GetClass() == "weapon_jm_grenade_health" then scoreGiven = 5 end
+		if weapon:GetClass() == "weapon_jm_grenade_jump" then scoreGiven = 6 end
+		if weapon:GetClass() == "weapon_jm_grenade_tag" then scoreGiven = 4 end
 
 		if scoreGiven == 0 then continue end
 

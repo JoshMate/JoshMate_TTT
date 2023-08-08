@@ -38,7 +38,7 @@ function ENT:Use( activator, caller )
 
 		if (not table.HasValue(self.Objective_Antidote_PeopleWhoHaveUsed, tostring(activator:Nick()))) then
 			JM_Function_PlaySound("grenade_health.wav")
-			JM_Function_PrintChat_All("Antidote", tostring(activator:Nick()) .. " has been cured!)")
+			JM_Function_PrintChat_All("Antidote", tostring(activator:Nick()) .. " has been cured!")
 			JM_RemoveBuffFromThisPlayer("jm_buff_antidotepoison",activator)
 			activator:SetHealth(activator:GetMaxHealth())
 			table.insert(self.Objective_Antidote_PeopleWhoHaveUsed, tostring(activator:Nick()))

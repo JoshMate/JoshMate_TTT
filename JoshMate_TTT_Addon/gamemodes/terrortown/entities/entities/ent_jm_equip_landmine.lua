@@ -86,7 +86,7 @@ function ENT:floorbombExplode()
 		-- Disorientated Debuff on Explosion
 		if (SERVER) then
 			JM_GiveBuffToThisPlayer("jm_buff_explosion",self.floorBombTriggeredTarget,self.Owner)
-		 end
+		end
 	end
 
 	-- Create splash damage explosion

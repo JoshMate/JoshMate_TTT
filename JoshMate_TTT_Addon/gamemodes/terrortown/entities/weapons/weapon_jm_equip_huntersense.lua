@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName          = "Informer"
+   SWEP.PrintName          = "Hunter Sense"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFOV       = 54
@@ -11,12 +11,16 @@ if CLIENT then
       type = "item_weapon",
       desc = [[An Intel Weapon
 	
-Tells the Detective important information on use
+Reveals all players location real time to the traitors
 
-3 uses
+It also distorts their vision and prevents them seeing player names
+
+Lasts for 12 seconds
+
+Has 1 Use
 ]]
 };
-   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_informer.png"
+   SWEP.Icon               = "vgui/ttt/joshmate/icon_jm_jammer.png"
 end
 
 SWEP.Base                  = "weapon_jm_base_gun"
@@ -26,85 +30,21 @@ SWEP.Primary.Damage        = 0
 SWEP.HeadshotMultiplier    = 0
 SWEP.Primary.Delay         = 0.5
 SWEP.Primary.Cone          = 0
-SWEP.Primary.ClipSize      = 3
-SWEP.Primary.DefaultClip   = 3
-SWEP.Primary.ClipMax       = 3
+SWEP.Primary.ClipSize      = 1
+SWEP.Primary.DefaultClip   = 1
+SWEP.Primary.ClipMax       = 1
 SWEP.DeploySpeed           = 4
 SWEP.Primary.SoundLevel    = 75
 SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_DETECTIVE}
+SWEP.CanBuy                = {ROLE_TRAITOR}
 SWEP.LimitedStock          = true -- only buyable once
-SWEP.WeaponID              = AMMO_INFORMER
+SWEP.WeaponID              = AMMO_JAMMER
 SWEP.UseHands              = false
-SWEP.ViewModel             = "models/props/cs_office/computer_mouse.mdl"
-SWEP.WorldModel            = "models/props/cs_office/computer_mouse.mdl"
-
-SWEP.informerScansPerformed = 0
-
-
-
-
-function SWEP:ApplyEffect(ent,weaponOwner)
-
-   if not IsValid(ent) then return end
-   
-   if SERVER then
-
-      -- Make sound
-      weaponOwner:EmitSound("informer_use.wav")
-
-      -- Gather Stats
-      local informerStatAlive   = 0
-      local informerStatDead    = 0
-      local informerStatNear    = 0
-      local informerStatC4s     = 0
-
-      for _, ply in ipairs( player.GetAll() ) do
-
-         if (ply:IsValid() and not ply:IsSpec() and ply:IsTerror() and ply:Alive()) then
-            informerStatAlive = informerStatAlive + 1
-
-            if (self:GetOwner():GetPos():Distance(ply:GetPos()) <= 800) then 
-               informerStatNear = informerStatNear +1
-            end
-
-         else
-            informerStatDead = informerStatDead + 1
-         end
-     end
-
-     -- Warn the detective about certain items
-     local weapons = ents.FindByClass( "weapon_jm_equip_c4" )
-     for i = 1, #weapons do
-        local weapon = weapons[i]
-        if not weapon:IsValid() then continue end
-        informerStatC4s     = informerStatC4s + 1
-     end
-     local weapons = ents.FindByClass( "ttt_c4" )
-     for i = 1, #weapons do
-        local weapon = weapons[i]
-        if not weapon:IsValid() then continue end
-        informerStatC4s     = informerStatC4s + 1
-     end
-     -- ##############
-
-     -- The user is always nearby, so remove them
-     informerStatNear = informerStatNear -1
-
-     self.informerScansPerformed = self.informerScansPerformed + 1
-
-      -- Set Status and print Message
-      JM_Function_PrintChat(weaponOwner, "Equipment","--- Scan: " .. tostring(self.informerScansPerformed) .. " / 3 ---")
-      JM_Function_PrintChat(weaponOwner, "Equipment","Informer: " .. tostring(informerStatAlive) .. " / " .. tostring(informerStatDead) .. " Players left alive")
-      JM_Function_PrintChat(weaponOwner, "Equipment","Informer: " .. tostring(informerStatNear) .. " Nearby Players")
-      JM_Function_PrintChat(weaponOwner, "Equipment","Informer: " .. tostring(informerStatC4s) .. " C4s detected")
-      -- End Of
-
-   end
-end
+SWEP.ViewModel             = "models/props_rooftop/roof_dish001.mdl"
+SWEP.WorldModel            = "models/props_rooftop/roof_dish001.mdl"
 
 function SWEP:PrimaryAttack()
 
@@ -113,9 +53,17 @@ function SWEP:PrimaryAttack()
    if not self:CanPrimaryAttack() then return end
    -- ####
 
-   -- Fire Shot and apply on hit effects (Now with lag compensation to prevent whiffing)
-   self:ApplyEffect(self:GetOwner(), self:GetOwner())
-   -- #########
+   -- Play the Sound
+   JM_Function_PlaySound("effect_huntersense_activate.mp3")
+
+   if SERVER then
+         for _, ply in ipairs( player.GetAll() ) do
+            if (ply:IsValid() and not ply:IsSpec() and ply:IsTerror() and ply:Alive() and not ply:IsTraitor()) then
+                  JM_Function_GiveHitMarkerToPlayer(hitMarkerOwner, 0, false)
+                  JM_GiveBuffToThisPlayer("jm_buff_huntersense",ply,self:GetOwner())
+            end
+      end
+   end
 
    self:TakePrimaryAmmo(1)
 
@@ -143,8 +91,8 @@ if CLIENT then
    function SWEP:GetViewModelPosition(EyePos, EyeAng)
 
       -- Change the pos and ang
-      local viewModelPos  = Vector(-5, -15,-5)
-      local viewModelAng  = Vector(3,180, 0)
+      local viewModelPos  = Vector(-40, -100,-80)
+      local viewModelAng  = Vector(1,180, 0)
 
       EyeAng = EyeAng * 1
       EyeAng:RotateAroundAxis(EyeAng:Right(), 	viewModelAng.x)
@@ -175,7 +123,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Use Informer", nil, true)
+	   self:AddTTT2HUDHelp("Activate Hunter Sense", nil, true)
  
 	   return self.BaseClass.Initialize(self)
 	end

@@ -39,7 +39,7 @@ SWEP.Primary.Automatic     = false
 
 SWEP.Primary.Sound         = nil
 SWEP.Kind                  = WEAPON_EQUIP
-SWEP.CanBuy                = {ROLE_TRAITOR}
+SWEP.CanBuy                = {}
 SWEP.LimitedStock          = true -- only buyable once
 SWEP.WeaponID              = AMMO_JAMMER
 SWEP.UseHands              = false

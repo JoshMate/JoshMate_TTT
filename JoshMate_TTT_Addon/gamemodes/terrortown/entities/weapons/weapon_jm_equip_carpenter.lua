@@ -13,8 +13,8 @@ SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= true
 SWEP.Primary.Delay 			= 0.5
 SWEP.Secondary.Delay 		= 0.5
-SWEP.Primary.ClipSize		= 10
-SWEP.Primary.DefaultClip	= 10
+SWEP.Primary.ClipSize		= 15
+SWEP.Primary.DefaultClip	= 15
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "none"
 SWEP.Weight					= 5
@@ -45,7 +45,7 @@ Left Click to place a wooden pallet in front of you
 
 It is breakable, but will otherwise block players
 
-It has 12 uses and they last until broken
+It has 15 uses and they last until broken
 ]]
 	}
 
@@ -77,8 +77,8 @@ function SWEP:PrimaryAttack()
 	ent:GetPhysicsObject():EnableMotion( false )
 	ent.fingerprints = self.fingerprints
 
-	ent:SetMaxHealth(100)
-	ent:SetHealth(100)
+	ent:SetMaxHealth(125)
+	ent:SetHealth(125)
 
 	self:GetOwner():EmitSound("shoot_barrel.mp3")
 	self:TakePrimaryAmmo(1)
@@ -95,6 +95,40 @@ end
 
 function SWEP:SecondaryAttack()
 
+	if not self:CanSecondaryAttack() then return end
+	self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
+
+	
+	if (CLIENT) then return end
+
+	local tr = util.TraceLine({start = self.Owner:GetShootPos(), endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * JM_Barrier_PlaceRange, filter = self.Owner})
+	
+	-- Place the barrier that belongs to each class
+	local ent = ents.Create("prop_physics")
+	ent:SetModel("models/props_junk/wood_pallet001a.mdl")
+	ent:SetColor(Color( 0, 80, 255, 255))
+	ent:SetPos(tr.HitPos)
+	local ang = tr.Normal:Angle()
+	ang:RotateAroundAxis(ang:Right(), 0)
+	ent:SetAngles(ang)
+	ent:Spawn()
+	ent:GetPhysicsObject():EnableMotion( false )
+	ent.fingerprints = self.fingerprints
+
+	ent:SetMaxHealth(125)
+	ent:SetHealth(125)
+
+	self:GetOwner():EmitSound("shoot_barrel.mp3")
+	self:TakePrimaryAmmo(1)
+
+	-- Remove Weapon When out of Ammo
+	if SERVER then
+		if self:Clip1() <= 0 then
+		   self:Remove()
+		end
+	 end
+	 -- #########
+
 end
 
 -- ##############################################
@@ -104,7 +138,7 @@ end
 -- HUD Controls Information
 if CLIENT then
 	function SWEP:Initialize()
-	   self:AddTTT2HUDHelp("Place a Pallet", nil, true)
+	   self:AddTTT2HUDHelp("Place Upright", "Place Flat", true)
  
 	   return self.BaseClass.Initialize(self)
 	end

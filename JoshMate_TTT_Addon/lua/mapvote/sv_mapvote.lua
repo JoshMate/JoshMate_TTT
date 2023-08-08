@@ -121,7 +121,7 @@ function MapVote:GetRandomMaps()
     local maps = file.Find("maps/*.bsp", "GAME")
 
     local result = {}
-    local resultRandomTwo = {}
+    local resultRandom = {}
 
     local playedMaps = ConfigHelper:ReadPlayedMaps()
     local addedMaps = 0
@@ -138,20 +138,27 @@ function MapVote:GetRandomMaps()
         end
     end
 
-    if JM_Global_MapVote_FullVote == false and addedMaps >= 5 then
+    -- Random Chance of Full Map Vote
+    local randomMapFullVoteCance = math.random(1, 100)
+
+    if randomMapFullVoteCance < 10 then
+        return result
+    end
+
+    if JM_Global_MapVote_FullVote == false and addedMaps >= 8 then
 
         local randomMapMin = 2
-        local randomMapMax = 5
+        local randomMapMax = 8
 
         local randomMapChosen = math.random(randomMapMin, randomMapMax)
 
         for i=1,randomMapChosen do 
             local ranomlyChosenMap = table.Random(result)
             table.RemoveByValue(result, ranomlyChosenMap)
-            table.insert(resultRandomTwo, ranomlyChosenMap) 
+            table.insert(resultRandom, ranomlyChosenMap) 
         end 
 
-        return resultRandomTwo
+        return resultRandom
     end
 
     JM_Global_MapVote_FullVote = false
