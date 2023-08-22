@@ -37,14 +37,16 @@ function JM_GameMode_Function_Main()
         JM_GameMode_ArmsDeal_Init,
         JM_GameMode_ArmsDeal_Init,
 
+        JM_GameMode_DollHunt_Init,
+        JM_GameMode_DollHunt_Init,
+
         JM_GameMode_Infection_Init,
         JM_GameMode_PistolRound_Init,
         JM_GameMode_TraitorTester_Init,
         JM_GameMode_PowerHour_Init,
         JM_GameMode_LowGravity_Init,
         JM_GameMode_SlipperyFloors_Init
-        
-
+    
     }
 
     local iRandomRoll = math.random(1, gamemodeChanceMax)
@@ -345,6 +347,17 @@ function JM_GameMode_ArmsDeal_Init()
 
     -- Spawn the Gamemode Handler Object
     local GameModeHandlerObject = ents.Create("ent_jm_objective_08_armsdeal_base")
+    GameModeHandlerObject:Spawn()
+
+end
+
+function JM_GameMode_DollHunt_Init()
+
+    -- Debug
+    if SERVER then print("[GameModes] Gamemode: Doll Hunt") end
+
+    -- Spawn the Gamemode Handler Object
+    local GameModeHandlerObject = ents.Create("ent_jm_objective_09_dollhunt_base")
     GameModeHandlerObject:Spawn()
 
 end

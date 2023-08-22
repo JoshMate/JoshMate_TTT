@@ -16,7 +16,7 @@ if CLIENT then
 	
 Left clicking a player will strip them of their weapons
 
-Does not include Special or bought weapons
+Does not include role weapons
 
 Has 3 uses and short range
 ]]
@@ -83,7 +83,8 @@ function SWEP:ApplyEffect(ent,weaponOwner)
       ent:StripWeapon("weapon_jm_grenade_health")
       ent:StripWeapon("weapon_jm_grenade_jump")
       ent:StripWeapon("weapon_jm_grenade_tag")
-
+      
+      ent:StripWeapon("weapon_jm_special_pickup")
       ent:SelectWeapon("weapon_jm_special_crowbar")
 
    end

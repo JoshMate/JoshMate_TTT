@@ -33,6 +33,7 @@ JM_KARMA_REWARD_ACTION_OBJECTIVE_Bomb           = 4
 JM_KARMA_REWARD_ACTION_OBJECTIVE_Battery        = 4
 JM_KARMA_REWARD_ACTION_OBJECTIVE_FILE           = 2
 JM_KARMA_REWARD_ACTION_OBJECTIVE_ARMS           = 2
+JM_KARMA_REWARD_ACTION_OBJECTIVE_DOLL           = 5
 
 
 
@@ -146,9 +147,16 @@ hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
 
         -- 1100 Karma Bonus
         if ply:GetBaseKarma() >= 1100 then 
+            JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff_ammo",ply)
+            JM_GiveBuffToThisPlayer("jm_buff_karmabuff_ammo",ply,ply)
+            JM_Function_PrintChat(ply, "Karma","Bandolier (Extra starting ammo)")
+        end
+
+        -- 1150 Karma Bonus
+        if ply:GetBaseKarma() >= 1150 then 
             JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff_extra_grenade",ply)
             JM_GiveBuffToThisPlayer("jm_buff_karmabuff_extra_grenade",ply,ply)
-            JM_Function_PrintChat(ply, "Karma","Nade Mule (+1 Grenade slot in inventory)")
+            JM_Function_PrintChat(ply, "Karma","Nade Mule (+1 Grenade slot)")
         end
     
         -- 1200 Karma Bonus
@@ -159,11 +167,18 @@ hook.Add("TTTBeginRound", "JMKarmaSlayRevealSittersOut", function()
             JM_Function_PrintChat(ply, "Karma","Clean Money (+1 Credit)")
         end
 
-        -- 1300 Karma Bonus
-        if ply:GetBaseKarma() >= 1300 then 
+        -- 1250 Karma Bonus
+        if ply:GetBaseKarma() >= 1250 then 
             JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff_movement",ply)
             JM_GiveBuffToThisPlayer("jm_buff_karmabuff_movement",ply,ply)
-            JM_Function_PrintChat(ply, "Karma","Angel wings (+10% Movement Speed and 20% less Fall Damage)")
+            JM_Function_PrintChat(ply, "Karma","Angel wings (+10% Movement Speed and -20% Fall Damage)")
+        end
+
+        -- 1300 Karma Bonus
+        if ply:GetBaseKarma() >= 1300 then 
+            JM_RemoveBuffFromThisPlayer("jm_buff_karmabuff_might",ply)
+            JM_GiveBuffToThisPlayer("jm_buff_karmabuff_might",ply,ply)
+            JM_Function_PrintChat(ply, "Karma","Mighty (+10% Damage)")
         end
 
         -- Announce Max Karma once per person

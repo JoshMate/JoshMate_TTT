@@ -54,7 +54,7 @@ It has 15 uses and they last until broken
 	end
 end
 
-local JM_Barrier_PlaceRange				= 64
+local JM_Barrier_PlaceRange				= 80
 
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end

@@ -16,6 +16,7 @@ JM_ShopCreditCosts = {
     ["weapon_jm_equip_poisondart"] = 2,
     ["weapon_jm_equip_propbomb"] = 2,
     ["weapon_jm_equip_huntersense"] = 2,
+    ["weapon_jm_equip_doom_dart"] = 2,
 
     ["weapon_jm_equip_taser"] = 3,
     ["weapon_jm_equipment_grenade_flash"] = 3,

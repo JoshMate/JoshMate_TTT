@@ -41,6 +41,7 @@ function JM_Function_MessageColourCalculator(prefixMessage)
 	if prefixMessage == "Crowbar Man Mode" then textPrefixColour = Color(0,255,0) end
 	if prefixMessage == "Antidote" then textPrefixColour = Color(0,255,0) end
 	if prefixMessage == "Arms Deal" then textPrefixColour = Color(0,255,0) end
+	if prefixMessage == "Doll Hunt" then textPrefixColour = Color(0,255,0) end
 	return textPrefixColour
 
 end

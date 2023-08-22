@@ -1,0 +1,61 @@
+###################################
+Josh Mate TTT Update 99 - Patch Notes
+###################################
+#### Gameplay
+###################################
+
+[Gamemode: Doll Hunt]
+- New Game mode
+- Innocents must locate up to 5 dolls randomly scattered around the map
+- For each doll brought back to the trade in spot
+- Detectives gain a Max HP bonus and a Credit
+- Innocents gain a Max HP bonus
+- Traitors lose Max HP
+- Traitors must stop them by hiding the dolls or sabotaging the operation
+
+[Carpenter]
+- Increased placement range so you are less likely to get stuck in them: 64 -> 96 Units
+
+[Strip Search]
+- Now removes pickup stick too, so you can deal with Koen, I mean prop abusers in general
+
+[Drop Spot]
+- Reduced First Care Package Spawn Time: 30 -> 25 Seconds
+- Reduced Second Care Package Spawn Time: 60 -> 45 Seconds
+
+[Loot: Barrel Apocalypse]
+- Randomly spawns 20 Explosive barrels all over the map
+
+[Loot: Crate Apocalypse]
+- Randomly spawns 30 Wooden crates all over the map
+
+[Loot: Size Grow]
+- Increased HP Multiplier: 3x -> 5x (You have more HP)
+
+[Loot: Size Shrink]
+- Reduced HP Multiplier: 0.25x -> 0.15x (You have less HP)
+
+[Karma]
+- Redid the buff icons for the karma buffs so it's more clear where they came from
+- Reworked the Karma Bonuses to the following:
+- At 1100 Karma: Bandolier (Spawn with extra reserve ammo for guns)
+- At 1150 Karma: Nade Mule (Gain +1 extra grenade Slot)
+- At 1200 Karma: Extra Credit (Gain +1 Starting Credit)
+- At 1250 Karma: Angel Wings (+10% movement speed and -20% fall damage)
+- At 1300 Karma: Mighty (Do +10% damage)
+
+[Misc]
+- Made essential engine and code changes that allow for the containment of a certain Kaiju
+
+###################################
+#### Maps
+###################################
+
+[TTT Dusty Lane]
+- New Map
+- A port of my 3 lane CSGO map I made, but with changes that make it work for TTT
+
+###################################
+End of Patch Notes
+###################################
+

@@ -274,26 +274,40 @@ JM_Global_Buff_HunterSense_IconGoodBad                               = "bad"
 
 -- Karma Buffs
 
-JM_Global_Buff_KarmaBuff_Movement_Name                            = "Angel Wings"
+JM_Global_Buff_KarmaBuff_Movement_Name                            = "Karma: Angel Wings"
 JM_Global_Buff_KarmaBuff_Movement_Duration                        = 0
 JM_Global_Buff_KarmaBuff_Movement_NWBool                          = "JM_Buff_NWBool_IsKarmaBuffMovement"
 JM_Global_Buff_KarmaBuff_Movement_IconName                        = "JM_Buff_Icon_KarmaBuffMovement"
-JM_Global_Buff_KarmaBuff_Movement_IconPath                        = "vgui/ttt/joshmate/hud_karma.png"
+JM_Global_Buff_KarmaBuff_Movement_IconPath                        = "vgui/ttt/joshmate/hud_karma_wings.png"
 JM_Global_Buff_KarmaBuff_Movement_IconGoodBad                     = "good"
 
-JM_Global_Buff_KarmaBuff_Extra_Grenade_Name                       = "Nade Mule"
+JM_Global_Buff_KarmaBuff_Extra_Grenade_Name                       = "Karma: Nade Mule"
 JM_Global_Buff_KarmaBuff_Extra_Grenade_Duration                   = 0
 JM_Global_Buff_KarmaBuff_Extra_Grenade_NWBool                     = "JM_Buff_NWBool_IsKarmaBuffExtraGrenade"
 JM_Global_Buff_KarmaBuff_Extra_Grenade_IconName                   = "JM_Buff_Icon_KarmaBuffExtraGrenade"
-JM_Global_Buff_KarmaBuff_Extra_Grenade_IconPath                   = "vgui/ttt/joshmate/hud_grenades.png"
+JM_Global_Buff_KarmaBuff_Extra_Grenade_IconPath                   = "vgui/ttt/joshmate/hud_karma_grenade.png"
 JM_Global_Buff_KarmaBuff_Extra_Grenade_IconGoodBad                = "good"
 
-JM_Global_Buff_KarmaBuff_Extra_Credit_Name                       = "Clean Money"
+JM_Global_Buff_KarmaBuff_Extra_Credit_Name                       = "Karma: Clean Money"
 JM_Global_Buff_KarmaBuff_Extra_Credit_Duration                   = 0
 JM_Global_Buff_KarmaBuff_Extra_Credit_NWBool                     = "JM_Buff_NWBool_IsKarmaBuffExtraCredit"
 JM_Global_Buff_KarmaBuff_Extra_Credit_IconName                   = "JM_Buff_Icon_KarmaBuffExtraCredit"
-JM_Global_Buff_KarmaBuff_Extra_Credit_IconPath                   = "vgui/ttt/joshmate/hud_credit.png"
+JM_Global_Buff_KarmaBuff_Extra_Credit_IconPath                   = "vgui/ttt/joshmate/hud_karma_money.png"
 JM_Global_Buff_KarmaBuff_Extra_Credit_IconGoodBad                = "good"
+
+JM_Global_Buff_KarmaBuff_Might_Name                             = "Karma: Mighty"
+JM_Global_Buff_KarmaBuff_Might_Duration                         = 0
+JM_Global_Buff_KarmaBuff_Might_NWBool                           = "JM_Buff_NWBool_IsKarmaBuffMight"
+JM_Global_Buff_KarmaBuff_Might_IconName                         = "JM_Buff_Icon_KarmaBuffMight"
+JM_Global_Buff_KarmaBuff_Might_IconPath                         = "vgui/ttt/joshmate/hud_karma_sword.png"
+JM_Global_Buff_KarmaBuff_Might_IconGoodBad                      = "good"
+
+JM_Global_Buff_KarmaBuff_Ammo_Name                             = "Karma: Bandolier"
+JM_Global_Buff_KarmaBuff_Ammo_Duration                         = 0
+JM_Global_Buff_KarmaBuff_Ammo_NWBool                           = "JM_Buff_NWBool_IsKarmaBuffAmmo"
+JM_Global_Buff_KarmaBuff_Ammo_IconName                         = "JM_Buff_Icon_KarmaBuffAmmo"
+JM_Global_Buff_KarmaBuff_Ammo_IconPath                         = "vgui/ttt/joshmate/hud_karma_ammo.png"
+JM_Global_Buff_KarmaBuff_Ammo_IconGoodBad                      = "good"
 
 
 -- Care Package Buffs

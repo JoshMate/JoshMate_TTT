@@ -18,8 +18,8 @@ ENT.Spawnable                   = false
 ENT.AdminSpawnable              = false
 
 local dropSpotColour 			= Color( 0, 50, 255, 255)
-local dropSpotSpawnDelayFirst 	= 30
-local dropSpotSpawnDelaySecond 	= 60
+local dropSpotSpawnDelayFirst 	= 25
+local dropSpotSpawnDelaySecond 	= 45
 local dropSpotDistanceOffFloor  = 60
 
 

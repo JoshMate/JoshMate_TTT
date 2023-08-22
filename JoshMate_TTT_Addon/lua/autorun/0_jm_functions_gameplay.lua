@@ -200,6 +200,99 @@ function JM_Function_SpawnThisThingInRandomPlaces(thingToSpawn, numberOfTimes)
 end
 
 -----------------------------------------------
+-- Spawn ents randomly with a given model (Uses Care Package and Player Spawns)
+-----------------------------------------------
+
+function JM_Function_SpawnThisThingInRandomPlacesWithAModel(modelName, numberOfTimes)
+
+    local NumberToSpawn = numberOfTimes
+    local possibleSpawns = ents.FindByClass( "ent_jm_carepackage_spawn" )
+    local possibleSpawnsPlayer = ents.FindByClass( "info_player_start" )
+	local listOfAllSpawnedItems = {}
+    
+    for i=1,NumberToSpawn do 
+
+        local randomChoice = math.random( 0, 100 )
+
+        -- 5% chance to use a player spawn
+        if randomChoice > 5 then
+
+            if #possibleSpawns > 0 then
+                local randomChoice = math.random(1, #possibleSpawns)
+                local spawn = possibleSpawns[randomChoice]
+                table.remove( possibleSpawns, randomChoice )
+                
+                local ent = ents.Create("prop_physics")
+				ent:SetModel(modelName)
+				ent:PhysicsInit(SOLID_VPHYSICS)
+				ent:SetMoveType(MOVETYPE_VPHYSICS)
+				ent:SetSolid(SOLID_VPHYSICS)
+				ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+                ent:SetPos(spawn:GetPos() + Vector(0, 0, 14))
+                ent:Spawn()
+				local entPhysics = ent:GetPhysicsObject()
+				if entPhysics:IsValid() then
+					entPhysics:Wake()
+				end  
+                ent.gmEntIndex = i
+				table.insert( listOfAllSpawnedItems, ent)
+            else
+
+                if #possibleSpawnsPlayer > 0 then
+                    local randomChoice = math.random(1, #possibleSpawnsPlayer)
+                    local spawn = possibleSpawnsPlayer[randomChoice]
+                    table.remove( possibleSpawnsPlayer, randomChoice )
+                    
+                    local ent = ents.Create("prop_physics")
+                    ent:SetModel(modelName)
+					ent:PhysicsInit(SOLID_VPHYSICS)
+					ent:SetMoveType(MOVETYPE_VPHYSICS)
+					ent:SetSolid(SOLID_VPHYSICS)
+					ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+					ent:SetPos(spawn:GetPos() + Vector(0, 0, 14))
+					ent:Spawn()
+					local entPhysics = ent:GetPhysicsObject()
+					if entPhysics:IsValid() then
+						entPhysics:Wake()
+					end    
+                    ent.gmEntIndex = i
+					table.insert( listOfAllSpawnedItems, ent)
+                end
+
+            end
+
+        else
+
+            if #possibleSpawnsPlayer > 0 then
+                local randomChoice = math.random(1, #possibleSpawnsPlayer)
+                local spawn = possibleSpawnsPlayer[randomChoice]
+                table.remove( possibleSpawnsPlayer, randomChoice )
+                
+                local ent = ents.Create("prop_physics")
+				ent:SetModel(modelName)
+				ent:PhysicsInit(SOLID_VPHYSICS)
+				ent:SetMoveType(MOVETYPE_VPHYSICS)
+				ent:SetSolid(SOLID_VPHYSICS)
+				ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+				ent:SetPos(spawn:GetPos() + Vector(0, 0, 14))
+				ent:Spawn()
+				local entPhysics = ent:GetPhysicsObject()
+				if entPhysics:IsValid() then
+					entPhysics:Wake()
+				end 
+                ent.gmEntIndex = i
+				table.insert( listOfAllSpawnedItems, ent)
+            end
+
+        end
+        
+    end
+
+	return listOfAllSpawnedItems
+
+end
+
+-----------------------------------------------
 -- Teleport player to a random Spot (Uses Care Package and Player Spawns)
 -----------------------------------------------
 

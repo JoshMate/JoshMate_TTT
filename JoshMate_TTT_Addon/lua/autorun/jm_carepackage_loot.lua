@@ -64,7 +64,9 @@ local lootTable = {
         JM_CarePackage_Loot_Dog_Apocalypse,
         JM_CarePackage_Loot_Size_Grow,
         JM_CarePackage_Loot_Size_Shrink,
-        JM_CarePackage_Loot_Music_Radio
+        JM_CarePackage_Loot_Music_Radio,
+        JM_CarePackage_Loot_Barrel_Apocalypse,
+        JM_CarePackage_Loot_Crate_Apocalypse
     }
 }
 
@@ -823,6 +825,20 @@ end
 function JM_CarePackage_Loot_Music_Radio( activator, caller )
     JM_Function_PrintChat(activator, "Care Package","Music Radio")
     Loot_SpawnThis(caller,"ent_jm_zloot_radio_music")
+end
+
+function JM_CarePackage_Loot_Barrel_Apocalypse( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Barrel Apocalypse")
+    JM_Function_Announcement("[Care Package] Barrel Apocalypse!")
+    JM_Function_SpawnThisThingInRandomPlacesWithAModel("models/props_phx/oildrum001_explosive.mdl", 20)
+end
+
+function JM_CarePackage_Loot_Crate_Apocalypse( activator, caller )
+
+    JM_Function_PrintChat(activator, "Care Package","Crate Apocalypse")
+    JM_Function_Announcement("[Care Package] Crate Apocalypse!")
+    JM_Function_SpawnThisThingInRandomPlacesWithAModel("models/props_junk/wood_crate001a.mdl", 30)
 end
 
 

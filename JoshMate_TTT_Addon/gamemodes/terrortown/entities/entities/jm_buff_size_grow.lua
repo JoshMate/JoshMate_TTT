@@ -40,7 +40,7 @@ end
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self.SizenewScaleMult = self.targetPlayer:GetModelScale() * 1.6
-    self.SizenewHealthMult = 3
+    self.SizenewHealthMult = 5
     self.targetPlayer:SetModelScale(self.SizenewScaleMult, 3)
     self.targetPlayer:SetMaxHealth(self.targetPlayer:GetMaxHealth() * self.SizenewHealthMult) 
     self.targetPlayer:SetHealth(self.targetPlayer:GetMaxHealth())
